@@ -32,6 +32,16 @@ Formatted as YYYYMMDD.
 
 ***
 
+### `mwse.buildNumber`
+
+Equal to the `APPVEYOR_BUILD_NUMBER` in builds by AppVeyor. Equal to `UINT_MAX` in regular builds.
+
+**Returns**:
+
+* `result` (integer)
+
+***
+
 ### `mwse.gameTimers`
 
 The mwseTimerController responsible for game-type timers.
@@ -72,11 +82,25 @@ It is usually better to use `mwse.buildDate` instead.
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
 ## Functions
+
+### `mwse.breakpoint`
+
+Prints "[MWSE] Hit breakpoint: ", with the provided `message` string appended, to the `mwse.log` file. This function is meant for debugging purposes.
+
+```lua
+mwse.breakpoint(message)
+```
+
+**Parameters**:
+
+* `message` (string): *Optional*. Provides a way to mark in the log which breakpoint was reached.
+
+***
 
 ### `mwse.clearScriptOverride`
 
@@ -121,7 +145,7 @@ local result = mwse.getVersion()
 
 **Returns**:
 
-* `result` (number)
+* `result` (integer)
 
 ***
 
@@ -136,6 +160,25 @@ local result = mwse.getVirtualMemoryUsage()
 **Returns**:
 
 * `result` (number)
+
+***
+
+### `mwse.iconv`
+
+Converts the provided string in UTF8 encoding to Morrowind's codepage base encoding.
+
+```lua
+local converted = mwse.iconv(languageCode, utf8string)
+```
+
+**Parameters**:
+
+* `languageCode` (integer): Determines the language (and appropriate encoding) to use. Maps to values in [`tes3.languageCode`](https://mwse.github.io/MWSE/references/language-codes/) table.
+* `utf8string` (string): The string to convert
+
+**Returns**:
+
+* `converted` (string)
 
 ***
 
@@ -216,6 +259,8 @@ local result = mwse.longToString(type)
 ### `mwse.overrideScript`
 
 Configures MWSE to execute a given function instead when a script would run.
+
+In most cases its intended to stop the execution of the original mwscript script. You can do so in the callback function by calling `mwscript.stopScript()`.
 
 ```lua
 local result = mwse.overrideScript(scriptId, callback)
@@ -313,6 +358,24 @@ local result = mwse.stringToLong(tag)
 **Returns**:
 
 * `result` (number)
+
+***
+
+### `mwse.virtualKeyPressed`
+
+Determines whether a key is pressed. A wrapper for `GetAsyncKeyState` function in Win32 API.
+
+```lua
+local result = mwse.virtualKeyPressed(VK_key)
+```
+
+**Parameters**:
+
+* `VK_key` (integer)
+
+**Returns**:
+
+* `result` (boolean)
 
 ***
 

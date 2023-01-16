@@ -25,6 +25,7 @@
 #include "CSStatic.h"
 
 #include "Settings.h"
+#include "RenderWindowWidgets.h"
 
 namespace se::cs::dialog::render_window {
 	static WORD lastRenderWindowPosX = 0;
@@ -132,7 +133,7 @@ namespace se::cs::dialog::render_window {
 	static_assert(sizeof(SceneGraphControllerVanilla) == 0x24, "CS::SceneGraphController failed size validation");
 
 	struct SceneGraphController : SceneGraphControllerVanilla {
-		NI::Pointer<NI::Node> widgetRoot; // 0x24
+		WidgetsController widgets; // 0x24
 
 		static bool __cdecl initialize(SceneGraphController* controller) {
 			// Zero out the structure again to handle newly added fields.
@@ -145,9 +146,8 @@ namespace se::cs::dialog::render_window {
 			}
 
 			// Create widget root.
-			controller->widgetRoot = new NI::Node();
-			controller->widgetRoot->setName("Editor widgetRoot");
-			controller->sceneRoot->attachChild(controller->widgetRoot);
+			controller->widgets = WidgetsController();
+			controller->sceneRoot->attachChild(controller->widgets.root);
 
 			return true;
 		}
@@ -156,8 +156,6 @@ namespace se::cs::dialog::render_window {
 			return memory::ExternalGlobal<SceneGraphController*, 0x6CEB78>::get();
 		}
 	};
-
-
 
 	//
 	// Patch: Use world rotation values unless ALT is held.
@@ -389,9 +387,104 @@ namespace se::cs::dialog::render_window {
 		}
 	}
 
-	//
-	// Patch: Allow alt-dragging objects to snap to surfaces.
-	//
+	// TODO: move this to more appropriate file.
+	NI::Vector3 rayPlaneIntersection(
+		const NI::Vector3& rayOrigin,
+		const NI::Vector3& rayDirection,
+		const NI::Vector3& planeOrigin,
+		const NI::Vector3& planeNormal
+	) {
+		auto d = planeNormal.dotProduct(&rayDirection);
+		if (d < -1e-6f) {
+			auto p = planeOrigin - rayOrigin;
+			auto t = planeNormal.dotProduct(&p) * (1 / d);
+			if (t >= 0.0f) {
+				return rayOrigin + (rayDirection * t);
+			}
+		}
+		return NI::Vector3();
+	}
+
+	static auto cursorOffset = std::optional<NI::Vector3>();
+	int __cdecl Patch_DefaultDragMovementLogic(RenderController* renderController, TranslationData::Target* firstTarget, int dx, int dy, bool lockX, bool lockY, bool lockZ) {
+		auto context = memory::MemAccess<TranslationData*>::Get(0x6CE968);
+		if (context->numberOfTargets == 0) {
+			return 0;
+		}
+
+		// Widgets are hidden by default.
+		auto& widgets = SceneGraphController::get()->widgets;
+		widgets.hide();
+
+		// Calculate raycast origin/direction from cursor.
+		NI::Vector3 rayOrigin;
+		NI::Vector3 rayDirection;
+		auto camera = RenderController::get()->camera;
+		auto success = camera->windowPointToRay(lastRenderWindowPosX, lastRenderWindowPosY, rayOrigin, rayDirection);
+		if (!success) {
+			return 0;
+		}
+
+		// Calculate the plane that we will raycast against.
+		auto planeOrigin = context->bound.center;
+		auto planeNormal = NI::Vector3(0, 0, 1);
+		
+		// Align the plane to the locked axis if applicable.
+		if (lockX || lockY || lockZ) {
+			planeNormal = -camera->worldDirection;
+			if (lockX) {
+				planeNormal.x = 0;
+				widgets.setAxis(WidgetsAxis::X);
+			}
+			if (lockY) {
+				planeNormal.y = 0;
+				widgets.setAxis(WidgetsAxis::Y);
+			}
+			if (lockZ) {
+				planeNormal.z = 0;
+				widgets.setAxis(WidgetsAxis::Z);
+			}
+			planeNormal.normalize();
+			widgets.show();
+		}
+
+		// Calculate the intersection.
+		auto intersection = rayPlaneIntersection(rayOrigin, rayDirection, planeOrigin, planeNormal);
+
+		// Perserve the cursor offset.
+		if (!cursorOffset.has_value()) {
+			cursorOffset.emplace(intersection - planeOrigin);
+		}
+		intersection = intersection - cursorOffset.value();
+
+		// Apply axis restrictions.
+		if (lockY) {
+			intersection.x = planeOrigin.x;
+			intersection.z = planeOrigin.z;
+		}
+		if (lockX) {
+			intersection.y = planeOrigin.y;
+			intersection.z = planeOrigin.z;
+		}
+		if (lockZ) {
+			intersection.x = planeOrigin.x;
+			intersection.y = planeOrigin.y;
+		}
+
+		// TODO: Apply grid snap.
+
+		// Update positions.
+		widgets.setPosition(intersection);
+		context->bound.center = intersection;
+		for (auto target = context->firstTarget; target; target = target->next) {
+			auto reference = target->reference;
+			auto offset = reference->position - planeOrigin;
+			reference->position = intersection + offset;
+			reference->unknown_0x10 = reference->position;
+			reference->sceneNode->localTranslate = reference->position;
+			reference->sceneNode->update(0.0f, true, true);
+		}
+	}
 
 	enum class SnappingAxis {
 		POSITIVE_X,
@@ -404,6 +497,9 @@ namespace se::cs::dialog::render_window {
 
 	SnappingAxis snappingAxis = SnappingAxis::POSITIVE_Z;
 
+	//
+	// Patch: Allow alt-dragging objects to snap to surfaces.
+	//
 	int __cdecl Patch_ReplaceDragMovementLogic(RenderController* renderController, TranslationData::Target* firstTarget, int dx, int dy, bool lockX, bool lockY, bool lockZ) {
 		using windows::isKeyDown;
 		using se::math::M_PIf;
@@ -411,8 +507,7 @@ namespace se::cs::dialog::render_window {
 		// We only care if we are holding the alt key and only have one object selected.
 		auto data = memory::MemAccess<TranslationData*>::Get(0x6CE968);
 		if (data->numberOfTargets != 1 || !isKeyDown(VK_MENU)) {
-			const auto DefaultDragMovementFunction = reinterpret_cast<int(__cdecl*)(RenderController*, TranslationData::Target*, int, int, bool, bool, bool)>(0x401F4B);
-			return DefaultDragMovementFunction(renderController, firstTarget, dx, dy, lockX, lockY, lockZ);
+			return Patch_DefaultDragMovementLogic(renderController, firstTarget, dx, dy, lockX, lockY, lockZ);
 		}
 
 		auto rendererPicker = &gRenderWindowPick::get();
@@ -1137,6 +1232,10 @@ namespace se::cs::dialog::render_window {
 		case WM_RBUTTONDOWN:
 			PatchDialogProc_OnRMouseButtonDown(hWnd, msg, wParam, lParam);
 			break;
+		case WM_LBUTTONDOWN:
+			SceneGraphController::get()->widgets.hide();
+			cursorOffset.reset();
+			break;
 		}
 
 		if (PatchDialogProc_preventMainHandler) {
@@ -1180,6 +1279,7 @@ namespace se::cs::dialog::render_window {
 		genCallEnforced(0x45EE3A, 0x404949, reinterpret_cast<DWORD>(Patch_ReplaceScalingLogic));
 
 		// Patch: Improve drag-move logic.
+		genJumpEnforced(0x401F4B, 0x464B70, reinterpret_cast<DWORD>(Patch_ReplaceDragMovementLogic));
 		genCallEnforced(0x45EE85, 0x401F4B, reinterpret_cast<DWORD>(Patch_ReplaceDragMovementLogic));
 
 		// Patch: Improve drop-to-surface logic by ignoring particles and skinned geometry.

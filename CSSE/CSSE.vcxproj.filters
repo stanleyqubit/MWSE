@@ -242,6 +242,8 @@
     </ClInclude>
     <ClInclude Include="NILinesData.h">
       <Filter>Header Files\NI</Filter>
+    <ClInclude Include="RenderWindowWidgets.h">
+      <Filter>Header Files\UI\Controllers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -355,6 +357,8 @@
     </ClCompile>
     <ClCompile Include="NILinesData.cpp">
       <Filter>Source Files\NI</Filter>
+    <ClCompile Include="RenderWindowWidgets.cpp">
+      <Filter>Source Files\UI\Controllers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -178,6 +178,7 @@ if defined APPVEYOR_BUILD_NUMBER (echo #define APPVEYOR_BUILD_NUMBER %APPVEYOR_B
     <ClInclude Include="NIRTTIDefines.h" />
     <ClInclude Include="ObjectWindowTabData.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="RenderWindowWidgets.h" />
     <ClInclude Include="Settings.h" />
     <ClInclude Include="WindowMain.h" />
     <ClInclude Include="WinUIUtil.h" />
@@ -220,6 +221,7 @@ if defined APPVEYOR_BUILD_NUMBER (echo #define APPVEYOR_BUILD_NUMBER %APPVEYOR_B
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="CSReference.cpp" />
+    <ClCompile Include="RenderWindowWidgets.cpp" />
     <ClCompile Include="Settings.cpp" />
     <ClCompile Include="WindowMain.cpp" />
     <ClCompile Include="WinUIUtil.cpp" />

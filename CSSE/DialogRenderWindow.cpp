@@ -479,6 +479,8 @@ namespace se::cs::dialog::render_window {
 					reference->unknown_0x10 = reference->position;
 					reference->sceneNode->localTranslate = reference->position;
 
+					data->bound.center = reference->position;
+
 					// Set rotation.
 					if (object->canRotateOnAllAxes()) {
 						NI::Vector3 orientation;

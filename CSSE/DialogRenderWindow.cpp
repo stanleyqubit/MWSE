@@ -25,6 +25,7 @@
 #include "CSStatic.h"
 
 #include "Settings.h"
+#include "RenderWindowSelectionData.h"
 #include "RenderWindowWidgets.h"
 
 namespace se::cs::dialog::render_window {
@@ -37,42 +38,6 @@ namespace se::cs::dialog::render_window {
 	using gCumulativeRotationValues = memory::ExternalGlobal<NI::Vector3, 0x6CF760>;
 	using gRenderWindowPick = memory::ExternalGlobal<NI::Pick, 0x6CF528>;
 	using gCurrentCell = memory::ExternalGlobal<Cell*, 0x6CF7B8>;
-
-	// TODO: Move to real definition file.
-	struct TranslationData {
-		enum class RotationAxis : unsigned int {
-			X = 1,
-			Z = 2,
-			Y = 3,
-		};
-		struct Target {
-			Reference* reference; // 0x0
-			Target* previous; // 0x4
-			Target* next; // 0x8
-		};
-		Target* firstTarget; // 0x0
-		unsigned int numberOfTargets; // 0x4
-		NI::Bound bound; // 0x8
-
-		void recalculateCenter() {
-			const auto TranslationData_recalculateCenter = reinterpret_cast<void(__thiscall*)(TranslationData*)>(0x402919);
-			TranslationData_recalculateCenter(this);
-		}
-
-		void recalculateRadius() {
-			const auto TranslationData_recalculateRadius = reinterpret_cast<void(__thiscall*)(TranslationData*)>(0x403DF0);
-			TranslationData_recalculateRadius(this);
-		}
-
-		void recalculateBound() {
-			recalculateCenter();
-			recalculateRadius();
-		}
-
-		static inline auto get() {
-			return memory::ExternalGlobal<TranslationData*, 0x6CE968>::get();
-		}
-	};
 
 	struct NetImmerseInstance {
 		struct VirtualTable {
@@ -172,8 +137,8 @@ namespace se::cs::dialog::render_window {
 	// Patch: Use world rotation values unless ALT is held.
 	//
 
-	const auto TES3_CS_OriginalRotationLogic = reinterpret_cast<bool(__cdecl*)(void*, TranslationData::Target*, int, TranslationData::RotationAxis)>(0x4652D0);
-	bool __cdecl Patch_ReplaceRotationLogic(void* unknown1, TranslationData::Target* firstTarget, int relativeMouseDelta, TranslationData::RotationAxis rotationAxis) {
+	const auto TES3_CS_OriginalRotationLogic = reinterpret_cast<bool(__cdecl*)(void*, SelectionData::Target*, int, SelectionData::RotationAxis)>(0x4652D0);
+	bool __cdecl Patch_ReplaceRotationLogic(void* unknown1, SelectionData::Target* firstTarget, int relativeMouseDelta, SelectionData::RotationAxis rotationAxis) {
 		using windows::isKeyDown;
 
 		// Allow holding ALT modifier to do vanilla behavior.
@@ -190,24 +155,24 @@ namespace se::cs::dialog::render_window {
 			return false;
 		}
 
-		auto data = TranslationData::get();
+		auto selectionData = SelectionData::get();
 
 		const auto rotationSpeed = gObjectMove::get();
 		const auto rotationFlags = gRotationFlags::get();
 
 		if (!isKeyDown('X') && !isKeyDown('Y')) {
-			rotationAxis = TranslationData::RotationAxis::Z;
+			rotationAxis = SelectionData::RotationAxis::Z;
 		}
 
 		auto& cumulativeRot = gCumulativeRotationValues::get();
 		switch (rotationAxis) {
-		case TranslationData::RotationAxis::X:
+		case SelectionData::RotationAxis::X:
 			cumulativeRot.x += relativeMouseDelta * rotationSpeed * 0.1f;
 			break;
-		case TranslationData::RotationAxis::Y:
+		case SelectionData::RotationAxis::Y:
 			cumulativeRot.y += relativeMouseDelta * rotationSpeed * 0.1f;
 			break;
-		case TranslationData::RotationAxis::Z:
+		case SelectionData::RotationAxis::Z:
 			cumulativeRot.z += relativeMouseDelta * rotationSpeed * 0.1f;
 			break;
 		}
@@ -238,7 +203,7 @@ namespace se::cs::dialog::render_window {
 		NI::Matrix33 userRotation;
 		userRotation.fromEulerXYZ(orientation.x, orientation.y, orientation.z);
 
-		for (auto target = data->firstTarget; target; target = target->next) {
+		for (auto target = selectionData->firstTarget; target; target = target->next) {
 			auto reference = target->reference;
 
 			reference->updateBaseObjectAndAttachment7();
@@ -246,7 +211,7 @@ namespace se::cs::dialog::render_window {
 
 			// Disallow XY rotations on actors and northmarkers.
 			auto doRotations = true;
-			if (rotationAxis != TranslationData::RotationAxis::Z && !reference->baseObject->canRotateOnAllAxes()) {
+			if (rotationAxis != SelectionData::RotationAxis::Z && !reference->baseObject->canRotateOnAllAxes()) {
 				doRotations = false;
 			}
 
@@ -267,17 +232,17 @@ namespace se::cs::dialog::render_window {
 					};
 				}
 
-				if (isSnapping && (target == data->firstTarget)) {
+				if (isSnapping && (target == selectionData->firstTarget)) {
 					// Snapping the new rotation after adjustments were applied.
 					// So we must only snap the *current* axis and not all them.
 					switch (rotationAxis) {
-					case TranslationData::RotationAxis::X:
+					case SelectionData::RotationAxis::X:
 						orientation.x = std::roundf(orientation.x / snapAngle) * snapAngle;
 						break;
-					case TranslationData::RotationAxis::Y:
+					case SelectionData::RotationAxis::Y:
 						orientation.y = std::roundf(orientation.y / snapAngle) * snapAngle;
 						break;
-					case TranslationData::RotationAxis::Z:
+					case SelectionData::RotationAxis::Z:
 						orientation.z = std::roundf(orientation.z / snapAngle) * snapAngle;
 						break;
 					}
@@ -302,9 +267,9 @@ namespace se::cs::dialog::render_window {
 			}
 
 			// Rotate positions.
-			if (data->numberOfTargets > 1) {
-				auto p = reference->position - data->bound.center;
-				reference->position = (userRotation * p) + data->bound.center;
+			if (selectionData->numberOfTargets > 1) {
+				auto p = reference->position - selectionData->bound.center;
+				reference->position = (userRotation * p) + selectionData->bound.center;
 				reference->unknown_0x10 = reference->position;
 				reference->sceneNode->localTranslate = reference->position;
 			}
@@ -319,19 +284,19 @@ namespace se::cs::dialog::render_window {
 	// Patch: Improve multi-reference scaling.
 	//
 
-	void __cdecl Patch_ReplaceScalingLogic(RenderController* renderController, TranslationData::Target* firstTarget, int scaler) {
+	void __cdecl Patch_ReplaceScalingLogic(RenderController* renderController, SelectionData::Target* firstTarget, int scaler) {
 		using windows::isKeyDown;
 
-		auto translationData = TranslationData::get();
-		if (!isKeyDown(VK_MENU) || translationData->numberOfTargets == 1) {
-			const auto VanillaScalingHandler = reinterpret_cast<void(__cdecl*)(RenderController*, TranslationData::Target*, int)>(0x404949);
+		auto selectionData = SelectionData::get();
+		if (!isKeyDown(VK_MENU) || selectionData->numberOfTargets == 1) {
+			const auto VanillaScalingHandler = reinterpret_cast<void(__cdecl*)(RenderController*, SelectionData::Target*, int)>(0x404949);
 			VanillaScalingHandler(renderController, firstTarget, scaler);
 			return;
 		}
 
 		const auto scaleDelta = scaler * 0.01f;
 
-		const auto& center = translationData->bound.center;
+		const auto& center = selectionData->bound.center;
 
 		for (auto target = firstTarget; target; target = target->next) {
 			auto reference = target->reference;
@@ -427,9 +392,9 @@ namespace se::cs::dialog::render_window {
 	}
 
 	static auto cursorOffset = std::optional<NI::Vector3>();
-	int __cdecl Patch_DefaultDragMovementLogic(RenderController* renderController, TranslationData::Target* firstTarget, int dx, int dy, bool lockX, bool lockY, bool lockZ) {
-		auto context = TranslationData::get();
-		if (context->numberOfTargets == 0) {
+	int __cdecl Patch_DefaultDragMovementLogic(RenderController* renderController, SelectionData::Target* firstTarget, int dx, int dy, bool lockX, bool lockY, bool lockZ) {
+		auto selectionData = SelectionData::get();
+		if (selectionData->numberOfTargets == 0) {
 			return 0;
 		}
 
@@ -447,7 +412,7 @@ namespace se::cs::dialog::render_window {
 		}
 
 		// Calculate the plane that we will raycast against.
-		auto planeOrigin = context->bound.center;
+		auto planeOrigin = selectionData->bound.center;
 		auto planeNormal = NI::Vector3(0, 0, 1);
 
 		// Align the plane to the locked axis if applicable.
@@ -496,8 +461,8 @@ namespace se::cs::dialog::render_window {
 
 		// Update positions.
 		widgets->setPosition(intersection);
-		context->bound.center = intersection;
-		for (auto target = context->firstTarget; target; target = target->next) {
+		selectionData->bound.center = intersection;
+		for (auto target = selectionData->firstTarget; target; target = target->next) {
 			auto reference = target->reference;
 			auto offset = reference->position - planeOrigin;
 			reference->position = intersection + offset;
@@ -524,13 +489,13 @@ namespace se::cs::dialog::render_window {
 
 	SnappingAxis snappingAxis = SnappingAxis::POSITIVE_Z;
 
-	int __cdecl Patch_ReplaceDragMovementLogic(RenderController* renderController, TranslationData::Target* firstTarget, int dx, int dy, bool lockX, bool lockY, bool lockZ) {
+	int __cdecl Patch_ReplaceDragMovementLogic(RenderController* renderController, SelectionData::Target* firstTarget, int dx, int dy, bool lockX, bool lockY, bool lockZ) {
 		using windows::isKeyDown;
 		using se::math::M_PIf;
 
 		// We only care if we are holding the alt key and only have one object selected.
-		auto data = TranslationData::get();
-		if (data->numberOfTargets != 1 || !isKeyDown(VK_MENU)) {
+		auto selectionData = SelectionData::get();
+		if (selectionData->numberOfTargets != 1 || !isKeyDown(VK_MENU)) {
 			return Patch_DefaultDragMovementLogic(renderController, firstTarget, dx, dy, lockX, lockY, lockZ);
 		}
 
@@ -548,7 +513,7 @@ namespace se::cs::dialog::render_window {
 		rendererPicker->returnNormal = true;
 		rendererPicker->pickType = NI::PickType::FIND_ALL;
 
-		auto reference = data->firstTarget->reference;
+		auto reference = selectionData->firstTarget->reference;
 		reference->sceneNode->setAppCulled(true);
 
 		NI::Vector3 origin;
@@ -598,7 +563,7 @@ namespace se::cs::dialog::render_window {
 					reference->unknown_0x10 = reference->position;
 					reference->sceneNode->localTranslate = reference->position;
 
-					data->bound.center = reference->position;
+					selectionData->bound.center = reference->position;
 
 					// Set rotation.
 					if (object->canRotateOnAllAxes()) {
@@ -910,9 +875,9 @@ namespace se::cs::dialog::render_window {
 	}
 
 	void hideSelectedReferences() {
-		auto translationData = TranslationData::get();
+		auto selectionData = SelectionData::get();
 		
-		for (auto target = translationData->firstTarget; target; target = target->next) {
+		for (auto target = selectionData->firstTarget; target; target = target->next) {
 			auto node = target->reference->sceneNode;
 			if (node) {
 				node->addExtraData(new NI::StringExtraData("xHID"));
@@ -921,8 +886,7 @@ namespace se::cs::dialog::render_window {
 			}
 		}
 
-		const auto thing = reinterpret_cast<void(__thiscall*)(TranslationData*, bool)>(0x403391);
-		thing(translationData, true);
+		selectionData->clear();
 	}
 
 	void unhideNode(NI::Node* node) {
@@ -1022,8 +986,8 @@ namespace se::cs::dialog::render_window {
 		}
 
 		auto recordHandler = DataHandler::get()->recordHandler;
-		auto translationData = TranslationData::get();
-		const bool hasReferencesSelected = translationData->numberOfTargets > 0;
+		auto selectionData = SelectionData::get();
+		const bool hasReferencesSelected = selectionData->numberOfTargets > 0;
 
 		enum ContextMenuId {
 			RESERVED_ERROR,

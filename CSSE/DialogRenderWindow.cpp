@@ -54,6 +54,10 @@ namespace se::cs::dialog::render_window {
 		unsigned int numberOfTargets; // 0x4
 		NI::Bound bound; // 0x8
 
+		void recalculateCenter() {
+			const auto TranslationData_recalculateCenter = reinterpret_cast<void(__thiscall*)(TranslationData*)>(0x402919);
+			TranslationData_recalculateCenter(this);
+		}
 		static inline auto get() {
 			return memory::ExternalGlobal<TranslationData*, 0x6CE968>::get();
 		}

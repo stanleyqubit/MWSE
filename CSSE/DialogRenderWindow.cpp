@@ -517,7 +517,7 @@ namespace se::cs::dialog::render_window {
 
 		// When holding shift perform the vanilla drag behbavior.
 		if (windows::isKeyDown(VK_LSHIFT)) {
-			const auto DefaultDragMovementFunction = reinterpret_cast<int(__cdecl*)(RenderController*, SelectionData::Target*, int, int, bool, bool, bool)>(0x401F4B);
+			const auto DefaultDragMovementFunction = reinterpret_cast<int(__cdecl*)(RenderController*, SelectionData::Target*, int, int, bool, bool, bool)>(0x464B70);
 			return DefaultDragMovementFunction(renderController, firstTarget, dx, dy, lockX, lockY, lockZ);
 		}
 		

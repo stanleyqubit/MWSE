@@ -58,6 +58,7 @@ namespace se::cs::dialog::render_window {
 			const auto TranslationData_recalculateCenter = reinterpret_cast<void(__thiscall*)(TranslationData*)>(0x402919);
 			TranslationData_recalculateCenter(this);
 		}
+
 		static inline auto get() {
 			return memory::ExternalGlobal<TranslationData*, 0x6CE968>::get();
 		}
@@ -141,7 +142,7 @@ namespace se::cs::dialog::render_window {
 
 		static bool __cdecl initialize(SceneGraphController* controller) {
 			// Zero out the structure again to handle newly added fields.
-			memset(controller, 0, sizeof(SceneGraphController));
+			ZeroMemory(controller, sizeof(SceneGraphController));
 
 			// Call existing function.
 			const auto SceneGraphController_initialize = reinterpret_cast<bool(__cdecl*)(SceneGraphController*)>(0x449930);
@@ -417,7 +418,7 @@ namespace se::cs::dialog::render_window {
 
 	static auto cursorOffset = std::optional<NI::Vector3>();
 	int __cdecl Patch_DefaultDragMovementLogic(RenderController* renderController, TranslationData::Target* firstTarget, int dx, int dy, bool lockX, bool lockY, bool lockZ) {
-		auto context = memory::MemAccess<TranslationData*>::Get(0x6CE968);
+		auto context = TranslationData::get();
 		if (context->numberOfTargets == 0) {
 			return 0;
 		}
@@ -518,7 +519,7 @@ namespace se::cs::dialog::render_window {
 		using se::math::M_PIf;
 
 		// We only care if we are holding the alt key and only have one object selected.
-		auto data = memory::MemAccess<TranslationData*>::Get(0x6CE968);
+		auto data = TranslationData::get();
 		if (data->numberOfTargets != 1 || !isKeyDown(VK_MENU)) {
 			return Patch_DefaultDragMovementLogic(renderController, firstTarget, dx, dy, lockX, lockY, lockZ);
 		}

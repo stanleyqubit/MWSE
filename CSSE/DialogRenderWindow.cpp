@@ -480,6 +480,12 @@ namespace se::cs::dialog::render_window {
 		// Calculate the intersection.
 		auto intersection = rayPlaneIntersection(rayOrigin, rayDirection, planeOrigin, planeNormal);
 
+		// We probably don't want to be sending things off into far distant cells.
+		// Can happen unintentionally if camera direction is parellel with movement axis.
+		if (planeOrigin.distance(&intersection) > 8192.0f) {
+			return 0;
+		}
+
 		// Preserve the cursor offset.
 		if (!cursorOffset.has_value()) {
 			cursorOffset.emplace(intersection - planeOrigin);

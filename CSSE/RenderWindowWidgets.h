@@ -23,7 +23,8 @@ namespace se::cs::dialog::render_window {
 			auto maybeValidAxisMovementWidget = loader->loadNIF("meshes\\mwse\\widgets.nif");
 			if (maybeValidAxisMovementWidget && maybeValidAxisMovementWidget->isOfType(NI::RTTIStaticPtr::NiSwitchNode)) {
 				axisMovementWidget = static_cast<NI::SwitchNode*>(maybeValidAxisMovementWidget);
-				root->attachChild(axisMovementWidget, false);
+				axisMovementWidget->setAppCulled(true);
+				root->attachChild(axisMovementWidget);
 				root->update();
 				root->updateEffects();
 				root->updateProperties();
@@ -31,13 +32,15 @@ namespace se::cs::dialog::render_window {
 		}
 
 		void show() {
-			root->setAppCulled(false);
-			root->update();
+			axisMovementWidget->setAppCulled(false);
 		}
 
 		void hide() {
-			root->setAppCulled(true);
-			root->update();
+			axisMovementWidget->setAppCulled(true);
+		}
+
+		bool isShown() const {
+			return axisMovementWidget && !axisMovementWidget->getAppCulled();
 		}
 
 		void setPosition(NI::Vector3& position) {

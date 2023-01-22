@@ -32,12 +32,33 @@ namespace se::cs::dialog::render_window {
 	static WORD lastRenderWindowPosX = 0;
 	static WORD lastRenderWindowPosY = 0;
 
-	using gObjectMove = memory::ExternalGlobal<float, 0x6CE9B0>;
+	using gObjectMove = memory::ExternalGlobal<float, 0x6CE9B4>;
+	using gObjectRotate = memory::ExternalGlobal<float, 0x6CE9B0>;
+
+	using gCameraPan = memory::ExternalGlobal<float, 0x6CE9C0>;
+	using gCameraRotate = memory::ExternalGlobal<float, 0x6CE9B8>;
+	using gCameraZoom = memory::ExternalGlobal<float, 0x6CE9BC>;
+
 	using gSnapAngleInDegrees = memory::ExternalGlobal<int, 0x6CE9AC>;
 	using gRotationFlags = memory::ExternalGlobal<BYTE, 0x6CE9A4>;
 	using gCumulativeRotationValues = memory::ExternalGlobal<NI::Vector3, 0x6CF760>;
+
 	using gRenderWindowPick = memory::ExternalGlobal<NI::Pick, 0x6CF528>;
+
 	using gCurrentCell = memory::ExternalGlobal<Cell*, 0x6CF7B8>;
+
+	using gIsHoldingV = memory::ExternalGlobal<bool, 0x6CF789>;
+	using gIsHoldingX = memory::ExternalGlobal<bool, 0x6CF786>;
+	using gIsHoldingY = memory::ExternalGlobal<bool, 0x6CF787>;
+	using gIsHoldingZ = memory::ExternalGlobal<bool, 0x6CF788>;
+	using gIsScaling = memory::ExternalGlobal<bool, 0x6CF785>;
+
+	using gRenderNextFrame = memory::ExternalGlobal<bool, 0x6CF78D>;
+
+	// Convenience function to see if X, Y, or Z are held down.
+	bool isHoldingAxisKey() {
+		return gIsHoldingX::get() || gIsHoldingY::get() || gIsHoldingZ::get();
+	}
 
 	struct NetImmerseInstance {
 		struct VirtualTable {
@@ -398,10 +419,6 @@ namespace se::cs::dialog::render_window {
 			return 0;
 		}
 
-		// Widgets are hidden by default.
-		auto widgets = SceneGraphController::get()->widgets;
-		widgets->hide();
-
 		// Calculate raycast origin/direction from cursor.
 		NI::Vector3 rayOrigin;
 		NI::Vector3 rayDirection;
@@ -415,8 +432,13 @@ namespace se::cs::dialog::render_window {
 		auto planeOrigin = selectionData->bound.center;
 		auto planeNormal = NI::Vector3(0, 0, 1);
 
+		// Show the widget.
+		auto widgets = SceneGraphController::get()->widgets;
+
 		// Align the plane to the locked axis if applicable.
 		if (lockX || lockY || lockZ) {
+			widgets->show();
+
 			planeNormal = -camera->worldDirection;
 			if (lockX) {
 				planeNormal.x = 0;
@@ -1193,13 +1215,6 @@ namespace se::cs::dialog::render_window {
 		}
 	}
 
-	void PatchDialogProc_BeforeLMouseButtonDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
-		// Clear axis-movement data.
-		auto widgets = SceneGraphController::get()->widgets;
-		widgets->hide();
-		cursorOffset.reset();
-	}
-
 	void PatchDialogProc_AfterKeyDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		switch (wParam) {
 		case 'Q':
@@ -1208,13 +1223,22 @@ namespace se::cs::dialog::render_window {
 		}
 	}
 
+	void PatchDialogProc_AfterKeyUp_XYZ(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		// Hide widgets if they are no longer needed.
+		auto widgets = SceneGraphController::get()->widgets;
+		if (!isHoldingAxisKey() && widgets->isShown()) {
+			widgets->hide();
+			cursorOffset.reset();
+			gRenderNextFrame::set(true);
+		}
+	}
+
 	void PatchDialogProc_AfterKeyUp(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		switch (wParam) {
 		case 'X':
 		case 'Y':
 		case 'Z':
-			SceneGraphController::get()->widgets->hide();
-			cursorOffset.reset();
+			PatchDialogProc_AfterKeyUp_XYZ(hWnd, msg, wParam, lParam);
 			break;
 		}
 	}
@@ -1236,9 +1260,6 @@ namespace se::cs::dialog::render_window {
 			break;
 		case WM_RBUTTONDOWN:
 			PatchDialogProc_BeforeRMouseButtonDown(hWnd, msg, wParam, lParam);
-			break;
-		case WM_LBUTTONDOWN:
-			PatchDialogProc_BeforeLMouseButtonDown(hWnd, msg, wParam, lParam);
 			break;
 		}
 

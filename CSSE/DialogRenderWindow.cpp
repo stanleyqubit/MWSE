@@ -10,7 +10,6 @@
 #include "NICamera.h"
 #include "NICollisionSwitch.h"
 #include "NIGeometry.h"
-#include "NILight.h"
 #include "NIMatrix33.h"
 #include "NINode.h"
 #include "NIPick.h"
@@ -19,7 +18,6 @@
 #include "CSDataHandler.h"
 #include "CSGameFile.h"
 #include "CSLandTexture.h"
-#include "CSLight.h"
 #include "CSRecordHandler.h"
 #include "CSReference.h"
 #include "CSStatic.h"
@@ -526,6 +524,8 @@ namespace se::cs::dialog::render_window {
 			reference->unknown_0x10 = reference->position;
 			reference->sceneNode->localTranslate = reference->position;
 			reference->sceneNode->update(0.0f, true, true);
+
+			DataHandler::get()->updateLightingForReference(reference);
 		}
 
 		return 0;
@@ -689,21 +689,7 @@ namespace se::cs::dialog::render_window {
 					reference->sceneNode->update(0.0f, true, true);
 
 					// Update lighting data.
-					auto dataHandler = DataHandler::get();
-					auto attachedLightData = reference->getLightAttachment();
-					if (object->objectType == ObjectType::Light && attachedLightData) {
-						auto baseObjectLight = static_cast<Light*>(object);
-						if (dataHandler->currentInteriorCell) {
-							attachedLightData->light->detachAllAffectedNodes();
-							baseObjectLight->updateLightingData(attachedLightData->light, dataHandler->currentInteriorCell);
-						}
-						else {
-							dataHandler->updateAllLights();
-						}
-					}
-					else {
-						dataHandler->maybeUpdateLightForReference(reference);
-					}
+					DataHandler::get()->updateLightingForReference(reference);
 				}
 			}
 		}

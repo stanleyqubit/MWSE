@@ -133,7 +133,7 @@ namespace se::cs::dialog::render_window {
 	static_assert(sizeof(SceneGraphControllerVanilla) == 0x24, "CS::SceneGraphController failed size validation");
 
 	struct SceneGraphController : SceneGraphControllerVanilla {
-		WidgetsController widgets; // 0x24
+		WidgetsController* widgets; // 0x24
 
 		static bool __cdecl initialize(SceneGraphController* controller) {
 			// Zero out the structure again to handle newly added fields.
@@ -144,10 +144,6 @@ namespace se::cs::dialog::render_window {
 			if (!SceneGraphController_initialize(controller)) {
 				return false;
 			}
-
-			// Create widget root.
-			controller->widgets = WidgetsController();
-			controller->sceneRoot->attachChild(controller->widgets.root);
 
 			return true;
 		}
@@ -403,12 +399,7 @@ namespace se::cs::dialog::render_window {
 	//
 
 	// TODO: move this to more appropriate file.
-	NI::Vector3 rayPlaneIntersection(
-		const NI::Vector3& rayOrigin,
-		const NI::Vector3& rayDirection,
-		const NI::Vector3& planeOrigin,
-		const NI::Vector3& planeNormal
-	) {
+	NI::Vector3 rayPlaneIntersection(const NI::Vector3& rayOrigin, const NI::Vector3& rayDirection, const NI::Vector3& planeOrigin, const NI::Vector3& planeNormal) {
 		auto d = planeNormal.dotProduct(&rayDirection);
 		if (d < -1e-6f) {
 			auto p = planeOrigin - rayOrigin;
@@ -428,8 +419,8 @@ namespace se::cs::dialog::render_window {
 		}
 
 		// Widgets are hidden by default.
-		auto& widgets = SceneGraphController::get()->widgets;
-		widgets.hide();
+		auto widgets = SceneGraphController::get()->widgets;
+		widgets->hide();
 
 		// Calculate raycast origin/direction from cursor.
 		NI::Vector3 rayOrigin;
@@ -449,18 +440,18 @@ namespace se::cs::dialog::render_window {
 			planeNormal = -camera->worldDirection;
 			if (lockX) {
 				planeNormal.x = 0;
-				widgets.setAxis(WidgetsAxis::X);
+				widgets->setAxis(WidgetsAxis::X);
 			}
 			if (lockY) {
 				planeNormal.y = 0;
-				widgets.setAxis(WidgetsAxis::Y);
+				widgets->setAxis(WidgetsAxis::Y);
 			}
 			if (lockZ) {
 				planeNormal.z = 0;
-				widgets.setAxis(WidgetsAxis::Z);
+				widgets->setAxis(WidgetsAxis::Z);
 			}
 			planeNormal.normalize();
-			widgets.show();
+			widgets->show();
 		}
 
 		// Calculate the intersection.
@@ -489,7 +480,7 @@ namespace se::cs::dialog::render_window {
 		// TODO: Apply grid snap.
 
 		// Update positions.
-		widgets.setPosition(intersection);
+		widgets->setPosition(intersection);
 		context->bound.center = intersection;
 		for (auto target = context->firstTarget; target; target = target->next) {
 			auto reference = target->reference;
@@ -833,7 +824,7 @@ namespace se::cs::dialog::render_window {
 	// Patch: Extend Render Window message handling.
 	//
 
-	static bool PatchDialogProc_preventMainHandler = false;
+	static std::optional<LRESULT> PatchDialogProc_OverrideResult = {};
 
 	constexpr auto landscapeEditWindowId = 203;
 
@@ -1211,19 +1202,26 @@ namespace se::cs::dialog::render_window {
 
 		// We also stole paint stuff, so repaint.
 		SendMessage(hWndRenderWindow, WM_PAINT, 0, 0);
-		PatchDialogProc_preventMainHandler = true;
+		PatchDialogProc_OverrideResult = TRUE;
 	}
 
-	void PatchDialogProc_OnRMouseButtonDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+	void PatchDialogProc_BeforeRMouseButtonDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		constexpr auto comboPickLandscapeTexture = MK_CONTROL | MK_RBUTTON;
 		if ((wParam & comboPickLandscapeTexture) == comboPickLandscapeTexture) {
 			if (PickLandscapeTexture(hWnd)) {
-				PatchDialogProc_preventMainHandler = true;
+				PatchDialogProc_OverrideResult = TRUE;
 			}
 		}
 	}
 
-	void PatchDialogProc_OnKeyDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+	void PatchDialogProc_BeforeLMouseButtonDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		// Clear axis-movement data.
+		auto widgets = SceneGraphController::get()->widgets;
+		widgets->hide();
+		cursorOffset.reset();
+	}
+
+	void PatchDialogProc_AfterKeyDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		switch (wParam) {
 		case 'Q':
 			showContextAwareActionMenu(hWnd);
@@ -1231,8 +1229,26 @@ namespace se::cs::dialog::render_window {
 		}
 	}
 
+	void PatchDialogProc_AfterKeyUp(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		switch (wParam) {
+		case 'X':
+		case 'Y':
+		case 'Z':
+			SceneGraphController::get()->widgets->hide();
+			cursorOffset.reset();
+			break;
+		}
+	}
+
+	void PatchDialogProc_AfterInitDialog(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		// Initialize widget controller.
+		auto sgController = SceneGraphController::get();
+		sgController->widgets = new WidgetsController();
+		sgController->sceneRoot->attachChild(sgController->widgets->root);
+	}
+
 	LRESULT CALLBACK PatchDialogProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
-		PatchDialogProc_preventMainHandler = false;
+		PatchDialogProc_OverrideResult.reset();
 
 		switch (msg) {
 		case WM_MOUSEMOVE:
@@ -1240,29 +1256,33 @@ namespace se::cs::dialog::render_window {
 			lastRenderWindowPosY = HIWORD(lParam);
 			break;
 		case WM_RBUTTONDOWN:
-			PatchDialogProc_OnRMouseButtonDown(hWnd, msg, wParam, lParam);
+			PatchDialogProc_BeforeRMouseButtonDown(hWnd, msg, wParam, lParam);
 			break;
 		case WM_LBUTTONDOWN:
-			SceneGraphController::get()->widgets.hide();
-			cursorOffset.reset();
+			PatchDialogProc_BeforeLMouseButtonDown(hWnd, msg, wParam, lParam);
 			break;
 		}
 
-		if (PatchDialogProc_preventMainHandler) {
-			return TRUE;
+		if (PatchDialogProc_OverrideResult) {
+			return PatchDialogProc_OverrideResult.value();
 		}
 
 		// Call original function.
 		const auto CS_RenderWindowDialogProc = reinterpret_cast<WNDPROC>(0x45A3F0);
-		auto result = CS_RenderWindowDialogProc(hWnd, msg, wParam, lParam);
+		auto vanillaResult = CS_RenderWindowDialogProc(hWnd, msg, wParam, lParam);
 
 		switch (msg) {
 		case WM_KEYDOWN:
-			PatchDialogProc_OnKeyDown(hWnd, msg, wParam, lParam);
+			PatchDialogProc_AfterKeyDown(hWnd, msg, wParam, lParam);
 			break;
+		case WM_KEYUP:
+			PatchDialogProc_AfterKeyUp(hWnd, msg, wParam, lParam);
+			break;
+		case WM_INITDIALOG:
+			PatchDialogProc_AfterInitDialog(hWnd, msg, wParam, lParam);
 		}
 
-		return result;
+		return PatchDialogProc_OverrideResult.value_or(vanillaResult);
 	}
 
 	//

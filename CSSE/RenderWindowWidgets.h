@@ -13,48 +13,43 @@ namespace se::cs::dialog::render_window {
 
 	struct WidgetsController {
 		NI::Pointer<NI::Node> root;
+		NI::Pointer<NI::SwitchNode> axisMovementWidget;
 
 		WidgetsController() {
 			root = new NI::Node();
 			root->setName("Editor widgetRoot");
+
+			auto loader = DataHandler::get()->recordHandler->modelLoader;
+			auto maybeValidAxisMovementWidget = loader->loadNIF("meshes\\mwse\\widgets.nif");
+			if (maybeValidAxisMovementWidget && maybeValidAxisMovementWidget->isOfType(NI::RTTIStaticPtr::NiSwitchNode)) {
+				axisMovementWidget = static_cast<NI::SwitchNode*>(maybeValidAxisMovementWidget);
+				root->attachChild(axisMovementWidget, false);
+				root->update();
+				root->updateEffects();
+				root->updateProperties();
+			}
 		}
 
 		void show() {
 			root->setAppCulled(false);
+			root->update();
 		}
 
 		void hide() {
 			root->setAppCulled(true);
-		}
-
-		auto getAxisLines() {
-			auto axis = root->getObjectByName("axisLines");
-			if (!axis) {
-				auto dataHandler = DataHandler::get();
-				if (dataHandler) {
-					auto loader = dataHandler->recordHandler->modelLoader;
-					axis = loader->loadNIF("meshes\\mwse\\widgets.nif");
-					root->attachChild(axis, false);
-					root->update();
-					root->updateEffects();
-					root->updateProperties();
-				}
-			}
-			return reinterpret_cast<NI::SwitchNode*>(axis);
+			root->update();
 		}
 
 		void setPosition(NI::Vector3& position) {
-			auto node = getAxisLines();
-			if (node) {
-				node->localTranslate = position;
-				node->update();
+			if (axisMovementWidget) {
+				axisMovementWidget->localTranslate = position;
+				axisMovementWidget->update();
 			}
 		}
 
 		void setAxis(WidgetsAxis axis) {
-			auto node = getAxisLines();
-			if (node) {
-				node->setSwitchIndex((int)axis);
+			if (axisMovementWidget) {
+				axisMovementWidget->setSwitchIndex((int)axis);
 			}
 		}
 	};

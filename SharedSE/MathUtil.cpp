@@ -1,4 +1,5 @@
 #include "MathUtil.h"
+#include "NiVector3.h"
 
 namespace se::math {
 	void standardizeAngleRadians(float& value) {
@@ -8,5 +9,23 @@ namespace se::math {
 		while (value < 0.0f) {
 			value += M_2PIf;
 		}
+	}
+
+	NI::Vector3 rayPlaneIntersection(
+		const NI::Vector3& rayOrigin, 
+		const NI::Vector3& rayDirection, 
+		const NI::Vector3& planeOrigin, 
+		const NI::Vector3& planeNormal
+	) {
+		// Note: This implementation intentionally allows intersections on either side of the plane.
+		auto projectionDist = rayDirection.dotProduct(&planeNormal);
+		if (projectionDist != 0.0f) {
+			auto rayToPlaneDist = (planeOrigin - rayOrigin).dotProduct(&planeNormal);
+			auto intersectionDist = rayToPlaneDist / projectionDist;
+			if (intersectionDist >= 0.0f) {
+				return rayOrigin + rayDirection * intersectionDist;
+			}
+		}
+		return NI::Vector3();
 	}
 }

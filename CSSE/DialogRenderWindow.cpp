@@ -415,136 +415,9 @@ namespace se::cs::dialog::render_window {
 	// Patch: Improve moving objects.
 	//
 
-	// TODO: move this to more appropriate file.
-	NI::Vector3 rayPlaneIntersection(const NI::Vector3& rayOrigin, const NI::Vector3& rayDirection, const NI::Vector3& planeOrigin, const NI::Vector3& planeNormal) {
-		auto d = planeNormal.dotProduct(&rayDirection);
-		if (d < -1e-6f) {
-			auto p = planeOrigin - rayOrigin;
-			auto t = planeNormal.dotProduct(&p) * (1 / d);
-			if (t >= 0.0f) {
-				return rayOrigin + (rayDirection * t);
-			}
-		}
-		return NI::Vector3();
-	}
-
-	static auto cursorOffset = std::optional<NI::Vector3>();
-	int __cdecl Patch_DefaultDragMovementLogic(RenderController* renderController, SelectionData::Target* firstTarget, int dx, int dy, bool lockX, bool lockY, bool lockZ) {
-		auto selectionData = SelectionData::get();
-		if (selectionData->numberOfTargets == 0) {
-			return 0;
-		}
-
-		// Calculate raycast origin/direction from cursor.
-		NI::Vector3 rayOrigin;
-		NI::Vector3 rayDirection;
-		auto camera = RenderController::get()->camera;
-		auto success = camera->windowPointToRay(lastRenderWindowPosX, lastRenderWindowPosY, rayOrigin, rayDirection);
-		if (!success) {
-			return 0;
-		}
-
-		// Ensure selection center is correct.
-		// Currently some other functions don't update it. (F key)
-		selectionData->recalculateCenter();
-
-		// Calculate the plane that we will raycast against.
-		auto planeOrigin = selectionData->bound.center;
-		auto planeNormal = NI::Vector3(0, 0, 1);
-
-		// Show the widget.
-		auto widgets = SceneGraphController::get()->widgets;
-
-		// Align the plane to the locked axis if applicable.
-		bool isAxisLocked = lockX || lockY || lockZ;
-		if (isAxisLocked) {
-			widgets->show();
-
-			planeNormal = -camera->worldDirection;
-			if (lockX) {
-				planeNormal.x = 0;
-				widgets->setAxis(WidgetsAxis::X);
-			}
-			if (lockY) {
-				planeNormal.y = 0;
-				widgets->setAxis(WidgetsAxis::Y);
-			}
-			if (lockZ) {
-				planeNormal.z = 0;
-				widgets->setAxis(WidgetsAxis::Z);
-			}
-			planeNormal.normalize();
-			widgets->show();
-		}
-
-		// Calculate the intersection.
-		auto intersection = rayPlaneIntersection(rayOrigin, rayDirection, planeOrigin, planeNormal);
-
-		// We probably don't want to be sending things off into far distant cells.
-		// Can happen unintentionally if camera direction is parellel with movement axis.
-		if (planeOrigin.distance(&intersection) > 8192.0f) {
-			return 0;
-		}
-
-		// Preserve the cursor offset.
-		if (!cursorOffset.has_value()) {
-			cursorOffset.emplace(intersection - planeOrigin);
-		}
-		intersection = intersection - cursorOffset.value();
-
-		// Apply axis restrictions.
-		if (lockX) {
-			intersection.y = planeOrigin.y;
-			intersection.z = planeOrigin.z;
-		}
-		if (lockY) {
-			intersection.x = planeOrigin.x;
-			intersection.z = planeOrigin.z;
-		}
-		if (lockZ) {
-			intersection.x = planeOrigin.x;
-			intersection.y = planeOrigin.y;
-		}
-
-		// Apply grid snap.
-		auto forceSnapping = windows::isKeyDown(VK_LCONTROL);
-		if (isGridSnapping() || forceSnapping) {
-			auto increment = gSnapGrid::get();
-			if (increment != 0.0f) {
-				auto lockXY = !isAxisLocked; // "Unlocked" movement defaults to XY axis.
-				if (lockX || lockXY) {
-					intersection.x = std::roundf(intersection.x / increment) * increment;
-				}
-				if (lockY || lockXY) {
-					intersection.y = std::roundf(intersection.y / increment) * increment;
-				}
-				if (lockZ) {
-					intersection.z = std::roundf(intersection.z / increment) * increment;
-				}
-			}
-		}
-
-		// Update positions.
-		widgets->setPosition(intersection);
-		selectionData->bound.center = intersection;
-		for (auto target = selectionData->firstTarget; target; target = target->next) {
-			auto reference = target->reference;
-			auto offset = reference->position - planeOrigin;
-			reference->position = intersection + offset;
-			reference->unknown_0x10 = reference->position;
-			reference->sceneNode->localTranslate = reference->position;
-			reference->sceneNode->update(0.0f, true, true);
-
-			DataHandler::get()->updateLightingForReference(reference);
-		}
-
-		return 0;
-	}
-
 	//
 	// Patch: Allow alt-dragging objects to snap to surfaces.
 	//
-
 	enum class SnappingAxis {
 		POSITIVE_X,
 		NEGATIVE_X,
@@ -556,20 +429,13 @@ namespace se::cs::dialog::render_window {
 
 	SnappingAxis snappingAxis = SnappingAxis::POSITIVE_Z;
 
-	int __cdecl Patch_ReplaceDragMovementLogic(RenderController* renderController, SelectionData::Target* firstTarget, int dx, int dy, bool lockX, bool lockY, bool lockZ) {
-		using windows::isKeyDown;
+	int Patch_AlignToSurfaceDragMovementLogic(RenderController* renderController, SelectionData::Target* firstTarget, int dx, int dy, bool lockX, bool lockY, bool lockZ) {
 		using se::math::M_PIf;
 
-		// When holding shift perform the vanilla drag behbavior.
-		if (windows::isKeyDown(VK_LSHIFT)) {
-			const auto DefaultDragMovementFunction = reinterpret_cast<int(__cdecl*)(RenderController*, SelectionData::Target*, int, int, bool, bool, bool)>(0x464B70);
-			return DefaultDragMovementFunction(renderController, firstTarget, dx, dy, lockX, lockY, lockZ);
-		}
-		
-		// We only care if we are holding the alt key and only have one object selected.
+		// Currently requires a single selection.
 		auto selectionData = SelectionData::get();
-		if (selectionData->numberOfTargets != 1 || !isKeyDown(VK_MENU)) {
-			return Patch_DefaultDragMovementLogic(renderController, firstTarget, dx, dy, lockX, lockY, lockZ);
+		if (selectionData->numberOfTargets != 1) {
+			return 0;
 		}
 
 		auto rendererPicker = &gRenderWindowPick::get();
@@ -711,8 +577,133 @@ namespace se::cs::dialog::render_window {
 		rendererPicker->root = previousRoot;
 		rendererPicker->returnNormal = previousReturnNormal;
 		rendererPicker->pickType = previousPickType;
-
+		
 		return 1;
+	}
+
+	static auto cursorOffset = std::optional<NI::Vector3>();
+	int __cdecl Patch_ReplaceDragMovementLogic(RenderController* renderController, SelectionData::Target* firstTarget, int dx, int dy, bool lockX, bool lockY, bool lockZ) {
+		using windows::isKeyDown;
+		
+		auto selectionData = SelectionData::get();
+		if (selectionData->numberOfTargets == 0) {
+			return 0;
+		}
+
+		// When holding shift perform vanilla drag behavior.
+		if (isKeyDown(VK_LSHIFT)) {
+			const auto DefaultDragMovementFunction = reinterpret_cast<int(__cdecl*)(RenderController*, SelectionData::Target*, int, int, bool, bool, bool)>(0x464B70);
+			return DefaultDragMovementFunction(renderController, firstTarget, dx, dy, lockX, lockY, lockZ);
+		}
+
+		// When holding alt perform align-to-surface behavior.
+		if (isKeyDown(VK_MENU)) {
+			return Patch_AlignToSurfaceDragMovementLogic(renderController, firstTarget, dx, dy, lockX, lockY, lockZ);
+		}
+
+		// Calculate raycast origin/direction from cursor.
+		NI::Vector3 rayOrigin;
+		NI::Vector3 rayDirection;
+		auto camera = RenderController::get()->camera;
+		auto success = camera->windowPointToRay(lastRenderWindowPosX, lastRenderWindowPosY, rayOrigin, rayDirection);
+		if (!success) {
+			return 0;
+		}
+
+		// Widgets default to hidden.
+		auto widgets = SceneGraphController::get()->widgets;
+		widgets->hide();
+
+		// Ensure selection center is correct.
+		// Currently some other functions don't update it. (F key)
+		selectionData->recalculateCenter();
+
+		// Calculate the plane that we will raycast against.
+		auto planeOrigin = selectionData->bound.center;
+		auto planeNormal = NI::Vector3(0, 0, 1);
+
+		// Align the plane to the locked axis if applicable.
+		bool isAxisLocked = lockX || lockY || lockZ;
+		if (isAxisLocked) {
+			planeNormal = -camera->worldDirection;
+			if (lockX) {
+				planeNormal.x = 0;
+				widgets->setAxis(WidgetsAxis::X);
+			}
+			if (lockY) {
+				planeNormal.y = 0;
+				widgets->setAxis(WidgetsAxis::Y);
+			}
+			if (lockZ) {
+				planeNormal.z = 0;
+				widgets->setAxis(WidgetsAxis::Z);
+			}
+			planeNormal.normalize();
+			widgets->show();
+		}
+
+		// Calculate the intersection.
+		auto intersection = math::rayPlaneIntersection(rayOrigin, rayDirection, planeOrigin, planeNormal);
+
+		// We probably don't want to be sending things off into far distant cells.
+		// Can happen unintentionally if camera direction is parallel with movement axis.
+		if (planeOrigin.distance(&intersection) > 8192.0f) {
+			return 0;
+		}
+
+		// Preserve the cursor offset.
+		if (!cursorOffset.has_value()) {
+			cursorOffset.emplace(intersection - planeOrigin);
+		}
+		intersection = intersection - cursorOffset.value();
+
+		// Apply axis restrictions.
+		if (lockX) {
+			intersection.y = planeOrigin.y;
+			intersection.z = planeOrigin.z;
+		}
+		if (lockY) {
+			intersection.x = planeOrigin.x;
+			intersection.z = planeOrigin.z;
+		}
+		if (lockZ) {
+			intersection.x = planeOrigin.x;
+			intersection.y = planeOrigin.y;
+		}
+
+		// Apply grid snap.
+		auto forceSnapping = windows::isKeyDown(VK_LCONTROL);
+		if (isGridSnapping() || forceSnapping) {
+			auto increment = gSnapGrid::get();
+			if (increment != 0.0f) {
+				auto lockXY = !isAxisLocked; // "Unlocked" movement defaults to XY axis.
+				if (lockX || lockXY) {
+					intersection.x = std::roundf(intersection.x / increment) * increment;
+				}
+				if (lockY || lockXY) {
+					intersection.y = std::roundf(intersection.y / increment) * increment;
+				}
+				if (lockZ) {
+					intersection.z = std::roundf(intersection.z / increment) * increment;
+				}
+			}
+		}
+
+		// Update positions.
+		widgets->setPosition(intersection);
+		for (auto target = selectionData->firstTarget; target; target = target->next) {
+			auto reference = target->reference;
+			auto offset = reference->position - planeOrigin;
+			reference->position = intersection + offset;
+			reference->unknown_0x10 = reference->position;
+			reference->sceneNode->localTranslate = reference->position;
+			reference->sceneNode->update(0.0f, true, true);
+
+			DataHandler::get()->updateLightingForReference(reference);
+		}
+		selectionData->recalculateCenter();
+
+		return 0;
 	}
 
 	//

@@ -39,8 +39,8 @@ namespace se::cs::dialog::render_window {
 	using gCameraRotate = memory::ExternalGlobal<float, 0x6CE9B8>;
 	using gCameraZoom = memory::ExternalGlobal<float, 0x6CE9BC>;
 
+	using gSnapGrid = memory::ExternalGlobal<int, 0x6CE9A8>;
 	using gSnapAngleInDegrees = memory::ExternalGlobal<int, 0x6CE9AC>;
-	using gRotationFlags = memory::ExternalGlobal<BYTE, 0x6CE9A4>;
 	using gCumulativeRotationValues = memory::ExternalGlobal<NI::Vector3, 0x6CF760>;
 
 	using gRenderWindowPick = memory::ExternalGlobal<NI::Pick, 0x6CF528>;
@@ -55,9 +55,28 @@ namespace se::cs::dialog::render_window {
 
 	using gRenderNextFrame = memory::ExternalGlobal<bool, 0x6CF78D>;
 
+	namespace RenderControlFlags {
+		enum RenderControlFlags : DWORD {
+			SnapToGrid = 0x1,
+			SnapToAngle = 0x2,
+			AllowRenderWindowCellLoads = 0x4,
+			SkipInitialCellLoad = 0x10,
+		};
+	}
+	using gRenderControlFlags = memory::ExternalGlobal<DWORD, 0x6CE9A4>;
+	using gAutoSaveTime = memory::ExternalGlobal<int, 0x6CEA38>;
+
 	// Convenience function to see if X, Y, or Z are held down.
 	bool isHoldingAxisKey() {
 		return gIsHoldingX::get() || gIsHoldingY::get() || gIsHoldingZ::get();
+	}
+
+	bool isGridSnapping() {
+		return gRenderControlFlags::get() & RenderControlFlags::SnapToGrid;
+	}
+
+	bool isAngleSnapping() {
+		return gRenderControlFlags::get() & RenderControlFlags::SnapToAngle;
 	}
 
 	struct NetImmerseInstance {
@@ -179,7 +198,6 @@ namespace se::cs::dialog::render_window {
 		auto selectionData = SelectionData::get();
 
 		const auto rotationSpeed = gObjectMove::get();
-		const auto rotationFlags = gRotationFlags::get();
 
 		if (!isKeyDown('X') && !isKeyDown('Y')) {
 			rotationAxis = SelectionData::RotationAxis::Z;
@@ -199,7 +217,7 @@ namespace se::cs::dialog::render_window {
 		}
 
 		const auto snapAngle = math::degreesToRadians((float)gSnapAngleInDegrees::get());
-		const bool isSnapping = ((rotationFlags & 2) != 0) && (snapAngle != 0.0f);
+		const bool isSnapping = isAngleSnapping() && snapAngle != 0.0f;
 
 		NI::Vector3 orientation = cumulativeRot;
 		if (isSnapping) {

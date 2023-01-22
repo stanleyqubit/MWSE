@@ -266,6 +266,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)NITriShape.cpp">
       <Filter>Source Files\NI</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)NIGeometry.cpp">
+      <Filter>Source Files\NI</Filter>
+    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)NISwitchNode.cpp">
       <Filter>Source Files\NI</Filter>
     </ClCompile>

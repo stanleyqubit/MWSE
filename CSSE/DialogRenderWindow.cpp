@@ -454,7 +454,8 @@ namespace se::cs::dialog::render_window {
 		auto widgets = SceneGraphController::get()->widgets;
 
 		// Align the plane to the locked axis if applicable.
-		if (lockX || lockY || lockZ) {
+		bool isAxisLocked = lockX || lockY || lockZ;
+		if (isAxisLocked) {
 			widgets->show();
 
 			planeNormal = -camera->worldDirection;
@@ -484,12 +485,12 @@ namespace se::cs::dialog::render_window {
 		intersection = intersection - cursorOffset.value();
 
 		// Apply axis restrictions.
-		if (lockY) {
-			intersection.x = planeOrigin.x;
-			intersection.z = planeOrigin.z;
-		}
 		if (lockX) {
 			intersection.y = planeOrigin.y;
+			intersection.z = planeOrigin.z;
+		}
+		if (lockY) {
+			intersection.x = planeOrigin.x;
 			intersection.z = planeOrigin.z;
 		}
 		if (lockZ) {
@@ -497,7 +498,23 @@ namespace se::cs::dialog::render_window {
 			intersection.y = planeOrigin.y;
 		}
 
-		// TODO: Apply grid snap.
+		// Apply grid snap.
+		auto forceSnapping = windows::isKeyDown(VK_LCONTROL);
+		if (isGridSnapping() || forceSnapping) {
+			auto increment = gSnapGrid::get();
+			if (increment != 0.0f) {
+				auto lockXY = !isAxisLocked; // "Unlocked" movement defaults to XY axis.
+				if (lockX || lockXY) {
+					intersection.x = std::roundf(intersection.x / increment) * increment;
+				}
+				if (lockY || lockXY) {
+					intersection.y = std::roundf(intersection.y / increment) * increment;
+				}
+				if (lockZ) {
+					intersection.z = std::roundf(intersection.z / increment) * increment;
+				}
+			}
+		}
 
 		// Update positions.
 		widgets->setPosition(intersection);

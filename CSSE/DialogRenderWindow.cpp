@@ -459,7 +459,7 @@ namespace se::cs::dialog::render_window {
 		// Calculate the intersection.
 		auto intersection = rayPlaneIntersection(rayOrigin, rayDirection, planeOrigin, planeNormal);
 
-		// Perserve the cursor offset.
+		// Preserve the cursor offset.
 		if (!cursorOffset.has_value()) {
 			cursorOffset.emplace(intersection - planeOrigin);
 		}
@@ -515,6 +515,12 @@ namespace se::cs::dialog::render_window {
 		using windows::isKeyDown;
 		using se::math::M_PIf;
 
+		// When holding shift perform the vanilla drag behbavior.
+		if (windows::isKeyDown(VK_LSHIFT)) {
+			const auto DefaultDragMovementFunction = reinterpret_cast<int(__cdecl*)(RenderController*, SelectionData::Target*, int, int, bool, bool, bool)>(0x401F4B);
+			return DefaultDragMovementFunction(renderController, firstTarget, dx, dy, lockX, lockY, lockZ);
+		}
+		
 		// We only care if we are holding the alt key and only have one object selected.
 		auto selectionData = SelectionData::get();
 		if (selectionData->numberOfTargets != 1 || !isKeyDown(VK_MENU)) {
@@ -1206,6 +1212,10 @@ namespace se::cs::dialog::render_window {
 		PatchDialogProc_OverrideResult = TRUE;
 	}
 
+	void PatchDialogProc_BeforeLMouseButtonDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		cursorOffset.reset();
+	}
+
 	void PatchDialogProc_BeforeRMouseButtonDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		constexpr auto comboPickLandscapeTexture = MK_CONTROL | MK_RBUTTON;
 		if ((wParam & comboPickLandscapeTexture) == comboPickLandscapeTexture) {
@@ -1257,6 +1267,9 @@ namespace se::cs::dialog::render_window {
 		case WM_MOUSEMOVE:
 			lastRenderWindowPosX = LOWORD(lParam);
 			lastRenderWindowPosY = HIWORD(lParam);
+			break;
+		case WM_LBUTTONDOWN:
+			PatchDialogProc_BeforeLMouseButtonDown(hWnd, msg, wParam, lParam);
 			break;
 		case WM_RBUTTONDOWN:
 			PatchDialogProc_BeforeRMouseButtonDown(hWnd, msg, wParam, lParam);

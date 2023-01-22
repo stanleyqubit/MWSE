@@ -444,6 +444,10 @@ namespace se::cs::dialog::render_window {
 			return 0;
 		}
 
+		// Ensure selection center is correct.
+		// Currently some other functions don't update it. (F key)
+		selectionData->recalculateCenter();
+
 		// Calculate the plane that we will raycast against.
 		auto planeOrigin = selectionData->bound.center;
 		auto planeNormal = NI::Vector3(0, 0, 1);

@@ -658,12 +658,6 @@ namespace se::cs::dialog::render_window {
 			return 0;
 		}
 
-		// We probably don't want to be sending things off into far distant cells.
-		// Can happen unintentionally if camera direction is parallel with movement axis.
-		if (distance > 8192.0f) {
-			return 0;
-		}
-
 		// Apply axis restrictions.
 		if (lockX) {
 			intersection.y = planeOrigin.y;
@@ -694,6 +688,12 @@ namespace se::cs::dialog::render_window {
 					intersection.z = std::roundf(intersection.z / increment) * increment;
 				}
 			}
+		}
+
+		// We probably don't want to be sending things off into far distant cells.
+		// Can happen unintentionally if camera direction is parallel with movement axis.
+		if (intersection.distance(&planeOrigin) > 8192.0f) {
+			return 0;
 		}
 
 		// Update positions.

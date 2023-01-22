@@ -591,7 +591,8 @@ namespace se::cs::dialog::render_window {
 		}
 
 		// When holding shift perform vanilla drag behavior.
-		if (isKeyDown(VK_LSHIFT)) {
+		bool useLegacyObjectMovement = settings.render_window.use_legacy_object_movement;
+		if (useLegacyObjectMovement || isKeyDown(VK_LSHIFT)) {
 			const auto DefaultDragMovementFunction = reinterpret_cast<int(__cdecl*)(RenderController*, SelectionData::Target*, int, int, bool, bool, bool)>(0x464B70);
 			return DefaultDragMovementFunction(renderController, firstTarget, dx, dy, lockX, lockY, lockZ);
 		}
@@ -1050,6 +1051,7 @@ namespace se::cs::dialog::render_window {
 			SET_SNAPPING_AXIS_NEGATIVE_Y,
 			SET_SNAPPING_AXIS_POSITIVE_Z,
 			SET_SNAPPING_AXIS_NEGATIVE_Z,
+			USE_LEGACY_OBJECT_MOVEMENT,
 			USE_WORLD_AXIS_ROTATION,
 			SAVE_STATE_TO_QUICKSTART,
 			CLEAR_STATE_FROM_QUICKSTART,
@@ -1061,6 +1063,7 @@ namespace se::cs::dialog::render_window {
 		*	R: Restore Hidden References
 		*	S: Set Snapping Axis
 		*	W: Toggle world axis rotation
+		*   M: Toggle legacy object movement
 		*/
 
 		MENUITEMINFO menuItem = {};
@@ -1128,6 +1131,14 @@ namespace se::cs::dialog::render_window {
 		menuItem.hSubMenu = subMenuSnappingAxis.hSubMenu;
 		menuItem.dwTypeData = (LPSTR)"Set &Snapping Axis";
 		InsertMenuItemA(menu, index++, TRUE, &menuItem);
+
+		menuItem.wID = USE_LEGACY_OBJECT_MOVEMENT;
+		menuItem.fMask = MIIM_FTYPE | MIIM_CHECKMARKS | MIIM_STRING | MIIM_ID;
+		menuItem.fType = MFT_STRING;
+		menuItem.fState = (settings.render_window.use_legacy_object_movement) ? MFS_CHECKED : MFS_UNCHECKED;
+		menuItem.dwTypeData = (LPSTR)"Use Legacy Object &Movement";
+		InsertMenuItemA(menu, index++, TRUE, &menuItem);
+		CheckMenuItem(menu, USE_LEGACY_OBJECT_MOVEMENT, (settings.render_window.use_legacy_object_movement) ? MFS_CHECKED : MFS_UNCHECKED);
 
 		menuItem.wID = USE_WORLD_AXIS_ROTATION;
 		menuItem.fMask = MIIM_FTYPE | MIIM_CHECKMARKS | MIIM_STRING | MIIM_ID;
@@ -1210,6 +1221,10 @@ namespace se::cs::dialog::render_window {
 			break;
 		case SET_SNAPPING_AXIS_NEGATIVE_Z:
 			snappingAxis = SnappingAxis::NEGATIVE_Z;
+			break;
+		case USE_LEGACY_OBJECT_MOVEMENT:
+			settings.render_window.use_legacy_object_movement = !settings.render_window.use_legacy_object_movement;
+			settings.save();
 			break;
 		case USE_WORLD_AXIS_ROTATION:
 			settings.render_window.use_world_axis_rotations_by_default = !settings.render_window.use_world_axis_rotations_by_default;

@@ -22,7 +22,7 @@ namespace se::math {
 
 	void standardizeAngleRadians(float& value);
 	
-	NI::Vector3 rayPlaneIntersection(
+	std::tuple<float, NI::Vector3> rayPlaneIntersection(
 		const NI::Vector3& rayOrigin, 
 		const NI::Vector3& rayDirection, 
 		const NI::Vector3& planeOrigin, 

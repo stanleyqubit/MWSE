@@ -606,8 +606,7 @@ namespace se::cs::dialog::render_window {
 		NI::Vector3 rayOrigin;
 		NI::Vector3 rayDirection;
 		auto camera = RenderController::get()->camera;
-		auto success = camera->windowPointToRay(lastRenderWindowPosX, lastRenderWindowPosY, rayOrigin, rayDirection);
-		if (!success) {
+		if (!camera->windowPointToRay(lastRenderWindowPosX, lastRenderWindowPosY, rayOrigin, rayDirection)) {
 			return 0;
 		}
 
@@ -618,15 +617,25 @@ namespace se::cs::dialog::render_window {
 		// Ensure selection center is correct.
 		// Currently some other functions don't update it. (F key)
 		selectionData->recalculateCenter();
-
+		
 		// Calculate the plane that we will raycast against.
 		auto planeOrigin = selectionData->bound.center;
 		auto planeNormal = NI::Vector3(0, 0, 1);
 
+		// Preserve the cursor offset.
+		if (!cursorOffset.has_value()) {
+			auto pick = SceneGraphController::get()->objectPick;
+			if (pick->pickObjectsWithSkinDeforms(&rayOrigin, &rayDirection)) {
+				auto intersection = pick->results.at(0)->intersection;
+				cursorOffset.emplace(intersection - planeOrigin);
+			}
+		}
+		planeOrigin = planeOrigin + cursorOffset.value_or(NI::Vector3());
+
 		// Align the plane to the locked axis if applicable.
 		bool isAxisLocked = lockX || lockY || lockZ;
 		if (isAxisLocked) {
-			planeNormal = -camera->worldDirection;
+			planeNormal = camera->worldDirection;
 			if (lockX) {
 				planeNormal.x = 0;
 				widgets->setAxis(WidgetsAxis::X);
@@ -644,19 +653,16 @@ namespace se::cs::dialog::render_window {
 		}
 
 		// Calculate the intersection.
-		auto intersection = math::rayPlaneIntersection(rayOrigin, rayDirection, planeOrigin, planeNormal);
-
-		// We probably don't want to be sending things off into far distant cells.
-		// Can happen unintentionally if camera direction is parallel with movement axis.
-		if (planeOrigin.distance(&intersection) > 8192.0f) {
+		auto [distance, intersection] = math::rayPlaneIntersection(rayOrigin, rayDirection, planeOrigin, planeNormal);
+		if (distance == -1.0f) {
 			return 0;
 		}
 
-		// Preserve the cursor offset.
-		if (!cursorOffset.has_value()) {
-			cursorOffset.emplace(intersection - planeOrigin);
+		// We probably don't want to be sending things off into far distant cells.
+		// Can happen unintentionally if camera direction is parallel with movement axis.
+		if (distance > 8192.0f) {
+			return 0;
 		}
-		intersection = intersection - cursorOffset.value();
 
 		// Apply axis restrictions.
 		if (lockX) {
@@ -691,7 +697,6 @@ namespace se::cs::dialog::render_window {
 		}
 
 		// Update positions.
-		widgets->setPosition(intersection);
 		for (auto target = selectionData->firstTarget; target; target = target->next) {
 			auto reference = target->reference;
 			auto offset = reference->position - planeOrigin;
@@ -702,7 +707,9 @@ namespace se::cs::dialog::render_window {
 
 			DataHandler::get()->updateLightingForReference(reference);
 		}
+
 		selectionData->recalculateCenter();
+		widgets->setPosition(selectionData->bound.center);
 
 		return 0;
 	}

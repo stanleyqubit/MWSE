@@ -11,7 +11,7 @@ namespace se::math {
 		}
 	}
 
-	NI::Vector3 rayPlaneIntersection(
+	std::tuple<float, NI::Vector3> rayPlaneIntersection(
 		const NI::Vector3& rayOrigin, 
 		const NI::Vector3& rayDirection, 
 		const NI::Vector3& planeOrigin, 
@@ -23,9 +23,9 @@ namespace se::math {
 			auto rayToPlaneDist = (planeOrigin - rayOrigin).dotProduct(&planeNormal);
 			auto intersectionDist = rayToPlaneDist / projectionDist;
 			if (intersectionDist >= 0.0f) {
-				return rayOrigin + rayDirection * intersectionDist;
+				return { intersectionDist, rayOrigin + rayDirection * intersectionDist };
 			}
 		}
-		return NI::Vector3();
+		return { -1.0, {} };
 	}
 }

@@ -59,6 +59,16 @@ namespace se::cs::dialog::render_window {
 			TranslationData_recalculateCenter(this);
 		}
 
+		void recalculateRadius() {
+			const auto TranslationData_recalculateRadius = reinterpret_cast<void(__thiscall*)(TranslationData*)>(0x403DF0);
+			TranslationData_recalculateRadius(this);
+		}
+
+		void recalculateBound() {
+			recalculateCenter();
+			recalculateRadius();
+		}
+
 		static inline auto get() {
 			return memory::ExternalGlobal<TranslationData*, 0x6CE968>::get();
 		}

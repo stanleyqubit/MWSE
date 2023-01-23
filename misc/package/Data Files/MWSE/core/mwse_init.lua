@@ -160,6 +160,7 @@ _G.mge = require("mge")
 _G.ni = require("ni")
 _G.event = require("event")
 _G.json = require("dkjson")
+_G.toml = require("toml")
 
 -- Prevent requiring socket.core before socket from causing issues.
 local socket = require("socket")
@@ -775,6 +776,31 @@ function json.encode(object, state)
 	end
 
 	return originalEncode(object, state)
+end
+
+
+-------------------------------------------------
+-- Extend our base API: toml
+-------------------------------------------------
+
+function toml.loadFile(fileName)
+	-- Load the contents of the file.
+	local f = io.open(fileName, "r")
+	if (f == nil) then
+		return nil
+	end
+
+	local fileContents = f:read("*all")
+	f:close()
+
+	-- Return decoded toml.
+	return toml.decode(fileContents)
+end
+
+function toml.saveFile(fileName, object)
+	local f = assert(io.open(fileName, "w"))
+	f:write(toml.encode(object))
+	f:close()
 end
 
 

@@ -550,6 +550,7 @@ namespace se::cs::dialog::render_window {
 	}
 
 	static auto cursorOffset = std::optional<NI::Vector3>();
+	const auto DefaultDragMovementFunction = reinterpret_cast<int(__cdecl*)(RenderController*, SelectionData::Target*, int, int, bool, bool, bool)>(0x464B70);
 	int __cdecl Patch_ReplaceDragMovementLogic(RenderController* renderController, SelectionData::Target* firstTarget, int dx, int dy, bool lockX, bool lockY, bool lockZ) {
 		using windows::isKeyDown;
 		
@@ -559,9 +560,7 @@ namespace se::cs::dialog::render_window {
 		}
 
 		// When holding shift perform vanilla drag behavior.
-		bool useLegacyObjectMovement = settings.render_window.use_legacy_object_movement;
-		if (useLegacyObjectMovement || isKeyDown(VK_LSHIFT)) {
-			const auto DefaultDragMovementFunction = reinterpret_cast<int(__cdecl*)(RenderController*, SelectionData::Target*, int, int, bool, bool, bool)>(0x464B70);
+		if (isKeyDown(VK_LSHIFT) || settings.render_window.use_legacy_object_movement) {
 			return DefaultDragMovementFunction(renderController, firstTarget, dx, dy, lockX, lockY, lockZ);
 		}
 
@@ -578,12 +577,7 @@ namespace se::cs::dialog::render_window {
 			return 0;
 		}
 
-		// Widgets default to hidden.
-		auto widgets = SceneGraphController::get()->widgets;
-		widgets->hide();
-
-		// Ensure selection center is correct.
-		// Currently some other functions don't update it. (F key)
+		// Ensure selection center is correct. Currently some other functions don't update it. (F key)
 		selectionData->recalculateCenter();
 		
 		// Calculate the plane that we will raycast against.
@@ -601,6 +595,7 @@ namespace se::cs::dialog::render_window {
 		planeOrigin = planeOrigin + cursorOffset.value_or(NI::Vector3());
 
 		// Align the plane to the locked axis if applicable.
+		auto widgets = SceneGraphController::get()->widgets;
 		bool isAxisLocked = lockX || lockY || lockZ;
 		if (isAxisLocked) {
 			planeNormal = camera->worldDirection;
@@ -641,7 +636,7 @@ namespace se::cs::dialog::render_window {
 		}
 
 		// Apply grid snap.
-		auto forceSnapping = windows::isKeyDown(VK_LCONTROL);
+		auto forceSnapping = isKeyDown(VK_LCONTROL);
 		if (isGridSnapping() || forceSnapping) {
 			auto increment = gSnapGrid::get();
 			if (increment != 0.0f) {

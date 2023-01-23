@@ -19,6 +19,9 @@
 #include "DialogRenderWindow.h"
 #include "DialogObjectWindow.h"
 
+#include "RenderWindowSceneGraphController.h"
+#include "RenderWindowWidgets.h"
+
 namespace se::cs::window::main {
 
 	struct ObjectEditLParam {
@@ -309,6 +312,12 @@ namespace se::cs::window::main {
 		isQuickStarting = true;
 	}
 
+	void PatchDialogProc_BeforeClose(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		auto sgController = dialog::render_window::SceneGraphController::get();
+		delete sgController->widgets;
+		sgController->widgets = nullptr;
+	}
+
 	LRESULT CALLBACK PatchDialogProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		blockNormalExecution = false;
 
@@ -316,6 +325,9 @@ namespace se::cs::window::main {
 		switch (msg) {
 		case CUSTOM_WM_FINISH_INITIALIZATION:
 			onFinishInitialization(lParam);
+			break;
+		case WM_CLOSE:
+			PatchDialogProc_BeforeClose(hWnd, msg, wParam, lParam);
 			break;
 		}
 

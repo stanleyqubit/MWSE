@@ -11646,8 +11646,18 @@ namespace se::cs {
 		int unknown_B5D0;
 		int unknown_B5D4;
 
-		void maybeUpdateLightForReference(Reference* reference);
+		//
+		// Other related this-call functions.
+		//
+
+		void updateLightingForNonLightReference(Reference* reference);
 		void updateAllLights();
+
+		//
+		// Custom functions
+		//
+
+		void updateLightingForReference(Reference* reference);
 
 		static DataHandler* get() {
 			return memory::ExternalGlobal<DataHandler*, 0x6CE8F0>::get();

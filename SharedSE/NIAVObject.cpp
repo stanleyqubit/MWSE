@@ -245,6 +245,13 @@ namespace NI {
 		localScale = source->scale;
 	}
 
+	void AVObject::detachFromParent() {
+		if (!parentNode) {
+			return;
+		}
+
+		parentNode->detachChild(this);
+	}
 
 	Pointer<Property> AVObject::getProperty(PropertyType type) const {
 		auto propNode = &propertyNode;

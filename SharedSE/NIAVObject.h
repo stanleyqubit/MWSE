@@ -115,6 +115,8 @@ namespace NI {
 		void copyTransforms(const AVObject* from);
 		void copyTransforms(const Transform* from);
 
+		void detachFromParent();
+
 		Pointer<Property> getProperty(PropertyType type) const;
 		Pointer<AlphaProperty> getAlphaProperty() const;
 		void setAlphaProperty(std::optional<AlphaProperty*> prop);

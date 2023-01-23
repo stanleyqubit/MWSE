@@ -16,18 +16,15 @@ namespace NI {
 		//
 
 		void attachChild(AVObject* child, bool useFirstAvailable = false);
-		void detachChild(Pointer<AVObject>* out_detached, AVObject* child);
-		void detachChildAt(Pointer<AVObject>* out_detached, unsigned int index);
-		void setChildAt(Pointer<AVObject>* out_detached, unsigned int index, AVObject* child);
+		Pointer<AVObject> detachChild(AVObject* child);
+		Pointer<AVObject> detachChildAt(unsigned int index);
+		Pointer<AVObject> setChildAt(unsigned int index, AVObject* child);
 
 		//
 		// Custom functions.
 		//
 
 		static Pointer<Node> create();
-
-		Pointer<AVObject> detachChildHandled(AVObject* child);
-		Pointer<AVObject> detachChildAtHandled(size_t index);
 
 		void attachEffect(DynamicEffect* effect);
 		void detachEffect(DynamicEffect* effect);

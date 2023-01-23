@@ -159,8 +159,8 @@ namespace TES3 {
 		if (removeLightFromParent.value_or(false)) {
 			auto attachedLight = getAttachedDynamicLight();
 			if (attachedLight) {
-				auto light = attachedLight->light;
-				light->parentNode->detachChildHandled(light);
+				auto& light = attachedLight->light;
+				light->parentNode->detachChild(light);
 			}
 		}
 		detachDynamicLightFromAffectedNodes();

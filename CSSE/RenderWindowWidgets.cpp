@@ -42,7 +42,7 @@ namespace se::cs::dialog::render_window {
 
 	WidgetsController::~WidgetsController() {
 		if (root) {
-			root->parentNode->detachChildHandled(root);
+			root->parentNode->detachChild(root);
 			DataHandler::get()->recordHandler->modelLoader->releaseNIF(root);
 		}
 	}

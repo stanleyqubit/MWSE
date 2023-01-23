@@ -23,6 +23,7 @@
 #include "CSStatic.h"
 
 #include "Settings.h"
+#include "RenderWindowSceneGraphController.h"
 #include "RenderWindowSelectionData.h"
 #include "RenderWindowWidgets.h"
 
@@ -136,40 +137,6 @@ namespace se::cs::dialog::render_window {
 	};
 	static_assert(sizeof(NetImmerseInstance) == 0x64, "CS::NetImmerseInstance failed size validation");
 	static_assert(sizeof(NetImmerseInstance::VirtualTable) == 0x64, "CS::NetImmerseInstance's virtual table failed size validation");
-
-	struct SceneGraphControllerVanilla {
-		NI::Pointer<NI::Node> sceneRoot; // 0x0
-		NI::Pointer<NI::Node> objectRoot; // 0x4
-		NI::Pointer<NI::Node> landscapeRoot; // 0x8
-		NI::Pointer<NI::ZBufferProperty> zBufferProperty; // 0xC
-		NI::Pointer<NI::Property> wireframeProperty; // 0x10
-		NI::Pick* objectPick; // 0x14
-		NI::Pick* landscapePick; // 0x18
-		NI::Pointer<NI::Light> directionalLight; // 0x1C
-		NI::Pointer<NI::FogProperty> fog; // 0x20
-	};
-	static_assert(sizeof(SceneGraphControllerVanilla) == 0x24, "CS::SceneGraphController failed size validation");
-
-	struct SceneGraphController : SceneGraphControllerVanilla {
-		WidgetsController* widgets; // 0x24
-
-		static bool __cdecl initialize(SceneGraphController* controller) {
-			// Zero out the structure again to handle newly added fields.
-			ZeroMemory(controller, sizeof(SceneGraphController));
-
-			// Call existing function.
-			const auto SceneGraphController_initialize = reinterpret_cast<bool(__cdecl*)(SceneGraphController*)>(0x449930);
-			if (!SceneGraphController_initialize(controller)) {
-				return false;
-			}
-
-			return true;
-		}
-
-		static inline auto get() {
-			return memory::ExternalGlobal<SceneGraphController*, 0x6CEB78>::get();
-		}
-	};
 
 	//
 	// Patch: Use world rotation values unless ALT is held.

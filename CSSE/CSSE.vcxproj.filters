@@ -249,6 +249,9 @@
     <ClInclude Include="RenderWindowSelectionData.h">
       <Filter>Header Files\UI\Controllers</Filter>
     </ClInclude>
+    <ClInclude Include="RenderWindowSceneGraphController.h">
+      <Filter>Header Files\UI\Controllers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -366,6 +369,9 @@
       <Filter>Source Files\UI\Controllers</Filter>
     </ClCompile>
     <ClCompile Include="RenderWindowSelectionData.cpp">
+      <Filter>Source Files\UI\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderWindowSceneGraphController.cpp">
       <Filter>Source Files\UI\Controllers</Filter>
     </ClCompile>
   </ItemGroup>

@@ -182,7 +182,7 @@ namespace se::cs::dialog::render_window {
 		}
 
 		const auto snapAngle = math::degreesToRadians((float)gSnapAngleInDegrees::get());
-		const bool isSnapping = isAngleSnapping() && snapAngle != 0.0f;
+		const bool isSnapping = (isAngleSnapping() || isKeyDown(VK_LCONTROL)) && (snapAngle != 0.0f);
 
 		NI::Vector3 orientation = cumulativeRot;
 		if (isSnapping) {

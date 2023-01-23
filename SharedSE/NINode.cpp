@@ -24,15 +24,15 @@ namespace NI {
 		vTable.asNode->attachChild(this, child, useFirstAvailable);
 	}
 
-	void Node::detachChild(AVObject** out_detached, AVObject* child) {
+	void Node::detachChild(Pointer<AVObject>* out_detached, AVObject* child) {
 		vTable.asNode->detachChild(this, out_detached, child);
 	}
 
-	void Node::detachChildAt(AVObject** out_detached, unsigned int index) {
+	void Node::detachChildAt(Pointer<AVObject>* out_detached, unsigned int index) {
 		vTable.asNode->detachChildAt(this, out_detached, index);
 	}
 
-	void Node::setChildAt(AVObject** out_detached, unsigned int index, AVObject* child) {
+	void Node::setChildAt(Pointer<AVObject>* out_detached, unsigned int index, AVObject* child) {
 		vTable.asNode->setChildAt(this, out_detached, index, child);
 	}
 
@@ -41,13 +41,13 @@ namespace NI {
 	}
 
 	Pointer<AVObject> Node::detachChildHandled(AVObject* child) {
-		AVObject* returnedChild = nullptr;
+		Pointer<AVObject> returnedChild;
 		detachChild(&returnedChild, child);
 		return returnedChild;
 	}
 
 	Pointer<AVObject> Node::detachChildAtHandled(size_t index) {
-		AVObject* returnedChild = nullptr;
+		Pointer<AVObject> returnedChild = nullptr;
 		detachChildAt(&returnedChild, index);
 		return returnedChild;
 	}

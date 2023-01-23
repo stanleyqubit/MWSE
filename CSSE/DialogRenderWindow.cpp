@@ -276,6 +276,7 @@ namespace se::cs::dialog::render_window {
 				reference->position = (userRotation * p) + selectionData->bound.center;
 				reference->unknown_0x10 = reference->position;
 				reference->sceneNode->localTranslate = reference->position;
+				DataHandler::get()->updateLightingForReference(reference);
 			}
 
 			reference->sceneNode->update(0.0f, true, true);

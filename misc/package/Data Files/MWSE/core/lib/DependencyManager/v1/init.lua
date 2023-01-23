@@ -3,6 +3,7 @@
 ---@field luaMod string The lua mod to check for. This should be a path to the folder containing the lua code/metadata for this mod
 ---@field plugin string The plugin file (esp, esm etc) of the mod to check for. This can be in addition to a lua/version/metadata file check
 ---@field version string The version to check for. It will look for a version file or metadata file
+---@field url string (optional) The url to the mod page. If this is provided, the dependency fail message will include a link to the mod page
 
 ---@class DependencyManager.new.params
 ---@field modName string The name of the mod using this dependency manager
@@ -10,12 +11,91 @@
 ---@field logger MWSELogger (optional)The logger to use for this dependency manager
 ---@field showFailureMessage boolean (optional) Whether to show a message box if a dependency fails to load. Defaults to true.
 
+---@class DependencyManager.failedDependency
+---@field dependency DependencyManager.Dependency The dependency that failed
+---@field reasons string[] The reasons the dependency failed
+
 ---@class DependencyManager
 ---@field modName string The name of the mod using this dependency manager
 ---@field dependencies DependencyManager.Dependency[] The dependencies to check for
 ---@field logger MWSELogger The logger to use for this dependency manager
 ---@field showFailureMessage boolean (optional) Whether to show a message box if a dependency fails to load. Defaults to true.
-local DependencyManager = {}
+---@field failedDependencies table<string, DependencyManager.failedDependency> The list of failed dependencies
+local DependencyManager = {
+    ---@type DependencyManager
+    registeredManagers = {},
+}
+
+event.register(tes3.event.initialized, function()
+    --Display each fail message with tes3ui.showMessageMenu,
+    -- with the Okay button triggering the next fail message
+    local function showNextMessage()
+        local manager = table.remove(DependencyManager.registeredManagers, 1)
+        if manager and manager.failedDependencies then
+            manager:dependenciesFailMessage(showNextMessage)
+        end
+    end
+    showNextMessage()
+end, { priority = -math.huge })
+
+---Displays the list of failed dependencies to the player
+---@param callback function The callback to call when the message box is closed
+function DependencyManager:dependenciesFailMessage(callback)
+    timer.frame.delayOneFrame(function()
+        local function customBlock(parentBlock)
+            parentBlock.widthProportional = 1.0
+            parentBlock.minWidth = 400
+            parentBlock.childAlignX = 0.5
+            parentBlock:getTopLevelMenu():getContentElement().maxWidth = nil
+            for _, failedDependency in pairs(self.failedDependencies) do
+                local dependency = failedDependency.dependency
+                local dependencyBlock = parentBlock:createThinBorder()
+                dependencyBlock.flowDirection = "top_to_bottom"
+                dependencyBlock.autoHeight = true
+                dependencyBlock.widthProportional = 1.0
+                dependencyBlock.paddingAllSides = 6
+                dependencyBlock.borderAllSides = 2
+                dependencyBlock.childAlignX = 0.5
+                local nameLabel = dependencyBlock:createLabel{ text = dependency.name }
+                nameLabel.wrapText = true
+                nameLabel.justifyText = "center"
+                nameLabel.widthProportional = 1.0
+                nameLabel.color = tes3ui.getPalette(tes3.palette.headerColor)
+                for _, reason in pairs(failedDependency.reasons) do
+                    local depLabel = dependencyBlock:createLabel{ text = "- " .. reason }
+                    depLabel.color = tes3ui.getPalette(tes3.palette.negativeColor)
+                    depLabel.wrapText = true
+                    depLabel.justifyText = "center"
+                    depLabel.widthProportional = 1.0
+                end
+                if dependency.url then
+                    local button = dependencyBlock:createButton{ text = "Open Download Page" }
+                    button:register("mouseClick", function(e)
+                        os.openURL(dependency.url)
+                        os.exit()
+                    end)
+                end
+            end
+            parentBlock:getTopLevelParent():updateLayout()
+            parentBlock:updateLayout()
+        end
+        local buttons = {
+            {
+                text = tes3.findGMST(tes3.gmst.sOK).value,
+                callback = function()
+                    if callback then
+                        callback()
+                    end
+                end,
+            },
+        }
+        tes3ui.showMessageMenu{
+            header = string.format("%s - The following dependencies failed to load", self.modName),
+            customBlock = customBlock,
+            buttons = buttons,
+        }
+    end)
+end
 
 ---@param e DependencyManager.new.params
 ---@return DependencyManager
@@ -32,7 +112,6 @@ function DependencyManager.new(e)
     end
     self.logger:assert(type(e.modName) == "string", "modName must be a string")
     self.logger:assert(type(e.dependencies) == "table", "dependencies must be a table")
-
     self.modName = e.modName
     self.dependencies = e.dependencies
     self.showFailureMessage = e.showFailureMessage == nil and true or e.showFailureMessage
@@ -87,60 +166,6 @@ DependencyManager.operators = {
 }
 
 
-function DependencyManager:dependencyFailMessage(failedDependencies)
-    timer.frame.delayOneFrame(function()
-        local function customBlock(parentBlock)
-            parentBlock.widthProportional = 1.0
-            parentBlock.minWidth = 400
-            parentBlock.childAlignX = 0.5
-            parentBlock:getTopLevelMenu():getContentElement().maxWidth = nil
-            for _, failedDependency in pairs(failedDependencies) do
-                local dependency = failedDependency.dependency
-                local dependencyBlock = parentBlock:createThinBorder()
-                dependencyBlock.flowDirection = "top_to_bottom"
-                dependencyBlock.autoHeight = true
-                dependencyBlock.widthProportional = 1.0
-                dependencyBlock.paddingAllSides = 6
-                dependencyBlock.borderAllSides = 2
-                dependencyBlock.childAlignX = 0.5
-                local nameLabel = dependencyBlock:createLabel{ text = dependency.name }
-                nameLabel.wrapText = true
-                nameLabel.justifyText = "center"
-                nameLabel.widthProportional = 1.0
-                nameLabel.color = tes3ui.getPalette(tes3.palette.headerColor)
-                for _, reason in pairs(failedDependency.reasons) do
-                    local depLabel = dependencyBlock:createLabel{ text = "- " .. reason }
-                    depLabel.color = tes3ui.getPalette(tes3.palette.negativeColor)
-                    depLabel.wrapText = true
-                    depLabel.justifyText = "center"
-                    depLabel.widthProportional = 1.0
-                end
-                if dependency.url then
-                    local button = dependencyBlock:createButton{ text = "Open Download Page" }
-                    button:register("mouseClick", function(e)
-                        os.openURL(dependency.url)
-                        os.exit()
-                    end)
-                end
-            end
-            parentBlock:getTopLevelParent():updateLayout()
-            parentBlock:updateLayout()
-        end
-        local buttons = {
-            {
-                text = tes3.findGMST(tes3.gmst.sCancel).value,
-                callback = function()
-                    tes3ui.leaveMenuMode()
-                end,
-            },
-        }
-        tes3ui.showMessageMenu{
-            header = "The following dependencies failed to load:",
-            customBlock = customBlock,
-            buttons = buttons,
-        }
-    end)
-end
 
 function DependencyManager:doVersionCheck(dependency, version)
     if dependency.version == nil then
@@ -237,9 +262,6 @@ function DependencyManager:doLuaModCheck(dependency)
             local folderExists = lfs.directoryexists( tes3.installDirectory .. fullPath)
             if folderExists then
                 return true
-            else
-                self.logger:debug("Folder does not exist: %s", fullPath)
-                return false, string.format("Could not find dependency folder: %s", fullPath)
             end
         end
 
@@ -271,7 +293,7 @@ end
 
 ---@return boolean #returns true if all dependencies passed, false if any failed.
 function DependencyManager:checkDependencies()
-    local failedDependencies = {}
+    local failedDependencies = {} ---@type table<string, DependencyManager.failedDependency>
     local didFail = false
     for _, dependency in pairs(self.dependencies) do
         self.logger:debug("Checking dependency: %s", dependency.name)
@@ -301,19 +323,20 @@ function DependencyManager:checkDependencies()
             end
         elseif dependency.version then
             --version and no luaMod to check, throw error
-            self.logger:error("Dependency has version but no luaMod to check: %s", dependency.name)
+            self.logger:error("Dependency %s for mod %s requires a version but doesn't define a 'luaMod' path", dependency.name, self.modName)
             failedDependencies[dependency.name] = failedDependencies[dependency.name] or {
                 dependency = dependency,
                 reasons = {}
             }
-            table.insert(failedDependencies[dependency.name].reasons,
-                string.format('Dependency has version but no luaMod to check: %s', dependency.name))
+            local reason = "Dependency requires a version but doesn't define a 'luaMod' path"
+            table.insert(failedDependencies[dependency.name].reasons, reason)
             didFail = true
         end
     end
     if didFail then
         if self.showFailureMessage then
-            self:dependencyFailMessage(failedDependencies)
+            self.failedDependencies = failedDependencies
+            table.insert(DependencyManager.registeredManagers, self)
         end
         return false
     end

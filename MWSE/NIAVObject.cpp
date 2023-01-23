@@ -57,10 +57,10 @@ namespace NI {
 				plane.z * worldBoundOrigin.z - plane.w
 			);
 			if (distance < -worldBoundRadius) {
-				return false;
+				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 
 	void AVObject::update(float fTime, bool bUpdateControllers, bool bUpdateBounds) {

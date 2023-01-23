@@ -649,15 +649,19 @@ namespace se::cs::dialog::render_window {
 		if (isGridSnapping() || forceSnapping) {
 			auto increment = gSnapGrid::get();
 			if (increment != 0.0f) {
-				auto lockXY = !isAxisLocked; // "Unlocked" movement defaults to XY axis.
+				// "Unlocked" movement defaults to XY axis.
+				auto lockXY = !isAxisLocked; 
+				// Offset so the first reference will be on the grid.
+				auto reference = selectionData->firstTarget->reference;
+				auto p = intersection + (reference->position - planeOrigin);
 				if (lockX || lockXY) {
-					intersection.x = std::roundf(intersection.x / increment) * increment;
+					intersection.x -= p.x - (std::roundf(p.x / increment) * increment);
 				}
 				if (lockY || lockXY) {
-					intersection.y = std::roundf(intersection.y / increment) * increment;
+					intersection.y -= p.y - (std::roundf(p.y / increment) * increment);
 				}
 				if (lockZ) {
-					intersection.z = std::roundf(intersection.z / increment) * increment;
+					intersection.z -= p.z - (std::roundf(p.z / increment) * increment);
 				}
 			}
 		}
@@ -671,8 +675,7 @@ namespace se::cs::dialog::render_window {
 		// Update positions.
 		for (auto target = selectionData->firstTarget; target; target = target->next) {
 			auto reference = target->reference;
-			auto offset = reference->position - planeOrigin;
-			reference->position = intersection + offset;
+			reference->position = intersection + (reference->position - planeOrigin);
 			reference->unknown_0x10 = reference->position;
 			reference->sceneNode->localTranslate = reference->position;
 			reference->sceneNode->update(0.0f, true, true);

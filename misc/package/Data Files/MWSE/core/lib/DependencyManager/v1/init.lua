@@ -116,7 +116,7 @@ function DependencyManager:dependencyFailMessage(failedDependencies)
                     depLabel.widthProportional = 1.0
                 end
                 if dependency.url then
-                    local button = dependencyBlock:createButton{ text = string.format("Open Download Page") }
+                    local button = dependencyBlock:createButton{ text = "Open Download Page" }
                     button:register("mouseClick", function(e)
                         os.openURL(dependency.url)
                         os.exit()

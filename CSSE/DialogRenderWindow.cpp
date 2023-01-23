@@ -168,15 +168,24 @@ namespace se::cs::dialog::render_window {
 			rotationAxis = SelectionData::RotationAxis::Z;
 		}
 
+		auto widgets = SceneGraphController::get()->widgets;
+		if (isHoldingAxisKey()) {
+			widgets->setPosition(selectionData->bound.center);
+			widgets->show();
+		}
+
 		auto& cumulativeRot = gCumulativeRotationValues::get();
 		switch (rotationAxis) {
 		case SelectionData::RotationAxis::X:
+			widgets->setAxis(WidgetsAxis::X);
 			cumulativeRot.x += relativeMouseDelta * rotationSpeed * 0.1f;
 			break;
 		case SelectionData::RotationAxis::Y:
+			widgets->setAxis(WidgetsAxis::Y);
 			cumulativeRot.y += relativeMouseDelta * rotationSpeed * 0.1f;
 			break;
 		case SelectionData::RotationAxis::Z:
+			widgets->setAxis(WidgetsAxis::Z);
 			cumulativeRot.z += relativeMouseDelta * rotationSpeed * 0.1f;
 			break;
 		}

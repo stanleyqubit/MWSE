@@ -614,6 +614,20 @@ myObject:isAppCulled()
 
 ***
 
+### `isFrustumCulled`
+
+Checks if the object is frustum culled for the given camera.
+
+```lua
+myObject:isFrustumCulled(camera)
+```
+
+**Parameters**:
+
+* `camera` ([niCamera](../../types/niCamera))
+
+***
+
 ### `isInstanceOfType`
 
 Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.

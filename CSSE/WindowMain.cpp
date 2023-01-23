@@ -314,7 +314,6 @@ namespace se::cs::window::main {
 
 	void PatchDialogProc_BeforeClose(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		auto sgController = dialog::render_window::SceneGraphController::get();
-		auto ptr = sgController->widgets->root.get();
 		delete sgController->widgets;
 		sgController->widgets = nullptr;
 	}

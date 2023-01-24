@@ -219,8 +219,7 @@ namespace se::cs::dialog::render_window {
 		for (auto target = selectionData->firstTarget; target; target = target->next) {
 			auto reference = target->reference;
 
-			reference->updateBaseObjectAndAttachment7();
-			reference->baseObject->setFlag80(true);
+			reference->setAsEdited();
 
 			// Disallow XY rotations on actors and northmarkers.
 			auto doRotations = true;
@@ -320,8 +319,6 @@ namespace se::cs::dialog::render_window {
 
 			const auto newScale = reference->getScale();
 			if (newScale != oldScale) {
-				reference->setFlag80(true);
-
 				const auto offset = reference->position - center;
 				const auto multiplier = newScale / oldScale;
 
@@ -330,7 +327,7 @@ namespace se::cs::dialog::render_window {
 				reference->sceneNode->localTranslate = reference->position;
 				reference->sceneNode->update(0.0f, true, true);
 
-				reference->updateBaseObjectAndAttachment7();
+				reference->setAsEdited();
 			}
 		}
 	}
@@ -447,9 +444,7 @@ namespace se::cs::dialog::render_window {
 						refSnappingAxis = SnappingAxis::POSITIVE_Z;
 					}
 
-					reference->setModified(true);
-					reference->setFlag80(true);
-					reference->updateBaseObjectAndAttachment7();
+					reference->setAsEdited();
 
 					// Set position.
 					NI::Vector3 offset;
@@ -681,6 +676,8 @@ namespace se::cs::dialog::render_window {
 			reference->sceneNode->update(0.0f, true, true);
 
 			DataHandler::get()->updateLightingForReference(reference);
+
+			reference->setAsEdited();
 		}
 
 		selectionData->recalculateCenter();

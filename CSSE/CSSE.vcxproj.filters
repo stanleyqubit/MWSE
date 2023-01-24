@@ -252,6 +252,9 @@
     <ClInclude Include="RenderWindowSceneGraphController.h">
       <Filter>Header Files\UI\Controllers</Filter>
     </ClInclude>
+    <ClInclude Include="DialogPreviewWindow.h">
+      <Filter>Header Files\UI\Dialog</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -373,6 +376,9 @@
     </ClCompile>
     <ClCompile Include="RenderWindowSceneGraphController.cpp">
       <Filter>Source Files\UI\Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogPreviewWindow.cpp">
+      <Filter>Source Files\UI\Dialog</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,3 +1,10 @@
+---@class MWSE.metadata
+---@field name string The name of the mod
+---@field description string The description of the mod
+---@field version string The version of the mod
+---@field buildDate number The build date of MWSE when this mod was last updated
+---@field dependencies table<string|number, DependencyManager.Dependency> The dependencies to check for
+
 ---@class DependencyManager.Dependency
 ---@field name string The name of the dependency
 ---@field luaMod string The lua mod to check for. This should be a path to the folder containing the lua code/metadata for this mod
@@ -6,8 +13,7 @@
 ---@field url string (optional) The url to the mod page. If this is provided, the dependency fail message will include a link to the mod page
 
 ---@class DependencyManager.new.params
----@field modName string The name of the mod using this dependency manager
----@field dependencies DependencyManager.Dependency[] The dependencies to check for
+---@field metadata MWSE.metadata The metadata of the mod using this dependency manager
 ---@field logger MWSELogger (optional)The logger to use for this dependency manager
 ---@field showFailureMessage boolean (optional) Whether to show a message box if a dependency fails to load. Defaults to true.
 
@@ -16,11 +22,10 @@
 ---@field reasons string[] The reasons the dependency failed
 
 ---@class DependencyManager
----@field modName string The name of the mod using this dependency manager
----@field dependencies DependencyManager.Dependency[] The dependencies to check for
----@field logger MWSELogger The logger to use for this dependency manager
+---@field metadata MWSE.metadata The metadata of the mod using this dependency manager
+---@field logger MWSELogger (optional)The logger to use for this dependency manager
 ---@field showFailureMessage boolean (optional) Whether to show a message box if a dependency fails to load. Defaults to true.
----@field failedDependencies table<string, DependencyManager.failedDependency> The list of failed dependencies
+---@field failedDependencies table<string, DependencyManager.failedDependency>? The list of failed dependencies
 local DependencyManager = {
     ---@type DependencyManager
     registeredManagers = {},
@@ -103,17 +108,18 @@ function DependencyManager.new(e)
     local self = setmetatable({}, { __index = DependencyManager })
     self.logger = e.logger
     if not self.logger then
-        local name = e.modName and e.modName .. ".DependencyManager" or "DependencyManager"
+        local name = e.metadata
+            and e.metadata.name
+            and e.metadata.name .. ".DependencyManager"
+            or "DependencyManager"
         local MWSELogger = require("logging.logger")
         self.logger = MWSELogger.new {
             name = name,
             logLevel = "INFO"
         }
     end
-    self.logger:assert(type(e.modName) == "string", "modName must be a string")
-    self.logger:assert(type(e.dependencies) == "table", "dependencies must be a table")
-    self.modName = e.modName
-    self.dependencies = e.dependencies
+    self.logger:assert(type(e.metadata) == "table", "DependencyManager.new: metadata is required")
+    self.metadata = e.metadata
     self.showFailureMessage = e.showFailureMessage == nil and true or e.showFailureMessage
     return self
 end
@@ -256,14 +262,11 @@ end
 
 ---@param dependency DependencyManager.Dependency
 function DependencyManager:doLuaModCheck(dependency)
-
     local path = dependency.luaMod:gsub("[/.]", "\\"):lower()
     local packagePaths = package.path:gsub("%?%.lua", "?")
-
     for packagePath in packagePaths:gmatch("[^;]+") do
         local fullPath = packagePath:gsub("?", path .. "\\")
         self.logger:debug("checking path: %s", fullPath)
-
         -- if no version is specific, just check the folder exists
         if dependency.version == nil then
             self.logger:debug("No target version, check if '%s' folder exists", fullPath)
@@ -272,7 +275,6 @@ function DependencyManager:doLuaModCheck(dependency)
                 return true
             end
         end
-
         --Look for metadata
         for _, fileType in ipairs{ "toml", "json"} do
             local metadataPath = fullPath .. "metadata." .. fileType
@@ -282,7 +284,6 @@ function DependencyManager:doLuaModCheck(dependency)
                 return self:doMetadataCheck(dependency, metadataPath, fileType)
             end
         end
-
         --Look for version file
         local versionFilePath = fullPath .. "version.txt"
         local versionFileExists = lfs.fileexists( tes3.installDirectory .. versionFilePath)
@@ -296,53 +297,72 @@ function DependencyManager:doLuaModCheck(dependency)
             return self:doVersionCheck(dependency, init.version)
         end
     end
-
     return false, string.format("Could not find dependency: %s", dependency.luaMod)
+end
+
+function DependencyManager:checkBuildDate()
+    if not self.metadata.buildDate then return true end
+    if mwse.buildDate == nil  then
+        self.logger:error("Could not get current build date")
+        return false
+    end
+    return mwse.buildDate <= self.metadata.buildDate
 end
 
 ---@return boolean #returns true if all dependencies passed, false if any failed.
 function DependencyManager:checkDependencies()
     local failedDependencies = {} ---@type table<string, DependencyManager.failedDependency>
-    local didFail = false
-    for _, dependency in pairs(self.dependencies) do
-        self.logger:debug("Checking dependency: %s", dependency.name)
-        if dependency.plugin then
-            self.logger:debug("Checking plugin dependency: %s", dependency.plugin)
-            if not tes3.isModActive(dependency.plugin) then
-                failedDependencies[dependency.name] = failedDependencies[dependency.name] or {
-                    dependency = dependency,
-                    reasons = {}
-                }
-                table.insert(failedDependencies[dependency.name].reasons,
-                    string.format('Plugin "%s" is not active', dependency.plugin))
-                didFail = true
-            end
-        end
-        if dependency.luaMod then
-            self.logger:debug("Checking luaMod dependency: %s", dependency.luaMod)
-            local passed, reason = self:doLuaModCheck(dependency)
-            if not passed then
-                self.logger:error("Failed with reason: %s", reason)
-                failedDependencies[dependency.name] = failedDependencies[dependency.name] or {
-                    dependency = dependency,
-                    reasons = {}
-                }
-                table.insert(failedDependencies[dependency.name].reasons, reason)
-                didFail = true
-            end
-        elseif dependency.version then
-            --version and no luaMod to check, throw error
-            self.logger:error("Dependency %s for mod %s requires a version but doesn't define a 'luaMod' path", dependency.name, self.modName)
-            failedDependencies[dependency.name] = failedDependencies[dependency.name] or {
-                dependency = dependency,
-                reasons = {}
+    if not self:checkBuildDate() then
+        failedDependencies["MWSE"] = {
+            dependency = {
+                name = "MWSE",
+            },
+            reasons = {
+                string.format("Build date is too old. Current build date: %s", self.metadata.buildDate)
             }
-            local reason = "Dependency requires a version but doesn't define a 'luaMod' path"
-            table.insert(failedDependencies[dependency.name].reasons, reason)
-            didFail = true
+        }
+    end
+    if self.metadata.dependencies then
+        for modId, dependency in pairs(self.metadata.dependencies) do
+            if not dependency.name then
+                dependency.name = modId ---@diagnostic disable-line: assign-type-mismatch
+            end
+            self.logger:debug("Checking dependency: %s", dependency.name)
+            if dependency.plugin then
+                self.logger:debug("Checking plugin dependency: %s", dependency.plugin)
+                if not tes3.isModActive(dependency.plugin) then
+                    failedDependencies[dependency.name] = failedDependencies[dependency.name] or {
+                        dependency = dependency,
+                        reasons = {}
+                    }
+                    table.insert(failedDependencies[dependency.name].reasons,
+                        string.format('Plugin "%s" is not active', dependency.plugin))
+                end
+            end
+            if dependency.luaMod then
+                self.logger:debug("Checking luaMod dependency: %s", dependency.luaMod)
+                local passed, reason = self:doLuaModCheck(dependency)
+                if not passed then
+                    self.logger:error("Failed with reason: %s", reason)
+                    failedDependencies[dependency.name] = failedDependencies[dependency.name] or {
+                        dependency = dependency,
+                        reasons = {}
+                    }
+                    table.insert(failedDependencies[dependency.name].reasons, reason)
+                end
+            elseif dependency.version then
+                --version and no luaMod to check, throw error
+                self.logger:error("Dependency %s for mod %s requires a version but doesn't define a 'luaMod' path", dependency.name, self.metadata.name)
+                failedDependencies[dependency.name] = failedDependencies[dependency.name] or {
+                    dependency = dependency,
+                    reasons = {}
+                }
+                local reason = "Dependency requires a version but doesn't define a 'luaMod' path"
+                table.insert(failedDependencies[dependency.name].reasons, reason)
+            end
         end
     end
-    if didFail then
+    if table.size(failedDependencies) > 0 then
         if self.showFailureMessage then
             self.failedDependencies = failedDependencies
             table.insert(DependencyManager.registeredManagers, self)
@@ -352,5 +372,7 @@ function DependencyManager:checkDependencies()
     self.logger:debug("All dependencies met")
     return true
 end
+
+
 
 return DependencyManager

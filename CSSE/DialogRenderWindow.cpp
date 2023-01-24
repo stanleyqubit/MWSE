@@ -646,7 +646,7 @@ namespace se::cs::dialog::render_window {
 				// "Unlocked" movement defaults to XY axis.
 				auto lockXY = !isAxisLocked; 
 				// Offset so the first reference will be on the grid.
-				auto reference = selectionData->firstTarget->reference;
+				auto reference = selectionData->getLastTarget()->reference;
 				auto p = intersection + (reference->position - planeOrigin);
 				if (lockX || lockXY) {
 					intersection.x -= p.x - (std::roundf(p.x / increment) * increment);

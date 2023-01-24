@@ -20,4 +20,12 @@ namespace se::cs::dialog::render_window {
 		const auto SelectioNData_clear = reinterpret_cast<void(__thiscall*)(SelectionData*, bool)>(0x403391);
 		SelectioNData_clear(this, unknownFlag);
 	}
+
+	SelectionData::Target* SelectionData::getLastTarget() const {
+		auto target = firstTarget;
+		for (auto i = 1; i < numberOfTargets; i++) {
+			target = target->next;
+		}
+		return target;
+	}
 }

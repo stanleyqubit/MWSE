@@ -31,5 +31,7 @@ namespace se::cs::dialog::render_window {
 		static inline auto get() {
 			return memory::ExternalGlobal<SelectionData*, 0x6CE968>::get();
 		}
+
+		Target* getLastTarget() const;
 	};
 }

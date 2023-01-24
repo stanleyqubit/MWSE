@@ -162,8 +162,6 @@ namespace se::cs::dialog::render_window {
 
 		auto selectionData = SelectionData::get();
 
-		const auto rotationSpeed = gObjectMove::get();
-
 		if (!isKeyDown('X') && !isKeyDown('Y')) {
 			rotationAxis = SelectionData::RotationAxis::Z;
 		}
@@ -174,6 +172,7 @@ namespace se::cs::dialog::render_window {
 			widgets->show();
 		}
 
+		const auto rotationSpeed = gObjectRotate::get();
 		auto& cumulativeRot = gCumulativeRotationValues::get();
 		switch (rotationAxis) {
 		case SelectionData::RotationAxis::X:

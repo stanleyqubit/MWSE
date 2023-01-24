@@ -209,13 +209,20 @@ function DependencyManager:doVersionCheck(dependency, version)
     return true
 end
 
-function DependencyManager:doMetadataCheck(dependency, metadataPath)
+function DependencyManager:doMetadataCheck(dependency, metadataPath, fileType)
+    self.logger:debug("doMetadataCheck: %s", metadataPath)
     local metadataFile = io.open(metadataPath, "r")
     if not metadataFile then
         self.logger:error("Could not find dependency metadata file: %s", metadataPath)
         return false, string.format("Could not find dependency metadata file: %s", metadataPath)
     else
-        local metadata = json.decode(metadataFile:read("*all"))
+        local contents = metadataFile:read("*all")
+        local metadata
+        if fileType == "toml" then
+            metadata = toml.decode(contents)
+        elseif fileType == "json" then
+            metadata = json.decode(contents)
+        end
         if not metadata then
             self.logger:error("Could not parse dependency metadata file: %s", metadataPath)
             return false, string.format("Could not parse dependency metadata file: %s", metadataPath)
@@ -229,6 +236,7 @@ function DependencyManager:doMetadataCheck(dependency, metadataPath)
 end
 
 function DependencyManager:doVersionFileCheck(dependency, versionFilePath)
+    self.logger:debug("doVersionFileCheck: %s", versionFilePath)
     local versionFile = io.open(versionFilePath, "r")
     if not versionFile then
         self.logger:error("Could not find dependency version file: %s", versionFilePath)
@@ -266,12 +274,13 @@ function DependencyManager:doLuaModCheck(dependency)
         end
 
         --Look for metadata
-        local metadataPath = fullPath .. "metadata.json"
-        -- .\\Data Files\\MWSE\\core\\mods\\Ashfall\\
-        local metadataExists = lfs.fileexists( tes3.installDirectory .. metadataPath)
-        -- C:\\Game\\Morrowind\\Data Files\\MWSE\\core\\mods\\Ashfall\\metadata.json
-        if metadataExists then
-            return self:doMetadataCheck(dependency, metadataPath)
+        for _, fileType in ipairs{ "toml", "json"} do
+            local metadataPath = fullPath .. "metadata." .. fileType
+            local metadataFileExists = lfs.fileexists( tes3.installDirectory .. metadataPath)
+            if metadataFileExists then
+                self.logger:debug("Found metadata file: %s", metadataPath)
+                return self:doMetadataCheck(dependency, metadataPath, fileType)
+            end
         end
 
         --Look for version file

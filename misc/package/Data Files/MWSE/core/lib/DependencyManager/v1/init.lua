@@ -14,12 +14,15 @@
 
 ---@class DependencyManager.new.params
 ---@field metadata MWSE.metadata The metadata of the mod using this dependency manager
+---@field luaMod string A path to the lua mod where the metadata can be found
 ---@field logger MWSELogger (optional)The logger to use for this dependency manager
 ---@field showFailureMessage boolean (optional) Whether to show a message box if a dependency fails to load. Defaults to true.
 
 ---@class DependencyManager.failedDependency
 ---@field dependency DependencyManager.Dependency The dependency that failed
 ---@field reasons string[] The reasons the dependency failed
+---@field updateMWSE boolean (optional) Whether to update MWSE if the dependency fails. Defaults to false
+
 
 ---@class DependencyManager
 ---@field metadata MWSE.metadata The metadata of the mod using this dependency manager
@@ -29,6 +32,52 @@
 local DependencyManager = {
     ---@type DependencyManager
     registeredManagers = {},
+    operators = {
+        {
+            pattern = ">=",
+            callback = function(major, minor, patch, targetMajor, targetMinor, targetPatch)
+                if major > targetMajor then
+                    return true
+                elseif major == targetMajor then
+                    if minor > targetMinor then
+                        return true
+                    elseif minor == targetMinor then
+                        if patch >= targetPatch then
+                            return true
+                        end
+                    end
+                end
+                return false
+            end,
+        },
+        {
+            pattern = ">",
+            callback = function(major, minor, patch, targetMajor, targetMinor, targetPatch)
+                if major > targetMajor then
+                    return true
+                elseif major == targetMajor then
+                    if minor > targetMinor then
+                        return true
+                    elseif minor == targetMinor then
+                        if patch > targetPatch then
+                            return true
+                        end
+                    end
+                end
+                return false
+            end,
+        },
+
+        {
+            pattern = "=",
+            callback = function(major, minor, patch, targetMajor, targetMinor, targetPatch)
+                if major == targetMajor and minor == targetMinor and patch == targetPatch then
+                    return true
+                end
+                return false
+            end
+        },
+    }
 }
 
 event.register(tes3.event.initialized, function()
@@ -42,6 +91,39 @@ event.register(tes3.event.initialized, function()
     end
     showNextMessage()
 end, { priority = -math.huge })
+
+---@param e DependencyManager.new.params
+---@return DependencyManager
+function DependencyManager.new(e)
+    local self = setmetatable({}, { __index = DependencyManager })
+    self.logger = e.logger
+    if not self.logger then
+        local name = e.metadata
+            and e.metadata.name
+            and e.metadata.name .. ".DependencyManager"
+            or "DependencyManager"
+        local MWSELogger = require("logging.logger")
+        self.logger = MWSELogger.new {
+            name = name,
+            logLevel = "INFO"
+        }
+    end
+    self.metadata = e.metadata
+    self.showFailureMessage = e.showFailureMessage == nil and true or e.showFailureMessage
+    if e.luaMod ~= nil and e.metadata == nil then
+        self.logger:debug("Using luaMod to get metadata")
+        local metadata = self:getMetadataFromModPath(e.luaMod)
+        if metadata then
+            self.logger:debug("Found metadata for mod %s", e.luaMod)
+            self.metadata = metadata
+        else
+            self.logger:error("DependencyManager.new: Could not find metadata for mod %s", e.luaMod)
+        end
+    end
+    self.logger:assert(type(self.metadata) == "table", "DependencyManager.new: metadata is required")
+    return self
+end
+
 
 ---Displays the list of failed dependencies to the player
 ---@param callback function The callback to call when the message box is closed
@@ -80,6 +162,14 @@ function DependencyManager:dependenciesFailMessage(callback)
                         os.exit()
                     end)
                 end
+                if failedDependency.updateMWSE then
+                    local button = dependencyBlock:createButton{ text = "Update MWSE" }
+                    button:register("mouseClick", function(e)
+                        local updateExe = "start .\\MWSE-Update.exe"
+                        os.execute(updateExe)
+                        os.exit()
+                    end)
+                end
             end
             parentBlock:getTopLevelParent():updateLayout()
             parentBlock:updateLayout()
@@ -95,83 +185,12 @@ function DependencyManager:dependenciesFailMessage(callback)
             },
         }
         tes3ui.showMessageMenu{
-            header = string.format("%s - The following dependencies failed to load", self.modName),
+            header = string.format("%s - The following dependencies failed to load", self.metadata.name),
             customBlock = customBlock,
             buttons = buttons,
         }
     end)
 end
-
----@param e DependencyManager.new.params
----@return DependencyManager
-function DependencyManager.new(e)
-    local self = setmetatable({}, { __index = DependencyManager })
-    self.logger = e.logger
-    if not self.logger then
-        local name = e.metadata
-            and e.metadata.name
-            and e.metadata.name .. ".DependencyManager"
-            or "DependencyManager"
-        local MWSELogger = require("logging.logger")
-        self.logger = MWSELogger.new {
-            name = name,
-            logLevel = "INFO"
-        }
-    end
-    self.logger:assert(type(e.metadata) == "table", "DependencyManager.new: metadata is required")
-    self.metadata = e.metadata
-    self.showFailureMessage = e.showFailureMessage == nil and true or e.showFailureMessage
-    return self
-end
-
-DependencyManager.operators = {
-    {
-        pattern = ">=",
-        callback = function(major, minor, patch, targetMajor, targetMinor, targetPatch)
-            if major > targetMajor then
-                return true
-            elseif major == targetMajor then
-                if minor > targetMinor then
-                    return true
-                elseif minor == targetMinor then
-                    if patch >= targetPatch then
-                        return true
-                    end
-                end
-            end
-            return false
-        end,
-    },
-    {
-        pattern = ">",
-        callback = function(major, minor, patch, targetMajor, targetMinor, targetPatch)
-            if major > targetMajor then
-                return true
-            elseif major == targetMajor then
-                if minor > targetMinor then
-                    return true
-                elseif minor == targetMinor then
-                    if patch > targetPatch then
-                        return true
-                    end
-                end
-            end
-            return false
-        end,
-    },
-
-    {
-        pattern = "=",
-        callback = function(major, minor, patch, targetMajor, targetMinor, targetPatch)
-            if major == targetMajor and minor == targetMinor and patch == targetPatch then
-                return true
-            end
-            return false
-        end
-    },
-}
-
-
 
 function DependencyManager:doVersionCheck(dependency, version)
     if dependency.version == nil then
@@ -215,30 +234,13 @@ function DependencyManager:doVersionCheck(dependency, version)
     return true
 end
 
-function DependencyManager:doMetadataCheck(dependency, metadataPath, fileType)
-    self.logger:debug("doMetadataCheck: %s", metadataPath)
-    local metadataFile = io.open(metadataPath, "r")
-    if not metadataFile then
-        self.logger:error("Could not find dependency metadata file: %s", metadataPath)
-        return false, string.format("Could not find dependency metadata file: %s", metadataPath)
-    else
-        local contents = metadataFile:read("*all")
-        local metadata
-        if fileType == "toml" then
-            metadata = toml.decode(contents)
-        elseif fileType == "json" then
-            metadata = json.decode(contents)
-        end
-        if not metadata then
-            self.logger:error("Could not parse dependency metadata file: %s", metadataPath)
-            return false, string.format("Could not parse dependency metadata file: %s", metadataPath)
-        end
-        if not metadata.version then
-            self.logger:debug("Could not find version in dependency metadata file: %s", metadataPath)
-            return false, string.format("Could not find version in dependency metadata file: %s", metadataPath)
-        end
-        return self:doVersionCheck(dependency, metadata.version)
+function DependencyManager:doMetadataCheck(dependency, metadata)
+    self.logger:debug("doMetadataCheck: %s", metadata.name)
+    if not metadata.version then
+        self.logger:debug("Could not find version in dependency metadata file: %s", dependency.luaMod)
+        return false, string.format("Could not find version in dependency metadata file: %s", dependency.luaMod)
     end
+    return self:doVersionCheck(dependency, metadata.version)
 end
 
 function DependencyManager:doVersionFileCheck(dependency, versionFilePath)
@@ -260,29 +262,54 @@ function DependencyManager:doVersionFileCheck(dependency, versionFilePath)
     end
 end
 
+---@return MWSE.metadata|nil
+function DependencyManager:getMetadataFromModPath(path)
+    local path = path:gsub("[/.]", "\\"):lower()
+    local packagePaths = package.path:gsub("%?%.lua", "?")
+    for packagePath in packagePaths:gmatch("[^;]+") do
+        local fullPath = packagePath:gsub("?", path .. "\\")
+        for _, fileType in ipairs{ "toml", "json"} do
+            local metadataPath = fullPath .. "metadata." .. fileType
+            local metadataFileExists = lfs.fileexists( tes3.installDirectory .. metadataPath)
+            if metadataFileExists then
+                self.logger:debug("Found metadata file: %s", metadataPath)
+                local metadataFile = io.open(metadataPath, "r")
+                if not metadataFile then
+                    self.logger:error("Could not find dependency metadata file: %s", metadataPath)
+                    return nil
+                else
+                    local contents = metadataFile:read("*all")
+                    local metadata
+                    if fileType == "toml" then
+                        metadata = toml.decode(contents)
+                    elseif fileType == "json" then
+                        metadata = json.decode(contents)
+                    end
+                    return metadata
+                end
+            end
+        end
+    end
+end
+
 ---@param dependency DependencyManager.Dependency
 function DependencyManager:doLuaModCheck(dependency)
     local path = dependency.luaMod:gsub("[/.]", "\\"):lower()
     local packagePaths = package.path:gsub("%?%.lua", "?")
     for packagePath in packagePaths:gmatch("[^;]+") do
         local fullPath = packagePath:gsub("?", path .. "\\")
-        self.logger:debug("checking path: %s", fullPath)
+        self.logger:trace("checking path: %s", fullPath)
         -- if no version is specific, just check the folder exists
         if dependency.version == nil then
-            self.logger:debug("No target version, check if '%s' folder exists", fullPath)
             local folderExists = lfs.directoryexists( tes3.installDirectory .. fullPath)
             if folderExists then
                 return true
             end
         end
         --Look for metadata
-        for _, fileType in ipairs{ "toml", "json"} do
-            local metadataPath = fullPath .. "metadata." .. fileType
-            local metadataFileExists = lfs.fileexists( tes3.installDirectory .. metadataPath)
-            if metadataFileExists then
-                self.logger:debug("Found metadata file: %s", metadataPath)
-                return self:doMetadataCheck(dependency, metadataPath, fileType)
-            end
+        local metadata = self:getMetadataFromModPath(dependency.luaMod)
+        if metadata then
+            return self:doMetadataCheck(dependency, metadata)
         end
         --Look for version file
         local versionFilePath = fullPath .. "version.txt"
@@ -303,24 +330,29 @@ end
 function DependencyManager:checkBuildDate()
     if not self.metadata.buildDate then return true end
     if mwse.buildDate == nil  then
-        self.logger:error("Could not get current build date")
-        return false
+        local error = "Could not get current build date"
+        self.logger:error(error)
+        return false, error
     end
-    return mwse.buildDate <= self.metadata.buildDate
+    if mwse.buildDate < self.metadata.buildDate then
+        local error = string.format("MWSE is out of date\nCurrent build date: %d; Required: %s",
+            mwse.buildDate, self.metadata.buildDate)
+        self.logger:error(error)
+        return false, error
+    end
+    return true
 end
 
 ---@return boolean #returns true if all dependencies passed, false if any failed.
 function DependencyManager:checkDependencies()
     local failedDependencies = {} ---@type table<string, DependencyManager.failedDependency>
-    if not self:checkBuildDate() then
-        failedDependencies["MWSE"] = {
-            dependency = {
-                name = "MWSE",
-            },
-            reasons = {
-                string.format("Build date is too old. Current build date: %s", self.metadata.buildDate)
-            }
-        }
+    local buildDatePassed, reason = self:checkBuildDate()
+    if not buildDatePassed then
+        table.insert(failedDependencies, {
+            dependency = { name = "MWSE" },
+            reasons = { reason },
+            updateMWSE = true
+        })
     end
     if self.metadata.dependencies then
         for modId, dependency in pairs(self.metadata.dependencies) do

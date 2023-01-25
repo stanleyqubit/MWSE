@@ -252,19 +252,38 @@ namespace se::cs {
 	//
 	//
 
+	static const char* settingsFilename = "csse.toml";
+
 	void Settings_t::load() {
-		if (std::filesystem::exists("csse.toml")) {
-			const auto data = toml::parse("csse.toml");
-			from_toml(data);
+		if (std::filesystem::exists(settingsFilename)) {
+			try {
+				const auto data = toml::parse(settingsFilename);
+				from_toml(data);
+			}
+			catch (toml::syntax_error& e) {
+				valid = false;
+				log::stream << "Error while parsing settings file " << settingsFilename << ":" << std::endl;
+				log::stream << e.what() << std::endl << std::endl;
+				throw;	// Re-throw
+			}
 		}
 	}
 
 	void Settings_t::save() {
-		std::ofstream outFile;
-		outFile.open("csse.toml");
+		if (!valid) {
+			return;
+		}
 
-		const toml::value data = settings;
-		outFile << std::setw(80) << std::setprecision(8) << data;
+		std::ofstream outFile;
+		outFile.open(settingsFilename);
+
+		if (!outFile.fail()) {
+			const toml::value data = settings;
+			outFile << std::setw(80) << std::setprecision(8) << data;
+		}
+		else {
+			log::stream << "Failed to save settings file " << settingsFilename << "." << std::endl;
+		}
 	}
 
 	void Settings_t::from_toml(const toml::value& v) {

@@ -122,6 +122,8 @@ namespace se::cs {
 			toml::value into_toml() const;
 		} quickstart;
 
+		bool valid = true;
+
 		void load();
 		void save();
 

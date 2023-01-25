@@ -589,13 +589,14 @@ namespace se::cs::dialog::render_window {
 
 		// Preserve the cursor offset.
 		if (!cursorOffset.has_value()) {
+			cursorOffset = NI::Vector3();
 			auto pick = SceneGraphController::get()->objectPick;
 			if (pick->pickObjectsWithSkinDeforms(&rayOrigin, &rayDirection)) {
 				auto intersection = pick->results.at(0)->intersection;
-				cursorOffset.emplace(intersection - planeOrigin);
+				cursorOffset = intersection - planeOrigin;
 			}
 		}
-		planeOrigin = planeOrigin + cursorOffset.value_or(NI::Vector3());
+		planeOrigin = planeOrigin + cursorOffset.value();
 
 		// Align the plane to the locked axis if applicable.
 		auto widgets = SceneGraphController::get()->widgets;

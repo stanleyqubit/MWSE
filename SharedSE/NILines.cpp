@@ -18,6 +18,14 @@ namespace NI {
 		vTable.asObject->destructor(this, 0);
 	}
 
+	Pointer<Lines> Lines::create(unsigned short vertexCount) {
+		auto vertices = se::memory::_new<Vector3>(vertexCount);
+		auto colors = se::memory::_new<Color>(vertexCount);
+		auto textureCoords = se::memory::_new<Vector2>(vertexCount);
+		auto lineSegmentFlags = se::memory::_new<bool>(vertexCount);
+		return new Lines(vertexCount, vertices, colors, textureCoords, lineSegmentFlags);
+	}
+
 	Pointer<Lines> Lines::create(unsigned short vertexCount, Vector3* vertices, Color* colors, Vector2* textureCoords, bool* lineSegmentFlags) {
 		return new Lines(vertexCount, vertices, colors, textureCoords, lineSegmentFlags);
 	}

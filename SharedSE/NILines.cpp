@@ -1,0 +1,24 @@
+#include "NILines.h"
+
+#include "ExceptionUtil.h"
+
+namespace NI {
+
+	Lines::Lines(unsigned short vertexCount, Vector3* vertices, Color* colors, Vector2* textureCoords, bool* lineSegmentFlags) {
+#if defined(SE_NI_LINES_FNADDR_CTOR) && SE_NI_LINES_FNADDR_CTOR > 0
+		const auto NI_Lines_ctor = reinterpret_cast<Lines*(__thiscall*)(Lines*, unsigned short, Vector3*, Color*, Vector2*, bool*)>(SE_NI_LINES_FNADDR_CTOR);
+		NI_Lines_ctor(this, vertexCount, vertices, colors, textureCoords, lineSegmentFlags);
+#else
+		throw not_implemented_exception();
+#endif
+	}
+
+	Lines::~Lines() {
+		// Call dtor without deletion.
+		vTable.asObject->destructor(this, 0);
+	}
+
+	Pointer<Lines> Lines::create(unsigned short vertexCount, Vector3* vertices, Color* colors, Vector2* textureCoords, bool* lineSegmentFlags) {
+		return new Lines(vertexCount, vertices, colors, textureCoords, lineSegmentFlags);
+	}
+}

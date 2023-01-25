@@ -32,6 +32,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)NIGeometryData.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)NIHashMap.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)NILight.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)NILines.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)NILinkedList.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)NIMatrix33.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)NINode.h" />
@@ -79,6 +80,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)NIExtraData.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)NIGeometry.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)NIGeometryData.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)NILines.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)NIMatrix33.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)NINode.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)NIObject.cpp" />

@@ -276,8 +276,16 @@ namespace se::cs::window::main {
 	bool blockNormalExecution = false;
 
 	void onFinishInitialization(LPARAM& lParam) {
-		// Skip any QuickStart usage if we were given a file to load.
 		char* commandLineFile = (char*)0x6CE6CC;
+
+		// Skip any initialization if the preview window is active.
+		auto renderController = dialog::render_window::RenderController::get();
+		if (renderController->node == nullptr) {
+			commandLineFile[0] = '\0';
+			return;
+		}
+
+		// Skip any QuickStart usage if we were given a file to load.
 		if (*commandLineFile != '\0') {
 			return;
 		}

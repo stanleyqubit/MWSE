@@ -1240,6 +1240,12 @@ namespace se::cs::dialog::render_window {
 		}
 	}
 
+	void PatchDialogProc_BeforeSetCameraPosition(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		if (RenderController::get()->node == nullptr) {
+			PatchDialogProc_OverrideResult = FALSE;
+		}
+	}
+
 	void PatchDialogProc_AfterKeyDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		switch (wParam) {
 		case 'Q':
@@ -1275,6 +1281,10 @@ namespace se::cs::dialog::render_window {
 		sgController->sceneRoot->attachChild(sgController->widgets->root);
 	}
 
+	namespace CustomWindowMessage {
+		constexpr UINT SetCameraPosition = 0x40Eu;
+	}
+
 	LRESULT CALLBACK PatchDialogProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		PatchDialogProc_OverrideResult.reset();
 
@@ -1288,6 +1298,9 @@ namespace se::cs::dialog::render_window {
 			break;
 		case WM_RBUTTONDOWN:
 			PatchDialogProc_BeforeRMouseButtonDown(hWnd, msg, wParam, lParam);
+			break;
+		case CustomWindowMessage::SetCameraPosition:
+			PatchDialogProc_BeforeSetCameraPosition(hWnd, msg, wParam, lParam);
 			break;
 		}
 
@@ -1308,6 +1321,7 @@ namespace se::cs::dialog::render_window {
 			break;
 		case WM_INITDIALOG:
 			PatchDialogProc_AfterInitDialog(hWnd, msg, wParam, lParam);
+			break;
 		}
 
 		return PatchDialogProc_OverrideResult.value_or(vanillaResult);

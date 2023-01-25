@@ -562,8 +562,8 @@ namespace se::cs::dialog::render_window {
 			return 0;
 		}
 
-		// When holding shift perform vanilla drag behavior.
-		if (isKeyDown(VK_LSHIFT) || settings.render_window.use_legacy_object_movement) {
+		// Respect the "Use Legacy Object Movement" setting.
+		if (settings.render_window.use_legacy_object_movement) {
 			return DefaultDragMovementFunction(renderController, firstTarget, dx, dy, lockX, lockY, lockZ);
 		}
 

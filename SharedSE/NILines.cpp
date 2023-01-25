@@ -4,9 +4,9 @@
 
 namespace NI {
 
-	Lines::Lines(unsigned short vertexCount, Vector3* vertices, Color* colors, Vector2* textureCoords, bool* lineSegmentFlags) {
+	Lines::Lines(unsigned short vertexCount, Vector3* vertices, PackedColor* colors, Vector2* textureCoords, bool* lineSegmentFlags) {
 #if defined(SE_NI_LINES_FNADDR_CTOR) && SE_NI_LINES_FNADDR_CTOR > 0
-		const auto NI_Lines_ctor = reinterpret_cast<Lines*(__thiscall*)(Lines*, unsigned short, Vector3*, Color*, Vector2*, bool*)>(SE_NI_LINES_FNADDR_CTOR);
+		const auto NI_Lines_ctor = reinterpret_cast<Lines*(__thiscall*)(Lines*, unsigned short, Vector3*, PackedColor*, Vector2*, bool*)>(SE_NI_LINES_FNADDR_CTOR);
 		NI_Lines_ctor(this, vertexCount, vertices, colors, textureCoords, lineSegmentFlags);
 #else
 		throw not_implemented_exception();
@@ -22,9 +22,9 @@ namespace NI {
 		auto vertices = se::memory::_new<Vector3>(vertexCount);
 		auto lineSegmentFlags = se::memory::_new<bool>(vertexCount);
 
-		Color* colors = nullptr;
+		PackedColor* colors = nullptr;
 		if (useColors) {
-			colors = se::memory::_new<Color>(vertexCount);
+			colors = se::memory::_new<PackedColor>(vertexCount);
 		}
 
 		Vector2* textureCoords = nullptr;
@@ -35,7 +35,7 @@ namespace NI {
 		return new Lines(vertexCount, vertices, colors, textureCoords, lineSegmentFlags);
 	}
 
-	Pointer<Lines> Lines::create(unsigned short vertexCount, Vector3* vertices, Color* colors, Vector2* textureCoords, bool* lineSegmentFlags) {
+	Pointer<Lines> Lines::create(unsigned short vertexCount, Vector3* vertices, PackedColor* colors, Vector2* textureCoords, bool* lineSegmentFlags) {
 		return new Lines(vertexCount, vertices, colors, textureCoords, lineSegmentFlags);
 	}
 }

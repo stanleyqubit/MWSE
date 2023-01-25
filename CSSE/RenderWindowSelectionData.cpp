@@ -23,7 +23,7 @@ namespace se::cs::dialog::render_window {
 
 	SelectionData::Target* SelectionData::getLastTarget() const {
 		auto target = firstTarget;
-		for (auto i = 1; i < numberOfTargets; i++) {
+		for (auto i = 1u; i < numberOfTargets; ++i) {
 			target = target->next;
 		}
 		return target;

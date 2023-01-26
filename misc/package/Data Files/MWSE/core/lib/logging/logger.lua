@@ -170,6 +170,7 @@ end
 ---@vararg any
 function Logger:assert(condition, message, ...)
 	if not condition then
+		message = tostring(message):format(...)
 		self:error(message)
 		assert(condition, message)
 	end

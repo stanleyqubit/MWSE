@@ -255,6 +255,12 @@
     <ClInclude Include="DialogPreviewWindow.h">
       <Filter>Header Files\UI\Dialog</Filter>
     </ClInclude>
+    <ClInclude Include="DialogEditObjectWindow.h">
+      <Filter>Header Files\UI\Dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogReferenceData.h">
+      <Filter>Header Files\UI\Dialog</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -378,6 +384,12 @@
       <Filter>Source Files\UI\Controllers</Filter>
     </ClCompile>
     <ClCompile Include="DialogPreviewWindow.cpp">
+      <Filter>Source Files\UI\Dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogEditObjectWindow.cpp">
+      <Filter>Source Files\UI\Dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogReferenceData.cpp">
       <Filter>Source Files\UI\Dialog</Filter>
     </ClCompile>
   </ItemGroup>

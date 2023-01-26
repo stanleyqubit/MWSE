@@ -15,8 +15,10 @@
 
 #include "DialogCellWindow.h"
 #include "DialogDialogueWindow.h"
+#include "DialogEditObjectWindow.h"
 #include "DialogObjectWindow.h"
 #include "DialogPreviewWindow.h"
+#include "DialogReferenceData.h"
 #include "DialogRenderWindow.h"
 #include "DialogSearchAndReplaceWindow.h"
 #include "DialogTextSearchWindow.h"
@@ -341,8 +343,10 @@ namespace se::cs {
 		window::main::installPatches();
 		dialog::cell_window::installPatches();
 		dialog::dialogue_window::installPatches();
+		dialog::edit_object_window::installPatches();
 		dialog::object_window::installPatches();
 		dialog::preview_window::installPatches();
+		dialog::reference_data::installPatches();
 		dialog::render_window::installPatches();
 		dialog::search_and_replace_window::installPatches();
 		dialog::text_search_window::installPatches();

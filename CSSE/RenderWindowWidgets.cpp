@@ -10,26 +10,26 @@ namespace se::cs::dialog::render_window {
 
 		root = loader->loadNIF("meshes\\mwse\\widgets.nif");
 		if (root) {
-			auto axisLines = root->getObjectByName("axisLines");
-			if (axisLines && axisLines->isOfType(NI::RTTIStaticPtr::NiSwitchNode)) {
+			auto axisLines = root->getObjectByNameAndType("axisLines", NI::RTTIStaticPtr::NiSwitchNode);
+			if (axisLines) {
 				axisMovementWidget = static_cast<NI::SwitchNode*>(axisLines);
 				axisMovementWidget->setAppCulled(true);
 			}
 
-			auto unitPlane = root->getObjectByName("unitPlane");
-			if (unitPlane && unitPlane->isInstanceOfType(NI::RTTIStaticPtr::NiGeometry)) {
+			auto unitPlane = root->getObjectByNameAndType("unitPlane", NI::RTTIStaticPtr::NiGeometry);
+			if (unitPlane) {
 				debugUnitPlane = static_cast<NI::Geometry*>(unitPlane);
 				debugUnitPlane->setAppCulled(true);
 			}
 
-			auto unitSphere = root->getObjectByName("unitSphere");
-			if (unitSphere && unitSphere->isInstanceOfType(NI::RTTIStaticPtr::NiGeometry)) {
+			auto unitSphere = root->getObjectByNameAndType("unitSphere", NI::RTTIStaticPtr::NiGeometry);
+			if (unitSphere) {
 				debugUnitSphere = static_cast<NI::Geometry*>(unitSphere);
 				debugUnitSphere->setAppCulled(true);
 			}
 
-			auto unitArrows = root->getObjectByName("unitArrows");
-			if (unitArrows && unitArrows->isInstanceOfType(NI::RTTIStaticPtr::NiGeometry)) {
+			auto unitArrows = root->getObjectByNameAndType("unitArrows", NI::RTTIStaticPtr::NiGeometry);
+			if (unitArrows) {
 				debugUnitArrows = static_cast<NI::Geometry*>(unitArrows);
 				debugUnitArrows->setAppCulled(true);
 			}

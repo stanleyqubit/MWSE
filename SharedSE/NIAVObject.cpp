@@ -25,8 +25,16 @@ namespace NI {
 		}
 	}
 
-	AVObject* AVObject::getObjectByName(const char* name) {
+	AVObject* AVObject::getObjectByName(const char* name) const {
 		return vTable.asAVObject->getObjectByName(this, name);
+	}
+
+	AVObject* AVObject::getObjectByNameAndType(const char* name, uintptr_t rtti) const {
+		auto result = getObjectByName(name);
+		if (result && result->isOfType(rtti)) {
+			return result;
+		}
+		return nullptr;
 	}
 
 	bool AVObject::getAppCulled() const {

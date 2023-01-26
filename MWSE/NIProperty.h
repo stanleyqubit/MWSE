@@ -120,6 +120,36 @@ namespace NI {
 	static_assert(sizeof(MaterialProperty) == 0x58, "NI::MaterialProperty failed size validation");
 
 	struct StencilProperty : Property {
+		enum TestFunc {
+			TEST_NEVER,
+			TEST_LESS,
+			TEST_EQUAL,
+			TEST_LESSEQUAL,
+			TEST_GREATER,
+			TEST_NOTEQUAL,
+			TEST_GREATEREQUAL,
+			TEST_ALWAYS,
+			TEST_MAX
+		};
+
+		enum Action {
+			ACTION_KEEP,
+			ACTION_ZERO,
+			ACTION_REPLACE,
+			ACTION_INCREMENT,
+			ACTION_DECREMENT,
+			ACTION_INVERT,
+			ACTION_MAX
+		};
+
+		enum DrawMode {
+			DRAW_CCW_OR_BOTH,
+			DRAW_CCW,
+			DRAW_CW,
+			DRAW_BOTH,
+			DRAW_MAX
+		};
+
 		bool enabled;
 		int testFunc;
 		unsigned int reference;
@@ -128,6 +158,11 @@ namespace NI {
 		int zFailAction;
 		int passAction;
 		int drawMode;
+
+		StencilProperty();
+		~StencilProperty();
+
+		static Pointer<StencilProperty> create();
 	};
 	static_assert(sizeof(StencilProperty) == 0x38, "NI::StencilProperty failed size validation");
 

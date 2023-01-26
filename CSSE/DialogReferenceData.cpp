@@ -9,8 +9,8 @@ namespace se::cs::dialog::reference_data {
 	// Configuration
 	//
 
-	constexpr auto ENABLE_ALL_OPTIMIZATIONS = false;
-	constexpr auto LOG_PERFORMANCE_RESULTS = true;
+	constexpr auto ENABLE_ALL_OPTIMIZATIONS = true;
+	constexpr auto LOG_PERFORMANCE_RESULTS = false;
 	
 	//
 	// Extended window messages.

@@ -1,5 +1,6 @@
 local DependencyType = require("Metadata.DependencyType")
 local Metadata = require("Metadata")
+local inspect = require("inspect")
 
 local v = require("semver")
 local operators = {
@@ -172,6 +173,7 @@ local function doVersionCheck(dependencyManager, mods, failures)
     end
 end
 
+
 local function doModuleCheck(dependencyManager, mods, failures)
     for modId, dependency in pairs(mods) do
         if dependency["mwse-module"] then
@@ -217,14 +219,85 @@ local function doModuleCheck(dependencyManager, mods, failures)
     end
 end
 
+
+
 DependencyType.registerDependencyType{
     id = "mods",
-    logLevel = "DEBUG",
+    ---@param dependencyManager DependencyManager
     checkDependency = function(dependencyManager, mods)
         local failures = {}
         doPluginCheck(dependencyManager, mods, failures)
         doVersionCheck(dependencyManager, mods, failures)
         doModuleCheck(dependencyManager, mods, failures)
+        if #failures > 0 then
+            return false, failures
+        end
+        return true
+    end
+}
+
+local function getMissingAssets(assets)
+    local missingAssets = {}
+    for _, asset in ipairs(assets) do
+        local fullPath = tes3.installDirectory .. "\\Data Files\\" .. asset
+        local found = lfs.fileexists(fullPath)
+                or lfs.directoryexists(fullPath)
+        if not found then
+            table.insert(missingAssets, asset)
+        end
+    end
+    return missingAssets
+end
+
+DependencyType.registerDependencyType{
+    id = "assets",
+    ---@param dependencyManager DependencyManager
+    ---@param assets string[]
+    checkDependency = function(dependencyManager, assets)
+        --Check assets exist as files or directories
+        local missingAssets = getMissingAssets(assets)
+        if #missingAssets > 0 then
+            return false, {
+                {
+                    title = "Missing Assets",
+                    reasons = missingAssets
+                }
+            }
+        end
+        return true
+    end
+}
+
+local function isArchiveActive(archive)
+    local loadedArchives = tes3.getArchiveList()
+    for _, loadedArchive in ipairs(loadedArchives) do
+        mwse.log("archive: " .. loadedArchive)
+        if loadedArchive:lower() == "data files\\".. archive:lower() then
+            mwse.log("FOUND ARCHIVE %s", archive)
+            return true
+        end
+    end
+    mwse.log("MISSING ARCHIVE %s", archive)
+    return false
+end
+
+DependencyType.registerDependencyType{
+    id = "archives",
+    ---@param dependencyManager DependencyManager
+    checkDependency = function(dependencyManager, archives)
+        local failures = {}
+        for archive, assets in pairs(archives) do
+            local missingAssets = {}
+            if not isArchiveActive(archive) then
+                missingAssets = getMissingAssets(assets)
+            end
+            if #missingAssets > 0 then
+                table.insert(failures, {
+                    title = string.format("Missing Assets from %s.\nMake sure to activate or unpack the archive.", archive),
+                    reasons = missingAssets
+                })
+            end
+        end
         if #failures > 0 then
             return false, failures
         end

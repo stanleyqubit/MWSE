@@ -169,6 +169,7 @@ end
 local writeSubPackage = nil
 
 local operatorToTitle = {
+	unm = "Unary minus (`-`)",
 	add = "Addition (`+`)",
 	sub = "Subtraction (`-`)",
 	mul = "Multiplication (`*`)",

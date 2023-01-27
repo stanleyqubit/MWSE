@@ -282,7 +282,7 @@ local quaternion = niQuaternion.new(w, x, y, z)
 
 ***
 
-### nil
+### Unary minus (`-`)
 
 | Result type | Description |
 | ----------- | ----------- |

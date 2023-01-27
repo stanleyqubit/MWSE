@@ -29,7 +29,6 @@ namespace NI {
 		Quaternion normalized() const;
 
 		Quaternion slerp(const Quaternion* q, float t) const;
-		Quaternion slerpKeyframe(const Quaternion* q, float t) const;
 		Quaternion rotateTowards(const Quaternion* to, float rotationLimit) const;
 
 		void fromAngleAxis(float angle, const TES3::Vector3* axis);

@@ -28,9 +28,7 @@ local defaultOperator = operators[1]
 local function getOperator(version)
     for _, operator in ipairs(operators) do
         if version:startswith(operator.pattern) then
-            mwse.log("Operator: %s", operator.pattern)
             version = version:sub(#operator.pattern + 1)
-            mwse.log("Version: %s", version)
             return operator, version
         end
     end
@@ -39,7 +37,7 @@ end
 
 DependencyType.registerDependencyType{
     id = "mwse",
-    checkDependency = function(dependencyManager, dependency)
+    checkDependency = function(_, dependency)
         if dependency.buildnumber > mwse.buildNumber then---@diagnostic disable-line: undefined-field
             return false, {
                 {

@@ -68,7 +68,7 @@ namespace NI {
 		void setLocalVelocity(Vector3*);
 
 		AVObject* getObjectByName(const char*) const;
-		AVObject* getObjectByNameAndType(const char* name, uintptr_t rtti) const;
+		AVObject* getObjectByNameAndType(const char* name, uintptr_t rtti, bool allowSubtypes = true) const;
 
 		bool getAppCulled() const;
 		void setAppCulled(bool culled);

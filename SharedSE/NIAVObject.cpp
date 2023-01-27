@@ -29,12 +29,18 @@ namespace NI {
 		return vTable.asAVObject->getObjectByName(this, name);
 	}
 
-	AVObject* AVObject::getObjectByNameAndType(const char* name, uintptr_t rtti) const {
+	AVObject* AVObject::getObjectByNameAndType(const char* name, uintptr_t rtti, bool allowSubtypes) const {
 		auto result = getObjectByName(name);
-		if (result && result->isOfType(rtti)) {
-			return result;
+		if (result == nullptr) {
+			return nullptr;
 		}
-		return nullptr;
+
+		if (allowSubtypes) {
+			return result->isInstanceOfType(rtti) ? result : nullptr;
+		}
+		else {
+			return result->isOfType(rtti) ? result : nullptr;
+		}
 	}
 
 	bool AVObject::getAppCulled() const {

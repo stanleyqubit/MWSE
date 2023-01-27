@@ -46,6 +46,7 @@ namespace mwse::lua {
 
 		// Basic function binding.
 		usertypeDefinition["clearTarget"] = &TES3::Game::clearTarget;
+		usertypeDefinition["savePlayerOptions"] = &TES3::Game::savePlayerOptions;
 		usertypeDefinition["setGamma"] = &TES3::Game::setGamma;
 
 		// Deprecated bindings.

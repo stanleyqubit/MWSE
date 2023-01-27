@@ -15,6 +15,11 @@ namespace TES3 {
 		TES3_Game_clearTarget(this);
 	}
 
+	const auto TES3_Game_savePlayerOptions = reinterpret_cast<void(__thiscall*)(Game*)>(0x4293A0);
+	void Game::savePlayerOptions() {
+		TES3_Game_savePlayerOptions(this);
+	}
+
 	Game* Game::get() {
 		return *reinterpret_cast<TES3::Game**>(0x7C6CDC);
 	}

@@ -271,13 +271,11 @@ DependencyType.registerDependencyType{
 local function isArchiveActive(archive)
     local loadedArchives = tes3.getArchiveList()
     for _, loadedArchive in ipairs(loadedArchives) do
-        mwse.log("archive: " .. loadedArchive)
+        ---@diagnostic disable-next-line
         if loadedArchive:lower() == "data files\\".. archive:lower() then
-            mwse.log("FOUND ARCHIVE %s", archive)
             return true
         end
     end
-    mwse.log("MISSING ARCHIVE %s", archive)
     return false
 end
 

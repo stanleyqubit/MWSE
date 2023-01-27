@@ -77,7 +77,7 @@ local result = os.getClipboardText()
 
 ### `os.openURL`
 
-Opens the given `url` in the default browser. This has an advantage over using `os.execute("show https://my.url")` in that it does not create a command prompt window.
+Opens the given `url` in the default browser. This has an advantage over using `os.execute("start https://my.url")` in that it does not create a command prompt window.
 
 ```lua
 os.openURL(url)

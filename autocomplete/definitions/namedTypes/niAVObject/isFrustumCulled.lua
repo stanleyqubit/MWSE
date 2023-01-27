@@ -4,4 +4,5 @@ return {
 	arguments = {
 		{ name = "camera", type = "niCamera" },
 	},
+	valuetype = "boolean",
 }

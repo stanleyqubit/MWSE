@@ -433,6 +433,8 @@ function tes3uiElement:createThinBorder(params) end
 --- Creates a vertically scrolling pane. Useful as a list box.
 --- 
 --- Scroll pane specific properties can be accessed through the `widget` property. The widget type for scroll panes is [`tes3uiScrollPane`](https://mwse.github.io/MWSE/types/tes3uiScrollPane/).
+---
+--- [Examples available in online documentation](https://mwse.github.io/MWSE/types/tes3uiElement/#createVerticalScrollPane).
 --- @param params tes3uiElement.createVerticalScrollPane.params? This table accepts the following values:
 --- 
 --- `id`: string|number|nil — *Optional*. An identifier to help find this element later.

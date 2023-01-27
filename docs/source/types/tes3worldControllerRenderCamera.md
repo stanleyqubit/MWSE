@@ -35,7 +35,7 @@ A core game object used for storing camera objects.
 
 **Returns**:
 
-* `result` (niRenderer)
+* `result` ([niRenderer](../../types/niRenderer))
 
 ***
 

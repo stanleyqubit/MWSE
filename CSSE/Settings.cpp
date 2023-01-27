@@ -28,6 +28,7 @@ namespace se::cs {
 	void Settings_t::RenderWindowSettings::from_toml(const toml::value& v) {
 		fov = toml::find_or(v, "fov", fov);
 		multisamples = toml::find_or(v, "multisamples", multisamples);
+		use_legacy_grid_snap = toml::find_or(v, "use_legacy_grid_snap", use_legacy_grid_snap);
 		use_legacy_object_movement = toml::find_or(v, "use_legacy_object_movement", use_legacy_object_movement);
 		use_world_axis_rotations_by_default = toml::find_or(v, "use_world_axis_rotations_by_default", use_world_axis_rotations_by_default);
 	}
@@ -37,6 +38,7 @@ namespace se::cs {
 			{
 				{ "fov", fov },
 				{ "multisamples", multisamples },
+				{ "use_legacy_grid_snap", use_legacy_grid_snap },
 				{ "use_legacy_object_movement", use_legacy_object_movement },
 				{ "use_world_axis_rotations_by_default", use_world_axis_rotations_by_default },
 			}

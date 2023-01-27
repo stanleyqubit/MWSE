@@ -645,8 +645,10 @@ namespace se::cs::dialog::render_window {
 			auto increment = gSnapGrid::get();
 			if (increment != 0.0f) {
 				// "Unlocked" movement defaults to XY axis.
-				auto lockXY = !isAxisLocked; 
-				// Offset so the first reference will be on the grid.
+				auto lockXY = !isAxisLocked;
+				// Legacy grid snap also locks the Z axis by default.
+				auto legacyLockZ = !isAxisLocked && settings.render_window.use_legacy_grid_snap;
+				// Offset so the last reference will be on the grid.
 				auto reference = selectionData->getLastTarget()->reference;
 				auto p = intersection + (reference->position - planeOrigin);
 				if (lockX || lockXY) {
@@ -655,7 +657,7 @@ namespace se::cs::dialog::render_window {
 				if (lockY || lockXY) {
 					intersection.y -= p.y - (std::roundf(p.y / increment) * increment);
 				}
-				if (lockZ) {
+				if (lockZ || legacyLockZ) {
 					intersection.z -= p.z - (std::roundf(p.z / increment) * increment);
 				}
 			}

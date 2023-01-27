@@ -137,10 +137,10 @@ namespace NI {
 		}
 
 		return {
-			float(k0 * w + k1 * q->w),
-			float(k0 * x + k1 * q->x),
-			float(k0 * y + k1 * q->y),
-			float(k0 * z + k1 * q->z),
+			float(k0 * w + k1 * q_closest.w),
+			float(k0 * x + k1 * q_closest.x),
+			float(k0 * y + k1 * q_closest.y),
+			float(k0 * z + k1 * q_closest.z),
 		};
 	}
 

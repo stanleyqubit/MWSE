@@ -101,7 +101,7 @@ function mge.reloadDistantLand() end
 function mge.saveConfig() end
 
 --- Saves a screenshot.
---- @param params mge.saveScreenshot.params? This table accepts the following values:
+--- @param params mge.saveScreenshot.params This table accepts the following values:
 --- 
 --- `path`: string — No description yet available.
 --- 

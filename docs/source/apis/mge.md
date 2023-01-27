@@ -157,7 +157,7 @@ mge.saveScreenshot({ path = ..., captureWithUI = ... })
 
 **Parameters**:
 
-* `params` (table): *Optional*.
+* `params` (table)
 	* `path` (string)
 	* `captureWithUI` (boolean): *Default*: `false`. If set to `true`, the screenshot will include the user interface.
 

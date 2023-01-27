@@ -55,6 +55,20 @@ local scatters = mgeWeatherConfig.getScattering()
 
 ***
 
+### `getSkylightScattering`
+
+Gets the skylight scatter values from MGE. These are returned in a table with the `skylight` and `mix` keys. The result table can be modified, then sent back to `setSkylightScattering`.
+
+```lua
+local scatters = mgeWeatherConfig.getSkylightScattering()
+```
+
+**Returns**:
+
+* `scatters` (table&lt;string, number[]|number&gt;)
+
+***
+
 ### `getWind`
 
 Gets the wind speed for a weather from MGE. This is returned in a table with the `speed` key, as well as the `weather` redefined. The result table can be modified, then sent back to `setWind`.
@@ -112,7 +126,7 @@ mgeWeatherConfig.setPerPixelLighting({ weather = ..., sun = ..., ambient = ... }
 Sets the in- and out-scatter values for MGE. The result table of `getScattering` can be modified then passed to this function.
 
 ```lua
-local success = mgeWeatherConfig.setScattering({ inscatter = ..., outscatter = ... })
+mgeWeatherConfig.setScattering({ inscatter = ..., outscatter = ... })
 ```
 
 **Parameters**:
@@ -121,9 +135,21 @@ local success = mgeWeatherConfig.setScattering({ inscatter = ..., outscatter = .
 	* `inscatter` ([tes3vector3](../../types/tes3vector3), table)
 	* `outscatter` ([tes3vector3](../../types/tes3vector3), table)
 
-**Returns**:
+***
 
-* `success` (table&lt;string, number&gt;)
+### `setSkylightScattering`
+
+Sets the sky scatter values for MGE. The result table of `getSkylightScattering` can be modified then passed to this function.
+
+```lua
+mgeWeatherConfig.setSkylightScattering({ skylight = ..., mix = ... })
+```
+
+**Parameters**:
+
+* `params` (table)
+	* `skylight` ([tes3vector3](../../types/tes3vector3), table)
+	* `mix` (number): *Default*: `0.44`.
 
 ***
 

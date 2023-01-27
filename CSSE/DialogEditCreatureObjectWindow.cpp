@@ -1,17 +1,9 @@
-#include "DialogEditObjectWindow.h"
+#include "DialogEditCreatureObjectWindow.h"
 
 #include "LogUtil.h"
 #include "MemoryUtil.h"
 
-#include "DialogEditAlchemyObjectWindow.h"
-#include "DialogEditCreatureObjectWindow.h"
-#include "DialogEditEnchantmentObjectWindow.h"
-#include "DialogEditLeveledCreatureObjectWindow.h"
-#include "DialogEditLeveledItemObjectWindow.h"
-#include "DialogEditNPCObjectWindow.h"
-#include "DialogEditSpellObjectWindow.h"
-
-namespace se::cs::dialog::edit_object_window {
+namespace se::cs::dialog::edit_creature_object_window {
 
 	//
 	// Configuration
@@ -35,19 +27,25 @@ namespace se::cs::dialog::edit_object_window {
 
 		// Optimize redraws.
 		if constexpr (ENABLE_ALL_OPTIMIZATIONS) {
+			SendDlgItemMessageA(hWnd, CONTROL_ID_BLOOD_COMBO, WM_SETREDRAW, FALSE, NULL);
 			SendDlgItemMessageA(hWnd, CONTROL_ID_SCRIPT_COMBO, WM_SETREDRAW, FALSE, NULL);
+			SendDlgItemMessageA(hWnd, CONTROL_ID_SOUND_GEN_COMBO, WM_SETREDRAW, FALSE, NULL);
+			SendDlgItemMessageA(hWnd, CONTROL_ID_TYPE_COMBO, WM_SETREDRAW, FALSE, NULL);
 		}
 	}
 
 	void PatchDialogProc_AfterInitialize(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		// Restore redraws.
 		if constexpr (ENABLE_ALL_OPTIMIZATIONS) {
+			SendDlgItemMessageA(hWnd, CONTROL_ID_BLOOD_COMBO, WM_SETREDRAW, TRUE, NULL);
 			SendDlgItemMessageA(hWnd, CONTROL_ID_SCRIPT_COMBO, WM_SETREDRAW, TRUE, NULL);
+			SendDlgItemMessageA(hWnd, CONTROL_ID_SOUND_GEN_COMBO, WM_SETREDRAW, TRUE, NULL);
+			SendDlgItemMessageA(hWnd, CONTROL_ID_TYPE_COMBO, WM_SETREDRAW, TRUE, NULL);
 		}
 
 		if constexpr (LOG_PERFORMANCE_RESULTS) {
 			auto timeToInitialize = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - initializationTimer);
-			log::stream << "Displaying default object data took " << timeToInitialize.count() << "ms" << std::endl;
+			log::stream << "Displaying creature object data took " << timeToInitialize.count() << "ms" << std::endl;
 		}
 	}
 
@@ -65,7 +63,7 @@ namespace se::cs::dialog::edit_object_window {
 		}
 
 		// Call original function.
-		const auto CS_VanillaDialogProc = reinterpret_cast<WNDPROC>(0x41AFD0);
+		const auto CS_VanillaDialogProc = reinterpret_cast<WNDPROC>(0x425560);
 		const auto vanillaResult = CS_VanillaDialogProc(hWnd, msg, wParam, lParam);
 
 		switch (msg) {
@@ -85,15 +83,6 @@ namespace se::cs::dialog::edit_object_window {
 		using memory::genJumpEnforced;
 
 		// Patch: Extend handling.
-		genJumpEnforced(0x402F9A, 0x41AFD0, reinterpret_cast<DWORD>(PatchDialogProc));
-
-		// Extend other edit object windows.
-		edit_alchemy_object_window::installPatches();
-		edit_creature_object_window::installPatches();
-		edit_enchantment_object_window::installPatches();
-		edit_leveled_creature_object_window::installPatches();
-		edit_leveled_item_object_window::installPatches();
-		edit_npc_object_window::installPatches();
-		edit_spell_object_window::installPatches();
+		genJumpEnforced(0x40132F, 0x425560, reinterpret_cast<DWORD>(PatchDialogProc));
 	}
 }

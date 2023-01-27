@@ -261,6 +261,27 @@
     <ClInclude Include="DialogReferenceData.h">
       <Filter>Header Files\UI\Dialog</Filter>
     </ClInclude>
+    <ClInclude Include="DialogEditAlchemyObjectWindow.h">
+      <Filter>Header Files\UI\Dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogEditCreatureObjectWindow.h">
+      <Filter>Header Files\UI\Dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogEditLeveledCreatureObjectWindow.h">
+      <Filter>Header Files\UI\Dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogEditEnchantmentObjectWindow.h">
+      <Filter>Header Files\UI\Dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogEditLeveledItemObjectWindow.h">
+      <Filter>Header Files\UI\Dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogEditNPCObjectWindow.h">
+      <Filter>Header Files\UI\Dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogEditSpellObjectWindow.h">
+      <Filter>Header Files\UI\Dialog</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -390,6 +411,27 @@
       <Filter>Source Files\UI\Dialog</Filter>
     </ClCompile>
     <ClCompile Include="DialogReferenceData.cpp">
+      <Filter>Source Files\UI\Dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogEditAlchemyObjectWindow.cpp">
+      <Filter>Source Files\UI\Dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogEditCreatureObjectWindow.cpp">
+      <Filter>Source Files\UI\Dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogEditLeveledCreatureObjectWindow.cpp">
+      <Filter>Source Files\UI\Dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogEditEnchantmentObjectWindow.cpp">
+      <Filter>Source Files\UI\Dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogEditLeveledItemObjectWindow.cpp">
+      <Filter>Source Files\UI\Dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogEditNPCObjectWindow.cpp">
+      <Filter>Source Files\UI\Dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogEditSpellObjectWindow.cpp">
       <Filter>Source Files\UI\Dialog</Filter>
     </ClCompile>
   </ItemGroup>

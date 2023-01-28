@@ -71,7 +71,7 @@ local function getTypeLink(type)
 	end
 
 	local isArray = type:endswith("[]")
-	local valueType = type:match("%w+")
+	local valueType = type:match("[%w%.]+")
 
 	if classes[valueType] then
 		typeLinks[type] = string.format("[%s](../../types/%s)%s", valueType, valueType, isArray and "[]" or "")

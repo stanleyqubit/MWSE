@@ -1,6 +1,6 @@
 local DependencyType = require("Metadata.DependencyType")
 local Metadata = require("Metadata")
-local inspect = require("inspect")
+local logLevel = "INFO"
 
 local v = require("semver")
 local operators = {
@@ -62,8 +62,24 @@ local function getDownloadButton(modId, dependency, text)
     end
 end
 
+local function insertReason(e)
+    if not e.failures[e.modId] then
+        e.failures[e.modId] = {
+            title = "Mod: " .. e.modId,
+            reasons = {}
+        }
+    end
+    if e.dependency then
+        if e.dependency.url then
+            e.failures[e.modId].resolveButton = getDownloadButton(e.modId, e.dependency)
+        end
+    end
+    table.insert(e.failures[e.modId].reasons, e.reason)
+end
+
 DependencyType.registerDependencyType{
     id = "mwse",
+    logLevel = logLevel,
     checkDependency = function(_, dependency)
         if dependency.buildnumber > mwse.buildNumber then---@diagnostic disable-line: undefined-field
             return false, {
@@ -98,18 +114,12 @@ local function doPluginCheck(dependencyManager, mods, failures)
             dependencyManager.logger:debug("Checking plugin %s", dependency.plugin)
             local isActive = tes3.isModActive(dependency.plugin)
             if not isActive then
-
-                local failure = {
-                    title = "Mod: " .. modId,
-                    reasons = {
-                        string.format("Plugin %s is missing or inactive", dependency.plugin)
-                    },
+                insertReason{
+                    modId = modId,
+                    dependency = dependency,
+                    reason = string.format("Plugin %s is missing or inactive", dependency.plugin),
+                    failures = failures
                 }
-                if dependency.url then
-                    failure.resolveButton = getDownloadButton(modId, dependency)
-                end
-                dependencyManager.logger:error("Plugin %s is missing or inactive", dependency.plugin)
-                table.insert(failures, failure)
             end
         end
     end
@@ -124,17 +134,13 @@ local function doVersionCheck(dependencyManager, mods, failures)
             local metadata = Metadata.getMetadata(modId)
             local modVersion = metadata and metadata.package and metadata.package.version
             if not modVersion then
-                local failure = {
-                    title = "Mod: " .. modId,
-                    reasons = {
-                        string.format("Dependency %s not found", modId)
-                    },
-                }
-                if dependency.url then
-                    failure.resolveButton = getDownloadButton(modId, dependency)
-                end
                 dependencyManager.logger:error("Dependency %s not found", modId)
-                table.insert(failures, failure)
+                insertReason{
+                    modId = modId,
+                    dependency = dependency,
+                    reason = string.format("Dependency %s not found", modId),
+                    failures = failures
+                }
             else
                 local operator, dependencyVersion = getOperator(dependency.version)
                 if not operator then
@@ -147,32 +153,26 @@ local function doVersionCheck(dependencyManager, mods, failures)
                     })
                 end
                 local versionMatches
-                local success, error = pcall(function()
+                local success, err = pcall(function()
                     dependencyManager.logger:debug("Checking version %s %s %s", dependencyVersion, operator.pattern, modVersion)
                     versionMatches = operator.func(dependencyVersion, modVersion)
                 end)
                 if not success then
-                    dependencyManager.logger:error(error)
-                    table.insert(failures, {
-                        title = "Mod: " .. modId,
-                        reasons = {
-                            error
-                        },
-                    })
-                elseif not versionMatches then
-                    local failure = {
-                        title = "Mod: " .. modId,
-                        reasons = {
-                            string.format("Dependency %s is outdated.\n  (Current Version: %s; Required: %s)",
-                                modId, modVersion, dependency.version)
-                        },
+                    dependencyManager.logger:error(err)
+                    insertReason{
+                        modId = modId,
+                        reason = err,
+                        failures = failures
                     }
-                    if dependency.url then
-                        failure.resolveButton = getDownloadButton(modId, dependency, "Update")
-                    end
-                    dependencyManager.logger:error("Dependency %s is outdated.\n  Current Version: %s; Required: %s.",
-                        modId, modVersion, dependency.version)
-                    table.insert(failures, failure)
+                elseif not versionMatches then
+                    dependencyManager.logger:debug("Dependency %s is outdated", modId)
+                    insertReason{
+                        modId = modId,
+                        dependency = dependency,
+                        reason = string.format("Dependency %s is outdated.\n  (Current Version: %s; Required: %s)",
+                            modId, modVersion, dependency.version),
+                        failures = failures
+                    }
                 end
             end
         end
@@ -200,17 +200,13 @@ local function doModuleCheck(dependencyManager, mods, failures)
                 end
             end
             if not found then
-                local failure = {
-                    title = "Mod: " .. modId,
-                    reasons = {
-                        string.format("MWSE Module %s is missing", dependency["mwse-module"])
-                    },
-                }
-                if dependency.url then
-                    failure.resolveButton = getDownloadButton(modId, dependency)
-                end
                 dependencyManager.logger:error("MWSE Module %s is missing", dependency["mwse-module"])
-                table.insert(failures, failure)
+                insertReason{
+                    modId = modId,
+                    dependency = dependency,
+                    reason = string.format("MWSE Module %s is missing", dependency["mwse-module"]),
+                    failures = failures
+                }
             else
                 dependencyManager.logger:debug("MWSE Module %s found", dependency["mwse-module"])
             end
@@ -218,17 +214,16 @@ local function doModuleCheck(dependencyManager, mods, failures)
     end
 end
 
-
-
 DependencyType.registerDependencyType{
     id = "mods",
+    logLevel = logLevel,
     ---@param dependencyManager DependencyManager
     checkDependency = function(dependencyManager, mods)
         local failures = {}
         doPluginCheck(dependencyManager, mods, failures)
         doVersionCheck(dependencyManager, mods, failures)
         doModuleCheck(dependencyManager, mods, failures)
-        if #failures > 0 then
+        if table.size(failures) > 0 then
             return false, failures
         end
         return true
@@ -250,6 +245,7 @@ end
 
 DependencyType.registerDependencyType{
     id = "assets",
+    logLevel = logLevel,
     ---@param dependencyManager DependencyManager
     ---@param assets string[]
     checkDependency = function(dependencyManager, assets)
@@ -271,6 +267,7 @@ local function isArchiveActive(archive)
     local loadedArchives = tes3.getArchiveList()
     for _, loadedArchive in ipairs(loadedArchives) do
         mwse.log("archive: " .. loadedArchive)
+        ---@diagnostic disable-next-line
         if loadedArchive:lower() == "data files\\".. archive:lower() then
             mwse.log("FOUND ARCHIVE %s", archive)
             return true
@@ -282,6 +279,7 @@ end
 
 DependencyType.registerDependencyType{
     id = "archives",
+    logLevel = logLevel,
     ---@param dependencyManager DependencyManager
     checkDependency = function(dependencyManager, archives)
         local failures = {}
@@ -297,7 +295,7 @@ DependencyType.registerDependencyType{
                 })
             end
         end
-        if #failures > 0 then
+        if table.size(failures) > 0 then
             return false, failures
         end
         return true

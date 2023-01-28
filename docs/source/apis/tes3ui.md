@@ -844,6 +844,31 @@ local wasShown = tes3ui.showJournal()
 
 ***
 
+### `tes3ui.showMessageMenu`
+
+Displays a message box. This may be a simple toast-style message, or a box with choice buttons.
+
+```lua
+tes3ui.showMessageMenu({ id = ..., buttons = ..., callbackParams = ..., cancels = ..., cancelText = ..., cancelCallback = ..., header = ..., message = ..., customBlock = ..., page = ..., pageSize = ... })
+```
+
+**Parameters**:
+
+* `params` (table)
+	* `id` (string): *Default*: `MenuMessage`. The menu ID of the message menu.
+	* `buttons` ([tes3ui.showMessageMenu.params.button](../../types/tes3ui.showMessageMenu.params.button)[]): **Required** The list of buttons.
+	* `callbackParams` (table): *Optional*. The table of parameters to pass to the callback functions.
+	* `cancels` (boolean): *Default*: `false`. When set to true, a cancel button is automatically added to the buttom of the list, even when paginated.
+	* `cancelText` (string): *Default*: `tes3.findGMST(tes3.gmst.sCancel).value`. The text on the cancel button.
+	* `cancelCallback` (function): *Optional*. The function to call when the user clicks the cancel button.
+	* `header` (string, fun(callbackParams: table): string): *Optional*. The optional header displayed above the message. Can also be a function that returns a string.
+	* `message` (string, fun(callbackParams: table): string): **Required** The message at the top of the messagebox. Can also be a function that returns a string.
+	* `customBlock` (fun(parent: tes3uiElement)): *Optional*. A custom element to be displayed below the header.
+	* `page` (integer): *Default*: `1`.
+	* `pageSize` (integer): *Default*: `30`.
+
+***
+
 ### `tes3ui.showNotifyMenu`
 
 Creates a new notify menu with a formatted string. A notify menu is a toast-style display that shows at the bottom of the screen. It will expire after an amount of time, determined by the length of the message and the `fMessageTimePerChar` GMST.

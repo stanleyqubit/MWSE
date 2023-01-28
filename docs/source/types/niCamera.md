@@ -156,7 +156,7 @@ The port on the backbuffer of the camera. Represents the rectangular portion of 
 
 **Returns**:
 
-* `result` (niRenderer)
+* `result` ([niRenderer](../../types/niRenderer))
 
 ***
 
@@ -609,8 +609,12 @@ local result = myObject:hasStringDataWith(value)
 Recursively checks if either the object or any of its parents are appCulled.
 
 ```lua
-myObject:isAppCulled()
+local result = myObject:isAppCulled()
 ```
+
+**Returns**:
+
+* `result` (boolean)
 
 ***
 
@@ -619,12 +623,16 @@ myObject:isAppCulled()
 Checks if the object is frustum culled for the given camera.
 
 ```lua
-myObject:isFrustumCulled(camera)
+local result = myObject:isFrustumCulled(camera)
 ```
 
 **Parameters**:
 
 * `camera` ([niCamera](../../types/niCamera))
+
+**Returns**:
+
+* `result` (boolean)
 
 ***
 
@@ -669,13 +677,17 @@ local result = myObject:isOfType(type)
 Update the camera's local rotation so that it is looking at the given point, with an up vector as close as possible to the given up vector. Both parameters are assumed to be in world space.
 
 ```lua
-myObject:lookAtWorldPoint(point, up)
+local success = myObject:lookAtWorldPoint(point, up)
 ```
 
 **Parameters**:
 
 * `point` ([tes3vector3](../../types/tes3vector3))
 * `up` ([tes3vector3](../../types/tes3vector3))
+
+**Returns**:
+
+* `success` (boolean): It's false when the provided location is equal to the location of the camera. It's true on success.
 
 ***
 
@@ -792,6 +804,16 @@ myObject:setFlag(state, index)
 
 * `state` (boolean)
 * `index` (number)
+
+***
+
+### `swapBuffers`
+
+Causes the current backbuffer of the attached display to be drawn to the frontbuffer, by swapping the two.
+
+```lua
+myObject:swapBuffers()
+```
 
 ***
 

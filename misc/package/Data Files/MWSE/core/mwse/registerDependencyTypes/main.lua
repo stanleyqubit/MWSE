@@ -36,6 +36,32 @@ local function getOperator(version)
     return defaultOperator, version
 end
 
+local isValidUrl = function(url)
+    url = url and url:lower()
+    return url
+       and url:startswith("http://")
+        or url:startswith("https://")
+end
+
+local function getDownloadButton(modId, dependency, text)
+    if dependency.url then
+        if not isValidUrl(dependency.url) then
+            mwse.log(string.format("Invalid url for dependency %s: %s", modId, dependency.url))
+            return false
+        end
+        return {
+            text = string.format("%s %s", text or "Download", modId),
+            tooltip = string.format('Go to "%s"', dependency.url),
+            callback = function()
+                local downloadExe = string.format('start %s', dependency.url)
+                mwse.log("Executing command: %s", downloadExe)
+                os.execute(downloadExe)
+                os.exit()
+            end
+        }
+    end
+end
+
 DependencyType.registerDependencyType{
     id = "mwse",
     checkDependency = function(_, dependency)
@@ -44,11 +70,12 @@ DependencyType.registerDependencyType{
                 {
                     title = "MWSE Update Required",
                     reasons = {
-                        string.format("Current Build: %d; Required: %s.",
+                        string.format("Current Build: %d; Required: %s",
                             mwse.buildNumber, dependency.buildnumber)---@diagnostic disable-line: undefined-field
                     },
                     resolveButton = {
                         text = "Update MWSE",
+                        tooltip = "Run 'Morrowind/MWSE-Update.exe'",
                         callback = function()
                             local updateExe = "start .\\MWSE-Update.exe"
                             os.execute(updateExe)
@@ -73,20 +100,13 @@ local function doPluginCheck(dependencyManager, mods, failures)
             if not isActive then
 
                 local failure = {
-                    title = modId,
+                    title = "Mod: " .. modId,
                     reasons = {
                         string.format("Plugin %s is missing or inactive", dependency.plugin)
                     },
                 }
                 if dependency.url then
-                    failure.resolveButton = {
-                        text = string.format("Download %s", modId),
-                        callback = function()
-                            local downloadExe = "start " .. dependency.url
-                            os.execute(downloadExe)
-                            os.exit()
-                        end
-                    }
+                    failure.resolveButton = getDownloadButton(modId, dependency)
                 end
                 dependencyManager.logger:error("Plugin %s is missing or inactive", dependency.plugin)
                 table.insert(failures, failure)
@@ -105,20 +125,13 @@ local function doVersionCheck(dependencyManager, mods, failures)
             local modVersion = metadata and metadata.package and metadata.package.version
             if not modVersion then
                 local failure = {
-                    title = modId,
+                    title = "Mod: " .. modId,
                     reasons = {
                         string.format("Dependency %s not found", modId)
                     },
                 }
                 if dependency.url then
-                    failure.resolveButton = {
-                        text = string.format("Download %s", modId),
-                        callback = function()
-                            local downloadExe = "start " .. dependency.url
-                            os.execute(downloadExe)
-                            os.exit()
-                        end
-                    }
+                    failure.resolveButton = getDownloadButton(modId, dependency)
                 end
                 dependencyManager.logger:error("Dependency %s not found", modId)
                 table.insert(failures, failure)
@@ -127,7 +140,7 @@ local function doVersionCheck(dependencyManager, mods, failures)
                 if not operator then
                     dependencyManager.logger:error("Dependency %s has invalid version requirement %s", modId, dependency.version)
                     table.insert(failures, {
-                        title = modId,
+                        title = "Mod: " .. modId,
                         reasons = {
                             string.format("Dependency %s has invalid version requirement %s", modId, dependency.version)
                         },
@@ -141,30 +154,23 @@ local function doVersionCheck(dependencyManager, mods, failures)
                 if not success then
                     dependencyManager.logger:error(error)
                     table.insert(failures, {
-                        title = modId,
+                        title = "Mod: " .. modId,
                         reasons = {
                             error
                         },
                     })
                 elseif not versionMatches then
                     local failure = {
-                        title = modId,
+                        title = "Mod: " .. modId,
                         reasons = {
-                            string.format("Dependency %s is outdated.\nCurrent Version: %s; Required: %s.",
+                            string.format("Dependency %s is outdated.\n  (Current Version: %s; Required: %s)",
                                 modId, modVersion, dependency.version)
                         },
                     }
                     if dependency.url then
-                        failure.resolveButton = {
-                            text = string.format("Update %s", modId),
-                            callback = function()
-                                local downloadExe = "start " .. dependency.url
-                                os.execute(downloadExe)
-                                os.exit()
-                            end
-                        }
+                        failure.resolveButton = getDownloadButton(modId, dependency, "Update")
                     end
-                    dependencyManager.logger:error("Dependency %s is outdated.\nCurrent Version: %s; Required: %s.",
+                    dependencyManager.logger:error("Dependency %s is outdated.\n  Current Version: %s; Required: %s.",
                         modId, modVersion, dependency.version)
                     table.insert(failures, failure)
                 end
@@ -195,20 +201,13 @@ local function doModuleCheck(dependencyManager, mods, failures)
             end
             if not found then
                 local failure = {
-                    title = modId,
+                    title = "Mod: " .. modId,
                     reasons = {
                         string.format("MWSE Module %s is missing", dependency["mwse-module"])
                     },
                 }
                 if dependency.url then
-                    failure.resolveButton = {
-                        text = string.format("Download %s", modId),
-                        callback = function()
-                            local downloadExe = "start " .. dependency.url
-                            os.execute(downloadExe)
-                            os.exit()
-                        end
-                    }
+                    failure.resolveButton = getDownloadButton(modId, dependency)
                 end
                 dependencyManager.logger:error("MWSE Module %s is missing", dependency["mwse-module"])
                 table.insert(failures, failure)
@@ -271,11 +270,13 @@ DependencyType.registerDependencyType{
 local function isArchiveActive(archive)
     local loadedArchives = tes3.getArchiveList()
     for _, loadedArchive in ipairs(loadedArchives) do
-        ---@diagnostic disable-next-line
+        mwse.log("archive: " .. loadedArchive)
         if loadedArchive:lower() == "data files\\".. archive:lower() then
+            mwse.log("FOUND ARCHIVE %s", archive)
             return true
         end
     end
+    mwse.log("MISSING ARCHIVE %s", archive)
     return false
 end
 
@@ -291,7 +292,7 @@ DependencyType.registerDependencyType{
             end
             if #missingAssets > 0 then
                 table.insert(failures, {
-                    title = string.format("Missing Assets from %s.\nMake sure to activate or unpack the archive.", archive),
+                    title = string.format("%s: Missing Assets\n  (Make sure to activate or unpack the archive)", archive),
                     reasons = missingAssets
                 })
             end

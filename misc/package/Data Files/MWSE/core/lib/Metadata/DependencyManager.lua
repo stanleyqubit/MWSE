@@ -68,30 +68,40 @@ function DependencyManager:dependenciesFailMessage(callback)
     timer.frame.delayOneFrame(function()
         local function customBlock(parentBlock)
             parentBlock.widthProportional = 1.0
+            parentBlock.borderTop = 6
             parentBlock.minWidth = 400
-            parentBlock.childAlignX = 0.5
+            --parentBlock.childAlignX = 0.5
             parentBlock:getTopLevelMenu():getContentElement().maxWidth = nil
+            local scrollPane = parentBlock:createVerticalScrollPane()
+            scrollPane.widthProportional = 1.0
+            scrollPane.heightProportional = 1.0
+            scrollPane.paddingAllSides = 2
+            scrollPane.minHeight = 500
+
             for _, failure in pairs(self.failedDependencies) do
-                local dependencyBlock = parentBlock:createThinBorder()
+                local dependencyBlock = scrollPane:createThinBorder()
                 dependencyBlock.flowDirection = "top_to_bottom"
                 dependencyBlock.autoHeight = true
                 dependencyBlock.widthProportional = 1.0
-                dependencyBlock.paddingAllSides = 6
+                dependencyBlock.paddingAllSides = 8
+                dependencyBlock.paddingBottom = 12
                 dependencyBlock.borderAllSides = 2
-                dependencyBlock.childAlignX = 0.5
+                --dependencyBlock.childAlignX = 0.5
 
                 local title = failure.title or "NO TITLE"
                 local titleLabel = dependencyBlock:createLabel { text = title }
+                titleLabel.color = tes3ui.getPalette(tes3.palette.headerColor)
                 titleLabel.wrapText = true
                 titleLabel.justifyText = "center"
                 titleLabel.widthProportional = 1.0
+                titleLabel.borderBottom = 4
                 titleLabel.color = tes3ui.getPalette(tes3.palette.headerColor)
 
                 for _, reason in pairs(failure.reasons) do
                     local depLabel = dependencyBlock:createLabel { text = "- " .. reason }
-                    depLabel.color = tes3ui.getPalette(tes3.palette.negativeColor)
+                    --depLabel.color = tes3ui.getPalette(tes3.palette.negativeColor)
                     depLabel.wrapText = true
-                    depLabel.justifyText = "center"
+                    --depLabel.justifyText = "center"
                     depLabel.widthProportional = 1.0
                 end
                 if failure.resolveButton then
@@ -100,9 +110,18 @@ function DependencyManager:dependenciesFailMessage(callback)
                     self.logger:assert(type(failure.resolveButton.callback) == "function",
                         "DependencyManager:dependenciesFailMessage: resolveButton.callback must be a function")
                     local button = dependencyBlock:createButton { text = failure.resolveButton.text }
+                    button.widthProportional = 1.0
+                    button.borderTop = 10
                     button:register("mouseClick", failure.resolveButton.callback)
+                    if failure.resolveButton.tooltip then
+                        button:register("help", function()
+                            local tooltip = tes3ui.createTooltipMenu()
+                            tooltip:createLabel{ text = failure.resolveButton.tooltip}
+                        end)
+                    end
                 end
             end
+            scrollPane.widget:contentsChanged()
             parentBlock:getTopLevelParent():updateLayout()
             parentBlock:updateLayout()
         end
@@ -117,7 +136,7 @@ function DependencyManager:dependenciesFailMessage(callback)
             },
         }
         tes3ui.showMessageMenu {
-            header = string.format("%s - The following dependencies failed to load", self.metadata.package.name),
+            header = string.format("%s - Failed Dependencies", self.metadata.package.name),
             customBlock = customBlock,
             buttons = buttons,
         }

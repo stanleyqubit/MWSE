@@ -5,6 +5,7 @@ local logger = logging.new{
 }
 ---@class MWSE.DependencyType.ResolveButton
 ---@field text string The text to display on the button.
+---@field tooltip string? The text to display when hovering over the button.
 ---@field callback fun() The action to perform when pressing the button.
 
 ---@class MWSE.DependencyType.Failure

@@ -1,6 +1,6 @@
 local ansicolors = require("logging.colors")
 
----@alias MWSELoggerLogLevels
+---@alias mwseLoggerLogLevel
 ---|  "TRACE"
 ---|  "DEBUG"
 ---|> "INFO" # The dafault log level
@@ -8,24 +8,11 @@ local ansicolors = require("logging.colors")
 ---|  "ERROR"
 ---|  "NONE"
 
----@class MWSELoggerInputData
----@field name string Name of mod, also counts as unique id of logger
+---@class mwseLoggerInputData
+---@field name string Name of the mod, also counts as unique id of the logger
 ---@field outputFile string? Optional. If set, logs will be sent to a file of this name
----@field logLevel MWSELoggerLogLevels? Set the log level. Options are: TRACE, DEBUG, INFO, WARN, ERROR and NONE
+---@field logLevel mwseLoggerLogLevel? Set the log level. Options are: TRACE, DEBUG, INFO, WARN, ERROR and NONE
 ---@field logToConsole boolean? Default: `false`. If set to `true`, all the logged messages will also be logged to console
-
----@class MWSELogger
----@field name string Name of mod, also counts as unique id of logger
----@field logToConsole boolean If `true`, all the logged messages will also be logged to console
----@field doLog fun(self: MWSELogger, logLevel: MWSELoggerLogLevels): boolean Check log level to determine if log should be written out
----@field info fun(self: MWSELogger, message: string, ...) Log info message
----@field debug fun(self: MWSELogger, message: string, ...) Log debug message
----@field trace fun(self: MWSELogger, message: string, ...) Log trace message
----@field warn fun(self: MWSELogger, message: string, ...) Log warn message
----@field error fun(self: MWSELogger, message: string, ...) Log error message
----@field assert fun(self: MWSELogger, condition: boolean, message: string, ...) Assert a condition and log an error if it fails
----@field setLogLevel fun(self: MWSELogger, newLogLevel: MWSELoggerLogLevels) Set the log level. Options are: TRACE, DEBUG, INFO, WARN, ERROR and NONE
----@field setOutputFile fun(self: MWSELogger, outputFile: string) Set the output file. If set, logs will be sent to a file of this name
 
 --[[
 	A logger class that can be registered by multiple mods.
@@ -51,25 +38,25 @@ local logLevels = {
 }
 
 --- Check log level to determine if log should be written out
----@param logLevel MWSELoggerLogLevels Log level to check against
+---@param logLevel mwseLoggerLogLevel Log level to check against
 function Logger:doLog(logLevel)
 	local currentLogLevel = self.logLevel or defaults.logLevel
 	return logLevels[currentLogLevel].level <= logLevels[logLevel].level
 end
 
 --- Creates a new instance of a logger.
----@param data MWSELoggerInputData
+---@param data mwseLoggerInputData
 ---
 --- `name`: string — Name of mod, also counts as unique id of logger
 ---
 --- `outputFile`: string? *Optional*. If set, logs will be sent to a file of this name
 ---
---- `logLevel`: MWSELoggerLogLevels? Set the log level. Options are: TRACE, DEBUG, INFO, WARN, ERROR and NONE
+--- `logLevel`: mwseLoggerLogLevel? Set the log level. Options are: TRACE, DEBUG, INFO, WARN, ERROR and NONE
 ---
 --- `logToConsole` boolean? Default: `false`. If set to `true`, all the messages will be logged to console
----@return MWSELogger
+---@return mwseLogger
 function Logger.new(data)
-	local newLogger = table.copy(data) ---@class MWSELogger
+	local newLogger = table.copy(data) ---@type mwseLogger
 	if not newLogger or type(newLogger) ~= "table" then
 		error("[Logger] No Logger constructor table provided.")
 	elseif type(newLogger) == "table" then
@@ -90,7 +77,7 @@ end
 
 --- Get a registered logger by name
 ---@param name string Name of logger to get
----@return MWSELogger|false logger
+---@return mwseLogger|false logger
 function Logger.getLogger(name)
 	local logger = registeredLoggers[name]
 	if logger then
@@ -101,7 +88,7 @@ function Logger.getLogger(name)
 end
 
 --- Set the log level for a logger
----@param newLogLevel MWSELoggerLogLevels Log level to set. Available options are: TRACE, DEBUG, INFO, WARN, ERROR and NONE
+---@param newLogLevel mwseLoggerLogLevel Log level to set. Available options are: TRACE, DEBUG, INFO, WARN, ERROR and NONE
 function Logger:setLogLevel(newLogLevel)
 	local errMsg = "[%s ERROR] Logger:setLogLevel() - Not a valid log level (valid log levels: TRACE, DEBUG, INFO, WARN, ERROR, NONE)"
 	assert(logLevels[newLogLevel], string.format(errMsg, self.name))
@@ -125,10 +112,10 @@ local function addColor(message, color)
 end
 
 --- Formats and colors the log message, and writes it to the configured log file. This is typically not called directly.
----@param logLevel MWSELoggerLogLevels
+---@param logLevel mwseLoggerLogLevel
 ---@param color string
 ---@param message string
----@vararg any
+---@param ...  any?
 function Logger:write(logLevel, color, message, ...)
 	local output = string.format("[%s: %s] %s", self.name, logLevel, tostring(message):format(...))
 
@@ -167,7 +154,7 @@ end
 --- Assert a condition and log an error if it fails
 ---@param condition boolean Condition to assert
 ---@param message string Message to log if condition fails
----@vararg any
+---@param ... any?
 function Logger:assert(condition, message, ...)
 	if not condition then
 		message = tostring(message):format(...)

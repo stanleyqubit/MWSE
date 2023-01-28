@@ -2,7 +2,7 @@ local common = {}
 
 --- A wrapper around `print` that allows format strings.
 --- @param fmt string The format string.
---- @vararg any Arguments for formatting.
+--- @param ... any? Arguments for formatting.
 function common.log(fmt, ...)
 	print(fmt:format(...))
 end
@@ -213,7 +213,7 @@ end
 
 local lfs = require("lfs")
 
---- @vararg string
+--- @param ... string
 --- @return string
 function lfs.join(...)
 	return table.concat({ ... }, "\\")
@@ -286,7 +286,7 @@ common.pathAutocomplete = lfs.currentdir()
 --- @type string
 common.pathDefinitions = lfs.join(common.pathAutocomplete, "definitions")
 
---- @vararg string
+--- @param ... string
 --- @return string
 function common.urlJoin(...)
 	local paths = { ... }

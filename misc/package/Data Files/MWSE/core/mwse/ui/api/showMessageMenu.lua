@@ -1,29 +1,3 @@
----@class tes3ui.showMessageMenu.params.tooltip
----@field header string|function The header at the top of the tooltip. Can also be a function that returns a string.
----@field text string|function The text in the body of the tooltip. Can also be a function that returns a string.
----@field callback function? A function to call when the tooltip has been created. Passes context information.
-
----@class tes3ui.showMessageMenu.params.button
----@field text string **Required** The label on the button. This defaults to MenuMessage.
----@field showRequirements function If set, the button will only be visible if this function returns true.
----@field enableRequirements function function that, if provided, determines whether the button will be call the callback when clicked, or be disabled + greyed out.
----@field callback function The function to call when this button is clicked.
----@field tooltip tes3ui.showMessageMenu.params.tooltip|function table with header and text that will display as a tooltip when an enabled button is hovered over. Can also be a function that returns a tes3ui.showMessageMenu.params.tooltip
----@field tooltipDisabled tes3ui.showMessageMenu.params.tooltip|function table with header and text that will display as a tooltip when a disabled button is hovered over. Can also be a function that returns a tes3ui.showMessageMenu.params.tooltip
-
----@class tes3ui.showMessageMenu.params
----@field id string The menu ID of the message menu.
----@field buttons tes3ui.showMessageMenu.params.button[] **Required** The list of buttons.
----@field callbackParams table The table of parameters to pass to the callback functions.
----@field cancelCallback function function to call when the user clicks the cancel button.
----@field cancels boolean When set to true, a cancel button is automatically added to the buttom of the list, even when paginated.
----@field cancelText string
----@field header string|function The optional header displayed above the message. Can also be a function that returns a string.
----@field message string|function **Required** The message at the top of the messagebox. Can also be a function that returns a string.
----@field customBlock fun(parent: tes3uiElement) A custom element to be displayed below the header
----@field page number
----@field pageSize number
-
 local common = require("mwse.common")
 
 --
@@ -144,6 +118,7 @@ local function callbackButtonHelp(e)
 end
 
 -- Forward declare the recreateMenu function.
+--- @type fun(menu: tes3uiElement)
 local recreateMenu
 
 --- @param e tes3uiEventData
@@ -174,6 +149,7 @@ end
 
 --- @param parent tes3uiElement
 --- @param buttonData tes3ui.showMessageMenu.params.button
+--- @param messageData tes3ui.showMessageMenu.params
 --- @return tes3uiElement
 local function addButton(parent, buttonData, messageData)
 	local button = parent:createButton({

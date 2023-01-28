@@ -9,5 +9,3 @@
 --- @field iconPath string *Read-only*. The path to the icon for the skill.
 --- @field name string *Read-only*. The player-facing name of the skill.
 --- @field specialization number The specialization in which the skill belongs. Maps to values in the [`tes3.specialization`](https://mwse.github.io/MWSE/references/specializations/) table.
-tes3skill = {}
-

@@ -23,5 +23,3 @@
 --- @field time number *Read-only*. No description yet available.
 --- @field valid boolean *Read-only*. No description yet available.
 --- @field velocity tes3vector3 *Read-only*. The velocity of the associated mobile object at the point of collision.
-tes3mobileObjectCollision = {}
-

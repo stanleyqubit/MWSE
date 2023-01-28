@@ -7,5 +7,3 @@
 --- @field direction tes3vector3 The direction of the axis of the spotlight cone from the light location in world space.
 --- @field spotAngle number The spotlight angle, in degrees. Controls the size of the light's cone.
 --- @field spotExponent number The spotlight angular attenuation exponent. This value may be ignored.
-niSpotLight = {}
-

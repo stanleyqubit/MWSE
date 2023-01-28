@@ -8,5 +8,3 @@
 --- @field x number A basic property of the mouse for the X-axis.
 --- @field y number A basic property of the mouse for the Y-axis.
 --- @field z number A basic property of the mouse for the Z-axis. This is typically the scroll wheel.
-tes3directInputMouseState = {}
-

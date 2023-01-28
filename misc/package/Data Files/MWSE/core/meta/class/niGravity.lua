@@ -11,5 +11,3 @@
 --- 
 --- Maps to values in [`ni.gravityForceType`](https://mwse.github.io/MWSE/references/ni/gravity-force-types/) table.
 --- @field position tes3vector3 The position of the center used when applying spherical gravity.
-niGravity = {}
-

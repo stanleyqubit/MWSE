@@ -6,5 +6,3 @@
 --- @class tes3lightNode
 --- @field light niAmbientLight|niDirectionalLight|niPointLight|niSpotLight Access to the `niLight` object mantained by this `tes3lightNode` object.
 --- @field value number The flicker phase of the light.
-tes3lightNode = {}
-

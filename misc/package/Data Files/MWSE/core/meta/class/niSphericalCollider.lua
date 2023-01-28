@@ -6,5 +6,3 @@
 --- @class niSphericalCollider : niParticleCollider, niParticleModifier, niObject
 --- @field position tes3vector3 The center of the deflecting sphere.
 --- @field radius number The radius of the used spherical deflector.
-niSphericalCollider = {}
-

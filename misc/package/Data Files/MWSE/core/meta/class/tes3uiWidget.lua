@@ -14,5 +14,3 @@
 --- * [tes3uiTextSelect](https://mwse.github.io/MWSE/types/tes3uiTextSelect)
 --- @class tes3uiWidget
 --- @field element tes3uiElement Access back to the element this widget interface is for.
-tes3uiWidget = {}
-

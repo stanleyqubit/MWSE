@@ -8,5 +8,3 @@
 --- @field name string The player-facing name for the object.
 --- @field spells tes3spellList *Read-only*. A list of spells granted by the birthsign.
 --- @field texturePath string Path to the related image representing the birthsign.
-tes3birthsign = {}
-

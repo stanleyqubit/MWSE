@@ -6,5 +6,3 @@
 --- @class niParticleGrowFade : niParticleModifier, niObject
 --- @field fade number The time over which the particles grow smaller, and at the end completely disappear.
 --- @field grow number The time over which the particles grow larger.
-niParticleGrowFade = {}
-

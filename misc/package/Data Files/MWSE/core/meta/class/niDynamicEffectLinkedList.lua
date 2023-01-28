@@ -6,5 +6,3 @@
 --- @class niDynamicEffectLinkedList
 --- @field data niAmbientLight|niDirectionalLight|niPointLight|niSpotLight|niTextureEffect *Read-only*. The current dynamic effect in the linked list.
 --- @field next niDynamicEffectLinkedList *Read-only*. The next dynamic effect in the linked list.
-niDynamicEffectLinkedList = {}
-

@@ -18,5 +18,3 @@
 --- 7     | Puts right fist above heart and bows head
 --- 8     | Reaches for the weapon
 --- 
-tes3aiPackageWanderIdleNode = {}
-

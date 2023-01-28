@@ -11,5 +11,3 @@
 --- @field bloodTextureCount number *Read-only*. The number of loaded blood textures.
 --- @field bloodTextureProperties niTexturingProperty[] *Read-only*. A list of loaded blood texturing properties.
 --- @field bloodTextures niSourceTexture[] *Read-only*. A list of blood splash textures.
-tes3splashController = {}
-

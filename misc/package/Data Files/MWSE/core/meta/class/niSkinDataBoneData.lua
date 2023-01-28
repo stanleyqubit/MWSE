@@ -9,5 +9,3 @@
 --- @field scale number Defines the scale of the bone in the bind pose from the skinned object's coordinate system to the bone's coordinate system.
 --- @field translation tes3vector3 Defines the translation of the bone in bind pose from the skinned object's coordinate system to the bone's coordinate system.
 --- @field weights niSkinDataBoneDataVertexWeight[] *Read-only*. Contains all the per-vertex weight coefficients used when deforming the verticies influenced by this bone.
-niSkinDataBoneData = {}
-

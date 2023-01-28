@@ -14,5 +14,3 @@
 --- @field texture tes3vector2 The texture coordinates at the point of intersection. The coordinates are valid only when `returnTexture = true` in the parent niPick object.
 --- @field triangleIndex integer The index of the intersected triangle.
 --- @field vertexIndex integer[] An array containing the 3 indices of the vertices that form the triangle at the intersection point. It's valid only if the `intersectType` was `ni.pickIntersectType.triangleIntersect`.
-niPickRecord = {}
-

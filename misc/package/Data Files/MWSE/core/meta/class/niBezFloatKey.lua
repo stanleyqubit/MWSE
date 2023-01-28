@@ -6,5 +6,3 @@
 --- @class niBezFloatKey : niFloatKey, niAnimationKey
 --- @field inTangent number The inbound tangent for the bezier curve.
 --- @field outTangent number The outbound tangent for the bezier curve.
-niBezFloatKey = {}
-

@@ -13,5 +13,3 @@
 --- @field initialSpeed number *Read-only*. The initial speed that the projectile was launched at.
 --- @field spellInstance tes3magicSourceInstance A quick access to [`tes3magicSourceInstance`](https://mwse.github.io/MWSE/types/tes3magicSourceInstance/) object of this `tes3mobileProjectile` if aplicable.
 --- @field velocity tes3vector3 Access to the current velocity of the projectile.
-tes3mobileProjectile = {}
-

@@ -16,5 +16,3 @@
 --- @field name string *Read-only*. The player-facing name for the object.
 --- @field skillBonuses tes3raceSkillBonus[] *Read-only*. Array-style table access for 7 skill bonuses for the race. Each element in the array is a [`tes3raceSkillBonus`](https://mwse.github.io/MWSE/types/tes3raceSkillBonus/).
 --- @field weight tes3raceHeightWeight *Read-only*. Access to the the height pair for males/females of the race.
-tes3race = {}
-

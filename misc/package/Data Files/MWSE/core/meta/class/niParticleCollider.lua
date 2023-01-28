@@ -9,5 +9,3 @@
 --- @field dieOnCollide boolean If this flag is true a particle that collides with something will be destroyed.
 --- @field restitution number The fraction of the original amount of energy the particle retains after a collision.
 --- @field spawnOnCollide boolean This flag controls if a new particle will be spawned on a collision. The new particle is spawned at the position of the old particle with the same attributes.
-niParticleCollider = {}
-

@@ -12,5 +12,3 @@
 --- @field script tes3script *Read-only*. The script that runs on the object.
 --- @field value number The value of the object.
 --- @field weight number The weight of the object.
-tes3probe = {}
-

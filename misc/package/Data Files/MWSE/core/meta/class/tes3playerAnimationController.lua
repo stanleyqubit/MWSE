@@ -16,5 +16,3 @@
 --- @field vanityCameraDistance integer *Read-only*. The orbiting radius of the camera during vanity mode in [game units](https://mwse.github.io/MWSE/references/other/game-units/). Measured from the center of the player's head.
 --- @field vanityCameraEnabled integer *Read-only*. The value of this property is `1` during vanity camera mode, and `0` otherwise.
 --- @field vanityCameraZ number *Read-only*. The offset on up-down (world z) axis of the camera in third person or during vanity mode from the player's head height in [game units](https://mwse.github.io/MWSE/references/other/game-units/).
-tes3playerAnimationController = {}
-

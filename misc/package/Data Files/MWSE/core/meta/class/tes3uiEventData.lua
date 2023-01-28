@@ -12,5 +12,3 @@
 --- @field relativeY number|nil *Read-only*. For mouse-related events, this is the relative vertical position for the current element.
 --- @field source tes3uiElement *Read-only*. The element that owns the event.
 --- @field widget tes3uiElement *Read-only*. No description yet available.
-tes3uiEventData = {}
-

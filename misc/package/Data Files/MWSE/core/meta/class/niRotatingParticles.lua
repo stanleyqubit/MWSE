@@ -5,5 +5,3 @@
 --- An object that represent collections of large numbers of small point-like objects. Each object in the collection can be separately rotated.
 --- @class niRotatingParticles : niParticles, niTriBasedGeometry, niGeometry, niAVObject, niObjectNET, niObject
 --- @field data niRotatingParticlesData The niRotatingParticlesData of the object. Manipulation should not be done directly. Instead, consider copying the data and assigning it to this shape.
-niRotatingParticles = {}
-

@@ -8,5 +8,3 @@
 --- @field level number The level of the lock.
 --- @field locked boolean The locked state.
 --- @field trap tes3spell The trap associated with the object.
-tes3lockNode = {}
-

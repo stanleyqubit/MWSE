@@ -20,5 +20,3 @@
 --- 
 --- There is a guide available [here](https://mwse.github.io/MWSE/guides/storing-data/) on using this table.
 --- @field timeLeft number The time remaining on a light. Provides incorrect values on non-light items, which instead have a `condition` property.
-tes3itemData = {}
-

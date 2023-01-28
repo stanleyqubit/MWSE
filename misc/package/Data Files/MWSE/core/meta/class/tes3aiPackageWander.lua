@@ -8,5 +8,3 @@
 --- @class tes3aiPackageWander : tes3aiPackage
 --- @field activationTarget tes3reference 
 --- @field idles tes3aiPackageWanderIdleNode[] *Read-only*. This is a table with chances that the actor will play corresponding idle animation.
-tes3aiPackageWander = {}
-

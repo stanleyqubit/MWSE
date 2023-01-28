@@ -4,5 +4,3 @@
 --- @meta
 --- This represents a Lpeg pattern.
 --- @class pattern
-pattern = {}
-

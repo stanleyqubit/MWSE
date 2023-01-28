@@ -6,5 +6,3 @@
 --- @class tes3raceBaseAttribute
 --- @field female number The base attribute for female actors.
 --- @field male number The base attribute for male actors.
-tes3raceBaseAttribute = {}
-

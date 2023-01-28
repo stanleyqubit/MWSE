@@ -15,5 +15,3 @@
 --- @field type number The book type. Maps to values in [`tes3.bookType`](https://mwse.github.io/MWSE/references/book-types/) namespace.
 --- @field value number The value of the object.
 --- @field weight number The weight of the object.
-tes3book = {}
-

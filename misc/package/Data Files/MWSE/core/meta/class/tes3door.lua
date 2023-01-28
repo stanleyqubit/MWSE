@@ -11,5 +11,3 @@
 --- @field name string The player-facing name for the object.
 --- @field openSound tes3sound The sound to be played when the door opens.
 --- @field script tes3script *Read-only*. The script that runs on the object.
-tes3door = {}
-

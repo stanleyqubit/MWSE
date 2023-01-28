@@ -4,5 +4,3 @@
 --- @meta
 --- An animation key for bezier curved rotation.
 --- @class niBezRotKey : niRotKey, niAnimationKey
-niBezRotKey = {}
-

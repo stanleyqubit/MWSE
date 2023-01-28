@@ -9,5 +9,3 @@
 --- @field keyTypes integer[] *Read-only*. An array of 3 values that define the types used for the contained keys. The types map to values in [`ni.animationKeyType`](https://mwse.github.io/MWSE/references/ni/animation-key-types/) table.
 --- @field lastIndices integer[] *Read-only*. An array of 3 values that define the last indices used for each key.
 --- @field numKeys integer[] *Read-only*. An array of 3 values that define the number of keys in each xRotations/yRotations/zRotations.
-niEulerRotKey = {}
-

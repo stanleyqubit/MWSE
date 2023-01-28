@@ -5,5 +5,3 @@
 --- niRotatingParticlesData objects contain the geometry data necessary to render a niRotatingParticles object. When a niRotatingParticles-based object is created, the actual geometry data is stored in an attached niRotatingParticlesData object.
 --- @class niRotatingParticlesData : niParticlesData, niTriBasedGeometryData, niGeometryData, niObject
 --- @field rotations niQuaternion[] *Read-only*. The particle rotations. The length of the array is equal to `vertexCount`.
-niRotatingParticlesData = {}
-

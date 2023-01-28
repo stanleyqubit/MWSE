@@ -7,5 +7,3 @@
 --- @field blightDiseaseChance number The weather's blight chance value.
 --- @field blightDiseases tes3spell[] *Read-only*. The weather's blight diseases, provided as a table of [`tes3spell`](https://mwse.github.io/MWSE/types/tes3spell/) objects.
 --- @field threshold number The weather's threshold value.
-tes3weatherBlight = {}
-

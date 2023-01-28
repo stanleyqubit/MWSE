@@ -12,5 +12,3 @@
 --- @field green number The green color value. Another alias for g.
 --- @field r number The red color value.
 --- @field red number The red color value. Another alias for r.
-tes3packedColor = {}
-

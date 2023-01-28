@@ -7,5 +7,3 @@
 --- @field leftArm niSequence The niSequence object for the actor's left arm.
 --- @field lower niSequence The niSequence object for the actor's legs.
 --- @field upper niSequence The niSequence object for the actor's upper body.
-tes3animationDataSequenceGroup = {}
-

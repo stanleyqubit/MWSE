@@ -42,5 +42,3 @@
 --- @field speedVariation number The variation of the initial velocity. The initial velocity will be evenly distributed over the [`.speed - .speedVariation / 2`, `.speed + .speedVariation / 2`] range.
 --- @field staticBounds boolean This flag controls whether or not the controller uses precomputed static bounding volumes for each frame of the animation.
 --- @field useBirthRate boolean If this flag is set to `false`, the maximal sustainable birth rate based on the life span of the particles will be used. Otherwise, the value of `.birthRate` property will be used.
-niParticleSystemController = {}
-

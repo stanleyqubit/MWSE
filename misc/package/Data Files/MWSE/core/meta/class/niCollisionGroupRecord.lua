@@ -8,5 +8,3 @@
 --- @class niCollisionGroupRecord
 --- @field collisionRoot niAmbientLight|niBillboardNode|niCamera|niCollisionSwitch|niDirectionalLight|niNode|niParticles|niPointLight|niRotatingParticles|niSpotLight|niSwitchNode|niTextureEffect|niTriShape *Read-only*. This is the ancestor root node added to the parent niCollisionGroup, whose child is the related `.object`.
 --- @field object niAmbientLight|niBillboardNode|niCamera|niCollisionSwitch|niDirectionalLight|niNode|niParticles|niPointLight|niRotatingParticles|niSpotLight|niSwitchNode|niTextureEffect|niTriShape *Read-only*. Access to the actual scene graph object this `niCollisionGroupRecord` represents.
-niCollisionGroupRecord = {}
-

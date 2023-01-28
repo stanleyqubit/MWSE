@@ -49,5 +49,3 @@
 --- @field targetsSkills boolean Access to the base flag that determines if this effect makes use of skills.
 --- @field unreflectable boolean Access to the base flag that determines if this effect can't be reflected.
 --- @field usesNegativeLighting boolean Access to the base flag that determines if this effect provides negative lighting.
-tes3magicEffect = {}
-

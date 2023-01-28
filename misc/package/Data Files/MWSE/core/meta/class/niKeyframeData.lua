@@ -13,5 +13,3 @@
 --- @field scaleKeyCount number *Read-only*. The number of scale keys available.
 --- @field scaleKeys niBezFloatKey[]|niFloatKey[]|niTCBFloatKey[] *Read-only*. The available scale keys.
 --- @field scaleType integer *Read-only*. The type of animation key used for scale keys. Maps to values in [`ni.animationKeyType`](https://mwse.github.io/MWSE/references/ni/animation-key-types/) table.
-niKeyframeData = {}
-

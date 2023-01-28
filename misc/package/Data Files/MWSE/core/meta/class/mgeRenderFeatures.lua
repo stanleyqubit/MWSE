@@ -26,5 +26,3 @@
 --- @field shadows boolean No description yet available.
 --- @field transparencyAA boolean No description yet available.
 --- @field updateHDR boolean No description yet available.
-mgeRenderFeatures = {}
-

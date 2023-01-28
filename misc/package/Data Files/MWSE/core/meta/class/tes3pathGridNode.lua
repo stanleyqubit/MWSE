@@ -5,5 +5,3 @@
 --- A node within a path grid.
 --- @class tes3pathGridNode
 --- @field position tes3vector3 *Read-only*. The world position of the node.
-tes3pathGridNode = {}
-

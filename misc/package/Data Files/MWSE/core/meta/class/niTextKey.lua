@@ -6,5 +6,3 @@
 --- @class niTextKey
 --- @field text string 
 --- @field time number 
-niTextKey = {}
-

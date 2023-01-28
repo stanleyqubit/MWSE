@@ -5,5 +5,3 @@
 --- This modifer alters the color of each particle as it ages.
 --- @class niParticleColorModifier : niParticleModifier, niObject
 --- @field colorData niColorData The parameters for this modifier.
-niParticleColorModifier = {}
-

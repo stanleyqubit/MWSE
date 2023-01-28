@@ -9,5 +9,3 @@
 --- @field activeCount number *Read-only*. The number of active particles.
 --- @field radius number *Read-only*. The radius of the particles.
 --- @field sizes number[] *Read-only*. The particle sizes. The length of the array is equal to `vertexCount`.
-niParticlesData = {}
-

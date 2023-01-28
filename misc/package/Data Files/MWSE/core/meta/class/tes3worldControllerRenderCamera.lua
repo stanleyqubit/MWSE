@@ -8,5 +8,3 @@
 --- @field cameraRoot niBillboardNode|niCollisionSwitch|niNode|niSwitchNode *Read-only*. The root scene node of the camera.
 --- @field renderer niRenderer *Read-only*. The renderer of the camera.
 --- @field root niBillboardNode|niCollisionSwitch|niNode|niSwitchNode *Read-only*. 
-tes3worldControllerRenderCamera = {}
-

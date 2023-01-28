@@ -6,5 +6,3 @@
 --- @class niNodeLinkedList
 --- @field data niBillboardNode|niCollisionSwitch|niNode|niSwitchNode *Read-only*. The current scene graph node in the linked list.
 --- @field next niNodeLinkedList *Read-only*. The next scene graph node in the linked list.
-niNodeLinkedList = {}
-

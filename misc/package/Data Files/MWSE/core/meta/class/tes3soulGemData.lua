@@ -12,5 +12,3 @@
 --- @field texture string *Read-only*. The path to the object's texture.
 --- @field value number *Read-only*. The value of the object.
 --- @field weight number *Read-only*. The weight of the object.
-tes3soulGemData = {}
-

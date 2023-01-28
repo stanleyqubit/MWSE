@@ -7,5 +7,3 @@
 --- @field attributes number[] *Read-only*. An array-style table holding the two attribute requirements.
 --- @field reputation number The reputation requirement to advance to this rank.
 --- @field skills number[] *Read-only*. An array-style table holding the two skill requirements.
-tes3factionRank = {}
-

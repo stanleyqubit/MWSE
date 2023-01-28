@@ -17,5 +17,3 @@
 --- @class niCollisionGroup
 --- @field collidees niCollisionGroupRecord[] *Read-only*. The array of collidee objects.
 --- @field colliders niCollisionGroupRecord[] *Read-only*. The array of collider objects.
-niCollisionGroup = {}
-

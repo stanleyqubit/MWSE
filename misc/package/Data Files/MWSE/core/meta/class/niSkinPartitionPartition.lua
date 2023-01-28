@@ -9,5 +9,3 @@
 --- @field stripLengths integer[] *Read-only*. 
 --- @field triangles niTriangle[] *Read-only*. The triangles that form this submesh.
 --- @field vertices integer[] *Read-only*. Maps the weight/influence list in this submesh to the vertices in the shape being skinned.
-niSkinPartitionPartition = {}
-

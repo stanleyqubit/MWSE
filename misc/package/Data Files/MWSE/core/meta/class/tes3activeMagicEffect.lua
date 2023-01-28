@@ -21,5 +21,3 @@
 --- @field previous tes3activeMagicEffect *Read-only*. Deprecated.
 --- @field serial integer *Read-only*. The magic source instance serial number. See the `instance` and `effectInstance` properties to easily access the magic and effect instances.
 --- @field skillId integer *Read-only*. The skill ID (note that this may be the attribute ID if the effect affects attributes, since `attributeId` and `skillId` properties are set to the same value by the engine). Maps to values in [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) table.
-tes3activeMagicEffect = {}
-

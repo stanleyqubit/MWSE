@@ -552,13 +552,19 @@ namespace se::cs::dialog::render_window {
 		return 1;
 	}
 
-	static auto cursorOffset = std::optional<NI::Vector3>();
+	struct MovementContext {
+		NI::Vector3 basePosition;
+		NI::Vector3 cursorOffset;
+	};
+	static auto movementContext = std::optional<MovementContext>();
+
 	const auto DefaultDragMovementFunction = reinterpret_cast<int(__cdecl*)(RenderController*, SelectionData::Target*, int, int, bool, bool, bool)>(0x464B70);
 	int __cdecl Patch_ReplaceDragMovementLogic(RenderController* renderController, SelectionData::Target* firstTarget, int dx, int dy, bool lockX, bool lockY, bool lockZ) {
 		using windows::isKeyDown;
-		
+
 		auto selectionData = SelectionData::get();
-		if (selectionData->numberOfTargets == 0) {
+		auto lastTarget = selectionData->getLastTarget();
+		if (!lastTarget) {
 			return 0;
 		}
 
@@ -587,16 +593,22 @@ namespace se::cs::dialog::render_window {
 		auto planeOrigin = selectionData->bound.center;
 		auto planeNormal = NI::Vector3(0, 0, 1);
 
-		// Preserve the cursor offset.
-		if (!cursorOffset.has_value()) {
-			cursorOffset = NI::Vector3();
+		// Preserve the cursor offset and starting position.
+		if (!movementContext.has_value()) {
+			MovementContext context;
 			auto pick = SceneGraphController::get()->objectPick;
 			if (pick->pickObjectsWithSkinDeforms(&rayOrigin, &rayDirection)) {
-				auto intersection = pick->results.at(0)->intersection;
-				cursorOffset = intersection - planeOrigin;
+				context.basePosition = pick->results.at(0)->intersection;
+				context.cursorOffset = context.basePosition - planeOrigin;
 			}
+			else {
+				context.basePosition = planeOrigin;
+				context.cursorOffset = NI::Vector3();
+			}
+			movementContext = std::move(context);
 		}
-		planeOrigin = planeOrigin + cursorOffset.value();
+		auto& context = movementContext.value();
+		planeOrigin = planeOrigin + context.cursorOffset;
 
 		// Align the plane to the locked axis if applicable.
 		auto widgets = SceneGraphController::get()->widgets;
@@ -604,37 +616,58 @@ namespace se::cs::dialog::render_window {
 		if (isAxisLocked) {
 			planeNormal = camera->worldDirection;
 			if (lockX) {
-				planeNormal.x = 0;
+				planeNormal.x = 0.0f;
 				widgets->setAxis(WidgetsAxis::X);
 			}
 			if (lockY) {
-				planeNormal.y = 0;
+				planeNormal.y = 0.0f;
 				widgets->setAxis(WidgetsAxis::Y);
 			}
 			if (lockZ) {
-				planeNormal.z = 0;
+				planeNormal.z = 0.0f;
 				widgets->setAxis(WidgetsAxis::Z);
 			}
 			planeNormal.normalize();
 			widgets->show();
 		}
 
+		// Clamp the plane angle if we're close to parellel with the camera.
+		auto fixedNormal = planeNormal;
+		auto fixedOrigin = planeOrigin;
+		if (!isAxisLocked) {
+			auto direction = (context.basePosition - camera->worldTransform.translation);
+			direction.normalize();
+
+			const float angle = planeNormal.dotProduct(&direction);
+			const float minAngle = se::math::degreesToRadians(15);
+			if (fabs(angle) <= minAngle) {
+				// Clamping to `minAngle` about the camera X axis.
+				NI::Matrix33 m;
+				m.toRotation(angle < 0.0f ? -minAngle : minAngle, camera->worldRight);
+				fixedNormal = m * planeNormal;
+				fixedOrigin = context.basePosition;
+			}
+		}
+
 		// Calculate the intersection.
-		auto [distance, intersection] = math::rayPlaneIntersection(rayOrigin, rayDirection, planeOrigin, planeNormal);
+		auto [distance, intersection] = math::rayPlaneIntersection(rayOrigin, rayDirection, fixedOrigin, fixedNormal);
 		if (distance == -1.0f) {
 			return 0;
 		}
 
 		// Apply axis restrictions.
-		if (lockX) {
+		if (!isAxisLocked) {
+			intersection.z = planeOrigin.z;
+		}
+		else if (lockX) {
 			intersection.y = planeOrigin.y;
 			intersection.z = planeOrigin.z;
 		}
-		if (lockY) {
+		else if (lockY) {
 			intersection.x = planeOrigin.x;
 			intersection.z = planeOrigin.z;
 		}
-		if (lockZ) {
+		else if (lockZ) {
 			intersection.x = planeOrigin.x;
 			intersection.y = planeOrigin.y;
 		}
@@ -649,8 +682,7 @@ namespace se::cs::dialog::render_window {
 				// Legacy grid snap also locks the Z axis by default.
 				auto legacyLockZ = !isAxisLocked && settings.render_window.use_legacy_grid_snap;
 				// Offset so the last reference will be on the grid.
-				auto reference = selectionData->getLastTarget()->reference;
-				auto p = intersection + (reference->position - planeOrigin);
+				auto p = intersection + (lastTarget->reference->position - planeOrigin);
 				if (lockX || lockXY) {
 					intersection.x -= p.x - (std::roundf(p.x / increment) * increment);
 				}
@@ -683,7 +715,7 @@ namespace se::cs::dialog::render_window {
 		}
 
 		selectionData->recalculateCenter();
-		widgets->setPosition(selectionData->bound.center);
+		widgets->setPosition(lastTarget->reference->position);
 
 		return 0;
 	}
@@ -1231,7 +1263,7 @@ namespace se::cs::dialog::render_window {
 	}
 
 	void PatchDialogProc_BeforeLMouseButtonDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
-		cursorOffset.reset();
+		movementContext.reset();
 	}
 
 	void PatchDialogProc_BeforeRMouseButtonDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
@@ -1262,7 +1294,7 @@ namespace se::cs::dialog::render_window {
 		auto widgets = SceneGraphController::get()->widgets;
 		if (!isHoldingAxisKey() && widgets->isShown()) {
 			widgets->hide();
-			cursorOffset.reset();
+			movementContext.reset();
 			gRenderNextFrame::set(true);
 		}
 	}

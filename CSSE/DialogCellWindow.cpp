@@ -57,30 +57,32 @@ namespace se::cs::dialog::cell_window {
 		}
 	}
 
-	bool FilterRefs_RefMatchesSearch(const Reference* reference) {
-		if (modeShowModifiedOnly && !reference->getModified()) {
+	bool FilterCellList_CellMatchesSearch(const Cell* cell) {
+		if (modeShowModifiedOnly && !cell->getModified()) {
 			return false;
 		}
-
 		if (currentSearchText.empty()) {
 			return true;
 		}
 
-		return matchDispatcher(reference->getObjectID());
+		return matchDispatcher(cell->getObjectID());
+	}
+
+	bool FilterRefsList_RefMatchesSearch(const Reference* reference) {
+		if (modeShowModifiedOnly && !reference->getModified()) {
+			return false;
+		}
+		return true;
 	}
 
 	Cell* __fastcall PatchFilterCellList(RecordHandler* recordHandler, DWORD edx, int index) {
 		auto cell = recordHandler->getCellByIndex(index);
-
-		if (modeShowModifiedOnly && cell && !cell->getModified()) {
-			return nullptr;
-		}
-		return cell;
+		return FilterCellList_CellMatchesSearch(cell) ? cell : nullptr;
 	}
 
 	const auto CS_addRefrToRefsListView = reinterpret_cast<void(__cdecl*)(HWND, const Reference*)>(0x40E4C0);
 	void PatchFilterRefsList(HWND hWnd, const Reference* reference) {
-		if (FilterRefs_RefMatchesSearch(reference)) {
+		if (FilterRefsList_RefMatchesSearch(reference)) {
 			CS_addRefrToRefsListView(hWnd, reference);
 		}
 	}
@@ -159,7 +161,8 @@ namespace se::cs::dialog::cell_window {
 				currentSearchRegex = {};
 			}
 
-			RefreshRefsListView(hWnd);
+			// Search affects cell list.
+			RefreshCellListView(hWnd);
 		}
 	}
 
@@ -209,7 +212,7 @@ namespace se::cs::dialog::cell_window {
 		if (cellWindowSearchControl == NULL) {
 
 			auto hDlgShowModifiedOnly = CreateWindowExA(NULL, WC_BUTTON, "Show modified only", BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_CHILD | WS_VISIBLE | WS_GROUP, 0, 0, 0, 0, hWnd, (HMENU)CONTROL_ID_SHOW_MODIFIED_ONLY_BUTTON, hInstance, NULL);
-			auto hDlgFilterStatic = CreateWindowExA(NULL, WC_STATIC, "Filter:", SS_RIGHT | WS_CHILD | WS_VISIBLE | WS_GROUP, 0, 0, 0, 0, hWnd, (HMENU)CONTROL_ID_FILTER_LABEL, hInstance, NULL);
+			auto hDlgFilterStatic = CreateWindowExA(NULL, WC_STATIC, "Filter cells:", SS_RIGHT | WS_CHILD | WS_VISIBLE | WS_GROUP, 0, 0, 0, 0, hWnd, (HMENU)CONTROL_ID_FILTER_LABEL, hInstance, NULL);
 			auto hDlgFilterEdit = CreateWindowExA(WS_EX_CLIENTEDGE, WC_EDIT, "", ES_LEFT | ES_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 0, 0, 0, 0, hWnd, (HMENU)CONTROL_ID_FILTER_EDIT, hInstance, NULL);
 			if (hDlgFilterEdit) {
 				SetWindowSubclass(hDlgFilterEdit, ui_subclass::edit::BasicExtendedProc, NULL, NULL);

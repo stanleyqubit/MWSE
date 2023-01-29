@@ -110,16 +110,20 @@ namespace NI {
 		return result;
 	}
 
-	Quaternion Quaternion::slerp(const Quaternion* q, float t) const {
+	static Quaternion slerpBase(const Quaternion* q0, const Quaternion* q1, double dot_product, float t) {
 		// Avoid using the vanilla implementation due to numerical issues.
 
-		// Use shortest path interpolation.
-		double dot_product = this->dot(q);
-		Quaternion q_closest = (dot_product >= 0) ? *q : -*q;
-		dot_product = std::abs(dot_product);
-
 		// Find (theta/2) while also handling values out of domain for acos.
-		double half_theta = (dot_product < 1.0) ? std::acos(dot_product) : 0;
+		double half_theta;
+		if (dot_product >= 1.0) {
+			half_theta = 0;
+		}
+		else if (dot_product <= -1.0) {
+			half_theta = 3.14159265358979;
+		}
+		else {
+			half_theta = std::acos(dot_product);
+		}
 
 		double s = std::sin(half_theta);
 		double k0, k1;
@@ -137,11 +141,27 @@ namespace NI {
 		}
 
 		return {
-			float(k0 * w + k1 * q_closest.w),
-			float(k0 * x + k1 * q_closest.x),
-			float(k0 * y + k1 * q_closest.y),
-			float(k0 * z + k1 * q_closest.z),
+			float(k0 * q0->w + k1 * q1->w),
+			float(k0 * q0->x + k1 * q1->x),
+			float(k0 * q0->y + k1 * q1->y),
+			float(k0 * q0->z + k1 * q1->z),
 		};
+	}
+
+	Quaternion Quaternion::slerp(const Quaternion* q, float t) const {
+		// Use shortest path interpolation.
+		double dot_product = this->dot(q);
+		Quaternion q_closest = (dot_product >= 0) ? *q : -*q;
+		dot_product = std::abs(dot_product);
+
+		return slerpBase(this, &q_closest, dot_product, t);
+	}
+
+	Quaternion Quaternion::slerpKeyframe(const Quaternion* q, float t) const {
+		// Slerp with no checking for shortest path.
+		double dot_product = this->dot(q);
+
+		return slerpBase(this, q, dot_product, t);
 	}
 
 	Quaternion Quaternion::rotateTowards(const Quaternion* to, float rotationLimit) const {

@@ -14,8 +14,13 @@ namespace mge::lua {
 		return true;
 	}
 
-	int CoreInterface::getVersion() {
-		return api->getMGEVersion();
+	sol::object CoreInterface::getVersion(sol::this_state ts) {
+		// Convert packed version to semver table. MGE XE major version is offset for legacy reasons.
+		int ver = api->getMGEVersion() - 0x40000;
+		int major = (ver >> 16) & 0xFF, minor = (ver >> 8) & 0xFF, patch = ver & 0xFF;
+
+		sol::state_view state = ts;
+		return state.create_table_with("major", major, "minor", minor, "patch", patch);
 	}
 
 	void CoreInterface::loadConfig() {

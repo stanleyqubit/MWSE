@@ -105,7 +105,7 @@ local scale = mge.getUIScale()
 
 ### `mge.getVersion`
 
-Gets the MGE version. Wrapper for MGEGetVersion.
+Gets the MGE version. Returns a table with keys `major`, `minor`, and `patch`.
 
 ```lua
 local result = mge.getVersion()
@@ -113,7 +113,7 @@ local result = mge.getVersion()
 
 **Returns**:
 
-* `result` (number)
+* `result` (table)
 
 ***
 

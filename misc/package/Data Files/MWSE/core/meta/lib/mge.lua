@@ -63,8 +63,8 @@ function mge.getScreenWidth() end
 --- @return number scale No description yet available.
 function mge.getUIScale() end
 
---- Gets the MGE version. Wrapper for MGEGetVersion.
---- @return number result No description yet available.
+--- Gets the MGE version. Returns a table with keys `major`, `minor`, and `patch`.
+--- @return table result No description yet available.
 function mge.getVersion() end
 
 --- Gets the weather distant land fog. Use `mge.weather.getDistantFog()` instead.

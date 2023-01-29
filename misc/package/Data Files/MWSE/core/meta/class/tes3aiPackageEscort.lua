@@ -6,5 +6,3 @@
 --- @class tes3aiPackageEscort : tes3aiPackage
 --- @field destination tes3vector3 The destination coordinates of this escort AI package.
 --- @field targetActor tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer The actor to be escorted to the destination.
-tes3aiPackageEscort = {}
-

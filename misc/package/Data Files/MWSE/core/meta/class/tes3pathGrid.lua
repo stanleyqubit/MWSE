@@ -9,5 +9,3 @@
 --- @field nodeCount number *Read-only*. The total number of nodes.
 --- @field nodes tes3pathGridNode[] *Read-only*. A list of all path nodes in the grid. Note that for some cells, not all nodes are placed on the ground.
 --- @field parentCell tes3cell *Read-only*. The cell that the pathgrid belongs to.
-tes3pathGrid = {}
-

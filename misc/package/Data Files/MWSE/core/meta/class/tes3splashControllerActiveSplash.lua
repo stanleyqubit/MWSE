@@ -7,5 +7,3 @@
 --- @field age number The splash's current age, measured in seconds.
 --- @field maxAge number The splash's maximum age, measured in seconds.
 --- @field node niBillboardNode|niCollisionSwitch|niNode|niSwitchNode *Read-only*. The splash's node.
-tes3splashControllerActiveSplash = {}
-

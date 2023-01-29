@@ -8,5 +8,3 @@
 --- @field flags number The raw flags.
 --- @field item tes3alchemy|tes3apparatus|tes3armor|tes3book|tes3clothing|tes3ingredient|tes3light|tes3lockpick|tes3misc|tes3probe|tes3repairTool|tes3weapon The raw item object this active body part pertains to.
 --- @field node niBillboardNode|niCollisionSwitch|niNode|niSwitchNode The NiNode-derived object for the object's loaded mesh.
-tes3bodyPartManagerActiveBodyPart = {}
-

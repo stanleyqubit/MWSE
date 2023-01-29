@@ -2,6 +2,7 @@
 #include "NIDefines.h"
 #include "NINode.h"
 #include "NIProperty.h"
+#include "NICamera.h"
 
 #include "MemoryUtil.h"
 
@@ -45,6 +46,21 @@ namespace NI {
 			return true;
 		}
 		return parentNode ? parentNode->isAppCulled() : false;
+	}
+
+	bool AVObject::isFrustumCulled(Camera* camera) {
+		for (auto i = 0u; i < 6; i++) {
+			auto plane = camera->cullingPlanes[i];
+			auto distance = (
+				plane.x * worldBoundOrigin.x +
+				plane.y * worldBoundOrigin.y +
+				plane.z * worldBoundOrigin.z - plane.w
+			);
+			if (distance < -worldBoundRadius) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	void AVObject::update(float fTime, bool bUpdateControllers, bool bUpdateBounds) {

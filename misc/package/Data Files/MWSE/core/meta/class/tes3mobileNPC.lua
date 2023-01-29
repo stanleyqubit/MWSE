@@ -43,5 +43,3 @@
 --- @field swimSpeed number *Read-only*. The calculated swim movement speed.
 --- @field unarmored tes3statisticSkill *Read-only*. Direct access to the NPC's unarmored skill statistic.
 --- @field walkSpeed number *Read-only*. The calculated walk movement speed.
-tes3mobileNPC = {}
-

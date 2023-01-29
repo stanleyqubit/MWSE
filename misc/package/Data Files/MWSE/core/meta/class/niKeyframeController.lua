@@ -8,5 +8,3 @@
 --- @field lastUsedPositionIndex number The last position index that the game engine used.
 --- @field lastUsedRotationIndex number The last rotation index that the game engine used.
 --- @field lastUsedScaleIndex number The last scale index that the game engine used.
-niKeyframeController = {}
-

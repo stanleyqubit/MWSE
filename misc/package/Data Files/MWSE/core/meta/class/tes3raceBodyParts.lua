@@ -20,5 +20,3 @@
 --- @field upperLeg tes3bodyPart The upper leg that an actor of this race and sex will use.
 --- @field vampireHead tes3bodyPart The head that an actor of this race and sex will use when they are a vampire.
 --- @field wrist tes3bodyPart The wrist that an actor of this race and sex will use.
-tes3raceBodyParts = {}
-

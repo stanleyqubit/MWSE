@@ -10,7 +10,6 @@
 #include "NICamera.h"
 #include "NICollisionSwitch.h"
 #include "NIGeometry.h"
-#include "NILight.h"
 #include "NIMatrix33.h"
 #include "NINode.h"
 #include "NIPick.h"
@@ -19,44 +18,65 @@
 #include "CSDataHandler.h"
 #include "CSGameFile.h"
 #include "CSLandTexture.h"
-#include "CSLight.h"
 #include "CSRecordHandler.h"
 #include "CSReference.h"
 #include "CSStatic.h"
 
 #include "Settings.h"
+#include "RenderWindowSceneGraphController.h"
+#include "RenderWindowSelectionData.h"
+#include "RenderWindowWidgets.h"
 
 namespace se::cs::dialog::render_window {
 	static WORD lastRenderWindowPosX = 0;
 	static WORD lastRenderWindowPosY = 0;
 
-	using gObjectMove = memory::ExternalGlobal<float, 0x6CE9B0>;
+	using gObjectMove = memory::ExternalGlobal<float, 0x6CE9B4>;
+	using gObjectRotate = memory::ExternalGlobal<float, 0x6CE9B0>;
+
+	using gCameraPan = memory::ExternalGlobal<float, 0x6CE9C0>;
+	using gCameraRotate = memory::ExternalGlobal<float, 0x6CE9B8>;
+	using gCameraZoom = memory::ExternalGlobal<float, 0x6CE9BC>;
+
+	using gSnapGrid = memory::ExternalGlobal<int, 0x6CE9A8>;
 	using gSnapAngleInDegrees = memory::ExternalGlobal<int, 0x6CE9AC>;
-	using gRotationFlags = memory::ExternalGlobal<BYTE, 0x6CE9A4>;
 	using gCumulativeRotationValues = memory::ExternalGlobal<NI::Vector3, 0x6CF760>;
+
 	using gRenderWindowPick = memory::ExternalGlobal<NI::Pick, 0x6CF528>;
+
 	using gCurrentCell = memory::ExternalGlobal<Cell*, 0x6CF7B8>;
 
-	// TODO: Move to real definition file.
-	struct TranslationData {
-		enum class RotationAxis : unsigned int {
-			X = 1,
-			Z = 2,
-			Y = 3,
-		};
-		struct Target {
-			Reference* reference; // 0x0
-			Target* previous; // 0x4
-			Target* next; // 0x8
-		};
-		Target* firstTarget; // 0x0
-		unsigned int numberOfTargets; // 0x4
-		NI::Bound bound; // 0x8
+	using gIsHoldingV = memory::ExternalGlobal<bool, 0x6CF789>;
+	using gIsHoldingX = memory::ExternalGlobal<bool, 0x6CF786>;
+	using gIsHoldingY = memory::ExternalGlobal<bool, 0x6CF787>;
+	using gIsHoldingZ = memory::ExternalGlobal<bool, 0x6CF788>;
+	using gIsScaling = memory::ExternalGlobal<bool, 0x6CF785>;
 
-		static inline auto get() {
-			return memory::ExternalGlobal<TranslationData*, 0x6CE968>::get();
-		}
-	};
+	using gRenderNextFrame = memory::ExternalGlobal<bool, 0x6CF78D>;
+
+	namespace RenderControlFlags {
+		enum RenderControlFlags : DWORD {
+			SnapToGrid = 0x1,
+			SnapToAngle = 0x2,
+			AllowRenderWindowCellLoads = 0x4,
+			SkipInitialCellLoad = 0x10,
+		};
+	}
+	using gRenderControlFlags = memory::ExternalGlobal<DWORD, 0x6CE9A4>;
+	using gAutoSaveTime = memory::ExternalGlobal<int, 0x6CEA38>;
+
+	// Convenience function to see if X, Y, or Z are held down.
+	bool isHoldingAxisKey() {
+		return gIsHoldingX::get() || gIsHoldingY::get() || gIsHoldingZ::get();
+	}
+
+	bool isGridSnapping() {
+		return gRenderControlFlags::get() & RenderControlFlags::SnapToGrid;
+	}
+
+	bool isAngleSnapping() {
+		return gRenderControlFlags::get() & RenderControlFlags::SnapToAngle;
+	}
 
 	struct NetImmerseInstance {
 		struct VirtualTable {
@@ -118,53 +138,12 @@ namespace se::cs::dialog::render_window {
 	static_assert(sizeof(NetImmerseInstance) == 0x64, "CS::NetImmerseInstance failed size validation");
 	static_assert(sizeof(NetImmerseInstance::VirtualTable) == 0x64, "CS::NetImmerseInstance's virtual table failed size validation");
 
-	struct SceneGraphControllerVanilla {
-		NI::Pointer<NI::Node> sceneRoot; // 0x0
-		NI::Pointer<NI::Node> objectRoot; // 0x4
-		NI::Pointer<NI::Node> landscapeRoot; // 0x8
-		NI::Pointer<NI::ZBufferProperty> zBufferProperty; // 0xC
-		NI::Pointer<NI::Property> wireframeProperty; // 0x10
-		NI::Pick* objectPick; // 0x14
-		NI::Pick* landscapePick; // 0x18
-		NI::Pointer<NI::Light> directionalLight; // 0x1C
-		NI::Pointer<NI::FogProperty> fog; // 0x20
-	};
-	static_assert(sizeof(SceneGraphControllerVanilla) == 0x24, "CS::SceneGraphController failed size validation");
-
-	struct SceneGraphController : SceneGraphControllerVanilla {
-		NI::Pointer<NI::Node> widgetRoot; // 0x24
-
-		static bool __cdecl initialize(SceneGraphController* controller) {
-			// Zero out the structure again to handle newly added fields.
-			memset(controller, 0, sizeof(SceneGraphController));
-
-			// Call existing function.
-			const auto SceneGraphController_initialize = reinterpret_cast<bool(__cdecl*)(SceneGraphController*)>(0x449930);
-			if (!SceneGraphController_initialize(controller)) {
-				return false;
-			}
-
-			// Create widget root.
-			controller->widgetRoot = new NI::Node();
-			controller->widgetRoot->setName("Editor widgetRoot");
-			controller->sceneRoot->attachChild(controller->widgetRoot);
-
-			return true;
-		}
-
-		static inline auto get() {
-			return memory::ExternalGlobal<SceneGraphController*, 0x6CEB78>::get();
-		}
-	};
-
-
-
 	//
 	// Patch: Use world rotation values unless ALT is held.
 	//
 
-	const auto TES3_CS_OriginalRotationLogic = reinterpret_cast<bool(__cdecl*)(void*, TranslationData::Target*, int, TranslationData::RotationAxis)>(0x4652D0);
-	bool __cdecl Patch_ReplaceRotationLogic(void* unknown1, TranslationData::Target* firstTarget, int relativeMouseDelta, TranslationData::RotationAxis rotationAxis) {
+	const auto TES3_CS_OriginalRotationLogic = reinterpret_cast<bool(__cdecl*)(void*, SelectionData::Target*, int, SelectionData::RotationAxis)>(0x4652D0);
+	bool __cdecl Patch_ReplaceRotationLogic(void* unknown1, SelectionData::Target* firstTarget, int relativeMouseDelta, SelectionData::RotationAxis rotationAxis) {
 		using windows::isKeyDown;
 
 		// Allow holding ALT modifier to do vanilla behavior.
@@ -181,30 +160,37 @@ namespace se::cs::dialog::render_window {
 			return false;
 		}
 
-		auto data = TranslationData::get();
-
-		const auto rotationSpeed = gObjectMove::get();
-		const auto rotationFlags = gRotationFlags::get();
+		auto selectionData = SelectionData::get();
 
 		if (!isKeyDown('X') && !isKeyDown('Y')) {
-			rotationAxis = TranslationData::RotationAxis::Z;
+			rotationAxis = SelectionData::RotationAxis::Z;
 		}
 
+		auto widgets = SceneGraphController::get()->widgets;
+		if (isHoldingAxisKey()) {
+			widgets->setPosition(selectionData->bound.center);
+			widgets->show();
+		}
+
+		const auto rotationSpeed = gObjectRotate::get();
 		auto& cumulativeRot = gCumulativeRotationValues::get();
 		switch (rotationAxis) {
-		case TranslationData::RotationAxis::X:
+		case SelectionData::RotationAxis::X:
+			widgets->setAxis(WidgetsAxis::X);
 			cumulativeRot.x += relativeMouseDelta * rotationSpeed * 0.1f;
 			break;
-		case TranslationData::RotationAxis::Y:
+		case SelectionData::RotationAxis::Y:
+			widgets->setAxis(WidgetsAxis::Y);
 			cumulativeRot.y += relativeMouseDelta * rotationSpeed * 0.1f;
 			break;
-		case TranslationData::RotationAxis::Z:
+		case SelectionData::RotationAxis::Z:
+			widgets->setAxis(WidgetsAxis::Z);
 			cumulativeRot.z += relativeMouseDelta * rotationSpeed * 0.1f;
 			break;
 		}
 
 		const auto snapAngle = math::degreesToRadians((float)gSnapAngleInDegrees::get());
-		const bool isSnapping = ((rotationFlags & 2) != 0) && (snapAngle != 0.0f);
+		const bool isSnapping = (isAngleSnapping() || isKeyDown(VK_LCONTROL)) && (snapAngle != 0.0f);
 
 		NI::Vector3 orientation = cumulativeRot;
 		if (isSnapping) {
@@ -229,15 +215,14 @@ namespace se::cs::dialog::render_window {
 		NI::Matrix33 userRotation;
 		userRotation.fromEulerXYZ(orientation.x, orientation.y, orientation.z);
 
-		for (auto target = data->firstTarget; target; target = target->next) {
+		for (auto target = selectionData->firstTarget; target; target = target->next) {
 			auto reference = target->reference;
 
-			reference->updateBaseObjectAndAttachment7();
-			reference->baseObject->setFlag80(true);
+			reference->setAsEdited();
 
 			// Disallow XY rotations on actors and northmarkers.
 			auto doRotations = true;
-			if (rotationAxis != TranslationData::RotationAxis::Z && !reference->baseObject->canRotateOnAllAxes()) {
+			if (rotationAxis != SelectionData::RotationAxis::Z && !reference->baseObject->canRotateOnAllAxes()) {
 				doRotations = false;
 			}
 
@@ -258,17 +243,17 @@ namespace se::cs::dialog::render_window {
 					};
 				}
 
-				if (isSnapping && (target == data->firstTarget)) {
+				if (isSnapping && (target == selectionData->firstTarget)) {
 					// Snapping the new rotation after adjustments were applied.
 					// So we must only snap the *current* axis and not all them.
 					switch (rotationAxis) {
-					case TranslationData::RotationAxis::X:
+					case SelectionData::RotationAxis::X:
 						orientation.x = std::roundf(orientation.x / snapAngle) * snapAngle;
 						break;
-					case TranslationData::RotationAxis::Y:
+					case SelectionData::RotationAxis::Y:
 						orientation.y = std::roundf(orientation.y / snapAngle) * snapAngle;
 						break;
-					case TranslationData::RotationAxis::Z:
+					case SelectionData::RotationAxis::Z:
 						orientation.z = std::roundf(orientation.z / snapAngle) * snapAngle;
 						break;
 					}
@@ -293,11 +278,12 @@ namespace se::cs::dialog::render_window {
 			}
 
 			// Rotate positions.
-			if (data->numberOfTargets > 1) {
-				auto p = reference->position - data->bound.center;
-				reference->position = (userRotation * p) + data->bound.center;
+			if (selectionData->numberOfTargets > 1) {
+				auto p = reference->position - selectionData->bound.center;
+				reference->position = (userRotation * p) + selectionData->bound.center;
 				reference->unknown_0x10 = reference->position;
 				reference->sceneNode->localTranslate = reference->position;
+				DataHandler::get()->updateLightingForReference(reference);
 			}
 
 			reference->sceneNode->update(0.0f, true, true);
@@ -310,19 +296,19 @@ namespace se::cs::dialog::render_window {
 	// Patch: Improve multi-reference scaling.
 	//
 
-	void __cdecl Patch_ReplaceScalingLogic(RenderController* renderController, TranslationData::Target* firstTarget, int scaler) {
+	void __cdecl Patch_ReplaceScalingLogic(RenderController* renderController, SelectionData::Target* firstTarget, int scaler) {
 		using windows::isKeyDown;
 
-		auto translationData = TranslationData::get();
-		if (!isKeyDown(VK_MENU) || translationData->numberOfTargets == 1) {
-			const auto VanillaScalingHandler = reinterpret_cast<void(__cdecl*)(RenderController*, TranslationData::Target*, int)>(0x404949);
+		auto selectionData = SelectionData::get();
+		if (!isKeyDown(VK_MENU) || selectionData->numberOfTargets == 1) {
+			const auto VanillaScalingHandler = reinterpret_cast<void(__cdecl*)(RenderController*, SelectionData::Target*, int)>(0x404949);
 			VanillaScalingHandler(renderController, firstTarget, scaler);
 			return;
 		}
 
 		const auto scaleDelta = scaler * 0.01f;
 
-		const auto& center = translationData->bound.center;
+		const auto& center = selectionData->bound.center;
 
 		for (auto target = firstTarget; target; target = target->next) {
 			auto reference = target->reference;
@@ -332,8 +318,6 @@ namespace se::cs::dialog::render_window {
 
 			const auto newScale = reference->getScale();
 			if (newScale != oldScale) {
-				reference->setFlag80(true);
-
 				const auto offset = reference->position - center;
 				const auto multiplier = newScale / oldScale;
 
@@ -342,7 +326,7 @@ namespace se::cs::dialog::render_window {
 				reference->sceneNode->localTranslate = reference->position;
 				reference->sceneNode->update(0.0f, true, true);
 
-				reference->updateBaseObjectAndAttachment7();
+				reference->setAsEdited();
 			}
 		}
 	}
@@ -401,9 +385,12 @@ namespace se::cs::dialog::render_window {
 	}
 
 	//
-	// Patch: Allow alt-dragging objects to snap to surfaces.
+	// Patch: Improve moving objects.
 	//
 
+	//
+	// Patch: Allow alt-dragging objects to snap to surfaces.
+	//
 	enum class SnappingAxis {
 		POSITIVE_X,
 		NEGATIVE_X,
@@ -415,15 +402,13 @@ namespace se::cs::dialog::render_window {
 
 	SnappingAxis snappingAxis = SnappingAxis::POSITIVE_Z;
 
-	int __cdecl Patch_ReplaceDragMovementLogic(RenderController* renderController, TranslationData::Target* firstTarget, int dx, int dy, bool lockX, bool lockY, bool lockZ) {
-		using windows::isKeyDown;
+	int Patch_AlignToSurfaceDragMovementLogic(RenderController* renderController, SelectionData::Target* firstTarget, int dx, int dy, bool lockX, bool lockY, bool lockZ) {
 		using se::math::M_PIf;
 
-		// We only care if we are holding the alt key and only have one object selected.
-		auto data = memory::MemAccess<TranslationData*>::Get(0x6CE968);
-		if (data->numberOfTargets != 1 || !isKeyDown(VK_MENU)) {
-			const auto DefaultDragMovementFunction = reinterpret_cast<int(__cdecl*)(RenderController*, TranslationData::Target*, int, int, bool, bool, bool)>(0x401F4B);
-			return DefaultDragMovementFunction(renderController, firstTarget, dx, dy, lockX, lockY, lockZ);
+		// Currently requires a single selection.
+		auto selectionData = SelectionData::get();
+		if (selectionData->numberOfTargets != 1) {
+			return 0;
 		}
 
 		auto rendererPicker = &gRenderWindowPick::get();
@@ -440,7 +425,7 @@ namespace se::cs::dialog::render_window {
 		rendererPicker->returnNormal = true;
 		rendererPicker->pickType = NI::PickType::FIND_ALL;
 
-		auto reference = data->firstTarget->reference;
+		auto reference = selectionData->firstTarget->reference;
 		reference->sceneNode->setAppCulled(true);
 
 		NI::Vector3 origin;
@@ -458,9 +443,7 @@ namespace se::cs::dialog::render_window {
 						refSnappingAxis = SnappingAxis::POSITIVE_Z;
 					}
 
-					reference->setModified(true);
-					reference->setFlag80(true);
-					reference->updateBaseObjectAndAttachment7();
+					reference->setAsEdited();
 
 					// Set position.
 					NI::Vector3 offset;
@@ -489,6 +472,8 @@ namespace se::cs::dialog::render_window {
 					reference->position = firstResult->intersection + offset;
 					reference->unknown_0x10 = reference->position;
 					reference->sceneNode->localTranslate = reference->position;
+
+					selectionData->bound.center = reference->position;
 
 					// Set rotation.
 					if (object->canRotateOnAllAxes()) {
@@ -551,21 +536,7 @@ namespace se::cs::dialog::render_window {
 					reference->sceneNode->update(0.0f, true, true);
 
 					// Update lighting data.
-					auto dataHandler = DataHandler::get();
-					auto attachedLightData = reference->getLightAttachment();
-					if (object->objectType == ObjectType::Light && attachedLightData) {
-						auto baseObjectLight = static_cast<Light*>(object);
-						if (dataHandler->currentInteriorCell) {
-							attachedLightData->light->detachAllAffectedNodes();
-							baseObjectLight->updateLightingData(attachedLightData->light, dataHandler->currentInteriorCell);
-						}
-						else {
-							dataHandler->updateAllLights();
-						}
-					}
-					else {
-						dataHandler->maybeUpdateLightForReference(reference);
-					}
+					DataHandler::get()->updateLightingForReference(reference);
 				}
 			}
 		}
@@ -577,8 +548,176 @@ namespace se::cs::dialog::render_window {
 		rendererPicker->root = previousRoot;
 		rendererPicker->returnNormal = previousReturnNormal;
 		rendererPicker->pickType = previousPickType;
-
+		
 		return 1;
+	}
+
+	struct MovementContext {
+		NI::Vector3 basePosition;
+		NI::Vector3 cursorOffset;
+	};
+	static auto movementContext = std::optional<MovementContext>();
+
+	const auto DefaultDragMovementFunction = reinterpret_cast<int(__cdecl*)(RenderController*, SelectionData::Target*, int, int, bool, bool, bool)>(0x464B70);
+	int __cdecl Patch_ReplaceDragMovementLogic(RenderController* renderController, SelectionData::Target* firstTarget, int dx, int dy, bool lockX, bool lockY, bool lockZ) {
+		using windows::isKeyDown;
+
+		auto selectionData = SelectionData::get();
+		auto lastTarget = selectionData->getLastTarget();
+		if (!lastTarget) {
+			return 0;
+		}
+
+		// Respect the "Use Legacy Object Movement" setting.
+		if (settings.render_window.use_legacy_object_movement) {
+			return DefaultDragMovementFunction(renderController, firstTarget, dx, dy, lockX, lockY, lockZ);
+		}
+
+		// When holding alt perform align-to-surface behavior.
+		if (isKeyDown(VK_MENU)) {
+			return Patch_AlignToSurfaceDragMovementLogic(renderController, firstTarget, dx, dy, lockX, lockY, lockZ);
+		}
+
+		// Calculate raycast origin/direction from cursor.
+		NI::Vector3 rayOrigin;
+		NI::Vector3 rayDirection;
+		auto camera = RenderController::get()->camera;
+		if (!camera->windowPointToRay(lastRenderWindowPosX, lastRenderWindowPosY, rayOrigin, rayDirection)) {
+			return 0;
+		}
+
+		// Ensure selection center is correct. Currently some other functions don't update it. (F key)
+		selectionData->recalculateCenter();
+		
+		// Calculate the plane that we will raycast against.
+		auto planeOrigin = selectionData->bound.center;
+		auto planeNormal = NI::Vector3(0, 0, 1);
+
+		// Preserve the cursor offset and starting position.
+		if (!movementContext.has_value()) {
+			MovementContext context;
+			auto pick = SceneGraphController::get()->objectPick;
+			if (pick->pickObjectsWithSkinDeforms(&rayOrigin, &rayDirection)) {
+				context.basePosition = pick->results.at(0)->intersection;
+				context.cursorOffset = context.basePosition - planeOrigin;
+			}
+			else {
+				context.basePosition = planeOrigin;
+				context.cursorOffset = NI::Vector3();
+			}
+			movementContext = std::move(context);
+		}
+		auto& context = movementContext.value();
+		planeOrigin = planeOrigin + context.cursorOffset;
+
+		// Align the plane to the locked axis if applicable.
+		auto widgets = SceneGraphController::get()->widgets;
+		bool isAxisLocked = lockX || lockY || lockZ;
+		if (isAxisLocked) {
+			planeNormal = camera->worldDirection;
+			if (lockX) {
+				planeNormal.x = 0.0f;
+				widgets->setAxis(WidgetsAxis::X);
+			}
+			if (lockY) {
+				planeNormal.y = 0.0f;
+				widgets->setAxis(WidgetsAxis::Y);
+			}
+			if (lockZ) {
+				planeNormal.z = 0.0f;
+				widgets->setAxis(WidgetsAxis::Z);
+			}
+			planeNormal.normalize();
+			widgets->show();
+		}
+
+		// Clamp the plane angle if we're close to parellel with the camera.
+		auto fixedNormal = planeNormal;
+		auto fixedOrigin = planeOrigin;
+		if (!isAxisLocked) {
+			auto direction = (context.basePosition - camera->worldTransform.translation);
+			direction.normalize();
+
+			const float angle = planeNormal.dotProduct(&direction);
+			const float minAngle = se::math::degreesToRadians(15);
+			if (fabs(angle) <= minAngle) {
+				// Clamping to `minAngle` about the camera X axis.
+				NI::Matrix33 m;
+				m.toRotation(angle < 0.0f ? -minAngle : minAngle, camera->worldRight);
+				fixedNormal = m * planeNormal;
+				fixedOrigin = context.basePosition;
+			}
+		}
+
+		// Calculate the intersection.
+		auto [distance, intersection] = math::rayPlaneIntersection(rayOrigin, rayDirection, fixedOrigin, fixedNormal);
+		if (distance == -1.0f) {
+			return 0;
+		}
+
+		// Apply axis restrictions.
+		if (!isAxisLocked) {
+			intersection.z = planeOrigin.z;
+		}
+		else if (lockX) {
+			intersection.y = planeOrigin.y;
+			intersection.z = planeOrigin.z;
+		}
+		else if (lockY) {
+			intersection.x = planeOrigin.x;
+			intersection.z = planeOrigin.z;
+		}
+		else if (lockZ) {
+			intersection.x = planeOrigin.x;
+			intersection.y = planeOrigin.y;
+		}
+
+		// Apply grid snap.
+		auto forceSnapping = isKeyDown(VK_LCONTROL);
+		if (isGridSnapping() || forceSnapping) {
+			auto increment = gSnapGrid::get();
+			if (increment != 0.0f) {
+				// "Unlocked" movement defaults to XY axis.
+				auto lockXY = !isAxisLocked;
+				// Legacy grid snap also locks the Z axis by default.
+				auto legacyLockZ = !isAxisLocked && settings.render_window.use_legacy_grid_snap;
+				// Offset so the last reference will be on the grid.
+				auto p = intersection + (lastTarget->reference->position - planeOrigin);
+				if (lockX || lockXY) {
+					intersection.x -= p.x - (std::roundf(p.x / increment) * increment);
+				}
+				if (lockY || lockXY) {
+					intersection.y -= p.y - (std::roundf(p.y / increment) * increment);
+				}
+				if (lockZ || legacyLockZ) {
+					intersection.z -= p.z - (std::roundf(p.z / increment) * increment);
+				}
+			}
+		}
+
+		// We probably don't want to be sending things off into far distant cells.
+		// Can happen unintentionally if camera direction is parallel with movement axis.
+		if (intersection.distance(&planeOrigin) > 8192.0f) {
+			return 0;
+		}
+
+		// Update positions.
+		for (auto target = selectionData->firstTarget; target; target = target->next) {
+			auto reference = target->reference;
+			reference->position = intersection + (reference->position - planeOrigin);
+			reference->unknown_0x10 = reference->position;
+			reference->sceneNode->localTranslate = reference->position;
+			reference->sceneNode->update(0.0f, true, true);
+
+			DataHandler::get()->updateLightingForReference(reference);
+
+			reference->setAsEdited();
+		}
+
+		selectionData->recalculateCenter();
+		widgets->setPosition(lastTarget->reference->position);
+
+		return 0;
 	}
 
 	//
@@ -729,7 +868,7 @@ namespace se::cs::dialog::render_window {
 	// Patch: Extend Render Window message handling.
 	//
 
-	static bool PatchDialogProc_preventMainHandler = false;
+	static std::optional<LRESULT> PatchDialogProc_OverrideResult = {};
 
 	constexpr auto landscapeEditWindowId = 203;
 
@@ -800,9 +939,9 @@ namespace se::cs::dialog::render_window {
 	}
 
 	void hideSelectedReferences() {
-		auto translationData = TranslationData::get();
+		auto selectionData = SelectionData::get();
 		
-		for (auto target = translationData->firstTarget; target; target = target->next) {
+		for (auto target = selectionData->firstTarget; target; target = target->next) {
 			auto node = target->reference->sceneNode;
 			if (node) {
 				node->addExtraData(new NI::StringExtraData("xHID"));
@@ -811,8 +950,7 @@ namespace se::cs::dialog::render_window {
 			}
 		}
 
-		const auto thing = reinterpret_cast<void(__thiscall*)(TranslationData*, bool)>(0x403391);
-		thing(translationData, true);
+		selectionData->clear();
 	}
 
 	void unhideNode(NI::Node* node) {
@@ -912,8 +1050,8 @@ namespace se::cs::dialog::render_window {
 		}
 
 		auto recordHandler = DataHandler::get()->recordHandler;
-		auto translationData = TranslationData::get();
-		const bool hasReferencesSelected = translationData->numberOfTargets > 0;
+		auto selectionData = SelectionData::get();
+		const bool hasReferencesSelected = selectionData->numberOfTargets > 0;
 
 		enum ContextMenuId {
 			RESERVED_ERROR,
@@ -926,6 +1064,7 @@ namespace se::cs::dialog::render_window {
 			SET_SNAPPING_AXIS_NEGATIVE_Y,
 			SET_SNAPPING_AXIS_POSITIVE_Z,
 			SET_SNAPPING_AXIS_NEGATIVE_Z,
+			USE_LEGACY_OBJECT_MOVEMENT,
 			USE_WORLD_AXIS_ROTATION,
 			SAVE_STATE_TO_QUICKSTART,
 			CLEAR_STATE_FROM_QUICKSTART,
@@ -937,6 +1076,7 @@ namespace se::cs::dialog::render_window {
 		*	R: Restore Hidden References
 		*	S: Set Snapping Axis
 		*	W: Toggle world axis rotation
+		*   M: Toggle legacy object movement
 		*/
 
 		MENUITEMINFO menuItem = {};
@@ -1004,6 +1144,14 @@ namespace se::cs::dialog::render_window {
 		menuItem.hSubMenu = subMenuSnappingAxis.hSubMenu;
 		menuItem.dwTypeData = (LPSTR)"Set &Snapping Axis";
 		InsertMenuItemA(menu, index++, TRUE, &menuItem);
+
+		menuItem.wID = USE_LEGACY_OBJECT_MOVEMENT;
+		menuItem.fMask = MIIM_FTYPE | MIIM_CHECKMARKS | MIIM_STRING | MIIM_ID;
+		menuItem.fType = MFT_STRING;
+		menuItem.fState = (settings.render_window.use_legacy_object_movement) ? MFS_CHECKED : MFS_UNCHECKED;
+		menuItem.dwTypeData = (LPSTR)"Use Legacy Object &Movement";
+		InsertMenuItemA(menu, index++, TRUE, &menuItem);
+		CheckMenuItem(menu, USE_LEGACY_OBJECT_MOVEMENT, (settings.render_window.use_legacy_object_movement) ? MFS_CHECKED : MFS_UNCHECKED);
 
 		menuItem.wID = USE_WORLD_AXIS_ROTATION;
 		menuItem.fMask = MIIM_FTYPE | MIIM_CHECKMARKS | MIIM_STRING | MIIM_ID;
@@ -1087,6 +1235,10 @@ namespace se::cs::dialog::render_window {
 		case SET_SNAPPING_AXIS_NEGATIVE_Z:
 			snappingAxis = SnappingAxis::NEGATIVE_Z;
 			break;
+		case USE_LEGACY_OBJECT_MOVEMENT:
+			settings.render_window.use_legacy_object_movement = !settings.render_window.use_legacy_object_movement;
+			settings.save();
+			break;
 		case USE_WORLD_AXIS_ROTATION:
 			settings.render_window.use_world_axis_rotations_by_default = !settings.render_window.use_world_axis_rotations_by_default;
 			settings.save();
@@ -1107,19 +1259,29 @@ namespace se::cs::dialog::render_window {
 
 		// We also stole paint stuff, so repaint.
 		SendMessage(hWndRenderWindow, WM_PAINT, 0, 0);
-		PatchDialogProc_preventMainHandler = true;
+		PatchDialogProc_OverrideResult = TRUE;
 	}
 
-	void PatchDialogProc_OnRMouseButtonDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+	void PatchDialogProc_BeforeLMouseButtonDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		movementContext.reset();
+	}
+
+	void PatchDialogProc_BeforeRMouseButtonDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		constexpr auto comboPickLandscapeTexture = MK_CONTROL | MK_RBUTTON;
 		if ((wParam & comboPickLandscapeTexture) == comboPickLandscapeTexture) {
 			if (PickLandscapeTexture(hWnd)) {
-				PatchDialogProc_preventMainHandler = true;
+				PatchDialogProc_OverrideResult = TRUE;
 			}
 		}
 	}
 
-	void PatchDialogProc_OnKeyDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+	void PatchDialogProc_BeforeSetCameraPosition(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		if (RenderController::get()->node == nullptr) {
+			PatchDialogProc_OverrideResult = FALSE;
+		}
+	}
+
+	void PatchDialogProc_AfterKeyDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		switch (wParam) {
 		case 'Q':
 			showContextAwareActionMenu(hWnd);
@@ -1127,34 +1289,77 @@ namespace se::cs::dialog::render_window {
 		}
 	}
 
+	void PatchDialogProc_AfterKeyUp_XYZ(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		// Hide widgets if they are no longer needed.
+		auto widgets = SceneGraphController::get()->widgets;
+		if (!isHoldingAxisKey() && widgets->isShown()) {
+			widgets->hide();
+			movementContext.reset();
+			gRenderNextFrame::set(true);
+		}
+	}
+
+	void PatchDialogProc_AfterKeyUp(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		switch (wParam) {
+		case 'X':
+		case 'Y':
+		case 'Z':
+			PatchDialogProc_AfterKeyUp_XYZ(hWnd, msg, wParam, lParam);
+			break;
+		}
+	}
+
+	void PatchDialogProc_AfterInitDialog(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		// Initialize widget controller.
+		auto sgController = SceneGraphController::get();
+		sgController->widgets = new WidgetsController();
+		sgController->sceneRoot->attachChild(sgController->widgets->root);
+	}
+
+	namespace CustomWindowMessage {
+		constexpr UINT SetCameraPosition = 0x40Eu;
+	}
+
 	LRESULT CALLBACK PatchDialogProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
-		PatchDialogProc_preventMainHandler = false;
+		PatchDialogProc_OverrideResult.reset();
 
 		switch (msg) {
 		case WM_MOUSEMOVE:
 			lastRenderWindowPosX = LOWORD(lParam);
 			lastRenderWindowPosY = HIWORD(lParam);
 			break;
+		case WM_LBUTTONDOWN:
+			PatchDialogProc_BeforeLMouseButtonDown(hWnd, msg, wParam, lParam);
+			break;
 		case WM_RBUTTONDOWN:
-			PatchDialogProc_OnRMouseButtonDown(hWnd, msg, wParam, lParam);
+			PatchDialogProc_BeforeRMouseButtonDown(hWnd, msg, wParam, lParam);
+			break;
+		case CustomWindowMessage::SetCameraPosition:
+			PatchDialogProc_BeforeSetCameraPosition(hWnd, msg, wParam, lParam);
 			break;
 		}
 
-		if (PatchDialogProc_preventMainHandler) {
-			return TRUE;
+		if (PatchDialogProc_OverrideResult) {
+			return PatchDialogProc_OverrideResult.value();
 		}
 
 		// Call original function.
 		const auto CS_RenderWindowDialogProc = reinterpret_cast<WNDPROC>(0x45A3F0);
-		auto result = CS_RenderWindowDialogProc(hWnd, msg, wParam, lParam);
+		auto vanillaResult = CS_RenderWindowDialogProc(hWnd, msg, wParam, lParam);
 
 		switch (msg) {
 		case WM_KEYDOWN:
-			PatchDialogProc_OnKeyDown(hWnd, msg, wParam, lParam);
+			PatchDialogProc_AfterKeyDown(hWnd, msg, wParam, lParam);
+			break;
+		case WM_KEYUP:
+			PatchDialogProc_AfterKeyUp(hWnd, msg, wParam, lParam);
+			break;
+		case WM_INITDIALOG:
+			PatchDialogProc_AfterInitDialog(hWnd, msg, wParam, lParam);
 			break;
 		}
 
-		return result;
+		return PatchDialogProc_OverrideResult.value_or(vanillaResult);
 	}
 
 	//
@@ -1181,7 +1386,7 @@ namespace se::cs::dialog::render_window {
 		genCallEnforced(0x45EE3A, 0x404949, reinterpret_cast<DWORD>(Patch_ReplaceScalingLogic));
 
 		// Patch: Improve drag-move logic.
-		genCallEnforced(0x45EE85, 0x401F4B, reinterpret_cast<DWORD>(Patch_ReplaceDragMovementLogic));
+		genJumpEnforced(0x401F4B, 0x464B70, reinterpret_cast<DWORD>(Patch_ReplaceDragMovementLogic));
 
 		// Patch: Improve drop-to-surface logic by ignoring particles and skinned geometry.
 		genCallEnforced(0x46687F, 0x403AD5, reinterpret_cast<DWORD>(Patch_FixDropToSurface_GetLowestZ));

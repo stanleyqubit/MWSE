@@ -10,5 +10,3 @@
 --- @field nearPlaneDistance number The distance of the camera's near plane.
 --- @field viewportHeight number The viewport height.
 --- @field viewportWidth number The viewport width.
-tes3worldControllerRenderCameraData = {}
-

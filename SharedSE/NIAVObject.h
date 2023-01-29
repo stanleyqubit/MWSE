@@ -26,7 +26,7 @@ namespace NI {
 		void(__thiscall* setAppCulled)(AVObject*, bool); // 0x50
 		bool(__thiscall* getAppCulled)(const AVObject*); // 0x54
 		void(__thiscall* setPropagationMode)(AVObject*, int); // 0x58
-		AVObject* (__thiscall* getObjectByName)(AVObject*, const char*); // 0x5C
+		AVObject* (__thiscall* getObjectByName)(const AVObject*, const char*); // 0x5C
 		void(__thiscall* updateDownwardPass)(AVObject*, float, bool, bool); // 0x60
 		bool(__thiscall* isVisualObject)(AVObject*); // 0x64
 		void(__thiscall* updatePropertiesDownward)(AVObject*, void*); // 0x68
@@ -67,12 +67,8 @@ namespace NI {
 		Vector3 getLocalVelocity() const;
 		void setLocalVelocity(Vector3*);
 
-		AVObject* getObjectByName(const char*);
-
-		template <typename T>
-		T* getObjectByNameAndType(const char* name) {
-			return static_cast<T*>(vTable.asAVObject->getObjectByName(this, name));
-		}
+		AVObject* getObjectByName(const char*) const;
+		AVObject* getObjectByNameAndType(const char* name, uintptr_t rtti, bool allowSubtypes = true) const;
 
 		bool getAppCulled() const;
 		void setAppCulled(bool culled);
@@ -114,6 +110,8 @@ namespace NI {
 		void clearTransforms();
 		void copyTransforms(const AVObject* from);
 		void copyTransforms(const Transform* from);
+
+		void detachFromParent();
 
 		Pointer<Property> getProperty(PropertyType type) const;
 		Pointer<AlphaProperty> getAlphaProperty() const;

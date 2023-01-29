@@ -19,5 +19,3 @@
 --- @field sourceInstanceSerial number *Read-only*. The serial number of the associated source instance.
 --- @field target tes3reference The reference the target is associated with, if any.
 --- @field verticalOffset number The VFX's vertical offset, at the time of creation. Changing this value will not automatically readjust the VFX's visual node.
-tes3vfx = {}
-

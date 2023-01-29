@@ -8,5 +8,3 @@
 --- @field id string *Read-only*. The id string.
 --- @field index number *Read-only*. The 0-based index number, as used in landscape objects.
 --- @field texture niSourceTexture *Read-only*. The texture object. Only available when the texture is loaded in an active cell.
-tes3landTexture = {}
-

@@ -6,5 +6,3 @@
 --- @class tes3travelDestinationNode
 --- @field cell tes3cell The destination cell.
 --- @field marker tes3reference The reference door marker that the destination places the traveling actor at.
-tes3travelDestinationNode = {}
-

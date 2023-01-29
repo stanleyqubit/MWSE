@@ -44,3 +44,7 @@
 --- @field zFailAction integer The action that is taken in the stencil buffer when the stencil test passes but the pixel fails the Z-buffer test. See the table at the top for available actions.
 niStencilProperty = {}
 
+--- Creates a new, niStencilProperty. By default it will use a GREATER test function, KEEP on fail, INCREMENT on pass, and use the CCW_OR_BOTH draw mode.
+--- @return niStencilProperty property No description yet available.
+function niStencilProperty.new() end
+

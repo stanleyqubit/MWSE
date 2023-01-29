@@ -5,4 +5,7 @@ return {
 		{ name = "point", type = "tes3vector3" },
 		{ name = "up", type = "tes3vector3" },
 	},
+	returns = {
+		{ name = "success", type = "boolean", description = "It's false when the provided location is equal to the location of the camera. It's true on success." }
+	}
 }

@@ -6,5 +6,3 @@
 --- @class tes3regionSound
 --- @field chance integer The chance the region sound will be used. Must be an integer between `0` and `100`.
 --- @field sound tes3sound The access to object's associated sound.
-tes3regionSound = {}
-

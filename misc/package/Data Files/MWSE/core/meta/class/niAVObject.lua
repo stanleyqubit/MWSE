@@ -55,7 +55,13 @@ function niAVObject:getObjectByName(name) end
 function niAVObject:getProperty(type) end
 
 --- Recursively checks if either the object or any of its parents are appCulled.
+--- @return boolean result No description yet available.
 function niAVObject:isAppCulled() end
+
+--- Checks if the object is frustum culled for the given camera.
+--- @param camera niCamera No description yet available.
+--- @return boolean result No description yet available.
+function niAVObject:isFrustumCulled(camera) end
 
 --- Alias for `update()` method. Updates the world transforms of this node and its children, which makes changes visible for rendering. Use after changing any local rotation, translation, scale, bounds or after attaching and detaching nodes.
 --- 

@@ -65,8 +65,8 @@ namespace se::cs {
 
 		LightAttachmentNode* getLightAttachment() const;
 
-		// Sets baseObject's flag 80, sets the base object as modified, and if there is an attachment7 it sets that as modified too.
-		void updateBaseObjectAndAttachment7() const;
+		// Sets reference as modified, sets baseObject's flag 80, and if there is an attachment7 it sets that as modified too.
+		void setAsEdited() const;
 
 		Reference* getAttachment7() const;
 

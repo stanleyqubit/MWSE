@@ -1,0 +1,23 @@
+return {
+	type = "function",
+	description = [[Displays a message box. This may be a simple toast-style message, or a box with choice buttons.]],
+	arguments = {
+		{
+			name = "params",
+			type = "table",
+			tableParams = {
+				{ name = "id", type = "string", optional = true, default = "MenuMessage", description = "The menu ID of the message menu." },
+				{ name = "buttons", type = "tes3ui.showMessageMenu.params.button[]", description = "**Required** The list of buttons." },
+				{ name = "callbackParams", type = "table", optional = true, description = "The table of parameters to pass to the callback functions." },
+				{ name = "cancels", type = "boolean", optional = true, default = false, description = "When set to true, a cancel button is automatically added to the buttom of the list, even when paginated." },
+				{ name = "cancelText", type = "string", optional = true, default = "tes3.findGMST(tes3.gmst.sCancel).value", description = "The text on the cancel button." },
+				{ name = "cancelCallback", type = "function", optional = true, description = "The function to call when the user clicks the cancel button." },
+				{ name = "header", type = "string|fun(callbackParams: table): string", optional = true, description = "The optional header displayed above the message. Can also be a function that returns a string." },
+				{ name = "message", type = "string|fun(callbackParams: table): string", description = "**Required** The message at the top of the messagebox. Can also be a function that returns a string." },
+				{ name = "customBlock", type = "fun(parent: tes3uiElement)", optional = true, description = "A custom element to be displayed below the header." },
+				{ name = "page", type = "integer", optional = true, default = 1 },
+				{ name = "pageSize", type = "integer", optional = true, default = 30 },
+			},
+		},
+	}
+}

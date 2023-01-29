@@ -9,7 +9,7 @@ namespace mge::lua {
 	class CoreInterface {
 	public:
 		static bool enabled();
-		static int getVersion();
+		static sol::object getVersion(sol::this_state ts);
 		static void loadConfig();
 		static void saveConfig();
 

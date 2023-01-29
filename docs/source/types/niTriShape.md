@@ -535,8 +535,30 @@ local result = myObject:hasStringDataWith(value)
 Recursively checks if either the object or any of its parents are appCulled.
 
 ```lua
-myObject:isAppCulled()
+local result = myObject:isAppCulled()
 ```
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
+### `isFrustumCulled`
+
+Checks if the object is frustum culled for the given camera.
+
+```lua
+local result = myObject:isFrustumCulled(camera)
+```
+
+**Parameters**:
+
+* `camera` ([niCamera](../../types/niCamera))
+
+**Returns**:
+
+* `result` (boolean)
 
 ***
 

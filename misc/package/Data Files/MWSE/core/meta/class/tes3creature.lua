@@ -29,5 +29,3 @@
 --- @field type number The type of the creature. Maps to [`tes3.creatureType`](https://mwse.github.io/MWSE/references/creature-types/) constants.
 --- @field usesEquipment boolean Access to the creature's usesEquipment flag.
 --- @field walks boolean Access to the creature's walks flag.
-tes3creature = {}
-

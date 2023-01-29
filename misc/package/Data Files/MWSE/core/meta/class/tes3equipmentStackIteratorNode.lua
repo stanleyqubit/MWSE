@@ -7,5 +7,3 @@
 --- @field nextNode tes3equipmentStackIteratorNode The next node in the collection.
 --- @field nodeData tes3equipmentStack The equipment stack object stored in the node.
 --- @field previousNode tes3equipmentStackIteratorNode The previous node in the collection.
-tes3equipmentStackIteratorNode = {}
-

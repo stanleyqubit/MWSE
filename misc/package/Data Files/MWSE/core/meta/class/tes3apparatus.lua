@@ -12,5 +12,3 @@
 --- @field type number The type of the apparatus. Maps to values in [`tes3.apparatusType`](https://mwse.github.io/MWSE/references/apparatus-types/) namespace.
 --- @field value number The value of the object.
 --- @field weight number The weight of the object.
-tes3apparatus = {}
-

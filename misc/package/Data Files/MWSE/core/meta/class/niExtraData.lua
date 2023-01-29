@@ -6,5 +6,3 @@
 --- @class niExtraData : niObject
 --- @field genericData number[] *Read-only*. Generic data held in the extra data. This is not used if a subtype of extra data is used.
 --- @field next niStringExtraData|niTES3ExtraData|niTextKeyExtraData The next extra data available on the object.
-niExtraData = {}
-

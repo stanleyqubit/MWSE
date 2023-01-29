@@ -15,5 +15,3 @@
 --- @field swimRunSpeed number *Read-only*. The calculated swim movement speed while running.
 --- @field swimSpeed number *Read-only*. The calculated swim movement speed.
 --- @field walkSpeed number *Read-only*. The calculated walk movement speed.
-tes3mobileCreature = {}
-

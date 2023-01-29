@@ -7,5 +7,3 @@
 --- @field b number Blue color value, in range [0.0, 1.0].
 --- @field g number Green color value, in range [0.0, 1.0].
 --- @field r number Red color value, in range [0.0, 1.0].
-tes3uiFontColor = {}
-

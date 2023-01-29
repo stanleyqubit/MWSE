@@ -25,8 +25,22 @@ namespace NI {
 		}
 	}
 
-	AVObject* AVObject::getObjectByName(const char* name) {
+	AVObject* AVObject::getObjectByName(const char* name) const {
 		return vTable.asAVObject->getObjectByName(this, name);
+	}
+
+	AVObject* AVObject::getObjectByNameAndType(const char* name, uintptr_t rtti, bool allowSubtypes) const {
+		auto result = getObjectByName(name);
+		if (result == nullptr) {
+			return nullptr;
+		}
+
+		if (allowSubtypes) {
+			return result->isInstanceOfType(rtti) ? result : nullptr;
+		}
+		else {
+			return result->isOfType(rtti) ? result : nullptr;
+		}
 	}
 
 	bool AVObject::getAppCulled() const {
@@ -245,6 +259,13 @@ namespace NI {
 		localScale = source->scale;
 	}
 
+	void AVObject::detachFromParent() {
+		if (!parentNode) {
+			return;
+		}
+
+		parentNode->detachChild(this);
+	}
 
 	Pointer<Property> AVObject::getProperty(PropertyType type) const {
 		auto propNode = &propertyNode;

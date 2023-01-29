@@ -6,5 +6,3 @@
 --- @class niParticleModifier : niObject
 --- @field controller niParticleSystemController Access to the generic time controller for particle systems.
 --- @field next niGravity|niParticleBomb|niParticleCollider|niParticleColorModifier|niParticleGrowFade|niParticleRotation|niPlanarCollider|niSphericalCollider Access to the next attached modifier.
-niParticleModifier = {}
-

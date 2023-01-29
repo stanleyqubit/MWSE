@@ -165,7 +165,17 @@ if defined APPVEYOR_BUILD_NUMBER (echo #define APPVEYOR_BUILD_NUMBER %APPVEYOR_B
     <ClInclude Include="DialogCellWindow.h" />
     <ClInclude Include="DialogDataFilesWindow.h" />
     <ClInclude Include="DialogDialogueWindow.h" />
+    <ClInclude Include="DialogEditAlchemyObjectWindow.h" />
+    <ClInclude Include="DialogEditCreatureObjectWindow.h" />
+    <ClInclude Include="DialogEditEnchantmentObjectWindow.h" />
+    <ClInclude Include="DialogEditLeveledCreatureObjectWindow.h" />
+    <ClInclude Include="DialogEditLeveledItemObjectWindow.h" />
+    <ClInclude Include="DialogEditNPCObjectWindow.h" />
+    <ClInclude Include="DialogEditObjectWindow.h" />
+    <ClInclude Include="DialogEditSpellObjectWindow.h" />
     <ClInclude Include="DialogObjectWindow.h" />
+    <ClInclude Include="DialogPreviewWindow.h" />
+    <ClInclude Include="DialogReferenceData.h" />
     <ClInclude Include="DialogRenderWindow.h" />
     <ClInclude Include="DialogSearchAndReplaceWindow.h" />
     <ClInclude Include="DialogTextSearchWindow.h" />
@@ -178,6 +188,9 @@ if defined APPVEYOR_BUILD_NUMBER (echo #define APPVEYOR_BUILD_NUMBER %APPVEYOR_B
     <ClInclude Include="NIRTTIDefines.h" />
     <ClInclude Include="ObjectWindowTabData.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="RenderWindowSceneGraphController.h" />
+    <ClInclude Include="RenderWindowSelectionData.h" />
+    <ClInclude Include="RenderWindowWidgets.h" />
     <ClInclude Include="Settings.h" />
     <ClInclude Include="WindowMain.h" />
     <ClInclude Include="WinUIUtil.h" />
@@ -195,6 +208,16 @@ if defined APPVEYOR_BUILD_NUMBER (echo #define APPVEYOR_BUILD_NUMBER %APPVEYOR_B
     <ClCompile Include="CSNPC.cpp" />
     <ClCompile Include="CSSpell.cpp" />
     <ClCompile Include="CSWeapon.cpp" />
+    <ClCompile Include="DialogEditAlchemyObjectWindow.cpp" />
+    <ClCompile Include="DialogEditCreatureObjectWindow.cpp" />
+    <ClCompile Include="DialogEditEnchantmentObjectWindow.cpp" />
+    <ClCompile Include="DialogEditLeveledCreatureObjectWindow.cpp" />
+    <ClCompile Include="DialogEditLeveledItemObjectWindow.cpp" />
+    <ClCompile Include="DialogEditNPCObjectWindow.cpp" />
+    <ClCompile Include="DialogEditObjectWindow.cpp" />
+    <ClCompile Include="DialogEditSpellObjectWindow.cpp" />
+    <ClCompile Include="DialogPreviewWindow.cpp" />
+    <ClCompile Include="DialogReferenceData.cpp" />
     <ClCompile Include="DialogTextSearchWindow.cpp" />
     <ClCompile Include="EditBasicExtended.cpp" />
     <ClCompile Include="CSBaseObject.cpp" />
@@ -220,6 +243,9 @@ if defined APPVEYOR_BUILD_NUMBER (echo #define APPVEYOR_BUILD_NUMBER %APPVEYOR_B
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="CSReference.cpp" />
+    <ClCompile Include="RenderWindowSceneGraphController.cpp" />
+    <ClCompile Include="RenderWindowSelectionData.cpp" />
+    <ClCompile Include="RenderWindowWidgets.cpp" />
     <ClCompile Include="Settings.cpp" />
     <ClCompile Include="WindowMain.cpp" />
     <ClCompile Include="WinUIUtil.cpp" />

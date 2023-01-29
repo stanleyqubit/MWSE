@@ -10,5 +10,3 @@
 --- @field particleHeightMin number The weather's particle minimum height.
 --- @field particleRadius number The weather's particle radius.
 --- @field threshold number The weather's threshold value.
-tes3weatherSnow = {}
-

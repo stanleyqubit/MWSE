@@ -7,5 +7,3 @@
 --- @field bias number The bias value for the TCB rotation animation key.
 --- @field continuity number The continuity value for the TCB rotation animation key.
 --- @field tension number The tension value for the TCB rotation animation key.
-niTCBRotKey = {}
-

@@ -17,5 +17,3 @@
 --- @field mapMenuEnabled boolean A flag that controls whether the map menu is enabled or disabled.
 --- @field scriptCompiler tes3scriptCompiler *Read-only*. Access to `tes3scriptCompiler` object.
 --- @field statsMenuEnabled boolean A flag that controls whether the stats menu is enabled or disabled. Stats menu lists all of the player's current skill and attribute values, level, race, class, health, magicka and fatigue.
-tes3uiMenuController = {}
-

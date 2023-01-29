@@ -12,5 +12,3 @@
 --- @field reference tes3reference *Read-only*. The reference that the object is represented by.
 --- @field respawns boolean Determines if the container's respawn flag is enabled.
 --- @field script tes3script The script that runs on the object.
-tes3containerInstance = {}
-

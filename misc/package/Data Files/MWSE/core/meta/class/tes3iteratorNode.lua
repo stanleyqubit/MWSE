@@ -7,5 +7,3 @@
 --- @field data any *Read-only*. The data stored in the node. Its type depends on the specific collection.
 --- @field head tes3iteratorNode *Read-only*. The previous node in the collection.
 --- @field tail tes3iteratorNode *Read-only*. The next node in the collection.
-tes3iteratorNode = {}
-

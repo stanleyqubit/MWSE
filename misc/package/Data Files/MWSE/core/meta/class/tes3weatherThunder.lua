@@ -25,5 +25,3 @@
 --- @field thunderSound4Id string The weather's thunder sound 4 ID.
 --- @field thunderSoundCount number The weather's thunder sound count.
 --- @field thunderThreshold number The weather's thunder threshold.
-tes3weatherThunder = {}
-

@@ -7,5 +7,3 @@
 --- @field formatPrefs niFormatPrefs The `NiFormatPrefs` of the texture.
 --- @field height number *Read-only*. The height of the texture.
 --- @field width number *Read-only*. The width of the texture.
-niTexture = {}
-

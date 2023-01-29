@@ -9,5 +9,3 @@
 --- @field rotation tes3matrix33 Defines the rotation of the root bone in the bind pose from the parent node of the root bone to the coordinate system of the skinned object.
 --- @field scale number Defines the scale of the root bone in the bind pose from the parent node of the root bone to the coordinate system of the skinned object.
 --- @field translation tes3vector3 Defines the translation of the root bone in the bind pose from the parent node of the root bone to the coordinate system of the skinned object.
-niSkinData = {}
-

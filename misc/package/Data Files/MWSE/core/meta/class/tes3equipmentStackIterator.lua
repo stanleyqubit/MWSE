@@ -8,5 +8,3 @@
 --- @field current tes3equipmentStackIteratorNode A reference for the currently iterated node. This is used by the core game engine, but should not be accessed from lua.
 --- @field head tes3equipmentStackIteratorNode The first node in the collection.
 --- @field tail tes3equipmentStackIteratorNode The last node in the collection.
-tes3equipmentStackIterator = {}
-

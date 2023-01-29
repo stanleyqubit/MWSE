@@ -6,5 +6,3 @@
 --- @class niSkinDataBoneDataVertexWeight
 --- @field index integer The index of the vertex in the skinned object's array of vertices.
 --- @field weight number The weight of the bone's influence on the vertex. The sum of the weights for all the bones that influence a particular vertex must be 1.0.
-niSkinDataBoneDataVertexWeight = {}
-

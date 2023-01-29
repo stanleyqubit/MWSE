@@ -13,5 +13,3 @@
 --- @field rainLoopSound tes3sound *Read-only*. The weather's rain loop sound object.
 --- @field rainLoopSoundId string The weather's rain loop sound ID.
 --- @field threshold number The weather's threshold value.
-tes3weatherRain = {}
-

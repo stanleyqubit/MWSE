@@ -28,6 +28,8 @@ namespace se::cs {
 	void Settings_t::RenderWindowSettings::from_toml(const toml::value& v) {
 		fov = toml::find_or(v, "fov", fov);
 		multisamples = toml::find_or(v, "multisamples", multisamples);
+		use_legacy_grid_snap = toml::find_or(v, "use_legacy_grid_snap", use_legacy_grid_snap);
+		use_legacy_object_movement = toml::find_or(v, "use_legacy_object_movement", use_legacy_object_movement);
 		use_world_axis_rotations_by_default = toml::find_or(v, "use_world_axis_rotations_by_default", use_world_axis_rotations_by_default);
 	}
 
@@ -36,6 +38,8 @@ namespace se::cs {
 			{
 				{ "fov", fov },
 				{ "multisamples", multisamples },
+				{ "use_legacy_grid_snap", use_legacy_grid_snap },
+				{ "use_legacy_object_movement", use_legacy_object_movement },
 				{ "use_world_axis_rotations_by_default", use_world_axis_rotations_by_default },
 			}
 		);
@@ -250,19 +254,38 @@ namespace se::cs {
 	//
 	//
 
+	static const char* settingsFilename = "csse.toml";
+
 	void Settings_t::load() {
-		if (std::filesystem::exists("csse.toml")) {
-			const auto data = toml::parse("csse.toml");
-			from_toml(data);
+		if (std::filesystem::exists(settingsFilename)) {
+			try {
+				const auto data = toml::parse(settingsFilename);
+				from_toml(data);
+			}
+			catch (toml::syntax_error& e) {
+				valid = false;
+				log::stream << "Error while parsing settings file " << settingsFilename << ":" << std::endl;
+				log::stream << e.what() << std::endl << std::endl;
+				throw;	// Re-throw
+			}
 		}
 	}
 
 	void Settings_t::save() {
-		std::ofstream outFile;
-		outFile.open("csse.toml");
+		if (!valid) {
+			return;
+		}
 
-		const toml::value data = settings;
-		outFile << std::setw(80) << std::setprecision(8) << data;
+		std::ofstream outFile;
+		outFile.open(settingsFilename);
+
+		if (!outFile.fail()) {
+			const toml::value data = settings;
+			outFile << std::setw(80) << std::setprecision(8) << data;
+		}
+		else {
+			log::stream << "Failed to save settings file " << settingsFilename << "." << std::endl;
+		}
 	}
 
 	void Settings_t::from_toml(const toml::value& v) {

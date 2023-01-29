@@ -39,5 +39,3 @@
 --- @field speed number Controls the speed of the moons across the sky. This corresponds to the setting of the same name in [Moons] section of the Morrowind.ini file.
 --- @field texture string *Read-only*. The texture to use for the moon. These look like "Textures\tx_masser". The actual texture that is used is determined by the current moon phase.
 --- @field weatherController tes3weatherController *Read-only*. Quick access back to the weather controller structure.
-tes3moon = {}
-

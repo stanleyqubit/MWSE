@@ -19,6 +19,9 @@
 #include "DialogRenderWindow.h"
 #include "DialogObjectWindow.h"
 
+#include "RenderWindowSceneGraphController.h"
+#include "RenderWindowWidgets.h"
+
 namespace se::cs::window::main {
 
 	struct ObjectEditLParam {
@@ -273,8 +276,16 @@ namespace se::cs::window::main {
 	bool blockNormalExecution = false;
 
 	void onFinishInitialization(LPARAM& lParam) {
-		// Skip any QuickStart usage if we were given a file to load.
 		char* commandLineFile = (char*)0x6CE6CC;
+
+		// Skip any initialization if the preview window is active.
+		auto renderController = dialog::render_window::RenderController::get();
+		if (renderController->node == nullptr) {
+			commandLineFile[0] = '\0';
+			return;
+		}
+
+		// Skip any QuickStart usage if we were given a file to load.
 		if (*commandLineFile != '\0') {
 			return;
 		}
@@ -309,6 +320,12 @@ namespace se::cs::window::main {
 		isQuickStarting = true;
 	}
 
+	void PatchDialogProc_BeforeClose(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		auto sgController = dialog::render_window::SceneGraphController::get();
+		delete sgController->widgets;
+		sgController->widgets = nullptr;
+	}
+
 	LRESULT CALLBACK PatchDialogProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		blockNormalExecution = false;
 
@@ -316,6 +333,9 @@ namespace se::cs::window::main {
 		switch (msg) {
 		case CUSTOM_WM_FINISH_INITIALIZATION:
 			onFinishInitialization(lParam);
+			break;
+		case WM_CLOSE:
+			PatchDialogProc_BeforeClose(hWnd, msg, wParam, lParam);
 			break;
 		}
 

@@ -9,5 +9,3 @@
 --- @field startFrame number The starting frame of animation at which the sound plays.
 --- @field startTime number 
 --- @field volume number The sound's volume.
-tes3animationDataSoundGenKey = {}
-

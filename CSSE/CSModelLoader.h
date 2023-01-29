@@ -8,5 +8,6 @@ namespace se::cs {
 		void* keyFrames; // 0x4
 
 		NI::Node* loadNIF(const char* path);
+		bool releaseNIF(NI::AVObject* nif);
 	};
 }

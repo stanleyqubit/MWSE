@@ -42,7 +42,7 @@ namespace NI {
 		void toRotationX(float x);
 		void toRotationY(float y);
 		void toRotationZ(float z);
-		void toRotation(float angle, float x, float y, float z);
+		void toRotation(float angle, const Vector3& axis);
 		bool toRotationDifference(const Vector3& a, const Vector3& b);
 
 		//

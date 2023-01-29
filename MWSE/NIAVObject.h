@@ -76,6 +76,7 @@ namespace NI {
 		void setAppCulled(bool culled);
 
 		bool isAppCulled();
+		bool isFrustumCulled(Camera*);
 
 		//
 		// Other related this-call functions.

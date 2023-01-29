@@ -6,9 +6,9 @@ namespace se::cs {
 		return Reference_getLightAttachment(this);
 	}
 
-	void Reference::updateBaseObjectAndAttachment7() const {
-		const auto Reference_updateBaseObjectAndAttachment7 = reinterpret_cast<void(__thiscall*)(const Reference*)>(0x4026E4);
-		Reference_updateBaseObjectAndAttachment7(this);
+	void Reference::setAsEdited() const {
+		const auto Reference_setModifiedUpdateBaseObjectAndAttachment7 = reinterpret_cast<void(__thiscall*)(const Reference*)>(0x4026E4);
+		Reference_setModifiedUpdateBaseObjectAndAttachment7(this);
 	}
 
 	Reference* Reference::getAttachment7() const {

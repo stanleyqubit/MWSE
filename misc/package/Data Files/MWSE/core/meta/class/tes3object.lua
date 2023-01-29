@@ -11,5 +11,3 @@
 --- @field scale number The object's scale. The value range is (0, 10).
 --- @field sceneCollisionRoot niBillboardNode|niCollisionSwitch|niNode|niSwitchNode The scene graph node for this object's physics collision, if its mesh has a root collision node.
 --- @field sceneNode niBillboardNode|niCollisionSwitch|niNode|niSwitchNode The scene graph node for this object.
-tes3object = {}
-

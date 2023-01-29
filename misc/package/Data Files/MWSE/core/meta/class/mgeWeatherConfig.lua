@@ -19,6 +19,10 @@ function mgeWeatherConfig.getPerPixelLighting(weather) end
 --- @return table<string, tes3vector3> scatters No description yet available.
 function mgeWeatherConfig.getScattering() end
 
+--- Gets the skylight scatter values from MGE. These are returned in a table with the `skylight` and `mix` keys. The result table can be modified, then sent back to `setSkylightScattering`.
+--- @return table<string, number[]|number> scatters No description yet available.
+function mgeWeatherConfig.getSkylightScattering() end
+
 --- Gets the wind speed for a weather from MGE. This is returned in a table with the `speed` key, as well as the `weather` redefined. The result table can be modified, then sent back to `setWind`.
 --- @param weather number No description yet available.
 --- @return table<string, number> result A package containing the speed property.
@@ -62,13 +66,25 @@ function mgeWeatherConfig.setPerPixelLighting(params) end
 --- `inscatter`: tes3vector3|table — No description yet available.
 --- 
 --- `outscatter`: tes3vector3|table — No description yet available.
---- @return table<string, number> success No description yet available.
 function mgeWeatherConfig.setScattering(params) end
 
 ---Table parameter definitions for `mgeWeatherConfig.setScattering`.
 --- @class mgeWeatherConfig.setScattering.params
 --- @field inscatter tes3vector3|table No description yet available.
 --- @field outscatter tes3vector3|table No description yet available.
+
+--- Sets the sky scatter values for MGE. The result table of `getSkylightScattering` can be modified then passed to this function.
+--- @param params mgeWeatherConfig.setSkylightScattering.params This table accepts the following values:
+--- 
+--- `skylight`: tes3vector3|table — No description yet available.
+--- 
+--- `mix`: number? — *Default*: `0.44`. No description yet available.
+function mgeWeatherConfig.setSkylightScattering(params) end
+
+---Table parameter definitions for `mgeWeatherConfig.setSkylightScattering`.
+--- @class mgeWeatherConfig.setSkylightScattering.params
+--- @field skylight tes3vector3|table No description yet available.
+--- @field mix number? *Default*: `0.44`. No description yet available.
 
 --- Sets the wind speed for a weather in MGE. The result table of `getWind` can be modified then passed to this function.
 --- @param params mgeWeatherConfig.setWind.params This table accepts the following values:

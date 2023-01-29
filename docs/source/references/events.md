@@ -28,6 +28,7 @@ calcArmorPieceHit             | `"calcArmorPieceHit"`             | [`calcArmorP
 calcArmorRating               | `"calcArmorRating"`               | [`calcArmorRating`](https://mwse.github.io/MWSE/events/calcArmorRating)
 calcBarterPrice               | `"calcBarterPrice"`               | [`calcBarterPrice`](https://mwse.github.io/MWSE/events/calcBarterPrice)
 calcBlockChance               | `"calcBlockChance"`               | [`calcBlockChance`](https://mwse.github.io/MWSE/events/calcBlockChance)
+calcEnchantmentPrice          | `"calcEnchantmentPrice"`          | [`calcEnchantmentPrice`](https://mwse.github.io/MWSE/events/calcEnchantmentPrice/)
 calcFlySpeed                  | `"calcFlySpeed"`                  | [`calcFlySpeed`](https://mwse.github.io/MWSE/events/calcFlySpeed)
 calcHitChance                 | `"calcHitChance"`                 | [`calcHitChance`](https://mwse.github.io/MWSE/events/calcHitChance)
 calcMoveSpeed                 | `"calcMoveSpeed"`                 | [`calcMoveSpeed`](https://mwse.github.io/MWSE/events/calcMoveSpeed)

@@ -9,7 +9,4 @@ return {
 			{ name = "outscatter", type = "tes3vector3|table" },
 		},
 	}},
-	returns = {
-		{ name = "success", type = "table<string, number>" },
-	},
 }

@@ -15,7 +15,10 @@
 
 #include "DialogCellWindow.h"
 #include "DialogDialogueWindow.h"
+#include "DialogEditObjectWindow.h"
 #include "DialogObjectWindow.h"
+#include "DialogPreviewWindow.h"
+#include "DialogReferenceData.h"
 #include "DialogRenderWindow.h"
 #include "DialogSearchAndReplaceWindow.h"
 #include "DialogTextSearchWindow.h"
@@ -340,7 +343,10 @@ namespace se::cs {
 		window::main::installPatches();
 		dialog::cell_window::installPatches();
 		dialog::dialogue_window::installPatches();
+		dialog::edit_object_window::installPatches();
 		dialog::object_window::installPatches();
+		dialog::preview_window::installPatches();
+		dialog::reference_data::installPatches();
 		dialog::render_window::installPatches();
 		dialog::search_and_replace_window::installPatches();
 		dialog::text_search_window::installPatches();
@@ -384,7 +390,20 @@ namespace se::cs {
 		updateCurrentDirectory();
 
 		// Load settings. Immediately save after so we can see new options if needed.
-		settings.load();
+		try {
+			settings.load();
+		}
+		catch (std::exception&) {
+			const char* message = "Could not parse the settings file csse.toml. Read csse.log for details of the error.\r\n\r\n" \
+				"Press Yes to reset settings to default.\r\n" \
+				"Press No to keep the settings file. You will need to immediately close the CS and correct the problem in csse.toml.";
+
+			auto result = MessageBoxA(NULL, message, "Settings Error", MB_YESNO);
+			if (result == IDYES) {
+				// Reset validity and use default constructed values.
+				settings.valid = true;
+			}
+		}
 		settings.save();
 
 		// Install TES Construction Set executable patches.

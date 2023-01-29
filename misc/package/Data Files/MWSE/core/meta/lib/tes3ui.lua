@@ -319,6 +319,46 @@ function tes3ui.showInventorySelectMenu(params) end
 --- @return boolean wasShown No description yet available.
 function tes3ui.showJournal() end
 
+--- Displays a message box. This may be a simple toast-style message, or a box with choice buttons.
+--- @param params tes3ui.showMessageMenu.params This table accepts the following values:
+--- 
+--- `id`: string? — *Default*: `MenuMessage`. The menu ID of the message menu.
+--- 
+--- `buttons`: tes3ui.showMessageMenu.params.button[] — **Required** The list of buttons.
+--- 
+--- `callbackParams`: table? — *Optional*. The table of parameters to pass to the callback functions.
+--- 
+--- `cancels`: boolean? — *Default*: `false`. When set to true, a cancel button is automatically added to the buttom of the list, even when paginated.
+--- 
+--- `cancelText`: string? — *Default*: `tes3.findGMST(tes3.gmst.sCancel).value`. The text on the cancel button.
+--- 
+--- `cancelCallback`: function? — *Optional*. The function to call when the user clicks the cancel button.
+--- 
+--- `header`: string|fun(callbackParams: table): string|nil — *Optional*. The optional header displayed above the message. Can also be a function that returns a string.
+--- 
+--- `message`: string|fun(callbackParams: table): string — **Required** The message at the top of the messagebox. Can also be a function that returns a string.
+--- 
+--- `customBlock`: fun(parent: tes3uiElement)? — *Optional*. A custom element to be displayed below the header.
+--- 
+--- `page`: integer? — *Default*: `1`. No description yet available.
+--- 
+--- `pageSize`: integer? — *Default*: `30`. No description yet available.
+function tes3ui.showMessageMenu(params) end
+
+---Table parameter definitions for `tes3ui.showMessageMenu`.
+--- @class tes3ui.showMessageMenu.params
+--- @field id string? *Default*: `MenuMessage`. The menu ID of the message menu.
+--- @field buttons tes3ui.showMessageMenu.params.button[] **Required** The list of buttons.
+--- @field callbackParams table? *Optional*. The table of parameters to pass to the callback functions.
+--- @field cancels boolean? *Default*: `false`. When set to true, a cancel button is automatically added to the buttom of the list, even when paginated.
+--- @field cancelText string? *Default*: `tes3.findGMST(tes3.gmst.sCancel).value`. The text on the cancel button.
+--- @field cancelCallback function? *Optional*. The function to call when the user clicks the cancel button.
+--- @field header string|fun(callbackParams: table): string|nil *Optional*. The optional header displayed above the message. Can also be a function that returns a string.
+--- @field message string|fun(callbackParams: table): string **Required** The message at the top of the messagebox. Can also be a function that returns a string.
+--- @field customBlock fun(parent: tes3uiElement)? *Optional*. A custom element to be displayed below the header.
+--- @field page integer? *Default*: `1`. No description yet available.
+--- @field pageSize integer? *Default*: `30`. No description yet available.
+
 --- Creates a new notify menu with a formatted string. A notify menu is a toast-style display that shows at the bottom of the screen. It will expire after an amount of time, determined by the length of the message and the `fMessageTimePerChar` GMST.
 --- @param string string The message to display. If it supports formatting, additional arguments are used.
 --- @param ... any? Optional values to feed to formatting found in the first parameter.

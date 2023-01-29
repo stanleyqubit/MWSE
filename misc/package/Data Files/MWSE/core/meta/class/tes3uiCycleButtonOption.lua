@@ -6,5 +6,3 @@
 --- @class tes3uiCycleButtonOption
 --- @field text string The text to use when this option is active.
 --- @field value any An optional value associated with this option.
-tes3uiCycleButtonOption = {}
-

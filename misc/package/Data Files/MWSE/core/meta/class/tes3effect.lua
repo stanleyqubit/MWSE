@@ -14,5 +14,3 @@
 --- @field radius integer The radius of the effect.
 --- @field rangeType integer Determines if the effect is self, touch, or target ranged. Maps to [`tes3.effectRange`](https://mwse.github.io/MWSE/references/effect-ranges/) constants.
 --- @field skill integer|nil The skill associated with this effect, or `nil` if no skill is used. Maps to values from [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) table.
-tes3effect = {}
-

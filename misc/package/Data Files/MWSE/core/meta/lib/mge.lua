@@ -63,8 +63,8 @@ function mge.getScreenWidth() end
 --- @return number scale No description yet available.
 function mge.getUIScale() end
 
---- Gets the MGE version. Wrapper for MGEGetVersion.
---- @return number result No description yet available.
+--- Gets the MGE version. Returns a table with keys `major`, `minor`, and `patch`.
+--- @return table result No description yet available.
 function mge.getVersion() end
 
 --- Gets the weather distant land fog. Use `mge.weather.getDistantFog()` instead.
@@ -101,7 +101,7 @@ function mge.reloadDistantLand() end
 function mge.saveConfig() end
 
 --- Saves a screenshot.
---- @param params mge.saveScreenshot.params? This table accepts the following values:
+--- @param params mge.saveScreenshot.params This table accepts the following values:
 --- 
 --- `path`: string — No description yet available.
 --- 

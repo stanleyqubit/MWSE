@@ -58,17 +58,23 @@ function niQuaternion:normalize() end
 --- @return niQuaternion result The normalized quaternion.
 function niQuaternion:normalized() end
 
---- Calculates a spherical linear interpolation between this quaternion and another, limited to a maximum rotation angle.
+--- Calculates a spherical linear interpolation between this quaternion and another, limited to a maximum rotation angle. Chooses the shortest path of interpolation between quaternions, which means it minimizes spin but the interpolation arc is limited to pi radians or 180 degrees of interpolation.
 --- @param target niQuaternion The quaternion to interpolate towards.
 --- @param rotationLimit number The interpolation result will be limited to this maximum angle from the initial quaternion. Angle in radians.
 --- @return niQuaternion result The calculated result.
 function niQuaternion:rotateTowards(target, rotationLimit) end
 
---- Calculates a spherical linear interpolation between this quaternion and another.
+--- Calculates a spherical linear interpolation between this quaternion and another. Chooses the shortest path of interpolation between quaternions, which means it minimizes spin but the interpolation arc is limited to pi radians or 180 degrees of interpolation.
 --- @param target niQuaternion The quaternion to interpolate towards.
 --- @param transition number The interpolation parameter. Must be between `0.0` (closer to this quaternion) and `1.0` (closer to the other quaternion).
 --- @return niQuaternion result The calculated result.
 function niQuaternion:slerp(target, transition) end
+
+--- Calculates a spherical linear interpolation between this quaternion and another. Does not choose a direction of interpolation. This means the interpolation arc can be up to 2pi radians or 360 degrees, depending on the signs of the quaternions.
+--- @param target niQuaternion The quaternion to interpolate towards.
+--- @param transition number The interpolation parameter. Must be between `0.0` (closer to this quaternion) and `1.0` (closer to the other quaternion).
+--- @return niQuaternion result The calculated result.
+function niQuaternion:slerpKeyframe(target, transition) end
 
 --- Convert this quaternion into an angle-axis rotation.
 --- @return number angle No description yet available.

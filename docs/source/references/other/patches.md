@@ -33,6 +33,7 @@ The following patches are included by MWSE.
 - Fixes crash when saving active VFXs when none are serializable.
 - Fixes crash when saving menu position if the derived key name is too long.
 - Fixes crash when updating cell markers at the border of the drawable map area.
+- Fixes crash where NPC flee logic tries to select a random node from pathgrids with 0 nodes.
 - Fixes crash with paper doll equipping/unequipping.
 - Fixes crash with uncloned actors removing items.
 - Fixes time being nudged forward by small extra increments when resting.

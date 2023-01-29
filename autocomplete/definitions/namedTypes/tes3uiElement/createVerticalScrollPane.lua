@@ -12,4 +12,9 @@ Scroll pane specific properties can be accessed through the `widget` property. T
 		},
 	} },
 	valuetype = "tes3uiElement",
+	examples = {
+		["sorting"] = {
+			title = "Sorting the child elements in a scroll pane"
+		}
+	}
 }

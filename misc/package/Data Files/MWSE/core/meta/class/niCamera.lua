@@ -27,7 +27,11 @@ function niCamera:click(something) end
 --- Update the camera's local rotation so that it is looking at the given point, with an up vector as close as possible to the given up vector. Both parameters are assumed to be in world space.
 --- @param point tes3vector3 No description yet available.
 --- @param up tes3vector3 No description yet available.
+--- @return boolean success It's false when the provided location is equal to the location of the camera. It's true on success.
 function niCamera:lookAtWorldPoint(point, up) end
+
+--- Causes the current backbuffer of the attached display to be drawn to the frontbuffer, by swapping the two.
+function niCamera:swapBuffers() end
 
 --- Given a screen space position, calculates the world position and outlook direction. This can be useful when trying to find a reference under a UI element, such as the cusor.
 --- @param point tes3vector2 The screen position to calculate a world ray for. Screen space is measured as ([-screenWidth/2, screenWidth/2], [-screenHeight/2, screenHeight/2]) with up-right being positive and an origin at the center of the screen.

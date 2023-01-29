@@ -6,5 +6,3 @@
 --- @class niTriBasedGeometryData : niGeometryData, niObject
 --- @field activeTriangleCount number The active triangle count of the object.
 --- @field triangleCount number *Read-only*. The triangle count of the object.
-niTriBasedGeometryData = {}
-

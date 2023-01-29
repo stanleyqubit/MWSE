@@ -1,18 +1,34 @@
 #include "DialogCellWindow.h"
 
 #include "CSCell.h"
+#include "CSRecordHandler.h"
+#include "CSReference.h"
+
+#include "EditBasicExtended.h"
 
 #include "MemoryUtil.h"
 #include "LogUtil.h"
+#include "StringUtil.h"
+#include "WinUIUtil.h"
+
+#include "Settings.h"
 
 namespace se::cs::dialog::cell_window {
 	using gActiveEditCell = memory::ExternalGlobal<Cell*, 0x6CDFF4>;
 
+	const auto CS_addAllToRefsListView = reinterpret_cast<void(__cdecl*)(HWND, const ReferenceList*)>(0x40E5B0);
+	const auto CS_refreshCellListView = reinterpret_cast<void(__cdecl*)(HWND)>(0x40E250);
+
+	static HWND cellWindowSearchControl = NULL;
+
+	static std::string currentSearchText;
+	static std::optional<std::regex> currentSearchRegex;
+	static bool modeShowModifiedOnly = false;
+
 	void __cdecl PatchSpeedUpCellViewDialog(HWND hWnd) {
 		SendMessageA(hWnd, WM_SETREDRAW, FALSE, NULL);
 
-		const auto originalFunction = reinterpret_cast<void(__cdecl*)(HWND)>(0x40E250);
-		originalFunction(hWnd);
+		CS_refreshCellListView(hWnd);
 
 		SendMessageA(hWnd, WM_SETREDRAW, TRUE, NULL);
 	}
@@ -22,26 +38,226 @@ namespace se::cs::dialog::cell_window {
 			SendMessageA(hWnd, WM_SETREDRAW, FALSE, NULL);
 		}
 
-		const auto originalFunction = reinterpret_cast<void(__cdecl*)(HWND, const ReferenceList*)>(0x40E5B0);
-		originalFunction(hWnd, references);
+		CS_addAllToRefsListView(hWnd, references);
 
 		if (references == &gActiveEditCell::get()->unknown_0x30) {
 			SendMessageA(hWnd, WM_SETREDRAW, TRUE, NULL);
 		}
 	}
 
-	bool blockNormalExecution = false;
+	bool matchDispatcher(const std::string_view& haystack) {
+		if (currentSearchRegex) {
+			return std::regex_search(haystack.data(), currentSearchRegex.value());
+		}
+		else if (settings.object_window.case_sensitive) {
+			return string::contains(haystack, currentSearchText);
+		}
+		else {
+			return string::cicontains(haystack, currentSearchText);
+		}
+	}
 
-	LRESULT CALLBACK PatchDialogProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
-		blockNormalExecution = false;
-
-		// Handle pre-patches.
-		switch (msg) {
-
+	bool FilterCellList_CellMatchesSearch(const Cell* cell) {
+		if (modeShowModifiedOnly && !cell->getModified()) {
+			return false;
+		}
+		if (currentSearchText.empty()) {
+			return true;
 		}
 
-		if (blockNormalExecution) {
-			return TRUE;
+		return matchDispatcher(cell->getObjectID());
+	}
+
+	bool FilterRefsList_RefMatchesSearch(const Reference* reference) {
+		if (modeShowModifiedOnly && !reference->getModified()) {
+			return false;
+		}
+		return true;
+	}
+
+	Cell* __fastcall PatchFilterCellList(RecordHandler* recordHandler, DWORD edx, int index) {
+		auto cell = recordHandler->getCellByIndex(index);
+		return FilterCellList_CellMatchesSearch(cell) ? cell : nullptr;
+	}
+
+	const auto CS_addRefrToRefsListView = reinterpret_cast<void(__cdecl*)(HWND, const Reference*)>(0x40E4C0);
+	void PatchFilterRefsList(HWND hWnd, const Reference* reference) {
+		if (FilterRefsList_RefMatchesSearch(reference)) {
+			CS_addRefrToRefsListView(hWnd, reference);
+		}
+	}
+
+	void RefreshRefsListView(HWND hWnd) {
+		auto refsListView = GetDlgItem(hWnd, CONTROL_ID_REFS_LIST_VIEW);
+		auto cell = gActiveEditCell::get();
+
+		SendMessageA(refsListView, WM_SETREDRAW, FALSE, NULL);
+
+		SendMessageA(refsListView, LVM_DELETEALLITEMS, 0, 0);
+		if (cell) {
+			CS_addAllToRefsListView(refsListView, &cell->unknown_0x40);
+			CS_addAllToRefsListView(refsListView, &cell->unknown_0x30);
+		}
+
+		SendMessageA(refsListView, WM_SETREDRAW, TRUE, NULL);
+		RedrawWindow(refsListView, NULL, NULL, RDW_ERASE | RDW_FRAME | RDW_INVALIDATE | RDW_ALLCHILDREN);
+	}
+
+	void RefreshCellListView(HWND hWnd) {
+		auto cellListView = GetDlgItem(hWnd, CONTROL_ID_CELL_LIST_VIEW);
+		auto cell = gActiveEditCell::get();
+
+		SendMessageA(cellListView, WM_SETREDRAW, FALSE, NULL);
+
+		CS_refreshCellListView(cellListView);
+
+		// Select active cell.
+		if (cell) {
+			LVFINDINFOA findInfo = { LVFI_PARAM, NULL, (LPARAM)cell, {}, {} };
+			int index = SendDlgItemMessageA(hWnd, CONTROL_ID_CELL_LIST_VIEW, LVM_FINDITEM, -1, (LPARAM)&findInfo);
+			if (index != -1) {
+				LVITEMA listItem;
+				listItem.state = LVIS_SELECTED;
+				listItem.stateMask = LVIS_SELECTED;
+				SendDlgItemMessageA(hWnd, CONTROL_ID_CELL_LIST_VIEW, LVM_SETITEMSTATE, index, (LPARAM)&listItem);
+				SendDlgItemMessageA(hWnd, CONTROL_ID_CELL_LIST_VIEW, LVM_ENSUREVISIBLE, index, TRUE);
+			}
+		}
+
+		SendMessageA(cellListView, WM_SETREDRAW, TRUE, NULL);
+		RedrawWindow(cellListView, NULL, NULL, RDW_ERASE | RDW_FRAME | RDW_INVALIDATE | RDW_ALLCHILDREN);
+	}
+
+	void OnFilterEditChanged(HWND hWnd) {
+		using namespace se::cs::winui;
+
+		// Get current search text.
+		auto newText = GetWindowTextA(cellWindowSearchControl);
+
+		// Transform the search text to lowercase and clear stray characters.
+		string::to_lower(newText);
+
+		if (!string::equal(currentSearchText, newText)) {
+			currentSearchText = std::move(newText);
+
+			// Regex crunching can be slow, so only do it once.
+			if (settings.object_window.use_regex) {
+				auto flags = std::regex_constants::extended | std::regex_constants::optimize | std::regex_constants::nosubs;
+				if (!settings.object_window.case_sensitive) {
+					flags |= std::regex_constants::icase;
+				}
+
+				try {
+					currentSearchRegex = std::regex(currentSearchText, flags);
+				}
+				catch (const std::regex_error& e) {
+					log::stream << "Regex error when searching cell refs window: " << e.what() << std::endl;
+					currentSearchRegex = {};
+
+					// TODO: Paint the background of the search input red or something.
+				}
+			}
+			else {
+				currentSearchRegex = {};
+			}
+
+			// Search affects cell list.
+			RefreshCellListView(hWnd);
+		}
+	}
+
+	void CALLBACK PatchDialogProc_AfterSize(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam) {
+		using winui::GetRectHeight;
+		using winui::GetRectWidth;
+		using winui::GetWindowRelativeRect;
+
+		auto cellListView = GetDlgItem(hDlg, CONTROL_ID_CELL_LIST_VIEW);
+		auto refsListView = GetDlgItem(hDlg, CONTROL_ID_REFS_LIST_VIEW);
+		auto showModifiedButton = GetDlgItem(hDlg, CONTROL_ID_SHOW_MODIFIED_ONLY_BUTTON);
+		auto searchLabel = GetDlgItem(hDlg, CONTROL_ID_FILTER_LABEL);
+		auto searchEdit = GetDlgItem(hDlg, CONTROL_ID_FILTER_EDIT);
+
+		// Update globals.
+		cellWindowSearchControl = searchEdit;
+
+		const auto mainWidth = LOWORD(lParam);
+		const auto mainHeight = HIWORD(lParam);
+
+		constexpr auto BASIC_PADDING = 2;
+		constexpr auto STATIC_HEIGHT = 13;
+		constexpr auto EDIT_HEIGHT = 21;
+		constexpr auto STATIC_COMBO_OFFSET = (EDIT_HEIGHT - STATIC_HEIGHT) / 2;
+
+		// Update list view area.
+		RECT listViewRect = {};
+		GetWindowRelativeRect(cellListView, &listViewRect);
+		MoveWindow(cellListView, listViewRect.left, listViewRect.top, GetRectWidth(&listViewRect), GetRectHeight(&listViewRect) - 3, FALSE);
+		GetWindowRelativeRect(refsListView, &listViewRect);
+		MoveWindow(refsListView, listViewRect.left, listViewRect.top, GetRectWidth(&listViewRect), GetRectHeight(&listViewRect) - 3, FALSE);
+
+		// Update the search bar placement.
+		int currentY = mainHeight - EDIT_HEIGHT - BASIC_PADDING;
+		auto searchEditWidth = std::min<int>(mainWidth - BASIC_PADDING * 2, 300);
+		MoveWindow(showModifiedButton, 9, currentY, 160, EDIT_HEIGHT, TRUE);
+		MoveWindow(searchLabel, (mainWidth - 21) - searchEditWidth - 54 - BASIC_PADDING, currentY + STATIC_COMBO_OFFSET, 54, STATIC_HEIGHT, TRUE);
+		MoveWindow(searchEdit, (mainWidth - 21) - searchEditWidth, currentY, searchEditWidth, EDIT_HEIGHT, FALSE);
+
+		RedrawWindow(hDlg, NULL, NULL, RDW_ERASE | RDW_FRAME | RDW_INVALIDATE | RDW_ALLCHILDREN);
+	}
+
+	void CALLBACK PatchDialogProc_AfterCreate(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		auto hInstance = (HINSTANCE)GetWindowLongA(hWnd, GWLP_HINSTANCE);
+
+		// Ensure our custom filter box is added.
+		if (cellWindowSearchControl == NULL) {
+
+			auto hDlgShowModifiedOnly = CreateWindowExA(NULL, WC_BUTTON, "Show modified only", BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_CHILD | WS_VISIBLE | WS_GROUP, 0, 0, 0, 0, hWnd, (HMENU)CONTROL_ID_SHOW_MODIFIED_ONLY_BUTTON, hInstance, NULL);
+			auto hDlgFilterStatic = CreateWindowExA(NULL, WC_STATIC, "Filter cells:", SS_RIGHT | WS_CHILD | WS_VISIBLE | WS_GROUP, 0, 0, 0, 0, hWnd, (HMENU)CONTROL_ID_FILTER_LABEL, hInstance, NULL);
+			auto hDlgFilterEdit = CreateWindowExA(WS_EX_CLIENTEDGE, WC_EDIT, "", ES_LEFT | ES_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 0, 0, 0, 0, hWnd, (HMENU)CONTROL_ID_FILTER_EDIT, hInstance, NULL);
+			if (hDlgFilterEdit) {
+				SetWindowSubclass(hDlgFilterEdit, ui_subclass::edit::BasicExtendedProc, NULL, NULL);
+
+				auto font = SendMessageA(hWnd, WM_GETFONT, FALSE, FALSE);
+				SendMessageA(hDlgShowModifiedOnly, WM_SETFONT, font, MAKELPARAM(TRUE, FALSE));
+				SendMessageA(hDlgFilterStatic, WM_SETFONT, font, MAKELPARAM(TRUE, FALSE));
+				SendMessageA(hDlgFilterEdit, WM_SETFONT, font, MAKELPARAM(TRUE, FALSE));
+			}
+			else {
+				log::stream << "ERROR: Could not create search control!" << std::endl;
+			}
+		}
+	}
+
+	void PatchDialogProc_BeforeCommand(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		const auto command = HIWORD(wParam);
+		const auto id = LOWORD(wParam);
+
+		switch (command) {
+		case BN_CLICKED:
+			switch (id) {
+			case CONTROL_ID_SHOW_MODIFIED_ONLY_BUTTON:
+				modeShowModifiedOnly = SendDlgItemMessage(hWnd, id, BM_GETCHECK, 0, 0);
+				RefreshCellListView(hWnd);
+				RefreshRefsListView(hWnd);
+				break;
+			}
+			break;
+		case EN_CHANGE:
+			switch (id) {
+			case CONTROL_ID_FILTER_EDIT:
+				OnFilterEditChanged(hWnd);
+				break;
+			}
+			break;
+		}
+	}
+
+	LRESULT CALLBACK PatchDialogProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		// Handle pre-patches.
+		switch (msg) {
+		case WM_COMMAND:
+			PatchDialogProc_BeforeCommand(hWnd, msg, wParam, lParam);
+			break;
 		}
 
 		// Call original function.
@@ -50,13 +266,19 @@ namespace se::cs::dialog::cell_window {
 
 		// Handle post-patches.
 		switch (msg) {
-
+		case WM_INITDIALOG:
+			PatchDialogProc_AfterCreate(hWnd, msg, wParam, lParam);
+			break;
+		case WM_SIZE:
+			PatchDialogProc_AfterSize(hWnd, msg, wParam, lParam);
+			break;
 		}
 
 		return result;
 	}
 
 	void installPatches() {
+		using memory::genCallEnforced;
 		using memory::genJumpEnforced;
 
 		// Patch: Optimize displaying of cell view window.
@@ -67,5 +289,11 @@ namespace se::cs::dialog::cell_window {
 
 		// Patch: Extend window messages.
 		genJumpEnforced(0x401898, 0x40EFA0, reinterpret_cast<DWORD>(PatchDialogProc));
+
+		// Patch: Allow filtering of cell list.
+		genCallEnforced(0x40E29C, 0x401230, reinterpret_cast<DWORD>(PatchFilterCellList));
+
+		// Patch: Allow filtering of refs list.
+		genCallEnforced(0x40E5C7, 0x4033EB, reinterpret_cast<DWORD>(PatchFilterRefsList));
 	}
 }

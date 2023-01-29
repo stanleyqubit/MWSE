@@ -28,6 +28,7 @@ namespace se::cs::winui {
 	}
 
 	bool GetWindowSize(HWND hWnd, SIZE& size);
+	void GetWindowRelativeRect(HWND hWnd, RECT* r);
 
 	void CenterWindow(HWND hWnd);
 	void ResizeAndCenterWindow(HWND hWnd, int width, int height);

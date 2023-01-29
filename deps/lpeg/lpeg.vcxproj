@@ -87,7 +87,7 @@
       <AdditionalDependencies>lua51.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y "$(TargetDir)lpeg.dll" "$(SolutionDir)misc\package\Data Files\MWSE\core\lpeg.dll"
+      <Command>copy /y "$(TargetDir)lpeg.dll" "$(SolutionDir)misc\package\Data Files\MWSE\core\lib\lpeg.dll"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -114,7 +114,7 @@
       <AdditionalDependencies>lua51.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy /y "$(TargetDir)lpeg.dll" "$(SolutionDir)misc\package\Data Files\MWSE\core\lpeg.dll"
+      <Command>copy /y "$(TargetDir)lpeg.dll" "$(SolutionDir)misc\package\Data Files\MWSE\core\lib\lpeg.dll"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>

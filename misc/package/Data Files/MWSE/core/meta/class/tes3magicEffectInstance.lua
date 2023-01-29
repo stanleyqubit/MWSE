@@ -20,5 +20,3 @@
 --- @field target tes3reference No description yet available.
 --- @field timeActive number The time since the effect started affecting its target in seconds.
 --- @field visual tes3vfx The associated visual effect.
-tes3magicEffectInstance = {}
-

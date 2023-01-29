@@ -61,7 +61,7 @@ namespace se::cs {
 		void* unknown_0xF4;
 		void* unknown_0xF8;
 		void* unknown_0xFC;
-		void* unknown_0x100;
+		void(__thiscall* populateObjectWindow)(const Object*, HWND); // 0x100
 		void* unknown_0x104;
 		bool(__thiscall* isMarker)(const Object*); // 0x108
 		void* unknown_0x10C;
@@ -167,6 +167,10 @@ namespace se::cs {
 
 		inline int getValue() const {
 			return vtbl.object->getValue(this);
+		}
+
+		inline void populateObjectWindow(HWND hWnd) const {
+			vtbl.object->populateObjectWindow(this, hWnd);
 		}
 	};
 	static_assert(sizeof(Object) == 0x28, "CS::Object failed size validation");

@@ -68,6 +68,20 @@ namespace se::cs::winui {
 		return true;
 	}
 
+	void GetWindowRelativeRect(HWND hWnd, RECT* r) {
+		// Get the screen position of the control.
+		GetWindowRect(hWnd, r);
+
+		// Adjust coordinates to be relative to parent.
+		POINT pt1 = { r->left, r->top }, pt2 = { r->right, r->bottom };
+		ScreenToClient(GetParent(hWnd), &pt1);
+		ScreenToClient(GetParent(hWnd), &pt2);
+		r->left = pt1.x;
+		r->top = pt1.y;
+		r->right = pt2.x;
+		r->bottom = pt2.y;
+	}
+
 	void CenterWindow(HWND hWnd) {
 		RECT windowRect = {};
 		GetWindowRect(hWnd, &windowRect);
@@ -193,16 +207,14 @@ namespace se::cs::winui {
 		TabCtrl_AdjustRect(hWnd, FALSE, r);
 
 		// Get the offset of the control.
-		RECT windowRect = {};
-		GetWindowRect(hWnd, &windowRect);
+		RECT controlRect = {};
+		GetWindowRelativeRect(hWnd, &controlRect);
 
 		// Perform relative to parent adjustments.
-		POINT pt = { windowRect.left, windowRect.top };
-		ScreenToClient(GetParent(hWnd), &pt);
-		r->left += pt.x;
-		r->right += pt.x;
-		r->top += pt.y;
-		r->bottom += pt.y;
+		r->left += controlRect.left;
+		r->right += controlRect.left;
+		r->top += controlRect.top;
+		r->bottom += controlRect.top;
 	}
 
 	void TabCtrl_SetCurSelEx(HWND hWnd, int index) {

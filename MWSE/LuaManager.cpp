@@ -2434,7 +2434,7 @@ namespace mwse::lua {
 		OnSkillTrained_SkillId = -1;
 	}
 
-	void LuaManager::executeMainModScripts(const char* path, const char* filename) {
+	void LuaManager::gatherMainModScripts(const std::string_view& path, bool core, const std::string_view& filename) {
 		if (!std::filesystem::exists(path)) {
 			return;
 		}
@@ -2442,38 +2442,68 @@ namespace mwse::lua {
 		// Do some precomputing for storing and calculating active lua mods.
 		sol::table luaMWSE = luaState["mwse"];
 		auto activeLuaMods = luaMWSE["activeLuaMods"];
-		auto luaDirectoryLength = strnlen_s(path, 260);
-		auto luaFilenameLength = strnlen_s(filename, 260);
 
 		// Parent folder suffixes that we'll skip.
 		std::array<std::string, 2> disabledMarkers = { ".disabled", ".mohidden" };
 
-		for (auto& p : std::filesystem::recursive_directory_iterator(path, std::filesystem::directory_options::follow_directory_symlink)) {
+		auto subclassOrder = 0u;
+		for (const auto& p : std::filesystem::recursive_directory_iterator(path, std::filesystem::directory_options::follow_directory_symlink)) {
 			if (p.path().filename() == filename) {
 				// If a parent directory is marked .disabled, ignore files in it.
-				auto pathString = p.path().string();
-				auto disabledPathItt = std::find_if(disabledMarkers.begin(), disabledMarkers.end(), [&](const std::string& s) {
+				const auto pathString = p.path().string();
+				const auto disabledPathItt = std::find_if(disabledMarkers.begin(), disabledMarkers.end(), [&](const std::string& s) {
 					return pathString.find(s) != std::string::npos;
-				});
+					});
 				if (disabledPathItt != disabledMarkers.end()) {
 					log::getLog() << "[LuaManager] Skipping mod initializer in disabled directory: " << pathString << std::endl;
 					continue;
 				}
 
-				// Execute the script.
-				sol::protected_function_result result = luaState.safe_script_file(pathString, &sol::script_pass_on_error);
-				if (!result.valid()) {
-					sol::error error = result;
-					log::getLog() << "[LuaManager] ERROR: Failed to run mod initialization script:" << std::endl << error.what() << std::endl;
+				// Get a version of its path as a key.
+				auto luaModKey = pathString.substr(path.length() + 1, pathString.length() - path.length() - filename.length() - 2);
+				std::replace(luaModKey.begin(), luaModKey.end(), '\\', '.');
+				string::to_lower(luaModKey);
+
+				// Check for key conflicts.
+				if (activeLuaMods[luaModKey] != sol::nil) {
+					log::getLog() << "[LuaManager] Skipping mod with duplicate key '" << luaModKey << "' in direcotry: " << pathString << std::endl;
 					continue;
 				}
 
-				// Store a version of its path as a key to be checked with tes3.isLuaModActive.
-				auto luaModKey = pathString.substr(luaDirectoryLength + 1, pathString.length() - luaDirectoryLength - luaFilenameLength - 2);
-				std::replace(luaModKey.begin(), luaModKey.end(), '\\', '.');
-				string::to_lower(luaModKey);
-				activeLuaMods[luaModKey] = true;
+				// Find metadata if applicable.
+				sol::table metadata = sol::nil;
+				const auto metadataPath = std::filesystem::path("Data Files") / (luaModKey + "-metadata.toml");
+				if (std::filesystem::exists(metadataPath)) {
+					const auto metadataPathString = metadataPath.string();
+					try {
+						metadata = luaState["toml"]["loadFile"](metadataPathString);
+					}
+					catch (const std::exception& e) {
+						log::getLog() << "[LuaManager] ERROR: Could not parse lua mod metadata file '" << metadataPathString << "':" << std::endl << e.what() << std::endl;
+						continue;
+					}
+				}
+
+				// Prepare runtime data.
+				auto runtime = luaState.create_table();
+				runtime["path"] = p.path().string();
+				runtime["parent_path"] = p.path().parent_path().string();
+				runtime["key"] = luaModKey;
+				runtime["metadata"] = metadata;
+				runtime["core_mod"] = core;
+				runtime["legacy_mod"] = !string::equal(filename, "main.lua");
+				runtime["std_order"] = subclassOrder++;
+
+				activeLuaMods[luaModKey] = runtime;
 			}
+		}
+	}
+
+	void LuaManager::executeMainModScripts() {
+		sol::protected_function_result result = luaState.safe_script_file("Data Files\\MWSE\\core\\startLuaMods.lua");
+		if (!result.valid()) {
+			sol::error error = result;
+			log::getLog() << "[LuaManager] ERROR: Failed to start up lua mods!" << std::endl << error.what() << std::endl;
 		}
 	}
 
@@ -4059,7 +4089,7 @@ namespace mwse::lua {
 
 		// Execute mwse_init.lua
 		try {
-			sol::protected_function_result result = luaState.safe_script_file("Data Files\\MWSE\\core\\mwse_init.lua");
+			sol::protected_function_result result = luaState.safe_script_file("Data Files\\MWSE\\core\\initialize.lua");
 			if (!result.valid()) {
 				sol::error error = result;
 				log::getLog() << "[LuaManager] ERROR: Failed to initialize MWSE Lua interface." << std::endl << error.what() << std::endl;
@@ -5560,13 +5590,16 @@ namespace mwse::lua {
 		}
 
 		// Look for main.lua scripts in the usual directories.
-		executeMainModScripts("Data Files\\MWSE\\core");
-		executeMainModScripts("Data Files\\MWSE\\mods");
+		gatherMainModScripts("Data Files\\MWSE\\core", true);
+		gatherMainModScripts("Data Files\\MWSE\\mods", false);
 
 		// Temporary backwards compatibility for old-style MWSE mods.
 		if (Configuration::EnableLegacyLuaMods) {
-			executeMainModScripts("Data Files\\MWSE\\lua", "mod_init.lua");
+			gatherMainModScripts("Data Files\\MWSE\\lua", false, "mod_init.lua");
 		}
+
+		// Finally execute the scripts.
+		executeMainModScripts();
 	}
 
 	void LuaManager::cleanup() {

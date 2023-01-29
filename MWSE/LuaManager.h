@@ -61,8 +61,9 @@ namespace mwse::lua {
 		void setButtonPressedCallback(sol::optional<sol::protected_function>);
 		void triggerButtonPressed();
 
-		// Helper function to execute main.lua scripts recursively in a directory.
-		void executeMainModScripts(const char* path, const char* filename = "main.lua");
+		// Helper functions to execute main.lua scripts recursively in a directory.
+		void gatherMainModScripts(const std::string_view& path, bool core, const std::string_view& filename = "main.lua");
+		void executeMainModScripts();
 
 		// Management functions for timers.
 		void updateTimers(float deltaTime, double simulationTimestamp, bool simulating);

@@ -24,7 +24,6 @@ local function execLuaMod(runtime)
 
 	-- Actually run the mod file.
 	local prefix = runtime.legacy_mod and "mod_init" or "main"
-	mwse.log("Running: %s", runtime.key .. "." .. prefix)
 	local result, err = pcall(dofile, runtime.key .. "." .. prefix)
 	if (not result) then
 		mwse.log("[LuaManager] ERROR: Failed to run mod initialization script:")
@@ -38,7 +37,6 @@ end
 
 local function execLuaModWrapper(runtime)
 	if (runtime.wait_until_initialize) then
-		mwse.log("Delaying execution of mod %s until initialization.", runtime.key)
 		event.register(tes3.event.initialized, function()
 			execLuaMod(runtime)
 		end, { priority = runtime.load_priority })

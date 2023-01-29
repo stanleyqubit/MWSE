@@ -2492,7 +2492,7 @@ namespace mwse::lua {
 				runtime["metadata"] = metadata;
 				runtime["core_mod"] = core;
 				runtime["legacy_mod"] = !string::equal(filename, "main.lua");
-				runtime["std_order"] = subclassOrder++;
+				runtime["load_std_order"] = subclassOrder++;
 
 				activeLuaMods[luaModKey] = runtime;
 			}

@@ -41,7 +41,7 @@ local function execLuaModWrapper(runtime)
 		mwse.log("Delaying execution of mod %s until initialization.", runtime.key)
 		event.register(tes3.event.initialized, function()
 			execLuaMod(runtime)
-		end, { priority = runtime.load_order })
+		end, { priority = runtime.load_priority })
 	else
 		execLuaMod(runtime)
 	end
@@ -59,12 +59,12 @@ local function modSorter(a, b)
 	end
 
 	-- Then we sort by explicit load order.
-	if (a.load_order ~= b.load_order) then
-		return a.load_order > b.load_order
+	if (a.load_priority ~= b.load_priority) then
+		return a.load_priority > b.load_priority
 	end
 
 	-- Finally we default to the original std::filesystem order.
-	return a.std_order < b.std_order
+	return a.load_std_order < b.load_std_order
 end
 
 -- Gather a list of mods to execute.
@@ -76,7 +76,7 @@ for _, runtime in ipairs(runtimes) do
 	local metadata_tools = metadata.tools or {}
 	local metadata_tools_mwse = metadata_tools.mwse or {}
 
-	runtime.load_order = metadata_tools_mwse.load_order or 0
+	runtime.load_priority = metadata_tools_mwse.load_priority or 0
 	runtime.wait_until_initialize = metadata_tools_mwse.wait_until_initialize or false
 end
 

@@ -2,18 +2,6 @@ local logger = require("logging.logger")
 local dependencyManagerModule = require("Metadata.DependencyManager")
 
 local function execLuaMod(runtime)
-	local prefix = runtime.legacy_mod and "mod_init" or "main"
-	mwse.log("Running: %s", runtime.key .. "." .. prefix)
-	local result, err = pcall(dofile, runtime.key .. "." .. prefix)
-	if (not result) then
-		mwse.log("[LuaManager] ERROR: Failed to run mod initialization script:")
-		mwse.log(err)
-		runtime.run = false
-		return
-	end
-
-	runtime.run = true
-
 	-- Check for dependencies if we need to.
 	if (runtime.metadata and runtime.metadata.dependencies) then
 		-- Generate a name from the key if we need one.
@@ -28,15 +16,24 @@ local function execLuaMod(runtime)
 			logger = logger.new({ name = name, logLevel = "INFO" }),
 		})
 
-		-- Actually check the dependencies.
-		if (runtime.wait_until_initialize) then
-			dependencyManager:checkDependencies()
-		else
-			event.register(tes3.event.initialized, function()
-				dependencyManager:checkDependencies()
-			end)
+		-- Prevent loading if we don't meet dependency requirements.
+		if (not dependencyManager:checkDependencies()) then
+			return
 		end
 	end
+
+	-- Actually run the mod file.
+	local prefix = runtime.legacy_mod and "mod_init" or "main"
+	mwse.log("Running: %s", runtime.key .. "." .. prefix)
+	local result, err = pcall(dofile, runtime.key .. "." .. prefix)
+	if (not result) then
+		mwse.log("[LuaManager] ERROR: Failed to run mod initialization script:")
+		mwse.log(err)
+		runtime.run = false
+		return
+	end
+
+	runtime.run = true
 end
 
 local function execLuaModWrapper(runtime)

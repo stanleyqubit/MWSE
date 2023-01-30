@@ -9,6 +9,26 @@ A node within a path grid.
 
 ## Properties
 
+### `connectedNodes`
+
+*Read-only*. The list of nodes connected to this node. This table value is a copy generated from the actual data.
+
+**Returns**:
+
+* `result` ([tes3pathGridNode](../../types/tes3pathGridNode)[])
+
+***
+
+### `grid`
+
+*Read-only*. The pathgrid that this node belongs to.
+
+**Returns**:
+
+* `result` ([tes3pathGrid](../../types/tes3pathGrid))
+
+***
+
 ### `position`
 
 *Read-only*. The world position of the node.

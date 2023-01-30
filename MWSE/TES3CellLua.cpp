@@ -155,6 +155,10 @@ namespace mwse::lua {
 			auto usertypeDefinition = state.new_usertype<TES3::PathGrid::Node>("tes3pathGridNode");
 			usertypeDefinition["new"] = sol::no_constructor;
 
+			// Basic property binding.
+			usertypeDefinition["connectedNodes"] = sol::readonly_property(&TES3::PathGrid::Node::getConnectedNodes_lua);
+			usertypeDefinition["grid"] = sol::readonly_property(&TES3::PathGrid::Node::parentGrid);
+
 			// Functions exposed as properties.
 			usertypeDefinition["position"] = sol::readonly_property(&TES3::PathGrid::Node::getPosition);
 		}

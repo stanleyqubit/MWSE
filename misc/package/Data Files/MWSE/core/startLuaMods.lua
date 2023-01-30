@@ -18,6 +18,7 @@ local function execLuaMod(runtime)
 
 		-- Prevent loading if we don't meet dependency requirements.
 		if (not dependencyManager:checkDependencies()) then
+			runtime.initialized = false
 			return
 		end
 	end
@@ -28,11 +29,11 @@ local function execLuaMod(runtime)
 	if (not result) then
 		mwse.log("[LuaManager] ERROR: Failed to run mod initialization script:")
 		mwse.log(err)
-		runtime.run = false
+		runtime.initialized = false
 		return
 	end
 
-	runtime.run = true
+	runtime.initialized = true
 end
 
 local function execLuaModWrapper(runtime)
@@ -45,7 +46,7 @@ local function execLuaModWrapper(runtime)
 	end
 end
 
-local function modSorter(a, b)
+local function defaultSorter(a, b)
 	-- Core mods go first.
 	if (a.core_mod ~= b.core_mod) then
 		return a.core_mod
@@ -59,6 +60,11 @@ local function modSorter(a, b)
 	-- Then we sort by explicit load order.
 	if (a.load_priority ~= b.load_priority) then
 		return a.load_priority > b.load_priority
+	end
+
+	-- Make sure that requirements are run first.
+	if (b.lua_mod_requirements and table.find(b.lua_mod_requirements, a.key)) then
+		return true
 	end
 
 	-- Finally we default to the original std::filesystem order.
@@ -76,10 +82,26 @@ for _, runtime in ipairs(runtimes) do
 
 	runtime.load_priority = metadata_tools_mwse.load_priority or 0
 	runtime.wait_until_initialize = metadata_tools_mwse.wait_until_initialize or false
+
+	-- Prepare a list of modules we require.
+	if (metadata.dependencies and metadata.dependencies.mods) then
+		local lua_mod_requirements = {}
+
+		for _, dependency in pairs(metadata.dependencies.mods) do
+			local module = dependency["mwse-module"]
+			if (module) then
+				table.insert(lua_mod_requirements, module)
+			end
+		end
+
+		if (not table.empty(lua_mod_requirements)) then
+			runtime.lua_mod_requirements = lua_mod_requirements
+		end
+	end
 end
 
 -- Sort them as appropriate.
-table.sort(runtimes, modSorter)
+table.sort(runtimes, defaultSorter)
 
 -- And finally run them.
 for _, runtime in ipairs(runtimes) do

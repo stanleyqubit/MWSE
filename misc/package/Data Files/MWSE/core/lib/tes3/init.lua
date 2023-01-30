@@ -197,7 +197,12 @@ end
 
 -- Checks to see if a lua mod is active.
 function tes3.isLuaModActive(key)
-	return mwse.activeLuaMods[key:gsub("[/\\]", "."):lower()] ~= nil
+	local runtime = mwse.activeLuaMods[key:gsub("[/\\]", "."):lower()]
+	if (not runtime) then
+		return false
+	end
+
+	return runtime.initialized == true
 end
 
 return tes3

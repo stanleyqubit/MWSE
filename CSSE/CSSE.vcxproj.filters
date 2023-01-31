@@ -285,6 +285,9 @@
     <ClInclude Include="DialogScriptListWindow.h">
       <Filter>Header Files\UI\Dialog</Filter>
     </ClInclude>
+    <ClInclude Include="DialogScriptEditorWindow.h">
+      <Filter>Header Files\UI\Dialog</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -438,6 +441,9 @@
       <Filter>Source Files\UI\Dialog</Filter>
     </ClCompile>
     <ClCompile Include="DialogScriptListWindow.cpp">
+      <Filter>Source Files\UI\Dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogScriptEditorWindow.cpp">
       <Filter>Source Files\UI\Dialog</Filter>
     </ClCompile>
   </ItemGroup>

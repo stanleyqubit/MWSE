@@ -123,6 +123,14 @@ namespace se::cs {
 			toml::value into_toml() const;
 		} quickstart;
 
+		struct ScriptEditorSettings {
+			std::string font_face = { "Consolas" };
+			int font_size = 10;
+
+			void from_toml(const toml::value& v);
+			toml::value into_toml() const;
+		} script_editor;
+
 		bool valid = true;
 
 		void load();

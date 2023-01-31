@@ -251,6 +251,24 @@ namespace se::cs {
 	}
 
 	//
+	// Script editor
+	//
+
+	void Settings_t::ScriptEditorSettings::from_toml(const toml::value& v) {
+		font_face = toml::find_or(v, "font_face", font_face);
+		font_size = toml::find_or(v, "font_size", font_size);
+	}
+
+	toml::value Settings_t::ScriptEditorSettings::into_toml() const {
+		return toml::value(
+			{
+				{ "font_face", font_face },
+				{ "font_size", font_size },
+			}
+		);
+	}
+
+	//
 	//
 	//
 
@@ -293,6 +311,7 @@ namespace se::cs {
 		object_window = toml::find_or(v, "object_window", object_window);
 		quickstart = toml::find_or(v, "quickstart", quickstart);
 		render_window = toml::find_or(v, "render_window", render_window);
+		script_editor = toml::find_or(v, "script_editor", script_editor);
 	}
 
 	toml::value Settings_t::into_toml() const {
@@ -303,6 +322,7 @@ namespace se::cs {
 				{ "object_window", object_window },
 				{ "render_window", render_window },
 				{ "quickstart", quickstart },
+				{ "script_editor", script_editor },
 			}
 		);
 	}

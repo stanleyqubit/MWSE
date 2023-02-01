@@ -296,35 +296,43 @@ namespace se::cs::dialog::render_window {
 	// Patch: Improve multi-reference scaling.
 	//
 
-	void __cdecl Patch_ReplaceScalingLogic(RenderController* renderController, SelectionData::Target* firstTarget, int scaler) {
+	void __cdecl Patch_ReplaceScalingLogic(RenderController* renderController, SelectionData::Target* firstTarget, int mouseDelta) {
 		using windows::isKeyDown;
 
 		auto selectionData = SelectionData::get();
 		bool useGroupScaling = settings.render_window.use_group_scaling;
 		if (!useGroupScaling || selectionData->numberOfTargets == 1) {
 			const auto VanillaScalingHandler = reinterpret_cast<void(__cdecl*)(RenderController*, SelectionData::Target*, int)>(0x404949);
-			VanillaScalingHandler(renderController, firstTarget, scaler);
+			VanillaScalingHandler(renderController, firstTarget, mouseDelta);
 			return;
 		}
 
 		// Clamp such that no reference will be scaled beyond supported bounds. [0.5, 2.0]
-		auto scaleDelta = scaler * 0.01f;
+		auto delta = mouseDelta * 0.01f;
 		for (auto target = firstTarget; target; target = target->next) {
+			//const auto scale = target->reference->sceneNode->localScale;
 			const auto scale = target->reference->getScale();
-			scaleDelta = std::clamp(scaleDelta, 0.5f - scale, 2.0f - scale);
+			delta = std::clamp(delta, 0.5f - scale, 2.0f - scale);
+		}
+		if (fabs(delta) <= 1e-5) {
+			return;
 		}
 
-		// Scale all selected references and their positions relative to the last target.
-		const auto reference = selectionData->getLastTarget()->reference;
-		const auto distance = 1.0f + scaleDelta / reference->getScale();
-		const auto origin = reference->position;
+		// Scale all selected references and their positions relative to selection center.
+		const auto center = selectionData->bound.center;
+		const auto factor = 1.0 + delta;
 
 		for (auto target = firstTarget; target; target = target->next) {
 			auto reference = target->reference;
-			reference->setScale(reference->getScale() + scaleDelta);
 
-			const auto offset = reference->position - origin;
-			reference->position = origin + (offset * distance);
+			// Update scale.
+			//reference->sceneNode->localScale *= factor;
+			reference->setScale(reference->getScale() * factor);
+
+			// Update position.
+			const auto relativePosition = reference->position - center;
+			reference->position = center + (relativePosition * factor);
+
 			reference->unknown_0x10 = reference->position;
 			reference->sceneNode->localTranslate = reference->position;
 			reference->sceneNode->update(0.0f, true, true);

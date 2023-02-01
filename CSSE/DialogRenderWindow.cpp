@@ -296,6 +296,7 @@ namespace se::cs::dialog::render_window {
 	// Patch: Improve multi-reference scaling.
 	//
 
+	static auto selectionNeedsScaleUpdate = false;
 	void __cdecl Patch_ReplaceScalingLogic(RenderController* renderController, SelectionData::Target* firstTarget, int mouseDelta) {
 		using windows::isKeyDown;
 
@@ -310,24 +311,26 @@ namespace se::cs::dialog::render_window {
 		// Clamp such that no reference will be scaled beyond supported bounds. [0.5, 2.0]
 		auto delta = mouseDelta * 0.01f;
 		for (auto target = firstTarget; target; target = target->next) {
-			//const auto scale = target->reference->sceneNode->localScale;
-			const auto scale = target->reference->getScale();
+			const auto scale = target->reference->sceneNode->localScale;
 			delta = std::clamp(delta, 0.5f - scale, 2.0f - scale);
 		}
-		if (fabs(delta) <= 1e-5) {
+		if (fabs(delta) < 0.01) {
 			return;
 		}
+		
+		// Avoid using `setScale` every update, its implementation causes huge precision loss.
+		// Instead set this flag which will trigger `setScale` just once when finished scaling.
+		selectionNeedsScaleUpdate = true;
 
-		// Scale all selected references and their positions relative to selection center.
-		const auto center = selectionData->bound.center;
+		// Scale all selected references and their positions relative to last target.
+		const auto center = selectionData->getLastTarget()->reference->position;
 		const auto factor = 1.0 + delta;
 
 		for (auto target = firstTarget; target; target = target->next) {
 			auto reference = target->reference;
 
 			// Update scale.
-			//reference->sceneNode->localScale *= factor;
-			reference->setScale(reference->getScale() * factor);
+			reference->sceneNode->localScale *= factor;
 
 			// Update position.
 			const auto relativePosition = reference->position - center;
@@ -341,6 +344,7 @@ namespace se::cs::dialog::render_window {
 
 			reference->setAsEdited();
 		}
+
 		selectionData->recalculateBound();
 	}
 
@@ -1307,6 +1311,16 @@ namespace se::cs::dialog::render_window {
 		}
 	}
 
+	void PatchDialogProc_AfterLMouseButtonUp(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		// see: Patch_ReplaceScalingLogic
+		if (selectionNeedsScaleUpdate) {
+			selectionNeedsScaleUpdate = false;
+			for (auto target = SelectionData::get()->firstTarget; target; target = target->next) {
+				target->reference->setScale(target->reference->sceneNode->localScale);
+			}
+		}
+	}
+
 	void PatchDialogProc_AfterKeyDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		switch (wParam) {
 		case 'Q':
@@ -1379,6 +1393,9 @@ namespace se::cs::dialog::render_window {
 			break;
 		case WM_KEYUP:
 			PatchDialogProc_AfterKeyUp(hWnd, msg, wParam, lParam);
+			break;
+		case WM_LBUTTONUP:
+			PatchDialogProc_AfterLMouseButtonUp(hWnd, msg, wParam, lParam);
 			break;
 		case WM_INITDIALOG:
 			PatchDialogProc_AfterInitDialog(hWnd, msg, wParam, lParam);

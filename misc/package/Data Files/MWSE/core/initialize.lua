@@ -803,6 +803,10 @@ function toml.saveFile(fileName, object)
 	f:close()
 end
 
+function toml.loadMetadata(key)
+	return toml.loadFile(string.format("Data Files\\%s-metadata.toml", key))
+end
+
 
 -------------------------------------------------
 -- Extend our base API: mwse

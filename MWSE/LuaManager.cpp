@@ -2451,8 +2451,9 @@ namespace mwse::lua {
 			if (p.path().filename() == filename) {
 				// If a parent directory is marked .disabled, ignore files in it.
 				const auto pathString = p.path().string();
-				const auto disabledPathItt = std::find_if(disabledMarkers.begin(), disabledMarkers.end(), [&](const std::string& s) {
-					return pathString.find(s) != std::string::npos;
+				const auto disabledPathItt = std::find_if(disabledMarkers.begin(), disabledMarkers.end(),
+					[&](const std::string& s) {
+						return pathString.find(s) != std::string::npos;
 					});
 				if (disabledPathItt != disabledMarkers.end()) {
 					log::getLog() << "[LuaManager] Skipping mod initializer in disabled directory: " << pathString << std::endl;
@@ -2470,29 +2471,28 @@ namespace mwse::lua {
 					continue;
 				}
 
-				// Find metadata if applicable.
-				sol::table metadata = sol::nil;
-				const auto metadataPath = std::filesystem::path("Data Files") / (luaModKey + "-metadata.toml");
-				if (std::filesystem::exists(metadataPath)) {
-					const auto metadataPathString = metadataPath.string();
-					try {
-						metadata = luaState["toml"]["loadFile"](metadataPathString);
-					}
-					catch (const std::exception& e) {
-						log::getLog() << "[LuaManager] ERROR: Could not parse lua mod metadata file '" << metadataPathString << "':" << std::endl << e.what() << std::endl;
-						continue;
-					}
-				}
-
 				// Prepare runtime data.
 				auto runtime = luaState.create_table();
 				runtime["path"] = p.path().string();
 				runtime["parent_path"] = p.path().parent_path().string();
 				runtime["key"] = luaModKey;
-				runtime["metadata"] = metadata;
 				runtime["core_mod"] = core;
 				runtime["legacy_mod"] = !string::equal(filename, "main.lua");
 				runtime["load_std_order"] = subclassOrder++;
+
+				// Find metadata if applicable.
+				sol::safe_function_result metadata_result = luaState["toml"]["loadMetadata"](luaModKey);
+				if (metadata_result.valid()) {
+					sol::optional<sol::table> metadata = metadata_result;
+					if (metadata) {
+						runtime["metadata"] = metadata.value();
+					}
+				}
+				else {
+					sol::error error = metadata_result;
+					log::getLog() << "[LuaManager] ERROR: Could not parse lua mod metadata for lua mod '" << luaModKey << "':" << std::endl << error.what() << std::endl;
+					continue;
+				}
 
 				activeLuaMods[luaModKey] = runtime;
 			}

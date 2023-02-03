@@ -195,9 +195,13 @@ function tes3.onMainMenu()
 	return tes3.worldController.charGenState.value == 0
 end
 
+local function getLuaModRuntime(key)
+	return mwse.activeLuaMods[key:gsub("[/\\]", "."):lower()]
+end
+
 -- Checks to see if a lua mod is active.
 function tes3.isLuaModActive(key)
-	local runtime = mwse.activeLuaMods[key:gsub("[/\\]", "."):lower()]
+	local runtime = getLuaModRuntime(key)
 	if (not runtime) then
 		return false
 	end

@@ -1,7 +1,7 @@
 local DependencyType = require("Metadata.DependencyType")
 ---@class DependencyManager.new.params
 ---@field metadata MWSE.Metadata The metadata of the mod using this dependency manager
----@field logger MWSELogger? The logger to use for this dependency manager
+---@field logger mwseLogger? The logger to use for this dependency manager
 ---@field showFailureMessage boolean? Whether to show a message box if a dependency fails to load. Defaults to true.
 
 --[[
@@ -11,7 +11,7 @@ local DependencyType = require("Metadata.DependencyType")
 ]]
 ---@class DependencyManager
 ---@field metadata MWSE.Metadata The metadata of the mod using this dependency manager
----@field logger MWSELogger? The logger to use for this dependency manager
+---@field logger mwseLogger? The logger to use for this dependency manager
 ---@field showFailureMessage boolean?  Whether to show a message box if a dependency fails to load. Defaults to true.
 ---@field failedDependencies MWSE.DependencyType.Failure[]? The list of failed dependencies
 local DependencyManager = {

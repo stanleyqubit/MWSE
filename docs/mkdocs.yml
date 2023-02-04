@@ -5,15 +5,15 @@ docs_dir: source
 repo_url: https://github.com/MWSE/MWSE
 
 plugins:
-  - search
-      # Default search is quite bad. Try with a better token separator. Taken directly from:
-      # https://squidfunk.github.io/mkdocs-material/setup/setting-up-site-search/#+search.separator
-      separator: '[\s\-,:!=\[\]()"/]+|(?!\b)(?=[A-Z][a-z])|\.(?!\d)|&[lg]t;'
   - awesome-pages
   - mermaid2:
       arguments:
         theme: |
           ^(JSON.parse(__md_get("__palette").index == 1)) ? 'dark' : 'light'
+  - search:
+      # Default search is quite bad. Try with a better token separator. Taken directly from:
+      # https://squidfunk.github.io/mkdocs-material/setup/setting-up-site-search/#+search.separator
+      separator: '[\s\-,:!=\[\]()"/]+|(?!\b)(?=[A-Z][a-z])|\.(?!\d)|&[lg]t;'
 
 extra_javascript:
   - assets/js/reloadMermaidPagesOnPaletteSwitch.js

@@ -40,6 +40,7 @@ void mwse::lua::bindNIQuaternion() {
 		usertypeDefinition["normalized"] = &NI::Quaternion::normalized;
 		usertypeDefinition["rotateTowards"] = &NI::Quaternion::rotateTowards;
 		usertypeDefinition["slerp"] = &NI::Quaternion::slerp;
+		usertypeDefinition["slerpKeyframe"] = &NI::Quaternion::slerpKeyframe;
 		usertypeDefinition["toAngleAxis"] = &NI::Quaternion::toAngleAxis;
 		usertypeDefinition["toRotation"] = &NI::Quaternion::toRotation;
 	}

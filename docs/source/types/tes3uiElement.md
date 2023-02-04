@@ -306,7 +306,7 @@ Elements that bypass parent layout will be ignored when automatically determing 
 
 ### `imageScaleX`
 
-Image scaling multipliers. Only applies to image elements.
+Image scaling multipliers. Only applies to image elements. `0` disables scaling and displays the original image. Negative numbers will mirror and scale along this axis.
 
 **Returns**:
 
@@ -316,7 +316,7 @@ Image scaling multipliers. Only applies to image elements.
 
 ### `imageScaleY`
 
-Image scaling multipliers. Only applies to image elements.
+Image scaling multipliers. Only applies to image elements. `0` disables scaling and displays the original image. Negative numbers will mirror and scale along this axis.
 
 **Returns**:
 
@@ -486,7 +486,7 @@ Controls if there is repeating text input when keys are held down. `true` by def
 
 ### `scaleMode`
 
-When set to `true` on image and NIF elements, they are scaled to fit `width` and `height`.
+When set to `true` on image and NIF elements, the image or NIF is scaled to fit the element `width` and `height`.
 
 **Returns**:
 

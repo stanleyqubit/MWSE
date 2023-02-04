@@ -56,8 +56,8 @@
 --- @field ignoreLayoutY boolean If `true`, the element's [`positionY`](https://mwse.github.io/MWSE/types/tes3uiElement/#positiony) can be modified and will not be affected by any layout restrictions imposed by the parent element. Incompatible with and will change the value of [`absolutePosAlignY`](https://mwse.github.io/MWSE/types/tes3uiElement/#absoluteposaligny).
 --- 	
 --- Elements that bypass parent layout will be ignored when automatically determing the parent's height. See [`autoHeight`](https://mwse.github.io/MWSE/types/tes3uiElement/#autoheight) for more information.
---- @field imageScaleX number Image scaling multipliers. Only applies to image elements.
---- @field imageScaleY number Image scaling multipliers. Only applies to image elements.
+--- @field imageScaleX number Image scaling multipliers. Only applies to image elements. `0` disables scaling and displays the original image. Negative numbers will mirror and scale along this axis.
+--- @field imageScaleY number Image scaling multipliers. Only applies to image elements. `0` disables scaling and displays the original image. Negative numbers will mirror and scale along this axis.
 --- @field justifyText string Can have values `"left"`, `"center"`, or `"right"`. Controls text justification. Maps to values in the [`tes3.justifyText`](https://mwse.github.io/MWSE/references/justify-text/) table. To work correctly for center/right justification, `wrapText` must be `true`.
 --- @field maxHeight integer The maximum height for auto-size layout and resizable frames.
 --- @field maxWidth integer The maximum width for auto-size layout and resizable frames.
@@ -74,7 +74,7 @@
 --- @field positionY integer The element's vertical position relative to its parent's top-left content area. For top-level menus, the position will be relative to the the centre of the screen. Modifying this value will not have any effect on most elements due to child element's positions being controlled by the layout and positioning settings of their parent elements, unless [`ignoreLayoutY`](https://mwse.github.io/MWSE/types/tes3uiElement/#ignorelayouty) is `true`.
 --- @field rawText string The raw value of the element's text. This, unlike the normal text property, will not directly read widget information or handle the removal of the positional cursor.
 --- @field repeatKeys boolean Controls if there is repeating text input when keys are held down. `true` by default.
---- @field scaleMode boolean When set to `true` on image and NIF elements, they are scaled to fit `width` and `height`.
+--- @field scaleMode boolean When set to `true` on image and NIF elements, the image or NIF is scaled to fit the element `width` and `height`.
 --- @field sceneNode niBillboardNode|niCollisionSwitch|niNode|niSwitchNode *Read-only*. Underlying access to the scene graph responsible for this element.
 --- @field text string The element's text. Text input can be read by accessing this property.
 --- 

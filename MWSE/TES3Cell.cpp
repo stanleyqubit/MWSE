@@ -298,6 +298,22 @@ namespace TES3 {
 		return int(x) >> 13;
 	}
 
+	sol::object PathGrid::Node::getConnectedNodes_lua(sol::this_state ts) const {
+		sol::state_view state = ts;
+		sol::table conn = state.create_table();
+
+		// Resolve extra indirections to make a flat node table.
+		if (this->connectedNodes) {
+			size_t n = 1;
+			for (auto nodePtr : *this->connectedNodes) {
+				if (nodePtr) {
+					conn[n++] = *nodePtr;
+				}
+			}
+		}
+		return conn;
+	}
+
 	Vector3 PathGrid::Node::getPosition() const {
 		// Convert local position to world position.
 		const auto cell = parentGrid->parentCell;

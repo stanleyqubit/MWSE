@@ -184,7 +184,7 @@ local result = myObject:normalized()
 
 ### `rotateTowards`
 
-Calculates a spherical linear interpolation between this quaternion and another, limited to a maximum rotation angle.
+Calculates a spherical linear interpolation between this quaternion and another, limited to a maximum rotation angle. Chooses the shortest path of interpolation between quaternions, which means it minimizes spin but the interpolation arc is limited to pi radians or 180 degrees of interpolation.
 
 ```lua
 local result = myObject:rotateTowards(target, rotationLimit)
@@ -203,10 +203,29 @@ local result = myObject:rotateTowards(target, rotationLimit)
 
 ### `slerp`
 
-Calculates a spherical linear interpolation between this quaternion and another.
+Calculates a spherical linear interpolation between this quaternion and another. Chooses the shortest path of interpolation between quaternions, which means it minimizes spin but the interpolation arc is limited to pi radians or 180 degrees of interpolation.
 
 ```lua
 local result = myObject:slerp(target, transition)
+```
+
+**Parameters**:
+
+* `target` ([niQuaternion](../../types/niQuaternion)): The quaternion to interpolate towards.
+* `transition` (number): The interpolation parameter. Must be between `0.0` (closer to this quaternion) and `1.0` (closer to the other quaternion).
+
+**Returns**:
+
+* `result` ([niQuaternion](../../types/niQuaternion)): The calculated result.
+
+***
+
+### `slerpKeyframe`
+
+Calculates a spherical linear interpolation between this quaternion and another. Does not choose a direction of interpolation. This means the interpolation arc can be up to 2pi radians or 360 degrees, depending on the signs of the quaternions.
+
+```lua
+local result = myObject:slerpKeyframe(target, transition)
 ```
 
 **Parameters**:

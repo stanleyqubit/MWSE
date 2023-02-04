@@ -20,6 +20,8 @@
 #include "DialogPreviewWindow.h"
 #include "DialogReferenceData.h"
 #include "DialogRenderWindow.h"
+#include "DialogScriptEditorWindow.h"
+#include "DialogScriptListWindow.h"
 #include "DialogSearchAndReplaceWindow.h"
 #include "DialogTextSearchWindow.h"
 
@@ -348,6 +350,8 @@ namespace se::cs {
 		dialog::preview_window::installPatches();
 		dialog::reference_data::installPatches();
 		dialog::render_window::installPatches();
+		dialog::script_editor_window::installPatches();
+		dialog::script_list_window::installPatches();
 		dialog::search_and_replace_window::installPatches();
 		dialog::text_search_window::installPatches();
 	}

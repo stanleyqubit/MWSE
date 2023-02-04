@@ -826,7 +826,7 @@ namespace se::cs::dialog::dialogue_window {
 		case BN_CLICKED:
 			switch (id) {
 			case CONTROL_ID_SHOW_MODIFIED_ONLY_BUTTON:
-				modeShowModifiedOnly = SendDlgItemMessage(hWnd, id, BM_GETCHECK, 0, 0);
+				modeShowModifiedOnly = SendDlgItemMessageA(hWnd, id, BM_GETCHECK, 0, 0);
 
 				// Invoke update logic by simulating the combo box selection changing.
 				// There may be a better way.

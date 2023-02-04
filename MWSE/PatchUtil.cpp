@@ -654,6 +654,59 @@ namespace mwse::patch {
 	}
 
 	//
+	// Patch: UI element image mirroring on negative image scale.
+	// 
+
+	// Mirror image texcoords with negative image scale.
+	void __cdecl PatchUIElementTexcoordWrite(TES3::UI::Element* element, TES3::Vector2* texCoords) {
+		float left = 0.0f, top = 0.0f, right = 1.0f, bottom = 1.0f;
+
+		if (element->imageScaleX < 0) {
+			std::swap(left, right);
+		}
+		if (element->imageScaleY < 0) {
+			std::swap(top, bottom);
+		}
+		texCoords[0].x = left;
+		texCoords[0].y = top;
+		texCoords[1].x = left;
+		texCoords[1].y = bottom;
+		texCoords[2].x = right;
+		texCoords[2].y = top;
+		texCoords[3].x = right;
+		texCoords[3].y = bottom;
+	}
+
+	// Change pixel width/height calculation to floor(abs(imageScale{X,Y} * texture{Width,Height}) + 0.5)
+	const float f_half = 0.5f;
+	__declspec(naked) void PatchUIUpdateLayoutImageContent1() {
+		__asm {
+			fmulp	st(1), st			// imageScale * textureDimension
+			fabs						// abs
+			fadd	[f_half]			// + 0.5
+			fstp	qword ptr [esp]		// double argument for floor
+		}
+	}
+	const size_t PatchUIUpdateLayoutImageContent1_size = 0xD;
+
+	// Replace texcoord writer.
+	__declspec(naked) void PatchUIUpdateLayoutImageContent2() {
+		__asm {
+			push eax		// texcoord data pointer
+			push esi		// UiElement pointer
+			nop				// call to patch placeholder
+			nop
+			nop
+			nop
+			nop
+			add esp, 8
+			xor ecx, ecx
+			jmp $ + 0x51
+		}
+	}
+	const size_t PatchUIUpdateLayoutImageContent2_size = 0x11;
+
+	//
 	// Install all the patches.
 	//
 
@@ -937,6 +990,12 @@ namespace mwse::patch {
 
 		// Patch: Fix crash in NPC flee logic when trying to pick a random node from a pathgrid with 0 nodes.
 		genCallEnforced(0x549E76, 0x4E2850, reinterpret_cast<DWORD>(PatchCellGetPathGridWithNodes));
+
+		// Patch: UI element image mirroring on negative image scale.
+		writePatchCodeUnprotected(0x57DE02, (BYTE*)&PatchUIUpdateLayoutImageContent1, PatchUIUpdateLayoutImageContent1_size);
+		writePatchCodeUnprotected(0x57DE3F, (BYTE*)&PatchUIUpdateLayoutImageContent1, PatchUIUpdateLayoutImageContent1_size);
+		writePatchCodeUnprotected(0x57E1E8, (BYTE*)&PatchUIUpdateLayoutImageContent2, PatchUIUpdateLayoutImageContent2_size);
+		genCallUnprotected(0x57E1E8 + 0x2, reinterpret_cast<DWORD>(PatchUIElementTexcoordWrite));
 	}
 
 	void installPostLuaPatches() {

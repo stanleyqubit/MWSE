@@ -296,39 +296,56 @@ namespace se::cs::dialog::render_window {
 	// Patch: Improve multi-reference scaling.
 	//
 
-	void __cdecl Patch_ReplaceScalingLogic(RenderController* renderController, SelectionData::Target* firstTarget, int scaler) {
+	static auto selectionNeedsScaleUpdate = false;
+	void __cdecl Patch_ReplaceScalingLogic(RenderController* renderController, SelectionData::Target* firstTarget, int mouseDelta) {
 		using windows::isKeyDown;
 
 		auto selectionData = SelectionData::get();
-		if (!isKeyDown(VK_MENU) || selectionData->numberOfTargets == 1) {
+		bool useGroupScaling = settings.render_window.use_group_scaling;
+		if (!useGroupScaling || selectionData->numberOfTargets == 1) {
 			const auto VanillaScalingHandler = reinterpret_cast<void(__cdecl*)(RenderController*, SelectionData::Target*, int)>(0x404949);
-			VanillaScalingHandler(renderController, firstTarget, scaler);
+			VanillaScalingHandler(renderController, firstTarget, mouseDelta);
 			return;
 		}
 
-		const auto scaleDelta = scaler * 0.01f;
+		// Clamp such that no reference will be scaled beyond supported bounds. [0.5, 2.0]
+		auto delta = mouseDelta * 0.01f;
+		for (auto target = firstTarget; target; target = target->next) {
+			const auto scale = target->reference->sceneNode->localScale;
+			delta = std::clamp(delta, 0.5f - scale, 2.0f - scale);
+		}
+		if (fabs(delta) < 0.01) {
+			return;
+		}
+		
+		// Avoid using `setScale` every update, its implementation causes huge precision loss.
+		// Instead set this flag which will trigger `setScale` just once when finished scaling.
+		selectionNeedsScaleUpdate = true;
 
-		const auto& center = selectionData->bound.center;
+		// Scale all selected references and their positions relative to last target.
+		const auto center = selectionData->getLastTarget()->reference->position;
+		const auto factor = 1.0 + delta;
 
 		for (auto target = firstTarget; target; target = target->next) {
 			auto reference = target->reference;
 
-			const auto oldScale = reference->getScale();
-			reference->setScale(oldScale + scaleDelta);
+			// Update scale.
+			reference->sceneNode->localScale *= factor;
 
-			const auto newScale = reference->getScale();
-			if (newScale != oldScale) {
-				const auto offset = reference->position - center;
-				const auto multiplier = newScale / oldScale;
+			// Update position.
+			const auto relativePosition = reference->position - center;
+			reference->position = center + (relativePosition * factor);
 
-				reference->position = center + offset * multiplier;
-				reference->unknown_0x10 = reference->position;
-				reference->sceneNode->localTranslate = reference->position;
-				reference->sceneNode->update(0.0f, true, true);
+			reference->unknown_0x10 = reference->position;
+			reference->sceneNode->localTranslate = reference->position;
+			reference->sceneNode->update(0.0f, true, true);
 
-				reference->setAsEdited();
-			}
+			DataHandler::get()->updateLightingForReference(reference);
+
+			reference->setAsEdited();
 		}
+
+		selectionData->recalculateBound();
 	}
 
 	//
@@ -1064,6 +1081,7 @@ namespace se::cs::dialog::render_window {
 			SET_SNAPPING_AXIS_NEGATIVE_Y,
 			SET_SNAPPING_AXIS_POSITIVE_Z,
 			SET_SNAPPING_AXIS_NEGATIVE_Z,
+			USE_GROUP_SCALING,
 			USE_LEGACY_OBJECT_MOVEMENT,
 			USE_WORLD_AXIS_ROTATION,
 			SAVE_STATE_TO_QUICKSTART,
@@ -1144,6 +1162,14 @@ namespace se::cs::dialog::render_window {
 		menuItem.hSubMenu = subMenuSnappingAxis.hSubMenu;
 		menuItem.dwTypeData = (LPSTR)"Set &Snapping Axis";
 		InsertMenuItemA(menu, index++, TRUE, &menuItem);
+
+		menuItem.wID = USE_GROUP_SCALING;
+		menuItem.fMask = MIIM_FTYPE | MIIM_CHECKMARKS | MIIM_STRING | MIIM_ID;
+		menuItem.fType = MFT_STRING;
+		menuItem.fState = (settings.render_window.use_group_scaling) ? MFS_CHECKED : MFS_UNCHECKED;
+		menuItem.dwTypeData = (LPSTR)"Use Group Scaling";
+		InsertMenuItemA(menu, index++, TRUE, &menuItem);
+		CheckMenuItem(menu, USE_GROUP_SCALING, (settings.render_window.use_group_scaling) ? MFS_CHECKED : MFS_UNCHECKED);
 
 		menuItem.wID = USE_LEGACY_OBJECT_MOVEMENT;
 		menuItem.fMask = MIIM_FTYPE | MIIM_CHECKMARKS | MIIM_STRING | MIIM_ID;
@@ -1235,6 +1261,10 @@ namespace se::cs::dialog::render_window {
 		case SET_SNAPPING_AXIS_NEGATIVE_Z:
 			snappingAxis = SnappingAxis::NEGATIVE_Z;
 			break;
+		case USE_GROUP_SCALING:
+			settings.render_window.use_group_scaling = !settings.render_window.use_group_scaling;
+			settings.save();
+			break;
 		case USE_LEGACY_OBJECT_MOVEMENT:
 			settings.render_window.use_legacy_object_movement = !settings.render_window.use_legacy_object_movement;
 			settings.save();
@@ -1278,6 +1308,16 @@ namespace se::cs::dialog::render_window {
 	void PatchDialogProc_BeforeSetCameraPosition(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		if (RenderController::get()->node == nullptr) {
 			PatchDialogProc_OverrideResult = FALSE;
+		}
+	}
+
+	void PatchDialogProc_AfterLMouseButtonUp(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		// see: Patch_ReplaceScalingLogic
+		if (selectionNeedsScaleUpdate) {
+			selectionNeedsScaleUpdate = false;
+			for (auto target = SelectionData::get()->firstTarget; target; target = target->next) {
+				target->reference->setScale(target->reference->sceneNode->localScale);
+			}
 		}
 	}
 
@@ -1353,6 +1393,9 @@ namespace se::cs::dialog::render_window {
 			break;
 		case WM_KEYUP:
 			PatchDialogProc_AfterKeyUp(hWnd, msg, wParam, lParam);
+			break;
+		case WM_LBUTTONUP:
+			PatchDialogProc_AfterLMouseButtonUp(hWnd, msg, wParam, lParam);
 			break;
 		case WM_INITDIALOG:
 			PatchDialogProc_AfterInitDialog(hWnd, msg, wParam, lParam);

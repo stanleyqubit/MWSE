@@ -1,13 +1,10 @@
 #pragma once
 
-#include "CSDefines.h"
-
-namespace se::cs::dialog::cell_window {
-	constexpr UINT DIALOG_ID = 175;
+namespace se::cs::dialog::script_list_window {
+	constexpr UINT DIALOG_ID = 189;
 
 	// Default IDs.
-	constexpr UINT CONTROL_ID_CELL_LIST_VIEW = 1155;
-	constexpr UINT CONTROL_ID_REFS_LIST_VIEW = 1156;
+	constexpr UINT CONTROL_ID_SCRIPT_LIST = 1018;
 
 	// Custom IDs.
 	constexpr UINT CONTROL_ID_FILTER_LABEL = 2000;

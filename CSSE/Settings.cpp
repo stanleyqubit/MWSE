@@ -28,6 +28,7 @@ namespace se::cs {
 	void Settings_t::RenderWindowSettings::from_toml(const toml::value& v) {
 		fov = toml::find_or(v, "fov", fov);
 		multisamples = toml::find_or(v, "multisamples", multisamples);
+		use_group_scaling = toml::find_or(v, "use_group_scaling", use_group_scaling);
 		use_legacy_grid_snap = toml::find_or(v, "use_legacy_grid_snap", use_legacy_grid_snap);
 		use_legacy_object_movement = toml::find_or(v, "use_legacy_object_movement", use_legacy_object_movement);
 		use_world_axis_rotations_by_default = toml::find_or(v, "use_world_axis_rotations_by_default", use_world_axis_rotations_by_default);
@@ -38,6 +39,7 @@ namespace se::cs {
 			{
 				{ "fov", fov },
 				{ "multisamples", multisamples },
+				{ "use_group_scaling", use_group_scaling },
 				{ "use_legacy_grid_snap", use_legacy_grid_snap },
 				{ "use_legacy_object_movement", use_legacy_object_movement },
 				{ "use_world_axis_rotations_by_default", use_world_axis_rotations_by_default },
@@ -251,6 +253,24 @@ namespace se::cs {
 	}
 
 	//
+	// Script editor
+	//
+
+	void Settings_t::ScriptEditorSettings::from_toml(const toml::value& v) {
+		font_face = toml::find_or(v, "font_face", font_face);
+		font_size = toml::find_or(v, "font_size", font_size);
+	}
+
+	toml::value Settings_t::ScriptEditorSettings::into_toml() const {
+		return toml::value(
+			{
+				{ "font_face", font_face },
+				{ "font_size", font_size },
+			}
+		);
+	}
+
+	//
 	//
 	//
 
@@ -293,6 +313,7 @@ namespace se::cs {
 		object_window = toml::find_or(v, "object_window", object_window);
 		quickstart = toml::find_or(v, "quickstart", quickstart);
 		render_window = toml::find_or(v, "render_window", render_window);
+		script_editor = toml::find_or(v, "script_editor", script_editor);
 	}
 
 	toml::value Settings_t::into_toml() const {
@@ -303,6 +324,7 @@ namespace se::cs {
 				{ "object_window", object_window },
 				{ "render_window", render_window },
 				{ "quickstart", quickstart },
+				{ "script_editor", script_editor },
 			}
 		);
 	}

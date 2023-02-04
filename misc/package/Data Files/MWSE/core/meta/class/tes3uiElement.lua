@@ -577,7 +577,7 @@ function tes3uiElement:move(to) end
 --- The original Morrowind event handler is saved when you first register an event. It may be optionally invoked with the `forwardEvent` method.  Note that handler may or may not destroy the event widget or the menu, so you should know how it behaves before accessing any elements after a callback.
 --- 
 --- **Example**
---- ```Lua
+--- ```lua
 --- local function onClick(e)
 --- 	-- pre-event code
 --- 	e.source:forwardEvent(e)

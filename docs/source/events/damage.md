@@ -4,6 +4,7 @@
 -->
 
 # damage
+<div class="search_terms" style="display: none">damage</div>
 
 The damage event triggers before an actor is damaged. The damage value can be modified, or the damage can be prevented completely by blocking the event.
 

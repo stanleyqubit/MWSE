@@ -4,6 +4,7 @@
 -->
 
 # niRTTI
+<div class="search_terms" style="display: none">nirtti, rtti</div>
 
 Runtime type information for NetImmerse structures.
 

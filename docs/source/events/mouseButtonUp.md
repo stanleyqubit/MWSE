@@ -4,6 +4,7 @@
 -->
 
 # mouseButtonUp
+<div class="search_terms" style="display: none">mousebuttonup</div>
 
 This event fires when a button on the mouse is released.
 

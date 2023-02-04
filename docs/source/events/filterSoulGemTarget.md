@@ -4,6 +4,7 @@
 -->
 
 # filterSoulGemTarget
+<div class="search_terms" style="display: none">filtersoulgemtarget</div>
 
 This event fires when a soul gem target is filtered
 

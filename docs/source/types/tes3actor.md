@@ -4,6 +4,7 @@
 -->
 
 # tes3actor
+<div class="search_terms" style="display: none">tes3actor, actor</div>
 
 An Actor (not to be confused with a Mobile Actor) is an object that can be cloned and that has an inventory. Creatures, NPCs, and containers are all considered actors.
 

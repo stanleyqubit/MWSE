@@ -4,6 +4,7 @@
 -->
 
 # tes3markData
+<div class="search_terms" style="display: none">tes3markdata, markdata</div>
 
 A simple structure to hold mark/recall data.
 

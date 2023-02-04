@@ -4,6 +4,7 @@
 -->
 
 # enchantChargeUse
+<div class="search_terms" style="display: none">enchantchargeuse</div>
 
 This event is triggered just before an on-strike or on-use enchantment is used by any actor, and also by the UI system to label enchant charges. It allows modification of the charge required to use an enchantment.
 

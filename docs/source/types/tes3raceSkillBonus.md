@@ -4,6 +4,7 @@
 -->
 
 # tes3raceSkillBonus
+<div class="search_terms" style="display: none">tes3raceskillbonus, raceskillbonus</div>
 
 A substructure for a race, storing up to 7 skill bonuses.
 

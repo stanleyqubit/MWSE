@@ -4,6 +4,7 @@
 -->
 
 # keyUp
+<div class="search_terms" style="display: none">keyup</div>
 
 The key event fires when a key is released.
 

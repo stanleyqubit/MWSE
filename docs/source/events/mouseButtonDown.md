@@ -4,6 +4,7 @@
 -->
 
 # mouseButtonDown
+<div class="search_terms" style="display: none">mousebuttondown</div>
 
 This event fires when a button on the mouse is pressed.
 

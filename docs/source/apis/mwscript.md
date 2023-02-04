@@ -4,6 +4,7 @@
 -->
 
 # mwscript
+<div class="search_terms" style="display: none">mwscript</div>
 
 !!! warning
 	This API is deprecated. See below for more information about what to use instead.

@@ -4,6 +4,7 @@
 -->
 
 # cellChanged
+<div class="search_terms" style="display: none">cellchanged</div>
 
 The cellChanged event is triggered when the player changes cells. This might occur from going through a door, using intervention or recall spells, or from scripted repositioning.
 

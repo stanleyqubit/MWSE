@@ -4,6 +4,7 @@
 -->
 
 # tes3inventoryTile
+<div class="search_terms" style="display: none">tes3inventorytile, inventorytile</div>
 
 An inventory tile, connecting an item, its data, and various related UI elements.
 

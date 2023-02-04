@@ -4,6 +4,7 @@
 -->
 
 # equipped
+<div class="search_terms" style="display: none">equipped</div>
 
 The **equipped** event fires after an actor has successfully equipped an item. This event is preceded by the [equip](https://mwse.github.io/MWSE/events/equip) event.
 

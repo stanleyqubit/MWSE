@@ -4,6 +4,7 @@
 -->
 
 # crimeWitnessed
+<div class="search_terms" style="display: none">crimewitnessed</div>
 
 This event fires when a crime is witnessed by an actor.
 

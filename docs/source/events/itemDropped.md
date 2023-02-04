@@ -4,6 +4,7 @@
 -->
 
 # itemDropped
+<div class="search_terms" style="display: none">itemdropped</div>
 
 This event fires when an item is dropped.
 

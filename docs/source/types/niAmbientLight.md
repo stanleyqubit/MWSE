@@ -4,6 +4,7 @@
 -->
 
 # niAmbientLight
+<div class="search_terms" style="display: none">niambientlight, ambientlight</div>
 
 An object that represents an ambient light. This object is fairly simple, and has no location, direction, or attenuation.
 

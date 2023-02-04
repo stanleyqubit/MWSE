@@ -4,6 +4,7 @@
 -->
 
 # preventRest
+<div class="search_terms" style="display: none">preventrest</div>
 
 This event can be used to prevent the player from resting by returning false.
 

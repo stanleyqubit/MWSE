@@ -4,6 +4,7 @@
 -->
 
 # tes3spellList
+<div class="search_terms" style="display: none">tes3spelllist, spelllist</div>
 
 A list of spells. Used by actors, birthsigns, and races.
 

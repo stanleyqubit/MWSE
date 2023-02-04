@@ -4,6 +4,7 @@
 -->
 
 # niGravity
+<div class="search_terms" style="display: none">nigravity, gravity</div>
 
 This modifer applies force, constant over time, to particles in the parent niParticleSystemController.
 

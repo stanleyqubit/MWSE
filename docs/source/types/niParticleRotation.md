@@ -4,6 +4,7 @@
 -->
 
 # niParticleRotation
+<div class="search_terms" style="display: none">niparticlerotation, particlerotation</div>
 
 This modifier rotates particles a constant rate.
 

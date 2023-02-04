@@ -4,6 +4,7 @@
 -->
 
 # tes3soundGenerator
+<div class="search_terms" style="display: none">tes3soundgenerator, soundgenerator</div>
 
 A sound generator object created in the TES3 CS
 

@@ -4,6 +4,7 @@
 -->
 
 # tes3apparatus
+<div class="search_terms" style="display: none">tes3apparatus, apparatus</div>
 
 An apparatus game object.
 

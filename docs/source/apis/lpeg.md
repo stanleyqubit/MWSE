@@ -4,6 +4,7 @@
 -->
 
 # lpeg
+<div class="search_terms" style="display: none">lpeg</div>
 
 Provides pattern-matching based on Parsing Expression Grammars (PEGs).
 	

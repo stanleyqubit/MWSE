@@ -4,6 +4,7 @@
 -->
 
 # tes3repairTool
+<div class="search_terms" style="display: none">tes3repairtool, repairtool</div>
 
 A core repair tool object.
 

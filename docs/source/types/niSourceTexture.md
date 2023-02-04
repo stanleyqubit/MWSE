@@ -4,6 +4,7 @@
 -->
 
 # niSourceTexture
+<div class="search_terms" style="display: none">nisourcetexture, sourcetexture</div>
 
 A texture that represent both static and dynamic content, as NiSourceTexture data objects can have their pixel data modified on the fly to implement dynamic texture behavior.
 

@@ -4,6 +4,7 @@
 -->
 
 # niTriShape
+<div class="search_terms" style="display: none">nitrishape, trishape</div>
 
 An object that allows the sharing of vertices between triangles to create shapes.
 

@@ -4,6 +4,7 @@
 -->
 
 # niGeometry
+<div class="search_terms" style="display: none">nigeometry, geometry</div>
 
 Base class for most geometric objects. Includes basic vertex and normal management.
 	

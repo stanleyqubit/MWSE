@@ -4,6 +4,7 @@
 -->
 
 # niPosKey
+<div class="search_terms" style="display: none">niposkey, poskey</div>
 
 An animation key that holds a position value.
 

@@ -4,6 +4,7 @@
 -->
 
 # tes3splashController
+<div class="search_terms" style="display: none">tes3splashcontroller, splashcontroller</div>
 
 A core game controller responsible for controlling temporary graphics.
 

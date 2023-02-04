@@ -4,6 +4,7 @@
 -->
 
 # tes3magicSourceInstance
+<div class="search_terms" style="display: none">tes3magicsourceinstance, magicsourceinstance</div>
 
 A game structure that keeps track of a magic source on an object.
 

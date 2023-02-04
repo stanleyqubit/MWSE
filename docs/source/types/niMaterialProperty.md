@@ -4,6 +4,7 @@
 -->
 
 # niMaterialProperty
+<div class="search_terms" style="display: none">nimaterialproperty, materialproperty</div>
 
 A rendering property that controls the surface properties of objects affected by the property. These surface properties include translucency, ambient reflective color, diffuse reflective color, emissive color intensity, and specular color.
 

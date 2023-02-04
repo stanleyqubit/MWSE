@@ -4,6 +4,7 @@
 -->
 
 # calcBarterPrice
+<div class="search_terms" style="display: none">calcbarterprice</div>
 
 This event is raised when an item price is being determined when bartering.
 

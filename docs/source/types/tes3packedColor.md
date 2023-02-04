@@ -4,6 +4,7 @@
 -->
 
 # tes3packedColor
+<div class="search_terms" style="display: none">tes3packedcolor, packedcolor</div>
 
 A densely packed structure for single-byte red, green, blue and alpha values. The values are from 0 to 255.
 

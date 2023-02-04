@@ -4,6 +4,7 @@
 -->
 
 # tes3aiPackage
+<div class="search_terms" style="display: none">tes3aipackage, aipackage</div>
 
 An AI package game object.
 

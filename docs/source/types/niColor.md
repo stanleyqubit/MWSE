@@ -4,6 +4,7 @@
 -->
 
 # niColor
+<div class="search_terms" style="display: none">nicolor, color</div>
 
 An object that represents a RGB color. The values are in [0.0, 1.0] range.
 

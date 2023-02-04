@@ -4,6 +4,7 @@
 -->
 
 # tes3weatherAsh
+<div class="search_terms" style="display: none">tes3weatherash, weatherash</div>
 
 A structure that contains weather information for the ashstorm weather type.
 

@@ -4,6 +4,7 @@
 -->
 
 # meshLoad
+<div class="search_terms" style="display: none">meshload</div>
 
 This event is triggered before a mesh is loaded. The path can be changed to instead load a different mesh.
 

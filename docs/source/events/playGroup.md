@@ -4,6 +4,7 @@
 -->
 
 # playGroup
+<div class="search_terms" style="display: none">playgroup</div>
 
 This event is triggered when an animation is about to be played.
 

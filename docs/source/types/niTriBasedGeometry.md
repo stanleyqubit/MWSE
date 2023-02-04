@@ -4,6 +4,7 @@
 -->
 
 # niTriBasedGeometry
+<div class="search_terms" style="display: none">nitribasedgeometry, tribasedgeometry</div>
 
 Base class for all geometry that uses triangles.
 

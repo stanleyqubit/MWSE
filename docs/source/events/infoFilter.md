@@ -4,6 +4,7 @@
 -->
 
 # infoFilter
+<div class="search_terms" style="display: none">infofilter</div>
 
 This event fires when a dialogue info object is filtered.
 

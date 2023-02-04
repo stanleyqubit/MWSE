@@ -4,6 +4,7 @@
 -->
 
 # calcArmorPieceHit
+<div class="search_terms" style="display: none">calcarmorpiecehit</div>
 
 This event is raised just after determining which armor piece, if any, was hit with an attack. The slots can be modified, to draw focus onto specific armor slots.
 

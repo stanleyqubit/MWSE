@@ -4,6 +4,7 @@
 -->
 
 # activationTargetChanged
+<div class="search_terms" style="display: none">activationtargetchanged</div>
 
 This event is raised when the potential activation target for the player changes.
 

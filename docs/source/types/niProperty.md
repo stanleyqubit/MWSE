@@ -4,6 +4,7 @@
 -->
 
 # niProperty
+<div class="search_terms" style="display: none">niproperty, property</div>
 
 A base class representing all rendering properties.
 

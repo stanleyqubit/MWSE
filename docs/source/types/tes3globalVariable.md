@@ -4,6 +4,7 @@
 -->
 
 # tes3globalVariable
+<div class="search_terms" style="display: none">tes3globalvariable, globalvariable</div>
 
 A global variable game object.
 

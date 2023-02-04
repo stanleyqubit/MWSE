@@ -4,6 +4,7 @@
 -->
 
 # tes3ingredient
+<div class="search_terms" style="display: none">tes3ingredient, ingredient</div>
 
 An ingredient game object.
 

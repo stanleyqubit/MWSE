@@ -4,6 +4,7 @@
 -->
 
 # spellTick
+<div class="search_terms" style="display: none">spelltick</div>
 
 The spellTick event happens every frame that an effect is active on a target. This can be used to aid in scripted spells, cancel active spells, or otherwise monitor spell activity on actors.
 

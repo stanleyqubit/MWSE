@@ -4,6 +4,7 @@
 -->
 
 # tes3gameSetting
+<div class="search_terms" style="display: none">tes3gamesetting, gamesetting</div>
 
 A GMST game object.
 

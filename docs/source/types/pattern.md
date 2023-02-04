@@ -4,6 +4,7 @@
 -->
 
 # pattern
+<div class="search_terms" style="display: none">pattern</div>
 
 This represents a Lpeg pattern.
 

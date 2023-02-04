@@ -4,6 +4,7 @@
 -->
 
 # tes3inputConfig
+<div class="search_terms" style="display: none">tes3inputconfig, inputconfig</div>
 
 A structure that represents a configured key binding.
 

@@ -4,6 +4,7 @@
 -->
 
 # tes3npcInstance
+<div class="search_terms" style="display: none">tes3npcinstance, npcinstance</div>
 
 An NPC object that has been cloned. Typically represents an NPC that has been instanced in the world.
 

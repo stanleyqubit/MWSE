@@ -4,6 +4,7 @@
 -->
 
 # determineAction
+<div class="search_terms" style="display: none">determineaction</div>
 
 This event fires when an actor determines an action in a combat session.
 

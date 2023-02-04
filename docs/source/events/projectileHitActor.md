@@ -4,6 +4,7 @@
 -->
 
 # projectileHitActor
+<div class="search_terms" style="display: none">projectilehitactor</div>
 
 The projectileHitActor event fires when a projectile collides with an actor.
 

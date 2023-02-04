@@ -4,6 +4,7 @@
 -->
 
 # niRotatingParticlesData
+<div class="search_terms" style="display: none">nirotatingparticlesdata, rotatingparticlesdata</div>
 
 niRotatingParticlesData objects contain the geometry data necessary to render a niRotatingParticles object. When a niRotatingParticles-based object is created, the actual geometry data is stored in an attached niRotatingParticlesData object.
 

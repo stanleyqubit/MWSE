@@ -4,6 +4,7 @@
 -->
 
 # tes3statistic
+<div class="search_terms" style="display: none">tes3statistic, statistic</div>
 
 A structure that holds statistical information relating to the current and base values of a statistic such as health, fatigue, magicka, or attributes.
 

@@ -4,6 +4,7 @@
 -->
 
 # calcRestInterrupt
+<div class="search_terms" style="display: none">calcrestinterrupt</div>
 
 This event is called when the player is about to start resting. The hour and count of creatures can be modified, or disabled. Blocking this event blocks any interrupting spawn.
 

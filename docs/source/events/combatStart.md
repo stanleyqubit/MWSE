@@ -4,6 +4,7 @@
 -->
 
 # combatStart
+<div class="search_terms" style="display: none">combatstart</div>
 
 The combatStart event occurs when combat is about to begin between two actors. This event allows scripts to prevent combat from starting.
 

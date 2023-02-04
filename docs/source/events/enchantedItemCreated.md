@@ -4,6 +4,7 @@
 -->
 
 # enchantedItemCreated
+<div class="search_terms" style="display: none">enchanteditemcreated</div>
 
 This event is fired when an enchanted item has been created by the player.
 

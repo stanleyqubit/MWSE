@@ -4,6 +4,7 @@
 -->
 
 # tes3light
+<div class="search_terms" style="display: none">tes3light, light</div>
 
 A core light object. This isn't actually a light in the rendering engine, but something like a lamp or torch.
 

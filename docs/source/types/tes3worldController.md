@@ -4,6 +4,7 @@
 -->
 
 # tes3worldController
+<div class="search_terms" style="display: none">tes3worldcontroller, worldcontroller</div>
 
 A core game object used for storing world simulation data.
 

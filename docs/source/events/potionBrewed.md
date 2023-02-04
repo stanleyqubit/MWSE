@@ -4,6 +4,7 @@
 -->
 
 # potionBrewed
+<div class="search_terms" style="display: none">potionbrewed</div>
 
 The potionBrewed event is raised when the player brews a new potion.
 

@@ -4,6 +4,7 @@
 -->
 
 # niParticleBomb
+<div class="search_terms" style="display: none">niparticlebomb, particlebomb</div>
 
 This modifer applies acceleration to particles in the parent niParticleSystemController.
 

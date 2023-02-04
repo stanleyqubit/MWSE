@@ -4,6 +4,7 @@
 -->
 
 # niObjectNET
+<div class="search_terms" style="display: none">niobjectnet, objectnet</div>
 
 An object that has a name, extra data, and controllers.
 

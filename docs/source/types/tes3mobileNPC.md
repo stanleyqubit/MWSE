@@ -4,6 +4,7 @@
 -->
 
 # tes3mobileNPC
+<div class="search_terms" style="display: none">tes3mobilenpc, mobilenpc</div>
 
 A mobile object for an NPC.
 

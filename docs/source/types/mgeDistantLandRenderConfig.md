@@ -4,6 +4,7 @@
 -->
 
 # mgeDistantLandRenderConfig
+<div class="search_terms" style="display: none">mgedistantlandrenderconfig</div>
 
 Allows control of MGE distant land features.
 

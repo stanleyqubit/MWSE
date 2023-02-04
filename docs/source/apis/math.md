@@ -4,6 +4,7 @@
 -->
 
 # math
+<div class="search_terms" style="display: none">math</div>
 
 This library is an interface to the standard C math library. This library has been further extended by MWSE. The functions implemented by MWSE are listed here. It provides all its functions inside the table math.
 

@@ -4,6 +4,7 @@
 -->
 
 # tes3weatherCloudy
+<div class="search_terms" style="display: none">tes3weathercloudy, weathercloudy</div>
 
 A structure that contains weather information for the cloudy weather type.
 

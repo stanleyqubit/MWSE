@@ -4,6 +4,7 @@
 -->
 
 # tes3bodyPartManagerAttachNode
+<div class="search_terms" style="display: none">tes3bodypartmanagerattachnode, bodypartmanagerattachnode</div>
 
 A game object which holds information about equipment attachments to the actor's skeleton.
 

@@ -4,6 +4,7 @@
 -->
 
 # mge.macros
+<div class="search_terms" style="display: none">mge.macros</div>
 
 Access to MGE's macro functions.
 

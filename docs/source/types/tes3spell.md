@@ -4,6 +4,7 @@
 -->
 
 # tes3spell
+<div class="search_terms" style="display: none">tes3spell, spell</div>
 
 A spell game object.
 

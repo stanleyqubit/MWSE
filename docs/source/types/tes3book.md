@@ -4,6 +4,7 @@
 -->
 
 # tes3book
+<div class="search_terms" style="display: none">tes3book, book</div>
 
 A book game object.
 

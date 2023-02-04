@@ -4,6 +4,7 @@
 -->
 
 # jump
+<div class="search_terms" style="display: none">jump</div>
 
 This event is called when an actor tries to jump. The `velocity` and `applyFatigueCost` can be modified.
 

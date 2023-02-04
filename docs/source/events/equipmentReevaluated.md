@@ -4,6 +4,7 @@
 -->
 
 # equipmentReevaluated
+<div class="search_terms" style="display: none">equipmentreevaluated</div>
 
 The **equipmentReevaluated** event fires after an actor has gone through its items and determined if anything in its inventory is better than what it currently has equipped. This event can be used to force equip new, custom equipment slots if needed.
 

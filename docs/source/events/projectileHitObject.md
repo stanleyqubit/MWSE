@@ -4,6 +4,7 @@
 -->
 
 # projectileHitObject
+<div class="search_terms" style="display: none">projectilehitobject</div>
 
 The projectileHitObject event fires when a projectile collides with an object.
 

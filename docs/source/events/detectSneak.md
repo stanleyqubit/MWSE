@@ -4,6 +4,7 @@
 -->
 
 # detectSneak
+<div class="search_terms" style="display: none">detectsneak</div>
 
 This event is invoked whenever an actor is checking if they can detect another actor sneaking.
 

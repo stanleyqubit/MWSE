@@ -4,6 +4,7 @@
 -->
 
 # debug
+<div class="search_terms" style="display: none">debug</div>
 
 This is an extension of Lua Debug library.
 

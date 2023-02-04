@@ -4,6 +4,7 @@
 -->
 
 # tes3worldControllerRenderCameraData
+<div class="search_terms" style="display: none">tes3worldcontrollerrendercameradata, worldcontrollerrendercameradata</div>
 
 A core game object used for storing additional data for camera objects.
 

@@ -4,6 +4,7 @@
 -->
 
 # tes3itemData
+<div class="search_terms" style="display: none">tes3itemdata, itemdata</div>
 
 A set of variables that differentiates one item from another.
 

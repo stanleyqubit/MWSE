@@ -4,6 +4,7 @@
 -->
 
 # calcWalkSpeed
+<div class="search_terms" style="display: none">calcwalkspeed</div>
 
 One of the movement events, **calcWalkSpeed** is used when calculating the base walk speed. Nearly every other movement speed event starts with this, with the exception of [calcFlySpeed](https://mwse.github.io/MWSE/events/calcFlySpeed).
 

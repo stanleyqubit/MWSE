@@ -4,6 +4,7 @@
 -->
 
 # tes3uiFontColor
+<div class="search_terms" style="display: none">tes3uifontcolor, fontcolor</div>
 
 Contains color information of a font.
 

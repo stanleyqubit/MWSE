@@ -4,6 +4,7 @@
 -->
 
 # tes3uiEventData
+<div class="search_terms" style="display: none">tes3uieventdata, eventdata</div>
 
 Contains information from a standard UI callback. This is the parameter passed to callbacks when using `:register`, `:registerBefore`, or `:registerAfter`.
 

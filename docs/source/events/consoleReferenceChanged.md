@@ -4,6 +4,7 @@
 -->
 
 # consoleReferenceChanged
+<div class="search_terms" style="display: none">consolereferencechanged</div>
 
 This event is invoked when the player selects a new reference with the console, or unselects a reference.
 

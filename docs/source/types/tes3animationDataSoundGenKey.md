@@ -4,6 +4,7 @@
 -->
 
 # tes3animationDataSoundGenKey
+<div class="search_terms" style="display: none">tes3animationdatasoundgenkey, animationdatasoundgenkey</div>
 
 A game object which contains information that map actor sounds to animations.
 

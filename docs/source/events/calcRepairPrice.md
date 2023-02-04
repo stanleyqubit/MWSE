@@ -4,6 +4,7 @@
 -->
 
 # calcRepairPrice
+<div class="search_terms" style="display: none">calcrepairprice</div>
 
 This event is called when determining the price of repairing an item. It can be used to override the repair cost.
 

@@ -4,6 +4,7 @@
 -->
 
 # menuEnter
+<div class="search_terms" style="display: none">menuenter</div>
 
 The menuEnter event fires when the player enters menu mode.
 

@@ -4,6 +4,7 @@
 -->
 
 # tes3effect
+<div class="search_terms" style="display: none">tes3effect, effect</div>
 
 A structure that defines information for an effect and its associated variables, typically found on spells, alchemy, and enchantments.
 

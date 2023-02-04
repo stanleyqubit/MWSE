@@ -4,6 +4,7 @@
 -->
 
 # tes3land
+<div class="search_terms" style="display: none">tes3land, land</div>
 
 A heightfield landscape used by an exterior cell.
 

@@ -4,6 +4,7 @@
 -->
 
 # tes3mobileActor
+<div class="search_terms" style="display: none">tes3mobileactor, mobileactor</div>
 
 A mobile object for a creature, NPC, or the player.
 

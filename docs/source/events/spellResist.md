@@ -4,6 +4,7 @@
 -->
 
 # spellResist
+<div class="search_terms" style="display: none">spellresist</div>
 
 This event is used when calculating an actor's magic effect resistance, and allows Lua scripts to override the behavior of magic effect resistance by changing the `resistedPercent` value. This can be used to enable willpower-based resistance checks, provide specific resistances to specific spells, spells that heal instead of harm, and a variety of new mechanics.
 

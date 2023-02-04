@@ -4,6 +4,7 @@
 -->
 
 # niTextureEffect
+<div class="search_terms" style="display: none">nitextureeffect, textureeffect</div>
 
 Represents an effect that uses projected textures such as projected lights (gobos) and shadows, environment maps, and fog maps. Should be in both the children list and effects list of the niTriShape object.
 

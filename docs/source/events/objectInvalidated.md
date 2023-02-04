@@ -4,6 +4,7 @@
 -->
 
 # objectInvalidated
+<div class="search_terms" style="display: none">objectinvalidated</div>
 
 This event is raised when reference is invalidated. This includes being removed from memory. This event can be used to safely remove references from tables.
 

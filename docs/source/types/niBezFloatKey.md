@@ -4,6 +4,7 @@
 -->
 
 # niBezFloatKey
+<div class="search_terms" style="display: none">nibezfloatkey, bezfloatkey</div>
 
 An animation key for bezier curved values.
 

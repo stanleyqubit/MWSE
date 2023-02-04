@@ -4,6 +4,7 @@
 -->
 
 # niSkinPartitionPartition
+<div class="search_terms" style="display: none">niskinpartitionpartition, skinpartitionpartition</div>
 
 Skinning data for a submesh, optimized for hardware skinning.
 

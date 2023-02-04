@@ -4,6 +4,7 @@
 -->
 
 # tes3combatSession
+<div class="search_terms" style="display: none">tes3combatsession, combatsession</div>
 
 A structure that keeps track of combat session data.
 

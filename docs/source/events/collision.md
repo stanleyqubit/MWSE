@@ -4,6 +4,7 @@
 -->
 
 # collision
+<div class="search_terms" style="display: none">collision</div>
 
 This event is triggered on a collision and all the frames during the collision.
 

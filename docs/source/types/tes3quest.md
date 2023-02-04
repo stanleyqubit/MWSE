@@ -4,6 +4,7 @@
 -->
 
 # tes3quest
+<div class="search_terms" style="display: none">tes3quest, quest</div>
 
 A representation of a quest, with associated dialogue and info.
 

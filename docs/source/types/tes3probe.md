@@ -4,6 +4,7 @@
 -->
 
 # tes3probe
+<div class="search_terms" style="display: none">tes3probe, probe</div>
 
 A core lockpick object.
 

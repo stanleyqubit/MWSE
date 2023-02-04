@@ -4,6 +4,7 @@
 -->
 
 # tes3creature
+<div class="search_terms" style="display: none">tes3creature, creature</div>
 
 A creature object that has not been cloned. Typically represents the raw information edited in the construction set.
 

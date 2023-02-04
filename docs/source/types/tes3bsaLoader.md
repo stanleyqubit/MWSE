@@ -4,6 +4,7 @@
 -->
 
 # tes3bsaLoader
+<div class="search_terms" style="display: none">tes3bsaloader, bsaloader</div>
 
 A class responsible for handling the loading of BSA files.
 

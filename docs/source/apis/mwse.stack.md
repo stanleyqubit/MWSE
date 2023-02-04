@@ -4,6 +4,7 @@
 -->
 
 # mwse.stack
+<div class="search_terms" style="display: none">mwse.stack</div>
 
 The stack library provides functions to interact with the mwse mwscript stack, for dealing with custom mwscript extensions.
 

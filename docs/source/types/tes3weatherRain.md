@@ -4,6 +4,7 @@
 -->
 
 # tes3weatherRain
+<div class="search_terms" style="display: none">tes3weatherrain, weatherrain</div>
 
 A structure that contains weather information for the rain weather type.
 

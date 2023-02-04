@@ -4,6 +4,7 @@
 -->
 
 # tes3weatherClear
+<div class="search_terms" style="display: none">tes3weatherclear, weatherclear</div>
 
 A structure that contains weather information for the clear skies weather type.
 

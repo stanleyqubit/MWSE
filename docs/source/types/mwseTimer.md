@@ -4,6 +4,7 @@
 -->
 
 # mwseTimer
+<div class="search_terms" style="display: none">mwsetimer</div>
 
 A Timer is a class used to keep track of callback that should be invoked at a later time.
 

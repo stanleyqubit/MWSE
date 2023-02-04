@@ -4,6 +4,7 @@
 -->
 
 # tes3equipmentStack
+<div class="search_terms" style="display: none">tes3equipmentstack, equipmentstack</div>
 
 A simple container that holds a relationship between an item, and any associated item data.
 

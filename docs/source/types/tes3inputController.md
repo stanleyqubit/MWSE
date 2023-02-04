@@ -4,6 +4,7 @@
 -->
 
 # tes3inputController
+<div class="search_terms" style="display: none">tes3inputcontroller, inputcontroller</div>
 
 A data structure, off of the world controller, that handles input.
 

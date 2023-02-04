@@ -4,6 +4,7 @@
 -->
 
 # cellDeactivated
+<div class="search_terms" style="display: none">celldeactivated</div>
 
 This event is triggered when a cell is deactivated.
 

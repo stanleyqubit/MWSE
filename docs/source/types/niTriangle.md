@@ -4,6 +4,7 @@
 -->
 
 # niTriangle
+<div class="search_terms" style="display: none">nitriangle, triangle</div>
 
 Contains the geometry data for an `NiTriShape` object.
 

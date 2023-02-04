@@ -4,6 +4,7 @@
 -->
 
 # tes3game
+<div class="search_terms" style="display: none">tes3game, game</div>
 
 A core game object used for storing game settings.
 

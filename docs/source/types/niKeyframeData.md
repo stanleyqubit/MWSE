@@ -4,6 +4,7 @@
 -->
 
 # niKeyframeData
+<div class="search_terms" style="display: none">nikeyframedata, keyframedata</div>
 
 A collection of position, rotation, and scale keys used on NiKeyframeControllers.
 

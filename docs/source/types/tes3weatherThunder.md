@@ -4,6 +4,7 @@
 -->
 
 # tes3weatherThunder
+<div class="search_terms" style="display: none">tes3weatherthunder, weatherthunder</div>
 
 A structure that contains weather information for the thunder weather type.
 

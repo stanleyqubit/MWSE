@@ -4,6 +4,7 @@
 -->
 
 # tes3iteratorNode
+<div class="search_terms" style="display: none">tes3iteratornode, iteratornode</div>
 
 A node from a collection, which has a link to the previous and next node, as well as its contained data.
 

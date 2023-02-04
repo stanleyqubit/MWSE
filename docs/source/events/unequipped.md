@@ -4,6 +4,7 @@
 -->
 
 # unequipped
+<div class="search_terms" style="display: none">unequipped</div>
 
 The unequipped event fires after an actor has successfully unequipped an item.
 

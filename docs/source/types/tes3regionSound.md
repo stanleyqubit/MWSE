@@ -4,6 +4,7 @@
 -->
 
 # tes3regionSound
+<div class="search_terms" style="display: none">tes3regionsound, regionsound</div>
 
 A structure that contains region sound information.
 

@@ -4,6 +4,7 @@
 -->
 
 # niParticleModifier
+<div class="search_terms" style="display: none">niparticlemodifier, particlemodifier</div>
 
 Abstract base class for particle system modifiers. It affects every particle in a particle system.
 

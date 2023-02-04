@@ -4,6 +4,7 @@
 -->
 
 # niSphericalCollider
+<div class="search_terms" style="display: none">nisphericalcollider, sphericalcollider</div>
 
 This modifier makes particles bounce off of a sphere.
 

@@ -4,6 +4,7 @@
 -->
 
 # topicAdded
+<div class="search_terms" style="display: none">topicadded</div>
 
 This event is raised when the player gains access to a new dialogue topic.
 

@@ -4,6 +4,7 @@
 -->
 
 # musicSelectTrack
+<div class="search_terms" style="display: none">musicselecttrack</div>
 
 The musicSelectTrack event occurs when new music is needed after a playing music track ends, or the combat situation changes. It allows you to select your own music for the current conditions by setting eventData.music. However, it does not control transitions to combat music, which in the future will be available in another event.
 

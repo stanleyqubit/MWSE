@@ -4,6 +4,7 @@
 -->
 
 # tes3tarray
+<div class="search_terms" style="display: none">tes3tarray, tarray</div>
 
 This class is a template array used for some parts of the API. They are mostly invisible to the user since they can be looped over the same as over standard array-style tables.
 

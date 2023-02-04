@@ -4,6 +4,7 @@
 -->
 
 # tes3weapon
+<div class="search_terms" style="display: none">tes3weapon, weapon</div>
 
 A weapon game object.
 

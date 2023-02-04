@@ -4,6 +4,7 @@
 -->
 
 # mouseAxis
+<div class="search_terms" style="display: none">mouseaxis</div>
 
 The mouseAxis event fires when the mouse is moved, providing deltaX and deltaY values.
 

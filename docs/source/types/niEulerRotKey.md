@@ -4,6 +4,7 @@
 -->
 
 # niEulerRotKey
+<div class="search_terms" style="display: none">nieulerrotkey, eulerrotkey</div>
 
 An animation key for euler rotations.
 

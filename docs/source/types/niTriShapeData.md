@@ -4,6 +4,7 @@
 -->
 
 # niTriShapeData
+<div class="search_terms" style="display: none">nitrishapedata, trishapedata</div>
 
 Contains the geometry data for an `NiTriShape` object.
 

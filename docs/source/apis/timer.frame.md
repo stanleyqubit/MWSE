@@ -4,6 +4,7 @@
 -->
 
 # timer.frame
+<div class="search_terms" style="display: none">timer.frame</div>
 
 Convenience access to frame timer functions. This is the same as passing `type = timer.real` to any of the functions from timer API.
 

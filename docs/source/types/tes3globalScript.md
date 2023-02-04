@@ -4,6 +4,7 @@
 -->
 
 # tes3globalScript
+<div class="search_terms" style="display: none">tes3globalscript, globalscript</div>
 
 A global script object. Any script (in mwscript) that is not attached to any object is a global script.
 

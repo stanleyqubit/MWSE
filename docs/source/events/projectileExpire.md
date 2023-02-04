@@ -4,6 +4,7 @@
 -->
 
 # projectileExpire
+<div class="search_terms" style="display: none">projectileexpire</div>
 
 The projectileExpire event fires just prior to a fired projectile expiring.
 

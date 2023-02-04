@@ -4,6 +4,7 @@
 -->
 
 # niExtraData
+<div class="search_terms" style="display: none">niextradata, extradata</div>
 
 An attachment to NiObjectNETs that allows the storing of arbitrary data onto the given object.
 

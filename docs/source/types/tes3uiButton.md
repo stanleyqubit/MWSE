@@ -4,6 +4,7 @@
 -->
 
 # tes3uiButton
+<div class="search_terms" style="display: none">tes3uibutton, button</div>
 
 A structure containing properties specific to buttons.
 

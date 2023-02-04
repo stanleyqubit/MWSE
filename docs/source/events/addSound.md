@@ -4,6 +4,7 @@
 -->
 
 # addSound
+<div class="search_terms" style="display: none">addsound</div>
 
 This event is triggered when a sound is played by the game or when `tes3.playSound()` is called.
 

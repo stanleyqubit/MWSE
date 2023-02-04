@@ -4,6 +4,7 @@
 -->
 
 # equip
+<div class="search_terms" style="display: none">equip</div>
 
 The equip event fires when an actor is about to equip an item, i.e. just before the item is equipped. This event allows scripts to block equipping. See `equipped`_ for the post-equip event.
 

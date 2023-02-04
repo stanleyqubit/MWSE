@@ -4,6 +4,7 @@
 -->
 
 # potionBrewFailed
+<div class="search_terms" style="display: none">potionbrewfailed</div>
 
 The potionBrewFailed event is raised when the player fails a potion brew attempt.
 

@@ -4,6 +4,7 @@
 -->
 
 # tes3pathGrid
+<div class="search_terms" style="display: none">tes3pathgrid, pathgrid</div>
 
 A navigation graph used for pathfinding through cells. Composed of nodes (waypoints) connected by navigable edges. Pathgrid data is only available when the `isLoaded` property is true.
 

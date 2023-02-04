@@ -4,6 +4,7 @@
 -->
 
 # leveledItemPicked
+<div class="search_terms" style="display: none">leveleditempicked</div>
 
 This event is called after any leveled item list is resolved.
 

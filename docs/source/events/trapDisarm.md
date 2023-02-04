@@ -4,6 +4,7 @@
 -->
 
 # trapDisarm
+<div class="search_terms" style="display: none">trapdisarm</div>
 
 This event fires when a trap is being disarmed.
 

@@ -4,6 +4,7 @@
 -->
 
 # tes3leveledCreature
+<div class="search_terms" style="display: none">tes3leveledcreature, leveledcreature</div>
 
 A leveled creature game object.
 

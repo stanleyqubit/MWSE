@@ -4,6 +4,7 @@
 -->
 
 # tes3vector4
+<div class="search_terms" style="display: none">tes3vector4, vector4</div>
 
 A set of 4 floating-point numbers.
 

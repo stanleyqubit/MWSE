@@ -4,6 +4,7 @@
 -->
 
 # tes3ui.showMessageMenu.params.button
+<div class="search_terms" style="display: none">tes3ui.showmessagemenu.params.button, .showmessagemenu.params.button</div>
 
 Layout for the buttons table passed to `tes3ui.showMessageMenu` function.
 

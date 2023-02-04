@@ -4,6 +4,7 @@
 -->
 
 # filterContentsMenu
+<div class="search_terms" style="display: none">filtercontentsmenu</div>
 
 This event fires when an item in the contents menu is filtered.
 

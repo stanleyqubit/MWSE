@@ -4,6 +4,7 @@
 -->
 
 # calcSpellPrice
+<div class="search_terms" style="display: none">calcspellprice</div>
 
 This event is called when determining the cost of purchasing a spell. The price can be modified.
 

@@ -4,6 +4,7 @@
 -->
 
 # niTexture
+<div class="search_terms" style="display: none">nitexture, texture</div>
 
 Represents all texture objects that are created from a file or a block of in-memory pixel data.
 

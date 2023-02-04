@@ -4,6 +4,7 @@
 -->
 
 # tes3weatherController
+<div class="search_terms" style="display: none">tes3weathercontroller, weathercontroller</div>
 
 A data structure that handles the weather.
 

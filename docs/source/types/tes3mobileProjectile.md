@@ -4,6 +4,7 @@
 -->
 
 # tes3mobileProjectile
+<div class="search_terms" style="display: none">tes3mobileprojectile, mobileprojectile</div>
 
 A mobile object for a physical projectile.
 

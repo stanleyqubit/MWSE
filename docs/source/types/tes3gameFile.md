@@ -4,6 +4,7 @@
 -->
 
 # tes3gameFile
+<div class="search_terms" style="display: none">tes3gamefile, gamefile</div>
 
 Represents a loaded ESM, ESP, or ESS file.
 

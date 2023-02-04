@@ -4,6 +4,7 @@
 -->
 
 # niParticleSystemController
+<div class="search_terms" style="display: none">niparticlesystemcontroller, particlesystemcontroller</div>
 
 The niParticleSystemController animates an niParticles-based object. The controller handles birth and death, spawning and motion.
 

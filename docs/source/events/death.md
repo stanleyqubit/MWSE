@@ -4,6 +4,7 @@
 -->
 
 # death
+<div class="search_terms" style="display: none">death</div>
 
 This event triggers when an actor dies.
 

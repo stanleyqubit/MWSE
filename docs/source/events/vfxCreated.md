@@ -4,6 +4,7 @@
 -->
 
 # vfxCreated
+<div class="search_terms" style="display: none">vfxcreated</div>
 
 The vfxCreated event fires when a managed visual effect is created by the game engine or through `tes3.createVisualEffect`.
 

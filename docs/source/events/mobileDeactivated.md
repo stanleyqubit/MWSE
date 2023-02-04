@@ -4,6 +4,7 @@
 -->
 
 # mobileDeactivated
+<div class="search_terms" style="display: none">mobiledeactivated</div>
 
 This event is called when a mobile object is deactivated. This includes NPCs, creatures and projectiles, but not the player. Typically this happens when an actor dies, a creature gets unsummoned, a projectile collides with something or expires or when the player transitions from one cell to another, causing actors in previously visited cells to get deactivated.
 

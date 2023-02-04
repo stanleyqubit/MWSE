@@ -4,6 +4,7 @@
 -->
 
 # tes3uiScrollPane
+<div class="search_terms" style="display: none">tes3uiscrollpane, scrollpane</div>
 
 A structure containing properties specific to scroll panes.
 

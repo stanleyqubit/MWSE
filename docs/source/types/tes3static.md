@@ -4,6 +4,7 @@
 -->
 
 # tes3static
+<div class="search_terms" style="display: none">tes3static, static</div>
 
 A static game object. A non-animated object like a building or rock.
 

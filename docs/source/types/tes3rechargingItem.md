@@ -4,6 +4,7 @@
 -->
 
 # tes3rechargingItem
+<div class="search_terms" style="display: none">tes3rechargingitem, rechargingitem</div>
 
 Data for a recharging item. Not necessarily an item owned by the player.
 

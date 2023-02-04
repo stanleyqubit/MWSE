@@ -4,6 +4,7 @@
 -->
 
 # tes3weather
+<div class="search_terms" style="display: none">tes3weather, weather</div>
 
 A structure that contains base weather information shared by inheriting weather structures.
 

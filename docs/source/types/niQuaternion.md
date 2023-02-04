@@ -4,6 +4,7 @@
 -->
 
 # niQuaternion
+<div class="search_terms" style="display: none">niquaternion, quaternion</div>
 
 A rotation in quaternion representation.
 

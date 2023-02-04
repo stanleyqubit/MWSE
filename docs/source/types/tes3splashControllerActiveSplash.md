@@ -4,6 +4,7 @@
 -->
 
 # tes3splashControllerActiveSplash
+<div class="search_terms" style="display: none">tes3splashcontrolleractivesplash, splashcontrolleractivesplash</div>
 
 An object representing an active splash, such as a blood particle.
 

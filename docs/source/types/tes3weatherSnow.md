@@ -4,6 +4,7 @@
 -->
 
 # tes3weatherSnow
+<div class="search_terms" style="display: none">tes3weathersnow, weathersnow</div>
 
 A structure that contains weather information for the snow weather type.
 

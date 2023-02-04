@@ -4,6 +4,7 @@
 -->
 
 # tes3scriptContext
+<div class="search_terms" style="display: none">tes3scriptcontext, scriptcontext</div>
 
 A script context object, which allows variables to be get/set using the variable name.
 

@@ -4,6 +4,7 @@
 -->
 
 # tes3uiTextSelect
+<div class="search_terms" style="display: none">tes3uitextselect, textselect</div>
 
 A structure containing properties specific to text selects.
 

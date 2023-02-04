@@ -4,6 +4,7 @@
 -->
 
 # loaded
+<div class="search_terms" style="display: none">loaded</div>
 
 The loaded event fires after the game has been successfully loaded. This event is preceded by the load event.
 

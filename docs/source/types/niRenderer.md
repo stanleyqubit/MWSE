@@ -4,6 +4,7 @@
 -->
 
 # niRenderer
+<div class="search_terms" style="display: none">nirenderer, renderer</div>
 
 The Morrowind's renderer class.
 

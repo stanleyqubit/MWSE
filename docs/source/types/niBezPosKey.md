@@ -4,6 +4,7 @@
 -->
 
 # niBezPosKey
+<div class="search_terms" style="display: none">nibezposkey, bezposkey</div>
 
 An animation key for bezier curved position.
 

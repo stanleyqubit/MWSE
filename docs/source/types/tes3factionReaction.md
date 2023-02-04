@@ -4,6 +4,7 @@
 -->
 
 # tes3factionReaction
+<div class="search_terms" style="display: none">tes3factionreaction, factionreaction</div>
 
 A container mapping a reputation for an associated faction.
 

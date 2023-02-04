@@ -4,6 +4,7 @@
 -->
 
 # calcHitChance
+<div class="search_terms" style="display: none">calchitchance</div>
 
 This event is raised when determining the hit chance for an actor.
 

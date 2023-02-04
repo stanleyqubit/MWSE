@@ -4,6 +4,7 @@
 -->
 
 # infoLinkResolve
+<div class="search_terms" style="display: none">infolinkresolve</div>
 
 This event fires when a dialogue hyperlink is being resolved to a topic, during UI layout (not on link activation).
 

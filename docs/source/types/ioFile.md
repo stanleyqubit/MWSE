@@ -4,6 +4,7 @@
 -->
 
 # ioFile
+<div class="search_terms" style="display: none">iofile</div>
 
 An object that represents an open file.
 

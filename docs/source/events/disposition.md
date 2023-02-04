@@ -4,6 +4,7 @@
 -->
 
 # disposition
+<div class="search_terms" style="display: none">disposition</div>
 
 This event is triggered after an NPC's disposition is calculated. This is done frequently. The disposition value can be changed to alter the resulting value. The disposition should be consistent between calls.
 

@@ -4,6 +4,7 @@
 -->
 
 # journal
+<div class="search_terms" style="display: none">journal</div>
 
 The journal event is invoked when a journal state progresses.
 

@@ -4,6 +4,7 @@
 -->
 
 # niTES3ExtraData
+<div class="search_terms" style="display: none">nites3extradata, tes3extradata</div>
 
 A simple extra data that stores a `tes3reference` object.
 

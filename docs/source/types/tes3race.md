@@ -4,6 +4,7 @@
 -->
 
 # tes3race
+<div class="search_terms" style="display: none">tes3race, race</div>
 
 A core object representing a character race.
 

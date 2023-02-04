@@ -4,6 +4,7 @@
 -->
 
 # bodyPartsUpdated
+<div class="search_terms" style="display: none">bodypartsupdated</div>
 
 This event is triggered when an actor's body parts have finished updating. This typically triggers when an actor is first rendered, or when their equipment changes.
 

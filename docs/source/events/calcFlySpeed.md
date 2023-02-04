@@ -4,6 +4,7 @@
 -->
 
 # calcFlySpeed
+<div class="search_terms" style="display: none">calcflyspeed</div>
 
 One of the movement events, **calcFlySpeed** is used when calculating movement speeds when levitating or otherwise flying.
 

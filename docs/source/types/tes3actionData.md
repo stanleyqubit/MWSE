@@ -4,6 +4,7 @@
 -->
 
 # tes3actionData
+<div class="search_terms" style="display: none">tes3actiondata, actiondata</div>
 
 A substructure of mobile actors that provides information about the current or previous action.
 

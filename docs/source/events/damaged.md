@@ -4,6 +4,7 @@
 -->
 
 # damaged
+<div class="search_terms" style="display: none">damaged</div>
 
 The damaged event triggers after an actor has been damaged.
 

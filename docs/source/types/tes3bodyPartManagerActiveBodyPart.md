@@ -4,6 +4,7 @@
 -->
 
 # tes3bodyPartManagerActiveBodyPart
+<div class="search_terms" style="display: none">tes3bodypartmanageractivebodypart, bodypartmanageractivebodypart</div>
 
 A game object which holds information about an active body part, it's associated item and scene node.
 

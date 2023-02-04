@@ -4,6 +4,7 @@
 -->
 
 # tes3ui.showMessageMenu.params.tooltip
+<div class="search_terms" style="display: none">tes3ui.showmessagemenu.params.tooltip, .showmessagemenu.params.tooltip</div>
 
 Layout for the tooltip table passed to `tes3ui.showMessageMenu` function.
 

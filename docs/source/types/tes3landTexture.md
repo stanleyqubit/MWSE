@@ -4,6 +4,7 @@
 -->
 
 # tes3landTexture
+<div class="search_terms" style="display: none">tes3landtexture, landtexture</div>
 
 Data for a texture used by a landscape object.
 

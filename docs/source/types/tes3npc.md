@@ -4,6 +4,7 @@
 -->
 
 # tes3npc
+<div class="search_terms" style="display: none">tes3npc, npc</div>
 
 An NPC object that has not been cloned. Typically represents the raw information edited in the construction set.
 

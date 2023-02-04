@@ -4,6 +4,7 @@
 -->
 
 # niStencilProperty
+<div class="search_terms" style="display: none">nistencilproperty, stencilproperty</div>
 
 A rendering property that controls the use of a stencil buffer when rendering. Stencil buffering allows effects such as cutouts in a screen, decal polygons without Z-buffer "aliasing", and advanced effects such as volumetric shadows. It also includes a draw-mode setting to allow the game engine to control the culling mode of a set of geometry.
 

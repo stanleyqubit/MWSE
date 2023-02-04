@@ -4,6 +4,7 @@
 -->
 
 # tes3itemStack
+<div class="search_terms" style="display: none">tes3itemstack, itemstack</div>
 
 A complex container that holds a relationship between an item, and zero or more associated item datas.
 

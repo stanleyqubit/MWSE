@@ -4,6 +4,7 @@
 -->
 
 # tes3script
+<div class="search_terms" style="display: none">tes3script, script</div>
 
 A script object.
 

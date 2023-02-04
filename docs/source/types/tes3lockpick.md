@@ -4,6 +4,7 @@
 -->
 
 # tes3lockpick
+<div class="search_terms" style="display: none">tes3lockpick, lockpick</div>
 
 A core lockpick object.
 

@@ -4,6 +4,7 @@
 -->
 
 # tes3aiPackageTravel
+<div class="search_terms" style="display: none">tes3aipackagetravel, aipackagetravel</div>
 
 An AI Travel package game object. Sets an actor to travel to a certain destination.
 

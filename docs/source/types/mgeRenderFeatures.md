@@ -4,6 +4,7 @@
 -->
 
 # mgeRenderFeatures
+<div class="search_terms" style="display: none">mgerenderfeatures</div>
 
 Allows control of MGE render features.
 

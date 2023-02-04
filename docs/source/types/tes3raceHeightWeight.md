@@ -4,6 +4,7 @@
 -->
 
 # tes3raceHeightWeight
+<div class="search_terms" style="display: none">tes3raceheightweight, raceheightweight</div>
 
 A substructure for a race, storing a height or weight for male and female actors.
 

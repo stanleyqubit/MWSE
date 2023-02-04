@@ -4,6 +4,7 @@
 -->
 
 # calcTrainingPrice
+<div class="search_terms" style="display: none">calctrainingprice</div>
 
 This event is called when determining the cost of training, and can be used to modify the given price.
 

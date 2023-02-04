@@ -4,6 +4,7 @@
 -->
 
 # niColorData
+<div class="search_terms" style="display: none">nicolordata, colordata</div>
 
 The NiColorData class provides a shareable wrapper for color animation data. Usually found in niParticleColorModifiers.
 

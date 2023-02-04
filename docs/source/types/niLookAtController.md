@@ -4,6 +4,7 @@
 -->
 
 # niLookAtController
+<div class="search_terms" style="display: none">nilookatcontroller, lookatcontroller</div>
 
 Orients an axis of the controlled object towards a lookAt target. The axis is selectable.
 

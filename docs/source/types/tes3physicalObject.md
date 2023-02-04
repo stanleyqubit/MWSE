@@ -4,6 +4,7 @@
 -->
 
 # tes3physicalObject
+<div class="search_terms" style="display: none">tes3physicalobject, physicalobject</div>
 
 Almost anything that can be represented in the Construction Set is based on this structure.
 

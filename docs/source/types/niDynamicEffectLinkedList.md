@@ -4,6 +4,7 @@
 -->
 
 # niDynamicEffectLinkedList
+<div class="search_terms" style="display: none">nidynamiceffectlinkedlist, dynamiceffectlinkedlist</div>
 
 A linked list of dynamic effects.
 

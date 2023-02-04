@@ -4,6 +4,7 @@
 -->
 
 # collideWater
+<div class="search_terms" style="display: none">collidewater</div>
 
 This event is triggered when a mobile object collides with water and all the frames during the collision.
 

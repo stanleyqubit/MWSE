@@ -4,6 +4,7 @@
 -->
 
 # uiRefreshed
+<div class="search_terms" style="display: none">uirefreshed</div>
 
 This event is invoked after a UI menu has been created or recreated. This can be useful for when important game subcomponents are destroyed and remade, without the entire UI being activated.
 

@@ -4,6 +4,7 @@
 -->
 
 # magicEffectRemoved
+<div class="search_terms" style="display: none">magiceffectremoved</div>
 
 This event triggers when a magic effect has been removed from an actor. This includes magic effects that have been resisted or are part of abilities like racial passives and diseases.
 

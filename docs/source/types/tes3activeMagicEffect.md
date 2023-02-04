@@ -4,6 +4,7 @@
 -->
 
 # tes3activeMagicEffect
+<div class="search_terms" style="display: none">tes3activemagiceffect, activemagiceffect</div>
 
 An active magic effect.
 

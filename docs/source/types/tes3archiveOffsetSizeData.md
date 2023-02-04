@@ -4,6 +4,7 @@
 -->
 
 # tes3archiveOffsetSizeData
+<div class="search_terms" style="display: none">tes3archiveoffsetsizedata, archiveoffsetsizedata</div>
 
 A pair of size and offset data for an entry stored in a BSA file.
 

@@ -4,6 +4,7 @@
 -->
 
 # spellCast
+<div class="search_terms" style="display: none">spellcast</div>
 
 This event is triggered just before a spell cast is resolved, at the end of the casting animation. It can control the success chance of the spell cast.
 

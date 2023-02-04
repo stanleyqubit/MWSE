@@ -4,6 +4,7 @@
 -->
 
 # niVertexColorProperty
+<div class="search_terms" style="display: none">nivertexcolorproperty, vertexcolorproperty</div>
 
 A rendering property that allows the application to control the method used to compute colors for each vertex in a geometry object. This class enables effects such as static pre-lighting, dynamic lighting, etc.
 

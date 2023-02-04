@@ -4,6 +4,7 @@
 -->
 
 # addTempSound
+<div class="search_terms" style="display: none">addtempsound</div>
 
 This event is triggered when the game is about to play a sound from a sound generator.
 

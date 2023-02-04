@@ -4,6 +4,7 @@
 -->
 
 # mgeWeatherConfig
+<div class="search_terms" style="display: none">mgeweatherconfig</div>
 
 Allows control of MGE weather features.
 

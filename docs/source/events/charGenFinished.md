@@ -4,6 +4,7 @@
 -->
 
 # charGenFinished
+<div class="search_terms" style="display: none">chargenfinished</div>
 
 This event is triggered when the character generation process at the start of the game has been finished. In an unmodded version of Morrowind, this event would trigger after leaving the 'Census and Excise Office' in 'Seyda Neen'.
 

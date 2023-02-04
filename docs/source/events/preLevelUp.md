@@ -4,6 +4,7 @@
 -->
 
 # preLevelUp
+<div class="search_terms" style="display: none">prelevelup</div>
 
 This event is triggered just before the player levels up.
 

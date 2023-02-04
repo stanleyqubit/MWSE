@@ -4,6 +4,7 @@
 -->
 
 # tes3lightNode
+<div class="search_terms" style="display: none">tes3lightnode, lightnode</div>
 
 An attachment-capable structure that maintains dynamic lights.
 

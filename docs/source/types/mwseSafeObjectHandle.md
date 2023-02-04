@@ -4,6 +4,7 @@
 -->
 
 # mwseSafeObjectHandle
+<div class="search_terms" style="display: none">mwsesafeobjecthandle</div>
 
 A handle to safely operate on ([tes3object](https://mwse.github.io/MWSE/types/tes3object/)).
 

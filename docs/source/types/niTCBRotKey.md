@@ -4,6 +4,7 @@
 -->
 
 # niTCBRotKey
+<div class="search_terms" style="display: none">nitcbrotkey, tcbrotkey</div>
 
 An animation key for tension-, continuity-, and bias-derived rotating.
 

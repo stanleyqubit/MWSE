@@ -4,6 +4,7 @@
 -->
 
 # spellCreated
+<div class="search_terms" style="display: none">spellcreated</div>
 
 This event is triggered when a new spell is created using spellmaking services or by a script using `tes3spell.create()`.
 

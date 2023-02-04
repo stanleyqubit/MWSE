@@ -4,6 +4,7 @@
 -->
 
 # json
+<div class="search_terms" style="display: none">json</div>
 
 Provides support for interacting with json data through an extended dkjson module.
 

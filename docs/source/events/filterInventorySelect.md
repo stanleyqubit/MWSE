@@ -4,6 +4,7 @@
 -->
 
 # filterInventorySelect
+<div class="search_terms" style="display: none">filterinventoryselect</div>
 
 This event fires when an inventory filter has been selected for an item.
 

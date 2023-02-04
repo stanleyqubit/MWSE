@@ -4,6 +4,7 @@
 -->
 
 # lockPick
+<div class="search_terms" style="display: none">lockpick</div>
 
 This event fires when a lock is being picked.
 

@@ -4,6 +4,7 @@
 -->
 
 # tes3mobManager
+<div class="search_terms" style="display: none">tes3mobmanager, mobmanager</div>
 
 The manager responsible for mobile objects and collision.
 

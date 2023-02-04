@@ -4,6 +4,7 @@
 -->
 
 # uiEvent
+<div class="search_terms" style="display: none">uievent</div>
 
 uiEvent is triggered through various UI events. This includes scrolling through panes, clicking buttons, selecting icons, or a host of other UI-related activities.
 

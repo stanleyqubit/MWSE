@@ -4,6 +4,7 @@
 -->
 
 # niAVObject
+<div class="search_terms" style="display: none">niavobject, avobject</div>
 
 The typical base type for most NetImmerse scene graph objects.
 

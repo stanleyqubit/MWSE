@@ -4,6 +4,7 @@
 -->
 
 # infoResponse
+<div class="search_terms" style="display: none">inforesponse</div>
 
 This event fires when a dialogue response is triggered.
 

@@ -4,6 +4,7 @@
 -->
 
 # repair
+<div class="search_terms" style="display: none">repair</div>
 
 This event is invoked when an item is being repaired. Currently, the event only fires when the player repairs an item.
 

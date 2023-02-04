@@ -4,6 +4,7 @@
 -->
 
 # calcArmorRating
+<div class="search_terms" style="display: none">calcarmorrating</div>
 
 This event is fired before an actor's armor rating has been calculated, and can be used to override the armor that the actor is given.
 

@@ -4,6 +4,7 @@
 -->
 
 # mwseLuaExecutor
+<div class="search_terms" style="display: none">mwseluaexecutor</div>
 
 A handle to a command excuted using `os.execute` configured to run asynchronously.
 

@@ -4,6 +4,7 @@
 -->
 
 # uiActivated
+<div class="search_terms" style="display: none">uiactivated</div>
 
 This event is invoked after a UI menu has been built or made visible, at the point that all menu elements contain updated data.
 

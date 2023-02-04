@@ -4,6 +4,7 @@
 -->
 
 # tes3faction
+<div class="search_terms" style="display: none">tes3faction, faction</div>
 
 A faction game object.
 

@@ -4,6 +4,7 @@
 -->
 
 # dialogueEnvironmentCreated
+<div class="search_terms" style="display: none">dialogueenvironmentcreated</div>
 
 This event is fired when a dialogue with lua scripting is about to be executed. It allows third party code to inject themselves into the dialogue environment, so new functionality can be added more easily for dialogue scripters.
 

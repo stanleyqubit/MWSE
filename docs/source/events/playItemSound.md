@@ -4,6 +4,7 @@
 -->
 
 # playItemSound
+<div class="search_terms" style="display: none">playitemsound</div>
 
 This event is triggered when the game is about to play a sound from an item. Can be blocked to play custom sound instead.
 

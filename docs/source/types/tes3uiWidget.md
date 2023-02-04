@@ -4,6 +4,7 @@
 -->
 
 # tes3uiWidget
+<div class="search_terms" style="display: none">tes3uiwidget, widget</div>
 
 A UI widget is a special interface to an element that offers functionality in a more friendly way.
 

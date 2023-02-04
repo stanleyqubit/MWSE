@@ -4,6 +4,7 @@
 -->
 
 # initialized
+<div class="search_terms" style="display: none">initialized</div>
 
 The initialized event fires when game code has finished initializing, and all .esm and .esp files have been loaded.
 

@@ -4,6 +4,7 @@
 -->
 
 # tes3wearablePart
+<div class="search_terms" style="display: none">tes3wearablepart, wearablepart</div>
 
 A container class that maps a body part id to its male and female body parts.
 

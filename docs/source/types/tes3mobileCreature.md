@@ -4,6 +4,7 @@
 -->
 
 # tes3mobileCreature
+<div class="search_terms" style="display: none">tes3mobilecreature, mobilecreature</div>
 
 A mobile object for a creature.
 

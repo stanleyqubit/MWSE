@@ -4,6 +4,7 @@
 -->
 
 # niRotKey
+<div class="search_terms" style="display: none">nirotkey, rotkey</div>
 
 An animation key that holds a rotation value.
 

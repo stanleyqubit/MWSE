@@ -4,6 +4,7 @@
 -->
 
 # lfsLock
+<div class="search_terms" style="display: none">lfslock</div>
 
 An object that represents a file lock.
 

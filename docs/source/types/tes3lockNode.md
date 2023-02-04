@@ -4,6 +4,7 @@
 -->
 
 # tes3lockNode
+<div class="search_terms" style="display: none">tes3locknode, locknode</div>
 
 An attachment-capable structure that maintains lock and trap data.
 

@@ -4,6 +4,7 @@
 -->
 
 # tes3region
+<div class="search_terms" style="display: none">tes3region, region</div>
 
 A structure that contains region information.
 

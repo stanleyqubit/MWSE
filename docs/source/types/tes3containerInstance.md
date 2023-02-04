@@ -4,6 +4,7 @@
 -->
 
 # tes3containerInstance
+<div class="search_terms" style="display: none">tes3containerinstance, containerinstance</div>
 
 A container object that has been cloned. Typically represents a container that has been instanced by being opened by the player.
 

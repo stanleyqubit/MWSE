@@ -4,6 +4,7 @@
 -->
 
 # niTexturingProperty
+<div class="search_terms" style="display: none">nitexturingproperty, texturingproperty</div>
 
 A rendering property that controls the methods used to filter texture pixels, and blend texture colors and vertex colors.
 

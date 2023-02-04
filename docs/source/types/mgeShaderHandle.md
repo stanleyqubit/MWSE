@@ -4,6 +4,7 @@
 -->
 
 # mgeShaderHandle
+<div class="search_terms" style="display: none">mgeshaderhandle</div>
 
 A loaded MGE shader.
 

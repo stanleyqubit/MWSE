@@ -4,6 +4,7 @@
 -->
 
 # tes3mobileSpellProjectile
+<div class="search_terms" style="display: none">tes3mobilespellprojectile, mobilespellprojectile</div>
 
 A mobile object for a spell projectile.
 

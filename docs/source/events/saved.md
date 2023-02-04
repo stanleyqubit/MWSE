@@ -4,6 +4,7 @@
 -->
 
 # saved
+<div class="search_terms" style="display: none">saved</div>
 
 The saved event fires after the game has successfully been saved. This event is preceded by the save event.
 

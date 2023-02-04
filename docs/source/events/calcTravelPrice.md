@@ -4,6 +4,7 @@
 -->
 
 # calcTravelPrice
+<div class="search_terms" style="display: none">calctravelprice</div>
 
 This event is called when determining the price of traveling, and can be used to modify the given price.
 

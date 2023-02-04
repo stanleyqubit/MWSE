@@ -4,6 +4,7 @@
 -->
 
 # enchantedItemCreateFailed
+<div class="search_terms" style="display: none">enchanteditemcreatefailed</div>
 
 This event is fired when an enchanted item could not be created.
 

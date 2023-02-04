@@ -4,6 +4,7 @@
 -->
 
 # keyDown
+<div class="search_terms" style="display: none">keydown</div>
 
 The key event fires when a key is pressed.
 

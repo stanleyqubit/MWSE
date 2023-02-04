@@ -4,6 +4,7 @@
 -->
 
 # tes3uiCycleButton
+<div class="search_terms" style="display: none">tes3uicyclebutton, cyclebutton</div>
 
 A structure containing properties specific to cycle buttons.
 

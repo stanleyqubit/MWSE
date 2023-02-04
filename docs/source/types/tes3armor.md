@@ -4,6 +4,7 @@
 -->
 
 # tes3armor
+<div class="search_terms" style="display: none">tes3armor, armor</div>
 
 An armor game object.
 

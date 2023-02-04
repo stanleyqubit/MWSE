@@ -4,6 +4,7 @@
 -->
 
 # weatherTransitionFinished
+<div class="search_terms" style="display: none">weathertransitionfinished</div>
 
 The **weatherTransitionFinished** event occurs when the currently simulated weather finished transitioning to a new weather.
 

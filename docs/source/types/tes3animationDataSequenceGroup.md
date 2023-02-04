@@ -4,6 +4,7 @@
 -->
 
 # tes3animationDataSequenceGroup
+<div class="search_terms" style="display: none">tes3animationdatasequencegroup, animationdatasequencegroup</div>
 
 A game object which contains niSequence objects for each animation body section.
 

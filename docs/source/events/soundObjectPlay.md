@@ -4,6 +4,7 @@
 -->
 
 # soundObjectPlay
+<div class="search_terms" style="display: none">soundobjectplay</div>
 
 This event triggers before certain object sounds are about to be played. For example, item pickup sounds.
 

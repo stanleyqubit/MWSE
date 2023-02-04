@@ -4,6 +4,7 @@
 -->
 
 # tes3aiPlanner
+<div class="search_terms" style="display: none">tes3aiplanner, aiplanner</div>
 
 A game object which contains information on actor's current and assigned AI packages.
 

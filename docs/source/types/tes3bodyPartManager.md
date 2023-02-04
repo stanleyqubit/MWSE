@@ -4,6 +4,7 @@
 -->
 
 # tes3bodyPartManager
+<div class="search_terms" style="display: none">tes3bodypartmanager, bodypartmanager</div>
 
 A game object which holds information about body parts.
 

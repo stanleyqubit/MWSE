@@ -4,6 +4,7 @@
 -->
 
 # niFloatKey
+<div class="search_terms" style="display: none">nifloatkey, floatkey</div>
 
 A simple animation key, that holds an arbitrary floating point value.
 

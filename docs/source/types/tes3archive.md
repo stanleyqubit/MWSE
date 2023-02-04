@@ -4,6 +4,7 @@
 -->
 
 # tes3archive
+<div class="search_terms" style="display: none">tes3archive, archive</div>
 
 Loaded data from a BSA file.
 

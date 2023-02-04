@@ -4,6 +4,7 @@
 -->
 
 # tes3mobileObject
+<div class="search_terms" style="display: none">tes3mobileobject, mobileobject</div>
 
 The base object from which all other mobiles (AI/movement using) structures derive.
 

@@ -4,6 +4,7 @@
 -->
 
 # mgeShadersConfig
+<div class="search_terms" style="display: none">mgeshadersconfig</div>
 
 Allows control of MGE shader features.
 

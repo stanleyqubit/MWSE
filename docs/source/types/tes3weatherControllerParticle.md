@@ -4,6 +4,7 @@
 -->
 
 # tes3weatherControllerParticle
+<div class="search_terms" style="display: none">tes3weathercontrollerparticle, weathercontrollerparticle</div>
 
 A data structure that represents a weather particle, such as a rain drop or snow flake.
 

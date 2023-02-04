@@ -4,6 +4,7 @@
 -->
 
 # tes3class
+<div class="search_terms" style="display: none">tes3class, class</div>
 
 A core object representing a character class.
 

@@ -4,6 +4,7 @@
 -->
 
 # tes3aiPackageWanderIdleNode
+<div class="search_terms" style="display: none">tes3aipackagewanderidlenode, aipackagewanderidlenode</div>
 
 An AI Wander package idle node game object. Contains information on the chance that the actor will wander at that idle node.
 

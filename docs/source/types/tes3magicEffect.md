@@ -4,6 +4,7 @@
 -->
 
 # tes3magicEffect
+<div class="search_terms" style="display: none">tes3magiceffect, magiceffect</div>
 
 A core magic effect definition.
 

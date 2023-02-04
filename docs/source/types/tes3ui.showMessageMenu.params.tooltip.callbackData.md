@@ -4,6 +4,7 @@
 -->
 
 # tes3ui.showMessageMenu.params.tooltip.callbackData
+<div class="search_terms" style="display: none">tes3ui.showmessagemenu.params.tooltip.callbackdata, .showmessagemenu.params.tooltip.callbackdata</div>
 
 Layout for the table passed to tooltip callback function of buttons in menu created with `tes3ui.showMessageMenu` function.
 

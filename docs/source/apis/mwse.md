@@ -4,6 +4,7 @@
 -->
 
 # mwse
+<div class="search_terms" style="display: none">mwse</div>
 
 The mwse library provides methods for interacting with MWSE itself, rather than direct TES3 objects.
 

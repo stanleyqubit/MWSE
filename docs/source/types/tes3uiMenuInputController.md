@@ -4,6 +4,7 @@
 -->
 
 # tes3uiMenuInputController
+<div class="search_terms" style="display: none">tes3uimenuinputcontroller, menuinputcontroller</div>
 
 A core came structure responsible for managing the input around menu elements.
 

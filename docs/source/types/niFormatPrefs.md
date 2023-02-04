@@ -4,6 +4,7 @@
 -->
 
 # niFormatPrefs
+<div class="search_terms" style="display: none">niformatprefs, formatprefs</div>
 
 A class that represents a set of preferences for texture formats. These preferences dictate levels of pixel accuracy.
 

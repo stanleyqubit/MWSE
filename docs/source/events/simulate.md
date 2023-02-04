@@ -4,6 +4,7 @@
 -->
 
 # simulate
+<div class="search_terms" style="display: none">simulate</div>
 
 The simulate event occurs at the start of every frame, excluding when the game is paused or in menu mode.
 

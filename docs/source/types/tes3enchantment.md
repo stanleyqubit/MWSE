@@ -4,6 +4,7 @@
 -->
 
 # tes3enchantment
+<div class="search_terms" style="display: none">tes3enchantment, enchantment</div>
 
 An enchantment game object.
 

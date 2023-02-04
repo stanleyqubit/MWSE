@@ -4,6 +4,7 @@
 -->
 
 # table
+<div class="search_terms" style="display: none">table</div>
 
 This library provides generic functions for table manipulation. It provides all its functions inside the table table.
 

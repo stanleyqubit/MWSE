@@ -4,6 +4,7 @@
 -->
 
 # niDynamicEffect
+<div class="search_terms" style="display: none">nidynamiceffect, dynamiceffect</div>
 
 Base class for dynamic effects such as NiLights or projected textures effects.
 

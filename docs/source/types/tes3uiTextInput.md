@@ -4,6 +4,7 @@
 -->
 
 # tes3uiTextInput
+<div class="search_terms" style="display: none">tes3uitextinput, textinput</div>
 
 A structure containing properties specific to text inputs.
 

@@ -4,6 +4,7 @@
 -->
 
 # tes3weatherOvercast
+<div class="search_terms" style="display: none">tes3weatherovercast, weatherovercast</div>
 
 A structure that contains weather information for the overcast weather type.
 

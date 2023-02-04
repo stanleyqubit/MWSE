@@ -4,6 +4,7 @@
 -->
 
 # tes3startScript
+<div class="search_terms" style="display: none">tes3startscript, startscript</div>
 
 An object representing a script which autostarts at the game load.
 

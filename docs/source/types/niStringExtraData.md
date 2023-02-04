@@ -4,6 +4,7 @@
 -->
 
 # niStringExtraData
+<div class="search_terms" style="display: none">nistringextradata, stringextradata</div>
 
 A simple extra data that contains a string.
 

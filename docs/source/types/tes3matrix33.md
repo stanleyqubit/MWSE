@@ -4,6 +4,7 @@
 -->
 
 # tes3matrix33
+<div class="search_terms" style="display: none">tes3matrix33, matrix33</div>
 
 A 3 by 3 matrix. You can perform following arithmetic with this type: `==`.
 

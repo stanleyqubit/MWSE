@@ -4,6 +4,7 @@
 -->
 
 # niPickRecord
+<div class="search_terms" style="display: none">nipickrecord, pickrecord</div>
 
 A nested class of NiPick that stores the results of previous picking operations for use by the game engine.
 

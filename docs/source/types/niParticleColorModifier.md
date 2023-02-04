@@ -4,6 +4,7 @@
 -->
 
 # niParticleColorModifier
+<div class="search_terms" style="display: none">niparticlecolormodifier, particlecolormodifier</div>
 
 This modifer alters the color of each particle as it ages.
 

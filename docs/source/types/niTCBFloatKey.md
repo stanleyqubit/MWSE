@@ -4,6 +4,7 @@
 -->
 
 # niTCBFloatKey
+<div class="search_terms" style="display: none">nitcbfloatkey, tcbfloatkey</div>
 
 An animation key for tension-, continuity-, and bias-derived values.
 

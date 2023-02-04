@@ -4,6 +4,7 @@
 -->
 
 # tes3referenceList
+<div class="search_terms" style="display: none">tes3referencelist, referencelist</div>
 
 A collection for references, holding a cell and a linked list of references contained in the cell.
 

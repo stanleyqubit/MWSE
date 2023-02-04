@@ -4,6 +4,7 @@
 -->
 
 # tes3cell
+<div class="search_terms" style="display: none">tes3cell, cell</div>
 
 An exterior or interior game area.
 

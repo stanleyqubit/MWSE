@@ -4,6 +4,7 @@
 -->
 
 # tes3uiHyperlink
+<div class="search_terms" style="display: none">tes3uihyperlink, hyperlink</div>
 
 A structure containing properties specific to hyperlinks.
 

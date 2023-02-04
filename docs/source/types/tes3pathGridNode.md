@@ -4,6 +4,7 @@
 -->
 
 # tes3pathGridNode
+<div class="search_terms" style="display: none">tes3pathgridnode, pathgridnode</div>
 
 A node within a path grid.
 

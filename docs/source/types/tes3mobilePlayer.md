@@ -4,6 +4,7 @@
 -->
 
 # tes3mobilePlayer
+<div class="search_terms" style="display: none">tes3mobileplayer, mobileplayer</div>
 
 A mobile object for a the player.
 

@@ -4,6 +4,7 @@
 -->
 
 # spellCasted
+<div class="search_terms" style="display: none">spellcasted</div>
 
 This event is triggered when any spell is cast successfully; this includes spells cast via scripts. This occurs at the end of the casting animation, just after the magic projectile has been constructed.
 

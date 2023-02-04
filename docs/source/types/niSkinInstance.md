@@ -4,6 +4,7 @@
 -->
 
 # niSkinInstance
+<div class="search_terms" style="display: none">niskininstance, skininstance</div>
 
 Contains instance-dependent skinning data for a `NiTriShape` object.
 

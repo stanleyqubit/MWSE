@@ -4,6 +4,7 @@
 -->
 
 # levelUp
+<div class="search_terms" style="display: none">levelup</div>
 
 This even is called whenever the player successfully finishes leveling up.
 

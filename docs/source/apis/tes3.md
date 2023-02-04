@@ -4,6 +4,7 @@
 -->
 
 # tes3
+<div class="search_terms" style="display: none">tes3</div>
 
 The tes3 library provides the majority of the functions for interacting with the game system.
 

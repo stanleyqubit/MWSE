@@ -4,6 +4,7 @@
 -->
 
 # niPlanarCollider
+<div class="search_terms" style="display: none">niplanarcollider, planarcollider</div>
 
 This modifier makes particles bounce off of a rectangle.
 

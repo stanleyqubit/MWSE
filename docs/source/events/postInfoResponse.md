@@ -4,6 +4,7 @@
 -->
 
 # postInfoResponse
+<div class="search_terms" style="display: none">postinforesponse</div>
 
 This event fires immediately after a dialogue response is processed.
 

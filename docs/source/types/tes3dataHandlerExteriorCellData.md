@@ -4,6 +4,7 @@
 -->
 
 # tes3dataHandlerExteriorCellData
+<div class="search_terms" style="display: none">tes3datahandlerexteriorcelldata, datahandlerexteriorcelldata</div>
 
 A structure the data handler uses to track loaded exterior cell data.
 

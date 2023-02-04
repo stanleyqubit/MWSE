@@ -4,6 +4,7 @@
 -->
 
 # tes3statisticSkill
+<div class="search_terms" style="display: none">tes3statisticskill, statisticskill</div>
 
 A structure that holds statistical information relating to the current and base values of a skill statistic.
 

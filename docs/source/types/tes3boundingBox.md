@@ -4,6 +4,7 @@
 -->
 
 # tes3boundingBox
+<div class="search_terms" style="display: none">tes3boundingbox, boundingbox</div>
 
 A pair of vectors marking a bounding box.
 

@@ -4,6 +4,7 @@
 -->
 
 # niColorKey
+<div class="search_terms" style="display: none">nicolorkey, colorkey</div>
 
 A key with timing, and color in niColorData, which are found in niParticleColorModifiers.
 

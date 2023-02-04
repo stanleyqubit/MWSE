@@ -4,6 +4,7 @@
 -->
 
 # calcEnchantmentPrice
+<div class="search_terms" style="display: none">calcenchantmentprice</div>
 
 This event is raised when an enchantment price is being determined.
 

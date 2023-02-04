@@ -4,6 +4,7 @@
 -->
 
 # niGeometryData
+<div class="search_terms" style="display: none">nigeometrydata, geometrydata</div>
 
 niGeometryData objects contain the geometry data necessary to render a niGeometry object. When a niGeometry-based object is created, the actual geometry data is stored in an attached niGeometryData object.
 

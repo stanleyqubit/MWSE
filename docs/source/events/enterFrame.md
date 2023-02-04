@@ -4,6 +4,7 @@
 -->
 
 # enterFrame
+<div class="search_terms" style="display: none">enterframe</div>
 
 The enterFrame event occurs at the start of every frame, including when the game is paused or in menu mode.
 

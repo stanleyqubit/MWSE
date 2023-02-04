@@ -4,6 +4,7 @@
 -->
 
 # tes3projectileManager
+<div class="search_terms" style="display: none">tes3projectilemanager, projectilemanager</div>
 
 A game structure which holds all active projectiles.
 

@@ -4,6 +4,7 @@
 -->
 
 # tes3ui
+<div class="search_terms" style="display: none">tes3ui, ui</div>
 
 The tes3ui library provides access to manipulating the game's GUI.
 

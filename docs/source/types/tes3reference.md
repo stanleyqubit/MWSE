@@ -4,6 +4,7 @@
 -->
 
 # tes3reference
+<div class="search_terms" style="display: none">tes3reference, reference</div>
 
 A reference is a sort of container structure for objects. It holds a base object, as well as various variables associated with that object that make it unique.
 

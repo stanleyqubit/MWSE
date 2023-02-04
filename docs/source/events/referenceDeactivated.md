@@ -4,6 +4,7 @@
 -->
 
 # referenceDeactivated
+<div class="search_terms" style="display: none">referencedeactivated</div>
 
 This event is triggered when a reference is deactivated.
 

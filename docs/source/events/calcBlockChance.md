@@ -4,6 +4,7 @@
 -->
 
 # calcBlockChance
+<div class="search_terms" style="display: none">calcblockchance</div>
 
 This event is raised when determining the block chance for an actor. This does not affect ranged or magic attacks and ignores attacks outside of the normal blocking angles, like being attacked from behind. Blocking is disabled in some situations, like being paralyzed or attacking.
 

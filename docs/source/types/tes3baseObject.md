@@ -4,6 +4,7 @@
 -->
 
 # tes3baseObject
+<div class="search_terms" style="display: none">tes3baseobject, baseobject</div>
 
 Almost anything that can be represented in the Construction Set is based on this structure.
 

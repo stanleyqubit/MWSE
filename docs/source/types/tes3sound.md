@@ -4,6 +4,7 @@
 -->
 
 # tes3sound
+<div class="search_terms" style="display: none">tes3sound, sound</div>
 
 A sound object created in the TES3 CS.
 

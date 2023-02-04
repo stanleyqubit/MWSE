@@ -4,6 +4,7 @@
 -->
 
 # tes3dataHandler
+<div class="search_terms" style="display: none">tes3datahandler, datahandler</div>
 
 A core game object used for storing both active and non-dynamic gameplay data.
 

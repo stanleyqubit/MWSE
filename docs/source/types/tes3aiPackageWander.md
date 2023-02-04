@@ -4,6 +4,7 @@
 -->
 
 # tes3aiPackageWander
+<div class="search_terms" style="display: none">tes3aipackagewander, aipackagewander</div>
 
 Wander AI package causing an actor to move around at random. Actors will choose points to walk to based on the path grid of the cell they are in.
 

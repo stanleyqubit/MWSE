@@ -4,6 +4,7 @@
 -->
 
 # referenceActivated
+<div class="search_terms" style="display: none">referenceactivated</div>
 
 This event is triggered when a reference is activated.
 

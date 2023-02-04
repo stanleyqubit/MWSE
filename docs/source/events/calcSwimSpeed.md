@@ -4,6 +4,7 @@
 -->
 
 # calcSwimSpeed
+<div class="search_terms" style="display: none">calcswimspeed</div>
 
 One of the movement events, **calcSwimSpeed** is used when calculating the movement speed while in water when running.
 

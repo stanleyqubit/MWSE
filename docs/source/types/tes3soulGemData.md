@@ -4,6 +4,7 @@
 -->
 
 # tes3soulGemData
+<div class="search_terms" style="display: none">tes3soulgemdata, soulgemdata</div>
 
 A structure that holds (sometimes redundant) information on a soul gem.
 

@@ -4,6 +4,7 @@
 -->
 
 # calcSpellmakingSpellPointCost
+<div class="search_terms" style="display: none">calcspellmakingspellpointcost</div>
 
 This event is called when determining the spell point cost of making a spell. The spell point cost can be modified.
 

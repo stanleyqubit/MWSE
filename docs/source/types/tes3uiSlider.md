@@ -4,6 +4,7 @@
 -->
 
 # tes3uiSlider
+<div class="search_terms" style="display: none">tes3uislider, slider</div>
 
 A structure containing properties specific to sliders.
 

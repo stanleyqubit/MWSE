@@ -4,6 +4,7 @@
 -->
 
 # tes3aiPackageFollow
+<div class="search_terms" style="display: none">tes3aipackagefollow, aipackagefollow</div>
 
 An AI Follow package game object. Sets an actor to follow another actor at a certain distance.
 

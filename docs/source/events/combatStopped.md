@@ -4,6 +4,7 @@
 -->
 
 # combatStopped
+<div class="search_terms" style="display: none">combatstopped</div>
 
 The **combatStopped** event occurs after an actor has left combat. This event is preceded by the [combatStop](https://mwse.github.io/MWSE/events/combatStop) event.
 

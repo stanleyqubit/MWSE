@@ -4,6 +4,7 @@
 -->
 
 # tes3moon
+<div class="search_terms" style="display: none">tes3moon, moon</div>
 
 A structure that keeps track of information related two the game's two moons.
 

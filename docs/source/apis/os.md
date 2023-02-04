@@ -4,6 +4,7 @@
 -->
 
 # os
+<div class="search_terms" style="display: none">os</div>
 
 Provides various OS-specific functions.
 

@@ -4,6 +4,7 @@
 -->
 
 # niCollisionSwitch
+<div class="search_terms" style="display: none">nicollisionswitch, collisionswitch</div>
 
 An object that specifies if the collision system is enabled.
 

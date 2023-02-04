@@ -4,6 +4,7 @@
 -->
 
 # niObject
+<div class="search_terms" style="display: none">niobject, object</div>
 
 The base-most object from which almost all NetImmerse structures are derived from.
 

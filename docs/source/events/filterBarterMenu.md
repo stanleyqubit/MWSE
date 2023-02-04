@@ -4,6 +4,7 @@
 -->
 
 # filterBarterMenu
+<div class="search_terms" style="display: none">filterbartermenu</div>
 
 This event fires when an item in the barter menu is filtered.
 

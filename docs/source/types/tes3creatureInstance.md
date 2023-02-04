@@ -4,6 +4,7 @@
 -->
 
 # tes3creatureInstance
+<div class="search_terms" style="display: none">tes3creatureinstance, creatureinstance</div>
 
 A creature object that has been cloned. Typically represents a creature that has been instanced in the world.
 

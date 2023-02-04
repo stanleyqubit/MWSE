@@ -4,6 +4,7 @@
 -->
 
 # tes3dialogue
+<div class="search_terms" style="display: none">tes3dialogue, dialogue</div>
 
 A parent-level dialogue, such as a topic, voice, greeting, persuasion response, or journal.
 

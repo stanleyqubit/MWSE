@@ -4,6 +4,7 @@
 -->
 
 # tes3mobileObjectCollision
+<div class="search_terms" style="display: none">tes3mobileobjectcollision, mobileobjectcollision</div>
 
 The base object holding the information of a collision.
 

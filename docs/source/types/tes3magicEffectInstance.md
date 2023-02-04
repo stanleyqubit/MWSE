@@ -4,6 +4,7 @@
 -->
 
 # tes3magicEffectInstance
+<div class="search_terms" style="display: none">tes3magiceffectinstance, magiceffectinstance</div>
 
 Represents an individual instance of a magic effect being applied to a reference.
 

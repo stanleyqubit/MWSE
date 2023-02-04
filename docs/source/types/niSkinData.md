@@ -4,6 +4,7 @@
 -->
 
 # niSkinData
+<div class="search_terms" style="display: none">niskindata, skindata</div>
 
 Contains skinning data that may be shared by multiple `NiSkinInstance` objects.
 

@@ -4,6 +4,7 @@
 -->
 
 # barterOffer
+<div class="search_terms" style="display: none">barteroffer</div>
 
 This event is called when a potentially successful barter offer is made by the player. Potentially successful means both parties have the required funds to make the trade.
 

@@ -4,6 +4,7 @@
 -->
 
 # niBezRotKey
+<div class="search_terms" style="display: none">nibezrotkey, bezrotkey</div>
 
 An animation key for bezier curved rotation.
 

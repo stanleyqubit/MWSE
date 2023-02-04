@@ -4,6 +4,7 @@
 -->
 
 # tes3birthsign
+<div class="search_terms" style="display: none">tes3birthsign, birthsign</div>
 
 An object representing a birthsign.
 

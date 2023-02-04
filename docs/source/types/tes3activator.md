@@ -4,6 +4,7 @@
 -->
 
 # tes3activator
+<div class="search_terms" style="display: none">tes3activator, activator</div>
 
 An activator game object.
 

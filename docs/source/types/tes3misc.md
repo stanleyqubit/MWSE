@@ -4,6 +4,7 @@
 -->
 
 # tes3misc
+<div class="search_terms" style="display: none">tes3misc, misc</div>
 
 A core miscellaneous object.
 

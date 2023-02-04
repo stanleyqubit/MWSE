@@ -4,6 +4,7 @@
 -->
 
 # tes3quickKey
+<div class="search_terms" style="display: none">tes3quickkey, quickkey</div>
 
 A configuration detailing a quick key.
 

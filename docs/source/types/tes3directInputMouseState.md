@@ -4,6 +4,7 @@
 -->
 
 # tes3directInputMouseState
+<div class="search_terms" style="display: none">tes3directinputmousestate, directinputmousestate</div>
 
 A raw DirectInput mouse state.
 

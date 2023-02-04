@@ -4,6 +4,7 @@
 -->
 
 # tes3item
+<div class="search_terms" style="display: none">tes3item, item</div>
 
 An item object.
 

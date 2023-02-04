@@ -4,6 +4,7 @@
 -->
 
 # calcSunDamageScalar
+<div class="search_terms" style="display: none">calcsundamagescalar</div>
 
 calcSunDamageScalar is used when calculating the amount of damage to apply for the Sun Damage magic effect.
 

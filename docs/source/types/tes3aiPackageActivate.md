@@ -4,6 +4,7 @@
 -->
 
 # tes3aiPackageActivate
+<div class="search_terms" style="display: none">tes3aipackageactivate, aipackageactivate</div>
 
 An AI Activate package game object. Sets an actor to activate a reference.
 

@@ -4,6 +4,7 @@
 -->
 
 # timer
+<div class="search_terms" style="display: none">timer</div>
 
 The timer library provides helper functions for creating delayed executors.
 

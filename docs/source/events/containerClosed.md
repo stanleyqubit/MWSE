@@ -4,6 +4,7 @@
 -->
 
 # containerClosed
+<div class="search_terms" style="display: none">containerclosed</div>
 
 This event is raised when a container is closed.
 

@@ -4,6 +4,7 @@
 -->
 
 # mge
+<div class="search_terms" style="display: none">mge</div>
 
 The mge library accesses MGE XE functionality, including control over shaders. Many older functions have been deprecated.
 

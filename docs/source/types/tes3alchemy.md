@@ -4,6 +4,7 @@
 -->
 
 # tes3alchemy
+<div class="search_terms" style="display: none">tes3alchemy, alchemy</div>
 
 An alchemy game object.
 

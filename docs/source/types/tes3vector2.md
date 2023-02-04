@@ -4,6 +4,7 @@
 -->
 
 # tes3vector2
+<div class="search_terms" style="display: none">tes3vector2, vector2</div>
 
 A simple pair of floating-point numbers.
 

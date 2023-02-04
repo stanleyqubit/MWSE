@@ -4,6 +4,7 @@
 -->
 
 # cellActivated
+<div class="search_terms" style="display: none">cellactivated</div>
 
 This event is triggered when a cell is activated.
 

@@ -4,6 +4,7 @@
 -->
 
 # tes3raceBodyParts
+<div class="search_terms" style="display: none">tes3racebodyparts, racebodyparts</div>
 
 A substructure for a race, storing the used body parts for a given sex.
 

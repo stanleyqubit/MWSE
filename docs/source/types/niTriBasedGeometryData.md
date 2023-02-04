@@ -4,6 +4,7 @@
 -->
 
 # niTriBasedGeometryData
+<div class="search_terms" style="display: none">nitribasedgeometrydata, tribasedgeometrydata</div>
 
 Contains the actual geometry data for a `NiTriBasedGeometry` object.
 

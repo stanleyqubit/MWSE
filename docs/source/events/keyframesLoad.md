@@ -4,6 +4,7 @@
 -->
 
 # keyframesLoad
+<div class="search_terms" style="display: none">keyframesload</div>
 
 This event is triggered before a keyframes file is loaded. The path can be changed to instead load a different keyframes file.
 

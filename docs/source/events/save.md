@@ -4,6 +4,7 @@
 -->
 
 # save
+<div class="search_terms" style="display: none">save</div>
 
 The save event fires when the game is about to save. This event allows scripts to block saving.
 

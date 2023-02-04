@@ -4,6 +4,7 @@
 -->
 
 # mwse.string
+<div class="search_terms" style="display: none">mwse.string</div>
 
 The mwse string library provides functions for interacting with mwscript string storage.
 

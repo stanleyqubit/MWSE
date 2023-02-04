@@ -4,6 +4,7 @@
 -->
 
 # tes3clothing
+<div class="search_terms" style="display: none">tes3clothing, clothing</div>
 
 A clothing game object.
 

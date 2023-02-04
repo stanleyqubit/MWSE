@@ -4,6 +4,7 @@
 -->
 
 # mgeCameraConfig
+<div class="search_terms" style="display: none">mgecameraconfig</div>
 
 Allows control of MGE camera features.
 

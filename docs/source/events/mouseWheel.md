@@ -4,6 +4,7 @@
 -->
 
 # mouseWheel
+<div class="search_terms" style="display: none">mousewheel</div>
 
 The mouseWheel event fires when the mouse wheel is used, providing a delta value.
 

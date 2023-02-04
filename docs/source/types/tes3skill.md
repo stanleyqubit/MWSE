@@ -4,6 +4,7 @@
 -->
 
 # tes3skill
+<div class="search_terms" style="display: none">tes3skill, skill</div>
 
 A skill object.
 

@@ -4,6 +4,7 @@
 -->
 
 # meshLoaded
+<div class="search_terms" style="display: none">meshloaded</div>
 
 This event is triggered when a mesh is loaded.
 

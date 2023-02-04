@@ -4,6 +4,7 @@
 -->
 
 # niLight
+<div class="search_terms" style="display: none">nilight, light</div>
 
 Base class that represents light sources in a scene graph. This includes the ambient, diffuse, and specular colors of a light, as well as its intensity.
 

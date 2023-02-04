@@ -4,6 +4,7 @@
 -->
 
 # tes3weatherBlizzard
+<div class="search_terms" style="display: none">tes3weatherblizzard, weatherblizzard</div>
 
 A structure that contains weather information for the blizzard weather type.
 

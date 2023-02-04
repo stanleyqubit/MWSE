@@ -4,6 +4,7 @@
 -->
 
 # tes3uiMenuController
+<div class="search_terms" style="display: none">tes3uimenucontroller, menucontroller</div>
 
 The controller responsible for the menu system.
 

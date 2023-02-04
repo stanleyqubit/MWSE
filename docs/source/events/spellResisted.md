@@ -4,6 +4,7 @@
 -->
 
 # spellResisted
+<div class="search_terms" style="display: none">spellresisted</div>
 
 This event triggers when a magic effect has been resisted by an actor, including magic effects from sources like spells, enchantments and potions. This event can trigger multiple times per source, once for each resisted effect.
 

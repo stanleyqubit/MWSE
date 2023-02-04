@@ -4,6 +4,7 @@
 -->
 
 # event
+<div class="search_terms" style="display: none">event</div>
 
 The event library helps to instruct mwse to call a given function when a specific action is taken in the game.
 

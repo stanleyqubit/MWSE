@@ -4,6 +4,7 @@
 -->
 
 # menuExit
+<div class="search_terms" style="display: none">menuexit</div>
 
 The menuExit event fires when the player leaves menu mode.
 

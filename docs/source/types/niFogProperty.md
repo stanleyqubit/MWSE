@@ -4,6 +4,7 @@
 -->
 
 # niFogProperty
+<div class="search_terms" style="display: none">nifogproperty, fogproperty</div>
 
 A rendering property that controls the appearance of fogging, also known as haze.
 

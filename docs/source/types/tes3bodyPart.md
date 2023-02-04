@@ -4,6 +4,7 @@
 -->
 
 # tes3bodyPart
+<div class="search_terms" style="display: none">tes3bodypart, bodypart</div>
 
 A body part game object.
 

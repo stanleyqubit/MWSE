@@ -4,6 +4,7 @@
 -->
 
 # referenceSceneNodeCreated
+<div class="search_terms" style="display: none">referencescenenodecreated</div>
 
 This event fires when a SceneNode is created for a reference.
 

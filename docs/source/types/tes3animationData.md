@@ -4,6 +4,7 @@
 -->
 
 # tes3animationData
+<div class="search_terms" style="display: none">tes3animationdata, animationdata</div>
 
 A game object which contains information on actor's animations.
 

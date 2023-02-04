@@ -4,6 +4,7 @@
 -->
 
 # tes3transform
+<div class="search_terms" style="display: none">tes3transform, transform</div>
 
 A rotation matrix, translation vector, and scale that marks an object's transformation.
 

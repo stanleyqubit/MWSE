@@ -4,6 +4,7 @@
 -->
 
 # tes3weatherBlight
+<div class="search_terms" style="display: none">tes3weatherblight, weatherblight</div>
 
 A structure that contains weather information for the blightstorm weather type.
 

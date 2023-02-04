@@ -4,6 +4,7 @@
 -->
 
 # re
+<div class="search_terms" style="display: none">re</div>
 
 Provides a regular expression style syntax for pattern usage with lpeg.
 	

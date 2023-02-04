@@ -4,6 +4,7 @@
 -->
 
 # tes3uiParagraphInput
+<div class="search_terms" style="display: none">tes3uiparagraphinput, paragraphinput</div>
 
 A structure containing properties specific to paragraph inputs.
 

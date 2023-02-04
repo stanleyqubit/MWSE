@@ -4,6 +4,7 @@
 -->
 
 # tes3inventory
+<div class="search_terms" style="display: none">tes3inventory, inventory</div>
 
 An inventory composes of an iterator, and flags caching the state of the inventory.
 

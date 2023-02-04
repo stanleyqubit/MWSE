@@ -4,6 +4,7 @@
 -->
 
 # weaponReadied
+<div class="search_terms" style="display: none">weaponreadied</div>
 
 This event is called when a weapon is readied, and pairs with the weaponUnreadied event. It can be used to reliably tell if a specific weapon is readied for attack. This does not necessarily mean that the animation state has changed for the first time.
 

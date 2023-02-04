@@ -4,6 +4,7 @@
 -->
 
 # toml
+<div class="search_terms" style="display: none">toml</div>
 
 Provides support for interacting with toml data through an extended toml.lua module.
 

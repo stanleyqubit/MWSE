@@ -4,6 +4,7 @@
 -->
 
 # niKeyframeController
+<div class="search_terms" style="display: none">nikeyframecontroller, keyframecontroller</div>
 
 The controller responsible for animating transforms, using position, rotation, and scale keys.
 

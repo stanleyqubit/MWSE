@@ -4,6 +4,7 @@
 -->
 
 # bodyPartAssigned
+<div class="search_terms" style="display: none">bodypartassigned</div>
 
 Allows reading and overwriting body part assignments.
 

@@ -4,6 +4,7 @@
 -->
 
 # niAlphaProperty
+<div class="search_terms" style="display: none">nialphaproperty, alphaproperty</div>
 
 A rendering property that manages alpha blending, enabling and disabling it, and setting blending functions. The property also affects alpha testing, which can provide a performance boost.
 

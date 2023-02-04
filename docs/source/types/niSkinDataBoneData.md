@@ -4,6 +4,7 @@
 -->
 
 # niSkinDataBoneData
+<div class="search_terms" style="display: none">niskindatabonedata, skindatabonedata</div>
 
 This class contains all the information needed to deform vertices by a single bone.
 

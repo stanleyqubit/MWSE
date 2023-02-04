@@ -4,6 +4,7 @@
 -->
 
 # tes3rangeInt
+<div class="search_terms" style="display: none">tes3rangeint, rangeint</div>
 
 A simple pair of integers, typically used to define a range.
 

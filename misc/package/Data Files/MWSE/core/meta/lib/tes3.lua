@@ -2070,7 +2070,7 @@ function tes3.say(params) end
 
 --- Changes the 3rd person camera offset from the player's head.
 --- 
---- !!! important
+--- !!! note
 --- 	This function can be used once tes3worldController and tes3mobilePlayer have finished initializing.
 --- @param params tes3.set3rdPersonCameraOffset.params This table accepts the following values:
 --- 

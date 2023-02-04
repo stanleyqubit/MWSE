@@ -1787,8 +1787,8 @@ Direct access to the actor's silence effect attribute.
 
 *Read-only*. Array-style table access to skill progress for each of the 27 skills.
 
-!!! attention
-	The first index in the array is 1, but skill indices in tes3.skill table start from 0.
+!!! warning
+	The first index in the array is 1, but skill indices in `tes3.skill` table start from 0.
 
 **Returns**:
 

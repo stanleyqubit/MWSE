@@ -4,8 +4,8 @@
 Mods can create new GUIs. One GUI that that MWSE ships with is the Mod Configuration Menu. By registering into this system, mods can create settings pages for their mods in a place where users can easily find and manipulate them.
 
 
-!!! todo "Out of Date Information"
-    The information here is out of date, and does not use the new EasyMCM system. These docs will be updated in the future to cover EasyMCM features.
+!!! warning "Out of Date Information"
+    The information here is out of date, and does not use the new EasyMCM system. These docs will be updated in the future to cover EasyMCM features. In the meantime, consider using [EasyMCM's documentation](https://easymcm.readthedocs.io/en/latest/).
 
 
 ## Creating a Config Package

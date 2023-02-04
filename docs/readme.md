@@ -44,7 +44,7 @@ For a list of all the available features supported by our documentation see Mate
 
 ### Admonitions
 
-The following admonition classes are available: `abstract`, `attention`, `bug`, `caution`, `check`, `cite`, `danger`, `done`, `error`, `example`, `fail`, `failure`, `faq`, `help`, `hint`, `important`, `info`, `missing`, `note`, `question`, `quote`, `success`, `summary`, `tip`, `tldr`, `todo`, `warning`. An adominition starts with three exclamation characters followed by adominition class and an optional title in double quotes. The body of the adominition needs to be indented. If you want to insert a new line in the rendered adominition you need to leave a one line empty. For more info see the official [documentation](https://squidfunk.github.io/mkdocs-material/reference/admonitions/). An example:
+The following admonition classes are available: `abstract`, `bug`, `danger`, `example`, `failure`, `info`, `note`, `question`, `quote`, `success`, `tip`, `warning`. An adominition starts with three exclamation characters (`!!!`) followed by adominition class and an optional title in double quotes. The body of the adominition needs to be indented. If you want to insert a new line in the rendered adominition you need to leave a one line empty. To create a collapsible block, start the adominition with `???` instead of `!!!`. Adding a `+` after the `???` token will render the block expanded by default. For more info see the official [documentation](https://squidfunk.github.io/mkdocs-material/reference/admonitions/). An example:
 
 ```markdown
 !!! tip "This text will override the adominition title"

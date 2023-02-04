@@ -2,7 +2,7 @@ return {
 	type = "function",
 	description = [[Changes the 3rd person camera offset from the player's head.
 
-!!! important
+!!! note
 	This function can be used once tes3worldController and tes3mobilePlayer have finished initializing.]],
 	arguments = {{
 		name = "params",

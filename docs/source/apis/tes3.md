@@ -1916,6 +1916,7 @@ local inputConfig = tes3.getInputBinding(keybind)
 ***
 
 ### `tes3.getItemCount`
+<div class="search_terms" style="display: none">getitemcount,itemcount</div>
 
 Returns the amount of a certain item that can be found in a reference's inventory.
 
@@ -3768,6 +3769,7 @@ tes3.setAITravel({ reference = ..., destination = ..., reset = ... })
 ***
 
 ### `tes3.setAIWander`
+<div class="search_terms" style="display: none">setaiwander,aiwander</div>
 
 Configures a mobile actor to wander around a cell.
 

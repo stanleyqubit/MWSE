@@ -92,7 +92,7 @@ Raw bit-based flags.
 
 ### `height`
 
-*Read-only*. Access to the the height pair for males/females of the race.
+*Read-only*. Access to the the height pair for males/females of the race. It corresponds to the scaling along the Z axis.
 
 **Returns**:
 
@@ -232,7 +232,7 @@ If true, references of this object can store temporary or persistent lua data.
 
 ### `weight`
 
-*Read-only*. Access to the the height pair for males/females of the race.
+*Read-only*. Access to the the height pair for males/females of the race. It corresponds to the scaling along the X and Y axes.
 
 **Returns**:
 

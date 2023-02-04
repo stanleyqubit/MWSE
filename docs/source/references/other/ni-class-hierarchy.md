@@ -54,7 +54,7 @@ The types are arranged into functional groupings. Within each grouping, indentat
 	- <span  style = "color:YellowGreen">niBltSource</span>
 	- niObjectNET
 		- niTexture
-			- <span style = "color:Turquoise">niRenderedTexture</span>
+			- niRenderedTexture
 				- <span  style = "color:YellowGreen">niRenderedCubeMap</span >
 			- niSourceTexture
 	- <span  style = "color:YellowGreen">niPalette</span>
@@ -148,7 +148,7 @@ The types are arranged into functional groupings. Within each grouping, indentat
 			- niVertexColorProperty
 			- <span  style = "color:YellowGreen">niWireframeProperty</span>
 			- niZBufferProperty
-	- <span style = "color:Turquoise">niRenderer</span>
+	- niRenderer
 		- <span  style = "color:YellowGreen">niDX8Renderer</span>
 
 ---
@@ -351,7 +351,7 @@ graph LR
 
 	%% Turquoise
 	classDef notExposed color:#000, fill: #40E0D0, stroke: #333, stroke-width: 2px;
-	class DA,EDA,G,HA,HD,HK,Q,R,W notExposed;
+	class DA,HA,HD,HK,Q,R,W notExposed;
 
 	%% YellowGreen
 	classDef notResearched color:#000, fill: #ADFF2F, stroke: #333, stroke-width: 2px;

@@ -9,10 +9,10 @@
 --- @field description string *Read-only*. Loads from disk and returns the description of the race.
 --- @field femaleBody tes3raceBodyParts *Read-only*. Access to all the body parts that will be used for female actors of this race.
 --- @field flags number Raw bit-based flags.
---- @field height tes3raceHeightWeight *Read-only*. Access to the the height pair for males/females of the race.
+--- @field height tes3raceHeightWeight *Read-only*. Access to the the height pair for males/females of the race. It corresponds to the scaling along the Z axis.
 --- @field isBeast boolean Access to the beast race flag.
 --- @field isPlayable boolean Access to the playable race flag.
 --- @field maleBody tes3raceBodyParts *Read-only*. Access to all the body parts that will be used for male actors of this race.
 --- @field name string *Read-only*. The player-facing name for the object.
 --- @field skillBonuses tes3raceSkillBonus[] *Read-only*. Array-style table access for 7 skill bonuses for the race. Each element in the array is a [`tes3raceSkillBonus`](https://mwse.github.io/MWSE/types/tes3raceSkillBonus/).
---- @field weight tes3raceHeightWeight *Read-only*. Access to the the height pair for males/females of the race.
+--- @field weight tes3raceHeightWeight *Read-only*. Access to the the height pair for males/females of the race. It corresponds to the scaling along the X and Y axes.

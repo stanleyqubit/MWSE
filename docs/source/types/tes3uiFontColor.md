@@ -10,6 +10,7 @@ Contains color information of a font.
 ## Properties
 
 ### `b`
+<div class="search_terms" style="display: none">b</div>
 
 Blue color value, in range [0.0, 1.0].
 
@@ -20,6 +21,7 @@ Blue color value, in range [0.0, 1.0].
 ***
 
 ### `g`
+<div class="search_terms" style="display: none">g</div>
 
 Green color value, in range [0.0, 1.0].
 
@@ -30,6 +32,7 @@ Green color value, in range [0.0, 1.0].
 ***
 
 ### `r`
+<div class="search_terms" style="display: none">r</div>
 
 Red color value, in range [0.0, 1.0].
 

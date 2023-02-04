@@ -11,6 +11,7 @@ This type inherits the following: [niNode](../../types/niNode), [niAVObject](../
 ## Properties
 
 ### `alphaProperty`
+<div class="search_terms" style="display: none">alphaproperty</div>
 
 Convenient access to this object's alpha property. Setting this value to be nil will erase the property, while setting it to a valid alpha property will set (or replace) it.
 
@@ -21,6 +22,7 @@ Convenient access to this object's alpha property. Setting this value to be nil 
 ***
 
 ### `appCulled`
+<div class="search_terms" style="display: none">appculled</div>
 
 A flag indicating if this object is culled. When culled, it will not render, and raycasts ignore it.
 
@@ -31,6 +33,7 @@ A flag indicating if this object is culled. When culled, it will not render, and
 ***
 
 ### `children`
+<div class="search_terms" style="display: none">children</div>
 
 *Read-only*. The children of the node. Can have `nil` entries.
 
@@ -41,6 +44,7 @@ A flag indicating if this object is culled. When culled, it will not render, and
 ***
 
 ### `controller`
+<div class="search_terms" style="display: none">controller</div>
 
 *Read-only*. The first controller available on the object.
 
@@ -51,6 +55,7 @@ A flag indicating if this object is culled. When culled, it will not render, and
 ***
 
 ### `effectList`
+<div class="search_terms" style="display: none">effectlist</div>
 
 *Read-only*. The effect list of the node. Attached effects affect the node and all of its child subtree geometry.
 
@@ -61,6 +66,7 @@ A flag indicating if this object is culled. When culled, it will not render, and
 ***
 
 ### `extraData`
+<div class="search_terms" style="display: none">extradata</div>
 
 *Read-only*. The first extra data available on the object.
 
@@ -71,6 +77,7 @@ A flag indicating if this object is culled. When culled, it will not render, and
 ***
 
 ### `flags`
+<div class="search_terms" style="display: none">flags</div>
 
 Flags, dependent on the specific object type.
 
@@ -81,6 +88,7 @@ Flags, dependent on the specific object type.
 ***
 
 ### `fogProperty`
+<div class="search_terms" style="display: none">fogproperty</div>
 
 Convenient access to this object's fog property. Setting this value to be nil will erase the property, while setting it to a valid fog property will set (or replace) it.
 
@@ -91,6 +99,7 @@ Convenient access to this object's fog property. Setting this value to be nil wi
 ***
 
 ### `materialProperty`
+<div class="search_terms" style="display: none">materialproperty</div>
 
 Convenient access to this object's material property. Setting this value to be nil will erase the property, while setting it to a valid material property will set (or replace) it.
 
@@ -101,6 +110,7 @@ Convenient access to this object's material property. Setting this value to be n
 ***
 
 ### `name`
+<div class="search_terms" style="display: none">name</div>
 
 The human-facing name of the given object.
 
@@ -111,6 +121,7 @@ The human-facing name of the given object.
 ***
 
 ### `parent`
+<div class="search_terms" style="display: none">parent</div>
 
 *Read-only*. The object's parent. It may not have one if it is not attached to the scene.
 
@@ -121,6 +132,7 @@ The human-facing name of the given object.
 ***
 
 ### `properties`
+<div class="search_terms" style="display: none">properties</div>
 
 *Read-only*. The list of properties attached to this `niAVObject`.
 
@@ -131,6 +143,7 @@ The human-facing name of the given object.
 ***
 
 ### `refCount`
+<div class="search_terms" style="display: none">refcount</div>
 
 *Read-only*. The number of references that exist for this object. When this value reaches zero, the object will be deleted.
 
@@ -141,6 +154,7 @@ The human-facing name of the given object.
 ***
 
 ### `rotation`
+<div class="search_terms" style="display: none">rotation</div>
 
 The object's local rotation matrix.
 
@@ -151,6 +165,7 @@ The object's local rotation matrix.
 ***
 
 ### `RTTI`
+<div class="search_terms" style="display: none">rtti</div>
 
 *Read-only*. The runtime type information for this object. This is an alias for the `.runTimeTypeInformation` property.
 
@@ -161,6 +176,7 @@ The object's local rotation matrix.
 ***
 
 ### `runTimeTypeInformation`
+<div class="search_terms" style="display: none">runtimetypeinformation</div>
 
 *Read-only*. The runtime type information for this object.
 
@@ -171,6 +187,7 @@ The object's local rotation matrix.
 ***
 
 ### `scale`
+<div class="search_terms" style="display: none">scale</div>
 
 The object's local uniform scaling factor.
 
@@ -181,6 +198,7 @@ The object's local uniform scaling factor.
 ***
 
 ### `stencilProperty`
+<div class="search_terms" style="display: none">stencilproperty</div>
 
 Convenient access to this object's stencil property. Setting this value to be nil will erase the property, while setting it to a valid stencil property will set (or replace) it.
 
@@ -191,6 +209,7 @@ Convenient access to this object's stencil property. Setting this value to be ni
 ***
 
 ### `switchIndex`
+<div class="search_terms" style="display: none">switchindex</div>
 
 The value of the active child index. This index represents the index of the active child in the `children` array of the niSwitchNode. If this index is -1, then no child is active.
 
@@ -201,6 +220,7 @@ The value of the active child index. This index represents the index of the acti
 ***
 
 ### `texturingProperty`
+<div class="search_terms" style="display: none">texturingproperty</div>
 
 Convenient access to this object's texturing property. Setting this value to be nil will erase the property, while setting it to a valid texturing property will set (or replace) it.
 
@@ -211,6 +231,7 @@ Convenient access to this object's texturing property. Setting this value to be 
 ***
 
 ### `translation`
+<div class="search_terms" style="display: none">translation</div>
 
 The object's local translation vector.
 
@@ -221,6 +242,7 @@ The object's local translation vector.
 ***
 
 ### `velocity`
+<div class="search_terms" style="display: none">velocity</div>
 
 The object's local velocity.
 
@@ -231,6 +253,7 @@ The object's local velocity.
 ***
 
 ### `vertexColorProperty`
+<div class="search_terms" style="display: none">vertexcolorproperty</div>
 
 Convenient access to this object's vertex coloring property. Setting this value to be nil will erase the property, while setting it to a valid vertex coloring property will set (or replace) it.
 
@@ -241,6 +264,7 @@ Convenient access to this object's vertex coloring property. Setting this value 
 ***
 
 ### `worldBoundOrigin`
+<div class="search_terms" style="display: none">worldboundorigin</div>
 
 The world coordinates of the object's bounds origin.
 
@@ -251,6 +275,7 @@ The world coordinates of the object's bounds origin.
 ***
 
 ### `worldBoundRadius`
+<div class="search_terms" style="display: none">worldboundradius</div>
 
 The radius of the object's bounds.
 
@@ -261,6 +286,7 @@ The radius of the object's bounds.
 ***
 
 ### `worldTransform`
+<div class="search_terms" style="display: none">worldtransform</div>
 
 The object's transformations in the world space.
 
@@ -271,6 +297,7 @@ The object's transformations in the world space.
 ***
 
 ### `zBufferProperty`
+<div class="search_terms" style="display: none">zbufferproperty</div>
 
 Convenient access to this object's z-buffer property. Setting this value to be nil will erase the property, while setting it to a valid z-buffer property will set (or replace) it.
 
@@ -283,6 +310,7 @@ Convenient access to this object's z-buffer property. Setting this value to be n
 ## Methods
 
 ### `addExtraData`
+<div class="search_terms" style="display: none">addextradata, extradata</div>
 
 Appends an extra data to the object.
 
@@ -297,6 +325,7 @@ myObject:addExtraData(extraData)
 ***
 
 ### `attachChild`
+<div class="search_terms" style="display: none">attachchild</div>
 
 Attaches the child to the children list of the node. Doesn't check to see if the object is already in the child list.
 
@@ -312,6 +341,7 @@ myObject:attachChild(child, useFirstAvailable)
 ***
 
 ### `attachEffect`
+<div class="search_terms" style="display: none">attacheffect</div>
 
 Attaches a dynamic effect to the node. It will not attach the same effect twice.
 
@@ -326,6 +356,7 @@ myObject:attachEffect(effect)
 ***
 
 ### `attachProperty`
+<div class="search_terms" style="display: none">attachproperty</div>
 
 Attaches a property to this object, without checking to see if the property or another of its type is already on the list. Property lists must not have more than one property of a given class (i.e. no two niTexturingProperty objects) attached at once, or else undefined behavior will result.
 
@@ -340,6 +371,7 @@ myObject:attachProperty(property)
 ***
 
 ### `clearTransforms`
+<div class="search_terms" style="display: none">cleartransforms</div>
 
 Resets the object's local transform.
 
@@ -350,6 +382,7 @@ myObject:clearTransforms()
 ***
 
 ### `clone`
+<div class="search_terms" style="display: none">clone</div>
 
 Creates a copy of this object.
 
@@ -364,6 +397,7 @@ local result = myObject:clone()
 ***
 
 ### `copyTransforms`
+<div class="search_terms" style="display: none">copytransforms</div>
 
 Update object's local transform by copying from another source.
 
@@ -378,6 +412,7 @@ myObject:copyTransforms(source)
 ***
 
 ### `createBoundingBox`
+<div class="search_terms" style="display: none">createboundingbox, boundingbox</div>
 
 Calculates and creates a bounding box for the object. The existing bounding box, if any, will not be used, a fresh one will always be calculated.
 
@@ -392,6 +427,7 @@ local boundingBox = myObject:createBoundingBox()
 ***
 
 ### `detachAllChildren`
+<div class="search_terms" style="display: none">detachallchildren</div>
 
 Detaches all children from the children list of the node.
 
@@ -402,6 +438,7 @@ myObject:detachAllChildren()
 ***
 
 ### `detachAllEffects`
+<div class="search_terms" style="display: none">detachalleffects</div>
 
 Detaches all dynamic effect from the effect list of the node.
 
@@ -412,6 +449,7 @@ myObject:detachAllEffects()
 ***
 
 ### `detachAllProperties`
+<div class="search_terms" style="display: none">detachallproperties</div>
 
 Detaches all the properties on the object and returns them in the table.
 
@@ -426,6 +464,7 @@ local result = myObject:detachAllProperties()
 ***
 
 ### `detachChild`
+<div class="search_terms" style="display: none">detachchild</div>
 
 Detaches the child from the children list of the node. Returns the detached child.
 
@@ -444,6 +483,7 @@ local detachedChild = myObject:detachChild(child)
 ***
 
 ### `detachChildAt`
+<div class="search_terms" style="display: none">detachchildat</div>
 
 Detaches the child at the specified index from the children list of the node. Returns the detached child.
 
@@ -462,6 +502,7 @@ local detachedChild = myObject:detachChildAt(index)
 ***
 
 ### `detachEffect`
+<div class="search_terms" style="display: none">detacheffect</div>
 
 Detaches the given dynamic effect from the effect list of the node, if it was present. Has no effect if the effect wasn't attached to the node.
 
@@ -476,6 +517,7 @@ myObject:detachEffect(effect)
 ***
 
 ### `detachProperty`
+<div class="search_terms" style="display: none">detachproperty</div>
 
 Detaches and returns a property from the object which matches the given property type.
 
@@ -494,6 +536,7 @@ local result = myObject:detachProperty(type)
 ***
 
 ### `getActiveChild`
+<div class="search_terms" style="display: none">getactivechild, activechild</div>
 
 Gets the active child node, or returns nil if the switch index is -1.
 
@@ -508,6 +551,7 @@ local result = myObject:getActiveChild()
 ***
 
 ### `getEffect`
+<div class="search_terms" style="display: none">geteffect, effect</div>
 
 Gets the effect of the given type.
 
@@ -526,6 +570,7 @@ local effect = myObject:getEffect(type)
 ***
 
 ### `getGameReference`
+<div class="search_terms" style="display: none">getgamereference, gamereference</div>
 
 Searches for an niExtraData on this object to see if it has one that holds a related reference.
 
@@ -544,6 +589,7 @@ local reference = myObject:getGameReference(searchParents)
 ***
 
 ### `getObjectByName`
+<div class="search_terms" style="display: none">getobjectbyname, objectbyname</div>
 
 Searches this node and all child nodes recursively for a node with a name that matches the argument.
 
@@ -562,6 +608,7 @@ local result = myObject:getObjectByName(name)
 ***
 
 ### `getProperty`
+<div class="search_terms" style="display: none">getproperty, property</div>
 
 Gets an attached property by property type.
 
@@ -580,6 +627,7 @@ local result = myObject:getProperty(type)
 ***
 
 ### `getStringDataStartingWith`
+<div class="search_terms" style="display: none">getstringdatastartingwith, stringdatastartingwith</div>
 
 Searches for an niExtraData on this object to see if it has niStringExtraData that has its string start with the provided `value` argument.
 
@@ -598,6 +646,7 @@ local extra = myObject:getStringDataStartingWith(value)
 ***
 
 ### `getStringDataWith`
+<div class="search_terms" style="display: none">getstringdatawith, stringdatawith</div>
 
 Searches for an niExtraData on this object to see if it has niStringExtraData that has the provided `value` argument in its string field.
 
@@ -616,6 +665,7 @@ local extra = myObject:getStringDataWith(value)
 ***
 
 ### `hasStringDataStartingWith`
+<div class="search_terms" style="display: none">hasstringdatastartingwith, stringdatastartingwith</div>
 
 Searches for an niExtraData on this object to see if it has niStringExtraData that has its string start with the provided `value` argument. Returns true if the value was found.
 
@@ -634,6 +684,7 @@ local result = myObject:hasStringDataStartingWith(value)
 ***
 
 ### `hasStringDataWith`
+<div class="search_terms" style="display: none">hasstringdatawith, stringdatawith</div>
 
 Searches for an niExtraData on this object to see if it has niStringExtraData that contains the provided `value` argument in its string field. Returns true if the value was found.
 
@@ -652,6 +703,7 @@ local result = myObject:hasStringDataWith(value)
 ***
 
 ### `isAppCulled`
+<div class="search_terms" style="display: none">isappculled, appculled</div>
 
 Recursively checks if either the object or any of its parents are appCulled.
 
@@ -666,6 +718,7 @@ local result = myObject:isAppCulled()
 ***
 
 ### `isFrustumCulled`
+<div class="search_terms" style="display: none">isfrustumculled, frustumculled</div>
 
 Checks if the object is frustum culled for the given camera.
 
@@ -684,6 +737,7 @@ local result = myObject:isFrustumCulled(camera)
 ***
 
 ### `isInstanceOfType`
+<div class="search_terms" style="display: none">isinstanceoftype, instanceoftype</div>
 
 Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
@@ -702,6 +756,7 @@ local result = myObject:isInstanceOfType(type)
 ***
 
 ### `isOfType`
+<div class="search_terms" style="display: none">isoftype, oftype</div>
 
 Determines if the object is of a given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
@@ -720,6 +775,7 @@ local result = myObject:isOfType(type)
 ***
 
 ### `prependController`
+<div class="search_terms" style="display: none">prependcontroller</div>
 
 Add a controller to the object as the first controller.
 
@@ -734,6 +790,7 @@ myObject:prependController(controller)
 ***
 
 ### `propagatePositionChange`
+<div class="search_terms" style="display: none">propagatepositionchange</div>
 
 Alias for `update()` method. Updates the world transforms of this node and its children, which makes changes visible for rendering. Use after changing any local rotation, translation, scale, bounds or after attaching and detaching nodes.
 
@@ -755,6 +812,7 @@ myObject:propagatePositionChange({ time = ..., controllers = ..., bounds = ... }
 ***
 
 ### `removeAllControllers`
+<div class="search_terms" style="display: none">removeallcontrollers, allcontrollers</div>
 
 Removes all controllers.
 
@@ -765,6 +823,7 @@ myObject:removeAllControllers()
 ***
 
 ### `removeAllExtraData`
+<div class="search_terms" style="display: none">removeallextradata, allextradata</div>
 
 Removes all extra data.
 
@@ -775,6 +834,7 @@ myObject:removeAllExtraData()
 ***
 
 ### `removeController`
+<div class="search_terms" style="display: none">removecontroller, controller</div>
 
 Removes a controller from the object.
 
@@ -789,6 +849,7 @@ myObject:removeController(controller)
 ***
 
 ### `removeExtraData`
+<div class="search_terms" style="display: none">removeextradata, extradata</div>
 
 Removes a specific extra data from the object.
 
@@ -803,6 +864,7 @@ myObject:removeExtraData(extraData)
 ***
 
 ### `saveBinary`
+<div class="search_terms" style="display: none">savebinary</div>
 
 Serializes the object, and writes it to the given file.
 
@@ -821,6 +883,7 @@ local success = myObject:saveBinary(path)
 ***
 
 ### `setFlag`
+<div class="search_terms" style="display: none">setflag, flag</div>
 
 Sets a given flag in the niObjectNET flag data. The specifics use of the flag is dependent on the real underlying type.
 
@@ -836,6 +899,7 @@ myObject:setFlag(state, index)
 ***
 
 ### `update`
+<div class="search_terms" style="display: none">update</div>
 
 Updates the world transforms of this node and its children, which makes changes visible for rendering. Use after changing any local rotation, translation, scale, bounds or after attaching and detaching nodes.
 
@@ -857,6 +921,7 @@ myObject:update({ time = ..., controllers = ..., bounds = ... })
 ***
 
 ### `updateEffects`
+<div class="search_terms" style="display: none">updateeffects, effects</div>
 
 Update all attached effects. This method must be called at or above any object when dynamic effects are attached or detached from it
 
@@ -867,6 +932,7 @@ myObject:updateEffects()
 ***
 
 ### `updateProperties`
+<div class="search_terms" style="display: none">updateproperties, properties</div>
 
 Update all attached properties.
 
@@ -879,6 +945,7 @@ myObject:updateProperties()
 ## Functions
 
 ### `new`
+<div class="search_terms" style="display: none">new</div>
 
 Creates a new, empty NiNode.
 

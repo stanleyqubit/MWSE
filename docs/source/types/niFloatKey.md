@@ -11,6 +11,7 @@ This type inherits the following: [niAnimationKey](../../types/niAnimationKey)
 ## Properties
 
 ### `timing`
+<div class="search_terms" style="display: none">timing</div>
 
 The timing of the animation key.
 
@@ -21,6 +22,7 @@ The timing of the animation key.
 ***
 
 ### `value`
+<div class="search_terms" style="display: none">value</div>
 
 The arbitrary value of the NiFloatKey.
 

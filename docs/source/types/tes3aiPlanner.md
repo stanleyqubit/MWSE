@@ -10,6 +10,7 @@ A game object which contains information on actor's current and assigned AI pack
 ## Properties
 
 ### `currentPackageIndex`
+<div class="search_terms" style="display: none">currentpackageindex</div>
 
 *Read-only*. Access to index of currently active AI package in packages table.
 
@@ -20,6 +21,7 @@ A game object which contains information on actor's current and assigned AI pack
 ***
 
 ### `mobile`
+<div class="search_terms" style="display: none">mobile</div>
 
 The access to mobile actor this `tes3aiPlanner` object works on.
 
@@ -30,6 +32,7 @@ The access to mobile actor this `tes3aiPlanner` object works on.
 ***
 
 ### `nextOpenPackageIndex`
+<div class="search_terms" style="display: none">nextopenpackageindex</div>
 
 *Read-only*. This is the index in `.packages` table that represents the currently active AI package.
 
@@ -40,6 +43,7 @@ The access to mobile actor this `tes3aiPlanner` object works on.
 ***
 
 ### `packages`
+<div class="search_terms" style="display: none">packages</div>
 
 *Read-only*. The table with `tes3aiPackage` objects assigned to this mobile actor. These packages are executed as instruction in the order they are defined. When the last one is executed, the cycle is repeated from the start. Has 32 entries, where any can be nil.
 
@@ -52,6 +56,7 @@ The access to mobile actor this `tes3aiPlanner` object works on.
 ## Methods
 
 ### `getActivePackage`
+<div class="search_terms" style="display: none">getactivepackage, activepackage</div>
 
 Fetches currently active AI package.
 

@@ -10,6 +10,7 @@ A simple structure to hold mark/recall data.
 ## Properties
 
 ### `cell`
+<div class="search_terms" style="display: none">cell</div>
 
 *Read-only*. The cell to recall to.
 
@@ -20,6 +21,7 @@ A simple structure to hold mark/recall data.
 ***
 
 ### `position`
+<div class="search_terms" style="display: none">position</div>
 
 The position to recall to.
 
@@ -30,6 +32,7 @@ The position to recall to.
 ***
 
 ### `rotation`
+<div class="search_terms" style="display: none">rotation</div>
 
 The rotation to use when recalling. It's the Euler rotation around the Z axis in Radians.
 

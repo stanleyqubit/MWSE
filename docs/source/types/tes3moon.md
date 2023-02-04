@@ -16,6 +16,7 @@ Most of the properties exposed here correspond to the setting of the same name i
 ## Properties
 
 ### `axisOffset`
+<div class="search_terms" style="display: none">axisoffset</div>
 
 The rotation of the moon's path arc from the North-South axis, in degrees.
 
@@ -26,6 +27,7 @@ The rotation of the moon's path arc from the North-South axis, in degrees.
 ***
 
 ### `dailyIncrement`
+<div class="search_terms" style="display: none">dailyincrement</div>
 
 Looks like this property controls when the moon raises during each phase of its cycle. Also seems to impact the progression of moon phases. The units of this property are most likely game hours.
 
@@ -36,6 +38,7 @@ Looks like this property controls when the moon raises during each phase of its 
 ***
 
 ### `fadeEndAngle`
+<div class="search_terms" style="display: none">fadeendangle</div>
 
 This angle represents the angle from the water plane, in degrees. If a moon arrives at that point in the sky it will start disappearing. A moon can disappear even before its `fadeOutStart` hour if it reaches this angle.
 
@@ -46,6 +49,7 @@ This angle represents the angle from the water plane, in degrees. If a moon arri
 ***
 
 ### `fadeInFinish`
+<div class="search_terms" style="display: none">fadeinfinish</div>
 
 The game hour at which the moon finishes fading in.
 
@@ -56,6 +60,7 @@ The game hour at which the moon finishes fading in.
 ***
 
 ### `fadeInStart`
+<div class="search_terms" style="display: none">fadeinstart</div>
 
 The game hour at which the moon starts to be visible in the sky.
 
@@ -66,6 +71,7 @@ The game hour at which the moon starts to be visible in the sky.
 ***
 
 ### `fadeOutFinish`
+<div class="search_terms" style="display: none">fadeoutfinish</div>
 
 The game hour at which has completely faded out.
 
@@ -76,6 +82,7 @@ The game hour at which has completely faded out.
 ***
 
 ### `fadeOutStart`
+<div class="search_terms" style="display: none">fadeoutstart</div>
 
 The game hour at which the moon starts fading out.
 
@@ -86,6 +93,7 @@ The game hour at which the moon starts fading out.
 ***
 
 ### `fadeStartAngle`
+<div class="search_terms" style="display: none">fadestartangle</div>
 
 The angle, in degrees, from the water plane at which the moon first appears in the sky.
 
@@ -96,6 +104,7 @@ The angle, in degrees, from the water plane at which the moon first appears in t
 ***
 
 ### `index`
+<div class="search_terms" style="display: none">index</div>
 
 *Read-only*. The index of the moon, 0 for Masser, 1 for Secunda.
 
@@ -106,6 +115,7 @@ The angle, in degrees, from the water plane at which the moon first appears in t
 ***
 
 ### `isRed`
+<div class="search_terms" style="display: none">isred, red</div>
 
 Determines if the moon is red, typically during the events of Bloodmoon.
 
@@ -116,6 +126,7 @@ Determines if the moon is red, typically during the events of Bloodmoon.
 ***
 
 ### `phase`
+<div class="search_terms" style="display: none">phase</div>
 
 The moon's current phase. The phase controls which of the moon's textures is currently being used.
 
@@ -140,6 +151,7 @@ Moon's phase | Used texture's suffix
 ***
 
 ### `shadowEarlyFadeAngle`
+<div class="search_terms" style="display: none">shadowearlyfadeangle</div>
 
 No description yet available.
 
@@ -150,6 +162,7 @@ No description yet available.
 ***
 
 ### `speed`
+<div class="search_terms" style="display: none">speed</div>
 
 Controls the speed of the moons across the sky. This corresponds to the setting of the same name in [Moons] section of the Morrowind.ini file.
 
@@ -160,6 +173,7 @@ Controls the speed of the moons across the sky. This corresponds to the setting 
 ***
 
 ### `texture`
+<div class="search_terms" style="display: none">texture</div>
 
 *Read-only*. The texture to use for the moon. These look like "Textures\tx_masser". The actual texture that is used is determined by the current moon phase.
 
@@ -170,6 +184,7 @@ Controls the speed of the moons across the sky. This corresponds to the setting 
 ***
 
 ### `weatherController`
+<div class="search_terms" style="display: none">weathercontroller</div>
 
 *Read-only*. Quick access back to the weather controller structure.
 

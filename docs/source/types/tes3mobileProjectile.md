@@ -11,6 +11,7 @@ This type inherits the following: [tes3mobileObject](../../types/tes3mobileObjec
 ## Properties
 
 ### `animTime`
+<div class="search_terms" style="display: none">animtime</div>
 
 The time index for the projectile model's animation controllers.
 
@@ -21,6 +22,7 @@ The time index for the projectile model's animation controllers.
 ***
 
 ### `attackSwing`
+<div class="search_terms" style="display: none">attackswing</div>
 
 The attack swing value of the attacker at the time of releasing the projectile.
 
@@ -31,6 +33,7 @@ The attack swing value of the attacker at the time of releasing the projectile.
 ***
 
 ### `boundSize`
+<div class="search_terms" style="display: none">boundsize</div>
 
 A vector that shows the size of the bounding box in each direction. Note that this is a convenience feature, and delivers the `x` and `y` values from `boundSize2D` with the `z` value of the mobile's `height`. Editing the values of the returned vector will not change the values that they came from, though setting the property itself will work.
 
@@ -41,6 +44,7 @@ A vector that shows the size of the bounding box in each direction. Note that th
 ***
 
 ### `boundSize2D`
+<div class="search_terms" style="display: none">boundsize2d</div>
 
 A vector that shows the size of the bounding box in X and Y directions. `boundSize` is a convenience property that exposes the bounding in 3 dimensions.
 
@@ -51,6 +55,7 @@ A vector that shows the size of the bounding box in X and Y directions. `boundSi
 ***
 
 ### `cellX`
+<div class="search_terms" style="display: none">cellx</div>
 
 *Read-only*. The X grid coordinate of the cell the mobile is in.
 
@@ -61,6 +66,7 @@ A vector that shows the size of the bounding box in X and Y directions. `boundSi
 ***
 
 ### `cellY`
+<div class="search_terms" style="display: none">celly</div>
 
 *Read-only*. The Y grid coordinate of the cell the mobile is in.
 
@@ -71,6 +77,7 @@ A vector that shows the size of the bounding box in X and Y directions. `boundSi
 ***
 
 ### `damage`
+<div class="search_terms" style="display: none">damage</div>
 
 Access to the raw damage that this projectile will inflict.
 
@@ -81,6 +88,7 @@ Access to the raw damage that this projectile will inflict.
 ***
 
 ### `expire`
+<div class="search_terms" style="display: none">expire</div>
 
 A flag that causes the projectile to expire when set to `1`.
 
@@ -91,6 +99,7 @@ A flag that causes the projectile to expire when set to `1`.
 ***
 
 ### `firingMobile`
+<div class="search_terms" style="display: none">firingmobile</div>
 
 *Read-only*. The mobile that fired this projectile.
 
@@ -101,6 +110,7 @@ A flag that causes the projectile to expire when set to `1`.
 ***
 
 ### `firingWeapon`
+<div class="search_terms" style="display: none">firingweapon</div>
 
 *Read-only*. The weapon that fired this projectile.
 
@@ -111,6 +121,7 @@ A flag that causes the projectile to expire when set to `1`.
 ***
 
 ### `flags`
+<div class="search_terms" style="display: none">flags</div>
 
 Access to the root mobile object flags, represented as an integer. Should not be accessed directly.
 
@@ -121,6 +132,7 @@ Access to the root mobile object flags, represented as an integer. Should not be
 ***
 
 ### `height`
+<div class="search_terms" style="display: none">height</div>
 
 The height of the mobile above the ground.
 
@@ -131,6 +143,7 @@ The height of the mobile above the ground.
 ***
 
 ### `impulseVelocity`
+<div class="search_terms" style="display: none">impulsevelocity</div>
 
 A vector that represents the 3D acceleration of the object.
 
@@ -141,6 +154,7 @@ A vector that represents the 3D acceleration of the object.
 ***
 
 ### `initialSpeed`
+<div class="search_terms" style="display: none">initialspeed</div>
 
 *Read-only*. The initial speed that the projectile was launched at.
 
@@ -151,6 +165,7 @@ A vector that represents the 3D acceleration of the object.
 ***
 
 ### `inventory`
+<div class="search_terms" style="display: none">inventory</div>
 
 *Read-only*. Access to the items the mobile object has in its inventory.
 
@@ -161,6 +176,7 @@ A vector that represents the 3D acceleration of the object.
 ***
 
 ### `isAffectedByGravity`
+<div class="search_terms" style="display: none">isaffectedbygravity, affectedbygravity</div>
 
 If `true`, the mobile is affected by gravity. Does not have any effect on spell projectiles.
 
@@ -171,6 +187,7 @@ If `true`, the mobile is affected by gravity. Does not have any effect on spell 
 ***
 
 ### `movementCollision`
+<div class="search_terms" style="display: none">movementcollision</div>
 
 Controls if the mobile has movement collision active. When false, the mobile can move through any object, but can still block other mobiles, and can still be hit in combat. Actors will still follow pathgrids, ramps and stairs when navigating.
 
@@ -181,6 +198,7 @@ Controls if the mobile has movement collision active. When false, the mobile can
 ***
 
 ### `movementFlags`
+<div class="search_terms" style="display: none">movementflags</div>
 
 Access to the root mobile object movement flags, represented as an integer. Should not be accessed directly.
 
@@ -191,6 +209,7 @@ Access to the root mobile object movement flags, represented as an integer. Shou
 ***
 
 ### `objectType`
+<div class="search_terms" style="display: none">objecttype</div>
 
 *Read-only*. The type of mobile object. Maps to values in [`tes3.objectType`](https://mwse.github.io/MWSE/references/object-types/) namespace.
 
@@ -201,6 +220,7 @@ Access to the root mobile object movement flags, represented as an integer. Shou
 ***
 
 ### `playerDistance`
+<div class="search_terms" style="display: none">playerdistance</div>
 
 The distance to the player. Updated every frame when the mobile is in an active cell.
 
@@ -211,6 +231,7 @@ The distance to the player. Updated every frame when the mobile is in an active 
 ***
 
 ### `position`
+<div class="search_terms" style="display: none">position</div>
 
 A vector that represents the 3D position of the object.
 
@@ -221,6 +242,7 @@ A vector that represents the 3D position of the object.
 ***
 
 ### `prevMovementFlags`
+<div class="search_terms" style="display: none">prevmovementflags</div>
 
 Access to the root mobile object movement flags from the previous frame, represented as an integer. Should not be accessed directly.
 
@@ -231,6 +253,7 @@ Access to the root mobile object movement flags from the previous frame, represe
 ***
 
 ### `reference`
+<div class="search_terms" style="display: none">reference</div>
 
 *Read-only*. Access to the reference object for the mobile, if any.
 
@@ -241,6 +264,7 @@ Access to the root mobile object movement flags from the previous frame, represe
 ***
 
 ### `spellInstance`
+<div class="search_terms" style="display: none">spellinstance</div>
 
 A quick access to [`tes3magicSourceInstance`](https://mwse.github.io/MWSE/types/tes3magicSourceInstance/) object of this `tes3mobileProjectile` if aplicable.
 
@@ -251,6 +275,7 @@ A quick access to [`tes3magicSourceInstance`](https://mwse.github.io/MWSE/types/
 ***
 
 ### `velocity`
+<div class="search_terms" style="display: none">velocity</div>
 
 Access to the current velocity of the projectile.
 

@@ -10,6 +10,7 @@ Provides support for interacting with json data through an extended dkjson modul
 ## Properties
 
 ### `json.null`
+<div class="search_terms" style="display: none">null</div>
 
 You can use this value for setting explicit null values.
 
@@ -20,6 +21,7 @@ You can use this value for setting explicit null values.
 ***
 
 ### `json.version`
+<div class="search_terms" style="display: none">version</div>
 
 Current version of dkjson.
 
@@ -32,6 +34,7 @@ Current version of dkjson.
 ## Functions
 
 ### `json.decode`
+<div class="search_terms" style="display: none">decode</div>
 
 Decode string into a table.
 
@@ -52,6 +55,7 @@ local result = json.decode(s, position, nullValue)
 ***
 
 ### `json.encode`
+<div class="search_terms" style="display: none">encode</div>
 
 Create a string representing the object. Object can be a table, a string, a number, a boolean, nil, json.null or any object with a function __tojson in its metatable. A table can only use strings and numbers as keys and its values have to be valid objects as well. It raises an error for any invalid data types or reference cycles.
 
@@ -71,6 +75,7 @@ local result = json.encode(object, state)
 ***
 
 ### `json.loadfile`
+<div class="search_terms" style="display: none">loadfile</div>
 
 Loads the contents of a file through json.decode. Files loaded from Data Files\\MWSE\\{fileName}.json.
 
@@ -89,6 +94,7 @@ local result = json.loadfile(fileName)
 ***
 
 ### `json.quotestring`
+<div class="search_terms" style="display: none">quotestring</div>
 
 Quote a UTF-8 string and escape critical characters using JSON escape sequences. This function is only necessary when you build your own __tojson functions.
 
@@ -107,6 +113,7 @@ local result = json.quotestring(s)
 ***
 
 ### `json.savefile`
+<div class="search_terms" style="display: none">savefile</div>
 
 Saves a serializable table to Data Files\\MWSE\\{fileName}.json, using json.encode.
 

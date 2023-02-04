@@ -12,6 +12,7 @@ Animations are divided into three layers. The layer 0 is the base layer containi
 ## Properties
 
 ### `actorNode`
+<div class="search_terms" style="display: none">actornode</div>
 
 
 
@@ -22,6 +23,7 @@ Animations are divided into three layers. The layer 0 is the base layer containi
 ***
 
 ### `animationGroups`
+<div class="search_terms" style="display: none">animationgroups</div>
 
 *Read-only*. The animation groups, indexed by the [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) namespace.
 
@@ -32,6 +34,7 @@ Animations are divided into three layers. The layer 0 is the base layer containi
 ***
 
 ### `animationGroupSoundgenCounts`
+<div class="search_terms" style="display: none">animationgroupsoundgencounts</div>
 
 *Read-only*. The number of sound generators for each of the animation groups, indexed by the [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) namespace.
 
@@ -42,6 +45,7 @@ Animations are divided into three layers. The layer 0 is the base layer containi
 ***
 
 ### `animGroupLayerIndicies`
+<div class="search_terms" style="display: none">animgrouplayerindicies</div>
 
 *Read-only*. The layer from which each of the actor's animation groups come, indexed by the [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) namespace.
 
@@ -52,6 +56,7 @@ Animations are divided into three layers. The layer 0 is the base layer containi
 ***
 
 ### `approxRootTravelSpeeds`
+<div class="search_terms" style="display: none">approxroottravelspeeds</div>
 
 *Read-only*. The approximate root node travel speed for each of the animation groups, indexed by the [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) namespace.
 
@@ -62,6 +67,7 @@ Animations are divided into three layers. The layer 0 is the base layer containi
 ***
 
 ### `currentAnimGroupLayers`
+<div class="search_terms" style="display: none">currentanimgrouplayers</div>
 
 *Read-only*. 
 
@@ -72,6 +78,7 @@ Animations are divided into three layers. The layer 0 is the base layer containi
 ***
 
 ### `currentAnimGroups`
+<div class="search_terms" style="display: none">currentanimgroups</div>
 
 *Read-only*. The currently playing [animation group](https://mwse.github.io/MWSE/references/animation-groups/), on each of the [body sections](https://mwse.github.io/MWSE/references/animation-body-sections/).
 
@@ -82,6 +89,7 @@ Animations are divided into three layers. The layer 0 is the base layer containi
 ***
 
 ### `currentNodeIndices`
+<div class="search_terms" style="display: none">currentnodeindices</div>
 
 *Read-only*. 
 
@@ -92,6 +100,7 @@ Animations are divided into three layers. The layer 0 is the base layer containi
 ***
 
 ### `currentSoundgenIndices`
+<div class="search_terms" style="display: none">currentsoundgenindices</div>
 
 *Read-only*. The index of the currently used sound generator for each of the [body sections](https://mwse.github.io/MWSE/references/animation-body-sections/).
 
@@ -102,6 +111,7 @@ Animations are divided into three layers. The layer 0 is the base layer containi
 ***
 
 ### `deltaTime`
+<div class="search_terms" style="display: none">deltatime</div>
 
 The time in seconds since the last update.
 
@@ -112,6 +122,7 @@ The time in seconds since the last update.
 ***
 
 ### `flags`
+<div class="search_terms" style="display: none">flags</div>
 
 
 
@@ -122,6 +133,7 @@ The time in seconds since the last update.
 ***
 
 ### `hasOverrideAnimations`
+<div class="search_terms" style="display: none">hasoverrideanimations, overrideanimations</div>
 
 *Read-only*. 
 
@@ -132,6 +144,7 @@ The time in seconds since the last update.
 ***
 
 ### `headGeometry`
+<div class="search_terms" style="display: none">headgeometry</div>
 
 
 
@@ -142,6 +155,7 @@ The time in seconds since the last update.
 ***
 
 ### `headNode`
+<div class="search_terms" style="display: none">headnode</div>
 
 
 
@@ -152,6 +166,7 @@ The time in seconds since the last update.
 ***
 
 ### `keyframeLayers`
+<div class="search_terms" style="display: none">keyframelayers</div>
 
 *Read-only*. 
 
@@ -162,6 +177,7 @@ The time in seconds since the last update.
 ***
 
 ### `lipsyncLevel`
+<div class="search_terms" style="display: none">lipsynclevel</div>
 
 
 
@@ -172,6 +188,7 @@ The time in seconds since the last update.
 ***
 
 ### `loopCounts`
+<div class="search_terms" style="display: none">loopcounts</div>
 
 *Read-only*. 
 
@@ -182,6 +199,7 @@ The time in seconds since the last update.
 ***
 
 ### `manager`
+<div class="search_terms" style="display: none">manager</div>
 
 
 
@@ -192,6 +210,7 @@ The time in seconds since the last update.
 ***
 
 ### `modelRootNode`
+<div class="search_terms" style="display: none">modelrootnode, elrootnode</div>
 
 
 
@@ -202,6 +221,7 @@ The time in seconds since the last update.
 ***
 
 ### `movementSpeed`
+<div class="search_terms" style="display: none">movementspeed</div>
 
 *Read-only*. The animation speed multiplier of movement animations. This includes walking, running, crouching, swimming, turning, jumping and other movement related animations.
 
@@ -212,6 +232,7 @@ The time in seconds since the last update.
 ***
 
 ### `nextLoopCounts`
+<div class="search_terms" style="display: none">nextloopcounts</div>
 
 
 
@@ -222,6 +243,7 @@ The time in seconds since the last update.
 ***
 
 ### `positionDeltaModelRoot`
+<div class="search_terms" style="display: none">positiondeltamodelroot</div>
 
 
 
@@ -232,6 +254,7 @@ The time in seconds since the last update.
 ***
 
 ### `spine1Node`
+<div class="search_terms" style="display: none">spine1node</div>
 
 
 
@@ -242,6 +265,7 @@ The time in seconds since the last update.
 ***
 
 ### `spine2Node`
+<div class="search_terms" style="display: none">spine2node</div>
 
 
 
@@ -252,6 +276,7 @@ The time in seconds since the last update.
 ***
 
 ### `spineAngle`
+<div class="search_terms" style="display: none">spineangle</div>
 
 
 
@@ -262,6 +287,7 @@ The time in seconds since the last update.
 ***
 
 ### `timings`
+<div class="search_terms" style="display: none">timings</div>
 
 The time in seconds indicating the current position within the animation for each individual body section, indexed by values in the [`tes3.animationBodySection`](https://mwse.github.io/MWSE/references/animation-body-sections/) table.
 
@@ -272,6 +298,7 @@ The time in seconds indicating the current position within the animation for eac
 ***
 
 ### `weaponSpeed`
+<div class="search_terms" style="display: none">weaponspeed</div>
 
 The animation speed multiplier of weapon animations. This includes all weapon related idle, attack, and ready/unready animations.
 
@@ -284,6 +311,7 @@ The animation speed multiplier of weapon animations. This includes all weapon re
 ## Methods
 
 ### `getReference`
+<div class="search_terms" style="display: none">getreference, reference</div>
 
 This method fetches the reference of the actor to whom this animation data belongs.
 
@@ -298,6 +326,7 @@ local result = myObject:getReference()
 ***
 
 ### `playAnimationGroup`
+<div class="search_terms" style="display: none">playanimationgroup</div>
 
 This method plays an animation group on the related actor, invoking `playGroup` event.
 
@@ -314,6 +343,7 @@ myObject:playAnimationGroup(animationGroup, startFlag, loopCount)
 ***
 
 ### `playAnimationGroupForIndex`
+<div class="search_terms" style="display: none">playanimationgroupforindex</div>
 
 This method plays an animation group on the provided body section of related actor, invoking `playGroup` event.
 
@@ -331,6 +361,7 @@ myObject:playAnimationGroupForIndex(animationGroup, triIndex, startFlag, loopCou
 ***
 
 ### `setHeadNode`
+<div class="search_terms" style="display: none">setheadnode, headnode</div>
 
 
 
@@ -345,6 +376,7 @@ myObject:setHeadNode(head)
 ***
 
 ### `setOverrideLayerKeyframes`
+<div class="search_terms" style="display: none">setoverridelayerkeyframes, overridelayerkeyframes</div>
 
 
 

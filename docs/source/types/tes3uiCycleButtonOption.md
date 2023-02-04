@@ -10,6 +10,7 @@ This table defines an option available for a tes3uiCycleButton. This must at min
 ## Properties
 
 ### `text`
+<div class="search_terms" style="display: none">text</div>
 
 The text to use when this option is active.
 
@@ -20,6 +21,7 @@ The text to use when this option is active.
 ***
 
 ### `value`
+<div class="search_terms" style="display: none">value</div>
 
 An optional value associated with this option.
 

@@ -10,6 +10,7 @@ A structure that represents a configured key binding.
 ## Properties
 
 ### `code`
+<div class="search_terms" style="display: none">code</div>
 
 The scan or input button code for the binding. Device specific. For keyboards, this is a scan code.
 
@@ -20,6 +21,7 @@ The scan or input button code for the binding. Device specific. For keyboards, t
 ***
 
 ### `device`
+<div class="search_terms" style="display: none">device</div>
 
 The index of the device used in the keybinding, such as keyboard, mouse, joystick, or gamepad.
 

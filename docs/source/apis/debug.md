@@ -10,6 +10,7 @@ This is an extension of Lua Debug library.
 ## Functions
 
 ### `debug.clearLogCacheForFile`
+<div class="search_terms" style="display: none">clearlogcacheforfile</div>
 
 Clears any prefix information from cache for use with `debug.log`. This is useful if your file loads dynamically via `dofile`, and is subject to change during development.
 
@@ -24,6 +25,7 @@ debug.clearLogCacheForFile(file)
 ***
 
 ### `debug.log`
+<div class="search_terms" style="display: none">log</div>
 
 Logs a message to `MWSE.log` file. The output format is `[path] "msg" = msg`, where the `path` is the path and line at which the function was called.
 

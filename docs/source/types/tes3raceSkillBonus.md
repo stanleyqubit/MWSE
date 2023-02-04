@@ -10,6 +10,7 @@ A substructure for a race, storing up to 7 skill bonuses.
 ## Properties
 
 ### `bonus`
+<div class="search_terms" style="display: none">bonus</div>
 
 The value to modify the skill with.
 
@@ -20,6 +21,7 @@ The value to modify the skill with.
 ***
 
 ### `skill`
+<div class="search_terms" style="display: none">skill</div>
 
 The skill id to modify. Maps to values in [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) namespace.
 

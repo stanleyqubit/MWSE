@@ -11,6 +11,7 @@ This type inherits the following: [tes3physicalObject](../../types/tes3physicalO
 ## Properties
 
 ### `blocked`
+<div class="search_terms" style="display: none">blocked</div>
 
 The blocked state of the object.
 
@@ -21,6 +22,7 @@ The blocked state of the object.
 ***
 
 ### `boundingBox`
+<div class="search_terms" style="display: none">boundingbox</div>
 
 The bounding box for the object.
 
@@ -31,6 +33,7 @@ The bounding box for the object.
 ***
 
 ### `deleted`
+<div class="search_terms" style="display: none">deleted</div>
 
 *Read-only*. The deleted state of the object.
 
@@ -41,6 +44,7 @@ The bounding box for the object.
 ***
 
 ### `disabled`
+<div class="search_terms" style="display: none">disabled</div>
 
 *Read-only*. The disabled state of the object.
 
@@ -51,6 +55,7 @@ The bounding box for the object.
 ***
 
 ### `female`
+<div class="search_terms" style="display: none">female</div>
 
 A flag that marks this body part as used for female actors.
 
@@ -61,6 +66,7 @@ A flag that marks this body part as used for female actors.
 ***
 
 ### `id`
+<div class="search_terms" style="display: none">id</div>
 
 *Read-only*. The unique identifier for the object.
 
@@ -71,6 +77,7 @@ A flag that marks this body part as used for female actors.
 ***
 
 ### `isLocationMarker`
+<div class="search_terms" style="display: none">islocationmarker, locationmarker</div>
 
 True if this object is an editor marker for a gameplay location. These include travel, intervention, prison, door, and interior north markers. Markers are invisible in-game.
 
@@ -81,6 +88,7 @@ True if this object is an editor marker for a gameplay location. These include t
 ***
 
 ### `mesh`
+<div class="search_terms" style="display: none">mesh</div>
 
 The path to the object's mesh.
 
@@ -91,6 +99,7 @@ The path to the object's mesh.
 ***
 
 ### `modified`
+<div class="search_terms" style="display: none">modified, ified</div>
 
 The modification state of the object since the last save.
 
@@ -101,6 +110,7 @@ The modification state of the object since the last save.
 ***
 
 ### `nextInCollection`
+<div class="search_terms" style="display: none">nextincollection</div>
 
 The next object in parent collection's list.
 
@@ -111,6 +121,7 @@ The next object in parent collection's list.
 ***
 
 ### `objectFlags`
+<div class="search_terms" style="display: none">objectflags</div>
 
 *Read-only*. The raw flags of the object.
 
@@ -121,6 +132,7 @@ The next object in parent collection's list.
 ***
 
 ### `objectType`
+<div class="search_terms" style="display: none">objecttype</div>
 
 *Read-only*. The type of object. Maps to values in [`tes3.objectType`](https://mwse.github.io/MWSE/references/object-types/).
 
@@ -131,6 +143,7 @@ The next object in parent collection's list.
 ***
 
 ### `owningCollection`
+<div class="search_terms" style="display: none">owningcollection</div>
 
 The collection responsible for holding this object.
 
@@ -141,6 +154,7 @@ The collection responsible for holding this object.
 ***
 
 ### `part`
+<div class="search_terms" style="display: none">part</div>
 
 The part of the body occupied. Maps to values in [`tes3.partIndex`](https://mwse.github.io/MWSE/references/part-indices/) namespace.
 
@@ -151,6 +165,7 @@ The part of the body occupied. Maps to values in [`tes3.partIndex`](https://mwse
 ***
 
 ### `partType`
+<div class="search_terms" style="display: none">parttype</div>
 
 The layer the body part occupies. Maps to values in [`tes3.activeBodyPartLayer`](https://mwse.github.io/MWSE/references/active-body-part-layers/) namespace.
 
@@ -161,6 +176,7 @@ The layer the body part occupies. Maps to values in [`tes3.activeBodyPartLayer`]
 ***
 
 ### `persistent`
+<div class="search_terms" style="display: none">persistent</div>
 
 The persistent flag of the object.
 
@@ -171,6 +187,7 @@ The persistent flag of the object.
 ***
 
 ### `playable`
+<div class="search_terms" style="display: none">playable</div>
 
 A flag that marks this body part as selectable during character generation.
 
@@ -181,6 +198,7 @@ A flag that marks this body part as selectable during character generation.
 ***
 
 ### `previousInCollection`
+<div class="search_terms" style="display: none">previousincollection</div>
 
 The previous object in parent collection's list.
 
@@ -191,6 +209,7 @@ The previous object in parent collection's list.
 ***
 
 ### `raceName`
+<div class="search_terms" style="display: none">racename</div>
 
 *Read-only*. The name of the race associated with this body part.
 
@@ -201,6 +220,7 @@ The previous object in parent collection's list.
 ***
 
 ### `scale`
+<div class="search_terms" style="display: none">scale</div>
 
 The object's scale. The value range is (0, 10).
 
@@ -211,6 +231,7 @@ The object's scale. The value range is (0, 10).
 ***
 
 ### `sceneCollisionRoot`
+<div class="search_terms" style="display: none">scenecollisionroot</div>
 
 The scene graph node for this object's physics collision, if its mesh has a root collision node.
 
@@ -221,6 +242,7 @@ The scene graph node for this object's physics collision, if its mesh has a root
 ***
 
 ### `sceneNode`
+<div class="search_terms" style="display: none">scenenode</div>
 
 The NiNode-derived object for the object's loaded mesh.
 
@@ -231,6 +253,7 @@ The NiNode-derived object for the object's loaded mesh.
 ***
 
 ### `sourceless`
+<div class="search_terms" style="display: none">sourceless</div>
 
 The soruceless flag of the object.
 
@@ -241,6 +264,7 @@ The soruceless flag of the object.
 ***
 
 ### `sourceMod`
+<div class="search_terms" style="display: none">sourcemod</div>
 
 *Read-only*. The filename (including the extension) of the mod that owns this object. It has `nil` value if the object was anything other than loaded from an ESP or ESM file.
 
@@ -251,6 +275,7 @@ The soruceless flag of the object.
 ***
 
 ### `stolenList`
+<div class="search_terms" style="display: none">stolenlist</div>
 
 A list of actors that the object has been stolen from.
 
@@ -261,6 +286,7 @@ A list of actors that the object has been stolen from.
 ***
 
 ### `supportsLuaData`
+<div class="search_terms" style="display: none">supportsluadata</div>
 
 If true, references of this object can store temporary or persistent lua data.
 
@@ -271,6 +297,7 @@ If true, references of this object can store temporary or persistent lua data.
 ***
 
 ### `vampiric`
+<div class="search_terms" style="display: none">vampiric</div>
 
 A flag that marks this body part as used for vampires.
 
@@ -283,6 +310,7 @@ A flag that marks this body part as used for vampires.
 ## Methods
 
 ### `__tojson`
+<div class="search_terms" style="display: none">__tojson</div>
 
 Serializes the object to json.
 

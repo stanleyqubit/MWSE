@@ -10,6 +10,7 @@ A rotation matrix, translation vector, and scale that marks an object's transfor
 ## Properties
 
 ### `rotation`
+<div class="search_terms" style="display: none">rotation</div>
 
 The transform's rotation matrix.
 
@@ -20,6 +21,7 @@ The transform's rotation matrix.
 ***
 
 ### `scale`
+<div class="search_terms" style="display: none">scale</div>
 
 The transform's scale.
 
@@ -30,6 +32,7 @@ The transform's scale.
 ***
 
 ### `translation`
+<div class="search_terms" style="display: none">translation</div>
 
 The transform's translation vector.
 
@@ -42,6 +45,7 @@ The transform's translation vector.
 ## Methods
 
 ### `copy`
+<div class="search_terms" style="display: none">copy</div>
 
 Creates a copy of the transform.
 
@@ -56,6 +60,7 @@ local result = myObject:copy()
 ***
 
 ### `invert`
+<div class="search_terms" style="display: none">invert</div>
 
 Returns a new transform that is the inverse of this transform. The second return value indicates whether the calculating the inverse was possible.
 
@@ -71,6 +76,7 @@ local transform, valid = myObject:invert()
 ***
 
 ### `new`
+<div class="search_terms" style="display: none">new</div>
 
 Creates a new instance of this type.
 
@@ -91,6 +97,7 @@ local result = myObject:new(rotation, translation, scale)
 ***
 
 ### `toIdentity`
+<div class="search_terms" style="display: none">toidentity</div>
 
 Sets transform's rotation matrix to the identity matrix, translation to null vector, and scale to 1.0.
 

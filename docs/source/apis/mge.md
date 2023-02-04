@@ -10,6 +10,7 @@ The mge library accesses MGE XE functionality, including control over shaders. M
 ## Properties
 
 ### `mge.camera`
+<div class="search_terms" style="display: none">camera</div>
 
 Allows control of MGE camera features.
 
@@ -20,6 +21,7 @@ Allows control of MGE camera features.
 ***
 
 ### `mge.distantLandRenderConfig`
+<div class="search_terms" style="display: none">distantlandrenderconfig</div>
 
 Allows control of the camera.
 
@@ -30,6 +32,7 @@ Allows control of the camera.
 ***
 
 ### `mge.render`
+<div class="search_terms" style="display: none">render</div>
 
 Allows control of render features.
 
@@ -40,6 +43,7 @@ Allows control of render features.
 ***
 
 ### `mge.shaders`
+<div class="search_terms" style="display: none">shaders</div>
 
 Allows control of shaders.
 
@@ -50,6 +54,7 @@ Allows control of shaders.
 ***
 
 ### `mge.weather`
+<div class="search_terms" style="display: none">weather</div>
 
 Allows control of MGE weather features.
 
@@ -62,6 +67,7 @@ Allows control of MGE weather features.
 ## Functions
 
 ### `mge.enabled`
+<div class="search_terms" style="display: none">enabled</div>
 
 Determines if the MGE XE interface is enabled.
 
@@ -76,6 +82,7 @@ local enabled = mge.enabled()
 ***
 
 ### `mge.getLightingMode`
+<div class="search_terms" style="display: none">getlightingmode, lightingmode</div>
 
 Returns the lighting mode used by MGE XE. These values map to `mge.lightingMode.*` constants.
 
@@ -90,6 +97,7 @@ local mode = mge.getLightingMode()
 ***
 
 ### `mge.getUIScale`
+<div class="search_terms" style="display: none">getuiscale, uiscale</div>
 
 Returns the GUI scaling used by MGE XE.
 
@@ -104,6 +112,7 @@ local scale = mge.getUIScale()
 ***
 
 ### `mge.getVersion`
+<div class="search_terms" style="display: none">getversion, version</div>
 
 Gets the MGE version. Returns a table with keys `major`, `minor`, and `patch`.
 
@@ -118,6 +127,7 @@ local result = mge.getVersion()
 ***
 
 ### `mge.loadConfig`
+<div class="search_terms" style="display: none">loadconfig</div>
 
 Reloads the MGE config file. This is primarily an internal function and shouldn't be called casually.
 
@@ -128,6 +138,7 @@ mge.loadConfig()
 ***
 
 ### `mge.reloadDistantLand`
+<div class="search_terms" style="display: none">reloaddistantland</div>
 
 Reloads the MGE distant land. This is a blocking call that can take some seconds.
 
@@ -138,6 +149,7 @@ mge.reloadDistantLand()
 ***
 
 ### `mge.saveConfig`
+<div class="search_terms" style="display: none">saveconfig</div>
 
 Saves the MGE config file. This is primarily an internal function and shouldn't be called casually.
 
@@ -148,6 +160,7 @@ mge.saveConfig()
 ***
 
 ### `mge.saveScreenshot`
+<div class="search_terms" style="display: none">savescreenshot</div>
 
 Saves a screenshot.
 
@@ -164,6 +177,7 @@ mge.saveScreenshot({ path = ..., captureWithUI = ... })
 ***
 
 ### `mge.setLightingMode`
+<div class="search_terms" style="display: none">setlightingmode, lightingmode</div>
 
 Sets the lighting mode used by MGE XE. The values passed can be used from the `mge.lightingMode.*` constants.
 
@@ -178,6 +192,7 @@ mge.setLightingMode(mode)
 ***
 
 ### `mge.setUIScale`
+<div class="search_terms" style="display: none">setuiscale, uiscale</div>
 
 Sets the GUI scaling used by MGE XE.
 

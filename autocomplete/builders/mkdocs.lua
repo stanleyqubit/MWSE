@@ -176,7 +176,7 @@ local operatorToTitle = {
 	div = "Division (`/`)",
 	idiv = "Floor division (`//`)",
 	mod = "Modulo (`%`)",
-	pow = "Exponentation (`^`)",
+	pow = "Exponentiation (`^`)",
 	concat = "Concatenation (`..`)",
 	len = "Length (`#`)",
 }
@@ -356,6 +356,18 @@ local function writePackageDetails(file, package)
 	end
 end
 
+local identifierStems = {
+	"get", "set", "mod",
+	"is", "has", "can",
+	"open", "close",
+	"add", "remove",
+	"enable", "disable",
+	"apply", "update",
+	"find", "show",
+	"create", "delete",
+	"test", "toggle",
+}
+
 writeSubPackage = function(file, package, from)
 	-- Don't document deprecated APIs on the website.
 	if (package.deprecated) then
@@ -366,7 +378,27 @@ writeSubPackage = function(file, package, from)
 	if (from.type == "lib") then
 		key = string.format("%s.%s", from.namespace, package.key)
 	end
-	file:write(string.format("### `%s`\n\n", key))
+	file:write(string.format("### `%s`\n", key))
+	
+	-- Hidden search terms, to work around deficiencies in lunr.
+	-- Include lower-cased variants of the identifier.
+	-- Include lower-cased stemmed variant, unless it is a single character.
+	local stemmedKey = nil
+	for _, stem in ipairs(identifierStems) do
+		if package.key:startswith(stem) and package.key ~= stem then
+			stemmedKey = string.sub(package.key, 1 + stem:len(), -1):lower()
+			break
+		end
+	end
+	
+	file:write("<div class=\"search_terms\" style=\"display: none\">")
+	local lowercaseKey = package.key:lower()
+	if stemmedKey and stemmedKey:len() > 1 then
+		file:write(string.format("%s, %s", lowercaseKey, stemmedKey))
+	else
+		file:write(string.format("%s", lowercaseKey))
+	end
+	file:write("</div>\n\n")
 
 	writePackageDetails(file, package)
 end

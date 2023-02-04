@@ -10,6 +10,7 @@ A managed visual effect, attached to position, reference, or arbitrary node. The
 ## Properties
 
 ### `age`
+<div class="search_terms" style="display: none">age</div>
 
 The VFX's current age, in seconds.
 
@@ -20,6 +21,7 @@ The VFX's current age, in seconds.
 ***
 
 ### `attachNode`
+<div class="search_terms" style="display: none">attachnode</div>
 
 The node the VFX was created to attach to, if it was created for node attachment.
 
@@ -30,6 +32,7 @@ The node the VFX was created to attach to, if it was created for node attachment
 ***
 
 ### `beginKeyTime`
+<div class="search_terms" style="display: none">beginkeytime</div>
 
 The start of the VFX's keyframe timing. This is fetched from the creating effect's time controller at the time of the VFX's creation.
 
@@ -40,6 +43,7 @@ The start of the VFX's keyframe timing. This is fetched from the creating effect
 ***
 
 ### `effectNode`
+<div class="search_terms" style="display: none">effectnode</div>
 
 The cloned node of the associated `effectObject`.
 
@@ -50,6 +54,7 @@ The cloned node of the associated `effectObject`.
 ***
 
 ### `effectObject`
+<div class="search_terms" style="display: none">effectobject</div>
 
 The object responsible for this VFX's appearance. Its scene node is cloned into `effectNode`.
 
@@ -60,6 +65,7 @@ The object responsible for this VFX's appearance. Its scene node is cloned into 
 ***
 
 ### `endKeyTime`
+<div class="search_terms" style="display: none">endkeytime</div>
 
 The end of the VFX's keyframe timing. This is fetched from the creating effect's time controller at the time of the VFX's creation.
 
@@ -70,6 +76,7 @@ The end of the VFX's keyframe timing. This is fetched from the creating effect's
 ***
 
 ### `expired`
+<div class="search_terms" style="display: none">expired</div>
 
 A flag controlling if the effect is expired. This can be set to cause the effect to remove itself on the next update.
 
@@ -80,6 +87,7 @@ A flag controlling if the effect is expired. This can be set to cause the effect
 ***
 
 ### `id`
+<div class="search_terms" style="display: none">id</div>
 
 *Read-only*. The unique numberic identifier for this visual effect.
 
@@ -90,6 +98,7 @@ A flag controlling if the effect is expired. This can be set to cause the effect
 ***
 
 ### `keyTime`
+<div class="search_terms" style="display: none">keytime</div>
 
 The VFX's current keyframe timing. When this value exceeds the `endKeyTime`, the effect will either loop back to `beginKeyTime` or the effect will expire.
 
@@ -100,6 +109,7 @@ The VFX's current keyframe timing. When this value exceeds the `endKeyTime`, the
 ***
 
 ### `maxAge`
+<div class="search_terms" style="display: none">maxage</div>
 
 The VFX's maximum age, in seconds.
 
@@ -110,6 +120,7 @@ The VFX's maximum age, in seconds.
 ***
 
 ### `position`
+<div class="search_terms" style="display: none">position</div>
 
 The position the VFX was created at.
 
@@ -120,6 +131,7 @@ The position the VFX was created at.
 ***
 
 ### `sourceInstance`
+<div class="search_terms" style="display: none">sourceinstance</div>
 
 *Read-only*. The the associated magic source instance.
 
@@ -130,6 +142,7 @@ The position the VFX was created at.
 ***
 
 ### `sourceInstanceSerial`
+<div class="search_terms" style="display: none">sourceinstanceserial</div>
 
 *Read-only*. The serial number of the associated source instance.
 
@@ -140,6 +153,7 @@ The position the VFX was created at.
 ***
 
 ### `target`
+<div class="search_terms" style="display: none">target</div>
 
 The reference the target is associated with, if any.
 
@@ -150,6 +164,7 @@ The reference the target is associated with, if any.
 ***
 
 ### `verticalOffset`
+<div class="search_terms" style="display: none">verticaloffset</div>
 
 The VFX's vertical offset, at the time of creation. Changing this value will not automatically readjust the VFX's visual node.
 

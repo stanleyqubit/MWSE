@@ -10,6 +10,7 @@ A list of spells. Used by actors, birthsigns, and races.
 ## Properties
 
 ### `iterator`
+<div class="search_terms" style="display: none">iterator</div>
 
 *Read-only*. Deprecated. Use `for index, spell in pairs(spellList)` to iterate over spells.
 
@@ -24,6 +25,7 @@ Direct access to the spells in this list.
 ## Methods
 
 ### `add`
+<div class="search_terms" style="display: none">add</div>
 
 Adds a spell to the list.
 
@@ -42,6 +44,7 @@ local result = myObject:add(spell)
 ***
 
 ### `contains`
+<div class="search_terms" style="display: none">contains</div>
 
 Checks if the specified spell is contained in the spell list.
 
@@ -60,6 +63,7 @@ local result = myObject:contains(spell)
 ***
 
 ### `containsType`
+<div class="search_terms" style="display: none">containstype</div>
 
 Finds the first spell with the type provided.
 
@@ -78,6 +82,7 @@ local result = myObject:containsType(spellType)
 ***
 
 ### `getCheapest`
+<div class="search_terms" style="display: none">getcheapest, cheapest</div>
 
 Finds the castable spell in the list with the lowest casting cost.
 
@@ -92,6 +97,7 @@ local result = myObject:getCheapest()
 ***
 
 ### `remove`
+<div class="search_terms" style="display: none">remove</div>
 
 Removes a spell from the list.
 

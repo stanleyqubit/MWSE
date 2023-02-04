@@ -10,6 +10,7 @@ An AI package game object.
 ## Properties
 
 ### `destinationCell`
+<div class="search_terms" style="display: none">destinationcell</div>
 
 The destination cell for escort and follow AI packages. For wander package, this is the cell the actor wanders in.
 
@@ -20,6 +21,7 @@ The destination cell for escort and follow AI packages. For wander package, this
 ***
 
 ### `distance`
+<div class="search_terms" style="display: none">distance</div>
 
 Determines the size of the area the actor with this wander AI package will walk around. Measured in the in-game units.
 
@@ -30,6 +32,7 @@ Determines the size of the area the actor with this wander AI package will walk 
 ***
 
 ### `duration`
+<div class="search_terms" style="display: none">duration</div>
 
 This property represents the duration of the AI package. It is present for wander, escort and follow AI packages. Measured in the in-game hours.
 
@@ -40,6 +43,7 @@ This property represents the duration of the AI package. It is present for wande
 ***
 
 ### `hourOfDay`
+<div class="search_terms" style="display: none">hourofday</div>
 
 
 
@@ -50,6 +54,7 @@ This property represents the duration of the AI package. It is present for wande
 ***
 
 ### `isDone`
+<div class="search_terms" style="display: none">isdone, done</div>
 
 
 
@@ -60,6 +65,7 @@ This property represents the duration of the AI package. It is present for wande
 ***
 
 ### `isFinalized`
+<div class="search_terms" style="display: none">isfinalized, finalized</div>
 
 
 
@@ -70,6 +76,7 @@ This property represents the duration of the AI package. It is present for wande
 ***
 
 ### `isMoving`
+<div class="search_terms" style="display: none">ismoving, moving</div>
 
 This property is `true` if the parent actor is moving.
 
@@ -80,6 +87,7 @@ This property is `true` if the parent actor is moving.
 ***
 
 ### `isReset`
+<div class="search_terms" style="display: none">isreset, reset</div>
 
 
 
@@ -90,6 +98,7 @@ This property is `true` if the parent actor is moving.
 ***
 
 ### `isStarted`
+<div class="search_terms" style="display: none">isstarted, started</div>
 
 
 
@@ -100,6 +109,7 @@ This property is `true` if the parent actor is moving.
 ***
 
 ### `mobile`
+<div class="search_terms" style="display: none">mobile</div>
 
 Access to the actor to whom this AI package belongs.
 
@@ -110,6 +120,7 @@ Access to the actor to whom this AI package belongs.
 ***
 
 ### `startGameHour`
+<div class="search_terms" style="display: none">startgamehour</div>
 
 The in-game hour at which this AI package started.
 
@@ -120,6 +131,7 @@ The in-game hour at which this AI package started.
 ***
 
 ### `targetActor`
+<div class="search_terms" style="display: none">targetactor</div>
 
 The target actor for activate, follow and escort AI packages.
 
@@ -130,6 +142,7 @@ The target actor for activate, follow and escort AI packages.
 ***
 
 ### `targetPosition`
+<div class="search_terms" style="display: none">targetposition</div>
 
 The final position to be reached by the escort, follow, and travel AI packages.
 
@@ -140,6 +153,7 @@ The final position to be reached by the escort, follow, and travel AI packages.
 ***
 
 ### `type`
+<div class="search_terms" style="display: none">type</div>
 
 *Read-only*. Maps to values in [`tes3.aiPackage`](https://mwse.github.io/MWSE/references/ai-packages/) namespace.
 

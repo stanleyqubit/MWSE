@@ -10,6 +10,7 @@ Allows control of MGE shader features.
 ## Properties
 
 ### `debug`
+<div class="search_terms" style="display: none">debug</div>
 
 *Read-only*. Gathers a string listing all shaders.
 
@@ -20,6 +21,7 @@ Allows control of MGE shader features.
 ***
 
 ### `hdrReactionSpeed`
+<div class="search_terms" style="display: none">hdrreactionspeed</div>
 
 The HDR exposure reaction speed, in seconds.
 
@@ -30,6 +32,7 @@ The HDR exposure reaction speed, in seconds.
 ***
 
 ### `list`
+<div class="search_terms" style="display: none">list</div>
 
 *Read-only*. Loads a list of all shaders. This is not a constant-held collection, and each shader handle is initialized anew each time this function is called. Cache this value when you are sure that shaders are not added or removed.
 
@@ -42,6 +45,7 @@ The HDR exposure reaction speed, in seconds.
 ## Functions
 
 ### `find`
+<div class="search_terms" style="display: none">find</div>
 
 Finds a loaded shader and returns a handle to it.
 
@@ -61,6 +65,7 @@ local shader = mgeShadersConfig.find({ name = ... })
 ***
 
 ### `load`
+<div class="search_terms" style="display: none">load</div>
 
 Loads a shader by name, from the `Data Files/shaders/XEshaders` directory. Adds the shader to the existing shader list, or returns the existing shader if it is already loaded.
 

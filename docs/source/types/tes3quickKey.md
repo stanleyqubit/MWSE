@@ -10,6 +10,7 @@ A configuration detailing a quick key.
 ## Properties
 
 ### `item`
+<div class="search_terms" style="display: none">item</div>
 
 *Read-only*. The raw item bound to the quick key. To change its value, use either the `setItem` or `setMagic` methods.
 
@@ -20,6 +21,7 @@ A configuration detailing a quick key.
 ***
 
 ### `itemData`
+<div class="search_terms" style="display: none">itemdata</div>
 
 *Read-only*. The raw item data bound to the quick key. To change its value, use either the `setItem` or `setMagic` methods.
 
@@ -30,6 +32,7 @@ A configuration detailing a quick key.
 ***
 
 ### `spell`
+<div class="search_terms" style="display: none">spell</div>
 
 *Read-only*. The raw spell bound to the quick key. To change its value, use the `setMagic` method.
 
@@ -40,6 +43,7 @@ A configuration detailing a quick key.
 ***
 
 ### `type`
+<div class="search_terms" style="display: none">type</div>
 
 *Read-only*. The type of the quick key, with the numeric value matching [`tes3.quickKeyType`](https://mwse.github.io/MWSE/references/quick-key-types/) constants.
 
@@ -52,6 +56,7 @@ A configuration detailing a quick key.
 ## Methods
 
 ### `clear`
+<div class="search_terms" style="display: none">clear</div>
 
 Unbinds the quick key, removing any data in it.
 
@@ -62,6 +67,7 @@ myObject:clear()
 ***
 
 ### `getItem`
+<div class="search_terms" style="display: none">getitem, item</div>
 
 Gets the item associated with the given quick key. If the quick key is not marked as an item, this will return `nil`. This is equivalent to fetching the `item` and `itemData` properties, after checking to make sure the `type` is set to item.
 
@@ -77,6 +83,7 @@ local source, data = myObject:getItem()
 ***
 
 ### `getMagic`
+<div class="search_terms" style="display: none">getmagic, magic</div>
 
 Gets the magic associated with the given quick key. If the quick key is not marked as magic, this will return `nil`. This is equivalent to fetching either the `spell` or `item` properties and the `itemData` property, after checking to make sure the `type` is set to magic.
 
@@ -92,6 +99,7 @@ local source, data = myObject:getMagic()
 ***
 
 ### `setItem`
+<div class="search_terms" style="display: none">setitem, item</div>
 
 Sets the binding of the quick key to a given item source.
 
@@ -107,6 +115,7 @@ myObject:setItem(source, data)
 ***
 
 ### `setMagic`
+<div class="search_terms" style="display: none">setmagic, magic</div>
 
 Sets the binding of the quick key to a given magic source. This must be a spell, or an item with an on-use enchantment.
 

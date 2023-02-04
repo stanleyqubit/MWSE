@@ -11,6 +11,7 @@ This type inherits the following: [tes3uiWidget](../../types/tes3uiWidget)
 ## Properties
 
 ### `contentPane`
+<div class="search_terms" style="display: none">contentpane</div>
 
 *Read-only*. The content element of this pane.
 
@@ -21,6 +22,7 @@ This type inherits the following: [tes3uiWidget](../../types/tes3uiWidget)
 ***
 
 ### `element`
+<div class="search_terms" style="display: none">element</div>
 
 Access back to the element this widget interface is for.
 
@@ -31,6 +33,7 @@ Access back to the element this widget interface is for.
 ***
 
 ### `positionX`
+<div class="search_terms" style="display: none">positionx</div>
 
 The horizontal scroll offset in pixels.
 
@@ -41,6 +44,7 @@ The horizontal scroll offset in pixels.
 ***
 
 ### `positionY`
+<div class="search_terms" style="display: none">positiony</div>
 
 The vertical scroll offset in pixels.
 
@@ -65,6 +69,7 @@ The vertical scroll offset in pixels.
 ***
 
 ### `scrollbarVisible`
+<div class="search_terms" style="display: none">scrollbarvisible</div>
 
 If `true`, the scrollbar will be visible.
 
@@ -77,6 +82,7 @@ If `true`, the scrollbar will be visible.
 ## Methods
 
 ### `contentsChanged`
+<div class="search_terms" style="display: none">contentschanged</div>
 
 Updates the scrollbar slider and scrollbar limits after adding or removing elements to the content container. Because content size depends on layout, this must be run after calling `updateLayout` on the widget element. Only required if the content size changes.
 

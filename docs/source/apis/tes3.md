@@ -10,6 +10,7 @@ The tes3 library provides the majority of the functions for interacting with the
 ## Properties
 
 ### `tes3.bsaLoader`
+<div class="search_terms" style="display: none">bsaloader</div>
 
 One of the core game objects, responsible for loaded BSA files.
 
@@ -20,6 +21,7 @@ One of the core game objects, responsible for loaded BSA files.
 ***
 
 ### `tes3.dataHandler`
+<div class="search_terms" style="display: none">datahandler</div>
 
 One of the core game objects.
 
@@ -30,6 +32,7 @@ One of the core game objects.
 ***
 
 ### `tes3.game`
+<div class="search_terms" style="display: none">game</div>
 
 One of the core game objects.
 
@@ -40,6 +43,7 @@ One of the core game objects.
 ***
 
 ### `tes3.installDirectory`
+<div class="search_terms" style="display: none">installdirectory</div>
 
 The currently executed root Morrowind installation path.
 
@@ -50,6 +54,7 @@ The currently executed root Morrowind installation path.
 ***
 
 ### `tes3.magicSchoolSkill`
+<div class="search_terms" style="display: none">magicschoolskill</div>
 
 This table is used to convert numerical magic school IDs to their respective skill IDs. These constants will return their respective `tes3.skill` constants.
 
@@ -76,6 +81,7 @@ This table is used to convert numerical magic school IDs to their respective ski
 ***
 
 ### `tes3.mobilePlayer`
+<div class="search_terms" style="display: none">mobileplayer</div>
 
 The player's mobile actor.
 
@@ -86,6 +92,7 @@ The player's mobile actor.
 ***
 
 ### `tes3.player`
+<div class="search_terms" style="display: none">player</div>
 
 A reference to the player.
 
@@ -96,6 +103,7 @@ A reference to the player.
 ***
 
 ### `tes3.player1stPerson`
+<div class="search_terms" style="display: none">player1stperson</div>
 
 A reference used for the player's first person hands.
 
@@ -106,6 +114,7 @@ A reference used for the player's first person hands.
 ***
 
 ### `tes3.worldController`
+<div class="search_terms" style="display: none">worldcontroller</div>
 
 One of the core game objects.
 
@@ -118,6 +127,7 @@ One of the core game objects.
 ## Functions
 
 ### `tes3.addArmorSlot`
+<div class="search_terms" style="display: none">addarmorslot, armorslot</div>
 
 Registers a new armor slot. Adds a new place for armor pieces with a matching slot number to equip to.
 
@@ -140,6 +150,7 @@ local wasAdded = tes3.addArmorSlot({ slot = ..., name = ..., weight = ..., scala
 ***
 
 ### `tes3.addClothingSlot`
+<div class="search_terms" style="display: none">addclothingslot, clothingslot</div>
 
 Registers a new clothing slot. Adds a new place for clothing pieces with a matching slot number to equip to.
 
@@ -156,6 +167,7 @@ tes3.addClothingSlot({ slot = ..., name = ... })
 ***
 
 ### `tes3.addItem`
+<div class="search_terms" style="display: none">additem, item</div>
 
 Adds an item to a given reference's inventory or mobile's inventory.
 
@@ -185,6 +197,7 @@ local addedCount = tes3.addItem({ reference = ..., item = ..., itemData = ..., s
 ***
 
 ### `tes3.addItemData`
+<div class="search_terms" style="display: none">additemdata, itemdata</div>
 
 Creates an item data if there is room for a new stack in a given inventory. This can be then used to add custom user data or adjust an item's condition. This will return nil if no item data could be allocated for the item -- for example if the reference doesn't have the item in their inventory or each item of that type already has item data.
 
@@ -206,6 +219,7 @@ local createdData = tes3.addItemData({ to = ..., item = ..., updateGUI = ... })
 ***
 
 ### `tes3.addJournalEntry`
+<div class="search_terms" style="display: none">addjournalentry, journalentry</div>
 
 This function creates a new journal entry. It can be called once the world controller is loaded.
 
@@ -222,6 +236,7 @@ tes3.addJournalEntry({ text = ..., showMessage = ... })
 ***
 
 ### `tes3.addMagicEffect`
+<div class="search_terms" style="display: none">addmagiceffect, magiceffect</div>
 
 This function creates a new custom magic effect. The effect can be scripted through lua. This function should be used inside [`magicEffectsResolved`](https://mwse.github.io/MWSE/events/magicEffectsResolved/) event callback.
 
@@ -438,6 +453,7 @@ local effect = tes3.addMagicEffect({ id = ..., name = ..., baseCost = ..., schoo
 ***
 
 ### `tes3.addSoulGem`
+<div class="search_terms" style="display: none">addsoulgem, soulgem</div>
 
 Causes a misc item to be recognized as a soul gem, so that it can be used for soul trapping.
 
@@ -486,6 +502,7 @@ local wasAdded = tes3.addSoulGem({ item = ... })
 ***
 
 ### `tes3.addSpell`
+<div class="search_terms" style="display: none">addspell, spell</div>
 
 Adds a spell to an actor's spell list. If the spell is passive, the effects will be applied.
 
@@ -508,6 +525,7 @@ local wasAdded = tes3.addSpell({ reference = ..., actor = ..., spell = ..., upda
 ***
 
 ### `tes3.addTopic`
+<div class="search_terms" style="display: none">addtopic, topic</div>
 
 Adds a topic to the valid topic list for the player. This doesn't create a dynamic new topic.
 
@@ -528,6 +546,7 @@ local wasAdded = tes3.addTopic({ topic = ..., updateGUI = ... })
 ***
 
 ### `tes3.adjustSoundVolume`
+<div class="search_terms" style="display: none">adjustsoundvolume</div>
 
 Changes the volume of a sound that is playing on a given reference.
 
@@ -546,6 +565,7 @@ tes3.adjustSoundVolume({ sound = ..., reference = ..., mixChannel = ..., volume 
 ***
 
 ### `tes3.advanceTime`
+<div class="search_terms" style="display: none">advancetime</div>
 
 Advances the game time. Can be used to simulate player resting.
 
@@ -567,6 +587,7 @@ local hoursPassed = tes3.advanceTime({ hours = ..., resting = ..., updateEnviron
 ***
 
 ### `tes3.applyMagicSource`
+<div class="search_terms" style="display: none">applymagicsource, magicsource</div>
 
 
 
@@ -602,6 +623,7 @@ local instance = tes3.applyMagicSource({ reference = ..., source = ..., name = .
 ***
 
 ### `tes3.applyTextDefines`
+<div class="search_terms" style="display: none">applytextdefines, textdefines</div>
 
 Returns a string with all the [text defines](https://en.uesp.net/wiki/Morrowind_Mod:Text_Defines) replaced in the input string. This can be used to replicate the behavior of book and dialogue text.
 
@@ -622,6 +644,7 @@ local result = tes3.applyTextDefines({ text = ..., actor = ... })
 ***
 
 ### `tes3.calculateChargeUse`
+<div class="search_terms" style="display: none">calculatechargeuse</div>
 
 Calculates the actual charge use of an enchantment by a mobile actor, after skills are applied. Invokes the enchantChargeUse event to account for modded charge usage. Takes into account the MCP charge use rebalance patch, if activated.
 
@@ -651,6 +674,7 @@ local chargeUse = tes3.calculateChargeUse({ mobile = ..., enchantment = ... })
 ***
 
 ### `tes3.calculatePrice`
+<div class="search_terms" style="display: none">calculateprice</div>
 
 Calculates a price, given a merchant and associated trading data. This is useful beyond accessing the object's `.value` field in that it raises the appropriate events to let other mods modify the values.
 
@@ -680,6 +704,7 @@ local price = tes3.calculatePrice({ object = ..., basePrice = ..., buying = ...,
 ***
 
 ### `tes3.canCastSpells`
+<div class="search_terms" style="display: none">cancastspells, castspells</div>
 
 Returns `true` if the `target` actor can cast spells, otherwise returns `false`.
 
@@ -699,6 +724,7 @@ local result = tes3.canCastSpells({ target = ... })
 ***
 
 ### `tes3.cancelAnimationLoop`
+<div class="search_terms" style="display: none">cancelanimationloop, celanimationloop</div>
 
 Signals looping animations on the actor to stop looping and play to the end. The animation will continue, playing past the loop point until the end frame. Useful for exiting looping animations cleanly.
 
@@ -714,6 +740,7 @@ tes3.cancelAnimationLoop({ reference = ... })
 ***
 
 ### `tes3.canRest`
+<div class="search_terms" style="display: none">canrest, rest</div>
 
 This function returns true if player can rest.
 
@@ -735,6 +762,7 @@ local canRest = tes3.canRest({ checkForEnemies = ..., checkForSolidGround = ...,
 ***
 
 ### `tes3.cast`
+<div class="search_terms" style="display: none">cast</div>
 
 Casts a spell from a given reference to a target reference. Touch effects will hit the target at any range, while target effects will create a projectile. By default, the spell always casts successfully and does not consume magicka. By default, an actor casting will stop and perform its cast animation, but the 'instant' flag can start the cast instantly and allows more control over the spell for NPCs.
 
@@ -790,6 +818,7 @@ local success = tes3.cast({ reference = ..., target = ..., spell = ..., instant 
 ***
 
 ### `tes3.checkMerchantOffersService`
+<div class="search_terms" style="display: none">checkmerchantoffersservice</div>
 
 Checks if a merchant will offer a service to you, including dialogue checks like disposition and faction membership. A specific service can be checked, or if no service is given, a generic dialogue check is made. If the service is refused, the dialogue reply for the refusal may also be returned (it may be nil, as there may not always be a reply available).
 
@@ -810,6 +839,7 @@ local offersService, refusalReply = tes3.checkMerchantOffersService(reference, s
 ***
 
 ### `tes3.checkMerchantTradesItem`
+<div class="search_terms" style="display: none">checkmerchanttradesitem</div>
 
 Determines if a merchant trades in a given item.
 
@@ -830,6 +860,7 @@ local trades = tes3.checkMerchantTradesItem({ item = ..., reference = ... })
 ***
 
 ### `tes3.claimSpellEffectId`
+<div class="search_terms" style="display: none">claimspelleffectid</div>
 
 This function is used to claim a unique spell effect name and id. This is needed before actually creating a new effect by calling `tes3.addMagicEffect()`. A claimed effect id is then available as: `tes3.effect.effectName` (just like any other spell effect). For examples of this function in practice see [`tes3.addMagicEffect()`](https://mwse.github.io/MWSE/apis/tes3/#tes3addmagiceffect) example.
 
@@ -845,6 +876,7 @@ tes3.claimSpellEffectId(name, id)
 ***
 
 ### `tes3.clearMarkLocation`
+<div class="search_terms" style="display: none">clearmarklocation</div>
 
 This function deletes the player's mark location.
 
@@ -855,6 +887,7 @@ tes3.clearMarkLocation()
 ***
 
 ### `tes3.closeAlchemyMenu`
+<div class="search_terms" style="display: none">closealchemymenu, alchemymenu</div>
 
 This function closes the alchemy menu.
 
@@ -865,6 +898,7 @@ tes3.closeAlchemyMenu()
 ***
 
 ### `tes3.closeContentsMenu`
+<div class="search_terms" style="display: none">closecontentsmenu, contentsmenu</div>
 
 This function closes the contents menu.
 
@@ -879,6 +913,7 @@ local wasClosed = tes3.closeContentsMenu()
 ***
 
 ### `tes3.closeDialogueMenu`
+<div class="search_terms" style="display: none">closedialoguemenu, dialoguemenu</div>
 
 This function closes the dialogue menu.
 
@@ -898,6 +933,7 @@ local wasClosed = tes3.closeDialogueMenu({ force = ... })
 ***
 
 ### `tes3.closeRepairServiceMenu`
+<div class="search_terms" style="display: none">closerepairservicemenu, repairservicemenu</div>
 
 This function closes the repair service menu.
 
@@ -908,6 +944,7 @@ tes3.closeRepairServiceMenu()
 ***
 
 ### `tes3.closeRestMenu`
+<div class="search_terms" style="display: none">closerestmenu, restmenu</div>
 
 This function closes the resting menu.
 
@@ -918,6 +955,7 @@ tes3.closeRestMenu()
 ***
 
 ### `tes3.closeSpellmakingMenu`
+<div class="search_terms" style="display: none">closespellmakingmenu, spellmakingmenu</div>
 
 This function closes the spellmaking menu.
 
@@ -928,6 +966,7 @@ tes3.closeSpellmakingMenu()
 ***
 
 ### `tes3.createObject`
+<div class="search_terms" style="display: none">createobject, object</div>
 
 Creates an object and returns it. The created object will be part of the saved game.
 
@@ -1032,6 +1071,7 @@ local createdObject = tes3.createObject({ id = ..., objectType = ..., getIfExist
 ***
 
 ### `tes3.createReference`
+<div class="search_terms" style="display: none">createreference, reference</div>
 
 Similar to mwscript's PlaceAtPC or PlaceAtMe, this creates a new reference in the game world.
 
@@ -1055,6 +1095,7 @@ local newReference = tes3.createReference({ object = ..., position = ..., orient
 ***
 
 ### `tes3.createVisualEffect`
+<div class="search_terms" style="display: none">createvisualeffect, visualeffect</div>
 
 Creates an arbitrary and automatically tracked visual effect. Most VFX assignments are persistent, and only expire when their lifespan ends, an associated reference is destroyed, or a given spell serial is retired.
 
@@ -1082,6 +1123,7 @@ local vfx = tes3.createVisualEffect({ object = ..., serial = ..., repeatCount = 
 ***
 
 ### `tes3.decrementKillCount`
+<div class="search_terms" style="display: none">decrementkillcount</div>
 
 Decreases player's kill count of a certain type of actor by one.
 
@@ -1097,6 +1139,7 @@ tes3.decrementKillCount({ actor = ... })
 ***
 
 ### `tes3.deleteObject`
+<div class="search_terms" style="display: none">deleteobject, object</div>
 
 Deletes a game object from the system. This can be dangerous, use with caution.
 
@@ -1111,6 +1154,7 @@ tes3.deleteObject(object)
 ***
 
 ### `tes3.disableKey`
+<div class="search_terms" style="display: none">disablekey, key</div>
 
 Disables the use of a keyboard key.
 
@@ -1125,6 +1169,7 @@ tes3.disableKey(keyCode)
 ***
 
 ### `tes3.dropItem`
+<div class="search_terms" style="display: none">dropitem</div>
 
 Drops one or more items from a reference's inventory onto the ground at their feet. It will unequip the item if it is equipped. The return value will be nil if no matching item was found.
 
@@ -1149,6 +1194,7 @@ local createdReference = tes3.dropItem({ reference = ..., item = ..., itemData =
 ***
 
 ### `tes3.enableKey`
+<div class="search_terms" style="display: none">enablekey, key</div>
 
 Enables the use of a keyboard key.
 
@@ -1163,6 +1209,7 @@ tes3.enableKey(keyCode)
 ***
 
 ### `tes3.fadeIn`
+<div class="search_terms" style="display: none">fadein</div>
 
 Similar to the vanilla FadeIn mwscript command.
 
@@ -1179,6 +1226,7 @@ tes3.fadeIn({ fader = ..., duration = ... })
 ***
 
 ### `tes3.fadeOut`
+<div class="search_terms" style="display: none">fadeout</div>
 
 Similar to the vanilla FadeOut mwscript command.
 
@@ -1195,6 +1243,7 @@ tes3.fadeOut({ fader = ..., duration = ... })
 ***
 
 ### `tes3.fadeTo`
+<div class="search_terms" style="display: none">fadeto</div>
 
 Similar to the vanilla FadeTo mwscript command.
 
@@ -1212,6 +1261,7 @@ tes3.fadeTo({ fader = ..., duration = ..., value = ... })
 ***
 
 ### `tes3.findActorsInProximity`
+<div class="search_terms" style="display: none">findactorsinproximity, actorsinproximity</div>
 
 Searches for active mobile actors which are within `range` distance from the `reference` or `position` argument. It only finds mobiles which have active AI, and can include the player. This function is used by the game for area-of-effect hits. It has a small amount of overhead, so try not to use it too much.
 
@@ -1233,6 +1283,7 @@ local mobileList = tes3.findActorsInProximity({ reference = ..., position = ...,
 ***
 
 ### `tes3.findBirthsign`
+<div class="search_terms" style="display: none">findbirthsign, birthsign</div>
 
 Fetches the core game birthsign object for a given birthsign ID. If the birthsign with a given ID doesn't exist, nil is returned.
 
@@ -1251,6 +1302,7 @@ local birthsign = tes3.findBirthsign(id)
 ***
 
 ### `tes3.findClass`
+<div class="search_terms" style="display: none">findclass, class</div>
 
 Fetches the core game character class object for a given class ID. If the class with a given ID doesn't exist, nil is returned.
 
@@ -1269,6 +1321,7 @@ local class = tes3.findClass(id)
 ***
 
 ### `tes3.findClosestExteriorReferenceOfObject`
+<div class="search_terms" style="display: none">findclosestexteriorreferenceofobject, closestexteriorreferenceofobject</div>
 
 Using the same engine function used by the vanilla intervention spells, locations the first reference of a given object in the exterior world.
 
@@ -1289,6 +1342,7 @@ local reference = tes3.findClosestExteriorReferenceOfObject({ object = ..., posi
 ***
 
 ### `tes3.findDialogue`
+<div class="search_terms" style="display: none">finddialogue, dialogue</div>
 
 Locates a root dialogue topic that can then be filtered down for a specific actor to return a specific dialogue info. Specify either `topic`, or both `type` and `page` for other types of dialogue.
 
@@ -1312,6 +1366,7 @@ local dialogue = tes3.findDialogue({ topic = ..., type = ..., page = ... })
 ***
 
 ### `tes3.findGlobal`
+<div class="search_terms" style="display: none">findglobal, global</div>
 
 Fetches the core game object that represents a global variable.
 
@@ -1330,6 +1385,7 @@ local globalVariable = tes3.findGlobal(id)
 ***
 
 ### `tes3.findGMST`
+<div class="search_terms" style="display: none">findgmst, gmst</div>
 
 Fetches the core game object that represents a game setting. While this function accepts a name, it is recommended to use the [`tes3.GMST`](https://mwse.github.io/MWSE/references/gmst/) constants.
 
@@ -1407,6 +1463,7 @@ local gameSetting = tes3.findGMST(id)
 ***
 
 ### `tes3.findRegion`
+<div class="search_terms" style="display: none">findregion, region</div>
 
 Fetches the core game region object for a given region ID. If the region with a given ID doesn't exist, nil is returned.
 
@@ -1426,6 +1483,7 @@ local region = tes3.findRegion({ id = ... })
 ***
 
 ### `tes3.force1stPerson`
+<div class="search_terms" style="display: none">force1stperson</div>
 
 Forces the player's POV to first person the next simulation frame, and returns true if the POV has been changed.
 
@@ -1440,6 +1498,7 @@ local changedPOV = tes3.force1stPerson()
 ***
 
 ### `tes3.force3rdPerson`
+<div class="search_terms" style="display: none">force3rdperson</div>
 
 Forces the player's POV to third person the next simulation frame, and returns true if the POV has been changed.
 
@@ -1454,6 +1513,7 @@ local changedPOV = tes3.force3rdPerson()
 ***
 
 ### `tes3.get3rdPersonCameraOffset`
+<div class="search_terms" style="display: none">get3rdpersoncameraoffset, 3rdpersoncameraoffset</div>
 
 Returns the camera offset from the player's head while in 3rd person view.
 
@@ -1471,6 +1531,7 @@ local cameraOffset = tes3.get3rdPersonCameraOffset()
 ***
 
 ### `tes3.getActiveCells`
+<div class="search_terms" style="display: none">getactivecells, activecells</div>
 
 Returns a table of active cells. If indoors, the table will have only one entry. If outdoors, the 9 surrounding cells will be provided.
 
@@ -1485,6 +1546,7 @@ local cells = tes3.getActiveCells()
 ***
 
 ### `tes3.getAnimationGroups`
+<div class="search_terms" style="display: none">getanimationgroups, animationgroups</div>
 
 This function fetches a reference's attached animation groups.
 
@@ -1504,6 +1566,7 @@ local animData = tes3.getAnimationGroups({ reference = ... })
 ***
 
 ### `tes3.getAnimationTiming`
+<div class="search_terms" style="display: none">getanimationtiming, animationtiming</div>
 
 This function fetches a reference's attached animation groups' timings.
 
@@ -1523,6 +1586,7 @@ local result = tes3.getAnimationTiming({ reference = ... })
 ***
 
 ### `tes3.getArchiveList`
+<div class="search_terms" style="display: none">getarchivelist, archivelist</div>
 
 Returns a 1-indexed table of active archives.
 
@@ -1537,6 +1601,7 @@ local archives = tes3.getArchiveList()
 ***
 
 ### `tes3.getAttachment`
+<div class="search_terms" style="display: none">getattachment, attachment</div>
 
 Fetches an attachment with a given type from a reference. Will return `nil` if no attachment of that type has been found.
 
@@ -1565,6 +1630,7 @@ local result = tes3.getAttachment(reference, attachment)
 ***
 
 ### `tes3.getAttributeName`
+<div class="search_terms" style="display: none">getattributename, attributename</div>
 
 Returns the lowercase identifying name of an attribute for a given numerical, 0-based index. E.g. "strength", by using GMSTs. Uses `tes3.attributeName` enumeration as a fallback.
 
@@ -1583,6 +1649,7 @@ local name = tes3.getAttributeName(attributeId)
 ***
 
 ### `tes3.getCameraPosition`
+<div class="search_terms" style="display: none">getcameraposition, cameraposition</div>
 
 Returns the camera's position.
 
@@ -1597,6 +1664,7 @@ local vector3 = tes3.getCameraPosition()
 ***
 
 ### `tes3.getCameraVector`
+<div class="search_terms" style="display: none">getcameravector, cameravector</div>
 
 Returns the camera look vector.
 
@@ -1611,6 +1679,7 @@ local vector3 = tes3.getCameraVector()
 ***
 
 ### `tes3.getCell`
+<div class="search_terms" style="display: none">getcell, cell</div>
 
 Finds a cell, either by an id or an X/Y grid position.
 
@@ -1632,6 +1701,7 @@ local cell = tes3.getCell({ id = ..., x = ..., y = ... })
 ***
 
 ### `tes3.getCumulativeDaysForMonth`
+<div class="search_terms" style="display: none">getcumulativedaysformonth, cumulativedaysformonth</div>
 
 Gets the number of days that have passed leading up to the start of a given month.
 
@@ -1650,6 +1720,7 @@ local days = tes3.getCumulativeDaysForMonth(month)
 ***
 
 ### `tes3.getCurrentAIPackageId`
+<div class="search_terms" style="display: none">getcurrentaipackageid, currentaipackageid</div>
 
 Returns an actor's current AI package ID, just as the mwscript function `GetCurrentAIPackage` would.
 
@@ -1668,6 +1739,7 @@ local packageID = tes3.getCurrentAIPackageId(reference)
 ***
 
 ### `tes3.getCurrentWeather`
+<div class="search_terms" style="display: none">getcurrentweather, currentweather</div>
 
 Gets the currently active weather, from the player's current region.
 
@@ -1682,6 +1754,7 @@ local weather = tes3.getCurrentWeather()
 ***
 
 ### `tes3.getCursorPosition`
+<div class="search_terms" style="display: none">getcursorposition, cursorposition</div>
 
 Returns a table with values x and y that contain the current cursor position.
 
@@ -1696,6 +1769,7 @@ local position = tes3.getCursorPosition()
 ***
 
 ### `tes3.getDaysInMonth`
+<div class="search_terms" style="display: none">getdaysinmonth, daysinmonth</div>
 
 Returns the number of days in a given month. This may be altered if a Morrowind Code Patch feature was installed.
 
@@ -1714,6 +1788,7 @@ local dayCount = tes3.getDaysInMonth(month)
 ***
 
 ### `tes3.getDialogueInfo`
+<div class="search_terms" style="display: none">getdialogueinfo, dialogueinfo</div>
 
 Locates and returns a Dialogue Info by a given id. This involves file IO and is an expensive call. Results should be cached.
 
@@ -1733,6 +1808,7 @@ local dialogueInfo = tes3.getDialogueInfo(dialogue, id)
 ***
 
 ### `tes3.getEffectMagnitude`
+<div class="search_terms" style="display: none">geteffectmagnitude, effectmagnitude</div>
 
 This function returns the total effective magnitude and total base magnitude of a certain magic effect affecting a reference. It returns a pair of numbers, the first being the effective magnitude after all the actor's resistances are applied (see examples). The second number is the magnitude before any of the actor's resistances are applied.
 
@@ -1774,6 +1850,7 @@ local effectiveMagnitude, magnitude = tes3.getEffectMagnitude({ reference = ...,
 ***
 
 ### `tes3.getEquippedItem`
+<div class="search_terms" style="display: none">getequippeditem, equippeditem</div>
 
 Returns an actor's equipped item stack, provided a given filter
 
@@ -1825,6 +1902,7 @@ local stack = tes3.getEquippedItem({ actor = ..., enchanted = ..., objectType = 
 ***
 
 ### `tes3.getFaction`
+<div class="search_terms" style="display: none">getfaction, faction</div>
 
 Fetches the core game faction object for a given faction ID.
 
@@ -1843,6 +1921,7 @@ local faction = tes3.getFaction(id)
 ***
 
 ### `tes3.getFileExists`
+<div class="search_terms" style="display: none">getfileexists, fileexists</div>
 
 Determines if a file exists in the user's Data Files.
 
@@ -1861,6 +1940,7 @@ local exists = tes3.getFileExists(path)
 ***
 
 ### `tes3.getFileSource`
+<div class="search_terms" style="display: none">getfilesource, filesource</div>
 
 Determines if a file exists on the filesystem or inside of a bsa. The returned string will be "file" or "bsa".
 
@@ -1880,6 +1960,7 @@ local exists, path = tes3.getFileSource(path)
 ***
 
 ### `tes3.getGlobal`
+<div class="search_terms" style="display: none">getglobal, global</div>
 
 Retrieves the value of a global value, or nil if the global could not be found.
 
@@ -1898,6 +1979,7 @@ local value = tes3.getGlobal(id)
 ***
 
 ### `tes3.getInputBinding`
+<div class="search_terms" style="display: none">getinputbinding, inputbinding</div>
 
 Gets the input configuration for a given keybind.
 
@@ -1916,7 +1998,7 @@ local inputConfig = tes3.getInputBinding(keybind)
 ***
 
 ### `tes3.getItemCount`
-<div class="search_terms" style="display: none">getitemcount,itemcount</div>
+<div class="search_terms" style="display: none">getitemcount, itemcount</div>
 
 Returns the amount of a certain item that can be found in a reference's inventory.
 
@@ -1937,6 +2019,7 @@ local count = tes3.getItemCount({ reference = ..., item = ... })
 ***
 
 ### `tes3.getItemIsStolen`
+<div class="search_terms" style="display: none">getitemisstolen, itemisstolen</div>
 
 This function checks item's stolen flag.
 
@@ -1958,6 +2041,7 @@ local isStolen, stolenFrom = tes3.getItemIsStolen({ item = ..., from = ... })
 ***
 
 ### `tes3.getJournalIndex`
+<div class="search_terms" style="display: none">getjournalindex, journalindex</div>
 
 Gets the index of a given journal, or nil if no valid journal could be found.
 
@@ -1977,6 +2061,7 @@ local index = tes3.getJournalIndex({ id = ... })
 ***
 
 ### `tes3.getKillCount`
+<div class="search_terms" style="display: none">getkillcount, killcount</div>
 
 Returns how many times the player killed an actor. If no actor is specified, total number of kills player commited will be returned.
 
@@ -1996,6 +2081,7 @@ local count = tes3.getKillCount({ actor = ... })
 ***
 
 ### `tes3.getKillCounts`
+<div class="search_terms" style="display: none">getkillcounts, killcounts</div>
 
 Returns a table with complete player kill counts. The table returned is formated so actor IDs are table keys and kill count of that type of actor is value.
 
@@ -2010,6 +2096,7 @@ local killMap = tes3.getKillCounts()
 ***
 
 ### `tes3.getLanguage`
+<div class="search_terms" style="display: none">getlanguage, language</div>
 
 Gets the language as an ISO string (e.g. "eng"), determined by the language entry in Morrowind.ini and the detected executable. Maps to values in the [`tes3.language`](https://mwse.github.io/MWSE/references/languages/) table.
 
@@ -2024,6 +2111,7 @@ local result = tes3.getLanguage()
 ***
 
 ### `tes3.getLanguageCode`
+<div class="search_terms" style="display: none">getlanguagecode, languagecode</div>
 
 Gets the language code, determined by the language entry in Morrowind.ini and the detected executable. Maps to values in the [`tes3.languageCode`](https://mwse.github.io/MWSE/references/language-codes/) table.
 
@@ -2038,6 +2126,7 @@ local result = tes3.getLanguageCode()
 ***
 
 ### `tes3.getLastExteriorPosition`
+<div class="search_terms" style="display: none">getlastexteriorposition, lastexteriorposition</div>
 
 Returns the last exterior position of the player.
 
@@ -2052,6 +2141,7 @@ local vector3 = tes3.getLastExteriorPosition()
 ***
 
 ### `tes3.getLocked`
+<div class="search_terms" style="display: none">getlocked, locked</div>
 
 Determines if a given reference is a locked door or container.
 
@@ -2071,6 +2161,7 @@ local isLocked = tes3.getLocked({ reference = ... })
 ***
 
 ### `tes3.getLockLevel`
+<div class="search_terms" style="display: none">getlocklevel, locklevel</div>
 
 Gets an locked reference's lock level. If no lock data is available, it will return nil.
 
@@ -2090,6 +2181,7 @@ local level = tes3.getLockLevel({ reference = ... })
 ***
 
 ### `tes3.getMagicEffect`
+<div class="search_terms" style="display: none">getmagiceffect, magiceffect</div>
 
 Fetches the core game Magic Effect object for a given ID. Can return custom magic effects added with `tes3.addMagicEffect`.
 
@@ -2108,6 +2200,7 @@ local magicEffect = tes3.getMagicEffect(id)
 ***
 
 ### `tes3.getMagicEffectName`
+<div class="search_terms" style="display: none">getmagiceffectname, magiceffectname</div>
 
 Returns the complex name of a magic effect, taking into account attribute or skill values.
 
@@ -2129,6 +2222,7 @@ local complexName = tes3.getMagicEffectName({ effect = ..., attribute = ..., ski
 ***
 
 ### `tes3.getMagicSourceInstanceBySerial`
+<div class="search_terms" style="display: none">getmagicsourceinstancebyserial, magicsourceinstancebyserial</div>
 
 Fetches an instance of the magic source of a given serial number.
 
@@ -2148,6 +2242,7 @@ local magicSourceInstance = tes3.getMagicSourceInstanceBySerial({ serialNumber =
 ***
 
 ### `tes3.getModList`
+<div class="search_terms" style="display: none">getmodlist, modlist</div>
 
 Fetches the list of the active ESM and ESP files.
 
@@ -2162,6 +2257,7 @@ local modList = tes3.getModList()
 ***
 
 ### `tes3.getObject`
+<div class="search_terms" style="display: none">getobject, object</div>
 
 Fetches the core game object for a given object ID.
 
@@ -2180,6 +2276,7 @@ local object = tes3.getObject(id)
 ***
 
 ### `tes3.getOwner`
+<div class="search_terms" style="display: none">getowner, owner</div>
 
 Returns the object's owner, or nil if the object is unowned.
 
@@ -2200,6 +2297,7 @@ local owner, requirement = tes3.getOwner({ reference = ... })
 ***
 
 ### `tes3.getPlayerActivationDistance`
+<div class="search_terms" style="display: none">getplayeractivationdistance, playeractivationdistance</div>
 
 This function returns the distance that the player can activate objects with. This is a sum of the iMaxActivateDist GMST value and the player's telekinesis strength.
 
@@ -2214,6 +2312,7 @@ local result = tes3.getPlayerActivationDistance()
 ***
 
 ### `tes3.getPlayerCell`
+<div class="search_terms" style="display: none">getplayercell, playercell</div>
 
 Fetches the cell that the player is currently in.
 
@@ -2228,6 +2327,7 @@ local result = tes3.getPlayerCell()
 ***
 
 ### `tes3.getPlayerEyePosition`
+<div class="search_terms" style="display: none">getplayereyeposition, playereyeposition</div>
 
 Returns the position of the player's eyes.
 
@@ -2242,6 +2342,7 @@ local position = tes3.getPlayerEyePosition()
 ***
 
 ### `tes3.getPlayerEyeVector`
+<div class="search_terms" style="display: none">getplayereyevector, playereyevector</div>
 
 Returns the look direction of the player's eyes.
 
@@ -2256,6 +2357,7 @@ local lookDirection = tes3.getPlayerEyeVector()
 ***
 
 ### `tes3.getPlayerGold`
+<div class="search_terms" style="display: none">getplayergold, playergold</div>
 
 Gets the gold count carried by the player.
 
@@ -2270,6 +2372,7 @@ local goldCount = tes3.getPlayerGold()
 ***
 
 ### `tes3.getPlayerTarget`
+<div class="search_terms" style="display: none">getplayertarget, playertarget</div>
 
 This function is used to see what the player is looking at. Unlike a real raycast, this does not work in all circumstances. As a general rule, it will return the reference if the information box is shown when it is looked at.
 
@@ -2284,6 +2387,7 @@ local result = tes3.getPlayerTarget()
 ***
 
 ### `tes3.getQuickKey`
+<div class="search_terms" style="display: none">getquickkey, quickkey</div>
 
 This function retrieves data for a quick key.
 
@@ -2303,6 +2407,7 @@ local result = tes3.getQuickKey({ slot = ... })
 ***
 
 ### `tes3.getReference`
+<div class="search_terms" style="display: none">getreference, reference</div>
 
 Fetches the first reference for a given base object ID.
 
@@ -2321,6 +2426,7 @@ local reference = tes3.getReference(id)
 ***
 
 ### `tes3.getRegion`
+<div class="search_terms" style="display: none">getregion, region</div>
 
 Gets the current region the player is in. This checks the player's current cell first, but will fall back to the last exterior cell.
 
@@ -2339,6 +2445,7 @@ local region = tes3.getRegion(useDoors)
 ***
 
 ### `tes3.getScript`
+<div class="search_terms" style="display: none">getscript, script</div>
 
 Locates and returns a script by a given id.
 
@@ -2357,6 +2464,7 @@ local script = tes3.getScript(id)
 ***
 
 ### `tes3.getSimulationTimestamp`
+<div class="search_terms" style="display: none">getsimulationtimestamp, simulationtimestamp</div>
 
 Returns a UNIX-style timestamp based on in-world simulation time since the start of the era, in hours.
 
@@ -2375,6 +2483,7 @@ local timestamp = tes3.getSimulationTimestamp(highPrecision)
 ***
 
 ### `tes3.getSkill`
+<div class="search_terms" style="display: none">getskill, skill</div>
 
 Fetches the core game object for a given skill ID.
 
@@ -2393,6 +2502,7 @@ local skill = tes3.getSkill(id)
 ***
 
 ### `tes3.getSkillName`
+<div class="search_terms" style="display: none">getskillname, skillname</div>
 
 Returns the identifying name of a skill for a given numerical, 0-based index. E.g. "Enchant".
 
@@ -2411,6 +2521,7 @@ local name = tes3.getSkillName(skillId)
 ***
 
 ### `tes3.getSound`
+<div class="search_terms" style="display: none">getsound, sound</div>
 
 Locates and returns a sound by a given id.
 
@@ -2429,6 +2540,7 @@ local sound = tes3.getSound(id)
 ***
 
 ### `tes3.getSoundGenerator`
+<div class="search_terms" style="display: none">getsoundgenerator, soundgenerator</div>
 
 Returns a sound generator by a given creature id and type.
 
@@ -2448,6 +2560,7 @@ local soundGenerator = tes3.getSoundGenerator(creatureId, soundType)
 ***
 
 ### `tes3.getSoundPlaying`
+<div class="search_terms" style="display: none">getsoundplaying, soundplaying</div>
 
 Without a reference, this function returns true if the sound is playing unattached or on any reference. With a reference, it returns true if the sound is playing on that specific reference.
 
@@ -2468,6 +2581,7 @@ local soundIsPlaying = tes3.getSoundPlaying({ sound = ..., reference = ... })
 ***
 
 ### `tes3.getSpecializationName`
+<div class="search_terms" style="display: none">getspecializationname, specializationname</div>
 
 Returns the lowercase identifying name of a specialization type for a given numerical, 0-based index. E.g. "magic", by using GMSTs. Uses `tes3.specializationName` enumeration as a fallback.
 
@@ -2486,6 +2600,7 @@ local name = tes3.getSpecializationName(specializationId)
 ***
 
 ### `tes3.getSpells`
+<div class="search_terms" style="display: none">getspells, spells</div>
 
 Gets the spells of an actor. This can be filtered by `spellType` and set to include or exclude actor, racial and birthsign spells.
 
@@ -2509,6 +2624,7 @@ local result = tes3.getSpells({ target = ..., spellType = ..., getActorSpells = 
 ***
 
 ### `tes3.getTopMenu`
+<div class="search_terms" style="display: none">gettopmenu, topmenu</div>
 
 Gets the top-level UI menu.
 
@@ -2523,6 +2639,7 @@ local menu = tes3.getTopMenu()
 ***
 
 ### `tes3.getTrap`
+<div class="search_terms" style="display: none">gettrap, trap</div>
 
 Gets the trap on a given reference.
 
@@ -2542,6 +2659,7 @@ local spell = tes3.getTrap({ reference = ... })
 ***
 
 ### `tes3.getVanityMode`
+<div class="search_terms" style="display: none">getvanitymode, vanitymode</div>
 
 The function returns true if the player is in the vanity mode. Vanity mode is triggered by a period of inactivity from the player or by a `tes3.setVanityMode()` function. The view is switched to third person (if not already), and the camera is orbiting slowly around the player character.
 
@@ -2556,6 +2674,7 @@ local result = tes3.getVanityMode()
 ***
 
 ### `tes3.getViewportSize`
+<div class="search_terms" style="display: none">getviewportsize, viewportsize</div>
 
 Returns both the viewport width and the viewport height. Note that this is the real resolution of the screen. For a value scaled by MGE's menu scaling, see the [same-named function](https://mwse.github.io/MWSE/apis/tes3ui/#tes3uigetviewportsize) in the tes3ui namespace. To get the scale used, check [getViewportScale](https://mwse.github.io/MWSE/apis/tes3ui/#tes3uigetviewportscale) in the tes3ui namespace.
 
@@ -2571,6 +2690,7 @@ local width, height = tes3.getViewportSize()
 ***
 
 ### `tes3.getWerewolfKillCount`
+<div class="search_terms" style="display: none">getwerewolfkillcount, werewolfkillcount</div>
 
 Returns the number of kills player commited as a Werewolf.
 
@@ -2585,6 +2705,7 @@ local werewolfKills = tes3.getWerewolfKillCount()
 ***
 
 ### `tes3.hammerKey`
+<div class="search_terms" style="display: none">hammerkey</div>
 
 Simulates hammering a key.
 
@@ -2599,6 +2720,7 @@ tes3.hammerKey(keyCode)
 ***
 
 ### `tes3.hasCodePatchFeature`
+<div class="search_terms" style="display: none">hascodepatchfeature, codepatchfeature</div>
 
 Attempts to determine if a given Morrowind Code Patch feature is enabled. This may not be possible, in which case nil will be returned.
 
@@ -2617,6 +2739,7 @@ local state = tes3.hasCodePatchFeature(id)
 ***
 
 ### `tes3.hasOwnershipAccess`
+<div class="search_terms" style="display: none">hasownershipaccess, ownershipaccess</div>
 
 Determines if a reference has access to another object, including its inventory. References have access to their own things, and the player has access to dead NPC's items.
 
@@ -2637,6 +2760,7 @@ local hasAccess = tes3.hasOwnershipAccess({ reference = ..., target = ... })
 ***
 
 ### `tes3.hasSpell`
+<div class="search_terms" style="display: none">hasspell, spell</div>
 
 Determines if the player has access to a given spell.
 
@@ -2658,6 +2782,7 @@ local hasSpell = tes3.hasSpell({ reference = ..., actor = ..., spell = ... })
 ***
 
 ### `tes3.incrementKillCount`
+<div class="search_terms" style="display: none">incrementkillcount</div>
 
 Increases player's kill count of a certain type of actor by one.
 
@@ -2673,6 +2798,7 @@ tes3.incrementKillCount({ actor = ... })
 ***
 
 ### `tes3.is3rdPerson`
+<div class="search_terms" style="display: none">is3rdperson, 3rdperson</div>
 
 Returns true if the game is in 3rd person.
 
@@ -2687,6 +2813,7 @@ local state = tes3.is3rdPerson()
 ***
 
 ### `tes3.isAffectedBy`
+<div class="search_terms" style="display: none">isaffectedby, affectedby</div>
 
 This function performs a check whether the provided reference is affected by a certain object or magic effect.
 
@@ -2710,6 +2837,7 @@ local isAffectedBy = tes3.isAffectedBy({ reference = ..., effect = ..., object =
 ***
 
 ### `tes3.isCharGenFinished`
+<div class="search_terms" style="display: none">ischargenfinished, chargenfinished</div>
 
 Returns `true` if the character generation process has been finished for the current player character.
 
@@ -2724,6 +2852,7 @@ local result = tes3.isCharGenFinished()
 ***
 
 ### `tes3.isKeyEqual`
+<div class="search_terms" style="display: none">iskeyequal, keyequal</div>
 
 Compares two key objects and returns their equality. Returns true if the objects are equal, false otherwise.
 
@@ -2754,6 +2883,7 @@ local equal = tes3.isKeyEqual({ actual = ..., expected = ... })
 ***
 
 ### `tes3.isLuaModActive`
+<div class="search_terms" style="display: none">isluamodactive, luamodactive</div>
 
 Determines if the player has a given lua mod active. The key passed to this function is the path to where its main.lua file is, relative to the MWSE\\mods folder. Slashes are automatically replaced with periods, and the key is case-insensitive.
 
@@ -2783,6 +2913,7 @@ local isActive = tes3.isLuaModActive(key)
 ***
 
 ### `tes3.isModActive`
+<div class="search_terms" style="display: none">ismodactive, modactive</div>
 
 Determines if the player has a given ESP or ESM file active.
 
@@ -2801,6 +2932,7 @@ local result = tes3.isModActive(filename)
 ***
 
 ### `tes3.iterate`
+<div class="search_terms" style="display: none">iterate</div>
 
 This function returns a function that iterates over a tes3iterator object. This is useful for for loops.
 
@@ -2821,6 +2953,7 @@ local iterator = tes3.iterate(iterator)
 ***
 
 ### `tes3.iterateObjects`
+<div class="search_terms" style="display: none">iterateobjects</div>
 
 Iteration function used for looping over game options.
 
@@ -2839,6 +2972,7 @@ local objectIterator = tes3.iterateObjects(filter)
 ***
 
 ### `tes3.loadAnimation`
+<div class="search_terms" style="display: none">loadanimation</div>
 
 Loads an animation and uses it to override existing animations on an actor. Animation groups present in the file will replace the actor's animation groups. The actor's model must be already loaded into memory to have its animations modified. The overridden animations only persist until the actor is unloaded.
 
@@ -2859,6 +2993,7 @@ tes3.loadAnimation({ reference = ..., file = ... })
 ***
 
 ### `tes3.loadGame`
+<div class="search_terms" style="display: none">loadgame</div>
 
 Loads a game.
 
@@ -2873,6 +3008,7 @@ tes3.loadGame(filename)
 ***
 
 ### `tes3.loadMesh`
+<div class="search_terms" style="display: none">loadmesh</div>
 
 Loads a mesh file and provides a scene graph object.
 
@@ -2892,6 +3028,7 @@ local model = tes3.loadMesh(path, useCache)
 ***
 
 ### `tes3.loadSourceTexture`
+<div class="search_terms" style="display: none">loadsourcetexture</div>
 
 Loads a source texture file and provides the niSourceTexture object.
 
@@ -2911,6 +3048,7 @@ local texture = tes3.loadSourceTexture(path, useCache)
 ***
 
 ### `tes3.lock`
+<div class="search_terms" style="display: none">lock</div>
 
 Locks an object, and optionally sets a locked reference's lock level. Returns true if the object can be and wasn't already locked.
 
@@ -2931,6 +3069,7 @@ local locked = tes3.lock({ reference = ..., level = ... })
 ***
 
 ### `tes3.loopTArray`
+<div class="search_terms" style="display: none">looptarray</div>
 
 This function returns a function that iterates over a tes3tarray object. This is useful for for loops.
 
@@ -2949,6 +3088,7 @@ local iterationFunction = tes3.loopTArray(tarray)
 ***
 
 ### `tes3.makeSafeObjectHandle`
+<div class="search_terms" style="display: none">makesafeobjecthandle</div>
 
 Returns a safe handle for the object. To get the object use `:getObject()`. To check if it still exists use `:valid()`.
 
@@ -2994,6 +3134,7 @@ local safeObjectHandle = tes3.makeSafeObjectHandle(object)
 ***
 
 ### `tes3.menuMode`
+<div class="search_terms" style="display: none">menumode</div>
 
 Returns true if the player is currently in menu mode.
 
@@ -3008,6 +3149,7 @@ local inMenuMode = tes3.menuMode()
 ***
 
 ### `tes3.messageBox`
+<div class="search_terms" style="display: none">messagebox</div>
 
 Displays a message box. This may be a simple toast-style message, or a box with choice buttons.
 
@@ -3070,6 +3212,7 @@ local element = tes3.messageBox({ message = ..., buttons = ..., callback = ..., 
 ***
 
 ### `tes3.modStatistic`
+<div class="search_terms" style="display: none">modstatistic, statistic</div>
 
 Modifies a statistic on a given actor. This should be used instead of manually setting values on the game structures, to ensure that events and GUI elements are properly handled. Either skill, attribute, or name must be provided.
 
@@ -3120,6 +3263,7 @@ tes3.modStatistic({ reference = ..., name = ..., attribute = ..., skill = ..., b
 ***
 
 ### `tes3.newGame`
+<div class="search_terms" style="display: none">newgame</div>
 
 Starts a new game.
 
@@ -3130,6 +3274,7 @@ tes3.newGame()
 ***
 
 ### `tes3.onMainMenu`
+<div class="search_terms" style="display: none">onmainmenu</div>
 
 Returns true if the player is on the main menu, and hasn't loaded a game yet.
 
@@ -3144,6 +3289,7 @@ local onMainMenu = tes3.onMainMenu()
 ***
 
 ### `tes3.persuade`
+<div class="search_terms" style="display: none">persuade</div>
 
 Attempts a persuasion attempt on an actor, potentially adjusting their disposition. Returns true if the attempt was a success.
 
@@ -3165,6 +3311,7 @@ local success = tes3.persuade({ actor = ..., index = ..., modifier = ... })
 ***
 
 ### `tes3.playAnimation`
+<div class="search_terms" style="display: none">playanimation</div>
 
 Plays a given animation group. Optional flags can be used to define how the group starts.
 
@@ -3191,6 +3338,7 @@ tes3.playAnimation({ reference = ..., group = ..., lower = ..., upper = ..., shi
 ***
 
 ### `tes3.playItemPickupSound`
+<div class="search_terms" style="display: none">playitempickupsound</div>
 
 Plays the sound responsible for picking up or putting down an item.
 
@@ -3212,6 +3360,7 @@ local executed = tes3.playItemPickupSound({ reference = ..., item = ..., pickup 
 ***
 
 ### `tes3.playSound`
+<div class="search_terms" style="display: none">playsound</div>
 
 Plays a sound on a given reference. Provides control over volume (including volume channel), pitch, and loop control.
 
@@ -3239,6 +3388,7 @@ local executed = tes3.playSound({ sound = ..., reference = ..., loop = ..., mixC
 ***
 
 ### `tes3.playVoiceover`
+<div class="search_terms" style="display: none">playvoiceover</div>
 
 Causes a target actor to play a voiceover.
 
@@ -3259,6 +3409,7 @@ local played = tes3.playVoiceover({ actor = ..., voiceover = ... })
 ***
 
 ### `tes3.positionCell`
+<div class="search_terms" style="display: none">positioncell</div>
 
 Positions a reference to another place.
 
@@ -3284,6 +3435,7 @@ local executed = tes3.positionCell({ reference = ..., cell = ..., position = ...
 ***
 
 ### `tes3.pushKey`
+<div class="search_terms" style="display: none">pushkey</div>
 
 Simulates pushing a keyboard key.
 
@@ -3298,6 +3450,7 @@ tes3.pushKey(keyCode)
 ***
 
 ### `tes3.random`
+<div class="search_terms" style="display: none">random</div>
 
 Returns a value from Morrowind's random number generator. This is not preferrable to lua's math.random function, but may be necessary for reproducing Morrowind's generation.
 
@@ -3312,6 +3465,7 @@ tes3.random(seed)
 ***
 
 ### `tes3.rayTest`
+<div class="search_terms" style="display: none">raytest</div>
 
 Performs a ray test and returns various information related to the result(s). If `findAll` is set, the result will be a table of results, otherwise only the first result is returned.
 
@@ -3429,6 +3583,7 @@ local result = tes3.rayTest({ position = ..., direction = ..., findAll = ..., ma
 ***
 
 ### `tes3.releaseKey`
+<div class="search_terms" style="display: none">releasekey</div>
 
 Simulates releasing a keyboard key.
 
@@ -3443,6 +3598,7 @@ tes3.releaseKey(keyCode)
 ***
 
 ### `tes3.removeEffects`
+<div class="search_terms" style="display: none">removeeffects, effects</div>
 
 Removes magic effects from a given reference. Requires that either the `effect` or `castType` parameter be provided.
 
@@ -3500,6 +3656,7 @@ tes3.removeEffects({ reference = ..., effect = ..., castType = ..., chance = ...
 ***
 
 ### `tes3.removeItem`
+<div class="search_terms" style="display: none">removeitem, item</div>
 
 Removes an item from a given reference's inventory.
 
@@ -3526,6 +3683,7 @@ local removedCount = tes3.removeItem({ reference = ..., item = ..., itemData = .
 ***
 
 ### `tes3.removeItemData`
+<div class="search_terms" style="display: none">removeitemdata, itemdata</div>
 
 Removes and deletes item data from a given reference, or from their inventory. If no `itemData` is provided, it will be removed from the reference itself.
 
@@ -3550,6 +3708,7 @@ local wasRemoved = tes3.removeItemData({ from = ..., item = ..., itemData = ...,
 ***
 
 ### `tes3.removeSound`
+<div class="search_terms" style="display: none">removesound, sound</div>
 
 Stops a sound playing. Without a reference, it will match unattached sounds. With a reference, it will only match a sound playing on that specific reference.
 
@@ -3566,6 +3725,7 @@ tes3.removeSound({ sound = ..., reference = ... })
 ***
 
 ### `tes3.removeSpell`
+<div class="search_terms" style="display: none">removespell, spell</div>
 
 Removes a spell from an actor's spell list. If the spell is passive, any active effects from that spell are retired.
 
@@ -3588,6 +3748,7 @@ local wasRemoved = tes3.removeSpell({ reference = ..., actor = ..., spell = ...,
 ***
 
 ### `tes3.removeVisualEffect`
+<div class="search_terms" style="display: none">removevisualeffect, visualeffect</div>
 
 Removes one or more visual effects created either through magical effects or `tes3.createVisualEffect()`.
 
@@ -3610,6 +3771,7 @@ local removedCount = tes3.removeVisualEffect({ vfx = ..., avObject = ..., serial
 ***
 
 ### `tes3.runLegacyScript`
+<div class="search_terms" style="display: none">runlegacyscript</div>
 
 This function will compile and run a mwscript chunk of code. This is not ideal to use, but can be used for features not yet exposed to lua.
 
@@ -3635,6 +3797,7 @@ local executed = tes3.runLegacyScript({ script = ..., source = ..., command = ..
 ***
 
 ### `tes3.saveGame`
+<div class="search_terms" style="display: none">savegame</div>
 
 Saves the game.
 
@@ -3655,6 +3818,7 @@ local saved = tes3.saveGame({ file = ..., name = ... })
 ***
 
 ### `tes3.say`
+<div class="search_terms" style="display: none">say</div>
 
 Plays a sound file, with an optional alteration and subtitle.
 
@@ -3677,6 +3841,7 @@ tes3.say({ reference = ..., soundPath = ..., pitch = ..., volume = ..., forceSub
 ***
 
 ### `tes3.set3rdPersonCameraOffset`
+<div class="search_terms" style="display: none">set3rdpersoncameraoffset, 3rdpersoncameraoffset</div>
 
 Changes the 3rd person camera offset from the player's head.
 
@@ -3695,6 +3860,7 @@ tes3.set3rdPersonCameraOffset({ offset = ... })
 ***
 
 ### `tes3.setAIActivate`
+<div class="search_terms" style="display: none">setaiactivate, aiactivate</div>
 
 Configures a mobile actor to activate an object.
 
@@ -3712,6 +3878,7 @@ tes3.setAIActivate({ reference = ..., target = ..., reset = ... })
 ***
 
 ### `tes3.setAIEscort`
+<div class="search_terms" style="display: none">setaiescort, aiescort</div>
 
 Configures a mobile actor to escort another actor to a destination. Escorting actor will protect and wait for the escortee to catch up. Its advisible to make the `target` actor follow the escorting actor with `tes3.setAIFollow()`, because the escorting actor will otherwise wait the escortee forever.
 
@@ -3732,6 +3899,7 @@ tes3.setAIEscort({ reference = ..., target = ..., destination = ..., duration = 
 ***
 
 ### `tes3.setAIFollow`
+<div class="search_terms" style="display: none">setaifollow, aifollow</div>
 
 Configures a mobile actor to follow another actor to a destination.
 
@@ -3752,6 +3920,7 @@ tes3.setAIFollow({ reference = ..., target = ..., destination = ..., duration = 
 ***
 
 ### `tes3.setAITravel`
+<div class="search_terms" style="display: none">setaitravel, aitravel</div>
 
 Configures a mobile actor to travel to a destination.
 
@@ -3769,7 +3938,7 @@ tes3.setAITravel({ reference = ..., destination = ..., reset = ... })
 ***
 
 ### `tes3.setAIWander`
-<div class="search_terms" style="display: none">setaiwander,aiwander</div>
+<div class="search_terms" style="display: none">setaiwander, aiwander</div>
 
 Configures a mobile actor to wander around a cell.
 
@@ -3790,6 +3959,7 @@ tes3.setAIWander({ reference = ..., idles = ..., range = ..., duration = ..., ti
 ***
 
 ### `tes3.setAnimationTiming`
+<div class="search_terms" style="display: none">setanimationtiming, animationtiming</div>
 
 This function sets a reference's animation groups' timings to a specified value.
 
@@ -3806,6 +3976,7 @@ tes3.setAnimationTiming({ reference = ..., timing = ... })
 ***
 
 ### `tes3.setDestination`
+<div class="search_terms" style="display: none">setdestination, destination</div>
 
 Sets or changes the destination of a door to a new location.
 
@@ -3824,6 +3995,7 @@ tes3.setDestination({ reference = ..., position = ..., orientation = ..., cell =
 ***
 
 ### `tes3.setEnabled`
+<div class="search_terms" style="display: none">setenabled, enabled</div>
 
 Enables or disables a reference.
 
@@ -3845,6 +4017,7 @@ local success = tes3.setEnabled({ reference = ..., toggle = ..., enabled = ... }
 ***
 
 ### `tes3.setGlobal`
+<div class="search_terms" style="display: none">setglobal, global</div>
 
 Sets the value of a global value. If the global could not be found, the function returns false.
 
@@ -3864,6 +4037,7 @@ local value = tes3.setGlobal(id, value)
 ***
 
 ### `tes3.setItemIsStolen`
+<div class="search_terms" style="display: none">setitemisstolen, itemisstolen</div>
 
 This function changes an item's stolen flag. Morrowind handles stealing by marking the base item (not the inventory stack) with NPCs that you have stolen that item from. The NPC will recognize an item as stolen if they are marked as stolen on the base item.
 
@@ -3881,6 +4055,7 @@ tes3.setItemIsStolen({ item = ..., from = ..., stolen = ... })
 ***
 
 ### `tes3.setJournalIndex`
+<div class="search_terms" style="display: none">setjournalindex, journalindex</div>
 
 Sets the index of a given journal in a way similar to the mwscript function SetJournalIndex.
 
@@ -3903,6 +4078,7 @@ local wasSet = tes3.setJournalIndex({ id = ..., index = ..., speaker = ..., show
 ***
 
 ### `tes3.setKillCount`
+<div class="search_terms" style="display: none">setkillcount, killcount</div>
 
 Sets player's kill count of a certain type of actor.
 
@@ -3919,6 +4095,7 @@ tes3.setKillCount({ actor = ..., count = ... })
 ***
 
 ### `tes3.setLockLevel`
+<div class="search_terms" style="display: none">setlocklevel, locklevel</div>
 
 Sets a locked reference's lock level. This does not lock the object.
 
@@ -3939,6 +4116,7 @@ local set = tes3.setLockLevel({ reference = ..., level = ... })
 ***
 
 ### `tes3.setMarkLocation`
+<div class="search_terms" style="display: none">setmarklocation, marklocation</div>
 
 This function sets the player's mark location to the one specified.
 
@@ -3956,6 +4134,7 @@ tes3.setMarkLocation({ position = ..., rotation = ..., cell = ... })
 ***
 
 ### `tes3.setOwner`
+<div class="search_terms" style="display: none">setowner, owner</div>
 
 This function sets the owner of a reference.
 
@@ -3975,6 +4154,7 @@ tes3.setOwner({ reference = ..., remove = ..., owner = ..., requiredGlobal = ...
 ***
 
 ### `tes3.setPlayerControlState`
+<div class="search_terms" style="display: none">setplayercontrolstate, playercontrolstate</div>
 
 Enables or disables player's controls state.
 
@@ -3999,6 +4179,7 @@ local changedControlState = tes3.setPlayerControlState({ enabled = ..., attack =
 ***
 
 ### `tes3.setSourceless`
+<div class="search_terms" style="display: none">setsourceless, sourceless</div>
 
 Sets an object (of any kind) to be sourceless, which are objects the game does not store in savegames. This can be useful for mod-created temporary objects which are not necessary to save.
 
@@ -4014,6 +4195,7 @@ tes3.setSourceless(object, sourceless)
 ***
 
 ### `tes3.setStatistic`
+<div class="search_terms" style="display: none">setstatistic, statistic</div>
 
 Sets a statistic on a given actor. This should be used instead of manually setting values on the game structures, to ensure that events and GUI elements are properly handled. Either skill, attribute, or name must be provided.
 
@@ -4036,6 +4218,7 @@ tes3.setStatistic({ attribute = ..., base = ..., current = ..., limit = ..., nam
 ***
 
 ### `tes3.setTrap`
+<div class="search_terms" style="display: none">settrap, trap</div>
 
 Sets the trap on a given reference.
 
@@ -4056,6 +4239,7 @@ local trapped = tes3.setTrap({ reference = ..., spell = ... })
 ***
 
 ### `tes3.setVanityMode`
+<div class="search_terms" style="display: none">setvanitymode, vanitymode</div>
 
 Toggles the camera into vanity mode. In vanity mode the camera is in third person and it is orbiting slowly around the player character. Returns true if changed to vanity mode.
 
@@ -4079,6 +4263,7 @@ local changedVanityMode = tes3.setVanityMode({ enabled = ..., checkVanityDisable
 ***
 
 ### `tes3.setWerewolfKillCount`
+<div class="search_terms" style="display: none">setwerewolfkillcount, werewolfkillcount</div>
 
 Sets player's kill count as a werewolf.
 
@@ -4094,6 +4279,7 @@ tes3.setWerewolfKillCount({ count = ... })
 ***
 
 ### `tes3.showAlchemyMenu`
+<div class="search_terms" style="display: none">showalchemymenu, alchemymenu</div>
 
 This function opens the alchemy menu.
 
@@ -4104,6 +4290,7 @@ tes3.showAlchemyMenu()
 ***
 
 ### `tes3.showContentsMenu`
+<div class="search_terms" style="display: none">showcontentsmenu, contentsmenu</div>
 
 This function opens the contents menu. This menu is used for containers, companion inventories, and pickpocket attempts.
 
@@ -4124,6 +4311,7 @@ local wasShown = tes3.showContentsMenu({ reference = ..., pickpocket = ... })
 ***
 
 ### `tes3.showDialogueMenu`
+<div class="search_terms" style="display: none">showdialoguemenu, dialoguemenu</div>
 
 This function opens the dialogue menu. This behaves similar to the `ForceGreeting` mwscript command.
 
@@ -4144,6 +4332,7 @@ local wasShown = tes3.showDialogueMenu({ reference = ..., checkAllowWerewolfForc
 ***
 
 ### `tes3.showRepairServiceMenu`
+<div class="search_terms" style="display: none">showrepairservicemenu, repairservicemenu</div>
 
 This function opens the repair service menu.
 
@@ -4159,6 +4348,7 @@ tes3.showRepairServiceMenu({ serviceActor = ... })
 ***
 
 ### `tes3.showRestMenu`
+<div class="search_terms" style="display: none">showrestmenu, restmenu</div>
 
 This function opens the resting menu and returns true on success. If the player can't rest currently, it returns false.
 
@@ -4186,6 +4376,7 @@ local success = tes3.showRestMenu({ checkForEnemies = ..., checkForSolidGround =
 ***
 
 ### `tes3.showSpellmakingMenu`
+<div class="search_terms" style="display: none">showspellmakingmenu, spellmakingmenu</div>
 
 This function opens the spellmaking menu and returns true on success.
 
@@ -4206,6 +4397,7 @@ local success = tes3.showSpellmakingMenu({ serviceActor = ..., useDialogActor = 
 ***
 
 ### `tes3.skipAnimationFrame`
+<div class="search_terms" style="display: none">skipanimationframe</div>
 
 Skips a given reference's animation for a single frame.
 
@@ -4221,6 +4413,7 @@ tes3.skipAnimationFrame({ reference = ... })
 ***
 
 ### `tes3.streamMusic`
+<div class="search_terms" style="display: none">streammusic</div>
 
 This function interrupts the current music to play the specified music track.
 
@@ -4242,6 +4435,7 @@ local executed = tes3.streamMusic({ path = ..., situation = ..., crossfade = ...
 ***
 
 ### `tes3.tapKey`
+<div class="search_terms" style="display: none">tapkey</div>
 
 Simulates tapping a keyboard key.
 
@@ -4256,6 +4450,7 @@ tes3.tapKey(keyCode)
 ***
 
 ### `tes3.testLineOfSight`
+<div class="search_terms" style="display: none">testlineofsight, lineofsight</div>
 
 Checks if there is a clear line of sight between two references, or two points in space, in the same method that the game uses for actor vision. You should pass two references, or two positions and heights.
 
@@ -4285,6 +4480,7 @@ local hasLineOfSight = tes3.testLineOfSight({ reference1 = ..., reference2 = ...
 ***
 
 ### `tes3.togglePOV`
+<div class="search_terms" style="display: none">togglepov, pov</div>
 
 Forces a toggle of the player's POV the next simulation frame, and returns if the player was previously in 3rd person. Multiple calls in the same frame will not stack.
 
@@ -4299,6 +4495,7 @@ local was3rdPerson = tes3.togglePOV()
 ***
 
 ### `tes3.transferItem`
+<div class="search_terms" style="display: none">transferitem</div>
 
 Moves one or more items from one reference to another. Returns the actual amount of items successfully transferred.
 
@@ -4327,6 +4524,7 @@ local transferredCount = tes3.transferItem({ from = ..., to = ..., item = ..., i
 ***
 
 ### `tes3.triggerCrime`
+<div class="search_terms" style="display: none">triggercrime</div>
 
 Emulates the player committing a crime. Returns `true` if the crime was witnessed by an actor.
 
@@ -4349,6 +4547,7 @@ local result = tes3.triggerCrime({ type = ..., victim = ..., value = ..., forceD
 ***
 
 ### `tes3.undoTransform`
+<div class="search_terms" style="display: none">undotransform</div>
 
 Changes a reference back from werewolf form to human. This function works only on a reference infected with Lycanthropy, be it the player or any other reference. Returns true if successful.
 
@@ -4368,6 +4567,7 @@ local success = tes3.undoTransform({ reference = ... })
 ***
 
 ### `tes3.unhammerKey`
+<div class="search_terms" style="display: none">unhammerkey</div>
 
 Stops simulating hammering a keyboard key.
 
@@ -4382,6 +4582,7 @@ tes3.unhammerKey(keyCode)
 ***
 
 ### `tes3.unlock`
+<div class="search_terms" style="display: none">unlock</div>
 
 Unlocks an object. Returns true if the object can be and wasn't already unlocked.
 
@@ -4401,6 +4602,7 @@ local unlocked = tes3.unlock({ reference = ... })
 ***
 
 ### `tes3.updateInventoryGUI`
+<div class="search_terms" style="display: none">updateinventorygui, inventorygui</div>
 
 Forces the GUI to update inventory-relevant elements for a given reference. This can be used after many calls to inventory-manipulating functions while passing updateGUI as false to resync inventory tiles, container weights, and companion data.
 
@@ -4416,6 +4618,7 @@ tes3.updateInventoryGUI({ reference = ... })
 ***
 
 ### `tes3.updateJournal`
+<div class="search_terms" style="display: none">updatejournal, journal</div>
 
 Updates the journal index in a way similar to the mwscript function Journal.
 
@@ -4437,6 +4640,7 @@ local wasSet = tes3.updateJournal({ id = ..., index = ..., showMessage = ... })
 ***
 
 ### `tes3.updateMagicGUI`
+<div class="search_terms" style="display: none">updatemagicgui, magicgui</div>
 
 Forces the GUI to update magic-relevant elements for a given reference. This can be used after many calls to magic- or magic item-manipulating functions while passing updateGUI as false to resync inventory tiles, container weights, and companion data.
 
@@ -4454,6 +4658,7 @@ tes3.updateMagicGUI({ reference = ..., updateSpells = ..., updateEnchantments = 
 ***
 
 ### `tes3.wakeUp`
+<div class="search_terms" style="display: none">wakeup</div>
 
 This function wakes player up and returns true if successful.
 

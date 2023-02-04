@@ -10,6 +10,7 @@ A 3 by 3 matrix. You can perform following arithmetic with this type: `==`.
 ## Properties
 
 ### `x`
+<div class="search_terms" style="display: none">x</div>
 
 The first row of the matrix.
 
@@ -20,6 +21,7 @@ The first row of the matrix.
 ***
 
 ### `y`
+<div class="search_terms" style="display: none">y</div>
 
 The second row of the matrix.
 
@@ -30,6 +32,7 @@ The second row of the matrix.
 ***
 
 ### `z`
+<div class="search_terms" style="display: none">z</div>
 
 The third row of the matrix.
 
@@ -42,6 +45,7 @@ The third row of the matrix.
 ## Methods
 
 ### `copy`
+<div class="search_terms" style="display: none">copy</div>
 
 Creates a copy of the matrix.
 
@@ -56,6 +60,7 @@ local result = myObject:copy()
 ***
 
 ### `fromEulerXYZ`
+<div class="search_terms" style="display: none">fromeulerxyz</div>
 
 Fills the matrix with values from euler coordinates.
 
@@ -72,6 +77,7 @@ myObject:fromEulerXYZ(x, y, z)
 ***
 
 ### `fromEulerZYX`
+<div class="search_terms" style="display: none">fromeulerzyx</div>
 
 Fills the matrix with values from euler coordinates.
 
@@ -88,6 +94,7 @@ myObject:fromEulerZYX(z, y, x)
 ***
 
 ### `fromQuaternion`
+<div class="search_terms" style="display: none">fromquaternion</div>
 
 Fill the matrix by converting a quaternion.
 
@@ -102,6 +109,7 @@ myObject:fromQuaternion(quaternion)
 ***
 
 ### `getForwardVector`
+<div class="search_terms" style="display: none">getforwardvector, forwardvector</div>
 
 Returns a copy of the forward vector component. This is the second column of the matrix.
 
@@ -116,6 +124,7 @@ local result = myObject:getForwardVector()
 ***
 
 ### `getRightVector`
+<div class="search_terms" style="display: none">getrightvector, rightvector</div>
 
 Returns a copy of the right vector component. This is the first column of the matrix.
 
@@ -130,6 +139,7 @@ local result = myObject:getRightVector()
 ***
 
 ### `getUpVector`
+<div class="search_terms" style="display: none">getupvector, upvector</div>
 
 Returns a copy of the up vector component. This is the third column of the matrix.
 
@@ -144,6 +154,7 @@ local result = myObject:getUpVector()
 ***
 
 ### `invert`
+<div class="search_terms" style="display: none">invert</div>
 
 Inverts the matrix.
 
@@ -159,6 +170,7 @@ local matrix, valid = myObject:invert()
 ***
 
 ### `reorthogonalize`
+<div class="search_terms" style="display: none">reorthogonalize</div>
 
 Reorthogonalizes the matrix.
 
@@ -173,6 +185,7 @@ local result = myObject:reorthogonalize()
 ***
 
 ### `toEulerXYZ`
+<div class="search_terms" style="display: none">toeulerxyz</div>
 
 Converts the matrix to series of rotations along each axis.
 
@@ -188,6 +201,7 @@ local vector3, isUnique = myObject:toEulerXYZ()
 ***
 
 ### `toEulerZYX`
+<div class="search_terms" style="display: none">toeulerzyx</div>
 
 Converts the matrix to series of rotations along each axis.
 
@@ -203,6 +217,7 @@ local vector3, isUnique = myObject:toEulerZYX()
 ***
 
 ### `toIdentity`
+<div class="search_terms" style="display: none">toidentity</div>
 
 Converts the matrix to the identity matrix's values.
 
@@ -213,6 +228,7 @@ myObject:toIdentity()
 ***
 
 ### `toQuaternion`
+<div class="search_terms" style="display: none">toquaternion</div>
 
 Convert the matrix into a quaternion.
 
@@ -227,6 +243,7 @@ local result = myObject:toQuaternion()
 ***
 
 ### `toRotation`
+<div class="search_terms" style="display: none">torotation</div>
 
 Makes this matrix a rotation matrix with provided axis-angle rotation parameters.
 
@@ -244,6 +261,7 @@ myObject:toRotation(angle, x, y, z)
 ***
 
 ### `toRotationX`
+<div class="search_terms" style="display: none">torotationx</div>
 
 Fills this matrix with the values needed to rotate a 3-by-1 vector or 3-by-N matrix of vectors around the X axis by `x` radians. For the rotation matrix A and vector v, the rotated vector is given by A * v.
 
@@ -258,6 +276,7 @@ myObject:toRotationX(x)
 ***
 
 ### `toRotationY`
+<div class="search_terms" style="display: none">torotationy</div>
 
 Fills this matrix with the values needed to rotate a 3-by-1 vector or 3-by-N matrix of vectors around the Y axis by `y` radians. For the rotation matrix A and vector v, the rotated vector is given by A * v.
 
@@ -272,6 +291,7 @@ myObject:toRotationY(y)
 ***
 
 ### `toRotationZ`
+<div class="search_terms" style="display: none">torotationz</div>
 
 Fills this matrix with the values needed to rotate a 3-by-1 vector or 3-by-N matrix of vectors around the Z axis by `z` radians. For the rotation matrix A and vector v, the rotated vector is given by A * v.
 
@@ -286,6 +306,7 @@ myObject:toRotationZ(z)
 ***
 
 ### `toZero`
+<div class="search_terms" style="display: none">tozero</div>
 
 Zeroes out all values in the matrix.
 
@@ -296,6 +317,7 @@ myObject:toZero()
 ***
 
 ### `transpose`
+<div class="search_terms" style="display: none">transpose</div>
 
 No description yet available.
 
@@ -312,6 +334,7 @@ local result = myObject:transpose()
 ## Functions
 
 ### `new`
+<div class="search_terms" style="display: none">new</div>
 
 Creates a new 3 by 3 matrix from 3 provided vectors or 9 numbers. Creates an empty matrix if nothing is provided.
 

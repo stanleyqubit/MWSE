@@ -11,6 +11,7 @@ This type inherits the following: [tes3baseObject](../../types/tes3baseObject)
 ## Properties
 
 ### `blocked`
+<div class="search_terms" style="display: none">blocked</div>
 
 The blocked state of the object.
 
@@ -21,6 +22,7 @@ The blocked state of the object.
 ***
 
 ### `deleted`
+<div class="search_terms" style="display: none">deleted</div>
 
 *Read-only*. The deleted state of the object.
 
@@ -31,6 +33,7 @@ The blocked state of the object.
 ***
 
 ### `disabled`
+<div class="search_terms" style="display: none">disabled</div>
 
 *Read-only*. The disabled state of the object.
 
@@ -41,6 +44,7 @@ The blocked state of the object.
 ***
 
 ### `granularity`
+<div class="search_terms" style="display: none">granularity</div>
 
 *Read-only*. Unknown purpose.
 
@@ -51,6 +55,7 @@ The blocked state of the object.
 ***
 
 ### `id`
+<div class="search_terms" style="display: none">id</div>
 
 *Read-only*. The unique identifier for the object.
 
@@ -61,6 +66,7 @@ The blocked state of the object.
 ***
 
 ### `isLoaded`
+<div class="search_terms" style="display: none">isloaded, loaded</div>
 
 *Read-only*. If the game has loaded the path grid data.
 
@@ -71,6 +77,7 @@ The blocked state of the object.
 ***
 
 ### `modified`
+<div class="search_terms" style="display: none">modified, ified</div>
 
 The modification state of the object since the last save.
 
@@ -81,6 +88,7 @@ The modification state of the object since the last save.
 ***
 
 ### `nodeCount`
+<div class="search_terms" style="display: none">nodecount</div>
 
 *Read-only*. The total number of nodes.
 
@@ -91,6 +99,7 @@ The modification state of the object since the last save.
 ***
 
 ### `nodes`
+<div class="search_terms" style="display: none">nodes</div>
 
 *Read-only*. A list of all path nodes in the grid. Note that for some cells, not all nodes are placed on the ground.
 
@@ -101,6 +110,7 @@ The modification state of the object since the last save.
 ***
 
 ### `objectFlags`
+<div class="search_terms" style="display: none">objectflags</div>
 
 *Read-only*. The raw flags of the object.
 
@@ -111,6 +121,7 @@ The modification state of the object since the last save.
 ***
 
 ### `objectType`
+<div class="search_terms" style="display: none">objecttype</div>
 
 *Read-only*. The type of object. Maps to values in [`tes3.objectType`](https://mwse.github.io/MWSE/references/object-types/).
 
@@ -121,6 +132,7 @@ The modification state of the object since the last save.
 ***
 
 ### `parentCell`
+<div class="search_terms" style="display: none">parentcell</div>
 
 *Read-only*. The cell that the pathgrid belongs to.
 
@@ -131,6 +143,7 @@ The modification state of the object since the last save.
 ***
 
 ### `persistent`
+<div class="search_terms" style="display: none">persistent</div>
 
 The persistent flag of the object.
 
@@ -141,6 +154,7 @@ The persistent flag of the object.
 ***
 
 ### `sourceless`
+<div class="search_terms" style="display: none">sourceless</div>
 
 The soruceless flag of the object.
 
@@ -151,6 +165,7 @@ The soruceless flag of the object.
 ***
 
 ### `sourceMod`
+<div class="search_terms" style="display: none">sourcemod</div>
 
 *Read-only*. The filename (including the extension) of the mod that owns this object. It has `nil` value if the object was anything other than loaded from an ESP or ESM file.
 
@@ -161,6 +176,7 @@ The soruceless flag of the object.
 ***
 
 ### `supportsLuaData`
+<div class="search_terms" style="display: none">supportsluadata</div>
 
 If true, references of this object can store temporary or persistent lua data.
 
@@ -173,6 +189,7 @@ If true, references of this object can store temporary or persistent lua data.
 ## Methods
 
 ### `__tojson`
+<div class="search_terms" style="display: none">__tojson</div>
 
 Serializes the object to json.
 

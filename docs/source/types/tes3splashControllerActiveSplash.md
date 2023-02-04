@@ -10,6 +10,7 @@ An object representing an active splash, such as a blood particle.
 ## Properties
 
 ### `age`
+<div class="search_terms" style="display: none">age</div>
 
 The splash's current age, measured in seconds.
 
@@ -20,6 +21,7 @@ The splash's current age, measured in seconds.
 ***
 
 ### `maxAge`
+<div class="search_terms" style="display: none">maxage</div>
 
 The splash's maximum age, measured in seconds.
 
@@ -30,6 +32,7 @@ The splash's maximum age, measured in seconds.
 ***
 
 ### `node`
+<div class="search_terms" style="display: none">node</div>
 
 *Read-only*. The splash's node.
 

@@ -10,6 +10,7 @@ A simple container that holds a relationship between an item, and any associated
 ## Properties
 
 ### `itemData`
+<div class="search_terms" style="display: none">itemdata</div>
 
 Item data associated with the stack's object, if any. All equipped items except ammunition will have itemData.
 
@@ -20,6 +21,7 @@ Item data associated with the stack's object, if any. All equipped items except 
 ***
 
 ### `object`
+<div class="search_terms" style="display: none">object</div>
 
 *Read-only*. The core game object that the stack represents.
 

@@ -11,6 +11,7 @@ This type inherits the following: [tes3baseObject](../../types/tes3baseObject)
 ## Properties
 
 ### `abilities`
+<div class="search_terms" style="display: none">abilities</div>
 
 *Read-only*. A list of abilities that NPCs of that race have access to. It is a `tes3spellList`, which is a list wrapper with helper functions. The actual list is accessed with `.iterator`. e.g. `for _, ability in pairs(race.abilities.iterator) do print(ability.name) end`
 
@@ -21,6 +22,7 @@ This type inherits the following: [tes3baseObject](../../types/tes3baseObject)
 ***
 
 ### `baseAttributes`
+<div class="search_terms" style="display: none">baseattributes</div>
 
 *Read-only*. Array-style table access to base 8 attributes for the race. Each element in the array is a [`tes3raceBaseAttribute`](https://mwse.github.io/MWSE/types/tes3raceBaseAttribute/).
 
@@ -31,6 +33,7 @@ This type inherits the following: [tes3baseObject](../../types/tes3baseObject)
 ***
 
 ### `blocked`
+<div class="search_terms" style="display: none">blocked</div>
 
 The blocked state of the object.
 
@@ -41,6 +44,7 @@ The blocked state of the object.
 ***
 
 ### `deleted`
+<div class="search_terms" style="display: none">deleted</div>
 
 *Read-only*. The deleted state of the object.
 
@@ -51,6 +55,7 @@ The blocked state of the object.
 ***
 
 ### `description`
+<div class="search_terms" style="display: none">description</div>
 
 *Read-only*. Loads from disk and returns the description of the race.
 
@@ -61,6 +66,7 @@ The blocked state of the object.
 ***
 
 ### `disabled`
+<div class="search_terms" style="display: none">disabled</div>
 
 *Read-only*. The disabled state of the object.
 
@@ -71,6 +77,7 @@ The blocked state of the object.
 ***
 
 ### `femaleBody`
+<div class="search_terms" style="display: none">femalebody</div>
 
 *Read-only*. Access to all the body parts that will be used for female actors of this race.
 
@@ -81,6 +88,7 @@ The blocked state of the object.
 ***
 
 ### `flags`
+<div class="search_terms" style="display: none">flags</div>
 
 Raw bit-based flags.
 
@@ -91,6 +99,7 @@ Raw bit-based flags.
 ***
 
 ### `height`
+<div class="search_terms" style="display: none">height</div>
 
 *Read-only*. Access to the the height pair for males/females of the race. It corresponds to the scaling along the Z axis.
 
@@ -101,6 +110,7 @@ Raw bit-based flags.
 ***
 
 ### `id`
+<div class="search_terms" style="display: none">id</div>
 
 *Read-only*. The unique identifier for the object.
 
@@ -111,6 +121,7 @@ Raw bit-based flags.
 ***
 
 ### `isBeast`
+<div class="search_terms" style="display: none">isbeast, beast</div>
 
 Access to the beast race flag.
 
@@ -121,6 +132,7 @@ Access to the beast race flag.
 ***
 
 ### `isPlayable`
+<div class="search_terms" style="display: none">isplayable, playable</div>
 
 Access to the playable race flag.
 
@@ -131,6 +143,7 @@ Access to the playable race flag.
 ***
 
 ### `maleBody`
+<div class="search_terms" style="display: none">malebody</div>
 
 *Read-only*. Access to all the body parts that will be used for male actors of this race.
 
@@ -141,6 +154,7 @@ Access to the playable race flag.
 ***
 
 ### `modified`
+<div class="search_terms" style="display: none">modified, ified</div>
 
 The modification state of the object since the last save.
 
@@ -151,6 +165,7 @@ The modification state of the object since the last save.
 ***
 
 ### `name`
+<div class="search_terms" style="display: none">name</div>
 
 *Read-only*. The player-facing name for the object.
 
@@ -161,6 +176,7 @@ The modification state of the object since the last save.
 ***
 
 ### `objectFlags`
+<div class="search_terms" style="display: none">objectflags</div>
 
 *Read-only*. The raw flags of the object.
 
@@ -171,6 +187,7 @@ The modification state of the object since the last save.
 ***
 
 ### `objectType`
+<div class="search_terms" style="display: none">objecttype</div>
 
 *Read-only*. The type of object. Maps to values in [`tes3.objectType`](https://mwse.github.io/MWSE/references/object-types/).
 
@@ -181,6 +198,7 @@ The modification state of the object since the last save.
 ***
 
 ### `persistent`
+<div class="search_terms" style="display: none">persistent</div>
 
 The persistent flag of the object.
 
@@ -191,6 +209,7 @@ The persistent flag of the object.
 ***
 
 ### `skillBonuses`
+<div class="search_terms" style="display: none">skillbonuses</div>
 
 *Read-only*. Array-style table access for 7 skill bonuses for the race. Each element in the array is a [`tes3raceSkillBonus`](https://mwse.github.io/MWSE/types/tes3raceSkillBonus/).
 
@@ -201,6 +220,7 @@ The persistent flag of the object.
 ***
 
 ### `sourceless`
+<div class="search_terms" style="display: none">sourceless</div>
 
 The soruceless flag of the object.
 
@@ -211,6 +231,7 @@ The soruceless flag of the object.
 ***
 
 ### `sourceMod`
+<div class="search_terms" style="display: none">sourcemod</div>
 
 *Read-only*. The filename (including the extension) of the mod that owns this object. It has `nil` value if the object was anything other than loaded from an ESP or ESM file.
 
@@ -221,6 +242,7 @@ The soruceless flag of the object.
 ***
 
 ### `supportsLuaData`
+<div class="search_terms" style="display: none">supportsluadata</div>
 
 If true, references of this object can store temporary or persistent lua data.
 
@@ -231,6 +253,7 @@ If true, references of this object can store temporary or persistent lua data.
 ***
 
 ### `weight`
+<div class="search_terms" style="display: none">weight</div>
 
 *Read-only*. Access to the the height pair for males/females of the race. It corresponds to the scaling along the X and Y axes.
 
@@ -243,6 +266,7 @@ If true, references of this object can store temporary or persistent lua data.
 ## Methods
 
 ### `__tojson`
+<div class="search_terms" style="display: none">__tojson</div>
 
 Serializes the object to json.
 

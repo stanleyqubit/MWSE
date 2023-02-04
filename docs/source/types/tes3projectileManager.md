@@ -10,6 +10,7 @@ A game structure which holds all active projectiles.
 ## Properties
 
 ### `projectiles`
+<div class="search_terms" style="display: none">projectiles</div>
 
 *Read-only*. A list of all currently active projectiles ([tes3mobileProjectile](https://mwse.github.io/MWSE/types/tes3mobileProjectile/)).
 

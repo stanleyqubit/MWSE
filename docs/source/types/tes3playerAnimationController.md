@@ -11,6 +11,7 @@ This type inherits the following: [tes3actorAnimationController](../../types/tes
 ## Properties
 
 ### `allowVerticalAirControl`
+<div class="search_terms" style="display: none">allowverticalaircontrol</div>
 
 *Read-only*. 
 
@@ -21,6 +22,7 @@ This type inherits the following: [tes3actorAnimationController](../../types/tes
 ***
 
 ### `alphaProperty`
+<div class="search_terms" style="display: none">alphaproperty</div>
 
 The alpha property applied to the actor. Controls the opacity/opaqueness of the actor.
 
@@ -31,6 +33,7 @@ The alpha property applied to the actor. Controls the opacity/opaqueness of the 
 ***
 
 ### `animationData`
+<div class="search_terms" style="display: none">animationdata</div>
 
 Access to the actor's animation data.
 
@@ -41,6 +44,7 @@ Access to the actor's animation data.
 ***
 
 ### `animGroupIdle`
+<div class="search_terms" style="display: none">animgroupidle</div>
 
 The actor's idle animation. Maps to values in [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) table.
 
@@ -51,6 +55,7 @@ The actor's idle animation. Maps to values in [`tes3.animationGroup`](https://mw
 ***
 
 ### `animGroupIdle2`
+<div class="search_terms" style="display: none">animgroupidle2</div>
 
 
 
@@ -61,6 +66,7 @@ The actor's idle animation. Maps to values in [`tes3.animationGroup`](https://mw
 ***
 
 ### `animGroupMovement`
+<div class="search_terms" style="display: none">animgroupmovement</div>
 
 The actor's movement animations group. Maps to values in [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) table.
 
@@ -71,6 +77,7 @@ The actor's movement animations group. Maps to values in [`tes3.animationGroup`]
 ***
 
 ### `attachTiming`
+<div class="search_terms" style="display: none">attachtiming</div>
 
 
 
@@ -81,6 +88,7 @@ The actor's movement animations group. Maps to values in [`tes3.animationGroup`]
 ***
 
 ### `attackFollowTiming`
+<div class="search_terms" style="display: none">attackfollowtiming</div>
 
 
 
@@ -91,6 +99,7 @@ The actor's movement animations group. Maps to values in [`tes3.animationGroup`]
 ***
 
 ### `cameraOffset`
+<div class="search_terms" style="display: none">cameraoffset</div>
 
 *Read-only*. Additional offset applied to the camera's position during the third person.
 
@@ -101,6 +110,7 @@ The actor's movement animations group. Maps to values in [`tes3.animationGroup`]
 ***
 
 ### `firstPersonHeadCameraNode`
+<div class="search_terms" style="display: none">firstpersonheadcameranode</div>
 
 *Read-only*. This is the camera used while in first person. Switching from first person to third person point of view doesn't affect this camera.
 
@@ -111,6 +121,7 @@ The actor's movement animations group. Maps to values in [`tes3.animationGroup`]
 ***
 
 ### `groundPlaneRotation`
+<div class="search_terms" style="display: none">groundplanerotation</div>
 
 The rotation of the actor around the up-down axis. When converted to euler angles, this axis corresponds to the z axis. The rotation range is [-PI, PI], where rotation of 0 corresponds to the game north.
 
@@ -121,6 +132,7 @@ The rotation of the actor around the up-down axis. When converted to euler angle
 ***
 
 ### `hitTiming`
+<div class="search_terms" style="display: none">hittiming</div>
 
 This it the time of the actor's attack animation in their `.kf`, played during the hit phase for fully charged attack. It's updated for the attacks from different directions.
 
@@ -131,6 +143,7 @@ This it the time of the actor's attack animation in their `.kf`, played during t
 ***
 
 ### `is3rdPerson`
+<div class="search_terms" style="display: none">is3rdperson, 3rdperson</div>
 
 *Read-only*. This flag is set to `true` when the player's view is in third person. To change the player's POV, you can use [tes3.force1stPerson](https://mwse.github.io/MWSE/apis/tes3/#tes3force1stperson) and [tes3.force3rdPerson](https://mwse.github.io/MWSE/apis/tes3/#tes3force3rdperson).
 
@@ -141,6 +154,7 @@ This it the time of the actor's attack animation in their `.kf`, played during t
 ***
 
 ### `materialProperty`
+<div class="search_terms" style="display: none">materialproperty</div>
 
 The material property applied to the actor.
 
@@ -151,6 +165,7 @@ The material property applied to the actor.
 ***
 
 ### `maxAttackTiming`
+<div class="search_terms" style="display: none">maxattacktiming</div>
 
 This it the time of the actor's attack animation in their `.kf` file, when the attack animation is fully charged. It's updated for the attacks from different directions.
 
@@ -161,6 +176,7 @@ This it the time of the actor's attack animation in their `.kf` file, when the a
 ***
 
 ### `minAttackTiming`
+<div class="search_terms" style="display: none">minattacktiming</div>
 
 This it the time of the actor's attack animation in their `.kf` file, at the earliest point the attack animation can end (when the attack button is just clicked and released). It's updated for the attacks from different directions.
 
@@ -171,6 +187,7 @@ This it the time of the actor's attack animation in their `.kf` file, at the ear
 ***
 
 ### `minHitTiming`
+<div class="search_terms" style="display: none">minhittiming</div>
 
 This it the time of the actor's attack animation in their `.kf`, played during the hit phase for the minimally charged attack. It's updated for the attacks from different directions.
 
@@ -181,6 +198,7 @@ This it the time of the actor's attack animation in their `.kf`, played during t
 ***
 
 ### `mobile`
+<div class="search_terms" style="display: none">mobile</div>
 
 *Read-only*. The mobile actor that this controller is responsible for.
 
@@ -191,6 +209,7 @@ This it the time of the actor's attack animation in their `.kf`, played during t
 ***
 
 ### `patchedOverrideState`
+<div class="search_terms" style="display: none">patchedoverridestate</div>
 
 
 
@@ -201,6 +220,7 @@ This it the time of the actor's attack animation in their `.kf`, played during t
 ***
 
 ### `pickData`
+<div class="search_terms" style="display: none">pickdata</div>
 
 *Read-only*. 
 
@@ -211,6 +231,7 @@ This it the time of the actor's attack animation in their `.kf`, played during t
 ***
 
 ### `remainingBlockTime`
+<div class="search_terms" style="display: none">remainingblocktime</div>
 
 
 
@@ -221,6 +242,7 @@ This it the time of the actor's attack animation in their `.kf`, played during t
 ***
 
 ### `shadowCameraMatrix`
+<div class="search_terms" style="display: none">shadowcameramatrix</div>
 
 *Read-only*. The local rotation matrix of the shadow camera.
 
@@ -231,6 +253,7 @@ This it the time of the actor's attack animation in their `.kf`, played during t
 ***
 
 ### `shouldJump`
+<div class="search_terms" style="display: none">shouldjump</div>
 
 
 
@@ -241,6 +264,7 @@ This it the time of the actor's attack animation in their `.kf`, played during t
 ***
 
 ### `speedMultiplier`
+<div class="search_terms" style="display: none">speedmultiplier</div>
 
 This is the speed multiplier of the current animation. For example, it is used by the game engine to scale the speed of the turning animation whith the speed at which the player is rotating the view with the mouse. In that case the value range is [0.0, 1.5].
 
@@ -251,6 +275,7 @@ This is the speed multiplier of the current animation. For example, it is used b
 ***
 
 ### `startTime`
+<div class="search_terms" style="display: none">starttime</div>
 
 This it the starting time of the actor's attack animation in their `.kf` file. It's updated for the attacks from different directions.
 
@@ -261,6 +286,7 @@ This it the starting time of the actor's attack animation in their `.kf` file. I
 ***
 
 ### `strikeWhenAttackSwingReaches`
+<div class="search_terms" style="display: none">strikewhenattackswingreaches</div>
 
 For NPCs this corresponds to how long the weapon was charged by the NPC after the attack landed. The value is in range [0.0, 1.0]. This property isn't used for the player character.
 
@@ -271,6 +297,7 @@ For NPCs this corresponds to how long the weapon was charged by the NPC after th
 ***
 
 ### `togglePOV`
+<div class="search_terms" style="display: none">togglepov, pov</div>
 
 *Read-only*. This property is set to `true` for one frame to change the point of view. Since this property is read-only, you can use [tes3.force1stPerson](https://mwse.github.io/MWSE/apis/tes3/#tes3force1stperson) and [tes3.force3rdPerson](https://mwse.github.io/MWSE/apis/tes3/#tes3force3rdperson).
 
@@ -281,6 +308,7 @@ For NPCs this corresponds to how long the weapon was charged by the NPC after th
 ***
 
 ### `useThirdPersonAfterVanityCameraDone`
+<div class="search_terms" style="display: none">usethirdpersonaftervanitycameradone</div>
 
 *Read-only*. This flag is set to `true` if vanity mode was entered from third person view. If vanity mode was entered from first person view, this flag is set to `false`.
 
@@ -291,6 +319,7 @@ For NPCs this corresponds to how long the weapon was charged by the NPC after th
 ***
 
 ### `vanityCamera`
+<div class="search_terms" style="display: none">vanitycamera</div>
 
 *Read-only*. 
 
@@ -301,6 +330,7 @@ For NPCs this corresponds to how long the weapon was charged by the NPC after th
 ***
 
 ### `vanityCameraDistance`
+<div class="search_terms" style="display: none">vanitycameradistance</div>
 
 *Read-only*. The orbiting radius of the camera during vanity mode in [game units](https://mwse.github.io/MWSE/references/other/game-units/). Measured from the center of the player's head.
 
@@ -311,6 +341,7 @@ For NPCs this corresponds to how long the weapon was charged by the NPC after th
 ***
 
 ### `vanityCameraEnabled`
+<div class="search_terms" style="display: none">vanitycameraenabled</div>
 
 *Read-only*. The value of this property is `1` during vanity camera mode, and `0` otherwise.
 
@@ -321,6 +352,7 @@ For NPCs this corresponds to how long the weapon was charged by the NPC after th
 ***
 
 ### `vanityCameraZ`
+<div class="search_terms" style="display: none">vanitycameraz</div>
 
 *Read-only*. The offset on up-down (world z) axis of the camera in third person or during vanity mode from the player's head height in [game units](https://mwse.github.io/MWSE/references/other/game-units/).
 
@@ -331,6 +363,7 @@ For NPCs this corresponds to how long the weapon was charged by the NPC after th
 ***
 
 ### `vertexColorProperty`
+<div class="search_terms" style="display: none">vertexcolorproperty</div>
 
 The vertex color property applied to the actor.
 
@@ -341,6 +374,7 @@ The vertex color property applied to the actor.
 ***
 
 ### `verticalRotation`
+<div class="search_terms" style="display: none">verticalrotation</div>
 
 Only used for the player. When converted to euler angles, the rotation about x axis will correspond to the rotation obtained from looking up and down. The rotations around other axes are always zero. In degrees the rotations range from -89.95 degrees for looking up, and 89.95 for looking maximally down.
 
@@ -351,6 +385,7 @@ Only used for the player. When converted to euler angles, the rotation about x a
 ***
 
 ### `weaponSpeed`
+<div class="search_terms" style="display: none">weaponspeed</div>
 
 The animation speed scaling of the weapon animations. This includes all weapon related idle, attack, and ready/unready animations. This value is reset at the starting frame of each weapon strike, normally equal to the the weapon speed. Therefore if you use this it should be changed after every strike, and reset after. Ready/unready actions do not change speed, but are affected by speed.
 
@@ -365,6 +400,7 @@ Use by getting the animation controller from the mobile. e.g. `mobile.animationC
 ## Methods
 
 ### `calculateAttackSwing`
+<div class="search_terms" style="display: none">calculateattackswing</div>
 
 Calculates how much an attack is currently being charged. Returns a value ranging from `0.0` to `1.0`. A value of `1.0` indicates that the attack is fully charged. Will always return `0.0` when not currently charging an attack.
 

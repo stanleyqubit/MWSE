@@ -11,6 +11,7 @@ This type inherits the following: [niTexture](../../types/niTexture), [niObjectN
 ## Properties
 
 ### `controller`
+<div class="search_terms" style="display: none">controller</div>
 
 *Read-only*. The first controller available on the object.
 
@@ -21,6 +22,7 @@ This type inherits the following: [niTexture](../../types/niTexture), [niObjectN
 ***
 
 ### `extraData`
+<div class="search_terms" style="display: none">extradata</div>
 
 *Read-only*. The first extra data available on the object.
 
@@ -31,6 +33,7 @@ This type inherits the following: [niTexture](../../types/niTexture), [niObjectN
 ***
 
 ### `fileName`
+<div class="search_terms" style="display: none">filename</div>
 
 *Read-only*. The platform-independent version of the filename from which the image was created, or nil if the image was created from pixel data.
 
@@ -41,6 +44,7 @@ This type inherits the following: [niTexture](../../types/niTexture), [niObjectN
 ***
 
 ### `formatPrefs`
+<div class="search_terms" style="display: none">formatprefs</div>
 
 The `NiFormatPrefs` of the texture.
 
@@ -51,6 +55,7 @@ The `NiFormatPrefs` of the texture.
 ***
 
 ### `height`
+<div class="search_terms" style="display: none">height</div>
 
 *Read-only*. The height of the texture.
 
@@ -61,6 +66,7 @@ The `NiFormatPrefs` of the texture.
 ***
 
 ### `isStatic`
+<div class="search_terms" style="display: none">isstatic, static</div>
 
 The static flag.
 
@@ -71,6 +77,7 @@ The static flag.
 ***
 
 ### `name`
+<div class="search_terms" style="display: none">name</div>
 
 The human-facing name of the given object.
 
@@ -81,6 +88,7 @@ The human-facing name of the given object.
 ***
 
 ### `pixelData`
+<div class="search_terms" style="display: none">pixeldata</div>
 
 The app-level pixel data.
 
@@ -91,6 +99,7 @@ The app-level pixel data.
 ***
 
 ### `platformFilename`
+<div class="search_terms" style="display: none">platformfilename</div>
 
 *Read-only*. The platform-specific version of the filename.
 
@@ -101,6 +110,7 @@ The app-level pixel data.
 ***
 
 ### `refCount`
+<div class="search_terms" style="display: none">refcount</div>
 
 *Read-only*. The number of references that exist for this object. When this value reaches zero, the object will be deleted.
 
@@ -111,6 +121,7 @@ The app-level pixel data.
 ***
 
 ### `RTTI`
+<div class="search_terms" style="display: none">rtti</div>
 
 *Read-only*. The runtime type information for this object. This is an alias for the `.runTimeTypeInformation` property.
 
@@ -121,6 +132,7 @@ The app-level pixel data.
 ***
 
 ### `runTimeTypeInformation`
+<div class="search_terms" style="display: none">runtimetypeinformation</div>
 
 *Read-only*. The runtime type information for this object.
 
@@ -131,6 +143,7 @@ The app-level pixel data.
 ***
 
 ### `width`
+<div class="search_terms" style="display: none">width</div>
 
 *Read-only*. The width of the texture.
 
@@ -143,6 +156,7 @@ The app-level pixel data.
 ## Methods
 
 ### `addExtraData`
+<div class="search_terms" style="display: none">addextradata, extradata</div>
 
 Appends an extra data to the object.
 
@@ -157,6 +171,7 @@ myObject:addExtraData(extraData)
 ***
 
 ### `clearPixelData`
+<div class="search_terms" style="display: none">clearpixeldata</div>
 
 Detaches any pixel data associated with this texture. Any render-specific data will be maintained, and remain in the GPU's memory.
 
@@ -167,6 +182,7 @@ myObject:clearPixelData()
 ***
 
 ### `clone`
+<div class="search_terms" style="display: none">clone</div>
 
 Creates a copy of this object.
 
@@ -181,6 +197,7 @@ local result = myObject:clone()
 ***
 
 ### `getGameReference`
+<div class="search_terms" style="display: none">getgamereference, gamereference</div>
 
 Searches for an niExtraData on this object to see if it has one that holds a related reference.
 
@@ -199,6 +216,7 @@ local reference = myObject:getGameReference(searchParents)
 ***
 
 ### `getStringDataStartingWith`
+<div class="search_terms" style="display: none">getstringdatastartingwith, stringdatastartingwith</div>
 
 Searches for an niExtraData on this object to see if it has niStringExtraData that has its string start with the provided `value` argument.
 
@@ -217,6 +235,7 @@ local extra = myObject:getStringDataStartingWith(value)
 ***
 
 ### `getStringDataWith`
+<div class="search_terms" style="display: none">getstringdatawith, stringdatawith</div>
 
 Searches for an niExtraData on this object to see if it has niStringExtraData that has the provided `value` argument in its string field.
 
@@ -235,6 +254,7 @@ local extra = myObject:getStringDataWith(value)
 ***
 
 ### `hasStringDataStartingWith`
+<div class="search_terms" style="display: none">hasstringdatastartingwith, stringdatastartingwith</div>
 
 Searches for an niExtraData on this object to see if it has niStringExtraData that has its string start with the provided `value` argument. Returns true if the value was found.
 
@@ -253,6 +273,7 @@ local result = myObject:hasStringDataStartingWith(value)
 ***
 
 ### `hasStringDataWith`
+<div class="search_terms" style="display: none">hasstringdatawith, stringdatawith</div>
 
 Searches for an niExtraData on this object to see if it has niStringExtraData that contains the provided `value` argument in its string field. Returns true if the value was found.
 
@@ -271,6 +292,7 @@ local result = myObject:hasStringDataWith(value)
 ***
 
 ### `isInstanceOfType`
+<div class="search_terms" style="display: none">isinstanceoftype, instanceoftype</div>
 
 Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
@@ -289,6 +311,7 @@ local result = myObject:isInstanceOfType(type)
 ***
 
 ### `isOfType`
+<div class="search_terms" style="display: none">isoftype, oftype</div>
 
 Determines if the object is of a given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
@@ -307,6 +330,7 @@ local result = myObject:isOfType(type)
 ***
 
 ### `loadPixelDataFromFile`
+<div class="search_terms" style="display: none">loadpixeldatafromfile</div>
 
 Loads the file associated with the texture into memory, and makes it accessible from the pixelData property.
 
@@ -317,6 +341,7 @@ myObject:loadPixelDataFromFile()
 ***
 
 ### `prependController`
+<div class="search_terms" style="display: none">prependcontroller</div>
 
 Add a controller to the object as the first controller.
 
@@ -331,6 +356,7 @@ myObject:prependController(controller)
 ***
 
 ### `removeAllControllers`
+<div class="search_terms" style="display: none">removeallcontrollers, allcontrollers</div>
 
 Removes all controllers.
 
@@ -341,6 +367,7 @@ myObject:removeAllControllers()
 ***
 
 ### `removeAllExtraData`
+<div class="search_terms" style="display: none">removeallextradata, allextradata</div>
 
 Removes all extra data.
 
@@ -351,6 +378,7 @@ myObject:removeAllExtraData()
 ***
 
 ### `removeController`
+<div class="search_terms" style="display: none">removecontroller, controller</div>
 
 Removes a controller from the object.
 
@@ -365,6 +393,7 @@ myObject:removeController(controller)
 ***
 
 ### `removeExtraData`
+<div class="search_terms" style="display: none">removeextradata, extradata</div>
 
 Removes a specific extra data from the object.
 
@@ -379,6 +408,7 @@ myObject:removeExtraData(extraData)
 ***
 
 ### `saveBinary`
+<div class="search_terms" style="display: none">savebinary</div>
 
 Serializes the object, and writes it to the given file.
 
@@ -397,6 +427,7 @@ local success = myObject:saveBinary(path)
 ***
 
 ### `setFlag`
+<div class="search_terms" style="display: none">setflag, flag</div>
 
 Sets a given flag in the niObjectNET flag data. The specifics use of the flag is dependent on the real underlying type.
 
@@ -414,6 +445,7 @@ myObject:setFlag(state, index)
 ## Functions
 
 ### `createFromPath`
+<div class="search_terms" style="display: none">createfrompath, frompath</div>
 
 Creates an niSourceTexture from the given filepath.
 

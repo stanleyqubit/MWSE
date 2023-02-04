@@ -10,6 +10,7 @@ A set of 4 floating-point numbers.
 ## Properties
 
 ### `w`
+<div class="search_terms" style="display: none">w</div>
 
 The 1st value in the vector.
 
@@ -20,6 +21,7 @@ The 1st value in the vector.
 ***
 
 ### `x`
+<div class="search_terms" style="display: none">x</div>
 
 The 2nd value in the vector.
 
@@ -30,6 +32,7 @@ The 2nd value in the vector.
 ***
 
 ### `y`
+<div class="search_terms" style="display: none">y</div>
 
 The 3rd value in the vector.
 
@@ -40,6 +43,7 @@ The 3rd value in the vector.
 ***
 
 ### `z`
+<div class="search_terms" style="display: none">z</div>
 
 The 4th value in the vector.
 
@@ -52,6 +56,7 @@ The 4th value in the vector.
 ## Methods
 
 ### `copy`
+<div class="search_terms" style="display: none">copy</div>
 
 Creates a copy of the vector.
 
@@ -66,6 +71,7 @@ local result = myObject:copy()
 ***
 
 ### `length`
+<div class="search_terms" style="display: none">length</div>
 
 Calculates the length of the vector.
 
@@ -82,6 +88,7 @@ local result = myObject:length()
 ## Functions
 
 ### `new`
+<div class="search_terms" style="display: none">new</div>
 
 Creates a new vector. If no parameters are provided, an empty set will be constructed.
 

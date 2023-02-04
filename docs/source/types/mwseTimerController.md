@@ -10,6 +10,7 @@ A Timer Controller is a class used to sort and trigger callbacks based on an arb
 ## Properties
 
 ### `clock`
+<div class="search_terms" style="display: none">clock</div>
 
 The current clock time for this timer controller. Timer Controller, responsible for `timer.game` type of timers, has clock equal to the game's simuation timestamp. Timer Controllers, responsible for `timer.real`, and `timer.simulate`, types of timers have their initial clock set to `0` on a new game, and their clock's progressions is equal to `deltaTime`. Timer Controller's, responsible for `timer.simulate` timers, clock only advances when the menu mode is off.
 
@@ -22,6 +23,7 @@ The current clock time for this timer controller. Timer Controller, responsible 
 ## Methods
 
 ### `create`
+<div class="search_terms" style="display: none">create</div>
 
 Creates a timer for the given Timer Controller.
 
@@ -47,6 +49,7 @@ local timer = myObject:create({ duration = ..., callback = ..., iterations = ...
 ## Functions
 
 ### `new`
+<div class="search_terms" style="display: none">new</div>
 
 Creates a new Timer Controller. Its initial clock is zero, unless a start time is provided.
 

@@ -11,6 +11,7 @@ This type inherits the following: [tes3actor](../../types/tes3actor), [tes3physi
 ## Properties
 
 ### `actorFlags`
+<div class="search_terms" style="display: none">actorflags</div>
 
 *Read-only*. A number representing the actor flags. Truly a bit field.
 
@@ -21,6 +22,7 @@ This type inherits the following: [tes3actor](../../types/tes3actor), [tes3physi
 ***
 
 ### `barterGold`
+<div class="search_terms" style="display: none">bartergold</div>
 
 Friendly access to actor's barter gold amount.
 
@@ -31,6 +33,7 @@ Friendly access to actor's barter gold amount.
 ***
 
 ### `baseObject`
+<div class="search_terms" style="display: none">baseobject</div>
 
 *Read-only*. The base container object that the instance inherits from.
 
@@ -41,6 +44,7 @@ Friendly access to actor's barter gold amount.
 ***
 
 ### `blocked`
+<div class="search_terms" style="display: none">blocked</div>
 
 The blocked state of the object.
 
@@ -51,6 +55,7 @@ The blocked state of the object.
 ***
 
 ### `blood`
+<div class="search_terms" style="display: none">blood</div>
 
 Friendly access to actor's blood type, in [0, 7] range. The available blood types are defined in the Morrowind.ini file, and assigned to the actor via the Construction Set.
 
@@ -61,6 +66,7 @@ Friendly access to actor's blood type, in [0, 7] range. The available blood type
 ***
 
 ### `boundingBox`
+<div class="search_terms" style="display: none">boundingbox</div>
 
 The bounding box for the object.
 
@@ -71,6 +77,7 @@ The bounding box for the object.
 ***
 
 ### `cloneCount`
+<div class="search_terms" style="display: none">clonecount</div>
 
 *Read-only*. The number of clones that exist of this actor.
 
@@ -81,6 +88,7 @@ The bounding box for the object.
 ***
 
 ### `deleted`
+<div class="search_terms" style="display: none">deleted</div>
 
 *Read-only*. The deleted state of the object.
 
@@ -91,6 +99,7 @@ The bounding box for the object.
 ***
 
 ### `disabled`
+<div class="search_terms" style="display: none">disabled</div>
 
 *Read-only*. The disabled state of the object.
 
@@ -101,6 +110,7 @@ The bounding box for the object.
 ***
 
 ### `equipment`
+<div class="search_terms" style="display: none">equipment</div>
 
 *Read-only*. The items currently equipped to the actor.
 
@@ -111,6 +121,7 @@ The bounding box for the object.
 ***
 
 ### `id`
+<div class="search_terms" style="display: none">id</div>
 
 *Read-only*. The unique identifier for the object.
 
@@ -121,6 +132,7 @@ The bounding box for the object.
 ***
 
 ### `inventory`
+<div class="search_terms" style="display: none">inventory</div>
 
 *Read-only*. The items currently carried by the actor.
 
@@ -131,6 +143,7 @@ The bounding box for the object.
 ***
 
 ### `isInstance`
+<div class="search_terms" style="display: none">isinstance, instance</div>
 
 Always returns true.
 
@@ -141,6 +154,7 @@ Always returns true.
 ***
 
 ### `isLocationMarker`
+<div class="search_terms" style="display: none">islocationmarker, locationmarker</div>
 
 True if this object is an editor marker for a gameplay location. These include travel, intervention, prison, door, and interior north markers. Markers are invisible in-game.
 
@@ -151,6 +165,7 @@ True if this object is an editor marker for a gameplay location. These include t
 ***
 
 ### `mesh`
+<div class="search_terms" style="display: none">mesh</div>
 
 The path to the object's mesh.
 
@@ -161,6 +176,7 @@ The path to the object's mesh.
 ***
 
 ### `modified`
+<div class="search_terms" style="display: none">modified, ified</div>
 
 The modification state of the object since the last save.
 
@@ -171,6 +187,7 @@ The modification state of the object since the last save.
 ***
 
 ### `name`
+<div class="search_terms" style="display: none">name</div>
 
 The player-facing name for the object.
 
@@ -181,6 +198,7 @@ The player-facing name for the object.
 ***
 
 ### `nextInCollection`
+<div class="search_terms" style="display: none">nextincollection</div>
 
 The next object in parent collection's list.
 
@@ -191,6 +209,7 @@ The next object in parent collection's list.
 ***
 
 ### `objectFlags`
+<div class="search_terms" style="display: none">objectflags</div>
 
 *Read-only*. The raw flags of the object.
 
@@ -201,6 +220,7 @@ The next object in parent collection's list.
 ***
 
 ### `objectType`
+<div class="search_terms" style="display: none">objecttype</div>
 
 *Read-only*. The type of object. Maps to values in [`tes3.objectType`](https://mwse.github.io/MWSE/references/object-types/).
 
@@ -211,6 +231,7 @@ The next object in parent collection's list.
 ***
 
 ### `organic`
+<div class="search_terms" style="display: none">organic</div>
 
 Determines if the container's organic flag is enabled.
 
@@ -221,6 +242,7 @@ Determines if the container's organic flag is enabled.
 ***
 
 ### `owningCollection`
+<div class="search_terms" style="display: none">owningcollection</div>
 
 The collection responsible for holding this object.
 
@@ -231,6 +253,7 @@ The collection responsible for holding this object.
 ***
 
 ### `persistent`
+<div class="search_terms" style="display: none">persistent</div>
 
 The persistent flag of the object.
 
@@ -241,6 +264,7 @@ The persistent flag of the object.
 ***
 
 ### `previousInCollection`
+<div class="search_terms" style="display: none">previousincollection</div>
 
 The previous object in parent collection's list.
 
@@ -251,6 +275,7 @@ The previous object in parent collection's list.
 ***
 
 ### `reference`
+<div class="search_terms" style="display: none">reference</div>
 
 *Read-only*. The reference that the object is represented by.
 
@@ -261,6 +286,7 @@ The previous object in parent collection's list.
 ***
 
 ### `respawns`
+<div class="search_terms" style="display: none">respawns</div>
 
 Determines if the container's respawn flag is enabled.
 
@@ -271,6 +297,7 @@ Determines if the container's respawn flag is enabled.
 ***
 
 ### `scale`
+<div class="search_terms" style="display: none">scale</div>
 
 The object's scale. The value range is (0, 10).
 
@@ -281,6 +308,7 @@ The object's scale. The value range is (0, 10).
 ***
 
 ### `sceneCollisionRoot`
+<div class="search_terms" style="display: none">scenecollisionroot</div>
 
 The scene graph node for this object's physics collision, if its mesh has a root collision node.
 
@@ -291,6 +319,7 @@ The scene graph node for this object's physics collision, if its mesh has a root
 ***
 
 ### `sceneNode`
+<div class="search_terms" style="display: none">scenenode</div>
 
 The scene graph node for this object.
 
@@ -301,6 +330,7 @@ The scene graph node for this object.
 ***
 
 ### `script`
+<div class="search_terms" style="display: none">script</div>
 
 The script that runs on the object.
 
@@ -311,6 +341,7 @@ The script that runs on the object.
 ***
 
 ### `sourceless`
+<div class="search_terms" style="display: none">sourceless</div>
 
 The soruceless flag of the object.
 
@@ -321,6 +352,7 @@ The soruceless flag of the object.
 ***
 
 ### `sourceMod`
+<div class="search_terms" style="display: none">sourcemod</div>
 
 *Read-only*. The filename (including the extension) of the mod that owns this object. It has `nil` value if the object was anything other than loaded from an ESP or ESM file.
 
@@ -331,6 +363,7 @@ The soruceless flag of the object.
 ***
 
 ### `stolenList`
+<div class="search_terms" style="display: none">stolenlist</div>
 
 A list of actors that the object has been stolen from.
 
@@ -341,6 +374,7 @@ A list of actors that the object has been stolen from.
 ***
 
 ### `supportsLuaData`
+<div class="search_terms" style="display: none">supportsluadata</div>
 
 If true, references of this object can store temporary or persistent lua data.
 
@@ -353,6 +387,7 @@ If true, references of this object can store temporary or persistent lua data.
 ## Methods
 
 ### `__tojson`
+<div class="search_terms" style="display: none">__tojson</div>
 
 Serializes the object to json.
 
@@ -367,6 +402,7 @@ local string = myObject:__tojson()
 ***
 
 ### `hasItemEquipped`
+<div class="search_terms" style="display: none">hasitemequipped, itemequipped</div>
 
 Checks if the actor has provided item equipped.
 
@@ -386,6 +422,7 @@ local result = myObject:hasItemEquipped(item, itemData)
 ***
 
 ### `offersService`
+<div class="search_terms" style="display: none">offersservice</div>
 
 Checks if the actor will offer a service in dialogue. This an offer and may still be refused by dialogue checks. To also get the result of dialogue checks, use [`tes3.checkMerchantOffersService()`](https://mwse.github.io/MWSE/apis/tes3/#tes3checkmerchantoffersservice).
 
@@ -404,6 +441,7 @@ local result = myObject:offersService(service)
 ***
 
 ### `onInventoryClose`
+<div class="search_terms" style="display: none">oninventoryclose</div>
 
 A callback function invoked when an inventory is closed. Typically not used outside of specific purposes. You may find `tes3.reference`'s `onCloseInventory()` to be more convenient to use.
 
@@ -418,6 +456,7 @@ myObject:onInventoryClose(reference)
 ***
 
 ### `tradesItemType`
+<div class="search_terms" style="display: none">tradesitemtype</div>
 
 Checks if the actor will buy and sell items of a given object type. e.g. `actor:tradesItemType(tes3.objectType.repairItem)`
 

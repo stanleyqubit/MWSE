@@ -10,6 +10,7 @@ A handle to safely operate on ([tes3object](https://mwse.github.io/MWSE/types/te
 ## Methods
 
 ### `getObject`
+<div class="search_terms" style="display: none">getobject, object</div>
 
 Returns the object of this handle.
 
@@ -24,6 +25,7 @@ local result = myObject:getObject()
 ***
 
 ### `valid`
+<div class="search_terms" style="display: none">valid</div>
 
 Returns true if the object of this handle is still valid. Objects that are invalid do no longer exist and cannot be used.
 

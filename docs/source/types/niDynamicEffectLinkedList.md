@@ -10,6 +10,7 @@ A linked list of dynamic effects.
 ## Properties
 
 ### `data`
+<div class="search_terms" style="display: none">data</div>
 
 *Read-only*. The current dynamic effect in the linked list.
 
@@ -20,6 +21,7 @@ A linked list of dynamic effects.
 ***
 
 ### `next`
+<div class="search_terms" style="display: none">next</div>
 
 *Read-only*. The next dynamic effect in the linked list.
 

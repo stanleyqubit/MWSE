@@ -21,6 +21,7 @@ The `niCollisionGroup` class is used to group the object into two main groups, b
 ## Properties
 
 ### `collidees`
+<div class="search_terms" style="display: none">collidees</div>
 
 *Read-only*. The array of collidee objects.
 
@@ -31,6 +32,7 @@ The `niCollisionGroup` class is used to group the object into two main groups, b
 ***
 
 ### `colliders`
+<div class="search_terms" style="display: none">colliders</div>
 
 *Read-only*. The array of collider objects.
 

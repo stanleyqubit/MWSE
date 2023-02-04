@@ -11,6 +11,7 @@ This type inherits the following: [tes3uiWidget](../../types/tes3uiWidget)
 ## Properties
 
 ### `element`
+<div class="search_terms" style="display: none">element</div>
 
 Access back to the element this widget interface is for.
 
@@ -21,6 +22,7 @@ Access back to the element this widget interface is for.
 ***
 
 ### `index`
+<div class="search_terms" style="display: none">index</div>
 
 The current index of the widget. If this is set, the text will be updated accordingly.
 
@@ -31,6 +33,7 @@ The current index of the widget. If this is set, the text will be updated accord
 ***
 
 ### `options`
+<div class="search_terms" style="display: none">options</div>
 
 The options available to the cycle button. Setting this value will reset the active index to 1.
 
@@ -41,6 +44,7 @@ The options available to the cycle button. Setting this value will reset the act
 ***
 
 ### `text`
+<div class="search_terms" style="display: none">text</div>
 
 The current text of the button. This will change every time the index changes.
 
@@ -51,6 +55,7 @@ The current text of the button. This will change every time the index changes.
 ***
 
 ### `value`
+<div class="search_terms" style="display: none">value</div>
 
 The value associated with the current index. Setting this property will search for an option that has the given value, and change the active index to that option's. If the value does not exist in the available options, it will throw an error.
 
@@ -63,6 +68,7 @@ The value associated with the current index. Setting this property will search f
 ## Methods
 
 ### `addOption`
+<div class="search_terms" style="display: none">addoption, option</div>
 
 Adds a new option to the cycle button.
 
@@ -77,6 +83,7 @@ myObject:addOption(option)
 ***
 
 ### `getIndexForValue`
+<div class="search_terms" style="display: none">getindexforvalue, indexforvalue</div>
 
 Gets the index used by a particular value.
 
@@ -95,6 +102,7 @@ local index = myObject:getIndexForValue(value)
 ***
 
 ### `getTextElement`
+<div class="search_terms" style="display: none">gettextelement, textelement</div>
 
 Gets the text element to use.
 
@@ -109,6 +117,7 @@ local element = myObject:getTextElement()
 ***
 
 ### `next`
+<div class="search_terms" style="display: none">next</div>
 
 Cycles the button to the next option.
 
@@ -119,6 +128,7 @@ myObject:next()
 ***
 
 ### `previous`
+<div class="search_terms" style="display: none">previous</div>
 
 Cycles the button to the previous option.
 

@@ -10,6 +10,7 @@ A game object which contains AI configuration information for an actor. This inc
 ## Properties
 
 ### `alarm`
+<div class="search_terms" style="display: none">alarm</div>
 
 Friendly access to actor's alarm value.
 
@@ -20,6 +21,7 @@ Friendly access to actor's alarm value.
 ***
 
 ### `bartersAlchemy`
+<div class="search_terms" style="display: none">bartersalchemy</div>
 
 Friendly access to a flag that controls whether the actor barters in potions.
 
@@ -30,6 +32,7 @@ Friendly access to a flag that controls whether the actor barters in potions.
 ***
 
 ### `bartersApparatus`
+<div class="search_terms" style="display: none">bartersapparatus</div>
 
 Friendly access to a flag that controls whether the actor barters in alchemical apparati.
 
@@ -40,6 +43,7 @@ Friendly access to a flag that controls whether the actor barters in alchemical 
 ***
 
 ### `bartersArmor`
+<div class="search_terms" style="display: none">bartersarmor</div>
 
 Friendly access to a flag that controls whether the actor barters in armor.
 
@@ -50,6 +54,7 @@ Friendly access to a flag that controls whether the actor barters in armor.
 ***
 
 ### `bartersBooks`
+<div class="search_terms" style="display: none">bartersbooks</div>
 
 Friendly access to a flag that controls whether the actor barters in books.
 
@@ -60,6 +65,7 @@ Friendly access to a flag that controls whether the actor barters in books.
 ***
 
 ### `bartersClothing`
+<div class="search_terms" style="display: none">bartersclothing</div>
 
 Friendly access to a flag that controls whether the actor barters in clothing.
 
@@ -70,6 +76,7 @@ Friendly access to a flag that controls whether the actor barters in clothing.
 ***
 
 ### `bartersEnchantedItems`
+<div class="search_terms" style="display: none">bartersenchanteditems</div>
 
 Friendly access to a flag that controls whether the actor barters in enchanted items.
 
@@ -80,6 +87,7 @@ Friendly access to a flag that controls whether the actor barters in enchanted i
 ***
 
 ### `bartersIngredients`
+<div class="search_terms" style="display: none">bartersingredients</div>
 
 Friendly access to a flag that controls whether the actor barters in alchemical ingredients.
 
@@ -90,6 +98,7 @@ Friendly access to a flag that controls whether the actor barters in alchemical 
 ***
 
 ### `bartersLights`
+<div class="search_terms" style="display: none">barterslights</div>
 
 Friendly access to a flag that controls whether the actor barters in lights.
 
@@ -100,6 +109,7 @@ Friendly access to a flag that controls whether the actor barters in lights.
 ***
 
 ### `bartersLockpicks`
+<div class="search_terms" style="display: none">barterslockpicks</div>
 
 Friendly access to a flag that controls whether the actor barters in lockpicks.
 
@@ -110,6 +120,7 @@ Friendly access to a flag that controls whether the actor barters in lockpicks.
 ***
 
 ### `bartersMiscItems`
+<div class="search_terms" style="display: none">bartersmiscitems</div>
 
 Friendly access to a flag that controls whether the actor barters in miscellaneous items.
 
@@ -120,6 +131,7 @@ Friendly access to a flag that controls whether the actor barters in miscellaneo
 ***
 
 ### `bartersProbes`
+<div class="search_terms" style="display: none">bartersprobes</div>
 
 Friendly access to a flag that controls whether the actor barters in probes.
 
@@ -130,6 +142,7 @@ Friendly access to a flag that controls whether the actor barters in probes.
 ***
 
 ### `bartersRepairTools`
+<div class="search_terms" style="display: none">bartersrepairtools</div>
 
 Friendly access to a flag that controls whether the actor barters in repair hammers and prongs.
 
@@ -140,6 +153,7 @@ Friendly access to a flag that controls whether the actor barters in repair hamm
 ***
 
 ### `bartersWeapons`
+<div class="search_terms" style="display: none">bartersweapons</div>
 
 Friendly access to a flag that controls whether the actor barters in weapons.
 
@@ -150,6 +164,7 @@ Friendly access to a flag that controls whether the actor barters in weapons.
 ***
 
 ### `fight`
+<div class="search_terms" style="display: none">fight</div>
 
 Friendly access to actor's fight value.
 
@@ -160,6 +175,7 @@ Friendly access to actor's fight value.
 ***
 
 ### `flee`
+<div class="search_terms" style="display: none">flee</div>
 
 Friendly access to actor's flee value.
 
@@ -170,6 +186,7 @@ Friendly access to actor's flee value.
 ***
 
 ### `hello`
+<div class="search_terms" style="display: none">hello</div>
 
 Friendly access to actor's hello value.
 
@@ -180,6 +197,7 @@ Friendly access to actor's hello value.
 ***
 
 ### `merchantFlags`
+<div class="search_terms" style="display: none">merchantflags</div>
 
 Numeric access to all merchant flags. Shouldn't be used directly.
 
@@ -190,6 +208,7 @@ Numeric access to all merchant flags. Shouldn't be used directly.
 ***
 
 ### `offersEnchanting`
+<div class="search_terms" style="display: none">offersenchanting</div>
 
 Friendly access to a flag that controls whether the actor offers enchanting services.
 
@@ -200,6 +219,7 @@ Friendly access to a flag that controls whether the actor offers enchanting serv
 ***
 
 ### `offersRepairs`
+<div class="search_terms" style="display: none">offersrepairs</div>
 
 Friendly access to a flag that controls whether the actor offers item repairs service.
 
@@ -210,6 +230,7 @@ Friendly access to a flag that controls whether the actor offers item repairs se
 ***
 
 ### `offersSpellmaking`
+<div class="search_terms" style="display: none">offersspellmaking</div>
 
 Friendly access to a flag that controls whether the actor offers spellmaking service.
 
@@ -220,6 +241,7 @@ Friendly access to a flag that controls whether the actor offers spellmaking ser
 ***
 
 ### `offersSpells`
+<div class="search_terms" style="display: none">offersspells</div>
 
 Friendly access to a flag that controls whether the actor sells spells.
 
@@ -230,6 +252,7 @@ Friendly access to a flag that controls whether the actor sells spells.
 ***
 
 ### `offersTraining`
+<div class="search_terms" style="display: none">offerstraining</div>
 
 Friendly access to a flag that controls whether the actor offers training services.
 
@@ -240,6 +263,7 @@ Friendly access to a flag that controls whether the actor offers training servic
 ***
 
 ### `travelDestinations`
+<div class="search_terms" style="display: none">traveldestinations</div>
 
 A table access to all [`tes3travelDestinationNode`](https://mwse.github.io/MWSE/types/tes3travelDestinationNode/) objects this actor can take the player to.
 

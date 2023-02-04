@@ -10,6 +10,7 @@ A handle to a command excuted using `os.execute` configured to run asynchronousl
 ## Properties
 
 ### `command`
+<div class="search_terms" style="display: none">command</div>
 
 The command originally passed to `os.execute`.
 
@@ -20,6 +21,7 @@ The command originally passed to `os.execute`.
 ***
 
 ### `errorCode`
+<div class="search_terms" style="display: none">errorcode</div>
 
 The error code of the program, or 0 if there was no error.
 
@@ -30,6 +32,7 @@ The error code of the program, or 0 if there was no error.
 ***
 
 ### `exitCode`
+<div class="search_terms" style="display: none">exitcode</div>
 
 The exit code of the program, or nil if the program has not yet finished.
 
@@ -40,6 +43,7 @@ The exit code of the program, or nil if the program has not yet finished.
 ***
 
 ### `ready`
+<div class="search_terms" style="display: none">ready</div>
 
 If true, the program is no longer running and output can be read.
 
@@ -52,6 +56,7 @@ If true, the program is no longer running and output can be read.
 ## Methods
 
 ### `getOutput`
+<div class="search_terms" style="display: none">getoutput, output</div>
 
 Reads the current output of the program, and clears the output buffer.
 
@@ -66,6 +71,7 @@ local output = myObject:getOutput()
 ***
 
 ### `wait`
+<div class="search_terms" style="display: none">wait</div>
 
 Pauses the main thread, locking up the program until the program has finished.
 

@@ -11,6 +11,7 @@ This type inherits the following: [tes3uiWidget](../../types/tes3uiWidget)
 ## Properties
 
 ### `current`
+<div class="search_terms" style="display: none">current</div>
 
 The current value. The size of the filled portion is determined by dividing `current` by `max`.
 
@@ -21,6 +22,7 @@ The current value. The size of the filled portion is determined by dividing `cur
 ***
 
 ### `element`
+<div class="search_terms" style="display: none">element</div>
 
 Access back to the element this widget interface is for.
 
@@ -31,6 +33,7 @@ Access back to the element this widget interface is for.
 ***
 
 ### `fillAlpha`
+<div class="search_terms" style="display: none">fillalpha</div>
 
 The alpha value of `fillColor`. Setting this will also set the alpha value of `fillColor`.
 
@@ -41,6 +44,7 @@ The alpha value of `fillColor`. Setting this will also set the alpha value of `f
 ***
 
 ### `fillColor`
+<div class="search_terms" style="display: none">fillcolor</div>
 
 The RGB color of the filled portion. An array of 3 floats with value range [0.0, 1.0]. Does not affect the background or the border.
 
@@ -51,6 +55,7 @@ The RGB color of the filled portion. An array of 3 floats with value range [0.0,
 ***
 
 ### `max`
+<div class="search_terms" style="display: none">max</div>
 
 The maximum value. The size of the filled portion is determined by dividing `current` by `max`.
 
@@ -61,6 +66,7 @@ The maximum value. The size of the filled portion is determined by dividing `cur
 ***
 
 ### `normalized`
+<div class="search_terms" style="display: none">normalized</div>
 
 The current value in range [0.0, 1.0].
 
@@ -71,6 +77,7 @@ The current value in range [0.0, 1.0].
 ***
 
 ### `showText`
+<div class="search_terms" style="display: none">showtext, text</div>
 
 If `true`, shows a centered text with the format `current/max` inside the fillbar.
 

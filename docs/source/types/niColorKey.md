@@ -11,6 +11,7 @@ This type inherits the following: [niAnimationKey](../../types/niAnimationKey)
 ## Properties
 
 ### `color`
+<div class="search_terms" style="display: none">color</div>
 
 The color for this key.
 
@@ -21,6 +22,7 @@ The color for this key.
 ***
 
 ### `timing`
+<div class="search_terms" style="display: none">timing</div>
 
 The timing of the animation key.
 

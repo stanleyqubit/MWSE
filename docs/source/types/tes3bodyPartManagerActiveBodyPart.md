@@ -10,6 +10,7 @@ A game object which holds information about an active body part, it's associated
 ## Properties
 
 ### `bodyPart`
+<div class="search_terms" style="display: none">bodypart</div>
 
 Access to the body part object.
 
@@ -20,6 +21,7 @@ Access to the body part object.
 ***
 
 ### `flags`
+<div class="search_terms" style="display: none">flags</div>
 
 The raw flags.
 
@@ -30,6 +32,7 @@ The raw flags.
 ***
 
 ### `item`
+<div class="search_terms" style="display: none">item</div>
 
 The raw item object this active body part pertains to.
 
@@ -40,6 +43,7 @@ The raw item object this active body part pertains to.
 ***
 
 ### `node`
+<div class="search_terms" style="display: none">node</div>
 
 The NiNode-derived object for the object's loaded mesh.
 

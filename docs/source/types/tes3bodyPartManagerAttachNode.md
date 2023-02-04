@@ -10,6 +10,7 @@ A game object which holds information about equipment attachments to the actor's
 ## Properties
 
 ### `flags`
+<div class="search_terms" style="display: none">flags</div>
 
 The raw flags.
 
@@ -20,6 +21,7 @@ The raw flags.
 ***
 
 ### `node`
+<div class="search_terms" style="display: none">node</div>
 
 The NiNode-derived object for the object's loaded mesh.
 
@@ -30,6 +32,7 @@ The NiNode-derived object for the object's loaded mesh.
 ***
 
 ### `rotation`
+<div class="search_terms" style="display: none">rotation</div>
 
 The rotation for this Attachment node.
 
@@ -40,6 +43,7 @@ The rotation for this Attachment node.
 ***
 
 ### `translation`
+<div class="search_terms" style="display: none">translation</div>
 
 The translation for this Attachment node.
 

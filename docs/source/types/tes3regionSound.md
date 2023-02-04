@@ -10,6 +10,7 @@ A structure that contains region sound information.
 ## Properties
 
 ### `chance`
+<div class="search_terms" style="display: none">chance</div>
 
 The chance the region sound will be used. Must be an integer between `0` and `100`.
 
@@ -20,6 +21,7 @@ The chance the region sound will be used. Must be an integer between `0` and `10
 ***
 
 ### `sound`
+<div class="search_terms" style="display: none">sound</div>
 
 The access to object's associated sound.
 

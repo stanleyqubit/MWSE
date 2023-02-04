@@ -10,6 +10,7 @@ An object that represents a RGB color with alpha channel support. The values are
 ## Properties
 
 ### `a`
+<div class="search_terms" style="display: none">a</div>
 
 The alpha value of the color.
 
@@ -20,6 +21,7 @@ The alpha value of the color.
 ***
 
 ### `alpha`
+<div class="search_terms" style="display: none">alpha</div>
 
 The alpha value of the color.
 
@@ -30,6 +32,7 @@ The alpha value of the color.
 ***
 
 ### `b`
+<div class="search_terms" style="display: none">b</div>
 
 The blue value of the color.
 
@@ -40,6 +43,7 @@ The blue value of the color.
 ***
 
 ### `blue`
+<div class="search_terms" style="display: none">blue</div>
 
 Alias for the blue value of the color.
 
@@ -50,6 +54,7 @@ Alias for the blue value of the color.
 ***
 
 ### `g`
+<div class="search_terms" style="display: none">g</div>
 
 The green value of the color.
 
@@ -60,6 +65,7 @@ The green value of the color.
 ***
 
 ### `green`
+<div class="search_terms" style="display: none">green</div>
 
 Alias for the green value of the color.
 
@@ -70,6 +76,7 @@ Alias for the green value of the color.
 ***
 
 ### `r`
+<div class="search_terms" style="display: none">r</div>
 
 The red value of the color.
 
@@ -80,6 +87,7 @@ The red value of the color.
 ***
 
 ### `red`
+<div class="search_terms" style="display: none">red</div>
 
 Alias for the red value of the color.
 
@@ -92,6 +100,7 @@ Alias for the red value of the color.
 ## Methods
 
 ### `copy`
+<div class="search_terms" style="display: none">copy</div>
 
 Creates a copy of the color object.
 
@@ -106,6 +115,7 @@ local result = myObject:copy()
 ***
 
 ### `lerp`
+<div class="search_terms" style="display: none">lerp</div>
 
 Calculates the interpolated color between this color and another, given a transition.
 
@@ -127,6 +137,7 @@ local lerpedcolor = myObject:lerp(tocolor, transition)
 ## Functions
 
 ### `new`
+<div class="search_terms" style="display: none">new</div>
 
 Creates a new niColorA.
 

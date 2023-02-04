@@ -10,6 +10,7 @@ Contains the geometry data for an `NiTriShape` object.
 ## Properties
 
 ### `verticies`
+<div class="search_terms" style="display: none">verticies</div>
 
 The access to the three indices of the verticies that make up this triangle (0-indexed).
 

@@ -12,6 +12,7 @@
 ## Properties
 
 ### `collisionRoot`
+<div class="search_terms" style="display: none">collisionroot</div>
 
 *Read-only*. This is the ancestor root node added to the parent niCollisionGroup, whose child is the related `.object`.
 
@@ -22,6 +23,7 @@
 ***
 
 ### `object`
+<div class="search_terms" style="display: none">object</div>
 
 *Read-only*. Access to the actual scene graph object this `niCollisionGroupRecord` represents.
 

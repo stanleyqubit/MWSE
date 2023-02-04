@@ -10,6 +10,7 @@ A simple pair of integers, typically used to define a range.
 ## Properties
 
 ### `max`
+<div class="search_terms" style="display: none">max</div>
 
 The maximum value in the range.
 
@@ -20,6 +21,7 @@ The maximum value in the range.
 ***
 
 ### `min`
+<div class="search_terms" style="display: none">min</div>
 
 The minimum value in the range.
 

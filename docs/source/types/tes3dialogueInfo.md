@@ -11,6 +11,7 @@ This type inherits the following: [tes3baseObject](../../types/tes3baseObject)
 ## Properties
 
 ### `actor`
+<div class="search_terms" style="display: none">actor</div>
 
 *Read-only*. The speaker's actor that the info is filtered for.
 
@@ -21,6 +22,7 @@ This type inherits the following: [tes3baseObject](../../types/tes3baseObject)
 ***
 
 ### `blocked`
+<div class="search_terms" style="display: none">blocked</div>
 
 The blocked state of the object.
 
@@ -31,6 +33,7 @@ The blocked state of the object.
 ***
 
 ### `cell`
+<div class="search_terms" style="display: none">cell</div>
 
 *Read-only*. The speaker's current cell that the info is filtered for.
 
@@ -41,6 +44,7 @@ The blocked state of the object.
 ***
 
 ### `deleted`
+<div class="search_terms" style="display: none">deleted</div>
 
 *Read-only*. The deleted state of the object.
 
@@ -51,6 +55,7 @@ The blocked state of the object.
 ***
 
 ### `disabled`
+<div class="search_terms" style="display: none">disabled</div>
 
 *Read-only*. The disabled state of the object.
 
@@ -61,6 +66,7 @@ The blocked state of the object.
 ***
 
 ### `disposition`
+<div class="search_terms" style="display: none">disposition</div>
 
 The minimum disposition that the info is filtered for. For journal-based dialogues, this is the same as the `journalIndex` property, which should be used instead.
 
@@ -71,6 +77,7 @@ The minimum disposition that the info is filtered for. For journal-based dialogu
 ***
 
 ### `firstHeardFrom`
+<div class="search_terms" style="display: none">firstheardfrom</div>
 
 The actor that the player first heard the info from.
 
@@ -81,6 +88,7 @@ The actor that the player first heard the info from.
 ***
 
 ### `id`
+<div class="search_terms" style="display: none">id</div>
 
 *Read-only*. The unique identifier for the object.
 
@@ -91,6 +99,7 @@ The actor that the player first heard the info from.
 ***
 
 ### `isQuestFinished`
+<div class="search_terms" style="display: none">isquestfinished, questfinished</div>
 
 Quick access to the "quest finished" flag. For dialogues that aren't journal-based, this will be `nil`.
 
@@ -101,6 +110,7 @@ Quick access to the "quest finished" flag. For dialogues that aren't journal-bas
 ***
 
 ### `isQuestName`
+<div class="search_terms" style="display: none">isquestname, questname</div>
 
 Quick access to the "quest name" flag. If this is true, this info contains the name of the quest. For dialogues that aren't journal-based, this will be `nil`.
 
@@ -111,6 +121,7 @@ Quick access to the "quest name" flag. If this is true, this info contains the n
 ***
 
 ### `isQuestRestart`
+<div class="search_terms" style="display: none">isquestrestart, questrestart</div>
 
 Quick access to the "quest restart" flag. For dialogues that aren't journal-based, this will be `nil`.
 
@@ -121,6 +132,7 @@ Quick access to the "quest restart" flag. For dialogues that aren't journal-base
 ***
 
 ### `journalIndex`
+<div class="search_terms" style="display: none">journalindex</div>
 
 The current index for the quest. For dialogues that aren't journal-based, this will be `nil`.
 
@@ -131,6 +143,7 @@ The current index for the quest. For dialogues that aren't journal-based, this w
 ***
 
 ### `modified`
+<div class="search_terms" style="display: none">modified, ified</div>
 
 The modification state of the object since the last save.
 
@@ -141,6 +154,7 @@ The modification state of the object since the last save.
 ***
 
 ### `npcClass`
+<div class="search_terms" style="display: none">npcclass</div>
 
 *Read-only*. The speaker's class that the info is filtered for.
 
@@ -151,6 +165,7 @@ The modification state of the object since the last save.
 ***
 
 ### `npcFaction`
+<div class="search_terms" style="display: none">npcfaction</div>
 
 *Read-only*. The speaker's faction that the info is filtered for.
 
@@ -161,6 +176,7 @@ The modification state of the object since the last save.
 ***
 
 ### `npcRace`
+<div class="search_terms" style="display: none">npcrace</div>
 
 *Read-only*. The speaker's race that the info is filtered for.
 
@@ -171,6 +187,7 @@ The modification state of the object since the last save.
 ***
 
 ### `npcRank`
+<div class="search_terms" style="display: none">npcrank</div>
 
 *Read-only*. The speaker's faction rank that the info is filtered for.
 
@@ -181,6 +198,7 @@ The modification state of the object since the last save.
 ***
 
 ### `npcSex`
+<div class="search_terms" style="display: none">npcsex</div>
 
 *Read-only*. The speaker's sex that the info is filtered for.
 
@@ -191,6 +209,7 @@ The modification state of the object since the last save.
 ***
 
 ### `objectFlags`
+<div class="search_terms" style="display: none">objectflags</div>
 
 *Read-only*. The raw flags of the object.
 
@@ -201,6 +220,7 @@ The modification state of the object since the last save.
 ***
 
 ### `objectType`
+<div class="search_terms" style="display: none">objecttype</div>
 
 *Read-only*. The type of object. Maps to values in [`tes3.objectType`](https://mwse.github.io/MWSE/references/object-types/).
 
@@ -211,6 +231,7 @@ The modification state of the object since the last save.
 ***
 
 ### `pcFaction`
+<div class="search_terms" style="display: none">pcfaction</div>
 
 *Read-only*. The player's joined faction that the info is filtered for.
 
@@ -221,6 +242,7 @@ The modification state of the object since the last save.
 ***
 
 ### `pcRank`
+<div class="search_terms" style="display: none">pcrank</div>
 
 *Read-only*. The player's rank required rank in the speaker's faction.
 
@@ -231,6 +253,7 @@ The modification state of the object since the last save.
 ***
 
 ### `persistent`
+<div class="search_terms" style="display: none">persistent</div>
 
 The persistent flag of the object.
 
@@ -241,6 +264,7 @@ The persistent flag of the object.
 ***
 
 ### `sourceless`
+<div class="search_terms" style="display: none">sourceless</div>
 
 The soruceless flag of the object.
 
@@ -251,6 +275,7 @@ The soruceless flag of the object.
 ***
 
 ### `sourceMod`
+<div class="search_terms" style="display: none">sourcemod</div>
 
 *Read-only*. The filename (including the extension) of the mod that owns this object. It has `nil` value if the object was anything other than loaded from an ESP or ESM file.
 
@@ -261,6 +286,7 @@ The soruceless flag of the object.
 ***
 
 ### `supportsLuaData`
+<div class="search_terms" style="display: none">supportsluadata</div>
 
 If true, references of this object can store temporary or persistent lua data.
 
@@ -271,6 +297,7 @@ If true, references of this object can store temporary or persistent lua data.
 ***
 
 ### `text`
+<div class="search_terms" style="display: none">text</div>
 
 *Read-only*. String contents for the info. This is not kept in memory, and must be loaded from files for each call.
 
@@ -281,6 +308,7 @@ If true, references of this object can store temporary or persistent lua data.
 ***
 
 ### `type`
+<div class="search_terms" style="display: none">type</div>
 
 *Read-only*. The type of the info. Maps to values in [`tes3.dialogueType`](https://mwse.github.io/MWSE/references/dialogue-types/) namespace.
 
@@ -293,6 +321,7 @@ If true, references of this object can store temporary or persistent lua data.
 ## Methods
 
 ### `__tojson`
+<div class="search_terms" style="display: none">__tojson</div>
 
 Serializes the object to json.
 
@@ -307,6 +336,7 @@ local string = myObject:__tojson()
 ***
 
 ### `filter`
+<div class="search_terms" style="display: none">filter</div>
 
 This method filters the associated dialogue info for given arguments and returns true if the dialogue info filtering passes. This method rises [`infoFilter`](https://mwse.github.io/MWSE/events/infoFilter/) event.
 
@@ -328,6 +358,7 @@ local result = myObject:filter(actor, reference, source, dialogue)
 ***
 
 ### `findDialogue`
+<div class="search_terms" style="display: none">finddialogue, dialogue</div>
 
 This method searches for the dialogue that this info belongs to.
 
@@ -342,6 +373,7 @@ local dialogue = myObject:findDialogue()
 ***
 
 ### `runScript`
+<div class="search_terms" style="display: none">runscript</div>
 
 This method runs the dialogue info's associated script on a given reference.
 

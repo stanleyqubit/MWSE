@@ -10,6 +10,7 @@ Loaded data from a BSA file.
 ## Properties
 
 ### `fileCount`
+<div class="search_terms" style="display: none">filecount</div>
 
 *Read-only*. The number of file entries in the BSA.
 
@@ -20,6 +21,7 @@ Loaded data from a BSA file.
 ***
 
 ### `nextArchive`
+<div class="search_terms" style="display: none">nextarchive</div>
 
 *Read-only*. The next archive to access after this one.
 
@@ -30,6 +32,7 @@ Loaded data from a BSA file.
 ***
 
 ### `offsetToFileNameHashes`
+<div class="search_terms" style="display: none">offsettofilenamehashes</div>
 
 *Read-only*. The offset in the BSA file where file name hashes can be found.
 
@@ -40,6 +43,7 @@ Loaded data from a BSA file.
 ***
 
 ### `path`
+<div class="search_terms" style="display: none">path</div>
 
 *Read-only*. The full path to the BSA, relative to the Morrowind installation directory.
 
@@ -50,6 +54,7 @@ Loaded data from a BSA file.
 ***
 
 ### `sizesAndOffsets`
+<div class="search_terms" style="display: none">sizesandoffsets</div>
 
 *Read-only*. An array of sizes and offsets for entries in the archive.
 
@@ -62,6 +67,7 @@ Loaded data from a BSA file.
 ## Methods
 
 ### `findFileIndex`
+<div class="search_terms" style="display: none">findfileindex, fileindex</div>
 
 Searches for a file in the archive, and returns the index that it can be found in.
 

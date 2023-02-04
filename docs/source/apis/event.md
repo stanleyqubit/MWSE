@@ -10,6 +10,7 @@ The event library helps to instruct mwse to call a given function when a specifi
 ## Functions
 
 ### `event.clear`
+<div class="search_terms" style="display: none">clear</div>
 
 Removes all callbacks registered for a given event.
 
@@ -25,6 +26,7 @@ event.clear(eventId, filter)
 ***
 
 ### `event.isRegistered`
+<div class="search_terms" style="display: none">isregistered, registered</div>
 
 Returns true for a function previously registered to an event with `event.register()`.
 
@@ -46,6 +48,7 @@ local result = event.isRegistered(eventId, callback, { filter = ... })
 ***
 
 ### `event.register`
+<div class="search_terms" style="display: none">register</div>
 
 Registers a function to be called when an event is raised.
 
@@ -65,6 +68,7 @@ event.register(eventId, callback, { doOnce = ..., filter = ..., priority = ... }
 ***
 
 ### `event.trigger`
+<div class="search_terms" style="display: none">trigger</div>
 
 Triggers an event. This can be used to trigger custom events with specific data.
 
@@ -86,6 +90,7 @@ local resultPayload = event.trigger(eventId, payload, { filter = ... })
 ***
 
 ### `event.unregister`
+<div class="search_terms" style="display: none">unregister</div>
 
 Unregisters a function previously registered for an event with `event.register()`.
 

@@ -10,6 +10,7 @@ A structure that holds (sometimes redundant) information on a soul gem.
 ## Properties
 
 ### `capacity`
+<div class="search_terms" style="display: none">capacity</div>
 
 *Read-only*. The capacity of the soul gem.
 
@@ -20,6 +21,7 @@ A structure that holds (sometimes redundant) information on a soul gem.
 ***
 
 ### `id`
+<div class="search_terms" style="display: none">id</div>
 
 *Read-only*. The unique object ID.
 
@@ -30,6 +32,7 @@ A structure that holds (sometimes redundant) information on a soul gem.
 ***
 
 ### `item`
+<div class="search_terms" style="display: none">item</div>
 
 *Read-only*. A reference back to the misc item that the soul gem represents.
 
@@ -40,6 +43,7 @@ A structure that holds (sometimes redundant) information on a soul gem.
 ***
 
 ### `mesh`
+<div class="search_terms" style="display: none">mesh</div>
 
 *Read-only*. The path to the object's mesh.
 
@@ -50,6 +54,7 @@ A structure that holds (sometimes redundant) information on a soul gem.
 ***
 
 ### `name`
+<div class="search_terms" style="display: none">name</div>
 
 *Read-only*. The player-facing name for the object.
 
@@ -60,6 +65,7 @@ A structure that holds (sometimes redundant) information on a soul gem.
 ***
 
 ### `texture`
+<div class="search_terms" style="display: none">texture</div>
 
 *Read-only*. The path to the object's texture.
 
@@ -70,6 +76,7 @@ A structure that holds (sometimes redundant) information on a soul gem.
 ***
 
 ### `value`
+<div class="search_terms" style="display: none">value</div>
 
 *Read-only*. The value of the object.
 
@@ -80,6 +87,7 @@ A structure that holds (sometimes redundant) information on a soul gem.
 ***
 
 ### `weight`
+<div class="search_terms" style="display: none">weight</div>
 
 *Read-only*. The weight of the object.
 

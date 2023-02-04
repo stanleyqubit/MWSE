@@ -10,6 +10,7 @@ A structure that defines information for an effect and its associated variables,
 ## Properties
 
 ### `attribute`
+<div class="search_terms" style="display: none">attribute</div>
 
 The attribute associated with this effect, or `nil` if no attribute is used. Maps to values from [`tes3.attribute`](https://mwse.github.io/MWSE/references/attributes/) table.
 
@@ -20,6 +21,7 @@ The attribute associated with this effect, or `nil` if no attribute is used. Map
 ***
 
 ### `cost`
+<div class="search_terms" style="display: none">cost</div>
 
 The base magicka cost of this effect.
 
@@ -30,6 +32,7 @@ The base magicka cost of this effect.
 ***
 
 ### `duration`
+<div class="search_terms" style="display: none">duration</div>
 
 How long the effect should last.
 
@@ -40,6 +43,7 @@ How long the effect should last.
 ***
 
 ### `id`
+<div class="search_terms" style="display: none">id</div>
 
 The base `tes3magicEffect` ID that the effect uses. Maps to values from [`tes3.effect`](https://mwse.github.io/MWSE/references/magic-effects/) table.
 
@@ -50,6 +54,7 @@ The base `tes3magicEffect` ID that the effect uses. Maps to values from [`tes3.e
 ***
 
 ### `max`
+<div class="search_terms" style="display: none">max</div>
 
 The maximum magnitude of the effect.
 
@@ -60,6 +65,7 @@ The maximum magnitude of the effect.
 ***
 
 ### `min`
+<div class="search_terms" style="display: none">min</div>
 
 The minimum magnitude of the effect.
 
@@ -70,6 +76,7 @@ The minimum magnitude of the effect.
 ***
 
 ### `object`
+<div class="search_terms" style="display: none">object</div>
 
 *Read-only*. Fetches the `tes3magicEffect` for the given id used.
 
@@ -80,6 +87,7 @@ The minimum magnitude of the effect.
 ***
 
 ### `radius`
+<div class="search_terms" style="display: none">radius</div>
 
 The radius of the effect.
 
@@ -90,6 +98,7 @@ The radius of the effect.
 ***
 
 ### `rangeType`
+<div class="search_terms" style="display: none">rangetype</div>
 
 Determines if the effect is self, touch, or target ranged. Maps to [`tes3.effectRange`](https://mwse.github.io/MWSE/references/effect-ranges/) constants.
 
@@ -100,6 +109,7 @@ Determines if the effect is self, touch, or target ranged. Maps to [`tes3.effect
 ***
 
 ### `skill`
+<div class="search_terms" style="display: none">skill</div>
 
 The skill associated with this effect, or `nil` if no skill is used. Maps to values from [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) table.
 

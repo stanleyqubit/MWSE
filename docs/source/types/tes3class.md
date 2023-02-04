@@ -11,6 +11,7 @@ This type inherits the following: [tes3baseObject](../../types/tes3baseObject)
 ## Properties
 
 ### `attributes`
+<div class="search_terms" style="display: none">attributes</div>
 
 *Read-only*. An array-style table of the two attribute IDs associated with the class. Maps to values in [`tes3.attribute`](https://mwse.github.io/MWSE/references/attributes/) namespace.
 
@@ -21,6 +22,7 @@ This type inherits the following: [tes3baseObject](../../types/tes3baseObject)
 ***
 
 ### `bartersAlchemy`
+<div class="search_terms" style="display: none">bartersalchemy</div>
 
 If true, the class will barter alchemy items.
 
@@ -31,6 +33,7 @@ If true, the class will barter alchemy items.
 ***
 
 ### `bartersApparatus`
+<div class="search_terms" style="display: none">bartersapparatus</div>
 
 If true, the class will barter apparatus items.
 
@@ -41,6 +44,7 @@ If true, the class will barter apparatus items.
 ***
 
 ### `bartersArmor`
+<div class="search_terms" style="display: none">bartersarmor</div>
 
 If true, the class will barter armor items.
 
@@ -51,6 +55,7 @@ If true, the class will barter armor items.
 ***
 
 ### `bartersBooks`
+<div class="search_terms" style="display: none">bartersbooks</div>
 
 If true, the class will barter book items.
 
@@ -61,6 +66,7 @@ If true, the class will barter book items.
 ***
 
 ### `bartersClothing`
+<div class="search_terms" style="display: none">bartersclothing</div>
 
 If true, the class will barter clothing items.
 
@@ -71,6 +77,7 @@ If true, the class will barter clothing items.
 ***
 
 ### `bartersEnchantedItems`
+<div class="search_terms" style="display: none">bartersenchanteditems</div>
 
 If true, the class will barter enchanted items.
 
@@ -81,6 +88,7 @@ If true, the class will barter enchanted items.
 ***
 
 ### `bartersIngredients`
+<div class="search_terms" style="display: none">bartersingredients</div>
 
 If true, the class will barter ingredient items.
 
@@ -91,6 +99,7 @@ If true, the class will barter ingredient items.
 ***
 
 ### `bartersLights`
+<div class="search_terms" style="display: none">barterslights</div>
 
 If true, the class will barter light items.
 
@@ -101,6 +110,7 @@ If true, the class will barter light items.
 ***
 
 ### `bartersLockpicks`
+<div class="search_terms" style="display: none">barterslockpicks</div>
 
 If true, the class will barter lockpick items.
 
@@ -111,6 +121,7 @@ If true, the class will barter lockpick items.
 ***
 
 ### `bartersMiscItems`
+<div class="search_terms" style="display: none">bartersmiscitems</div>
 
 If true, the class will barter misc items.
 
@@ -121,6 +132,7 @@ If true, the class will barter misc items.
 ***
 
 ### `bartersProbes`
+<div class="search_terms" style="display: none">bartersprobes</div>
 
 If true, the class will barter probe items.
 
@@ -131,6 +143,7 @@ If true, the class will barter probe items.
 ***
 
 ### `bartersRepairTools`
+<div class="search_terms" style="display: none">bartersrepairtools</div>
 
 If true, the class will barter repair items.
 
@@ -141,6 +154,7 @@ If true, the class will barter repair items.
 ***
 
 ### `bartersWeapons`
+<div class="search_terms" style="display: none">bartersweapons</div>
 
 If true, the class will barter weapon items.
 
@@ -151,6 +165,7 @@ If true, the class will barter weapon items.
 ***
 
 ### `blocked`
+<div class="search_terms" style="display: none">blocked</div>
 
 The blocked state of the object.
 
@@ -161,6 +176,7 @@ The blocked state of the object.
 ***
 
 ### `deleted`
+<div class="search_terms" style="display: none">deleted</div>
 
 *Read-only*. The deleted state of the object.
 
@@ -171,6 +187,7 @@ The blocked state of the object.
 ***
 
 ### `description`
+<div class="search_terms" style="display: none">description</div>
 
 Loads from disk and returns the description of the class.
 
@@ -181,6 +198,7 @@ Loads from disk and returns the description of the class.
 ***
 
 ### `disabled`
+<div class="search_terms" style="display: none">disabled</div>
 
 *Read-only*. The disabled state of the object.
 
@@ -191,6 +209,7 @@ Loads from disk and returns the description of the class.
 ***
 
 ### `id`
+<div class="search_terms" style="display: none">id</div>
 
 *Read-only*. The unique identifier for the object.
 
@@ -201,6 +220,7 @@ Loads from disk and returns the description of the class.
 ***
 
 ### `image`
+<div class="search_terms" style="display: none">image</div>
 
 The path used for the class selection/level up menus, where appropriate. Custom classes may not have their images shown in the level up menu.
 
@@ -211,6 +231,7 @@ The path used for the class selection/level up menus, where appropriate. Custom 
 ***
 
 ### `majorSkills`
+<div class="search_terms" style="display: none">majorskills</div>
 
 *Read-only*. An array-style table of the 5 skills IDs associated with the class' major skills. Maps to values in [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) namespace.
 
@@ -221,6 +242,7 @@ The path used for the class selection/level up menus, where appropriate. Custom 
 ***
 
 ### `minorSkills`
+<div class="search_terms" style="display: none">minorskills</div>
 
 *Read-only*. An array-style table of the 5 skills IDs associated with the class' minor skills. Maps to values in [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) namespace.
 
@@ -231,6 +253,7 @@ The path used for the class selection/level up menus, where appropriate. Custom 
 ***
 
 ### `modified`
+<div class="search_terms" style="display: none">modified, ified</div>
 
 The modification state of the object since the last save.
 
@@ -241,6 +264,7 @@ The modification state of the object since the last save.
 ***
 
 ### `name`
+<div class="search_terms" style="display: none">name</div>
 
 The player-facing name for the object.
 
@@ -251,6 +275,7 @@ The player-facing name for the object.
 ***
 
 ### `objectFlags`
+<div class="search_terms" style="display: none">objectflags</div>
 
 *Read-only*. The raw flags of the object.
 
@@ -261,6 +286,7 @@ The player-facing name for the object.
 ***
 
 ### `objectType`
+<div class="search_terms" style="display: none">objecttype</div>
 
 *Read-only*. The type of object. Maps to values in [`tes3.objectType`](https://mwse.github.io/MWSE/references/object-types/).
 
@@ -271,6 +297,7 @@ The player-facing name for the object.
 ***
 
 ### `offersEnchanting`
+<div class="search_terms" style="display: none">offersenchanting</div>
 
 If true, the class will offer repair services.
 
@@ -281,6 +308,7 @@ If true, the class will offer repair services.
 ***
 
 ### `offersRepairs`
+<div class="search_terms" style="display: none">offersrepairs</div>
 
 If true, the class will offer enchanting services.
 
@@ -291,6 +319,7 @@ If true, the class will offer enchanting services.
 ***
 
 ### `offersSpellmaking`
+<div class="search_terms" style="display: none">offersspellmaking</div>
 
 If true, the class will offer spellmaking services.
 
@@ -301,6 +330,7 @@ If true, the class will offer spellmaking services.
 ***
 
 ### `offersSpells`
+<div class="search_terms" style="display: none">offersspells</div>
 
 If true, the class will offer spell selling services.
 
@@ -311,6 +341,7 @@ If true, the class will offer spell selling services.
 ***
 
 ### `offersTraining`
+<div class="search_terms" style="display: none">offerstraining</div>
 
 If true, the class will offer training services.
 
@@ -321,6 +352,7 @@ If true, the class will offer training services.
 ***
 
 ### `persistent`
+<div class="search_terms" style="display: none">persistent</div>
 
 The persistent flag of the object.
 
@@ -331,6 +363,7 @@ The persistent flag of the object.
 ***
 
 ### `playable`
+<div class="search_terms" style="display: none">playable</div>
 
 If true, the class is selectable at character generation.
 
@@ -341,6 +374,7 @@ If true, the class is selectable at character generation.
 ***
 
 ### `services`
+<div class="search_terms" style="display: none">services</div>
 
 The services offered by the class. This is a bit field, and its values should typically be accessed through values such as `bartersAlchemy`.
 
@@ -351,6 +385,7 @@ The services offered by the class. This is a bit field, and its values should ty
 ***
 
 ### `skills`
+<div class="search_terms" style="display: none">skills</div>
 
 *Read-only*. An array-style table of the 10 skills IDs associated with the class. For major or minor skills specifically, use the `majorSkills` and `minorSkills` properties. Maps to values in [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) namespace.
 
@@ -361,6 +396,7 @@ The services offered by the class. This is a bit field, and its values should ty
 ***
 
 ### `sourceless`
+<div class="search_terms" style="display: none">sourceless</div>
 
 The soruceless flag of the object.
 
@@ -371,6 +407,7 @@ The soruceless flag of the object.
 ***
 
 ### `sourceMod`
+<div class="search_terms" style="display: none">sourcemod</div>
 
 *Read-only*. The filename (including the extension) of the mod that owns this object. It has `nil` value if the object was anything other than loaded from an ESP or ESM file.
 
@@ -381,6 +418,7 @@ The soruceless flag of the object.
 ***
 
 ### `specialization`
+<div class="search_terms" style="display: none">specialization</div>
 
 The specialization for the class. Maps to values in the [`tes3.specialization`](https://mwse.github.io/MWSE/references/specializations/) table.
 
@@ -391,6 +429,7 @@ The specialization for the class. Maps to values in the [`tes3.specialization`](
 ***
 
 ### `supportsLuaData`
+<div class="search_terms" style="display: none">supportsluadata</div>
 
 If true, references of this object can store temporary or persistent lua data.
 
@@ -403,6 +442,7 @@ If true, references of this object can store temporary or persistent lua data.
 ## Methods
 
 ### `__tojson`
+<div class="search_terms" style="display: none">__tojson</div>
 
 Serializes the object to json.
 

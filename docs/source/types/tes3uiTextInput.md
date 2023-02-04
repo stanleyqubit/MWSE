@@ -11,6 +11,7 @@ This type inherits the following: [tes3uiWidget](../../types/tes3uiWidget)
 ## Properties
 
 ### `element`
+<div class="search_terms" style="display: none">element</div>
 
 Access back to the element this widget interface is for.
 
@@ -21,6 +22,7 @@ Access back to the element this widget interface is for.
 ***
 
 ### `eraseOnFirstKey`
+<div class="search_terms" style="display: none">eraseonfirstkey</div>
 
 *Default*: `true`. If `true`, clears the initial value if the first keypress is not an edit action.
 
@@ -31,6 +33,7 @@ Access back to the element this widget interface is for.
 ***
 
 ### `lengthLimit`
+<div class="search_terms" style="display: none">lengthlimit</div>
 
 The character limit. Inputting additional characters will not be possible if this limit has been reached. Setting this to `nil` will remove the limit.
 

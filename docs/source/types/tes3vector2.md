@@ -10,6 +10,7 @@ A simple pair of floating-point numbers.
 ## Properties
 
 ### `x`
+<div class="search_terms" style="display: none">x</div>
 
 The first value in the vector.
 
@@ -20,6 +21,7 @@ The first value in the vector.
 ***
 
 ### `y`
+<div class="search_terms" style="display: none">y</div>
 
 The second value in the vector.
 
@@ -32,6 +34,7 @@ The second value in the vector.
 ## Methods
 
 ### `copy`
+<div class="search_terms" style="display: none">copy</div>
 
 Creates a copy of the vector.
 
@@ -46,6 +49,7 @@ local result = myObject:copy()
 ***
 
 ### `length`
+<div class="search_terms" style="display: none">length</div>
 
 Calculates the length of the vector.
 
@@ -60,6 +64,7 @@ local result = myObject:length()
 ***
 
 ### `normalize`
+<div class="search_terms" style="display: none">normalize</div>
 
 Normalize the vector in-place, or set its components to zero if normalization is not possible. Returns `true` if the vector was successfully normalized.
 
@@ -74,6 +79,7 @@ local result = myObject:normalize()
 ***
 
 ### `normalized`
+<div class="search_terms" style="display: none">normalized</div>
 
 Get a normalized copy of the vector.
 
@@ -90,6 +96,7 @@ local result = myObject:normalized()
 ## Functions
 
 ### `new`
+<div class="search_terms" style="display: none">new</div>
 
 Creates a new vector. If no parameters are provided, an empty set will be constructed.
 

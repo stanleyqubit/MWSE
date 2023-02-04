@@ -10,6 +10,7 @@ A controller for audio. It holds data on the status of the current and next musi
 ## Properties
 
 ### `currentMusicFilePath`
+<div class="search_terms" style="display: none">currentmusicfilepath</div>
 
 File path of the currently playing music track. The path can not be longer than 260 characters.
 
@@ -20,6 +21,7 @@ File path of the currently playing music track. The path can not be longer than 
 ***
 
 ### `disableAudio`
+<div class="search_terms" style="display: none">disableaudio, audio</div>
 
 A flag which controls whether the audio is disabled or not.
 
@@ -30,6 +32,7 @@ A flag which controls whether the audio is disabled or not.
 ***
 
 ### `listenerPosition`
+<div class="search_terms" style="display: none">listenerposition</div>
 
 The sound listener position.
 
@@ -40,6 +43,7 @@ The sound listener position.
 ***
 
 ### `musicDuration`
+<div class="search_terms" style="display: none">musicduration</div>
 
 *Read-only*. The duration of the currently playing music track.
 
@@ -50,6 +54,7 @@ The sound listener position.
 ***
 
 ### `musicFadeBeginTimestamp`
+<div class="search_terms" style="display: none">musicfadebegintimestamp</div>
 
 The timestamp at which currently playing music track started fading in. So, it's a timestamp at which currently playing music track started.
 
@@ -60,6 +65,7 @@ The timestamp at which currently playing music track started fading in. So, it's
 ***
 
 ### `musicNextTrackStartTimestamp`
+<div class="search_terms" style="display: none">musicnexttrackstarttimestamp</div>
 
 
 
@@ -70,6 +76,7 @@ The timestamp at which currently playing music track started fading in. So, it's
 ***
 
 ### `musicNextTrackVolume`
+<div class="search_terms" style="display: none">musicnexttrackvolume</div>
 
 The volume of the next track.
 
@@ -80,6 +87,7 @@ The volume of the next track.
 ***
 
 ### `musicPosition`
+<div class="search_terms" style="display: none">musicposition</div>
 
 Current play time for currently playing music track.
 
@@ -90,6 +98,7 @@ Current play time for currently playing music track.
 ***
 
 ### `nextMusicFilePath`
+<div class="search_terms" style="display: none">nextmusicfilepath</div>
 
 File path of the music track which is to be played next. The path can not be longer than 260 characters.
 
@@ -100,6 +109,7 @@ File path of the music track which is to be played next. The path can not be lon
 ***
 
 ### `pitchAxis`
+<div class="search_terms" style="display: none">pitchaxis</div>
 
 Approximated pitch axis in radians.
 
@@ -110,6 +120,7 @@ Approximated pitch axis in radians.
 ***
 
 ### `volumeEffects`
+<div class="search_terms" style="display: none">volumeeffects</div>
 
 Volume of the effects. Corresponds to the effects volume slider in Audio settings.
 
@@ -120,6 +131,7 @@ Volume of the effects. Corresponds to the effects volume slider in Audio setting
 ***
 
 ### `volumeFootsteps`
+<div class="search_terms" style="display: none">volumefootsteps</div>
 
 Volume of the footsteps. Corresponds to the footsteps volume slider in Audio settings.
 
@@ -130,6 +142,7 @@ Volume of the footsteps. Corresponds to the footsteps volume slider in Audio set
 ***
 
 ### `volumeMaster`
+<div class="search_terms" style="display: none">volumemaster</div>
 
 Master volume. Corresponds to the master volume slider in Audio settings.
 
@@ -140,6 +153,7 @@ Master volume. Corresponds to the master volume slider in Audio settings.
 ***
 
 ### `volumeMusic`
+<div class="search_terms" style="display: none">volumemusic</div>
 
 Volume of the music. Corresponds to the music volume slider in Audio settings.
 
@@ -150,6 +164,7 @@ Volume of the music. Corresponds to the music volume slider in Audio settings.
 ***
 
 ### `volumeVoice`
+<div class="search_terms" style="display: none">volumevoice</div>
 
 Volume of the voices. Corresponds to the voice volume slider in Audio settings.
 
@@ -160,6 +175,7 @@ Volume of the voices. Corresponds to the voice volume slider in Audio settings.
 ***
 
 ### `yawAxis`
+<div class="search_terms" style="display: none">yawaxis</div>
 
 Approximated yaw axis in radians.
 
@@ -172,6 +188,7 @@ Approximated yaw axis in radians.
 ## Methods
 
 ### `changeMusicTrack`
+<div class="search_terms" style="display: none">changemusictrack</div>
 
 Changes currently playing music track according to provided parameters.
 
@@ -189,6 +206,7 @@ myObject:changeMusicTrack({ filename = ..., crossfade = ..., volume = ... })
 ***
 
 ### `getMixVolume`
+<div class="search_terms" style="display: none">getmixvolume, mixvolume</div>
 
 Final volume of a provided type of audio, after master volume and its own volume adjustments. Music volume is an exception since it isn't affected by master volume.
 

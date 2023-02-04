@@ -11,6 +11,7 @@ This type inherits the following: [tes3uiWidget](../../types/tes3uiWidget)
 ## Properties
 
 ### `current`
+<div class="search_terms" style="display: none">current</div>
 
 The current value. The position of the slider handle is determined by dividing `current` by `max`.
 
@@ -21,6 +22,7 @@ The current value. The position of the slider handle is determined by dividing `
 ***
 
 ### `element`
+<div class="search_terms" style="display: none">element</div>
 
 Access back to the element this widget interface is for.
 
@@ -31,6 +33,7 @@ Access back to the element this widget interface is for.
 ***
 
 ### `jump`
+<div class="search_terms" style="display: none">jump</div>
 
 The change in value when clicking into the empty areas next to the slider handle.
 
@@ -41,6 +44,7 @@ The change in value when clicking into the empty areas next to the slider handle
 ***
 
 ### `max`
+<div class="search_terms" style="display: none">max</div>
 
 The maximum value. The position of the slider handle is determined by dividing `current` by `max`.
 
@@ -51,6 +55,7 @@ The maximum value. The position of the slider handle is determined by dividing `
 ***
 
 ### `step`
+<div class="search_terms" style="display: none">step</div>
 
 The change in value when clicking the left and right arrow buttons.
 

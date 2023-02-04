@@ -10,6 +10,7 @@ Data for a recharging item. Not necessarily an item owned by the player.
 ## Properties
 
 ### `enchantment`
+<div class="search_terms" style="display: none">enchantment</div>
 
 *Read-only*. The enchantment of the recharging item.
 
@@ -20,6 +21,7 @@ Data for a recharging item. Not necessarily an item owned by the player.
 ***
 
 ### `itemData`
+<div class="search_terms" style="display: none">itemdata</div>
 
 *Read-only*. The specific item data being recharged.
 
@@ -30,6 +32,7 @@ Data for a recharging item. Not necessarily an item owned by the player.
 ***
 
 ### `object`
+<div class="search_terms" style="display: none">object</div>
 
 *Read-only*. The item being recharged.
 

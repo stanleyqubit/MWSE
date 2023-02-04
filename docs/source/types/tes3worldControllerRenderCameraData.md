@@ -10,6 +10,7 @@ A core game object used for storing additional data for camera objects.
 ## Properties
 
 ### `camera`
+<div class="search_terms" style="display: none">camera</div>
 
 The camera scene node.
 
@@ -20,6 +21,7 @@ The camera scene node.
 ***
 
 ### `farPlaneDistance`
+<div class="search_terms" style="display: none">farplanedistance</div>
 
 The distance of the camera's far plane.
 
@@ -30,6 +32,7 @@ The distance of the camera's far plane.
 ***
 
 ### `fov`
+<div class="search_terms" style="display: none">fov</div>
 
 The camera's Field of View.
 
@@ -40,6 +43,7 @@ The camera's Field of View.
 ***
 
 ### `nearPlaneDistance`
+<div class="search_terms" style="display: none">nearplanedistance</div>
 
 The distance of the camera's near plane.
 
@@ -50,6 +54,7 @@ The distance of the camera's near plane.
 ***
 
 ### `viewportHeight`
+<div class="search_terms" style="display: none">viewportheight</div>
 
 The viewport height.
 
@@ -60,6 +65,7 @@ The viewport height.
 ***
 
 ### `viewportWidth`
+<div class="search_terms" style="display: none">viewportwidth</div>
 
 The viewport width.
 

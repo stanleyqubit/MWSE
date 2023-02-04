@@ -10,6 +10,7 @@ A densely packed structure for single-byte red, green, blue and alpha values. Th
 ## Properties
 
 ### `a`
+<div class="search_terms" style="display: none">a</div>
 
 The alpha color value.
 
@@ -20,6 +21,7 @@ The alpha color value.
 ***
 
 ### `alpha`
+<div class="search_terms" style="display: none">alpha</div>
 
 The alpha color value. Another alias for a.
 
@@ -30,6 +32,7 @@ The alpha color value. Another alias for a.
 ***
 
 ### `b`
+<div class="search_terms" style="display: none">b</div>
 
 The blue color value.
 
@@ -40,6 +43,7 @@ The blue color value.
 ***
 
 ### `blue`
+<div class="search_terms" style="display: none">blue</div>
 
 The blue color value. Another alias for b.
 
@@ -50,6 +54,7 @@ The blue color value. Another alias for b.
 ***
 
 ### `g`
+<div class="search_terms" style="display: none">g</div>
 
 The green color value.
 
@@ -60,6 +65,7 @@ The green color value.
 ***
 
 ### `green`
+<div class="search_terms" style="display: none">green</div>
 
 The green color value. Another alias for g.
 
@@ -70,6 +76,7 @@ The green color value. Another alias for g.
 ***
 
 ### `r`
+<div class="search_terms" style="display: none">r</div>
 
 The red color value.
 
@@ -80,6 +87,7 @@ The red color value.
 ***
 
 ### `red`
+<div class="search_terms" style="display: none">red</div>
 
 The red color value. Another alias for r.
 

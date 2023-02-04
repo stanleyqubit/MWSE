@@ -10,6 +10,7 @@ Allows control of MGE distant land features.
 ## Properties
 
 ### `aboveWaterFogEnd`
+<div class="search_terms" style="display: none">abovewaterfogend</div>
 
 The above water fog end distance, in cells.
 
@@ -20,6 +21,7 @@ The above water fog end distance, in cells.
 ***
 
 ### `aboveWaterFogStart`
+<div class="search_terms" style="display: none">abovewaterfogstart</div>
 
 The above water fog start distance, in cells.
 
@@ -30,6 +32,7 @@ The above water fog start distance, in cells.
 ***
 
 ### `belowWaterFogEnd`
+<div class="search_terms" style="display: none">belowwaterfogend</div>
 
 The below water fog end distance, in cells.
 
@@ -40,6 +43,7 @@ The below water fog end distance, in cells.
 ***
 
 ### `belowWaterFogStart`
+<div class="search_terms" style="display: none">belowwaterfogstart</div>
 
 The below water fog start distance, in cells.
 
@@ -50,6 +54,7 @@ The below water fog start distance, in cells.
 ***
 
 ### `drawDistance`
+<div class="search_terms" style="display: none">drawdistance</div>
 
 The draw distance, in cells.
 
@@ -60,6 +65,7 @@ The draw distance, in cells.
 ***
 
 ### `farStaticEnd`
+<div class="search_terms" style="display: none">farstaticend</div>
 
 The maximum distance that 'far' statics will be visible, in cells.
 
@@ -70,6 +76,7 @@ The maximum distance that 'far' statics will be visible, in cells.
 ***
 
 ### `farStaticMinSize`
+<div class="search_terms" style="display: none">farstaticminsize</div>
 
 Distant objects which are at least this size (and are smaller than veryFarStaticMinSize) are classified as 'far' statics. Smaller objects are classified as 'near' statics. This cannot be updated during gameplay. The game must be restarted to see changes.
 
@@ -80,6 +87,7 @@ Distant objects which are at least this size (and are smaller than veryFarStatic
 ***
 
 ### `fogDistance`
+<div class="search_terms" style="display: none">fogdistance</div>
 
 An array containing the fog distance multiplier for each weather.
 
@@ -90,6 +98,7 @@ An array containing the fog distance multiplier for each weather.
 ***
 
 ### `fogOffsetPercent`
+<div class="search_terms" style="display: none">fogoffsetpercent</div>
 
 An array containing the fog offset % for each weather.
 
@@ -100,6 +109,7 @@ An array containing the fog offset % for each weather.
 ***
 
 ### `interiorFogEnd`
+<div class="search_terms" style="display: none">interiorfogend</div>
 
 The interior fog end distance, in cells.
 
@@ -110,6 +120,7 @@ The interior fog end distance, in cells.
 ***
 
 ### `interiorFogStart`
+<div class="search_terms" style="display: none">interiorfogstart</div>
 
 The interior fog start distance, in cells.
 
@@ -120,6 +131,7 @@ The interior fog start distance, in cells.
 ***
 
 ### `nearStaticEnd`
+<div class="search_terms" style="display: none">nearstaticend</div>
 
 The maximum distance that 'near' statics will be visible, in cells.
 
@@ -130,6 +142,7 @@ The maximum distance that 'near' statics will be visible, in cells.
 ***
 
 ### `veryFarStaticEnd`
+<div class="search_terms" style="display: none">veryfarstaticend</div>
 
 The maximum distance that 'very far' statics will be visible, in cells.
 
@@ -140,6 +153,7 @@ The maximum distance that 'very far' statics will be visible, in cells.
 ***
 
 ### `veryFarStaticMinSize`
+<div class="search_terms" style="display: none">veryfarstaticminsize</div>
 
 Distant objects which are at least this size are classified as 'very far' statics. This cannot be updated during gameplay. The game must be restarted to see changes.
 
@@ -150,6 +164,7 @@ Distant objects which are at least this size are classified as 'very far' static
 ***
 
 ### `waterCaustics`
+<div class="search_terms" style="display: none">watercaustics</div>
 
 The % brightness of water caustics.
 
@@ -160,6 +175,7 @@ The % brightness of water caustics.
 ***
 
 ### `waterWaveHeight`
+<div class="search_terms" style="display: none">waterwaveheight</div>
 
 The maximum height of dynamic waves.
 
@@ -170,6 +186,7 @@ The maximum height of dynamic waves.
 ***
 
 ### `wind`
+<div class="search_terms" style="display: none">wind</div>
 
 An array containing the wind speed multiplier for each weather.
 

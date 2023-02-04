@@ -10,6 +10,7 @@ Layout for the tooltip table passed to `tes3ui.showMessageMenu` function.
 ## Properties
 
 ### `callback`
+<div class="search_terms" style="display: none">callback</div>
 
 A function to call when the tooltip has been created. Passes context information. Can be used to make further adjustments to the tooltip.
 
@@ -20,6 +21,7 @@ A function to call when the tooltip has been created. Passes context information
 ***
 
 ### `header`
+<div class="search_terms" style="display: none">header</div>
 
 The header at the top of the tooltip. Can also be a function that returns a string.
 
@@ -30,6 +32,7 @@ The header at the top of the tooltip. Can also be a function that returns a stri
 ***
 
 ### `text`
+<div class="search_terms" style="display: none">text</div>
 
 The text in the body of the tooltip. Can also be a function that returns a string.
 

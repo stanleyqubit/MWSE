@@ -10,6 +10,7 @@ Layout for the buttons table passed to `tes3ui.showMessageMenu` function.
 ## Properties
 
 ### `callback`
+<div class="search_terms" style="display: none">callback</div>
 
 The function to call when this button is clicked.
 
@@ -20,6 +21,7 @@ The function to call when this button is clicked.
 ***
 
 ### `enableRequirements`
+<div class="search_terms" style="display: none">enablerequirements, requirements</div>
 
 Function that, if provided, determines whether the button will call the callback when clicked, or be disabled + greyed out. This function will be passed the `callbackParams` table that was provided in `tes3ui.showMessageMenu`.
 
@@ -30,6 +32,7 @@ Function that, if provided, determines whether the button will call the callback
 ***
 
 ### `showRequirements`
+<div class="search_terms" style="display: none">showrequirements, requirements</div>
 
 If set, the button will only be visible if this function returns true. This function will be passed the `callbackParams` table that was provided in `tes3ui.showMessageMenu`.
 
@@ -40,6 +43,7 @@ If set, the button will only be visible if this function returns true. This func
 ***
 
 ### `text`
+<div class="search_terms" style="display: none">text</div>
 
 **Required.** The label on the button.
 
@@ -50,6 +54,7 @@ If set, the button will only be visible if this function returns true. This func
 ***
 
 ### `tooltip`
+<div class="search_terms" style="display: none">tooltip</div>
 
 A table with header and text that will display as a tooltip when an enabled button is hovered over. Can also be a function that returns a tes3ui.showMessageMenu.params.tooltip.
 
@@ -60,6 +65,7 @@ A table with header and text that will display as a tooltip when an enabled butt
 ***
 
 ### `tooltipDisabled`
+<div class="search_terms" style="display: none">tooltipdisabled</div>
 
 A table with header and text that will display as a tooltip when a disabled button is hovered over. Can also be a function that returns a tes3ui.showMessageMenu.params.tooltip.
 

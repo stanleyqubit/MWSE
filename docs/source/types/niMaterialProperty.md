@@ -11,6 +11,7 @@ This type inherits the following: [niProperty](../../types/niProperty), [niObjec
 ## Properties
 
 ### `alpha`
+<div class="search_terms" style="display: none">alpha</div>
 
 The alpha value of the material. Value should be in [0.0, 1.0] range. Setting this value also marks the material as changed, so that renderer knows that it needs to update its copies of the material settings.
 
@@ -21,6 +22,7 @@ The alpha value of the material. Value should be in [0.0, 1.0] range. Setting th
 ***
 
 ### `ambient`
+<div class="search_terms" style="display: none">ambient</div>
 
 The ambient material color. Setting this value also marks the material as changed, so that renderer knows that it needs to update its copies of the material settings.
 
@@ -31,6 +33,7 @@ The ambient material color. Setting this value also marks the material as change
 ***
 
 ### `controller`
+<div class="search_terms" style="display: none">controller</div>
 
 *Read-only*. The first controller available on the object.
 
@@ -41,6 +44,7 @@ The ambient material color. Setting this value also marks the material as change
 ***
 
 ### `diffuse`
+<div class="search_terms" style="display: none">diffuse</div>
 
 The diffuse material color. Setting this value also marks the material as changed, so that renderer knows that it needs to update its copies of the material settings.
 
@@ -51,6 +55,7 @@ The diffuse material color. Setting this value also marks the material as change
 ***
 
 ### `emissive`
+<div class="search_terms" style="display: none">emissive</div>
 
 The emissive material color. Setting this value also marks the material as changed, so that renderer knows that it needs to update its copies of the material settings.
 
@@ -61,6 +66,7 @@ The emissive material color. Setting this value also marks the material as chang
 ***
 
 ### `extraData`
+<div class="search_terms" style="display: none">extradata</div>
 
 *Read-only*. The first extra data available on the object.
 
@@ -71,6 +77,7 @@ The emissive material color. Setting this value also marks the material as chang
 ***
 
 ### `name`
+<div class="search_terms" style="display: none">name</div>
 
 The human-facing name of the given object.
 
@@ -81,6 +88,7 @@ The human-facing name of the given object.
 ***
 
 ### `propertyFlags`
+<div class="search_terms" style="display: none">propertyflags</div>
 
 
 
@@ -91,6 +99,7 @@ The human-facing name of the given object.
 ***
 
 ### `refCount`
+<div class="search_terms" style="display: none">refcount</div>
 
 *Read-only*. The number of references that exist for this object. When this value reaches zero, the object will be deleted.
 
@@ -101,6 +110,7 @@ The human-facing name of the given object.
 ***
 
 ### `RTTI`
+<div class="search_terms" style="display: none">rtti</div>
 
 *Read-only*. The runtime type information for this object. This is an alias for the `.runTimeTypeInformation` property.
 
@@ -111,6 +121,7 @@ The human-facing name of the given object.
 ***
 
 ### `runTimeTypeInformation`
+<div class="search_terms" style="display: none">runtimetypeinformation</div>
 
 *Read-only*. The runtime type information for this object.
 
@@ -121,6 +132,7 @@ The human-facing name of the given object.
 ***
 
 ### `shininess`
+<div class="search_terms" style="display: none">shininess</div>
 
 The shine of the material. Value should be >= 0. Higher values tend to make the material appear to have a more mirror-like finish. Setting this value also marks the material as changed, so that renderer knows that it needs to update its copies of the material settings.
 
@@ -131,6 +143,7 @@ The shine of the material. Value should be >= 0. Higher values tend to make the 
 ***
 
 ### `specular`
+<div class="search_terms" style="display: none">specular</div>
 
 The specular material color. Setting this value also marks the material as changed, so that renderer knows that it needs to update its copies of the material settings.
 
@@ -141,6 +154,7 @@ The specular material color. Setting this value also marks the material as chang
 ***
 
 ### `type`
+<div class="search_terms" style="display: none">type</div>
 
 *Read-only*. The unique class identifier number of the given rendering property. The types are available in [`ni.propertyType`](https://mwse.github.io/MWSE/references/ni/property-types/) table.
 
@@ -153,6 +167,7 @@ The specular material color. Setting this value also marks the material as chang
 ## Methods
 
 ### `addExtraData`
+<div class="search_terms" style="display: none">addextradata, extradata</div>
 
 Appends an extra data to the object.
 
@@ -167,6 +182,7 @@ myObject:addExtraData(extraData)
 ***
 
 ### `clone`
+<div class="search_terms" style="display: none">clone</div>
 
 Creates a copy of this object.
 
@@ -181,6 +197,7 @@ local result = myObject:clone()
 ***
 
 ### `getGameReference`
+<div class="search_terms" style="display: none">getgamereference, gamereference</div>
 
 Searches for an niExtraData on this object to see if it has one that holds a related reference.
 
@@ -199,6 +216,7 @@ local reference = myObject:getGameReference(searchParents)
 ***
 
 ### `getStringDataStartingWith`
+<div class="search_terms" style="display: none">getstringdatastartingwith, stringdatastartingwith</div>
 
 Searches for an niExtraData on this object to see if it has niStringExtraData that has its string start with the provided `value` argument.
 
@@ -217,6 +235,7 @@ local extra = myObject:getStringDataStartingWith(value)
 ***
 
 ### `getStringDataWith`
+<div class="search_terms" style="display: none">getstringdatawith, stringdatawith</div>
 
 Searches for an niExtraData on this object to see if it has niStringExtraData that has the provided `value` argument in its string field.
 
@@ -235,6 +254,7 @@ local extra = myObject:getStringDataWith(value)
 ***
 
 ### `hasStringDataStartingWith`
+<div class="search_terms" style="display: none">hasstringdatastartingwith, stringdatastartingwith</div>
 
 Searches for an niExtraData on this object to see if it has niStringExtraData that has its string start with the provided `value` argument. Returns true if the value was found.
 
@@ -253,6 +273,7 @@ local result = myObject:hasStringDataStartingWith(value)
 ***
 
 ### `hasStringDataWith`
+<div class="search_terms" style="display: none">hasstringdatawith, stringdatawith</div>
 
 Searches for an niExtraData on this object to see if it has niStringExtraData that contains the provided `value` argument in its string field. Returns true if the value was found.
 
@@ -271,6 +292,7 @@ local result = myObject:hasStringDataWith(value)
 ***
 
 ### `incrementRevisionId`
+<div class="search_terms" style="display: none">incrementrevisionid</div>
 
 This marks the material as changed, so that the renderer knows that it needs to update the copies of the material settings.
 
@@ -281,6 +303,7 @@ myObject:incrementRevisionId()
 ***
 
 ### `isInstanceOfType`
+<div class="search_terms" style="display: none">isinstanceoftype, instanceoftype</div>
 
 Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
@@ -299,6 +322,7 @@ local result = myObject:isInstanceOfType(type)
 ***
 
 ### `isOfType`
+<div class="search_terms" style="display: none">isoftype, oftype</div>
 
 Determines if the object is of a given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
@@ -317,6 +341,7 @@ local result = myObject:isOfType(type)
 ***
 
 ### `prependController`
+<div class="search_terms" style="display: none">prependcontroller</div>
 
 Add a controller to the object as the first controller.
 
@@ -331,6 +356,7 @@ myObject:prependController(controller)
 ***
 
 ### `removeAllControllers`
+<div class="search_terms" style="display: none">removeallcontrollers, allcontrollers</div>
 
 Removes all controllers.
 
@@ -341,6 +367,7 @@ myObject:removeAllControllers()
 ***
 
 ### `removeAllExtraData`
+<div class="search_terms" style="display: none">removeallextradata, allextradata</div>
 
 Removes all extra data.
 
@@ -351,6 +378,7 @@ myObject:removeAllExtraData()
 ***
 
 ### `removeController`
+<div class="search_terms" style="display: none">removecontroller, controller</div>
 
 Removes a controller from the object.
 
@@ -365,6 +393,7 @@ myObject:removeController(controller)
 ***
 
 ### `removeExtraData`
+<div class="search_terms" style="display: none">removeextradata, extradata</div>
 
 Removes a specific extra data from the object.
 
@@ -379,6 +408,7 @@ myObject:removeExtraData(extraData)
 ***
 
 ### `saveBinary`
+<div class="search_terms" style="display: none">savebinary</div>
 
 Serializes the object, and writes it to the given file.
 
@@ -397,6 +427,7 @@ local success = myObject:saveBinary(path)
 ***
 
 ### `setFlag`
+<div class="search_terms" style="display: none">setflag, flag</div>
 
 Sets a given flag in the niObjectNET flag data. The specifics use of the flag is dependent on the real underlying type.
 

@@ -10,6 +10,7 @@ The manager responsible for mobile objects and collision.
 ## Properties
 
 ### `gravity`
+<div class="search_terms" style="display: none">gravity</div>
 
 The gravity applied to all actors. Has a default value of `{0.0, 0.0, -627.2}`.
 
@@ -20,6 +21,7 @@ The gravity applied to all actors. Has a default value of `{0.0, 0.0, -627.2}`.
 ***
 
 ### `mobCollisionGroup`
+<div class="search_terms" style="display: none">mobcollisiongroup</div>
 
 *Read-only*. !!! warning
 	This part of the API isn't fully understood yet and thus is considered experimental. That means that there can be breaking changes requiring the code using this part of the API to be rewritten. The MWSE team will not make any effort to keep backward compatibility with the mods using experimental APIs.
@@ -32,6 +34,7 @@ The gravity applied to all actors. Has a default value of `{0.0, 0.0, -627.2}`.
 ***
 
 ### `movingProps`
+<div class="search_terms" style="display: none">movingprops</div>
 
 *Read-only*. !!! warning
 	This part of the API isn't fully understood yet and thus is considered experimental. That means that there can be breaking changes requiring the code using this part of the API to be rewritten. The MWSE team will not make any effort to keep backward compatibility with the mods using experimental APIs.
@@ -44,6 +47,7 @@ The gravity applied to all actors. Has a default value of `{0.0, 0.0, -627.2}`.
 ***
 
 ### `processManager`
+<div class="search_terms" style="display: none">processmanager</div>
 
 *Read-only*. Access to the process manager.
 
@@ -54,6 +58,7 @@ The gravity applied to all actors. Has a default value of `{0.0, 0.0, -627.2}`.
 ***
 
 ### `projectileManager`
+<div class="search_terms" style="display: none">projectilemanager</div>
 
 *Read-only*. Access to the projectile manager.
 
@@ -64,6 +69,7 @@ The gravity applied to all actors. Has a default value of `{0.0, 0.0, -627.2}`.
 ***
 
 ### `terminalVelocity`
+<div class="search_terms" style="display: none">terminalvelocity</div>
 
 The maximum velocity that actors can reach through the application of gravity. Has a default value of `{0.0, 0.0, -4005.5}`.
 

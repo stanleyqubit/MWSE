@@ -10,6 +10,7 @@ An object that applies a graphical effect on the screen, such as screen glare or
 ## Properties
 
 ### `active`
+<div class="search_terms" style="display: none">active</div>
 
 The activation state for the fader. Setting this effectively calls activate/deactivate.
 
@@ -22,6 +23,7 @@ The activation state for the fader. Setting this effectively calls activate/deac
 ## Methods
 
 ### `activate`
+<div class="search_terms" style="display: none">activate</div>
 
 Activates a deactivated fader.
 
@@ -32,6 +34,7 @@ myObject:activate()
 ***
 
 ### `deactivate`
+<div class="search_terms" style="display: none">deactivate</div>
 
 Deactivates an activated fader.
 
@@ -42,6 +45,7 @@ myObject:deactivate()
 ***
 
 ### `fadeIn`
+<div class="search_terms" style="display: none">fadein</div>
 
 Transitions the fader to a value of `1` over a given duration.
 
@@ -57,6 +61,7 @@ myObject:fadeIn({ duration = ... })
 ***
 
 ### `fadeOut`
+<div class="search_terms" style="display: none">fadeout</div>
 
 Transitions the fader to a value of `0` over a given duration.
 
@@ -72,6 +77,7 @@ myObject:fadeOut({ duration = ... })
 ***
 
 ### `fadeTo`
+<div class="search_terms" style="display: none">fadeto</div>
 
 Transitions the fader to a value over a given duration.
 
@@ -88,6 +94,7 @@ myObject:fadeTo({ value = ..., duration = ... })
 ***
 
 ### `setColor`
+<div class="search_terms" style="display: none">setcolor, color</div>
 
 Applies a coloring effect to the fader. A fader without a texture will apply a colouring effect over the screen. The colour set here can completely change the color of the fader's texture.
 
@@ -108,6 +115,7 @@ local result = myObject:setColor({ color = ..., flag = ... })
 ***
 
 ### `setTexture`
+<div class="search_terms" style="display: none">settexture, texture</div>
 
 This method allows changing the texture of the fader.
 
@@ -122,6 +130,7 @@ myObject:setTexture(path)
 ***
 
 ### `update`
+<div class="search_terms" style="display: none">update</div>
 
 Updates the fader for the current frame. This method needs to be called each frame for fader to be present.
 
@@ -132,6 +141,7 @@ myObject:update()
 ***
 
 ### `updateMaterialProperty`
+<div class="search_terms" style="display: none">updatematerialproperty, materialproperty</div>
 
 Updates the fader's alpha. The fader needs to be active.
 
@@ -148,6 +158,7 @@ myObject:updateMaterialProperty(value)
 ## Functions
 
 ### `new`
+<div class="search_terms" style="display: none">new</div>
 
 Creates a new fader, and adds it to the fader system.
 

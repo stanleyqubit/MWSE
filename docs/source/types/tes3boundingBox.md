@@ -10,6 +10,7 @@ A pair of vectors marking a bounding box.
 ## Properties
 
 ### `max`
+<div class="search_terms" style="display: none">max</div>
 
 The maximum bound of the box.
 
@@ -20,6 +21,7 @@ The maximum bound of the box.
 ***
 
 ### `min`
+<div class="search_terms" style="display: none">min</div>
 
 The minimum bound of the box.
 
@@ -32,6 +34,7 @@ The minimum bound of the box.
 ## Methods
 
 ### `copy`
+<div class="search_terms" style="display: none">copy</div>
 
 Creates a copy of the bounding box.
 
@@ -46,6 +49,7 @@ local result = myObject:copy()
 ***
 
 ### `vertices`
+<div class="search_terms" style="display: none">vertices</div>
 
 Returns a table containing the 8 vertices comprising this bounding box.
 

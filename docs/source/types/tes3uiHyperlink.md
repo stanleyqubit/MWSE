@@ -11,6 +11,7 @@ This type inherits the following: [tes3uiWidget](../../types/tes3uiWidget)
 ## Properties
 
 ### `confirm`
+<div class="search_terms" style="display: none">confirm</div>
 
 If true, a confirmation prompt will be shown before any URLs are opened.
 
@@ -21,6 +22,7 @@ If true, a confirmation prompt will be shown before any URLs are opened.
 ***
 
 ### `element`
+<div class="search_terms" style="display: none">element</div>
 
 Access back to the element this widget interface is for.
 
@@ -31,6 +33,7 @@ Access back to the element this widget interface is for.
 ***
 
 ### `url`
+<div class="search_terms" style="display: none">url</div>
 
 The URL to open if the element is clicked.
 
@@ -43,6 +46,7 @@ The URL to open if the element is clicked.
 ## Methods
 
 ### `openURL`
+<div class="search_terms" style="display: none">openurl, url</div>
 
 Opens a contained URL. If the `confirm` property is set, a modal prompt will be given to confirm the user wants to open the URL.
 

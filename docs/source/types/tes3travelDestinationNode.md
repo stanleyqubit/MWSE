@@ -10,6 +10,7 @@ An attachment-capable structure to manage a travel destination. This is either e
 ## Properties
 
 ### `cell`
+<div class="search_terms" style="display: none">cell</div>
 
 The destination cell.
 
@@ -20,6 +21,7 @@ The destination cell.
 ***
 
 ### `marker`
+<div class="search_terms" style="display: none">marker</div>
 
 The reference door marker that the destination places the traveling actor at.
 

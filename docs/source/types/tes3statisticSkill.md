@@ -13,6 +13,7 @@ This type inherits the following: [tes3statistic](../../types/tes3statistic)
 ## Properties
 
 ### `base`
+<div class="search_terms" style="display: none">base</div>
 
 The base value of the skill statistic. Damage, and fortify spell effects don't change base skill value.
 
@@ -23,6 +24,7 @@ The base value of the skill statistic. Damage, and fortify spell effects don't c
 ***
 
 ### `baseRaw`
+<div class="search_terms" style="display: none">baseraw</div>
 
 The base value of the skill statistic, as stored in memory. Prefer to use `.base` unless you know what you're doing.
 
@@ -33,6 +35,7 @@ The base value of the skill statistic, as stored in memory. Prefer to use `.base
 ***
 
 ### `current`
+<div class="search_terms" style="display: none">current</div>
 
 The current value of the skill statistic.
 
@@ -43,6 +46,7 @@ The current value of the skill statistic.
 ***
 
 ### `currentRaw`
+<div class="search_terms" style="display: none">currentraw</div>
 
 The current value of the skill statistic, as stored in memory. Prefer to use `.current` unless you know what you're doing.
 
@@ -53,6 +57,7 @@ The current value of the skill statistic, as stored in memory. Prefer to use `.c
 ***
 
 ### `normalized`
+<div class="search_terms" style="display: none">normalized</div>
 
 The normalized value of the skill statistic.
 
@@ -63,6 +68,7 @@ The normalized value of the skill statistic.
 ***
 
 ### `type`
+<div class="search_terms" style="display: none">type</div>
 
 The type of the skill, as assigned by the actor's class. Maps to values in [`tes3.skillType`](https://mwse.github.io/MWSE/references/skill-types/) namespace.
 

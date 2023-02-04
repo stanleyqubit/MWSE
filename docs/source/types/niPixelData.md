@@ -11,6 +11,7 @@ This type inherits the following: [niObject](../../types/niObject)
 ## Properties
 
 ### `bytesPerPixel`
+<div class="search_terms" style="display: none">bytesperpixel</div>
 
 *Read-only*. The number of bytes per pixel.
 
@@ -21,6 +22,7 @@ This type inherits the following: [niObject](../../types/niObject)
 ***
 
 ### `mipMapLevels`
+<div class="search_terms" style="display: none">mipmaplevels</div>
 
 *Read-only*. The number of MipMap levels.
 
@@ -31,6 +33,7 @@ This type inherits the following: [niObject](../../types/niObject)
 ***
 
 ### `refCount`
+<div class="search_terms" style="display: none">refcount</div>
 
 *Read-only*. The number of references that exist for this object. When this value reaches zero, the object will be deleted.
 
@@ -41,6 +44,7 @@ This type inherits the following: [niObject](../../types/niObject)
 ***
 
 ### `RTTI`
+<div class="search_terms" style="display: none">rtti</div>
 
 *Read-only*. The runtime type information for this object. This is an alias for the `.runTimeTypeInformation` property.
 
@@ -51,6 +55,7 @@ This type inherits the following: [niObject](../../types/niObject)
 ***
 
 ### `runTimeTypeInformation`
+<div class="search_terms" style="display: none">runtimetypeinformation</div>
 
 *Read-only*. The runtime type information for this object.
 
@@ -63,6 +68,7 @@ This type inherits the following: [niObject](../../types/niObject)
 ## Methods
 
 ### `clone`
+<div class="search_terms" style="display: none">clone</div>
 
 Creates a copy of this object.
 
@@ -77,6 +83,7 @@ local result = myObject:clone()
 ***
 
 ### `createSourceTexture`
+<div class="search_terms" style="display: none">createsourcetexture, sourcetexture</div>
 
 Creates a source texture from the current NiPixelData object.
 
@@ -91,6 +98,7 @@ local result = myObject:createSourceTexture()
 ***
 
 ### `fill`
+<div class="search_terms" style="display: none">fill</div>
 
 Fills this pixel data with the provided color.
 
@@ -106,6 +114,7 @@ myObject:fill(data, mipMapLevel)
 ***
 
 ### `getHeight`
+<div class="search_terms" style="display: none">getheight, height</div>
 
 Returns the height of the mipmap level at the given index, where level 0 is the finest (largest) mipmap level, and level `mipMapLevels - 1` is the coarsest (smallest) mipmap level.
 
@@ -124,6 +133,7 @@ local result = myObject:getHeight(mipMapLevel)
 ***
 
 ### `getWidth`
+<div class="search_terms" style="display: none">getwidth, width</div>
 
 Returns the width of the mipmap level at the given index, where level 0 is the finest (largest) mipmap level, and level `mipMapLevels - 1` is the coarsest (smallest) mipmap level.
 
@@ -142,6 +152,7 @@ local result = myObject:getWidth(mipMapLevel)
 ***
 
 ### `isInstanceOfType`
+<div class="search_terms" style="display: none">isinstanceoftype, instanceoftype</div>
 
 Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
@@ -160,6 +171,7 @@ local result = myObject:isInstanceOfType(type)
 ***
 
 ### `isOfType`
+<div class="search_terms" style="display: none">isoftype, oftype</div>
 
 Determines if the object is of a given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
@@ -178,6 +190,7 @@ local result = myObject:isOfType(type)
 ***
 
 ### `saveBinary`
+<div class="search_terms" style="display: none">savebinary</div>
 
 Serializes the object, and writes it to the given file.
 
@@ -196,6 +209,7 @@ local success = myObject:saveBinary(path)
 ***
 
 ### `setPixelsByte`
+<div class="search_terms" style="display: none">setpixelsbyte, pixelsbyte</div>
 
 Sets the pixel data from byte data.
 
@@ -211,6 +225,7 @@ myObject:setPixelsByte(data, mipMapLevel)
 ***
 
 ### `setPixelsFloat`
+<div class="search_terms" style="display: none">setpixelsfloat, pixelsfloat</div>
 
 Sets the pixel data from float data.
 
@@ -228,6 +243,7 @@ myObject:setPixelsFloat(data, mipMapLevel)
 ## Functions
 
 ### `new`
+<div class="search_terms" style="display: none">new</div>
 
 Creates a new NiPixelData object.
 

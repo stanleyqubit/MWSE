@@ -10,6 +10,7 @@ The base-most object from which almost all NetImmerse structures are derived fro
 ## Properties
 
 ### `refCount`
+<div class="search_terms" style="display: none">refcount</div>
 
 *Read-only*. The number of references that exist for this object. When this value reaches zero, the object will be deleted.
 
@@ -20,6 +21,7 @@ The base-most object from which almost all NetImmerse structures are derived fro
 ***
 
 ### `RTTI`
+<div class="search_terms" style="display: none">rtti</div>
 
 *Read-only*. The runtime type information for this object. This is an alias for the `.runTimeTypeInformation` property.
 
@@ -30,6 +32,7 @@ The base-most object from which almost all NetImmerse structures are derived fro
 ***
 
 ### `runTimeTypeInformation`
+<div class="search_terms" style="display: none">runtimetypeinformation</div>
 
 *Read-only*. The runtime type information for this object.
 
@@ -42,6 +45,7 @@ The base-most object from which almost all NetImmerse structures are derived fro
 ## Methods
 
 ### `clone`
+<div class="search_terms" style="display: none">clone</div>
 
 Creates a copy of this object.
 
@@ -56,6 +60,7 @@ local result = myObject:clone()
 ***
 
 ### `isInstanceOfType`
+<div class="search_terms" style="display: none">isinstanceoftype, instanceoftype</div>
 
 Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
@@ -74,6 +79,7 @@ local result = myObject:isInstanceOfType(type)
 ***
 
 ### `isOfType`
+<div class="search_terms" style="display: none">isoftype, oftype</div>
 
 Determines if the object is of a given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
@@ -92,6 +98,7 @@ local result = myObject:isOfType(type)
 ***
 
 ### `saveBinary`
+<div class="search_terms" style="display: none">savebinary</div>
 
 Serializes the object, and writes it to the given file.
 

@@ -11,6 +11,7 @@ This type inherits the following: [niParticleModifier](../../types/niParticleMod
 ## Properties
 
 ### `controller`
+<div class="search_terms" style="display: none">controller</div>
 
 Access to the generic time controller for particle systems.
 
@@ -21,6 +22,7 @@ Access to the generic time controller for particle systems.
 ***
 
 ### `decay`
+<div class="search_terms" style="display: none">decay</div>
 
 This value impacts how fast gravitational force attenuates with the distance from the source. A value of `0` causes no decay.
 
@@ -31,6 +33,7 @@ This value impacts how fast gravitational force attenuates with the distance fro
 ***
 
 ### `direction`
+<div class="search_terms" style="display: none">direction</div>
 
 The direction of action for planar gravity.
 
@@ -41,6 +44,7 @@ The direction of action for planar gravity.
 ***
 
 ### `force`
+<div class="search_terms" style="display: none">force</div>
 
 The magnitude of the gravitational force in [units/second](https://mwse.github.io/MWSE/references/other/game-units/).
 
@@ -51,6 +55,7 @@ The magnitude of the gravitational force in [units/second](https://mwse.github.i
 ***
 
 ### `forceType`
+<div class="search_terms" style="display: none">forcetype</div>
 
 The type of the modifier. Planar force will attract the particles parallel to the `.direction` vector. Spherical force will act so that the point defined by `.position` property is the source of the spherical gravitational force.
 
@@ -63,6 +68,7 @@ Maps to values in [`ni.gravityForceType`](https://mwse.github.io/MWSE/references
 ***
 
 ### `next`
+<div class="search_terms" style="display: none">next</div>
 
 Access to the next attached modifier.
 
@@ -73,6 +79,7 @@ Access to the next attached modifier.
 ***
 
 ### `position`
+<div class="search_terms" style="display: none">position</div>
 
 The position of the center used when applying spherical gravity.
 
@@ -83,6 +90,7 @@ The position of the center used when applying spherical gravity.
 ***
 
 ### `refCount`
+<div class="search_terms" style="display: none">refcount</div>
 
 *Read-only*. The number of references that exist for this object. When this value reaches zero, the object will be deleted.
 
@@ -93,6 +101,7 @@ The position of the center used when applying spherical gravity.
 ***
 
 ### `RTTI`
+<div class="search_terms" style="display: none">rtti</div>
 
 *Read-only*. The runtime type information for this object. This is an alias for the `.runTimeTypeInformation` property.
 
@@ -103,6 +112,7 @@ The position of the center used when applying spherical gravity.
 ***
 
 ### `runTimeTypeInformation`
+<div class="search_terms" style="display: none">runtimetypeinformation</div>
 
 *Read-only*. The runtime type information for this object.
 
@@ -115,6 +125,7 @@ The position of the center used when applying spherical gravity.
 ## Methods
 
 ### `clone`
+<div class="search_terms" style="display: none">clone</div>
 
 Creates a copy of this object.
 
@@ -129,6 +140,7 @@ local result = myObject:clone()
 ***
 
 ### `isInstanceOfType`
+<div class="search_terms" style="display: none">isinstanceoftype, instanceoftype</div>
 
 Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
@@ -147,6 +159,7 @@ local result = myObject:isInstanceOfType(type)
 ***
 
 ### `isOfType`
+<div class="search_terms" style="display: none">isoftype, oftype</div>
 
 Determines if the object is of a given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
@@ -165,6 +178,7 @@ local result = myObject:isOfType(type)
 ***
 
 ### `saveBinary`
+<div class="search_terms" style="display: none">savebinary</div>
 
 Serializes the object, and writes it to the given file.
 

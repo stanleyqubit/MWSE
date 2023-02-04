@@ -10,6 +10,7 @@ A game object which holds information about body parts.
 ## Properties
 
 ### `activeBodyParts`
+<div class="search_terms" style="display: none">activebodyparts</div>
 
 *Read-only*. The access to the reference's [`tes3bodyPartManagerActiveBodyPart`](https://mwse.github.io/MWSE/types/tes3bodyPartManagerActiveBodyPart/) objects. It's a 2-dimensional table, with first dimension index values from [`tes3.activeBodyPartLayer`](https://mwse.github.io/MWSE/references/active-body-part-layers/) namespace, while its second dimension indexes are values from [`tes3.activeBodyPart`](https://mwse.github.io/MWSE/references/active-body-parts/) namespace.
 
@@ -20,6 +21,7 @@ A game object which holds information about body parts.
 ***
 
 ### `animationPhase`
+<div class="search_terms" style="display: none">animationphase</div>
 
 *Read-only*. 
 
@@ -30,6 +32,7 @@ A game object which holds information about body parts.
 ***
 
 ### `attachNodes`
+<div class="search_terms" style="display: none">attachnodes</div>
 
 *Read-only*. The access to the reference's [`tes3bodyPartManagerAttachNode`](https://mwse.github.io/MWSE/types/tes3bodyPartManagerAttachNode/) objects. Indexes of that table are values from [`tes3.bodyPartAttachment`](https://mwse.github.io/MWSE/references/body-part-attachments/) namespace.
 
@@ -40,6 +43,7 @@ A game object which holds information about body parts.
 ***
 
 ### `reference`
+<div class="search_terms" style="display: none">reference</div>
 
 *Read-only*. The access to the reference this body part manager operates for.
 
@@ -52,6 +56,7 @@ A game object which holds information about body parts.
 ## Methods
 
 ### `getActiveBodyPart`
+<div class="search_terms" style="display: none">getactivebodypart, activebodypart</div>
 
 The method fetches active body part of a actor at a given layer and position.
 
@@ -71,6 +76,7 @@ local result = myObject:getActiveBodyPart(layer, index)
 ***
 
 ### `getActiveBodyPartForItem`
+<div class="search_terms" style="display: none">getactivebodypartforitem, activebodypartforitem</div>
 
 The method fetches active body part of a actor for the given item.
 
@@ -89,6 +95,7 @@ local result = myObject:getActiveBodyPartForItem(item)
 ***
 
 ### `getActiveBodyPartNode`
+<div class="search_terms" style="display: none">getactivebodypartnode, activebodypartnode</div>
 
 The method fetches the NiNode-derived object for the loaded mesh of an active body part at a given layer and position.
 
@@ -108,6 +115,7 @@ local result = myObject:getActiveBodyPartNode(layer, index)
 ***
 
 ### `removeEquippedLayers`
+<div class="search_terms" style="display: none">removeequippedlayers, equippedlayers</div>
 
 The method removes all currently equipped layers from the actor.
 
@@ -118,6 +126,7 @@ myObject:removeEquippedLayers()
 ***
 
 ### `setActivePartData`
+<div class="search_terms" style="display: none">setactivepartdata, activepartdata</div>
 
 The method sets a niNode derived object as active body part at a given layer and position.
 
@@ -135,6 +144,7 @@ myObject:setActivePartData(layer, index, overwriteData, node)
 ***
 
 ### `setBodyPartByIdForObject`
+<div class="search_terms" style="display: none">setbodypartbyidforobject, bodypartbyidforobject</div>
 
 The method sets a new body part for a given object.
 
@@ -152,6 +162,7 @@ myObject:setBodyPartByIdForObject(object, index, bodyPartId, isFirstPerson)
 ***
 
 ### `setBodyPartForObject`
+<div class="search_terms" style="display: none">setbodypartforobject, bodypartforobject</div>
 
 The method sets a new body part for a given object. Triggers `bodyPart` event.
 
@@ -169,6 +180,7 @@ myObject:setBodyPartForObject(object, index, bodyPart, isFirstPerson)
 ***
 
 ### `updateForReference`
+<div class="search_terms" style="display: none">updateforreference, forreference</div>
 
 The method updates all body parts for a given reference.
 

@@ -10,6 +10,7 @@ A 4 by 4 matrix. You can perform following arithmetic with this type: `==`.
 ## Properties
 
 ### `w`
+<div class="search_terms" style="display: none">w</div>
 
 The 1st row of the matrix.
 
@@ -20,6 +21,7 @@ The 1st row of the matrix.
 ***
 
 ### `x`
+<div class="search_terms" style="display: none">x</div>
 
 The 2nd row of the matrix.
 
@@ -30,6 +32,7 @@ The 2nd row of the matrix.
 ***
 
 ### `y`
+<div class="search_terms" style="display: none">y</div>
 
 The 3rd row of the matrix.
 
@@ -40,6 +43,7 @@ The 3rd row of the matrix.
 ***
 
 ### `z`
+<div class="search_terms" style="display: none">z</div>
 
 The 4th row of the matrix.
 
@@ -52,6 +56,7 @@ The 4th row of the matrix.
 ## Methods
 
 ### `copy`
+<div class="search_terms" style="display: none">copy</div>
 
 Creates a copy of the matrix.
 
@@ -66,6 +71,7 @@ local result = myObject:copy()
 ***
 
 ### `toZero`
+<div class="search_terms" style="display: none">tozero</div>
 
 Zeroes out all values in the matrix.
 
@@ -78,6 +84,7 @@ myObject:toZero()
 ## Functions
 
 ### `new`
+<div class="search_terms" style="display: none">new</div>
 
 Creates a new 4 by 4 matrix from 4 provided vectors or 16 numbers. Creates an empty matrix if nothing is provided.
 

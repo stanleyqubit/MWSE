@@ -10,6 +10,7 @@ A pair of size and offset data for an entry stored in a BSA file.
 ## Properties
 
 ### `offset`
+<div class="search_terms" style="display: none">offset</div>
 
 *Read-only*. The offset from the start of the BSA file that this file can be found at.
 
@@ -20,6 +21,7 @@ A pair of size and offset data for an entry stored in a BSA file.
 ***
 
 ### `size`
+<div class="search_terms" style="display: none">size</div>
 
 *Read-only*. The size of the file stored in the BSA.
 

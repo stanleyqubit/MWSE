@@ -13,6 +13,7 @@ This type inherits the following: [tes3physicalObject](../../types/tes3physicalO
 ## Properties
 
 ### `blocked`
+<div class="search_terms" style="display: none">blocked</div>
 
 The blocked state of the object.
 
@@ -23,6 +24,7 @@ The blocked state of the object.
 ***
 
 ### `boundingBox`
+<div class="search_terms" style="display: none">boundingbox</div>
 
 The bounding box for the object.
 
@@ -33,6 +35,7 @@ The bounding box for the object.
 ***
 
 ### `closeSound`
+<div class="search_terms" style="display: none">closesound, sound</div>
 
 The sound to be played when the door closes.
 
@@ -43,6 +46,7 @@ The sound to be played when the door closes.
 ***
 
 ### `deleted`
+<div class="search_terms" style="display: none">deleted</div>
 
 *Read-only*. The deleted state of the object.
 
@@ -53,6 +57,7 @@ The sound to be played when the door closes.
 ***
 
 ### `disabled`
+<div class="search_terms" style="display: none">disabled</div>
 
 *Read-only*. The disabled state of the object.
 
@@ -63,6 +68,7 @@ The sound to be played when the door closes.
 ***
 
 ### `id`
+<div class="search_terms" style="display: none">id</div>
 
 *Read-only*. The unique identifier for the object.
 
@@ -73,6 +79,7 @@ The sound to be played when the door closes.
 ***
 
 ### `isLocationMarker`
+<div class="search_terms" style="display: none">islocationmarker, locationmarker</div>
 
 True if this object is an editor marker for a gameplay location. These include travel, intervention, prison, door, and interior north markers. Markers are invisible in-game.
 
@@ -83,6 +90,7 @@ True if this object is an editor marker for a gameplay location. These include t
 ***
 
 ### `mesh`
+<div class="search_terms" style="display: none">mesh</div>
 
 The path to the object's mesh.
 
@@ -93,6 +101,7 @@ The path to the object's mesh.
 ***
 
 ### `modified`
+<div class="search_terms" style="display: none">modified, ified</div>
 
 The modification state of the object since the last save.
 
@@ -103,6 +112,7 @@ The modification state of the object since the last save.
 ***
 
 ### `name`
+<div class="search_terms" style="display: none">name</div>
 
 The player-facing name for the object.
 
@@ -113,6 +123,7 @@ The player-facing name for the object.
 ***
 
 ### `nextInCollection`
+<div class="search_terms" style="display: none">nextincollection</div>
 
 The next object in parent collection's list.
 
@@ -123,6 +134,7 @@ The next object in parent collection's list.
 ***
 
 ### `objectFlags`
+<div class="search_terms" style="display: none">objectflags</div>
 
 *Read-only*. The raw flags of the object.
 
@@ -133,6 +145,7 @@ The next object in parent collection's list.
 ***
 
 ### `objectType`
+<div class="search_terms" style="display: none">objecttype</div>
 
 *Read-only*. The type of object. Maps to values in [`tes3.objectType`](https://mwse.github.io/MWSE/references/object-types/).
 
@@ -143,6 +156,7 @@ The next object in parent collection's list.
 ***
 
 ### `openSound`
+<div class="search_terms" style="display: none">opensound, sound</div>
 
 The sound to be played when the door opens.
 
@@ -153,6 +167,7 @@ The sound to be played when the door opens.
 ***
 
 ### `owningCollection`
+<div class="search_terms" style="display: none">owningcollection</div>
 
 The collection responsible for holding this object.
 
@@ -163,6 +178,7 @@ The collection responsible for holding this object.
 ***
 
 ### `persistent`
+<div class="search_terms" style="display: none">persistent</div>
 
 The persistent flag of the object.
 
@@ -173,6 +189,7 @@ The persistent flag of the object.
 ***
 
 ### `previousInCollection`
+<div class="search_terms" style="display: none">previousincollection</div>
 
 The previous object in parent collection's list.
 
@@ -183,6 +200,7 @@ The previous object in parent collection's list.
 ***
 
 ### `scale`
+<div class="search_terms" style="display: none">scale</div>
 
 The object's scale. The value range is (0, 10).
 
@@ -193,6 +211,7 @@ The object's scale. The value range is (0, 10).
 ***
 
 ### `sceneCollisionRoot`
+<div class="search_terms" style="display: none">scenecollisionroot</div>
 
 The scene graph node for this object's physics collision, if its mesh has a root collision node.
 
@@ -203,6 +222,7 @@ The scene graph node for this object's physics collision, if its mesh has a root
 ***
 
 ### `sceneNode`
+<div class="search_terms" style="display: none">scenenode</div>
 
 The scene graph node for this object.
 
@@ -213,6 +233,7 @@ The scene graph node for this object.
 ***
 
 ### `script`
+<div class="search_terms" style="display: none">script</div>
 
 *Read-only*. The script that runs on the object.
 
@@ -223,6 +244,7 @@ The scene graph node for this object.
 ***
 
 ### `sourceless`
+<div class="search_terms" style="display: none">sourceless</div>
 
 The soruceless flag of the object.
 
@@ -233,6 +255,7 @@ The soruceless flag of the object.
 ***
 
 ### `sourceMod`
+<div class="search_terms" style="display: none">sourcemod</div>
 
 *Read-only*. The filename (including the extension) of the mod that owns this object. It has `nil` value if the object was anything other than loaded from an ESP or ESM file.
 
@@ -243,6 +266,7 @@ The soruceless flag of the object.
 ***
 
 ### `stolenList`
+<div class="search_terms" style="display: none">stolenlist</div>
 
 A list of actors that the object has been stolen from.
 
@@ -253,6 +277,7 @@ A list of actors that the object has been stolen from.
 ***
 
 ### `supportsLuaData`
+<div class="search_terms" style="display: none">supportsluadata</div>
 
 If true, references of this object can store temporary or persistent lua data.
 
@@ -265,6 +290,7 @@ If true, references of this object can store temporary or persistent lua data.
 ## Methods
 
 ### `__tojson`
+<div class="search_terms" style="display: none">__tojson</div>
 
 Serializes the object to json.
 

@@ -10,6 +10,7 @@ A substructure of mobile actors that provides information about the current or p
 ## Properties
 
 ### `aiBehaviorState`
+<div class="search_terms" style="display: none">aibehaviorstate</div>
 
 The behavior state of the [tes3actionData](https://mwse.github.io/MWSE/types/tes3actionData). This maps to values in [`tes3.aiBehaviorState`](https://mwse.github.io/MWSE/references/ai-behavior-states/) namespace.
 
@@ -31,6 +32,7 @@ Value | Behavior
 ***
 
 ### `animationAttackState`
+<div class="search_terms" style="display: none">animationattackstate</div>
 
 The actor's animation state. Maps to values in [`tes3.animationState`](https://mwse.github.io/MWSE/references/animation-states/) namespace.
 
@@ -41,6 +43,7 @@ The actor's animation state. Maps to values in [`tes3.animationState`](https://m
 ***
 
 ### `attackSwing`
+<div class="search_terms" style="display: none">attackswing</div>
 
 When attacking, this value represents how much the weapon has been pulled back. The value ranges from [0.0 - 1.0].
 
@@ -51,6 +54,7 @@ When attacking, this value represents how much the weapon has been pulled back. 
 ***
 
 ### `currentAnimationGroup`
+<div class="search_terms" style="display: none">currentanimationgroup</div>
 
 Actor's current animation group. Maps to values in [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) namespace.
 
@@ -61,6 +65,7 @@ Actor's current animation group. Maps to values in [`tes3.animationGroup`](https
 ***
 
 ### `hitTarget`
+<div class="search_terms" style="display: none">hittarget</div>
 
 The actor's attack target. The target will be saved in `hitTarget` field until a new attack is made. Missing an attack will clear `hitTarget` field.
 
@@ -71,6 +76,7 @@ The actor's attack target. The target will be saved in `hitTarget` field until a
 ***
 
 ### `lastBarterHoursPassed`
+<div class="search_terms" style="display: none">lastbarterhourspassed</div>
 
 No description yet available.
 
@@ -81,6 +87,7 @@ No description yet available.
 ***
 
 ### `nockedProjectile`
+<div class="search_terms" style="display: none">nockedprojectile</div>
 
 The currently nocked projectile the associated actor is using. It is available while charging a projectile attack, before releasing the projectile. This can be modified, but can only be set to nil, which will remove the projectile without consuming ammo.
 
@@ -91,6 +98,7 @@ The currently nocked projectile the associated actor is using. It is available w
 ***
 
 ### `physicalAttackType`
+<div class="search_terms" style="display: none">physicalattacktype</div>
 
 A number from the [`tes3.physicalAttackType`](https://mwse.github.io/MWSE/references/physical-attack-types/) enumeration identifying the physical attack type. Can be `tes3.physicalAttackType.slash`, `.chop`, `.thrust`, `.projectile`, `.creature1`, `.creature2`, or `.creature3.`
 
@@ -101,6 +109,7 @@ A number from the [`tes3.physicalAttackType`](https://mwse.github.io/MWSE/refere
 ***
 
 ### `physicalDamage`
+<div class="search_terms" style="display: none">physicaldamage</div>
 
 When attacking, this is the value of the weapon damage that was rolled. This value takes into account the actor's strength, attack swing and weapon condition, but it doesn't include difficulty nor target's armor. This value is updated on an attack. After the attack this value will still contain the damage rolled. It will be refreshed on a new attack.
 
@@ -111,6 +120,7 @@ When attacking, this is the value of the weapon damage that was rolled. This val
 ***
 
 ### `stolenFrom`
+<div class="search_terms" style="display: none">stolenfrom</div>
 
 No description yet available.
 
@@ -121,6 +131,7 @@ No description yet available.
 ***
 
 ### `target`
+<div class="search_terms" style="display: none">target</div>
 
 The actor's attack target, stored until the actor attacks successfully again. In contrast to `hitTarget`, `target` property isn't cleared on missed attack.
 
@@ -131,6 +142,7 @@ The actor's attack target, stored until the actor attacks successfully again. In
 ***
 
 ### `walkDestination`
+<div class="search_terms" style="display: none">walkdestination</div>
 
 If moving to a location, this is the position to be walked to.
 

@@ -10,6 +10,7 @@ An active magic effect.
 ## Properties
 
 ### `attributeId`
+<div class="search_terms" style="display: none">attributeid</div>
 
 *Read-only*. The attribute ID (note that this may be the skill ID if the effect affects skills, since `attributeId` and `skillId` properties are set to the same value by the engine). Maps to values from [`tes3.attribute`](https://mwse.github.io/MWSE/references/attributes/) table.
 
@@ -20,6 +21,7 @@ An active magic effect.
 ***
 
 ### `duration`
+<div class="search_terms" style="display: none">duration</div>
 
 *Read-only*. The total duration of this specific effect.
 
@@ -30,6 +32,7 @@ An active magic effect.
 ***
 
 ### `effectId`
+<div class="search_terms" style="display: none">effectid</div>
 
 *Read-only*. The magic effect ID. Maps to values from [`tes3.effect`](https://mwse.github.io/MWSE/references/magic-effects/) table.
 
@@ -40,6 +43,7 @@ An active magic effect.
 ***
 
 ### `effectIndex`
+<div class="search_terms" style="display: none">effectindex</div>
 
 *Read-only*. The index of the effect inside the magic source instance.
 
@@ -50,6 +54,7 @@ An active magic effect.
 ***
 
 ### `effectInstance`
+<div class="search_terms" style="display: none">effectinstance</div>
 
 *Read-only*. The magic effect instance for this effect.
 
@@ -60,6 +65,7 @@ An active magic effect.
 ***
 
 ### `harmful`
+<div class="search_terms" style="display: none">harmful</div>
 
 *Read-only*. This flag that determines if this effect is counted as a hostile action.
 
@@ -70,6 +76,7 @@ An active magic effect.
 ***
 
 ### `instance`
+<div class="search_terms" style="display: none">instance</div>
 
 *Read-only*. The magic source instance for this effect.
 
@@ -80,6 +87,7 @@ An active magic effect.
 ***
 
 ### `isBoundItem`
+<div class="search_terms" style="display: none">isbounditem, bounditem</div>
 
 *Read-only*. If this effect has summoned a bound item.
 
@@ -90,6 +98,7 @@ An active magic effect.
 ***
 
 ### `isIllegalSummon`
+<div class="search_terms" style="display: none">isillegalsummon, illegalsummon</div>
 
 *Read-only*. If this effect has summoned a creature that has been declared illegal to summon. This is an otherwise unused flag in the game that is set for daedra and undead summon magic effects, but not for any other summon creature magic effects.
 
@@ -100,6 +109,7 @@ An active magic effect.
 ***
 
 ### `isSummon`
+<div class="search_terms" style="display: none">issummon, summon</div>
 
 *Read-only*. If this effect has summoned a creature.
 
@@ -110,6 +120,7 @@ An active magic effect.
 ***
 
 ### `magnitude`
+<div class="search_terms" style="display: none">magnitude</div>
 
 *Read-only*. The unresisted magnitude of the magic effect, that is the magnitude before resistance attributes are applied. To find the actual effective magnitude after resistances are applied, you must check the magic effect instance.
 
@@ -120,6 +131,7 @@ An active magic effect.
 ***
 
 ### `magnitudeMin`
+<div class="search_terms" style="display: none">magnitudemin</div>
 
 *Read-only*. Deprecated.
 
@@ -130,6 +142,7 @@ An active magic effect.
 ***
 
 ### `mobile`
+<div class="search_terms" style="display: none">mobile</div>
 
 *Read-only*. The mobile affected by the magic effect.
 
@@ -140,6 +153,7 @@ An active magic effect.
 ***
 
 ### `next`
+<div class="search_terms" style="display: none">next</div>
 
 *Read-only*. Deprecated.
 
@@ -150,6 +164,7 @@ An active magic effect.
 ***
 
 ### `previous`
+<div class="search_terms" style="display: none">previous</div>
 
 *Read-only*. Deprecated.
 
@@ -160,6 +175,7 @@ An active magic effect.
 ***
 
 ### `serial`
+<div class="search_terms" style="display: none">serial</div>
 
 *Read-only*. The magic source instance serial number. See the `instance` and `effectInstance` properties to easily access the magic and effect instances.
 
@@ -170,6 +186,7 @@ An active magic effect.
 ***
 
 ### `skillId`
+<div class="search_terms" style="display: none">skillid</div>
 
 *Read-only*. The skill ID (note that this may be the attribute ID if the effect affects attributes, since `attributeId` and `skillId` properties are set to the same value by the engine). Maps to values in [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) table.
 

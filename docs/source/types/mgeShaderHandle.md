@@ -10,6 +10,7 @@ A loaded MGE shader.
 ## Properties
 
 ### `enabled`
+<div class="search_terms" style="display: none">enabled</div>
 
 The enabled state of the shader.
 
@@ -20,6 +21,7 @@ The enabled state of the shader.
 ***
 
 ### `name`
+<div class="search_terms" style="display: none">name</div>
 
 The shader name.
 
@@ -30,6 +32,7 @@ The shader name.
 ***
 
 ### `orderPriority`
+<div class="search_terms" style="display: none">orderpriority</div>
 
 The calculated ordering priority value of the shader, that allows auto-sorting of shaders. Changing this value will re-sort the shader list.
 
@@ -40,6 +43,7 @@ The calculated ordering priority value of the shader, that allows auto-sorting o
 ***
 
 ### `variables`
+<div class="search_terms" style="display: none">variables</div>
 
 Lists the shader's editable variables. The result table has the variable names as keys, and the variable types as values. To get and set the actual variable, use the expression `shaderHandle.<variableName>`.
 
@@ -63,6 +67,7 @@ Lists the shader's editable variables. The result table has the variable names a
 ## Methods
 
 ### `reload`
+<div class="search_terms" style="display: none">reload</div>
 
 Reloads and recompiles the shader. Returns if the reload was successful.
 

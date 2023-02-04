@@ -10,6 +10,7 @@ A core game object used for storing game settings.
 ## Properties
 
 ### `activationAmbientLight`
+<div class="search_terms" style="display: none">activationambientlight</div>
 
 *Read-only*. An ambiental light inside the `worldObjectRoot`.
 
@@ -20,6 +21,7 @@ A core game object used for storing game settings.
 ***
 
 ### `debugRoot`
+<div class="search_terms" style="display: none">debugroot</div>
 
 *Read-only*. Access to the root of the scene graph of the Debug menu layer.
 
@@ -30,6 +32,7 @@ A core game object used for storing game settings.
 ***
 
 ### `fogProperty`
+<div class="search_terms" style="display: none">fogproperty</div>
 
 *Read-only*. No description yet available.
 
@@ -40,6 +43,7 @@ A core game object used for storing game settings.
 ***
 
 ### `parentWindowHandle`
+<div class="search_terms" style="display: none">parentwindowhandle</div>
 
 *Read-only*. The Windows HWND for the parent window.
 
@@ -50,6 +54,7 @@ A core game object used for storing game settings.
 ***
 
 ### `playerTarget`
+<div class="search_terms" style="display: none">playertarget</div>
 
 *Read-only*. The current activation target.
 
@@ -60,6 +65,7 @@ A core game object used for storing game settings.
 ***
 
 ### `renderDistance`
+<div class="search_terms" style="display: none">renderdistance</div>
 
 The game's rendering distance.
 
@@ -70,6 +76,7 @@ The game's rendering distance.
 ***
 
 ### `sceneGraphCollideString`
+<div class="search_terms" style="display: none">scenegraphcollidestring</div>
 
 *Read-only*. No description yet available.
 
@@ -80,6 +87,7 @@ The game's rendering distance.
 ***
 
 ### `sceneGraphGridString`
+<div class="search_terms" style="display: none">scenegraphgridstring</div>
 
 *Read-only*. No description yet available.
 
@@ -90,6 +98,7 @@ The game's rendering distance.
 ***
 
 ### `sceneGraphTextureString`
+<div class="search_terms" style="display: none">scenegraphtexturestring</div>
 
 *Read-only*. No description yet available.
 
@@ -100,6 +109,7 @@ The game's rendering distance.
 ***
 
 ### `screenShotsEnabled`
+<div class="search_terms" style="display: none">screenshotsenabled</div>
 
 State on if screenshots are enabled.
 
@@ -110,6 +120,7 @@ State on if screenshots are enabled.
 ***
 
 ### `screenX`
+<div class="search_terms" style="display: none">screenx</div>
 
 *Read-only*. The screen's horizontal position.
 
@@ -120,6 +131,7 @@ State on if screenshots are enabled.
 ***
 
 ### `screenY`
+<div class="search_terms" style="display: none">screeny</div>
 
 *Read-only*. The screen's vertical position.
 
@@ -130,6 +142,7 @@ State on if screenshots are enabled.
 ***
 
 ### `soundQuality`
+<div class="search_terms" style="display: none">soundquality</div>
 
 Sound quality level.
 
@@ -140,6 +153,7 @@ Sound quality level.
 ***
 
 ### `volumeEffect`
+<div class="search_terms" style="display: none">volumeeffect</div>
 
 Mix volumes for effects.
 
@@ -150,6 +164,7 @@ Mix volumes for effects.
 ***
 
 ### `volumeFootsteps`
+<div class="search_terms" style="display: none">volumefootsteps</div>
 
 Mix volumes for footsteps.
 
@@ -160,6 +175,7 @@ Mix volumes for footsteps.
 ***
 
 ### `volumeMaster`
+<div class="search_terms" style="display: none">volumemaster</div>
 
 Mix volumes for all sounds.
 
@@ -170,6 +186,7 @@ Mix volumes for all sounds.
 ***
 
 ### `volumeMedia`
+<div class="search_terms" style="display: none">volumemedia</div>
 
 Mix volumes for music.
 
@@ -180,6 +197,7 @@ Mix volumes for music.
 ***
 
 ### `volumeVoice`
+<div class="search_terms" style="display: none">volumevoice</div>
 
 Mix volumes for voices.
 
@@ -190,6 +208,7 @@ Mix volumes for voices.
 ***
 
 ### `windowHandle`
+<div class="search_terms" style="display: none">windowhandle</div>
 
 *Read-only*. The Windows HWND for the window.
 
@@ -200,6 +219,7 @@ Mix volumes for voices.
 ***
 
 ### `wireframeProperty`
+<div class="search_terms" style="display: none">wireframeproperty</div>
 
 *Read-only*. The reused wireframe property, applied when toggling wireframe rendering.
 
@@ -210,6 +230,7 @@ Mix volumes for voices.
 ***
 
 ### `worldLandscapeRoot`
+<div class="search_terms" style="display: none">worldlandscaperoot</div>
 
 *Read-only*. Access to the root of the scene graph of all the currently loaded terrain. It's nine cells in total when the player is in exterior cell. While the player is in interior cell this node is culled.
 
@@ -220,6 +241,7 @@ Mix volumes for voices.
 ***
 
 ### `worldObjectRoot`
+<div class="search_terms" style="display: none">worldobjectroot</div>
 
 *Read-only*. Access to the root of the scene graph containing all the static objects, and lights that can't be picked up. In addition, the player's scene graph is a child node of this root node.
 
@@ -230,6 +252,7 @@ Mix volumes for voices.
 ***
 
 ### `worldPickRoot`
+<div class="search_terms" style="display: none">worldpickroot</div>
 
 *Read-only*. Access to the root of the scene graph containing all the objects that can be interacted with (NPCs, items, harvestable plants, activators, doors...), but also some objects that are only rendered in the Construction Set such as sound emmiting activator objects with EditorMarker.NIF mesh.
 
@@ -240,6 +263,7 @@ Mix volumes for voices.
 ***
 
 ### `worldRoot`
+<div class="search_terms" style="display: none">worldroot</div>
 
 *Read-only*. Access to the root of the world scene graph. Contains all the 3D geometry. All the other available world root nodes are child nodes of the world root.
 
@@ -252,6 +276,7 @@ Mix volumes for voices.
 ## Methods
 
 ### `clearTarget`
+<div class="search_terms" style="display: none">cleartarget</div>
 
 Clears data related to activation, resetting what the player can activate.
 
@@ -262,6 +287,7 @@ myObject:clearTarget()
 ***
 
 ### `savePlayerOptions`
+<div class="search_terms" style="display: none">saveplayeroptions</div>
 
 Saves all options menu settings, including those changed by editing controller variables. Writes to the Windows registry.
 
@@ -281,6 +307,7 @@ myObject:savePlayerOptions()
 ***
 
 ### `setGamma`
+<div class="search_terms" style="display: none">setgamma, gamma</div>
 
 This method allows changing gamma correction.
 

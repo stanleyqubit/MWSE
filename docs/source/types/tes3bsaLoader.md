@@ -10,6 +10,7 @@ A class responsible for handling the loading of BSA files.
 ## Properties
 
 ### `archives`
+<div class="search_terms" style="display: none">archives</div>
 
 *Read-only*. An array-style table of archive files.
 
@@ -20,6 +21,7 @@ A class responsible for handling the loading of BSA files.
 ***
 
 ### `firstArchive`
+<div class="search_terms" style="display: none">firstarchive</div>
 
 *Read-only*. The start of the list of loaded archives. This is the last loaded archive, meaning first in priority.
 
@@ -32,6 +34,7 @@ A class responsible for handling the loading of BSA files.
 ## Methods
 
 ### `findFile`
+<div class="search_terms" style="display: none">findfile, file</div>
 
 Searches for a file in the archive list, and returns the archive and index that it can be found in.
 

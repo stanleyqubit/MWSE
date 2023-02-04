@@ -19,6 +19,7 @@ Some core widget interfaces offered by MWSE include:
 ## Properties
 
 ### `element`
+<div class="search_terms" style="display: none">element</div>
 
 Access back to the element this widget interface is for.
 

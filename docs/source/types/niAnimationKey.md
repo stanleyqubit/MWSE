@@ -10,6 +10,7 @@ The base-most class from which all other animation keys are derived. Simply hold
 ## Properties
 
 ### `timing`
+<div class="search_terms" style="display: none">timing</div>
 
 The timing of the animation key.
 

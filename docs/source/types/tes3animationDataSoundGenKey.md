@@ -10,6 +10,7 @@ A game object which contains information that map actor sounds to animations.
 ## Properties
 
 ### `pitch`
+<div class="search_terms" style="display: none">pitch</div>
 
 The pitch of the sound.
 
@@ -20,6 +21,7 @@ The pitch of the sound.
 ***
 
 ### `sound`
+<div class="search_terms" style="display: none">sound</div>
 
 The sound played at this sound generator key.
 
@@ -30,6 +32,7 @@ The sound played at this sound generator key.
 ***
 
 ### `startFrame`
+<div class="search_terms" style="display: none">startframe</div>
 
 The starting frame of animation at which the sound plays.
 
@@ -40,6 +43,7 @@ The starting frame of animation at which the sound plays.
 ***
 
 ### `startTime`
+<div class="search_terms" style="display: none">starttime</div>
 
 
 
@@ -50,6 +54,7 @@ The starting frame of animation at which the sound plays.
 ***
 
 ### `volume`
+<div class="search_terms" style="display: none">volume</div>
 
 The sound's volume.
 

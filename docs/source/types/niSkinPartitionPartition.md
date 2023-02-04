@@ -10,6 +10,7 @@ Skinning data for a submesh, optimized for hardware skinning.
 ## Properties
 
 ### `bones`
+<div class="search_terms" style="display: none">bones</div>
 
 *Read-only*. The list of bone indices (that influence this partition) from the bones array in the parent `niSkinInstance` node.
 
@@ -20,6 +21,7 @@ Skinning data for a submesh, optimized for hardware skinning.
 ***
 
 ### `bonesPerVertex`
+<div class="search_terms" style="display: none">bonespervertex</div>
 
 
 
@@ -30,6 +32,7 @@ Skinning data for a submesh, optimized for hardware skinning.
 ***
 
 ### `stripLengths`
+<div class="search_terms" style="display: none">striplengths</div>
 
 *Read-only*. 
 
@@ -40,6 +43,7 @@ Skinning data for a submesh, optimized for hardware skinning.
 ***
 
 ### `triangles`
+<div class="search_terms" style="display: none">triangles</div>
 
 *Read-only*. The triangles that form this submesh.
 
@@ -50,6 +54,7 @@ Skinning data for a submesh, optimized for hardware skinning.
 ***
 
 ### `vertices`
+<div class="search_terms" style="display: none">vertices</div>
 
 *Read-only*. Maps the weight/influence list in this submesh to the vertices in the shape being skinned.
 

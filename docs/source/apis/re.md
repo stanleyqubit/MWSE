@@ -16,6 +16,7 @@ There is also a copy in the MWSE repo at: deps/lpeg/re.html
 ## Functions
 
 ### `re.compile`
+<div class="search_terms" style="display: none">compile</div>
 
 Compiles the given string and returns an equivalent lpeg pattern.
 	
@@ -38,6 +39,7 @@ local result = re.compile(s, defs)
 ***
 
 ### `re.find`
+<div class="search_terms" style="display: none">find</div>
 
 Searches the given pattern in the given subject.
 	
@@ -82,6 +84,7 @@ local result = re.find(subject, pattern, init)
 ***
 
 ### `re.gsub`
+<div class="search_terms" style="display: none">gsub</div>
 
 Does a global substitution, replacing all occurrences of pattern in the given subject by replacement.
 
@@ -121,6 +124,7 @@ local result = re.gsub(subject, pattern, replacement)
 ***
 
 ### `re.match`
+<div class="search_terms" style="display: none">match</div>
 
 Matches the given pattern against the given subject, returning all captures.
 
@@ -163,6 +167,7 @@ local result = re.match(subject, pattern)
 ***
 
 ### `re.updatelocale`
+<div class="search_terms" style="display: none">updatelocale, locale</div>
 
 Updates the pre-defined character classes to the current locale.
 

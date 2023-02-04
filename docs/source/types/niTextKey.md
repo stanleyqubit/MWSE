@@ -10,6 +10,7 @@ A class used to represent text notes that have an associated time value. They ar
 ## Properties
 
 ### `text`
+<div class="search_terms" style="display: none">text</div>
 
 
 
@@ -20,6 +21,7 @@ A class used to represent text notes that have an associated time value. They ar
 ***
 
 ### `time`
+<div class="search_terms" style="display: none">time</div>
 
 
 

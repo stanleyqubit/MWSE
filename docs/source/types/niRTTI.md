@@ -10,6 +10,7 @@ Runtime type information for NetImmerse structures.
 ## Properties
 
 ### `name`
+<div class="search_terms" style="display: none">name</div>
 
 The human readable name for the type.
 
@@ -20,6 +21,7 @@ The human readable name for the type.
 ***
 
 ### `parent`
+<div class="search_terms" style="display: none">parent</div>
 
 The runtime type information that this type derives from.
 

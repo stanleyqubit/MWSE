@@ -10,6 +10,7 @@ Convenience access to frame timer functions. This is the same as passing `type =
 ## Functions
 
 ### `timer.frame.delayOneFrame`
+<div class="search_terms" style="display: none">delayoneframe</div>
 
 Creates a timer that will finish the next frame.
 

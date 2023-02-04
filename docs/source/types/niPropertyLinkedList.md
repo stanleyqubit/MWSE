@@ -10,6 +10,7 @@ A linked list of properties.
 ## Properties
 
 ### `data`
+<div class="search_terms" style="display: none">data</div>
 
 *Read-only*. The current property in the linked list.
 
@@ -20,6 +21,7 @@ A linked list of properties.
 ***
 
 ### `next`
+<div class="search_terms" style="display: none">next</div>
 
 *Read-only*. The next property in the linked list.
 

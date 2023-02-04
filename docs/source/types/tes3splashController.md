@@ -10,6 +10,7 @@ A core game controller responsible for controlling temporary graphics.
 ## Properties
 
 ### `activeSplashes`
+<div class="search_terms" style="display: none">activesplashes</div>
 
 *Read-only*. A list of tes3splashControllerActiveSplash objects.
 
@@ -20,6 +21,7 @@ A core game controller responsible for controlling temporary graphics.
 ***
 
 ### `bloodMeshCount`
+<div class="search_terms" style="display: none">bloodmeshcount</div>
 
 *Read-only*. The number of loaded blood meshes.
 
@@ -30,6 +32,7 @@ A core game controller responsible for controlling temporary graphics.
 ***
 
 ### `bloodMeshes`
+<div class="search_terms" style="display: none">bloodmeshes</div>
 
 *Read-only*. A list of loaded blood meshes.
 
@@ -40,6 +43,7 @@ A core game controller responsible for controlling temporary graphics.
 ***
 
 ### `bloodSplashDurations`
+<div class="search_terms" style="display: none">bloodsplashdurations</div>
 
 *Read-only*. A list of blood splash durations, measured in seconds.
 
@@ -50,6 +54,7 @@ A core game controller responsible for controlling temporary graphics.
 ***
 
 ### `bloodTextureCount`
+<div class="search_terms" style="display: none">bloodtexturecount</div>
 
 *Read-only*. The number of loaded blood textures.
 
@@ -60,6 +65,7 @@ A core game controller responsible for controlling temporary graphics.
 ***
 
 ### `bloodTextureProperties`
+<div class="search_terms" style="display: none">bloodtextureproperties</div>
 
 *Read-only*. A list of loaded blood texturing properties.
 
@@ -70,6 +76,7 @@ A core game controller responsible for controlling temporary graphics.
 ***
 
 ### `bloodTextures`
+<div class="search_terms" style="display: none">bloodtextures</div>
 
 *Read-only*. A list of blood splash textures.
 

@@ -11,6 +11,7 @@ This type inherits the following: [niExtraData](../../types/niExtraData), [niObj
 ## Properties
 
 ### `genericData`
+<div class="search_terms" style="display: none">genericdata</div>
 
 *Read-only*. Generic data held in the extra data. This is not used if a subtype of extra data is used.
 
@@ -21,6 +22,7 @@ This type inherits the following: [niExtraData](../../types/niExtraData), [niObj
 ***
 
 ### `next`
+<div class="search_terms" style="display: none">next</div>
 
 The next extra data available on the object.
 
@@ -31,6 +33,7 @@ The next extra data available on the object.
 ***
 
 ### `refCount`
+<div class="search_terms" style="display: none">refcount</div>
 
 *Read-only*. The number of references that exist for this object. When this value reaches zero, the object will be deleted.
 
@@ -41,6 +44,7 @@ The next extra data available on the object.
 ***
 
 ### `reference`
+<div class="search_terms" style="display: none">reference</div>
 
 The reference stored on this extra data.
 
@@ -51,6 +55,7 @@ The reference stored on this extra data.
 ***
 
 ### `RTTI`
+<div class="search_terms" style="display: none">rtti</div>
 
 *Read-only*. The runtime type information for this object. This is an alias for the `.runTimeTypeInformation` property.
 
@@ -61,6 +66,7 @@ The reference stored on this extra data.
 ***
 
 ### `runTimeTypeInformation`
+<div class="search_terms" style="display: none">runtimetypeinformation</div>
 
 *Read-only*. The runtime type information for this object.
 
@@ -73,6 +79,7 @@ The reference stored on this extra data.
 ## Methods
 
 ### `clone`
+<div class="search_terms" style="display: none">clone</div>
 
 Creates a copy of this object.
 
@@ -87,6 +94,7 @@ local result = myObject:clone()
 ***
 
 ### `isInstanceOfType`
+<div class="search_terms" style="display: none">isinstanceoftype, instanceoftype</div>
 
 Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
@@ -105,6 +113,7 @@ local result = myObject:isInstanceOfType(type)
 ***
 
 ### `isOfType`
+<div class="search_terms" style="display: none">isoftype, oftype</div>
 
 Determines if the object is of a given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
@@ -123,6 +132,7 @@ local result = myObject:isOfType(type)
 ***
 
 ### `saveBinary`
+<div class="search_terms" style="display: none">savebinary</div>
 
 Serializes the object, and writes it to the given file.
 

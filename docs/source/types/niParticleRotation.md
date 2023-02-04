@@ -11,6 +11,7 @@ This type inherits the following: [niParticleModifier](../../types/niParticleMod
 ## Properties
 
 ### `controller`
+<div class="search_terms" style="display: none">controller</div>
 
 Access to the generic time controller for particle systems.
 
@@ -21,6 +22,7 @@ Access to the generic time controller for particle systems.
 ***
 
 ### `initialAxis`
+<div class="search_terms" style="display: none">initialaxis</div>
 
 The axis of rotation for the particles. If `.randomInitialAxis` is set to true then this won't be used.
 
@@ -31,6 +33,7 @@ The axis of rotation for the particles. If `.randomInitialAxis` is set to true t
 ***
 
 ### `next`
+<div class="search_terms" style="display: none">next</div>
 
 Access to the next attached modifier.
 
@@ -41,6 +44,7 @@ Access to the next attached modifier.
 ***
 
 ### `randomInitialAxis`
+<div class="search_terms" style="display: none">randominitialaxis</div>
 
 If set to true, random axis of rotation will be used to rotate each particle.
 
@@ -51,6 +55,7 @@ If set to true, random axis of rotation will be used to rotate each particle.
 ***
 
 ### `refCount`
+<div class="search_terms" style="display: none">refcount</div>
 
 *Read-only*. The number of references that exist for this object. When this value reaches zero, the object will be deleted.
 
@@ -61,6 +66,7 @@ If set to true, random axis of rotation will be used to rotate each particle.
 ***
 
 ### `rotationSpeed`
+<div class="search_terms" style="display: none">rotationspeed</div>
 
 The speed at which each particle rotates.
 
@@ -71,6 +77,7 @@ The speed at which each particle rotates.
 ***
 
 ### `RTTI`
+<div class="search_terms" style="display: none">rtti</div>
 
 *Read-only*. The runtime type information for this object. This is an alias for the `.runTimeTypeInformation` property.
 
@@ -81,6 +88,7 @@ The speed at which each particle rotates.
 ***
 
 ### `runTimeTypeInformation`
+<div class="search_terms" style="display: none">runtimetypeinformation</div>
 
 *Read-only*. The runtime type information for this object.
 
@@ -93,6 +101,7 @@ The speed at which each particle rotates.
 ## Methods
 
 ### `clone`
+<div class="search_terms" style="display: none">clone</div>
 
 Creates a copy of this object.
 
@@ -107,6 +116,7 @@ local result = myObject:clone()
 ***
 
 ### `isInstanceOfType`
+<div class="search_terms" style="display: none">isinstanceoftype, instanceoftype</div>
 
 Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
@@ -125,6 +135,7 @@ local result = myObject:isInstanceOfType(type)
 ***
 
 ### `isOfType`
+<div class="search_terms" style="display: none">isoftype, oftype</div>
 
 Determines if the object is of a given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
@@ -143,6 +154,7 @@ local result = myObject:isOfType(type)
 ***
 
 ### `saveBinary`
+<div class="search_terms" style="display: none">savebinary</div>
 
 Serializes the object, and writes it to the given file.
 

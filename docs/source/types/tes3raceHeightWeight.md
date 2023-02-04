@@ -10,6 +10,7 @@ A substructure for a race, storing a height or weight for male and female actors
 ## Properties
 
 ### `female`
+<div class="search_terms" style="display: none">female</div>
 
 The height or weight for female actors.
 
@@ -20,6 +21,7 @@ The height or weight for female actors.
 ***
 
 ### `male`
+<div class="search_terms" style="display: none">male</div>
 
 The height or weight for male actors.
 

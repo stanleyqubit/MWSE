@@ -10,6 +10,7 @@ A core game object used for storing both active and non-dynamic gameplay data.
 ## Properties
 
 ### `backgroundThread`
+<div class="search_terms" style="display: none">backgroundthread</div>
 
 *Read-only*. A Windows handle to the background processing thread.
 
@@ -20,6 +21,7 @@ A core game object used for storing both active and non-dynamic gameplay data.
 ***
 
 ### `backgroundThreadId`
+<div class="search_terms" style="display: none">backgroundthreadid</div>
 
 *Read-only*. The thread ID for the background processing thread.
 
@@ -30,6 +32,7 @@ A core game object used for storing both active and non-dynamic gameplay data.
 ***
 
 ### `backgroundThreadRunning`
+<div class="search_terms" style="display: none">backgroundthreadrunning</div>
 
 *Read-only*. Access to the running state for the background processing thread.
 
@@ -40,6 +43,7 @@ A core game object used for storing both active and non-dynamic gameplay data.
 ***
 
 ### `cellChanged`
+<div class="search_terms" style="display: none">cellchanged</div>
 
 *Read-only*. A flag set for the frame that the player has changed cells.
 
@@ -50,6 +54,7 @@ A core game object used for storing both active and non-dynamic gameplay data.
 ***
 
 ### `centralGridX`
+<div class="search_terms" style="display: none">centralgridx</div>
 
 *Read-only*. The position of the origin horizontal grid coordinate.
 
@@ -60,6 +65,7 @@ A core game object used for storing both active and non-dynamic gameplay data.
 ***
 
 ### `centralGridY`
+<div class="search_terms" style="display: none">centralgridy</div>
 
 *Read-only*. The position of the origin longitudinal grid coordinate.
 
@@ -70,6 +76,7 @@ A core game object used for storing both active and non-dynamic gameplay data.
 ***
 
 ### `currentAmbientWaterSound`
+<div class="search_terms" style="display: none">currentambientwatersound</div>
 
 Access to the current ambient water sound.
 
@@ -80,6 +87,7 @@ Access to the current ambient water sound.
 ***
 
 ### `currentCell`
+<div class="search_terms" style="display: none">currentcell</div>
 
 *Read-only*. Access to the cell that the player is currently in.
 
@@ -90,6 +98,7 @@ Access to the current ambient water sound.
 ***
 
 ### `currentInteriorCell`
+<div class="search_terms" style="display: none">currentinteriorcell</div>
 
 *Read-only*. Access to the current interior cell, if the player is in an interior.
 
@@ -100,6 +109,7 @@ Access to the current ambient water sound.
 ***
 
 ### `dontThreadLoad`
+<div class="search_terms" style="display: none">dontthreadload</div>
 
 Access to dontThreadLoad setting.
 
@@ -110,6 +120,7 @@ Access to dontThreadLoad setting.
 ***
 
 ### `exteriorCells`
+<div class="search_terms" style="display: none">exteriorcells</div>
 
 *Read-only*. A table of nine [`tes3cellExteriorData`](https://mwse.github.io/MWSE/types/tes3cellExteriorData/) objects for all loaded exterior cells.
 
@@ -120,6 +131,7 @@ Access to dontThreadLoad setting.
 ***
 
 ### `lastExteriorCell`
+<div class="search_terms" style="display: none">lastexteriorcell</div>
 
 *Read-only*. Access to the last visited exterior cell.
 
@@ -130,6 +142,7 @@ Access to dontThreadLoad setting.
 ***
 
 ### `mainThread`
+<div class="search_terms" style="display: none">mainthread</div>
 
 *Read-only*. A Windows handle to the main execution thread.
 
@@ -140,6 +153,7 @@ Access to dontThreadLoad setting.
 ***
 
 ### `mainThreadId`
+<div class="search_terms" style="display: none">mainthreadid</div>
 
 *Read-only*. The thread ID for the main execution thread.
 
@@ -150,6 +164,7 @@ Access to dontThreadLoad setting.
 ***
 
 ### `nonDynamicData`
+<div class="search_terms" style="display: none">nondynamicdata</div>
 
 *Read-only*. A child structure where core game objects are held.
 
@@ -160,6 +175,7 @@ Access to dontThreadLoad setting.
 ***
 
 ### `suppressThreadLoad`
+<div class="search_terms" style="display: none">suppressthreadload</div>
 
 Access to suppressThreadLoad setting.
 
@@ -170,6 +186,7 @@ Access to suppressThreadLoad setting.
 ***
 
 ### `threadSleepTime`
+<div class="search_terms" style="display: none">threadsleeptime</div>
 
 *Read-only*. No description yet available.
 
@@ -180,6 +197,7 @@ Access to suppressThreadLoad setting.
 ***
 
 ### `useCellTransitionFader`
+<div class="search_terms" style="display: none">usecelltransitionfader</div>
 
 An engine flag that controls if there is a fade in/out between cells.
 
@@ -190,6 +208,7 @@ An engine flag that controls if there is a fade in/out between cells.
 ***
 
 ### `worldLandscapeRoot`
+<div class="search_terms" style="display: none">worldlandscaperoot</div>
 
 *Read-only*. Access to the root of the scene graph of all the currently loaded terrain. It's nine cells in total when the player is in exterior cell. While the player is in interior cell this node is culled.
 
@@ -200,6 +219,7 @@ An engine flag that controls if there is a fade in/out between cells.
 ***
 
 ### `worldObjectRoot`
+<div class="search_terms" style="display: none">worldobjectroot</div>
 
 *Read-only*. Access to the root of the scene graph containing all the static objects, and lights that can't be picked up. In addition, the player's scene graph is a child node of this root node.
 
@@ -210,6 +230,7 @@ An engine flag that controls if there is a fade in/out between cells.
 ***
 
 ### `worldPickObjectRoot`
+<div class="search_terms" style="display: none">worldpickobjectroot</div>
 
 *Read-only*. Access to the root of the scene graph containing all the objects that can be interacted with (NPCs, items, harvestable plants, activators, doors...), but also some objects that are only rendered in the Construction Set such as sound emmiting activator objects with EditorMarker.NIF mesh.
 
@@ -222,6 +243,7 @@ An engine flag that controls if there is a fade in/out between cells.
 ## Methods
 
 ### `updateCollisionGroupsForActiveCells`
+<div class="search_terms" style="display: none">updatecollisiongroupsforactivecells, collisiongroupsforactivecells</div>
 
 No description yet available.
 

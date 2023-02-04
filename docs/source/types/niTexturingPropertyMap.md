@@ -10,6 +10,7 @@ A combination of a texture, a filter mode, a clamping mode, and an index to a se
 ## Properties
 
 ### `clampMode`
+<div class="search_terms" style="display: none">clampmode</div>
 
 The clamp mode for the Map. Maps to values in [`ni.texturingPropertyClampMode`](https://mwse.github.io/MWSE/references/ni/texturing-property-clamp-modes/) table.
 
@@ -20,6 +21,7 @@ The clamp mode for the Map. Maps to values in [`ni.texturingPropertyClampMode`](
 ***
 
 ### `filterMode`
+<div class="search_terms" style="display: none">filtermode</div>
 
 The filter mode for the Map. Maps to values in [`ni.texturingPropertyFilterMode`](https://mwse.github.io/MWSE/references/ni/texturing-property-filter-modes/) table.
 
@@ -30,6 +32,7 @@ The filter mode for the Map. Maps to values in [`ni.texturingPropertyFilterMode`
 ***
 
 ### `texCoordSet`
+<div class="search_terms" style="display: none">texcoordset</div>
 
 The texture coordinate set for the Map.
 
@@ -40,6 +43,7 @@ The texture coordinate set for the Map.
 ***
 
 ### `texture`
+<div class="search_terms" style="display: none">texture</div>
 
 The texture for the Map.
 
@@ -52,6 +56,7 @@ The texture for the Map.
 ## Functions
 
 ### `new`
+<div class="search_terms" style="display: none">new</div>
 
 Creates a new basic or bump map.
 

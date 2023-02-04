@@ -10,6 +10,7 @@ The mwse library provides methods for interacting with MWSE itself, rather than 
 ## Properties
 
 ### `mwse.buildDate`
+<div class="search_terms" style="display: none">builddate</div>
 
 A numerical representation of the date that version of MWSE currently being used was built on.
 
@@ -33,6 +34,7 @@ Formatted as YYYYMMDD.
 ***
 
 ### `mwse.gameTimers`
+<div class="search_terms" style="display: none">gametimers</div>
 
 The mwseTimerController responsible for game-type timers.
 
@@ -43,6 +45,7 @@ The mwseTimerController responsible for game-type timers.
 ***
 
 ### `mwse.realTimers`
+<div class="search_terms" style="display: none">realtimers</div>
 
 The mwseTimerController responsible for real-type timers.
 
@@ -53,6 +56,7 @@ The mwseTimerController responsible for real-type timers.
 ***
 
 ### `mwse.simulateTimers`
+<div class="search_terms" style="display: none">simulatetimers</div>
 
 The mwseTimerController responsible for simulate-type timers.
 
@@ -63,6 +67,7 @@ The mwseTimerController responsible for simulate-type timers.
 ***
 
 ### `mwse.version`
+<div class="search_terms" style="display: none">version</div>
 
 A numerical representation of the release version of MWSE currently being used.
 
@@ -79,6 +84,7 @@ It is usually better to use `mwse.buildDate` instead.
 ## Functions
 
 ### `mwse.clearScriptOverride`
+<div class="search_terms" style="display: none">clearscriptoverride</div>
 
 Configures MWSE to no longer execute a lua function instead when a script would run. This undoes the work of `mwse.overrideScript`.
 
@@ -97,6 +103,7 @@ local result = mwse.clearScriptOverride(scriptId)
 ***
 
 ### `mwse.getCurrentMorrowindScriptState`
+<div class="search_terms" style="display: none">getcurrentmorrowindscriptstate, currentmorrowindscriptstate</div>
 
 This function returns information on the current mwscript execution state.
 
@@ -112,6 +119,7 @@ local script, reference = mwse.getCurrentMorrowindScriptState()
 ***
 
 ### `mwse.getVersion`
+<div class="search_terms" style="display: none">getversion, version</div>
 
 Equivalent to mwse.version.
 
@@ -126,6 +134,7 @@ local result = mwse.getVersion()
 ***
 
 ### `mwse.getVirtualMemoryUsage`
+<div class="search_terms" style="display: none">getvirtualmemoryusage, virtualmemoryusage</div>
 
 Returns the amount of memory used, in bytes.
 
@@ -140,6 +149,7 @@ local result = mwse.getVirtualMemoryUsage()
 ***
 
 ### `mwse.loadConfig`
+<div class="search_terms" style="display: none">loadconfig</div>
 
 Loads a config table from Data Files\\MWSE\\config\\{fileName}.json.
 	
@@ -161,6 +171,7 @@ local result = mwse.loadConfig(fileName, defaults)
 ***
 
 ### `mwse.loadTranslations`
+<div class="search_terms" style="display: none">loadtranslations</div>
 
 Loads translations from the i18n folder for a given mod. This is locale-aware, using the result from `tes3.getLanguage()`. See the [mod translations guide](https://mwse.github.io/MWSE/guides/mod-translations/) for more information.
 
@@ -179,6 +190,7 @@ local i18n = mwse.loadTranslations(mod)
 ***
 
 ### `mwse.log`
+<div class="search_terms" style="display: none">log</div>
 
 This function writes information to the mwse.log file in the user's installation directory.
 
@@ -196,6 +208,7 @@ mwse.log(message, formatValues)
 ***
 
 ### `mwse.longToString`
+<div class="search_terms" style="display: none">longtostring</div>
 
 Converts a TES3 object type (e.g. from tes3.objectType) into an uppercase, 4-character string.
 
@@ -214,6 +227,7 @@ local result = mwse.longToString(type)
 ***
 
 ### `mwse.overrideScript`
+<div class="search_terms" style="display: none">overridescript</div>
 
 Configures MWSE to execute a given function instead when a script would run.
 
@@ -279,6 +293,7 @@ local result = mwse.overrideScript(scriptId, callback)
 ***
 
 ### `mwse.saveConfig`
+<div class="search_terms" style="display: none">saveconfig</div>
 
 Saves a config table to Data Files\\MWSE\\config\\{fileName}.json.
 
@@ -299,6 +314,7 @@ local result = mwse.saveConfig(fileName, object, config)
 ***
 
 ### `mwse.stringToLong`
+<div class="search_terms" style="display: none">stringtolong</div>
 
 Converts an uppercase, 4-character string into a TES3 object type.
 

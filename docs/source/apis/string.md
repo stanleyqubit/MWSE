@@ -10,6 +10,7 @@ This library provides generic functions for string manipulation, such as finding
 ## Functions
 
 ### `string.endswith`
+<div class="search_terms" style="display: none">endswith</div>
 
 Returns true if a string ends with a given pattern.
 
@@ -29,6 +30,7 @@ local result = string.endswith(s, pattern)
 ***
 
 ### `string.format`
+<div class="search_terms" style="display: none">format</div>
 
 This function creates a string, given various values. The first parameter follows the [printf](http://www.cplusplus.com/reference/cstdio/printf) format, with the additional option of `%q` to automatically quote a string.
 
@@ -70,6 +72,7 @@ local result = string.format(format, values)
 ***
 
 ### `string.insert`
+<div class="search_terms" style="display: none">insert</div>
 
 Returns a string where one string has been inserted into another at a given position.
 
@@ -90,6 +93,7 @@ local inserted = string.insert(s1, s2, position)
 ***
 
 ### `string.multifind`
+<div class="search_terms" style="display: none">multifind</div>
 
 Performs the logic of find, using a table of patterns.
 
@@ -109,6 +113,7 @@ string.multifind(s, pattern, index, plain)
 ***
 
 ### `string.split`
+<div class="search_terms" style="display: none">split</div>
 
 Returns an array-style table with `str` split by `sep`. The `sep`erator is not part of the results. By default the `sep`erator is `%s`, splitting the given `str`ing by spaces.
 
@@ -128,6 +133,7 @@ local split = string.split(str, sep)
 ***
 
 ### `string.startswith`
+<div class="search_terms" style="display: none">startswith</div>
 
 Returns true if a string begins with a given pattern.
 
@@ -147,6 +153,7 @@ local result = string.startswith(s, pattern)
 ***
 
 ### `string.trim`
+<div class="search_terms" style="display: none">trim</div>
 
 Returns a copy of the string, with whitespace removed from the start and end.
 

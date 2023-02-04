@@ -10,6 +10,7 @@ A global script object. Any script (in mwscript) that is not attached to any obj
 ## Properties
 
 ### `context`
+<div class="search_terms" style="display: none">context</div>
 
 *Read-only*. A special context used for getting and setting script's variables.
 
@@ -20,6 +21,7 @@ A global script object. Any script (in mwscript) that is not attached to any obj
 ***
 
 ### `reference`
+<div class="search_terms" style="display: none">reference</div>
 
 *Read-only*. A reference this global script is tied to, if any. If the reference field isn't empty, then the global script in question is a Targeted script (a name given to it in Morrowind Scripting for Dummies).
 
@@ -30,6 +32,7 @@ A global script object. Any script (in mwscript) that is not attached to any obj
 ***
 
 ### `script`
+<div class="search_terms" style="display: none">script</div>
 
 *Read-only*. Access to global script object's associated script.
 

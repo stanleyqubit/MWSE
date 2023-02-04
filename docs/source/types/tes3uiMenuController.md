@@ -10,6 +10,7 @@ The controller responsible for the menu system.
 ## Properties
 
 ### `fogOfWarDisabled`
+<div class="search_terms" style="display: none">fogofwardisabled</div>
 
 A flag that controls whether the local map menu renders fog of war.
 
@@ -20,6 +21,7 @@ A flag that controls whether the local map menu renders fog of war.
 ***
 
 ### `fontColors`
+<div class="search_terms" style="display: none">fontcolors</div>
 
 *Read-only*. A 1-indexed table with 49 [`tes3uiFontColor`](https://mwse.github.io/MWSE/types/tes3uiFontColor/) objects for all different in-game uses for fonts.
 
@@ -32,6 +34,7 @@ Namely: `normal`, `normal_over`, `normal_pressed`, `active`, `active_over`, `act
 ***
 
 ### `helpDelay`
+<div class="search_terms" style="display: none">helpdelay</div>
 
 *Read-only*. Delay in seconds before help tooltip appears. Corresponds to the Menu Help Delay slider in Options menu.
 
@@ -42,6 +45,7 @@ Namely: `normal`, `normal_over`, `normal_pressed`, `active`, `active_over`, `act
 ***
 
 ### `helpRoot`
+<div class="search_terms" style="display: none">helproot</div>
 
 *Read-only*. The root element of the help UI layer. The help UI layer will always be drawn after the main UI layer and therefore all elements on it will be shown in front of elements of the main UI layer. This element contains top level menus like tooltips, message boxes and more as direct children. Prefer using the [`tes3ui.findHelpLayerMenu()`](https://mwse.github.io/MWSE/apis/tes3ui/#tes3uifindhelplayermenu) function to find one of this element's direct children.
 
@@ -52,6 +56,7 @@ Namely: `normal`, `normal_over`, `normal_pressed`, `active`, `active_over`, `act
 ***
 
 ### `inputController`
+<div class="search_terms" style="display: none">inputcontroller</div>
 
 *Read-only*. Access to `tes3uiMenuInputController`.
 
@@ -62,6 +67,7 @@ Namely: `normal`, `normal_over`, `normal_pressed`, `active`, `active_over`, `act
 ***
 
 ### `inventoryMenuEnabled`
+<div class="search_terms" style="display: none">inventorymenuenabled</div>
 
 A flag that controls whether the inventory menu is enabled or disabled.
 
@@ -72,6 +78,7 @@ A flag that controls whether the inventory menu is enabled or disabled.
 ***
 
 ### `magicMenuEnabled`
+<div class="search_terms" style="display: none">magicmenuenabled</div>
 
 A flag that controls whether the magic menu is enabled or disabled. Magic menu is the menu used to select a spell for casting from available spells, scrolls and enchantments.
 
@@ -82,6 +89,7 @@ A flag that controls whether the magic menu is enabled or disabled. Magic menu i
 ***
 
 ### `mainRoot`
+<div class="search_terms" style="display: none">mainroot</div>
 
 *Read-only*. The root element of the main UI layer. This element contains top level menus like the inventory menu, magic menu, status menu, map menu, the HUD and more as direct children. Prefer using the [`tes3ui.findMenu()`](https://mwse.github.io/MWSE/apis/tes3ui/#tes3uifindmenu) function to find one of this element's direct children.
 
@@ -92,6 +100,7 @@ A flag that controls whether the magic menu is enabled or disabled. Magic menu i
 ***
 
 ### `mapMenuEnabled`
+<div class="search_terms" style="display: none">mapmenuenabled</div>
 
 A flag that controls whether the map menu is enabled or disabled.
 
@@ -102,6 +111,7 @@ A flag that controls whether the map menu is enabled or disabled.
 ***
 
 ### `scriptCompiler`
+<div class="search_terms" style="display: none">scriptcompiler</div>
 
 *Read-only*. Access to `tes3scriptCompiler` object.
 
@@ -112,6 +122,7 @@ A flag that controls whether the map menu is enabled or disabled.
 ***
 
 ### `statsMenuEnabled`
+<div class="search_terms" style="display: none">statsmenuenabled</div>
 
 A flag that controls whether the stats menu is enabled or disabled. Stats menu lists all of the player's current skill and attribute values, level, race, class, health, magicka and fatigue.
 

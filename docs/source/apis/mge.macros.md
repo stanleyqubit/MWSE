@@ -10,6 +10,7 @@ Access to MGE's macro functions.
 ## Functions
 
 ### `mge.macros.decreaseFOV`
+<div class="search_terms" style="display: none">decreasefov</div>
 
 Triggers the MGE "Decrease FOV" macro.
 
@@ -20,6 +21,7 @@ mge.macros.decreaseFOV()
 ***
 
 ### `mge.macros.decreaseViewRange`
+<div class="search_terms" style="display: none">decreaseviewrange</div>
 
 Triggers the MGE "Decrease View Range" macro.
 
@@ -30,6 +32,7 @@ mge.macros.decreaseViewRange()
 ***
 
 ### `mge.macros.decreaseZoom`
+<div class="search_terms" style="display: none">decreasezoom</div>
 
 Triggers the MGE "Decrease Zoom" macro.
 
@@ -40,6 +43,7 @@ mge.macros.decreaseZoom()
 ***
 
 ### `mge.macros.disableMusic`
+<div class="search_terms" style="display: none">disablemusic, music</div>
 
 Triggers the MGE "Disable Music" macro.
 
@@ -50,6 +54,7 @@ mge.macros.disableMusic()
 ***
 
 ### `mge.macros.haggleLess1`
+<div class="search_terms" style="display: none">haggleless1</div>
 
 Triggers the MGE "Haggle Less 1" macro.
 
@@ -60,6 +65,7 @@ mge.macros.haggleLess1()
 ***
 
 ### `mge.macros.haggleLess10`
+<div class="search_terms" style="display: none">haggleless10</div>
 
 Triggers the MGE "Haggle Less 10" macro.
 
@@ -70,6 +76,7 @@ mge.macros.haggleLess10()
 ***
 
 ### `mge.macros.haggleLess100`
+<div class="search_terms" style="display: none">haggleless100</div>
 
 Triggers the MGE "Haggle Less 100" macro.
 
@@ -80,6 +87,7 @@ mge.macros.haggleLess100()
 ***
 
 ### `mge.macros.haggleLess1000`
+<div class="search_terms" style="display: none">haggleless1000</div>
 
 Triggers the MGE "Haggle Less 1,000" macro.
 
@@ -90,6 +98,7 @@ mge.macros.haggleLess1000()
 ***
 
 ### `mge.macros.haggleLess10000`
+<div class="search_terms" style="display: none">haggleless10000</div>
 
 Triggers the MGE "Haggle Less 10,000" macro.
 
@@ -100,6 +109,7 @@ mge.macros.haggleLess10000()
 ***
 
 ### `mge.macros.haggleMore1`
+<div class="search_terms" style="display: none">hagglemore1</div>
 
 Triggers the MGE "Haggle More 1" macro.
 
@@ -110,6 +120,7 @@ mge.macros.haggleMore1()
 ***
 
 ### `mge.macros.haggleMore10`
+<div class="search_terms" style="display: none">hagglemore10</div>
 
 Triggers the MGE "Haggle More 10" macro.
 
@@ -120,6 +131,7 @@ mge.macros.haggleMore10()
 ***
 
 ### `mge.macros.haggleMore100`
+<div class="search_terms" style="display: none">hagglemore100</div>
 
 Triggers the MGE "Haggle More 100" macro.
 
@@ -130,6 +142,7 @@ mge.macros.haggleMore100()
 ***
 
 ### `mge.macros.haggleMore1000`
+<div class="search_terms" style="display: none">hagglemore1000</div>
 
 Triggers the MGE "Haggle More 1,000" macro.
 
@@ -140,6 +153,7 @@ mge.macros.haggleMore1000()
 ***
 
 ### `mge.macros.haggleMore10000`
+<div class="search_terms" style="display: none">hagglemore10000</div>
 
 Triggers the MGE "Haggle More 10,000" macro.
 
@@ -150,6 +164,7 @@ mge.macros.haggleMore10000()
 ***
 
 ### `mge.macros.increaseFOV`
+<div class="search_terms" style="display: none">increasefov</div>
 
 Triggers the MGE "Increase FOV" macro.
 
@@ -160,6 +175,7 @@ mge.macros.increaseFOV()
 ***
 
 ### `mge.macros.increaseViewRange`
+<div class="search_terms" style="display: none">increaseviewrange</div>
 
 Triggers the MGE "Increase View Range" macro.
 
@@ -170,6 +186,7 @@ mge.macros.increaseViewRange()
 ***
 
 ### `mge.macros.increaseZoom`
+<div class="search_terms" style="display: none">increasezoom</div>
 
 Triggers the MGE "Increase Zoom" macro.
 
@@ -180,6 +197,7 @@ mge.macros.increaseZoom()
 ***
 
 ### `mge.macros.moveBack3PCam`
+<div class="search_terms" style="display: none">moveback3pcam</div>
 
 Triggers the MGE "Move Back 3rd Person Camera" macro.
 
@@ -190,6 +208,7 @@ mge.macros.moveBack3PCam()
 ***
 
 ### `mge.macros.moveDown3PCam`
+<div class="search_terms" style="display: none">movedown3pcam</div>
 
 Triggers the MGE "Move Down 3rd Person Camera" macro.
 
@@ -200,6 +219,7 @@ mge.macros.moveDown3PCam()
 ***
 
 ### `mge.macros.moveForward3PCam`
+<div class="search_terms" style="display: none">moveforward3pcam</div>
 
 Triggers the MGE "Move Forward 3rd Person Camera" macro.
 
@@ -210,6 +230,7 @@ mge.macros.moveForward3PCam()
 ***
 
 ### `mge.macros.moveLeft3PCam`
+<div class="search_terms" style="display: none">moveleft3pcam</div>
 
 Triggers the MGE "Move Left 3rd Person Camera" macro.
 
@@ -220,6 +241,7 @@ mge.macros.moveLeft3PCam()
 ***
 
 ### `mge.macros.moveRight3PCam`
+<div class="search_terms" style="display: none">moveright3pcam</div>
 
 Triggers the MGE "Move Right 3rd Person Camera" macro.
 
@@ -230,6 +252,7 @@ mge.macros.moveRight3PCam()
 ***
 
 ### `mge.macros.moveUp3PCam`
+<div class="search_terms" style="display: none">moveup3pcam</div>
 
 Triggers the MGE "Move Up 3rd Person Camera" macro.
 
@@ -240,6 +263,7 @@ mge.macros.moveUp3PCam()
 ***
 
 ### `mge.macros.nextTrack`
+<div class="search_terms" style="display: none">nexttrack</div>
 
 Triggers the MGE "Next Track" macro.
 
@@ -250,6 +274,7 @@ mge.macros.nextTrack()
 ***
 
 ### `mge.macros.resetEnableZoom`
+<div class="search_terms" style="display: none">resetenablezoom</div>
 
 Triggers the MGE "Reset Enable Zoom" macro.
 
@@ -260,6 +285,7 @@ mge.macros.resetEnableZoom()
 ***
 
 ### `mge.macros.showLastMessage`
+<div class="search_terms" style="display: none">showlastmessage, lastmessage</div>
 
 Triggers the MGE "Show Last Message" macro.
 
@@ -270,6 +296,7 @@ mge.macros.showLastMessage()
 ***
 
 ### `mge.macros.takeScreenshot`
+<div class="search_terms" style="display: none">takescreenshot</div>
 
 Triggers the MGE "Take Screenshot" macro.
 
@@ -280,6 +307,7 @@ mge.macros.takeScreenshot()
 ***
 
 ### `mge.macros.toggleBlending`
+<div class="search_terms" style="display: none">toggleblending, blending</div>
 
 Triggers the MGE "Toggle Blending" macro.
 
@@ -290,6 +318,7 @@ mge.macros.toggleBlending()
 ***
 
 ### `mge.macros.toggleCrosshair`
+<div class="search_terms" style="display: none">togglecrosshair, crosshair</div>
 
 Triggers the MGE "Toggle Crosshair" macro.
 
@@ -300,6 +329,7 @@ mge.macros.toggleCrosshair()
 ***
 
 ### `mge.macros.toggleDistantLand`
+<div class="search_terms" style="display: none">toggledistantland, distantland</div>
 
 Triggers the MGE "Toggle Distant Land" macro.
 
@@ -310,6 +340,7 @@ mge.macros.toggleDistantLand()
 ***
 
 ### `mge.macros.toggleFpsCounter`
+<div class="search_terms" style="display: none">togglefpscounter, fpscounter</div>
 
 Triggers the MGE "Toggle FPS Counter" macro.
 
@@ -320,6 +351,7 @@ mge.macros.toggleFpsCounter()
 ***
 
 ### `mge.macros.toggleGrass`
+<div class="search_terms" style="display: none">togglegrass, grass</div>
 
 Triggers the MGE "Toggle Grass" macro.
 
@@ -330,6 +362,7 @@ mge.macros.toggleGrass()
 ***
 
 ### `mge.macros.toggleLightingMode`
+<div class="search_terms" style="display: none">togglelightingmode, lightingmode</div>
 
 Triggers the MGE "Toggle Lighting Mode" macro.
 
@@ -340,6 +373,7 @@ mge.macros.toggleLightingMode()
 ***
 
 ### `mge.macros.toggleShaders`
+<div class="search_terms" style="display: none">toggleshaders, shaders</div>
 
 Triggers the MGE "Toggle Shaders" macro.
 
@@ -350,6 +384,7 @@ mge.macros.toggleShaders()
 ***
 
 ### `mge.macros.toggleShadows`
+<div class="search_terms" style="display: none">toggleshadows, shadows</div>
 
 Triggers the MGE "Toggle Shadows" macro.
 
@@ -360,6 +395,7 @@ mge.macros.toggleShadows()
 ***
 
 ### `mge.macros.toggleStatusText`
+<div class="search_terms" style="display: none">togglestatustext, statustext</div>
 
 Triggers the MGE "Toggle Status Text" macro.
 
@@ -370,6 +406,7 @@ mge.macros.toggleStatusText()
 ***
 
 ### `mge.macros.toggleTransparencyAA`
+<div class="search_terms" style="display: none">toggletransparencyaa, transparencyaa</div>
 
 Triggers the MGE "Toggle Transparency AA" macro.
 
@@ -380,6 +417,7 @@ mge.macros.toggleTransparencyAA()
 ***
 
 ### `mge.macros.toggleZoom`
+<div class="search_terms" style="display: none">togglezoom, zoom</div>
 
 Triggers the MGE "Toggle Zoom" macro.
 

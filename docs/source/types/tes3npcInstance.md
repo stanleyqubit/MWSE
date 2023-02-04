@@ -11,6 +11,7 @@ This type inherits the following: [tes3actor](../../types/tes3actor), [tes3physi
 ## Properties
 
 ### `actorFlags`
+<div class="search_terms" style="display: none">actorflags</div>
 
 *Read-only*. A number representing the actor flags. Truly a bit field.
 
@@ -21,6 +22,7 @@ This type inherits the following: [tes3actor](../../types/tes3actor), [tes3physi
 ***
 
 ### `aiConfig`
+<div class="search_terms" style="display: none">aiconfig</div>
 
 *Read-only*. A substructure off of actors that contains information on the current AI configuration.
 
@@ -49,6 +51,7 @@ This type inherits the following: [tes3actor](../../types/tes3actor), [tes3physi
 ***
 
 ### `attributes`
+<div class="search_terms" style="display: none">attributes</div>
 
 Quick access to the base NPC's attributes.
 
@@ -59,6 +62,7 @@ Quick access to the base NPC's attributes.
 ***
 
 ### `autoCalc`
+<div class="search_terms" style="display: none">autocalc</div>
 
 Direct access to the actor autocalc flag.
 
@@ -69,6 +73,7 @@ Direct access to the actor autocalc flag.
 ***
 
 ### `barterGold`
+<div class="search_terms" style="display: none">bartergold</div>
 
 Friendly access to actor's barter gold amount.
 
@@ -79,6 +84,7 @@ Friendly access to actor's barter gold amount.
 ***
 
 ### `baseDisposition`
+<div class="search_terms" style="display: none">basedisposition</div>
 
 The actor's base disposition.
 
@@ -89,6 +95,7 @@ The actor's base disposition.
 ***
 
 ### `baseObject`
+<div class="search_terms" style="display: none">baseobject</div>
 
 *Read-only*. Access to the base NPC object.
 
@@ -99,6 +106,7 @@ The actor's base disposition.
 ***
 
 ### `blocked`
+<div class="search_terms" style="display: none">blocked</div>
 
 The blocked state of the object.
 
@@ -109,6 +117,7 @@ The blocked state of the object.
 ***
 
 ### `blood`
+<div class="search_terms" style="display: none">blood</div>
 
 Friendly access to actor's blood type, in [0, 7] range. The available blood types are defined in the Morrowind.ini file, and assigned to the actor via the Construction Set.
 
@@ -119,6 +128,7 @@ Friendly access to actor's blood type, in [0, 7] range. The available blood type
 ***
 
 ### `boundingBox`
+<div class="search_terms" style="display: none">boundingbox</div>
 
 The bounding box for the object.
 
@@ -129,6 +139,7 @@ The bounding box for the object.
 ***
 
 ### `class`
+<div class="search_terms" style="display: none">class</div>
 
 *Read-only*. Quick access to the base NPC's class.
 
@@ -139,6 +150,7 @@ The bounding box for the object.
 ***
 
 ### `cloneCount`
+<div class="search_terms" style="display: none">clonecount</div>
 
 *Read-only*. The number of clones that exist of this actor.
 
@@ -149,6 +161,7 @@ The bounding box for the object.
 ***
 
 ### `deleted`
+<div class="search_terms" style="display: none">deleted</div>
 
 *Read-only*. The deleted state of the object.
 
@@ -159,6 +172,7 @@ The bounding box for the object.
 ***
 
 ### `disabled`
+<div class="search_terms" style="display: none">disabled</div>
 
 *Read-only*. The disabled state of the object.
 
@@ -169,6 +183,7 @@ The bounding box for the object.
 ***
 
 ### `disposition`
+<div class="search_terms" style="display: none">disposition</div>
 
 *Read-only*. The actor's effective disposition, with all modifiers applied.
 
@@ -179,6 +194,7 @@ The bounding box for the object.
 ***
 
 ### `equipment`
+<div class="search_terms" style="display: none">equipment</div>
 
 *Read-only*. The items currently equipped to the actor.
 
@@ -189,6 +205,7 @@ The bounding box for the object.
 ***
 
 ### `faction`
+<div class="search_terms" style="display: none">faction</div>
 
 *Read-only*. Quick access to the base NPC's faction.
 
@@ -199,6 +216,7 @@ The bounding box for the object.
 ***
 
 ### `factionIndex`
+<div class="search_terms" style="display: none">factionindex</div>
 
 Deprecated. Use `reputation` instead.
 
@@ -209,6 +227,7 @@ Deprecated. Use `reputation` instead.
 ***
 
 ### `fatigue`
+<div class="search_terms" style="display: none">fatigue</div>
 
 *Read-only*. Quick access to the base NPC's fatigue.
 
@@ -219,6 +238,7 @@ Deprecated. Use `reputation` instead.
 ***
 
 ### `female`
+<div class="search_terms" style="display: none">female</div>
 
 Direct access to the actor female flag.
 
@@ -229,6 +249,7 @@ Direct access to the actor female flag.
 ***
 
 ### `health`
+<div class="search_terms" style="display: none">health</div>
 
 *Read-only*. Quick access to the base NPC's health.
 
@@ -239,6 +260,7 @@ Direct access to the actor female flag.
 ***
 
 ### `height`
+<div class="search_terms" style="display: none">height</div>
 
 *Read-only*. Convenience access to the NPCs (race) height.
 
@@ -249,6 +271,7 @@ Direct access to the actor female flag.
 ***
 
 ### `id`
+<div class="search_terms" style="display: none">id</div>
 
 *Read-only*. The unique identifier for the object.
 
@@ -259,6 +282,7 @@ Direct access to the actor female flag.
 ***
 
 ### `inventory`
+<div class="search_terms" style="display: none">inventory</div>
 
 *Read-only*. The items currently carried by the actor.
 
@@ -269,6 +293,7 @@ Direct access to the actor female flag.
 ***
 
 ### `isAttacked`
+<div class="search_terms" style="display: none">isattacked, attacked</div>
 
 *Read-only*. If true, the actor's attacked flag is set.
 
@@ -279,6 +304,7 @@ Direct access to the actor female flag.
 ***
 
 ### `isEssential`
+<div class="search_terms" style="display: none">isessential, essential</div>
 
 *Read-only*. If true, the actor's essential flag is set.
 
@@ -289,6 +315,7 @@ Direct access to the actor female flag.
 ***
 
 ### `isGuard`
+<div class="search_terms" style="display: none">isguard, guard</div>
 
 *Read-only*. If true, the actor is a guard.
 
@@ -299,6 +326,7 @@ Direct access to the actor female flag.
 ***
 
 ### `isInstance`
+<div class="search_terms" style="display: none">isinstance, instance</div>
 
 Always returns true.
 
@@ -309,6 +337,7 @@ Always returns true.
 ***
 
 ### `isLocationMarker`
+<div class="search_terms" style="display: none">islocationmarker, locationmarker</div>
 
 True if this object is an editor marker for a gameplay location. These include travel, intervention, prison, door, and interior north markers. Markers are invisible in-game.
 
@@ -319,6 +348,7 @@ True if this object is an editor marker for a gameplay location. These include t
 ***
 
 ### `isRespawn`
+<div class="search_terms" style="display: none">isrespawn, respawn</div>
 
 *Read-only*. If true, the actor's respawn flag is set.
 
@@ -329,6 +359,7 @@ True if this object is an editor marker for a gameplay location. These include t
 ***
 
 ### `level`
+<div class="search_terms" style="display: none">level</div>
 
 *Read-only*. Quick access to the base NPC's level.
 
@@ -339,6 +370,7 @@ True if this object is an editor marker for a gameplay location. These include t
 ***
 
 ### `magicka`
+<div class="search_terms" style="display: none">magicka</div>
 
 *Read-only*. Quick access to the base NPC's magicka.
 
@@ -349,6 +381,7 @@ True if this object is an editor marker for a gameplay location. These include t
 ***
 
 ### `mesh`
+<div class="search_terms" style="display: none">mesh</div>
 
 The path to the object's mesh.
 
@@ -359,6 +392,7 @@ The path to the object's mesh.
 ***
 
 ### `mobile`
+<div class="search_terms" style="display: none">mobile</div>
 
 *Read-only*. The mobile that the object is represented by.
 
@@ -369,6 +403,7 @@ The path to the object's mesh.
 ***
 
 ### `modified`
+<div class="search_terms" style="display: none">modified, ified</div>
 
 The modification state of the object since the last save.
 
@@ -379,6 +414,7 @@ The modification state of the object since the last save.
 ***
 
 ### `name`
+<div class="search_terms" style="display: none">name</div>
 
 Quick access to the base NPC's name.
 
@@ -389,6 +425,7 @@ Quick access to the base NPC's name.
 ***
 
 ### `nextInCollection`
+<div class="search_terms" style="display: none">nextincollection</div>
 
 The next object in parent collection's list.
 
@@ -399,6 +436,7 @@ The next object in parent collection's list.
 ***
 
 ### `objectFlags`
+<div class="search_terms" style="display: none">objectflags</div>
 
 *Read-only*. The raw flags of the object.
 
@@ -409,6 +447,7 @@ The next object in parent collection's list.
 ***
 
 ### `objectType`
+<div class="search_terms" style="display: none">objecttype</div>
 
 *Read-only*. The type of object. Maps to values in [`tes3.objectType`](https://mwse.github.io/MWSE/references/object-types/).
 
@@ -419,6 +458,7 @@ The next object in parent collection's list.
 ***
 
 ### `owningCollection`
+<div class="search_terms" style="display: none">owningcollection</div>
 
 The collection responsible for holding this object.
 
@@ -429,6 +469,7 @@ The collection responsible for holding this object.
 ***
 
 ### `persistent`
+<div class="search_terms" style="display: none">persistent</div>
 
 The persistent flag of the object.
 
@@ -439,6 +480,7 @@ The persistent flag of the object.
 ***
 
 ### `previousInCollection`
+<div class="search_terms" style="display: none">previousincollection</div>
 
 The previous object in parent collection's list.
 
@@ -449,6 +491,7 @@ The previous object in parent collection's list.
 ***
 
 ### `race`
+<div class="search_terms" style="display: none">race</div>
 
 *Read-only*. Quick access to the base NPC's race.
 
@@ -459,6 +502,7 @@ The previous object in parent collection's list.
 ***
 
 ### `reference`
+<div class="search_terms" style="display: none">reference</div>
 
 *Read-only*. The reference that the object is represented by.
 
@@ -469,6 +513,7 @@ The previous object in parent collection's list.
 ***
 
 ### `reputation`
+<div class="search_terms" style="display: none">reputation</div>
 
 The actor's reputation.
 
@@ -479,6 +524,7 @@ The actor's reputation.
 ***
 
 ### `scale`
+<div class="search_terms" style="display: none">scale</div>
 
 The object's scale. The value range is (0, 10).
 
@@ -489,6 +535,7 @@ The object's scale. The value range is (0, 10).
 ***
 
 ### `sceneCollisionRoot`
+<div class="search_terms" style="display: none">scenecollisionroot</div>
 
 The scene graph node for this object's physics collision, if its mesh has a root collision node.
 
@@ -499,6 +546,7 @@ The scene graph node for this object's physics collision, if its mesh has a root
 ***
 
 ### `sceneNode`
+<div class="search_terms" style="display: none">scenenode</div>
 
 The scene graph node for this object.
 
@@ -509,6 +557,7 @@ The scene graph node for this object.
 ***
 
 ### `script`
+<div class="search_terms" style="display: none">script</div>
 
 *Read-only*. Quick access to the base NPC's script.
 
@@ -519,6 +568,7 @@ The scene graph node for this object.
 ***
 
 ### `skills`
+<div class="search_terms" style="display: none">skills</div>
 
 Quick access to the base NPC's skills.
 
@@ -529,6 +579,7 @@ Quick access to the base NPC's skills.
 ***
 
 ### `soul`
+<div class="search_terms" style="display: none">soul</div>
 
 The soul value for this NPC's base object. This is typically `nil`, unless the `calcSouLValue` event provides one for the base actor.
 
@@ -539,6 +590,7 @@ The soul value for this NPC's base object. This is typically `nil`, unless the `
 ***
 
 ### `sourceless`
+<div class="search_terms" style="display: none">sourceless</div>
 
 The soruceless flag of the object.
 
@@ -549,6 +601,7 @@ The soruceless flag of the object.
 ***
 
 ### `sourceMod`
+<div class="search_terms" style="display: none">sourcemod</div>
 
 *Read-only*. The filename (including the extension) of the mod that owns this object. It has `nil` value if the object was anything other than loaded from an ESP or ESM file.
 
@@ -559,6 +612,7 @@ The soruceless flag of the object.
 ***
 
 ### `spells`
+<div class="search_terms" style="display: none">spells</div>
 
 *Read-only*. Quick access to the base NPC's spell list. It is a `tes3spellList`, which is a list wrapper with helper functions. The actual list is accessed with `.iterator`. e.g. `for _, spell in pairs(npc.spells.iterator) do print(spell.name) end`
 
@@ -569,6 +623,7 @@ The soruceless flag of the object.
 ***
 
 ### `stolenList`
+<div class="search_terms" style="display: none">stolenlist</div>
 
 A list of actors that the object has been stolen from.
 
@@ -579,6 +634,7 @@ A list of actors that the object has been stolen from.
 ***
 
 ### `supportsLuaData`
+<div class="search_terms" style="display: none">supportsluadata</div>
 
 If true, references of this object can store temporary or persistent lua data.
 
@@ -589,6 +645,7 @@ If true, references of this object can store temporary or persistent lua data.
 ***
 
 ### `weight`
+<div class="search_terms" style="display: none">weight</div>
 
 *Read-only*. Convenience access to the NPCs (race) weight.
 
@@ -601,6 +658,7 @@ If true, references of this object can store temporary or persistent lua data.
 ## Methods
 
 ### `__tojson`
+<div class="search_terms" style="display: none">__tojson</div>
 
 Serializes the object to json.
 
@@ -615,6 +673,7 @@ local string = myObject:__tojson()
 ***
 
 ### `hasItemEquipped`
+<div class="search_terms" style="display: none">hasitemequipped, itemequipped</div>
 
 Checks if the actor has provided item equipped.
 
@@ -634,6 +693,7 @@ local result = myObject:hasItemEquipped(item, itemData)
 ***
 
 ### `offersService`
+<div class="search_terms" style="display: none">offersservice</div>
 
 Checks if the actor will offer a service in dialogue. This an offer and may still be refused by dialogue checks. To also get the result of dialogue checks, use [`tes3.checkMerchantOffersService()`](https://mwse.github.io/MWSE/apis/tes3/#tes3checkmerchantoffersservice).
 
@@ -652,6 +712,7 @@ local result = myObject:offersService(service)
 ***
 
 ### `onInventoryClose`
+<div class="search_terms" style="display: none">oninventoryclose</div>
 
 A callback function invoked when an inventory is closed. Typically not used outside of specific purposes. You may find `tes3.reference`'s `onCloseInventory()` to be more convenient to use.
 
@@ -666,6 +727,7 @@ myObject:onInventoryClose(reference)
 ***
 
 ### `reevaluateEquipment`
+<div class="search_terms" style="display: none">reevaluateequipment</div>
 
 Causes the NPC to reevaluate his/hers equipment choices and equip the best available.
 
@@ -676,6 +738,7 @@ myObject:reevaluateEquipment()
 ***
 
 ### `tradesItemType`
+<div class="search_terms" style="display: none">tradesitemtype</div>
 
 Checks if the actor will buy and sell items of a given object type. e.g. `actor:tradesItemType(tes3.objectType.repairItem)`
 

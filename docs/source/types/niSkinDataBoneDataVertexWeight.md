@@ -10,6 +10,7 @@ An instance of `niSkinDataBoneDataVertexWeight` exists for every vertex that is 
 ## Properties
 
 ### `index`
+<div class="search_terms" style="display: none">index</div>
 
 The index of the vertex in the skinned object's array of vertices.
 
@@ -20,6 +21,7 @@ The index of the vertex in the skinned object's array of vertices.
 ***
 
 ### `weight`
+<div class="search_terms" style="display: none">weight</div>
 
 The weight of the bone's influence on the vertex. The sum of the weights for all the bones that influence a particular vertex must be 1.0.
 

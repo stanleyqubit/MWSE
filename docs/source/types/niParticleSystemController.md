@@ -13,6 +13,7 @@ This type inherits the following: [niTimeController](../../types/niTimeControlle
 ## Properties
 
 ### `active`
+<div class="search_terms" style="display: none">active</div>
 
 If the controller is active. When inactive, the target does not get updated and animation timing does not advance.
 
@@ -23,6 +24,7 @@ If the controller is active. When inactive, the target does not get updated and 
 ***
 
 ### `activeParticleCount`
+<div class="search_terms" style="display: none">activeparticlecount</div>
 
 *Read-only*. The number of active particles in the initial particles array.
 
@@ -33,6 +35,7 @@ If the controller is active. When inactive, the target does not get updated and 
 ***
 
 ### `animTimingType`
+<div class="search_terms" style="display: none">animtimingtype</div>
 
 How the time parameter passed to the update function is treated. Type 0 is the default, which treats the update time as a delta time. Type 1 treats the update time an offset from the start of the animation.
 
@@ -45,6 +48,7 @@ Maps to values in [`ni.animType`](https://mwse.github.io/MWSE/references/ni/anim
 ***
 
 ### `birthRate`
+<div class="search_terms" style="display: none">birthrate</div>
 
 The rate at which new particles are generated.
 
@@ -55,6 +59,7 @@ The rate at which new particles are generated.
 ***
 
 ### `currentParticleIndex`
+<div class="search_terms" style="display: none">currentparticleindex</div>
 
 *Read-only*. 
 
@@ -65,6 +70,7 @@ The rate at which new particles are generated.
 ***
 
 ### `cycleType`
+<div class="search_terms" style="display: none">cycletype</div>
 
 The animation cycle type. Type 0 is looping, type 2 is reverse, type 4 is clamped.
 
@@ -77,6 +83,7 @@ Maps to values in [`ni.animCycleType`](https://mwse.github.io/MWSE/references/ni
 ***
 
 ### `declinationAngle`
+<div class="search_terms" style="display: none">declinationangle</div>
 
 The declination angle of the velocity vector of newly spawned particles from the positive Z axis in radians. The range is [0, PI], where declination angle of `0` will set the initial velocity vector to [0, 0, 1]. Declination angle of PI will set the initial velocity vector to [0, 0, -1].
 
@@ -87,6 +94,7 @@ The declination angle of the velocity vector of newly spawned particles from the
 ***
 
 ### `declinationAngleVariation`
+<div class="search_terms" style="display: none">declinationanglevariation</div>
 
 The variation of the initial declination angle. The initial velocity declination will be evenly distributed over the [`.declinationAngle - .declinationAngleVariation / 2`, `.declinationAngle + .declinationAngleVariation / 2`] range.
 
@@ -97,6 +105,7 @@ The variation of the initial declination angle. The initial velocity declination
 ***
 
 ### `emitStartTime`
+<div class="search_terms" style="display: none">emitstarttime</div>
 
 The time value at which the niParticleSystemController will start emitting particles. If this value is less than the `.startTime` variable (inherited from niTimeController), the controller will perform a run-up for the amount of time indicated by the difference.
 
@@ -107,6 +116,7 @@ The time value at which the niParticleSystemController will start emitting parti
 ***
 
 ### `emitStopTime`
+<div class="search_terms" style="display: none">emitstoptime</div>
 
 The time value at which the controller stops emitting the particles.
 
@@ -117,6 +127,7 @@ The time value at which the controller stops emitting the particles.
 ***
 
 ### `emitter`
+<div class="search_terms" style="display: none">emitter</div>
 
 The object that emits the particles. The emitter volume is transformed into the world coordinates of the emitter before new particles are generated. This allows the transforms of the emitter to change without affecting the transforms of all the particles in the system.
 
@@ -127,6 +138,7 @@ The object that emits the particles. The emitter volume is transformed into the 
 ***
 
 ### `emitterDepth`
+<div class="search_terms" style="display: none">emitterdepth</div>
 
 Determines the dimensions of the volume from which new particles are generated.
 
@@ -137,6 +149,7 @@ Determines the dimensions of the volume from which new particles are generated.
 ***
 
 ### `emitterHeight`
+<div class="search_terms" style="display: none">emitterheight</div>
 
 Determines the dimensions of the volume from which new particles are generated.
 
@@ -147,6 +160,7 @@ Determines the dimensions of the volume from which new particles are generated.
 ***
 
 ### `emitterModifiers`
+<div class="search_terms" style="display: none">emittermodifiers</div>
 
 Modifiers that will influence the particle system by modifying the emmiting object.
 
@@ -157,6 +171,7 @@ Modifiers that will influence the particle system by modifying the emmiting obje
 ***
 
 ### `emitterWidth`
+<div class="search_terms" style="display: none">emitterwidth</div>
 
 Determines the dimensions of the volume from which new particles are generated.
 
@@ -167,6 +182,7 @@ Determines the dimensions of the volume from which new particles are generated.
 ***
 
 ### `firstTime`
+<div class="search_terms" style="display: none">firsttime</div>
 
 
 
@@ -177,6 +193,7 @@ Determines the dimensions of the volume from which new particles are generated.
 ***
 
 ### `frequency`
+<div class="search_terms" style="display: none">frequency</div>
 
 The animation controller's frequency value. It is a scaling value used to convert from update time units to keyframe time units, if necessary.
 
@@ -187,6 +204,7 @@ The animation controller's frequency value. It is a scaling value used to conver
 ***
 
 ### `highKeyFrame`
+<div class="search_terms" style="display: none">highkeyframe</div>
 
 This is the end animation key time of the animation controller.
 
@@ -197,6 +215,7 @@ This is the end animation key time of the animation controller.
 ***
 
 ### `initialColor`
+<div class="search_terms" style="display: none">initialcolor</div>
 
 The initial color given to the newly created particles.
 
@@ -207,6 +226,7 @@ The initial color given to the newly created particles.
 ***
 
 ### `initialNormal`
+<div class="search_terms" style="display: none">initialnormal</div>
 
 *Default*: `{1.0, 0.0, 0.0}`. The normal vector given to the newly created particles.
 
@@ -217,6 +237,7 @@ The initial color given to the newly created particles.
 ***
 
 ### `initialSize`
+<div class="search_terms" style="display: none">initialsize</div>
 
 The initial size of the new particles.
 
@@ -227,6 +248,7 @@ The initial size of the new particles.
 ***
 
 ### `lastEmit`
+<div class="search_terms" style="display: none">lastemit</div>
 
 The timestamp at which the last emitted particles were created.
 
@@ -237,6 +259,7 @@ The timestamp at which the last emitted particles were created.
 ***
 
 ### `lastScaledTime`
+<div class="search_terms" style="display: none">lastscaledtime</div>
 
 This function returns the last scaled time computed by this controller. The scaled time takes the `frequency` and `phase` into account, along with the `cycleType` and `animTimingType`. This is the last value used to interpolate animation keys.
 
@@ -247,6 +270,7 @@ This function returns the last scaled time computed by this controller. The scal
 ***
 
 ### `lastTime`
+<div class="search_terms" style="display: none">lasttime</div>
 
 No description.
 
@@ -257,6 +281,7 @@ No description.
 ***
 
 ### `lifespan`
+<div class="search_terms" style="display: none">lifespan</div>
 
 The life spane for each particle.
 
@@ -267,6 +292,7 @@ The life spane for each particle.
 ***
 
 ### `lifespanVariance`
+<div class="search_terms" style="display: none">lifespanvariance</div>
 
 The variation of the particle life span. It will be evenly distributed over the [`.lifespan - .lifespanVariance / 2`, `.lifespan + .lifespanVariance / 2`] range.
 
@@ -277,6 +303,7 @@ The variation of the particle life span. It will be evenly distributed over the 
 ***
 
 ### `lowKeyFrame`
+<div class="search_terms" style="display: none">lowkeyframe</div>
 
 This is the beginning animation key time of the animation controller.
 
@@ -287,6 +314,7 @@ This is the beginning animation key time of the animation controller.
 ***
 
 ### `nextController`
+<div class="search_terms" style="display: none">nextcontroller</div>
 
 The next animation controller in the list of controllers containing the calling controller.
 
@@ -297,6 +325,7 @@ The next animation controller in the list of controllers containing the calling 
 ***
 
 ### `particleColliders`
+<div class="search_terms" style="display: none">particlecolliders</div>
 
 Collider modifiers that will influence the individual particles.
 
@@ -307,6 +336,7 @@ Collider modifiers that will influence the individual particles.
 ***
 
 ### `particleDataCount`
+<div class="search_terms" style="display: none">particledatacount</div>
 
 *Read-only*. The number of initial particles.
 
@@ -317,6 +347,7 @@ Collider modifiers that will influence the individual particles.
 ***
 
 ### `particleModifiers`
+<div class="search_terms" style="display: none">particlemodifiers</div>
 
 Modifiers that will influence the individual particles.
 
@@ -327,6 +358,7 @@ Modifiers that will influence the individual particles.
 ***
 
 ### `phase`
+<div class="search_terms" style="display: none">phase</div>
 
 The phase value. It is an offset applied to the animation's update time, in seconds.
 
@@ -337,6 +369,7 @@ The phase value. It is an offset applied to the animation's update time, in seco
 ***
 
 ### `planarAngle`
+<div class="search_terms" style="display: none">planarangle</div>
 
 The planar angle (around the Z axis from the positive X axis) that will serve as the plane in which the declination will occur. The expected range of the planar angle is [0, 2PI).
 
@@ -347,6 +380,7 @@ The planar angle (around the Z axis from the positive X axis) that will serve as
 ***
 
 ### `planarAngleVariation`
+<div class="search_terms" style="display: none">planaranglevariation</div>
 
 The variation of the initial planar angle. The planar angle will be evenly distributed over the [`.planarAngle - .planarAngleVariation / 2`, `.planarAngle + .planarAngleVariation / 2`] range.
 
@@ -357,6 +391,7 @@ The variation of the initial planar angle. The planar angle will be evenly distr
 ***
 
 ### `refCount`
+<div class="search_terms" style="display: none">refcount</div>
 
 *Read-only*. The number of references that exist for this object. When this value reaches zero, the object will be deleted.
 
@@ -367,6 +402,7 @@ The variation of the initial planar angle. The planar angle will be evenly distr
 ***
 
 ### `resetParticleSystem`
+<div class="search_terms" style="display: none">resetparticlesystem</div>
 
 Controls whether the system will be reset when the niParticleSystemController loops. If this flag is set to `true`, existing particles will be eliminated when the controller loops, and any run-up indicated by `.emitStartTime` variable will occur. Otherwise, the controller will simply continue running from the beginning of the loop, and the existing particles will continue to run until they die out naturally.
 
@@ -377,6 +413,7 @@ Controls whether the system will be reset when the niParticleSystemController lo
 ***
 
 ### `RTTI`
+<div class="search_terms" style="display: none">rtti</div>
 
 *Read-only*. The runtime type information for this object. This is an alias for the `.runTimeTypeInformation` property.
 
@@ -387,6 +424,7 @@ Controls whether the system will be reset when the niParticleSystemController lo
 ***
 
 ### `runTimeTypeInformation`
+<div class="search_terms" style="display: none">runtimetypeinformation</div>
 
 *Read-only*. The runtime type information for this object.
 
@@ -397,6 +435,7 @@ Controls whether the system will be reset when the niParticleSystemController lo
 ***
 
 ### `scaledLastTime`
+<div class="search_terms" style="display: none">scaledlasttime</div>
 
 
 
@@ -407,6 +446,7 @@ Controls whether the system will be reset when the niParticleSystemController lo
 ***
 
 ### `spawnDirectionChaos`
+<div class="search_terms" style="display: none">spawndirectionchaos</div>
 
 Controls the change in direction that new particles generated by a spawn event will have. A value of `0.0` indicates no change in direction, and a value of `1.0` indicates a 0 % to 100 % change in direction.
 
@@ -417,6 +457,7 @@ Controls the change in direction that new particles generated by a spawn event w
 ***
 
 ### `spawnGenerationsCount`
+<div class="search_terms" style="display: none">spawngenerationscount</div>
 
 The number of spawn generations a particle can go through.
 
@@ -427,6 +468,7 @@ The number of spawn generations a particle can go through.
 ***
 
 ### `spawnMultiplier`
+<div class="search_terms" style="display: none">spawnmultiplier</div>
 
 The number of new particles generated on a spawn event.
 
@@ -437,6 +479,7 @@ The number of new particles generated on a spawn event.
 ***
 
 ### `spawnOnDeath`
+<div class="search_terms" style="display: none">spawnondeath</div>
 
 This flag indicates whether a particle spawn event will occur upon particle death.
 
@@ -447,6 +490,7 @@ This flag indicates whether a particle spawn event will occur upon particle deat
 ***
 
 ### `spawnPercentage`
+<div class="search_terms" style="display: none">spawnpercentage</div>
 
 The percentage of the particles that will actually spawn when a spawn event occurs Expected values are in range [0.0, 1.0].
 
@@ -457,6 +501,7 @@ The percentage of the particles that will actually spawn when a spawn event occu
 ***
 
 ### `spawnSpeedChaos`
+<div class="search_terms" style="display: none">spawnspeedchaos</div>
 
 Controls the change in speed that new particles generated by a spawn event will have. A value of `0.0` indicates no change in speed, a value of `1.0` indicates a 0 % to 100 % increase in speed, and a value of `-1.0` indicates 0 % to 100 % decrease in speed.
 
@@ -467,6 +512,7 @@ Controls the change in speed that new particles generated by a spawn event will 
 ***
 
 ### `speed`
+<div class="search_terms" style="display: none">speed</div>
 
 This is the initial speed of the newly spawned particles.
 
@@ -477,6 +523,7 @@ This is the initial speed of the newly spawned particles.
 ***
 
 ### `speedVariation`
+<div class="search_terms" style="display: none">speedvariation</div>
 
 The variation of the initial velocity. The initial velocity will be evenly distributed over the [`.speed - .speedVariation / 2`, `.speed + .speedVariation / 2`] range.
 
@@ -487,6 +534,7 @@ The variation of the initial velocity. The initial velocity will be evenly distr
 ***
 
 ### `startTime`
+<div class="search_terms" style="display: none">starttime</div>
 
 The time at which the animation controller starts playing its animation.
 
@@ -497,6 +545,7 @@ The time at which the animation controller starts playing its animation.
 ***
 
 ### `staticBounds`
+<div class="search_terms" style="display: none">staticbounds</div>
 
 This flag controls whether or not the controller uses precomputed static bounding volumes for each frame of the animation.
 
@@ -507,6 +556,7 @@ This flag controls whether or not the controller uses precomputed static boundin
 ***
 
 ### `target`
+<div class="search_terms" style="display: none">target</div>
 
 *Read-only*. The scene graph object that this animation controller is to animate.
 
@@ -517,6 +567,7 @@ This flag controls whether or not the controller uses precomputed static boundin
 ***
 
 ### `useBirthRate`
+<div class="search_terms" style="display: none">usebirthrate</div>
 
 If this flag is set to `false`, the maximal sustainable birth rate based on the life span of the particles will be used. Otherwise, the value of `.birthRate` property will be used.
 
@@ -529,6 +580,7 @@ If this flag is set to `false`, the maximal sustainable birth rate based on the 
 ## Methods
 
 ### `clone`
+<div class="search_terms" style="display: none">clone</div>
 
 Creates a copy of this object.
 
@@ -543,6 +595,7 @@ local result = myObject:clone()
 ***
 
 ### `isInstanceOfType`
+<div class="search_terms" style="display: none">isinstanceoftype, instanceoftype</div>
 
 Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
@@ -561,6 +614,7 @@ local result = myObject:isInstanceOfType(type)
 ***
 
 ### `isOfType`
+<div class="search_terms" style="display: none">isoftype, oftype</div>
 
 Determines if the object is of a given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
@@ -579,6 +633,7 @@ local result = myObject:isOfType(type)
 ***
 
 ### `saveBinary`
+<div class="search_terms" style="display: none">savebinary</div>
 
 Serializes the object, and writes it to the given file.
 
@@ -597,6 +652,7 @@ local success = myObject:saveBinary(path)
 ***
 
 ### `setTarget`
+<div class="search_terms" style="display: none">settarget, target</div>
 
 This method assigns a new target to the animation controller.
 
@@ -611,6 +667,7 @@ myObject:setTarget(target)
 ***
 
 ### `start`
+<div class="search_terms" style="display: none">start</div>
 
 Starts the controller at the specified time. Intended for controllers with `animTimingType` of 1.
 
@@ -625,6 +682,7 @@ myObject:start(time)
 ***
 
 ### `stop`
+<div class="search_terms" style="display: none">stop</div>
 
 Stops the controller. If you only want to pause the controller, use the `update` property.
 

@@ -11,6 +11,7 @@ This type inherits the following: [tes3baseObject](../../types/tes3baseObject)
 ## Properties
 
 ### `blocked`
+<div class="search_terms" style="display: none">blocked</div>
 
 The blocked state of the object.
 
@@ -21,6 +22,7 @@ The blocked state of the object.
 ***
 
 ### `deleted`
+<div class="search_terms" style="display: none">deleted</div>
 
 *Read-only*. The deleted state of the object.
 
@@ -31,6 +33,7 @@ The blocked state of the object.
 ***
 
 ### `disabled`
+<div class="search_terms" style="display: none">disabled</div>
 
 *Read-only*. The disabled state of the object.
 
@@ -41,6 +44,7 @@ The blocked state of the object.
 ***
 
 ### `flags`
+<div class="search_terms" style="display: none">flags</div>
 
 *Read-only*. A numeric representation of the packed bit flags for the landscape, typically accessed from other properties.
 
@@ -51,6 +55,7 @@ The blocked state of the object.
 ***
 
 ### `gridX`
+<div class="search_terms" style="display: none">gridx</div>
 
 *Read-only*. The cell's X grid coordinate.
 
@@ -61,6 +66,7 @@ The blocked state of the object.
 ***
 
 ### `gridY`
+<div class="search_terms" style="display: none">gridy</div>
 
 *Read-only*. The cell's Y grid coordinate.
 
@@ -71,6 +77,7 @@ The blocked state of the object.
 ***
 
 ### `id`
+<div class="search_terms" style="display: none">id</div>
 
 *Read-only*. The unique identifier for the object.
 
@@ -81,6 +88,7 @@ The blocked state of the object.
 ***
 
 ### `maxHeight`
+<div class="search_terms" style="display: none">maxheight</div>
 
 *Read-only*. The height of the highest land vertex.
 
@@ -91,6 +99,7 @@ The blocked state of the object.
 ***
 
 ### `minHeight`
+<div class="search_terms" style="display: none">minheight</div>
 
 *Read-only*. The height of the lowest land vertex.
 
@@ -101,6 +110,7 @@ The blocked state of the object.
 ***
 
 ### `modified`
+<div class="search_terms" style="display: none">modified, ified</div>
 
 The modification state of the object since the last save.
 
@@ -111,6 +121,7 @@ The modification state of the object since the last save.
 ***
 
 ### `objectFlags`
+<div class="search_terms" style="display: none">objectflags</div>
 
 *Read-only*. The raw flags of the object.
 
@@ -121,6 +132,7 @@ The modification state of the object since the last save.
 ***
 
 ### `objectType`
+<div class="search_terms" style="display: none">objecttype</div>
 
 *Read-only*. The type of object. Maps to values in [`tes3.objectType`](https://mwse.github.io/MWSE/references/object-types/).
 
@@ -131,6 +143,7 @@ The modification state of the object since the last save.
 ***
 
 ### `persistent`
+<div class="search_terms" style="display: none">persistent</div>
 
 The persistent flag of the object.
 
@@ -141,6 +154,7 @@ The persistent flag of the object.
 ***
 
 ### `sceneNode`
+<div class="search_terms" style="display: none">scenenode</div>
 
 *Read-only*. The scene graph node for the landscape. Contains sub nodes for land patches.
 
@@ -151,6 +165,7 @@ The persistent flag of the object.
 ***
 
 ### `sourceless`
+<div class="search_terms" style="display: none">sourceless</div>
 
 The soruceless flag of the object.
 
@@ -161,6 +176,7 @@ The soruceless flag of the object.
 ***
 
 ### `sourceMod`
+<div class="search_terms" style="display: none">sourcemod</div>
 
 *Read-only*. The filename (including the extension) of the mod that owns this object. It has `nil` value if the object was anything other than loaded from an ESP or ESM file.
 
@@ -171,6 +187,7 @@ The soruceless flag of the object.
 ***
 
 ### `supportsLuaData`
+<div class="search_terms" style="display: none">supportsluadata</div>
 
 If true, references of this object can store temporary or persistent lua data.
 
@@ -181,6 +198,7 @@ If true, references of this object can store temporary or persistent lua data.
 ***
 
 ### `textureIndices`
+<div class="search_terms" style="display: none">textureindices</div>
 
 *Read-only*. An array containing texture index numbers. They are 0-based indexes. They index into the global land texture list, `tes3.dataHandler.nonDynamicData.landTextures`. Adjustment is required when indexing the list through lua.
 
@@ -193,6 +211,7 @@ If true, references of this object can store temporary or persistent lua data.
 ## Methods
 
 ### `__tojson`
+<div class="search_terms" style="display: none">__tojson</div>
 
 Serializes the object to json.
 

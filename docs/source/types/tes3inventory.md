@@ -10,6 +10,7 @@ An inventory composes of an iterator, and flags caching the state of the invento
 ## Properties
 
 ### `flags`
+<div class="search_terms" style="display: none">flags</div>
 
 *Read-only*. Raw bit-based flags.
 
@@ -20,6 +21,7 @@ An inventory composes of an iterator, and flags caching the state of the invento
 ***
 
 ### `items`
+<div class="search_terms" style="display: none">items</div>
 
 *Read-only*. Direct acces to the container that holds the inventory's items.
 
@@ -76,6 +78,7 @@ An inventory composes of an iterator, and flags caching the state of the invento
 ## Methods
 
 ### `addItem`
+<div class="search_terms" style="display: none">additem, item</div>
 
 Adds an item into the inventory directly. This should not be used, in favor of the [`tes3.addItem()`](https://mwse.github.io/MWSE/apis/tes3/#tes3additem) function.
 
@@ -94,6 +97,7 @@ myObject:addItem({ mobile = ..., item = ..., itemData = ..., count = ... })
 ***
 
 ### `calculateWeight`
+<div class="search_terms" style="display: none">calculateweight</div>
 
 Calculates the weight of all items in the container.
 
@@ -108,6 +112,7 @@ local result = myObject:calculateWeight()
 ***
 
 ### `contains`
+<div class="search_terms" style="display: none">contains</div>
 
 Checks to see if the inventory contains an item.
 
@@ -127,6 +132,7 @@ local result = myObject:contains(item, itemData)
 ***
 
 ### `dropItem`
+<div class="search_terms" style="display: none">dropitem</div>
 
 Checks to see if the inventory contains an item. This should not be used, instead use the [`tes3.dropItem()`](https://mwse.github.io/MWSE/apis/tes3/#tes3dropitem) function.
 
@@ -147,6 +153,7 @@ myObject:dropItem(mobile, item, itemData, count, position, orientation, ignoreIt
 ***
 
 ### `findItemStack`
+<div class="search_terms" style="display: none">finditemstack, itemstack</div>
 
 Searches for an item stack in the inventory.
 
@@ -166,6 +173,7 @@ local result = myObject:findItemStack(item, itemData)
 ***
 
 ### `removeItem`
+<div class="search_terms" style="display: none">removeitem, item</div>
 
 Removes an item from the inventory directly. This should not be used, in favor of the [`tes3.removeItem()`](https://mwse.github.io/MWSE/apis/tes3/#tes3removeitem) function.
 
@@ -185,6 +193,7 @@ myObject:removeItem({ mobile = ..., item = ..., itemData = ..., count = ..., del
 ***
 
 ### `resolveLeveledItems`
+<div class="search_terms" style="display: none">resolveleveleditems</div>
 
 Resolves all contained leveled lists and adds the randomized items to the inventory. This should generally not be called directly.
 

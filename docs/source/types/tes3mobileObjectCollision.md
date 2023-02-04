@@ -10,6 +10,7 @@ The base object holding the information of a collision.
 ## Properties
 
 ### `colliderRef`
+<div class="search_terms" style="display: none">colliderref</div>
 
 *Read-only*. Access to the reference of the colliding object.
 
@@ -20,6 +21,7 @@ The base object holding the information of a collision.
 ***
 
 ### `colliderRoot`
+<div class="search_terms" style="display: none">colliderroot</div>
 
 *Read-only*. The collider's root scene graph node.
 
@@ -30,6 +32,7 @@ The base object holding the information of a collision.
 ***
 
 ### `collisionType`
+<div class="search_terms" style="display: none">collisiontype</div>
 
 *Read-only*. The collision type.
 
@@ -50,6 +53,7 @@ Value | Collsion type
 ***
 
 ### `normal`
+<div class="search_terms" style="display: none">normal</div>
 
 *Read-only*. The normal vector at the collision point.
 
@@ -60,6 +64,7 @@ Value | Collsion type
 ***
 
 ### `objectPosAtCollision`
+<div class="search_terms" style="display: none">objectposatcollision</div>
 
 *Read-only*. The location of the mobile object at the moment of collision.
 
@@ -70,6 +75,7 @@ Value | Collsion type
 ***
 
 ### `point`
+<div class="search_terms" style="display: none">point</div>
 
 *Read-only*. The point of contact.
 
@@ -80,6 +86,7 @@ Value | Collsion type
 ***
 
 ### `time`
+<div class="search_terms" style="display: none">time</div>
 
 *Read-only*. No description yet available.
 
@@ -90,6 +97,7 @@ Value | Collsion type
 ***
 
 ### `valid`
+<div class="search_terms" style="display: none">valid</div>
 
 *Read-only*. No description yet available.
 
@@ -100,6 +108,7 @@ Value | Collsion type
 ***
 
 ### `velocity`
+<div class="search_terms" style="display: none">velocity</div>
 
 *Read-only*. The velocity of the associated mobile object at the point of collision.
 

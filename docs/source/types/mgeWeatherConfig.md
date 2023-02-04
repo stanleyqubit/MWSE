@@ -10,6 +10,7 @@ Allows control of MGE weather features.
 ## Functions
 
 ### `getDistantFog`
+<div class="search_terms" style="display: none">getdistantfog, distantfog</div>
 
 No description yet available.
 
@@ -24,6 +25,7 @@ mgeWeatherConfig.getDistantFog(weather)
 ***
 
 ### `getPerPixelLighting`
+<div class="search_terms" style="display: none">getperpixellighting, perpixellighting</div>
 
 Gets the PPL data for a weather from MGE. These are returned in a table with the `sun` and `ambient` keys, as well as the `weather` redefined. The result table can be modified, then sent back to `setPerPixelLighting`.
 
@@ -42,6 +44,7 @@ local result = mgeWeatherConfig.getPerPixelLighting(weather)
 ***
 
 ### `getScattering`
+<div class="search_terms" style="display: none">getscattering, scattering</div>
 
 Gets the in- and out-scatter values from MGE. These are returned in a table with the `inscatter` and `outscatter` keys. The result table can be modified, then sent back to `setScattering`.
 
@@ -56,6 +59,7 @@ local scatters = mgeWeatherConfig.getScattering()
 ***
 
 ### `getSkylightScattering`
+<div class="search_terms" style="display: none">getskylightscattering, skylightscattering</div>
 
 Gets the skylight scatter values from MGE. These are returned in a table with the `skylight` and `mix` keys. The result table can be modified, then sent back to `setSkylightScattering`.
 
@@ -70,6 +74,7 @@ local scatters = mgeWeatherConfig.getSkylightScattering()
 ***
 
 ### `getWind`
+<div class="search_terms" style="display: none">getwind, wind</div>
 
 Gets the wind speed for a weather from MGE. This is returned in a table with the `speed` key, as well as the `weather` redefined. The result table can be modified, then sent back to `setWind`.
 
@@ -88,6 +93,7 @@ local result = mgeWeatherConfig.getWind(weather)
 ***
 
 ### `setDistantFog`
+<div class="search_terms" style="display: none">setdistantfog, distantfog</div>
 
 No description yet available.
 
@@ -105,6 +111,7 @@ mgeWeatherConfig.setDistantFog({ weather = ..., distance = ..., offset = ... })
 ***
 
 ### `setPerPixelLighting`
+<div class="search_terms" style="display: none">setperpixellighting, perpixellighting</div>
 
 Sets the PPL values for a weather in MGE. The result table of `getPerPixelLighting` can be modified then passed to this function.
 
@@ -122,6 +129,7 @@ mgeWeatherConfig.setPerPixelLighting({ weather = ..., sun = ..., ambient = ... }
 ***
 
 ### `setScattering`
+<div class="search_terms" style="display: none">setscattering, scattering</div>
 
 Sets the in- and out-scatter values for MGE. The result table of `getScattering` can be modified then passed to this function.
 
@@ -138,6 +146,7 @@ mgeWeatherConfig.setScattering({ inscatter = ..., outscatter = ... })
 ***
 
 ### `setSkylightScattering`
+<div class="search_terms" style="display: none">setskylightscattering, skylightscattering</div>
 
 Sets the sky scatter values for MGE. The result table of `getSkylightScattering` can be modified then passed to this function.
 
@@ -154,6 +163,7 @@ mgeWeatherConfig.setSkylightScattering({ skylight = ..., mix = ... })
 ***
 
 ### `setWind`
+<div class="search_terms" style="display: none">setwind, wind</div>
 
 Sets the wind speed for a weather in MGE. The result table of `getWind` can be modified then passed to this function.
 

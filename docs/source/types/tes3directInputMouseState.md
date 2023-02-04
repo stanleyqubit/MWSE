@@ -10,6 +10,7 @@ A raw DirectInput mouse state.
 ## Properties
 
 ### `buttons`
+<div class="search_terms" style="display: none">buttons</div>
 
 *Read-only*. The array-style access to 8 buttons states available on the mouse. Not all may be used.
 
@@ -20,6 +21,7 @@ A raw DirectInput mouse state.
 ***
 
 ### `x`
+<div class="search_terms" style="display: none">x</div>
 
 A basic property of the mouse for the X-axis.
 
@@ -30,6 +32,7 @@ A basic property of the mouse for the X-axis.
 ***
 
 ### `y`
+<div class="search_terms" style="display: none">y</div>
 
 A basic property of the mouse for the Y-axis.
 
@@ -40,6 +43,7 @@ A basic property of the mouse for the Y-axis.
 ***
 
 ### `z`
+<div class="search_terms" style="display: none">z</div>
 
 A basic property of the mouse for the Z-axis. This is typically the scroll wheel.
 

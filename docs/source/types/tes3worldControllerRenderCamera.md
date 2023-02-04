@@ -10,6 +10,7 @@ A core game object used for storing camera objects.
 ## Properties
 
 ### `cameraData`
+<div class="search_terms" style="display: none">cameradata</div>
 
 *Read-only*. The additional data of the camera.
 
@@ -20,6 +21,7 @@ A core game object used for storing camera objects.
 ***
 
 ### `cameraRoot`
+<div class="search_terms" style="display: none">cameraroot</div>
 
 *Read-only*. The root scene node of the camera.
 
@@ -30,6 +32,7 @@ A core game object used for storing camera objects.
 ***
 
 ### `renderer`
+<div class="search_terms" style="display: none">renderer</div>
 
 *Read-only*. The renderer of the camera.
 
@@ -40,6 +43,7 @@ A core game object used for storing camera objects.
 ***
 
 ### `root`
+<div class="search_terms" style="display: none">root</div>
 
 *Read-only*. 
 

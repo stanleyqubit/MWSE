@@ -10,6 +10,7 @@ A game object which contains niSequence objects for each animation body section.
 ## Properties
 
 ### `leftArm`
+<div class="search_terms" style="display: none">leftarm</div>
 
 The niSequence object for the actor's left arm.
 
@@ -20,6 +21,7 @@ The niSequence object for the actor's left arm.
 ***
 
 ### `lower`
+<div class="search_terms" style="display: none">lower</div>
 
 The niSequence object for the actor's legs.
 
@@ -30,6 +32,7 @@ The niSequence object for the actor's legs.
 ***
 
 ### `upper`
+<div class="search_terms" style="display: none">upper</div>
 
 The niSequence object for the actor's upper body.
 

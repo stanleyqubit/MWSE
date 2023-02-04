@@ -11,6 +11,7 @@ This type inherits the following: [niFloatKey](../../types/niFloatKey), [niAnima
 ## Properties
 
 ### `inTangent`
+<div class="search_terms" style="display: none">intangent</div>
 
 The inbound tangent for the bezier curve.
 
@@ -21,6 +22,7 @@ The inbound tangent for the bezier curve.
 ***
 
 ### `outTangent`
+<div class="search_terms" style="display: none">outtangent</div>
 
 The outbound tangent for the bezier curve.
 
@@ -31,6 +33,7 @@ The outbound tangent for the bezier curve.
 ***
 
 ### `timing`
+<div class="search_terms" style="display: none">timing</div>
 
 The timing of the animation key.
 
@@ -41,6 +44,7 @@ The timing of the animation key.
 ***
 
 ### `value`
+<div class="search_terms" style="display: none">value</div>
 
 The arbitrary value of the NiFloatKey.
 

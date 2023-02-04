@@ -10,6 +10,7 @@ A data structure that represents a weather particle, such as a rain drop or snow
 ## Properties
 
 ### `diameter`
+<div class="search_terms" style="display: none">diameter</div>
 
 The diameter of the particle.
 
@@ -20,6 +21,7 @@ The diameter of the particle.
 ***
 
 ### `object`
+<div class="search_terms" style="display: none">object</div>
 
 The visual used for the particle.
 
@@ -30,6 +32,7 @@ The visual used for the particle.
 ***
 
 ### `rainRoot`
+<div class="search_terms" style="display: none">rainroot</div>
 
 *Read-only*. A shortcut to the root rain node.
 
@@ -40,6 +43,7 @@ The visual used for the particle.
 ***
 
 ### `remainingLifetime`
+<div class="search_terms" style="display: none">remaininglifetime</div>
 
 The remaining time before the particle becomes inactive.
 
@@ -50,6 +54,7 @@ The remaining time before the particle becomes inactive.
 ***
 
 ### `velocity`
+<div class="search_terms" style="display: none">velocity</div>
 
 The velocity of the particle.
 
@@ -60,6 +65,7 @@ The velocity of the particle.
 ***
 
 ### `weatherController`
+<div class="search_terms" style="display: none">weathercontroller</div>
 
 *Read-only*. A shortcut to the weather controller.
 

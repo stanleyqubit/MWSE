@@ -10,6 +10,7 @@ A structure that keeps track of combat session data.
 ## Properties
 
 ### `alchemyPriority`
+<div class="search_terms" style="display: none">alchemypriority</div>
 
 No description yet available.
 
@@ -20,6 +21,7 @@ No description yet available.
 ***
 
 ### `data`
+<div class="search_terms" style="display: none">data</div>
 
 A generic lua table that data can be written to, and synced to/from the save. All information stored must be valid for serialization to json.
 
@@ -32,6 +34,7 @@ There is a guide available [here](https://mwse.github.io/MWSE/guides/storing-dat
 ***
 
 ### `distance`
+<div class="search_terms" style="display: none">distance</div>
 
 The combat distance.
 
@@ -42,6 +45,7 @@ The combat distance.
 ***
 
 ### `lastUseTimestamp`
+<div class="search_terms" style="display: none">lastusetimestamp</div>
 
 No description yet available.
 
@@ -52,6 +56,7 @@ No description yet available.
 ***
 
 ### `mobile`
+<div class="search_terms" style="display: none">mobile</div>
 
 *Read-only*. Convenience access back to the associated actor.
 
@@ -62,6 +67,7 @@ No description yet available.
 ***
 
 ### `potionUseFlag`
+<div class="search_terms" style="display: none">potionuseflag</div>
 
 No description yet available.
 
@@ -72,6 +78,7 @@ No description yet available.
 ***
 
 ### `selectedAction`
+<div class="search_terms" style="display: none">selectedaction</div>
 
 The next action. From observed behavior, this roughly maps to:
 
@@ -97,6 +104,7 @@ Value | Behavior
 ***
 
 ### `selectedItem`
+<div class="search_terms" style="display: none">selecteditem</div>
 
 No description yet available.
 
@@ -107,6 +115,7 @@ No description yet available.
 ***
 
 ### `selectedShield`
+<div class="search_terms" style="display: none">selectedshield</div>
 
 *Read-only*. No description yet available.
 
@@ -117,6 +126,7 @@ No description yet available.
 ***
 
 ### `selectedSpell`
+<div class="search_terms" style="display: none">selectedspell</div>
 
 This field containg the spell the actor is currently casting. If not in casting state this field has `nil` value.
 
@@ -127,6 +137,7 @@ This field containg the spell the actor is currently casting. If not in casting 
 ***
 
 ### `selectedWeapon`
+<div class="search_terms" style="display: none">selectedweapon</div>
 
 *Read-only*. The weapon the actor is using in this combat session.
 
@@ -137,6 +148,7 @@ This field containg the spell the actor is currently casting. If not in casting 
 ***
 
 ### `selectionPriority`
+<div class="search_terms" style="display: none">selectionpriority</div>
 
 No description yet available.
 
@@ -149,6 +161,7 @@ No description yet available.
 ## Methods
 
 ### `changeEquipment`
+<div class="search_terms" style="display: none">changeequipment</div>
 
 This method equips an item to the mobile in this combat sesion.
 
@@ -163,6 +176,7 @@ myObject:changeEquipment(equipmentStack)
 ***
 
 ### `selectAlchemyWithEffect`
+<div class="search_terms" style="display: none">selectalchemywitheffect</div>
 
 Selects the alchemy item with the greatest value, for a given effect ID and loads it into the `selectedItem` property.
 

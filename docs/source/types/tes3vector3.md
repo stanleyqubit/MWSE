@@ -10,6 +10,7 @@ A simple trio of floating-point numbers.
 ## Properties
 
 ### `angle`
+<div class="search_terms" style="display: none">angle</div>
 
 The angle between the vector and the water plane.
 
@@ -20,6 +21,7 @@ The angle between the vector and the water plane.
 ***
 
 ### `b`
+<div class="search_terms" style="display: none">b</div>
 
 The third value in the vector. An alias for `z`.
 
@@ -30,6 +32,7 @@ The third value in the vector. An alias for `z`.
 ***
 
 ### `g`
+<div class="search_terms" style="display: none">g</div>
 
 The second value in the vector. An alias for `y`.
 
@@ -40,6 +43,7 @@ The second value in the vector. An alias for `y`.
 ***
 
 ### `r`
+<div class="search_terms" style="display: none">r</div>
 
 The first value in the vector. An alias for `x`.
 
@@ -50,6 +54,7 @@ The first value in the vector. An alias for `x`.
 ***
 
 ### `x`
+<div class="search_terms" style="display: none">x</div>
 
 The first value in the vector.
 
@@ -60,6 +65,7 @@ The first value in the vector.
 ***
 
 ### `y`
+<div class="search_terms" style="display: none">y</div>
 
 The second value in the vector.
 
@@ -70,6 +76,7 @@ The second value in the vector.
 ***
 
 ### `z`
+<div class="search_terms" style="display: none">z</div>
 
 The third value in the vector.
 
@@ -82,6 +89,7 @@ The third value in the vector.
 ## Methods
 
 ### `copy`
+<div class="search_terms" style="display: none">copy</div>
 
 Creates a copy of the vector.
 
@@ -96,6 +104,7 @@ local result = myObject:copy()
 ***
 
 ### `cross`
+<div class="search_terms" style="display: none">cross</div>
 
 Calculates the cross product with another vector.
 
@@ -114,6 +123,7 @@ local result = myObject:cross(vec)
 ***
 
 ### `distance`
+<div class="search_terms" style="display: none">distance</div>
 
 Calculates the distance to another vector.
 
@@ -132,6 +142,7 @@ local result = myObject:distance(vec)
 ***
 
 ### `dot`
+<div class="search_terms" style="display: none">dot</div>
 
 Calculates the dot product with another vector.
 
@@ -150,6 +161,7 @@ local result = myObject:dot(vec)
 ***
 
 ### `heightDifference`
+<div class="search_terms" style="display: none">heightdifference</div>
 
 Calculates the vertical distance to another vector.
 
@@ -168,6 +180,7 @@ local result = myObject:heightDifference(vec)
 ***
 
 ### `interpolate`
+<div class="search_terms" style="display: none">interpolate</div>
 
 Calculates the interpolated position against the target vector using the `distance` parameter.
 
@@ -187,6 +200,7 @@ local result = myObject:interpolate(targetPoint, distance)
 ***
 
 ### `length`
+<div class="search_terms" style="display: none">length</div>
 
 Calculates the length of the vector.
 
@@ -201,6 +215,7 @@ local result = myObject:length()
 ***
 
 ### `lerp`
+<div class="search_terms" style="display: none">lerp</div>
 
 Calculates the interpolated vector between this vector and another, given a transition.
 
@@ -220,6 +235,7 @@ local lerpedVector = myObject:lerp(toVector, transition)
 ***
 
 ### `negate`
+<div class="search_terms" style="display: none">negate</div>
 
 Negates all values in the vector.
 
@@ -230,6 +246,7 @@ myObject:negate()
 ***
 
 ### `normalize`
+<div class="search_terms" style="display: none">normalize</div>
 
 Normalize the vector in-place, or set its components to zero if normalization is not possible. Returns `true` if the vector was successfully normalized.
 
@@ -244,6 +261,7 @@ local result = myObject:normalize()
 ***
 
 ### `normalized`
+<div class="search_terms" style="display: none">normalized</div>
 
 Get a normalized copy of the vector.
 
@@ -258,6 +276,7 @@ local result = myObject:normalized()
 ***
 
 ### `outerProduct`
+<div class="search_terms" style="display: none">outerproduct</div>
 
 Calculates the outer product with another vector.
 
@@ -276,6 +295,7 @@ local result = myObject:outerProduct(vec)
 ***
 
 ### `toColor`
+<div class="search_terms" style="display: none">tocolor</div>
 
 Converts the vector to `niColor` object.
 
@@ -292,6 +312,7 @@ local result = myObject:toColor()
 ## Functions
 
 ### `new`
+<div class="search_terms" style="display: none">new</div>
 
 Creates a new vector. If no parameters are provided, an empty set will be constructed.
 

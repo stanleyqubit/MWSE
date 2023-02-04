@@ -10,6 +10,7 @@ An inventory tile, connecting an item, its data, and various related UI elements
 ## Properties
 
 ### `count`
+<div class="search_terms" style="display: none">count</div>
 
 *Read-only*. The number of items that the tile represents.
 
@@ -20,6 +21,7 @@ An inventory tile, connecting an item, its data, and various related UI elements
 ***
 
 ### `element`
+<div class="search_terms" style="display: none">element</div>
 
 *Read-only*. The UI element associated with the tile.
 
@@ -30,6 +32,7 @@ An inventory tile, connecting an item, its data, and various related UI elements
 ***
 
 ### `flags`
+<div class="search_terms" style="display: none">flags</div>
 
 *Read-only*. Direct access to the tile's flags. Use `.isBartered`, `.isBoundItem`, or `.isEquipped` to access individual flags.
 
@@ -40,6 +43,7 @@ An inventory tile, connecting an item, its data, and various related UI elements
 ***
 
 ### `isBartered`
+<div class="search_terms" style="display: none">isbartered, bartered</div>
 
 If `true`, the tile represents an item being bartered.
 
@@ -50,6 +54,7 @@ If `true`, the tile represents an item being bartered.
 ***
 
 ### `isBoundItem`
+<div class="search_terms" style="display: none">isbounditem, bounditem</div>
 
 *Read-only*. If `true`, the tile represents a bound item.
 
@@ -60,6 +65,7 @@ If `true`, the tile represents an item being bartered.
 ***
 
 ### `isEquipped`
+<div class="search_terms" style="display: none">isequipped, equipped</div>
 
 If `true`, the tile represents an item that is equipped.
 
@@ -70,6 +76,7 @@ If `true`, the tile represents an item that is equipped.
 ***
 
 ### `item`
+<div class="search_terms" style="display: none">item</div>
 
 *Read-only*. The item the tile represents.
 
@@ -80,6 +87,7 @@ If `true`, the tile represents an item that is equipped.
 ***
 
 ### `itemData`
+<div class="search_terms" style="display: none">itemdata</div>
 
 *Read-only*. The item data associated with this tile.
 
@@ -90,6 +98,7 @@ If `true`, the tile represents an item that is equipped.
 ***
 
 ### `type`
+<div class="search_terms" style="display: none">type</div>
 
 *Read-only*. The type of tile represented. Maps to values in [`tes3.inventoryTileType`](https://mwse.github.io/MWSE/references/inventory-tile-types/) namespace.
 

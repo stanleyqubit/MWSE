@@ -10,6 +10,7 @@ A set of variables that differentiates one item from another.
 ## Properties
 
 ### `charge`
+<div class="search_terms" style="display: none">charge</div>
 
 The charge of the item. Provides incorrect values on misc items, which instead have a soul actor.
 
@@ -20,6 +21,7 @@ The charge of the item. Provides incorrect values on misc items, which instead h
 ***
 
 ### `condition`
+<div class="search_terms" style="display: none">condition</div>
 
 The condition/health of the item. Provides incorrect values on light items, which instead have a `timeLeft` property.
 
@@ -30,6 +32,7 @@ The condition/health of the item. Provides incorrect values on light items, whic
 ***
 
 ### `context`
+<div class="search_terms" style="display: none">context</div>
 
 Returns an ease of use script context for variable access.
 
@@ -40,6 +43,7 @@ Returns an ease of use script context for variable access.
 ***
 
 ### `count`
+<div class="search_terms" style="display: none">count</div>
 
 The total number of identical items represented by this data. Reserved for use by in-world references. It should always be `1` for items in inventories. Inventories utilize the stack count in [`tes3itemStack`](https://mwse.github.io/MWSE/types/tes3itemStack/) object.
 
@@ -50,6 +54,7 @@ The total number of identical items represented by this data. Reserved for use b
 ***
 
 ### `data`
+<div class="search_terms" style="display: none">data</div>
 
 A generic lua table that data can be written to, and synced to/from the save. All information stored must be valid for serialization to json. For data that doesn't persist, use `tempData`.
 
@@ -62,6 +67,7 @@ There is a guide available [here](https://mwse.github.io/MWSE/guides/storing-dat
 ***
 
 ### `owner`
+<div class="search_terms" style="display: none">owner</div>
 
 The owner of the associated item. An item can have an owner or it can be faction-owned.
 
@@ -72,6 +78,7 @@ The owner of the associated item. An item can have an owner or it can be faction
 ***
 
 ### `requirement`
+<div class="search_terms" style="display: none">requirement</div>
 
 A requirement, typically associated with ownership and when the player may freely interact with an object. The type depends on the owner. Faction owners provide a required rank as a number, while NPCs provide a global variable to check.
 
@@ -82,6 +89,7 @@ A requirement, typically associated with ownership and when the player may freel
 ***
 
 ### `script`
+<div class="search_terms" style="display: none">script</div>
 
 *Read-only*. The script associated with the scriptVariables.
 
@@ -92,6 +100,7 @@ A requirement, typically associated with ownership and when the player may freel
 ***
 
 ### `scriptVariables`
+<div class="search_terms" style="display: none">scriptvariables</div>
 
 Access to the structure where individual mwscript data is stored.
 
@@ -102,6 +111,7 @@ Access to the structure where individual mwscript data is stored.
 ***
 
 ### `soul`
+<div class="search_terms" style="display: none">soul</div>
 
 Only available on misc items. The actor that is stored inside the soul gem.
 
@@ -112,6 +122,7 @@ Only available on misc items. The actor that is stored inside the soul gem.
 ***
 
 ### `tempData`
+<div class="search_terms" style="display: none">tempdata</div>
 
 A generic lua table that data can be written to, but is not synced to/from a save.
 
@@ -124,6 +135,7 @@ There is a guide available [here](https://mwse.github.io/MWSE/guides/storing-dat
 ***
 
 ### `timeLeft`
+<div class="search_terms" style="display: none">timeleft</div>
 
 The time remaining on a light. Provides incorrect values on non-light items, which instead have a `condition` property.
 

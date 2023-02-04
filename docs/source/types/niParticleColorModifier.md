@@ -11,6 +11,7 @@ This type inherits the following: [niParticleModifier](../../types/niParticleMod
 ## Properties
 
 ### `colorData`
+<div class="search_terms" style="display: none">colordata</div>
 
 The parameters for this modifier.
 
@@ -21,6 +22,7 @@ The parameters for this modifier.
 ***
 
 ### `controller`
+<div class="search_terms" style="display: none">controller</div>
 
 Access to the generic time controller for particle systems.
 
@@ -31,6 +33,7 @@ Access to the generic time controller for particle systems.
 ***
 
 ### `next`
+<div class="search_terms" style="display: none">next</div>
 
 Access to the next attached modifier.
 
@@ -41,6 +44,7 @@ Access to the next attached modifier.
 ***
 
 ### `refCount`
+<div class="search_terms" style="display: none">refcount</div>
 
 *Read-only*. The number of references that exist for this object. When this value reaches zero, the object will be deleted.
 
@@ -51,6 +55,7 @@ Access to the next attached modifier.
 ***
 
 ### `RTTI`
+<div class="search_terms" style="display: none">rtti</div>
 
 *Read-only*. The runtime type information for this object. This is an alias for the `.runTimeTypeInformation` property.
 
@@ -61,6 +66,7 @@ Access to the next attached modifier.
 ***
 
 ### `runTimeTypeInformation`
+<div class="search_terms" style="display: none">runtimetypeinformation</div>
 
 *Read-only*. The runtime type information for this object.
 
@@ -73,6 +79,7 @@ Access to the next attached modifier.
 ## Methods
 
 ### `clone`
+<div class="search_terms" style="display: none">clone</div>
 
 Creates a copy of this object.
 
@@ -87,6 +94,7 @@ local result = myObject:clone()
 ***
 
 ### `isInstanceOfType`
+<div class="search_terms" style="display: none">isinstanceoftype, instanceoftype</div>
 
 Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
@@ -105,6 +113,7 @@ local result = myObject:isInstanceOfType(type)
 ***
 
 ### `isOfType`
+<div class="search_terms" style="display: none">isoftype, oftype</div>
 
 Determines if the object is of a given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
@@ -123,6 +132,7 @@ local result = myObject:isOfType(type)
 ***
 
 ### `saveBinary`
+<div class="search_terms" style="display: none">savebinary</div>
 
 Serializes the object, and writes it to the given file.
 

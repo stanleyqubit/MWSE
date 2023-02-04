@@ -11,6 +11,7 @@ This type inherits the following: [niParticleModifier](../../types/niParticleMod
 ## Properties
 
 ### `collisionPoint`
+<div class="search_terms" style="display: none">collisionpoint</div>
 
 
 
@@ -21,6 +22,7 @@ This type inherits the following: [niParticleModifier](../../types/niParticleMod
 ***
 
 ### `collisionTime`
+<div class="search_terms" style="display: none">collisiontime</div>
 
 
 
@@ -31,6 +33,7 @@ This type inherits the following: [niParticleModifier](../../types/niParticleMod
 ***
 
 ### `controller`
+<div class="search_terms" style="display: none">controller</div>
 
 Access to the generic time controller for particle systems.
 
@@ -41,6 +44,7 @@ Access to the generic time controller for particle systems.
 ***
 
 ### `dieOnCollide`
+<div class="search_terms" style="display: none">dieoncollide</div>
 
 If this flag is true a particle that collides with something will be destroyed.
 
@@ -51,6 +55,7 @@ If this flag is true a particle that collides with something will be destroyed.
 ***
 
 ### `next`
+<div class="search_terms" style="display: none">next</div>
 
 Access to the next attached modifier.
 
@@ -61,6 +66,7 @@ Access to the next attached modifier.
 ***
 
 ### `refCount`
+<div class="search_terms" style="display: none">refcount</div>
 
 *Read-only*. The number of references that exist for this object. When this value reaches zero, the object will be deleted.
 
@@ -71,6 +77,7 @@ Access to the next attached modifier.
 ***
 
 ### `restitution`
+<div class="search_terms" style="display: none">restitution</div>
 
 The fraction of the original amount of energy the particle retains after a collision.
 
@@ -81,6 +88,7 @@ The fraction of the original amount of energy the particle retains after a colli
 ***
 
 ### `RTTI`
+<div class="search_terms" style="display: none">rtti</div>
 
 *Read-only*. The runtime type information for this object. This is an alias for the `.runTimeTypeInformation` property.
 
@@ -91,6 +99,7 @@ The fraction of the original amount of energy the particle retains after a colli
 ***
 
 ### `runTimeTypeInformation`
+<div class="search_terms" style="display: none">runtimetypeinformation</div>
 
 *Read-only*. The runtime type information for this object.
 
@@ -101,6 +110,7 @@ The fraction of the original amount of energy the particle retains after a colli
 ***
 
 ### `spawnOnCollide`
+<div class="search_terms" style="display: none">spawnoncollide</div>
 
 This flag controls if a new particle will be spawned on a collision. The new particle is spawned at the position of the old particle with the same attributes.
 
@@ -113,6 +123,7 @@ This flag controls if a new particle will be spawned on a collision. The new par
 ## Methods
 
 ### `clone`
+<div class="search_terms" style="display: none">clone</div>
 
 Creates a copy of this object.
 
@@ -127,6 +138,7 @@ local result = myObject:clone()
 ***
 
 ### `isInstanceOfType`
+<div class="search_terms" style="display: none">isinstanceoftype, instanceoftype</div>
 
 Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
@@ -145,6 +157,7 @@ local result = myObject:isInstanceOfType(type)
 ***
 
 ### `isOfType`
+<div class="search_terms" style="display: none">isoftype, oftype</div>
 
 Determines if the object is of a given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
@@ -163,6 +176,7 @@ local result = myObject:isOfType(type)
 ***
 
 ### `saveBinary`
+<div class="search_terms" style="display: none">savebinary</div>
 
 Serializes the object, and writes it to the given file.
 

@@ -10,6 +10,7 @@ The stack library provides functions to interact with the mwse mwscript stack, f
 ## Functions
 
 ### `mwse.stack.clear`
+<div class="search_terms" style="display: none">clear</div>
 
 Purges all elements from the stack.
 
@@ -20,6 +21,7 @@ mwse.stack.clear()
 ***
 
 ### `mwse.stack.dump`
+<div class="search_terms" style="display: none">dump</div>
 
 Prints all values on the stack in hex format to the log file.
 
@@ -30,6 +32,7 @@ mwse.stack.dump()
 ***
 
 ### `mwse.stack.empty`
+<div class="search_terms" style="display: none">empty</div>
 
 Determines if the stack is empty.
 
@@ -44,6 +47,7 @@ local result = mwse.stack.empty()
 ***
 
 ### `mwse.stack.popFloat`
+<div class="search_terms" style="display: none">popfloat</div>
 
 Pops a value of mwscript type "float" off of the stack.
 
@@ -58,6 +62,7 @@ local unnamed1 = mwse.stack.popFloat()
 ***
 
 ### `mwse.stack.popLong`
+<div class="search_terms" style="display: none">poplong</div>
 
 Pops a value of mwscript type "long" off of the stack.
 
@@ -72,6 +77,7 @@ local unnamed1 = mwse.stack.popLong()
 ***
 
 ### `mwse.stack.popObject`
+<div class="search_terms" style="display: none">popobject</div>
 
 Pops a value of mwscript type "long" off of the stack, and tries to reinterpret as a game object.
 
@@ -86,6 +92,7 @@ local unnamed1 = mwse.stack.popObject()
 ***
 
 ### `mwse.stack.popShort`
+<div class="search_terms" style="display: none">popshort</div>
 
 Pops a value of mwscript type "short" off of the stack.
 
@@ -100,6 +107,7 @@ local unnamed1 = mwse.stack.popShort()
 ***
 
 ### `mwse.stack.popString`
+<div class="search_terms" style="display: none">popstring</div>
 
 Pops a value of mwscript type "long" off of the stack, and tries to reinterpret as a string.
 
@@ -114,6 +122,7 @@ local unnamed1 = mwse.stack.popString()
 ***
 
 ### `mwse.stack.pushFloat`
+<div class="search_terms" style="display: none">pushfloat</div>
 
 Pushes a value of mwscript type "float" onto the stack.
 
@@ -132,6 +141,7 @@ local result = mwse.stack.pushFloat(value)
 ***
 
 ### `mwse.stack.pushLong`
+<div class="search_terms" style="display: none">pushlong</div>
 
 Pushes a value of mwscript type "long" onto the stack.
 
@@ -150,6 +160,7 @@ local result = mwse.stack.pushLong(value)
 ***
 
 ### `mwse.stack.pushObject`
+<div class="search_terms" style="display: none">pushobject</div>
 
 Pushes a value of mwscript type "long" onto the stack, which matches the address of a given game object.
 
@@ -168,6 +179,7 @@ local result = mwse.stack.pushObject(value)
 ***
 
 ### `mwse.stack.pushShort`
+<div class="search_terms" style="display: none">pushshort</div>
 
 Pushes a value of mwscript type "short" onto the stack.
 
@@ -186,6 +198,7 @@ local result = mwse.stack.pushShort(value)
 ***
 
 ### `mwse.stack.pushString`
+<div class="search_terms" style="display: none">pushstring</div>
 
 Adds a string to mwse's string storage, and pushes a value of mwscript type "long" onto the stack that represents the string.
 
@@ -204,6 +217,7 @@ local result = mwse.stack.pushString(value)
 ***
 
 ### `mwse.stack.size`
+<div class="search_terms" style="display: none">size</div>
 
 Returns the number of elements currently on the stack.
 

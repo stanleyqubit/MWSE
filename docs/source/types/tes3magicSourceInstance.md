@@ -11,6 +11,7 @@ This type inherits the following: [tes3baseObject](../../types/tes3baseObject)
 ## Properties
 
 ### `blocked`
+<div class="search_terms" style="display: none">blocked</div>
 
 The blocked state of the object.
 
@@ -21,6 +22,7 @@ The blocked state of the object.
 ***
 
 ### `castChanceOverride`
+<div class="search_terms" style="display: none">castchanceoverride</div>
 
 No description yet available.
 
@@ -31,6 +33,7 @@ No description yet available.
 ***
 
 ### `caster`
+<div class="search_terms" style="display: none">caster</div>
 
 *Read-only*. No description yet available.
 
@@ -41,6 +44,7 @@ No description yet available.
 ***
 
 ### `corprusHoursSinceLastWorsen`
+<div class="search_terms" style="display: none">corprushourssincelastworsen</div>
 
 The number of hours passed since the player's corprus state last worsened.
 
@@ -51,6 +55,7 @@ The number of hours passed since the player's corprus state last worsened.
 ***
 
 ### `deleted`
+<div class="search_terms" style="display: none">deleted</div>
 
 *Read-only*. The deleted state of the object.
 
@@ -61,6 +66,7 @@ The number of hours passed since the player's corprus state last worsened.
 ***
 
 ### `disabled`
+<div class="search_terms" style="display: none">disabled</div>
 
 *Read-only*. The disabled state of the object.
 
@@ -71,6 +77,7 @@ The number of hours passed since the player's corprus state last worsened.
 ***
 
 ### `id`
+<div class="search_terms" style="display: none">id</div>
 
 *Read-only*. The unique identifier for the object.
 
@@ -81,6 +88,7 @@ The number of hours passed since the player's corprus state last worsened.
 ***
 
 ### `item`
+<div class="search_terms" style="display: none">item</div>
 
 *Read-only*. No description yet available.
 
@@ -91,6 +99,7 @@ The number of hours passed since the player's corprus state last worsened.
 ***
 
 ### `itemData`
+<div class="search_terms" style="display: none">itemdata</div>
 
 *Read-only*. No description yet available.
 
@@ -101,6 +110,7 @@ The number of hours passed since the player's corprus state last worsened.
 ***
 
 ### `itemID`
+<div class="search_terms" style="display: none">itemid</div>
 
 *Read-only*. No description yet available.
 
@@ -111,6 +121,7 @@ The number of hours passed since the player's corprus state last worsened.
 ***
 
 ### `magicID`
+<div class="search_terms" style="display: none">magicid</div>
 
 *Read-only*. For spells created in the Contruction Set, this is the id of the spell defined there. For spells created during play, with spellmaking, this is a number.
 
@@ -121,6 +132,7 @@ The number of hours passed since the player's corprus state last worsened.
 ***
 
 ### `modified`
+<div class="search_terms" style="display: none">modified, ified</div>
 
 The modification state of the object since the last save.
 
@@ -131,6 +143,7 @@ The modification state of the object since the last save.
 ***
 
 ### `objectFlags`
+<div class="search_terms" style="display: none">objectflags</div>
 
 *Read-only*. The raw flags of the object.
 
@@ -141,6 +154,7 @@ The modification state of the object since the last save.
 ***
 
 ### `objectType`
+<div class="search_terms" style="display: none">objecttype</div>
 
 *Read-only*. The type of object. Maps to values in [`tes3.objectType`](https://mwse.github.io/MWSE/references/object-types/).
 
@@ -151,6 +165,7 @@ The modification state of the object since the last save.
 ***
 
 ### `persistent`
+<div class="search_terms" style="display: none">persistent</div>
 
 The persistent flag of the object.
 
@@ -161,6 +176,7 @@ The persistent flag of the object.
 ***
 
 ### `projectile`
+<div class="search_terms" style="display: none">projectile</div>
 
 *Read-only*. No description yet available.
 
@@ -171,6 +187,7 @@ The persistent flag of the object.
 ***
 
 ### `serialNumber`
+<div class="search_terms" style="display: none">serialnumber</div>
 
 *Read-only*. Unique indentifier for just this magic source.
 
@@ -181,6 +198,7 @@ The persistent flag of the object.
 ***
 
 ### `source`
+<div class="search_terms" style="display: none">source</div>
 
 *Read-only*. No description yet available.
 
@@ -191,6 +209,7 @@ The persistent flag of the object.
 ***
 
 ### `sourceEffects`
+<div class="search_terms" style="display: none">sourceeffects</div>
 
 *Read-only*. An array-style table holding spell effects this magic source has.
 
@@ -201,6 +220,7 @@ The persistent flag of the object.
 ***
 
 ### `sourceless`
+<div class="search_terms" style="display: none">sourceless</div>
 
 The soruceless flag of the object.
 
@@ -211,6 +231,7 @@ The soruceless flag of the object.
 ***
 
 ### `sourceMod`
+<div class="search_terms" style="display: none">sourcemod</div>
 
 *Read-only*. The filename (including the extension) of the mod that owns this object. It has `nil` value if the object was anything other than loaded from an ESP or ESM file.
 
@@ -221,6 +242,7 @@ The soruceless flag of the object.
 ***
 
 ### `sourceType`
+<div class="search_terms" style="display: none">sourcetype</div>
 
 *Read-only*. The type of this magic source. Maps to [`tes3.magicSourceType`](https://mwse.github.io/MWSE/references/magic-source-types/) constants.
 
@@ -231,6 +253,7 @@ The soruceless flag of the object.
 ***
 
 ### `state`
+<div class="search_terms" style="display: none">state</div>
 
 Shows if the state is pre-cast, cast, beginning, working, ending, retired, etc. Maps to [`tes3.spellState`](https://mwse.github.io/MWSE/references/spell-states/) constants.
 
@@ -241,6 +264,7 @@ Shows if the state is pre-cast, cast, beginning, working, ending, retired, etc. 
 ***
 
 ### `supportsLuaData`
+<div class="search_terms" style="display: none">supportsluadata</div>
 
 If true, references of this object can store temporary or persistent lua data.
 
@@ -251,6 +275,7 @@ If true, references of this object can store temporary or persistent lua data.
 ***
 
 ### `target`
+<div class="search_terms" style="display: none">target</div>
 
 *Read-only*. No description yet available.
 
@@ -261,6 +286,7 @@ If true, references of this object can store temporary or persistent lua data.
 ***
 
 ### `timestampCastBegin`
+<div class="search_terms" style="display: none">timestampcastbegin</div>
 
 The timestamp at which this magic source was cast.
 
@@ -273,6 +299,7 @@ The timestamp at which this magic source was cast.
 ## Methods
 
 ### `__tojson`
+<div class="search_terms" style="display: none">__tojson</div>
 
 Serializes the object to json.
 
@@ -287,6 +314,7 @@ local string = myObject:__tojson()
 ***
 
 ### `getEffectInstance`
+<div class="search_terms" style="display: none">geteffectinstance, effectinstance</div>
 
 Gets the magic effect instance for a given effect index and target reference. Effect instances may not all be active on a target, due to reflect, absorption, dispels, different durations and other factors.
 
@@ -306,6 +334,7 @@ local result = myObject:getEffectInstance(index, target)
 ***
 
 ### `getMagnitudeForIndex`
+<div class="search_terms" style="display: none">getmagnitudeforindex, magnitudeforindex</div>
 
 Gets the magnitude from the casting source for a given effect index.
 
@@ -324,6 +353,7 @@ local result = myObject:getMagnitudeForIndex(index)
 ***
 
 ### `playVisualEffect`
+<div class="search_terms" style="display: none">playvisualeffect</div>
 
 This function plays an animation for an effect from the `tes3magicSourceInstance` object.
 

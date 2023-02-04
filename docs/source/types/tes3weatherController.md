@@ -10,6 +10,7 @@ A data structure that handles the weather.
 ## Properties
 
 ### `ambientPostSunriseTime`
+<div class="search_terms" style="display: none">ambientpostsunrisetime</div>
 
 Each weather's ambiental color has one color for day and night states each. The day color will be used when the game hour is between `ambientPostSunriseTime` and `ambientPreSunsetTime`. This corresponds to the setting of the same name in Morrowind.ini file.
 
@@ -20,6 +21,7 @@ Each weather's ambiental color has one color for day and night states each. The 
 ***
 
 ### `ambientPostSunsetTime`
+<div class="search_terms" style="display: none">ambientpostsunsettime</div>
 
 Each weather's ambiental color has one color for day and night states each. The night color will be used when the game hour is between `ambientPostSunsetTime` and `ambientPreSunriseTime`. This corresponds to the setting of the same name in Morrowind.ini file.
 
@@ -30,6 +32,7 @@ Each weather's ambiental color has one color for day and night states each. The 
 ***
 
 ### `ambientPreSunriseTime`
+<div class="search_terms" style="display: none">ambientpresunrisetime</div>
 
 Each weather's ambiental color has one color for day and night states each. The night color will be used when the game hour is between `ambientPostSunsetTime` and `ambientPreSunriseTime`. This corresponds to the setting of the same name in Morrowind.ini file.
 
@@ -40,6 +43,7 @@ Each weather's ambiental color has one color for day and night states each. The 
 ***
 
 ### `ambientPreSunsetTime`
+<div class="search_terms" style="display: none">ambientpresunsettime</div>
 
 Each weather's ambiental color has one color for day and night states each. The day color will be used when the game hour is between `ambientPostSunriseTime` and `ambientPreSunsetTime`. This corresponds to the setting of the same name in Morrowind.ini file.
 
@@ -50,6 +54,7 @@ Each weather's ambiental color has one color for day and night states each. The 
 ***
 
 ### `currentFogColor`
+<div class="search_terms" style="display: none">currentfogcolor</div>
 
 The current fog color. The values can range from 0 to 1.
 
@@ -60,6 +65,7 @@ The current fog color. The values can range from 0 to 1.
 ***
 
 ### `currentSkyColor`
+<div class="search_terms" style="display: none">currentskycolor</div>
 
 The current sky color. The values can range from 0 to 1.
 
@@ -70,6 +76,7 @@ The current sky color. The values can range from 0 to 1.
 ***
 
 ### `currentWeather`
+<div class="search_terms" style="display: none">currentweather</div>
 
 *Read-only*. The current weather.
 
@@ -80,6 +87,7 @@ The current sky color. The values can range from 0 to 1.
 ***
 
 ### `daysRemaining`
+<div class="search_terms" style="display: none">daysremaining</div>
 
 The days remaining for the current weather.
 
@@ -90,6 +98,7 @@ The days remaining for the current weather.
 ***
 
 ### `fogDepthChangeSpeed`
+<div class="search_terms" style="display: none">fogdepthchangespeed</div>
 
 Controls the speed of how fast the fog comes in. This corresponds to the setting of the same name in Morrowind.ini file.
 
@@ -100,6 +109,7 @@ Controls the speed of how fast the fog comes in. This corresponds to the setting
 ***
 
 ### `fogPostSunriseTime`
+<div class="search_terms" style="display: none">fogpostsunrisetime</div>
 
 Each weather's fog color has one color for day and night states each. The day color will be used when the game hour is between `fogPostSunriseTime` and `fogPreSunsetTime`. This corresponds to the setting of the same name in Morrowind.ini file.
 
@@ -110,6 +120,7 @@ Each weather's fog color has one color for day and night states each. The day co
 ***
 
 ### `fogPostSunsetTime`
+<div class="search_terms" style="display: none">fogpostsunsettime</div>
 
 Each weather's fog color has one color for day and night states each. The night color will be used when the game hour is between `fogPostSunsetTime` and `fogPreSunriseTime`. This corresponds to the setting of the same name in Morrowind.ini file.
 
@@ -120,6 +131,7 @@ Each weather's fog color has one color for day and night states each. The night 
 ***
 
 ### `fogPreSunriseTime`
+<div class="search_terms" style="display: none">fogpresunrisetime</div>
 
 Each weather's fog color has one color for day and night states each. The night color will be used when the game hour is between `fogPostSunsetTime` and `fogPreSunriseTime`. This corresponds to the setting of the same name in Morrowind.ini file.
 
@@ -130,6 +142,7 @@ Each weather's fog color has one color for day and night states each. The night 
 ***
 
 ### `fogPreSunsetTime`
+<div class="search_terms" style="display: none">fogpresunsettime</div>
 
 Each weather's fog color has one color for day and night states each. The day color will be used when the game hour is between `fogPostSunriseTime` and `fogPreSunsetTime`. This corresponds to the setting of the same name in Morrowind.ini file.
 
@@ -140,6 +153,7 @@ Each weather's fog color has one color for day and night states each. The day co
 ***
 
 ### `hoursBetweenWeatherChanges`
+<div class="search_terms" style="display: none">hoursbetweenweatherchanges</div>
 
 The hours between weather changes. Stored as a float value.
 
@@ -150,6 +164,7 @@ The hours between weather changes. Stored as a float value.
 ***
 
 ### `hoursRemaining`
+<div class="search_terms" style="display: none">hoursremaining</div>
 
 The hours remaining.
 
@@ -160,6 +175,7 @@ The hours remaining.
 ***
 
 ### `lastActiveRegion`
+<div class="search_terms" style="display: none">lastactiveregion</div>
 
 *Read-only*. Provides read-only access to last active region object.
 
@@ -170,6 +186,7 @@ The hours remaining.
 ***
 
 ### `masser`
+<div class="search_terms" style="display: none">masser</div>
 
 *Read-only*. Provides read-only access to the Masser moon object.
 
@@ -180,6 +197,7 @@ The hours remaining.
 ***
 
 ### `nextWeather`
+<div class="search_terms" style="display: none">nextweather</div>
 
 *Read-only*. The next weather.
 
@@ -190,6 +208,7 @@ The hours remaining.
 ***
 
 ### `particlesActive`
+<div class="search_terms" style="display: none">particlesactive</div>
 
 *Read-only*. Provides a list of active weather particles.
 
@@ -200,6 +219,7 @@ The hours remaining.
 ***
 
 ### `particlesInactive`
+<div class="search_terms" style="display: none">particlesinactive</div>
 
 *Read-only*. Provides a list of inactive weather particles.
 
@@ -210,6 +230,7 @@ The hours remaining.
 ***
 
 ### `sceneRainRoot`
+<div class="search_terms" style="display: none">scenerainroot</div>
 
 *Read-only*. Provides read-only access to the scene rain root NiNode.
 
@@ -220,6 +241,7 @@ The hours remaining.
 ***
 
 ### `sceneSkyLight`
+<div class="search_terms" style="display: none">sceneskylight</div>
 
 *Read-only*. Provides read-only access to the scene sky light directional light.
 
@@ -230,6 +252,7 @@ The hours remaining.
 ***
 
 ### `sceneSkyRoot`
+<div class="search_terms" style="display: none">sceneskyroot</div>
 
 *Read-only*. Provides read-only access to the scene sky root NiNode.
 
@@ -240,6 +263,7 @@ The hours remaining.
 ***
 
 ### `sceneSnowRoot`
+<div class="search_terms" style="display: none">scenesnowroot</div>
 
 *Read-only*. Provides read-only access to the scene snow root NiNode.
 
@@ -250,6 +274,7 @@ The hours remaining.
 ***
 
 ### `sceneStormRoot`
+<div class="search_terms" style="display: none">scenestormroot</div>
 
 *Read-only*. Provides read-only access to the scene storm root NiNode.
 
@@ -260,6 +285,7 @@ The hours remaining.
 ***
 
 ### `sceneSunBase`
+<div class="search_terms" style="display: none">scenesunbase</div>
 
 *Read-only*. Provides read-only access to the scenesun base NiNode.
 
@@ -270,6 +296,7 @@ The hours remaining.
 ***
 
 ### `sceneSunGlare`
+<div class="search_terms" style="display: none">scenesunglare</div>
 
 *Read-only*. Provides read-only access to the scene sun glare NiNode.
 
@@ -280,6 +307,7 @@ The hours remaining.
 ***
 
 ### `sceneSunVis`
+<div class="search_terms" style="display: none">scenesunvis</div>
 
 *Read-only*. Provides read-only access to the scene sun vis NiNode.
 
@@ -290,6 +318,7 @@ The hours remaining.
 ***
 
 ### `secunda`
+<div class="search_terms" style="display: none">secunda</div>
 
 *Read-only*. Provides read-only access to the Secunda moon object.
 
@@ -300,6 +329,7 @@ The hours remaining.
 ***
 
 ### `skyPostSunriseTime`
+<div class="search_terms" style="display: none">skypostsunrisetime</div>
 
 The sky has one color for day and night states each. The day color will be used when the game hour is between `skyPostSunriseTime` and `skyPreSunsetTime`. This corresponds to the setting of the same name in Morrowind.ini file.
 
@@ -310,6 +340,7 @@ The sky has one color for day and night states each. The day color will be used 
 ***
 
 ### `skyPostSunsetTime`
+<div class="search_terms" style="display: none">skypostsunsettime</div>
 
 The sky has one color for day and night states each. The night color will be used when the game hour is between `skyPostSunsetTime` and `skyPreSunriseTime`. This corresponds to the setting of the same name in Morrowind.ini file.
 
@@ -320,6 +351,7 @@ The sky has one color for day and night states each. The night color will be use
 ***
 
 ### `skyPreSunriseTime`
+<div class="search_terms" style="display: none">skypresunrisetime</div>
 
 The sky has one color for day and night states each. The night color will be used when the game hour is between `skyPostSunsetTime` and `skyPreSunriseTime`. This corresponds to the setting of the same name in Morrowind.ini file.
 
@@ -330,6 +362,7 @@ The sky has one color for day and night states each. The night color will be use
 ***
 
 ### `skyPreSunsetTime`
+<div class="search_terms" style="display: none">skypresunsettime</div>
 
 The sky has one color for day and night states each. The day color will be used when the game hour is between `skyPostSunriseTime` and `skyPreSunsetTime`. This corresponds to the setting of the same name in Morrowind.ini file.
 
@@ -340,6 +373,7 @@ The sky has one color for day and night states each. The day color will be used 
 ***
 
 ### `starsFadingDuration`
+<div class="search_terms" style="display: none">starsfadingduration</div>
 
 The stars will fade in `starsPostSunsetStart` hours after the sunset. They fade out `starsPreSunriseFinish` hours before sunrise. This value represents the duration of the fading. This corresponds to the setting of the same name in Morrowind.ini file.
 
@@ -350,6 +384,7 @@ The stars will fade in `starsPostSunsetStart` hours after the sunset. They fade 
 ***
 
 ### `starsPostSunsetStart`
+<div class="search_terms" style="display: none">starspostsunsetstart</div>
 
 The stars will start to fade in (appear) `starsPostSunsetStart` hours before sunrise. This corresponds to the setting of the same name in Morrowind.ini file.
 
@@ -360,6 +395,7 @@ The stars will start to fade in (appear) `starsPostSunsetStart` hours before sun
 ***
 
 ### `starsPreSunriseFinish`
+<div class="search_terms" style="display: none">starspresunrisefinish</div>
 
 The stars will start to fade out (disappear) `starsPreSunriseFinish` hours before sunrise. This corresponds to the setting of the same name in Morrowind.ini file.
 
@@ -370,6 +406,7 @@ The stars will start to fade out (disappear) `starsPreSunriseFinish` hours befor
 ***
 
 ### `sunglareFaderAngleMax`
+<div class="search_terms" style="display: none">sunglarefaderanglemax</div>
 
 The sunglare fader maximum angle.
 
@@ -380,6 +417,7 @@ The sunglare fader maximum angle.
 ***
 
 ### `sunglareFaderColor`
+<div class="search_terms" style="display: none">sunglarefadercolor</div>
 
 The sunglare fader color. The values can range from 0 to 1.
 
@@ -390,6 +428,7 @@ The sunglare fader color. The values can range from 0 to 1.
 ***
 
 ### `sunglareFaderMax`
+<div class="search_terms" style="display: none">sunglarefadermax</div>
 
 The sunglare fader maximum.
 
@@ -400,6 +439,7 @@ The sunglare fader maximum.
 ***
 
 ### `sunPostSunriseTime`
+<div class="search_terms" style="display: none">sunpostsunrisetime</div>
 
 The Sun has one color for day and night states each. The day color will be used when the game hour is between `sunPostSunriseTime` and `sunPreSunsetTime`. This corresponds to the setting of the same name in Morrowind.ini file.
 
@@ -410,6 +450,7 @@ The Sun has one color for day and night states each. The day color will be used 
 ***
 
 ### `sunPostSunsetTime`
+<div class="search_terms" style="display: none">sunpostsunsettime</div>
 
 The Sun has one color for day and night states each. The night color will be used when the game hour is between `sunPostSunsetTime` and `sunPreSunriseTime`. This corresponds to the setting of the same name in Morrowind.ini file.
 
@@ -420,6 +461,7 @@ The Sun has one color for day and night states each. The night color will be use
 ***
 
 ### `sunPreSunriseTime`
+<div class="search_terms" style="display: none">sunpresunrisetime</div>
 
 The Sun has one color for day and night states each. The night color will be used when the game hour is between `sunPostSunsetTime` and `sunPreSunriseTime`. This corresponds to the setting of the same name in Morrowind.ini file.
 
@@ -430,6 +472,7 @@ The Sun has one color for day and night states each. The night color will be use
 ***
 
 ### `sunPreSunsetTime`
+<div class="search_terms" style="display: none">sunpresunsettime</div>
 
 The Sun has one color for day and night states each. The day color will be used when the game hour is between `sunPostSunriseTime` and `sunPreSunsetTime`. This corresponds to the setting of the same name in Morrowind.ini file.
 
@@ -440,6 +483,7 @@ The Sun has one color for day and night states each. The day color will be used 
 ***
 
 ### `sunriseDuration`
+<div class="search_terms" style="display: none">sunriseduration</div>
 
 The sunrise duration.
 
@@ -450,6 +494,7 @@ The sunrise duration.
 ***
 
 ### `sunriseHour`
+<div class="search_terms" style="display: none">sunrisehour</div>
 
 The sunrise hour.
 
@@ -460,6 +505,7 @@ The sunrise hour.
 ***
 
 ### `sunsetDuration`
+<div class="search_terms" style="display: none">sunsetduration</div>
 
 The sunset duration.
 
@@ -470,6 +516,7 @@ The sunset duration.
 ***
 
 ### `sunsetHour`
+<div class="search_terms" style="display: none">sunsethour</div>
 
 The sunset hour.
 
@@ -480,6 +527,7 @@ The sunset hour.
 ***
 
 ### `timescaleClouds`
+<div class="search_terms" style="display: none">timescaleclouds</div>
 
 The timescale for clouds.
 
@@ -490,6 +538,7 @@ The timescale for clouds.
 ***
 
 ### `transitionScalar`
+<div class="search_terms" style="display: none">transitionscalar</div>
 
 The scalar transition.
 
@@ -500,6 +549,7 @@ The scalar transition.
 ***
 
 ### `underwaterColor`
+<div class="search_terms" style="display: none">underwatercolor</div>
 
 The underwater color, represented as a vector. The values can range from 0 to 1.
 
@@ -510,6 +560,7 @@ The underwater color, represented as a vector. The values can range from 0 to 1.
 ***
 
 ### `underwaterColorWeight`
+<div class="search_terms" style="display: none">underwatercolorweight</div>
 
 The underwater color weight.
 
@@ -520,6 +571,7 @@ The underwater color weight.
 ***
 
 ### `underwaterDayFog`
+<div class="search_terms" style="display: none">underwaterdayfog</div>
 
 The underwater day fog value.
 
@@ -530,6 +582,7 @@ The underwater day fog value.
 ***
 
 ### `underwaterIndoorFog`
+<div class="search_terms" style="display: none">underwaterindoorfog</div>
 
 The underwater indoor fog value.
 
@@ -540,6 +593,7 @@ The underwater indoor fog value.
 ***
 
 ### `underwaterNightFog`
+<div class="search_terms" style="display: none">underwaternightfog</div>
 
 The underwater night fog value.
 
@@ -550,6 +604,7 @@ The underwater night fog value.
 ***
 
 ### `underwaterSunriseFog`
+<div class="search_terms" style="display: none">underwatersunrisefog</div>
 
 The underwater sunrise fog value.
 
@@ -560,6 +615,7 @@ The underwater sunrise fog value.
 ***
 
 ### `underwaterSunsetFog`
+<div class="search_terms" style="display: none">underwatersunsetfog</div>
 
 The underwater sunset fog value.
 
@@ -570,6 +626,7 @@ The underwater sunset fog value.
 ***
 
 ### `weathers`
+<div class="search_terms" style="display: none">weathers</div>
 
 *Read-only*. Array-style table for the different weather types. Each object in the table is a [tes3weather](https://mwse.github.io/MWSE/types/tes3weather/). The indices in the table map to the values in the [`tes3.weather`](https://mwse.github.io/MWSE/references/weather-types/) table.
 
@@ -580,6 +637,7 @@ The underwater sunset fog value.
 ***
 
 ### `windVelocityCurrWeather`
+<div class="search_terms" style="display: none">windvelocitycurrweather</div>
 
 The wind velocity for the current weather.
 
@@ -590,6 +648,7 @@ The wind velocity for the current weather.
 ***
 
 ### `windVelocityNextWeather`
+<div class="search_terms" style="display: none">windvelocitynextweather</div>
 
 The wind velocity for the next weather.
 
@@ -602,6 +661,7 @@ The wind velocity for the next weather.
 ## Methods
 
 ### `calcSunDamageScalar`
+<div class="search_terms" style="display: none">calcsundamagescalar</div>
 
 Calculates the sun damage based on the current weather.
 
@@ -619,6 +679,7 @@ local result = myObject:calcSunDamageScalar()
 ***
 
 ### `switchImmediate`
+<div class="search_terms" style="display: none">switchimmediate</div>
 
 Immediately switches the weather to the provided weather parameter.
 
@@ -633,6 +694,7 @@ myObject:switchImmediate(weatherId)
 ***
 
 ### `switchTransition`
+<div class="search_terms" style="display: none">switchtransition</div>
 
 Transitions the weather to the provided weather parameter based on the weather controller settings.
 
@@ -647,6 +709,7 @@ myObject:switchTransition(weatherId)
 ***
 
 ### `updateVisuals`
+<div class="search_terms" style="display: none">updatevisuals, visuals</div>
 
 Updates the weather controller visuals. This should be called after any weather transitions.
 

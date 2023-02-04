@@ -10,6 +10,7 @@ A child container from [`tes3dataHandler`](https://mwse.github.io/MWSE/types/tes
 ## Properties
 
 ### `activeMods`
+<div class="search_terms" style="display: none">activemods</div>
 
 *Read-only*. A collection of all actively loaded mods.
 
@@ -20,6 +21,7 @@ A child container from [`tes3dataHandler`](https://mwse.github.io/MWSE/types/tes
 ***
 
 ### `birthsigns`
+<div class="search_terms" style="display: none">birthsigns</div>
 
 *Read-only*. A collection of all birthsign objects.
 
@@ -30,6 +32,7 @@ A child container from [`tes3dataHandler`](https://mwse.github.io/MWSE/types/tes
 ***
 
 ### `cells`
+<div class="search_terms" style="display: none">cells</div>
 
 *Read-only*. A collection of all cell objects.
 
@@ -40,6 +43,7 @@ A child container from [`tes3dataHandler`](https://mwse.github.io/MWSE/types/tes
 ***
 
 ### `classes`
+<div class="search_terms" style="display: none">classes</div>
 
 *Read-only*. A collection of all class objects.
 
@@ -50,6 +54,7 @@ A child container from [`tes3dataHandler`](https://mwse.github.io/MWSE/types/tes
 ***
 
 ### `dialogues`
+<div class="search_terms" style="display: none">dialogues</div>
 
 *Read-only*. A collection of all dialogue objects.
 
@@ -60,6 +65,7 @@ A child container from [`tes3dataHandler`](https://mwse.github.io/MWSE/types/tes
 ***
 
 ### `factions`
+<div class="search_terms" style="display: none">factions</div>
 
 *Read-only*. A collection of all faction objects.
 
@@ -70,6 +76,7 @@ A child container from [`tes3dataHandler`](https://mwse.github.io/MWSE/types/tes
 ***
 
 ### `globals`
+<div class="search_terms" style="display: none">globals</div>
 
 *Read-only*. A collection of all global variable objects.
 
@@ -80,6 +87,7 @@ A child container from [`tes3dataHandler`](https://mwse.github.io/MWSE/types/tes
 ***
 
 ### `isSavingOrLoading`
+<div class="search_terms" style="display: none">issavingorloading, savingorloading</div>
 
 *Read-only*. True when in the process of saving or loading the game.
 
@@ -90,6 +98,7 @@ A child container from [`tes3dataHandler`](https://mwse.github.io/MWSE/types/tes
 ***
 
 ### `lastLoadedFile`
+<div class="search_terms" style="display: none">lastloadedfile</div>
 
 *Read-only*. The last loaded savegame file.
 
@@ -100,6 +109,7 @@ A child container from [`tes3dataHandler`](https://mwse.github.io/MWSE/types/tes
 ***
 
 ### `magicEffects`
+<div class="search_terms" style="display: none">magiceffects</div>
 
 *Read-only*. A table of references to all magic effects. This is a dictionary, as the effect list may have gaps.
 
@@ -110,6 +120,7 @@ A child container from [`tes3dataHandler`](https://mwse.github.io/MWSE/types/tes
 ***
 
 ### `mapTexture`
+<div class="search_terms" style="display: none">maptexture</div>
 
 Access to the World map texture.
 
@@ -120,6 +131,7 @@ Access to the World map texture.
 ***
 
 ### `objects`
+<div class="search_terms" style="display: none">objects</div>
 
 *Read-only*. A collection of all other game objects.
 
@@ -130,6 +142,7 @@ Access to the World map texture.
 ***
 
 ### `races`
+<div class="search_terms" style="display: none">races</div>
 
 *Read-only*. A collection of all race objects.
 
@@ -140,6 +153,7 @@ Access to the World map texture.
 ***
 
 ### `regions`
+<div class="search_terms" style="display: none">regions</div>
 
 *Read-only*. A collection of all region objects.
 
@@ -150,6 +164,7 @@ Access to the World map texture.
 ***
 
 ### `scripts`
+<div class="search_terms" style="display: none">scripts</div>
 
 *Read-only*. A collection of all script objects.
 
@@ -160,6 +175,7 @@ Access to the World map texture.
 ***
 
 ### `skills`
+<div class="search_terms" style="display: none">skills</div>
 
 *Read-only*. A table of references to all 27 skills.
 
@@ -170,6 +186,7 @@ Access to the World map texture.
 ***
 
 ### `soundGenerators`
+<div class="search_terms" style="display: none">soundgenerators</div>
 
 *Read-only*. A collection of all sound generator objects.
 
@@ -180,6 +197,7 @@ Access to the World map texture.
 ***
 
 ### `sounds`
+<div class="search_terms" style="display: none">sounds</div>
 
 *Read-only*. A collection of all sound objects.
 
@@ -190,6 +208,7 @@ Access to the World map texture.
 ***
 
 ### `spells`
+<div class="search_terms" style="display: none">spells</div>
 
 *Read-only*. A collection of all spell objects.
 
@@ -200,6 +219,7 @@ Access to the World map texture.
 ***
 
 ### `startScripts`
+<div class="search_terms" style="display: none">startscripts</div>
 
 *Read-only*. A collection of all start script objects.
 
@@ -212,6 +232,7 @@ Access to the World map texture.
 ## Methods
 
 ### `addNewObject`
+<div class="search_terms" style="display: none">addnewobject, newobject</div>
 
 Inserts a newly created object into the proper collections.
 
@@ -230,6 +251,7 @@ local result = myObject:addNewObject(object)
 ***
 
 ### `deleteObject`
+<div class="search_terms" style="display: none">deleteobject, object</div>
 
 Removes an object from the proper collections.
 
@@ -244,6 +266,7 @@ myObject:deleteObject(object)
 ***
 
 ### `drawCellMapMarker`
+<div class="search_terms" style="display: none">drawcellmapmarker</div>
 
 Draws a map marker box for an exterior cell onto the world map.
 
@@ -258,6 +281,7 @@ myObject:drawCellMapMarker(cell)
 ***
 
 ### `findDialogue`
+<div class="search_terms" style="display: none">finddialogue, dialogue</div>
 
 Locates a dialogue for a given ID.
 
@@ -276,6 +300,7 @@ local result = myObject:findDialogue(id)
 ***
 
 ### `findFirstCloneOfActor`
+<div class="search_terms" style="display: none">findfirstcloneofactor, firstcloneofactor</div>
 
 Locates the first reference for a given object ID.
 
@@ -294,6 +319,7 @@ local result = myObject:findFirstCloneOfActor(id)
 ***
 
 ### `findGlobalVariable`
+<div class="search_terms" style="display: none">findglobalvariable, globalvariable</div>
 
 Locates a global variable for a given ID.
 
@@ -312,6 +338,7 @@ local result = myObject:findGlobalVariable(id)
 ***
 
 ### `findScript`
+<div class="search_terms" style="display: none">findscript, script</div>
 
 Locates a script for a given ID.
 
@@ -330,6 +357,7 @@ local result = myObject:findScript(id)
 ***
 
 ### `findSound`
+<div class="search_terms" style="display: none">findsound, sound</div>
 
 Locates a sound for a given ID.
 
@@ -348,6 +376,7 @@ local result = myObject:findSound(id)
 ***
 
 ### `resolveObject`
+<div class="search_terms" style="display: none">resolveobject</div>
 
 Locates a general object for a given ID.
 
@@ -366,6 +395,7 @@ local result = myObject:resolveObject(id)
 ***
 
 ### `showLocationOnMap`
+<div class="search_terms" style="display: none">showlocationonmap, locationonmap</div>
 
 Draws map marker boxes onto the world map for all cells with names starting with the prefix. e.g. `showLocationOnMap("Vivec")` draws boxes for all cells in Vivec, because the cell names "Vivec, Arena", "Vivec, Temple", etc. matches.
 

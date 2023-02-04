@@ -13,6 +13,7 @@ So `itemStack.variables` is a list of different itemData for each thing in the s
 ## Properties
 
 ### `count`
+<div class="search_terms" style="display: none">count</div>
 
 The total number of items in the stack.
 
@@ -23,6 +24,7 @@ The total number of items in the stack.
 ***
 
 ### `object`
+<div class="search_terms" style="display: none">object</div>
 
 *Read-only*. The core game object that the stack represents.
 
@@ -33,6 +35,7 @@ The total number of items in the stack.
 ***
 
 ### `variables`
+<div class="search_terms" style="display: none">variables</div>
 
 A collection of variables that are associated with the stack's object, or nil if there aren't any.
 

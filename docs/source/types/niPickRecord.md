@@ -10,6 +10,7 @@ A nested class of NiPick that stores the results of previous picking operations 
 ## Properties
 
 ### `color`
+<div class="search_terms" style="display: none">color</div>
 
 The vertex color at the point of intersection. The color is valid only when `returnColor = true`.
 
@@ -20,6 +21,7 @@ The vertex color at the point of intersection. The color is valid only when `ret
 ***
 
 ### `distance`
+<div class="search_terms" style="display: none">distance</div>
 
 The distance of the triangle intersection from the ray origin.
 
@@ -30,6 +32,7 @@ The distance of the triangle intersection from the ray origin.
 ***
 
 ### `intersection`
+<div class="search_terms" style="display: none">intersection</div>
 
 The intersection point on the triangle. It's valid only if the `intersectType` was `ni.pickIntersectType.triangleIntersect`.
 
@@ -40,6 +43,7 @@ The intersection point on the triangle. It's valid only if the `intersectType` w
 ***
 
 ### `normal`
+<div class="search_terms" style="display: none">normal</div>
 
 The normal vector at the point of intersection. The normal is valid only when `returnNormal = true` in the parent niPick object.
 
@@ -50,6 +54,7 @@ The normal vector at the point of intersection. The normal is valid only when `r
 ***
 
 ### `object`
+<div class="search_terms" style="display: none">object</div>
 
 *Read-only*. The object of the record.
 
@@ -60,6 +65,7 @@ The normal vector at the point of intersection. The normal is valid only when `r
 ***
 
 ### `parent`
+<div class="search_terms" style="display: none">parent</div>
 
 *Read-only*. The parent of the record.
 
@@ -70,6 +76,7 @@ The normal vector at the point of intersection. The normal is valid only when `r
 ***
 
 ### `reference`
+<div class="search_terms" style="display: none">reference</div>
 
 *Read-only*. Quick access to the associated object's reference.
 
@@ -80,6 +87,7 @@ The normal vector at the point of intersection. The normal is valid only when `r
 ***
 
 ### `texture`
+<div class="search_terms" style="display: none">texture</div>
 
 The texture coordinates at the point of intersection. The coordinates are valid only when `returnTexture = true` in the parent niPick object.
 
@@ -90,6 +98,7 @@ The texture coordinates at the point of intersection. The coordinates are valid 
 ***
 
 ### `triangleIndex`
+<div class="search_terms" style="display: none">triangleindex</div>
 
 The index of the intersected triangle.
 
@@ -100,6 +109,7 @@ The index of the intersected triangle.
 ***
 
 ### `vertexIndex`
+<div class="search_terms" style="display: none">vertexindex</div>
 
 An array containing the 3 indices of the vertices that form the triangle at the intersection point. It's valid only if the `intersectType` was `ni.pickIntersectType.triangleIntersect`.
 

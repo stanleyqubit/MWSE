@@ -10,6 +10,7 @@ A script context object, which allows variables to be get/set using the variable
 ## Methods
 
 ### `getVariableData`
+<div class="search_terms" style="display: none">getvariabledata, variabledata</div>
 
 This method fetches all of the script's variables as a table.
 

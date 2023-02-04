@@ -10,6 +10,7 @@
 ## Properties
 
 ### `aiDistance`
+<div class="search_terms" style="display: none">aidistance</div>
 
 A value which controls how far the game AI is processed, measured in game distance units. Corresponds to AI Distance slider in Options menu.
 
@@ -20,6 +21,7 @@ A value which controls how far the game AI is processed, measured in game distan
 ***
 
 ### `aiDistanceScale`
+<div class="search_terms" style="display: none">aidistancescale</div>
 
 A value which controls how far the game AI is processed. Corresponds to AI Distance slider in Options menu. This scale is in range [0, 1]. Where `0` means the minimal AI processing range, while `1` means maximal AI processing range.
 
@@ -32,6 +34,7 @@ A value which controls how far the game AI is processed. Corresponds to AI Dista
 ## Methods
 
 ### `checkAlarmRadius`
+<div class="search_terms" style="display: none">checkalarmradius</div>
 
 
 
@@ -48,6 +51,7 @@ myObject:checkAlarmRadius({ actor = ..., container = ... })
 ***
 
 ### `checkNearbyEnemiesAllowRest`
+<div class="search_terms" style="display: none">checknearbyenemiesallowrest</div>
 
 Performs a check whether any potential nearby enemies allow the player to rest.
 
@@ -62,6 +66,7 @@ local result = myObject:checkNearbyEnemiesAllowRest()
 ***
 
 ### `checkPlayerDistance`
+<div class="search_terms" style="display: none">checkplayerdistance</div>
 
 Forces a new distance check for actor AI behaviour.
 
@@ -72,6 +77,7 @@ myObject:checkPlayerDistance()
 ***
 
 ### `detectPresence`
+<div class="search_terms" style="display: none">detectpresence</div>
 
 This function performs a check for presence of a given mobile actor.
 
@@ -88,6 +94,7 @@ myObject:detectPresence({ actor = ..., unknown = ... })
 ***
 
 ### `detectSneak`
+<div class="search_terms" style="display: none">detectsneak</div>
 
 This function performs a check whether a detector can detect another actor sneaking.
 

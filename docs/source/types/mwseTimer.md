@@ -10,6 +10,7 @@ A Timer is a class used to keep track of callback that should be invoked at a la
 ## Properties
 
 ### `callback`
+<div class="search_terms" style="display: none">callback</div>
 
 *Read-only*. The callback that will be invoked at the end of each iteration.
 
@@ -20,6 +21,7 @@ A Timer is a class used to keep track of callback that should be invoked at a la
 ***
 
 ### `data`
+<div class="search_terms" style="display: none">data</div>
 
 Arbitrary json-serializable data stored in the timer. This defaults to `nil`, but can be set at the time of timer creation, or changed later.
 
@@ -30,6 +32,7 @@ Arbitrary json-serializable data stored in the timer. This defaults to `nil`, bu
 ***
 
 ### `duration`
+<div class="search_terms" style="display: none">duration</div>
 
 *Read-only*. The duration of single iteration of the timer in seconds for timers of `timer.real` and `timer.simulate` types. It's in hours for `timer.game` timers.
 
@@ -40,6 +43,7 @@ Arbitrary json-serializable data stored in the timer. This defaults to `nil`, bu
 ***
 
 ### `iterations`
+<div class="search_terms" style="display: none">iterations</div>
 
 *Read-only*. The amount of iterations left for the timer.
 
@@ -50,6 +54,7 @@ Arbitrary json-serializable data stored in the timer. This defaults to `nil`, bu
 ***
 
 ### `state`
+<div class="search_terms" style="display: none">state</div>
 
 *Read-only*. The state of the timer, matching `timer.active`, `timer.paused`, or `timer.expired`.
 
@@ -60,6 +65,7 @@ Arbitrary json-serializable data stored in the timer. This defaults to `nil`, bu
 ***
 
 ### `timeLeft`
+<div class="search_terms" style="display: none">timeleft</div>
 
 *Read-only*. The amount of time left before the current iteration of the timer will complete. Reset to `duration` value at the end of each iteration.
 
@@ -70,6 +76,7 @@ Arbitrary json-serializable data stored in the timer. This defaults to `nil`, bu
 ***
 
 ### `timing`
+<div class="search_terms" style="display: none">timing</div>
 
 *Read-only*. This is the time in the owning `mwseTimerController`'s clock when the current iteration of the timer ends. It's updated for each iteration. For paused timers its equal to the number of seconds/hours left for the current iteration.
 
@@ -82,6 +89,7 @@ Arbitrary json-serializable data stored in the timer. This defaults to `nil`, bu
 ## Methods
 
 ### `cancel`
+<div class="search_terms" style="display: none">cancel, cel</div>
 
 Cancels the timer.
 
@@ -96,6 +104,7 @@ local canceled = myObject:cancel()
 ***
 
 ### `pause`
+<div class="search_terms" style="display: none">pause</div>
 
 Pauses the timer.
 
@@ -110,6 +119,7 @@ local paused = myObject:pause()
 ***
 
 ### `reset`
+<div class="search_terms" style="display: none">reset</div>
 
 Resets the timer completion time and iterations count.
 
@@ -120,6 +130,7 @@ myObject:reset()
 ***
 
 ### `resume`
+<div class="search_terms" style="display: none">resume</div>
 
 Resumes a paused timer.
 

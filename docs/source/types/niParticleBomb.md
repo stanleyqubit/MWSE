@@ -11,6 +11,7 @@ This type inherits the following: [niParticleModifier](../../types/niParticleMod
 ## Properties
 
 ### `controller`
+<div class="search_terms" style="display: none">controller</div>
 
 Access to the generic time controller for particle systems.
 
@@ -21,6 +22,7 @@ Access to the generic time controller for particle systems.
 ***
 
 ### `decay`
+<div class="search_terms" style="display: none">decay</div>
 
 The niParticleBomb modifers with `decayType` linear and exponential have their strength attenuated with distance. No attenuation occurs within the `.decay` distance of the niParticelBomb's position.
 
@@ -31,6 +33,7 @@ The niParticleBomb modifers with `decayType` linear and exponential have their s
 ***
 
 ### `decayType`
+<div class="search_terms" style="display: none">decaytype</div>
 
 Controls how the force applied attenuates with distance. Maps to values in [`ni.particleBombDecayType`](https://mwse.github.io/MWSE/references/ni/particle-bomb-decay-types/) table.
 
@@ -41,6 +44,7 @@ Controls how the force applied attenuates with distance. Maps to values in [`ni.
 ***
 
 ### `deltaV`
+<div class="search_terms" style="display: none">deltav</div>
 
 The acceleration applied to the particles.
 
@@ -51,6 +55,7 @@ The acceleration applied to the particles.
 ***
 
 ### `direction`
+<div class="search_terms" style="display: none">direction</div>
 
 The direction of applied acceleration used for cylindrical and planar particle bombs.
 
@@ -61,6 +66,7 @@ The direction of applied acceleration used for cylindrical and planar particle b
 ***
 
 ### `duration`
+<div class="search_terms" style="display: none">duration</div>
 
 Controls how long this modifer affects the particles.
 
@@ -71,6 +77,7 @@ Controls how long this modifer affects the particles.
 ***
 
 ### `next`
+<div class="search_terms" style="display: none">next</div>
 
 Access to the next attached modifier.
 
@@ -81,6 +88,7 @@ Access to the next attached modifier.
 ***
 
 ### `position`
+<div class="search_terms" style="display: none">position</div>
 
 This is the center of force that spherical and cylindrical particle bombs apply to the particles.
 
@@ -91,6 +99,7 @@ This is the center of force that spherical and cylindrical particle bombs apply 
 ***
 
 ### `refCount`
+<div class="search_terms" style="display: none">refcount</div>
 
 *Read-only*. The number of references that exist for this object. When this value reaches zero, the object will be deleted.
 
@@ -101,6 +110,7 @@ This is the center of force that spherical and cylindrical particle bombs apply 
 ***
 
 ### `RTTI`
+<div class="search_terms" style="display: none">rtti</div>
 
 *Read-only*. The runtime type information for this object. This is an alias for the `.runTimeTypeInformation` property.
 
@@ -111,6 +121,7 @@ This is the center of force that spherical and cylindrical particle bombs apply 
 ***
 
 ### `runTimeTypeInformation`
+<div class="search_terms" style="display: none">runtimetypeinformation</div>
 
 *Read-only*. The runtime type information for this object.
 
@@ -121,6 +132,7 @@ This is the center of force that spherical and cylindrical particle bombs apply 
 ***
 
 ### `start`
+<div class="search_terms" style="display: none">start</div>
 
 The time at which this modifier start affecting the particles.
 
@@ -131,6 +143,7 @@ The time at which this modifier start affecting the particles.
 ***
 
 ### `symmetryType`
+<div class="search_terms" style="display: none">symmetrytype</div>
 
 Controls how this modifer affects the particles. Spherical modifer operates around the point defined by `.position` property. Cylindrical modifer applied the force parallel to the `.direction` vector, centered at `position` property. Planar modifers operate perpendicular to the `.direction` vector.
 
@@ -145,6 +158,7 @@ Maps to values in [`ni.particleBombSymmetryType`](https://mwse.github.io/MWSE/re
 ## Methods
 
 ### `clone`
+<div class="search_terms" style="display: none">clone</div>
 
 Creates a copy of this object.
 
@@ -159,6 +173,7 @@ local result = myObject:clone()
 ***
 
 ### `isInstanceOfType`
+<div class="search_terms" style="display: none">isinstanceoftype, instanceoftype</div>
 
 Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
@@ -177,6 +192,7 @@ local result = myObject:isInstanceOfType(type)
 ***
 
 ### `isOfType`
+<div class="search_terms" style="display: none">isoftype, oftype</div>
 
 Determines if the object is of a given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
@@ -195,6 +211,7 @@ local result = myObject:isOfType(type)
 ***
 
 ### `saveBinary`
+<div class="search_terms" style="display: none">savebinary</div>
 
 Serializes the object, and writes it to the given file.
 

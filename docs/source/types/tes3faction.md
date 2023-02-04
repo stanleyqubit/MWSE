@@ -11,6 +11,7 @@ This type inherits the following: [tes3baseObject](../../types/tes3baseObject)
 ## Properties
 
 ### `attributes`
+<div class="search_terms" style="display: none">attributes</div>
 
 *Read-only*. An array-style table holding the two attributes that govern advancement. Maps to values in [`tes3.attribute`](https://mwse.github.io/MWSE/references/attributes/) namespace.
 
@@ -21,6 +22,7 @@ This type inherits the following: [tes3baseObject](../../types/tes3baseObject)
 ***
 
 ### `blocked`
+<div class="search_terms" style="display: none">blocked</div>
 
 The blocked state of the object.
 
@@ -31,6 +33,7 @@ The blocked state of the object.
 ***
 
 ### `deleted`
+<div class="search_terms" style="display: none">deleted</div>
 
 *Read-only*. The deleted state of the object.
 
@@ -41,6 +44,7 @@ The blocked state of the object.
 ***
 
 ### `disabled`
+<div class="search_terms" style="display: none">disabled</div>
 
 *Read-only*. The disabled state of the object.
 
@@ -51,6 +55,7 @@ The blocked state of the object.
 ***
 
 ### `id`
+<div class="search_terms" style="display: none">id</div>
 
 *Read-only*. The unique identifier for the object.
 
@@ -61,6 +66,7 @@ The blocked state of the object.
 ***
 
 ### `modified`
+<div class="search_terms" style="display: none">modified, ified</div>
 
 The modification state of the object since the last save.
 
@@ -71,6 +77,7 @@ The modification state of the object since the last save.
 ***
 
 ### `name`
+<div class="search_terms" style="display: none">name</div>
 
 The faction's player-facing name.
 
@@ -81,6 +88,7 @@ The faction's player-facing name.
 ***
 
 ### `objectFlags`
+<div class="search_terms" style="display: none">objectflags</div>
 
 *Read-only*. The raw flags of the object.
 
@@ -91,6 +99,7 @@ The faction's player-facing name.
 ***
 
 ### `objectType`
+<div class="search_terms" style="display: none">objecttype</div>
 
 *Read-only*. The type of object. Maps to values in [`tes3.objectType`](https://mwse.github.io/MWSE/references/object-types/).
 
@@ -101,6 +110,7 @@ The faction's player-facing name.
 ***
 
 ### `persistent`
+<div class="search_terms" style="display: none">persistent</div>
 
 The persistent flag of the object.
 
@@ -111,6 +121,7 @@ The persistent flag of the object.
 ***
 
 ### `playerExpelled`
+<div class="search_terms" style="display: none">playerexpelled</div>
 
 The player's expelled state in the faction.
 
@@ -121,6 +132,7 @@ The player's expelled state in the faction.
 ***
 
 ### `playerJoined`
+<div class="search_terms" style="display: none">playerjoined</div>
 
 The player's join state for the faction.
 
@@ -131,6 +143,7 @@ The player's join state for the faction.
 ***
 
 ### `playerRank`
+<div class="search_terms" style="display: none">playerrank</div>
 
 The player's current rank in the faction.
 
@@ -141,6 +154,7 @@ The player's current rank in the faction.
 ***
 
 ### `playerReputation`
+<div class="search_terms" style="display: none">playerreputation</div>
 
 The player's current reputation in the faction.
 
@@ -151,6 +165,7 @@ The player's current reputation in the faction.
 ***
 
 ### `ranks`
+<div class="search_terms" style="display: none">ranks</div>
 
 *Read-only*. An array-style table holding the ten related [`tes3factionRank`](https://mwse.github.io/MWSE/types/tes3factionRank/)s.
 
@@ -161,6 +176,7 @@ The player's current reputation in the faction.
 ***
 
 ### `reactions`
+<div class="search_terms" style="display: none">reactions</div>
 
 *Read-only*. A collection of [`tes3factionReaction`](https://mwse.github.io/MWSE/types/tes3factionReaction/)s.
 
@@ -171,6 +187,7 @@ The player's current reputation in the faction.
 ***
 
 ### `skills`
+<div class="search_terms" style="display: none">skills</div>
 
 *Read-only*. An array-style table holding the seven skills that govern advancement. Maps to values in [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) namespace.
 
@@ -181,6 +198,7 @@ The player's current reputation in the faction.
 ***
 
 ### `sourceless`
+<div class="search_terms" style="display: none">sourceless</div>
 
 The soruceless flag of the object.
 
@@ -191,6 +209,7 @@ The soruceless flag of the object.
 ***
 
 ### `sourceMod`
+<div class="search_terms" style="display: none">sourcemod</div>
 
 *Read-only*. The filename (including the extension) of the mod that owns this object. It has `nil` value if the object was anything other than loaded from an ESP or ESM file.
 
@@ -201,6 +220,7 @@ The soruceless flag of the object.
 ***
 
 ### `supportsLuaData`
+<div class="search_terms" style="display: none">supportsluadata</div>
 
 If true, references of this object can store temporary or persistent lua data.
 
@@ -213,6 +233,7 @@ If true, references of this object can store temporary or persistent lua data.
 ## Methods
 
 ### `__tojson`
+<div class="search_terms" style="display: none">__tojson</div>
 
 Serializes the object to json.
 
@@ -227,6 +248,7 @@ local string = myObject:__tojson()
 ***
 
 ### `getLowestJoinedReaction`
+<div class="search_terms" style="display: none">getlowestjoinedreaction, lowestjoinedreaction</div>
 
 For this faction, this function finds the worst reaction for another faction that the player has joined. It returns that reaction and its associated faction, or `nil` for both values if the no relationship is applicable.
 
@@ -242,6 +264,7 @@ local reaction, faction = myObject:getLowestJoinedReaction()
 ***
 
 ### `getRankName`
+<div class="search_terms" style="display: none">getrankname, rankname</div>
 
 This function fetches the player-facing name of a rank in the faction.
 
@@ -260,6 +283,7 @@ local result = myObject:getRankName(rank)
 ***
 
 ### `getReactionWithFaction`
+<div class="search_terms" style="display: none">getreactionwithfaction, reactionwithfaction</div>
 
 Returns a reaction value for another faction, or `nil` if no relationship exists between the two factions.
 
@@ -278,6 +302,7 @@ local reaction = myObject:getReactionWithFaction(faction)
 ***
 
 ### `setRankName`
+<div class="search_terms" style="display: none">setrankname, rankname</div>
 
 This function changes the player-facing name of a given rank in the faction.
 

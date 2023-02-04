@@ -13,6 +13,7 @@ This type inherits the following: [niTriBasedGeometryData](../../types/niTriBase
 ## Properties
 
 ### `activeCount`
+<div class="search_terms" style="display: none">activecount</div>
 
 *Read-only*. The number of active particles.
 
@@ -23,6 +24,7 @@ This type inherits the following: [niTriBasedGeometryData](../../types/niTriBase
 ***
 
 ### `activeTriangleCount`
+<div class="search_terms" style="display: none">activetrianglecount</div>
 
 The active triangle count of the object.
 
@@ -33,6 +35,7 @@ The active triangle count of the object.
 ***
 
 ### `bounds`
+<div class="search_terms" style="display: none">bounds</div>
 
 The model-space bounding sphere of the object.
 
@@ -43,6 +46,7 @@ The model-space bounding sphere of the object.
 ***
 
 ### `colors`
+<div class="search_terms" style="display: none">colors</div>
 
 *Read-only*. The vertex colors for the object. The length of the array is equal to `vertexCount`.
 
@@ -53,6 +57,7 @@ The model-space bounding sphere of the object.
 ***
 
 ### `normals`
+<div class="search_terms" style="display: none">normals</div>
 
 *Read-only*. The list of unitized, model-space vertex normals for the object. The length of the array is equal to `vertexCount`.
 
@@ -63,6 +68,7 @@ The model-space bounding sphere of the object.
 ***
 
 ### `radius`
+<div class="search_terms" style="display: none">radius</div>
 
 *Read-only*. The radius of the particles.
 
@@ -73,6 +79,7 @@ The model-space bounding sphere of the object.
 ***
 
 ### `refCount`
+<div class="search_terms" style="display: none">refcount</div>
 
 *Read-only*. The number of references that exist for this object. When this value reaches zero, the object will be deleted.
 
@@ -83,6 +90,7 @@ The model-space bounding sphere of the object.
 ***
 
 ### `RTTI`
+<div class="search_terms" style="display: none">rtti</div>
 
 *Read-only*. The runtime type information for this object. This is an alias for the `.runTimeTypeInformation` property.
 
@@ -93,6 +101,7 @@ The model-space bounding sphere of the object.
 ***
 
 ### `runTimeTypeInformation`
+<div class="search_terms" style="display: none">runtimetypeinformation</div>
 
 *Read-only*. The runtime type information for this object.
 
@@ -103,6 +112,7 @@ The model-space bounding sphere of the object.
 ***
 
 ### `sizes`
+<div class="search_terms" style="display: none">sizes</div>
 
 *Read-only*. The particle sizes. The length of the array is equal to `vertexCount`.
 
@@ -113,6 +123,7 @@ The model-space bounding sphere of the object.
 ***
 
 ### `texCoords`
+<div class="search_terms" style="display: none">texcoords</div>
 
 *Read-only*. The array of texture coordinates. The length of the array is equal to `vertexCount` times `textureSets`.
 
@@ -123,6 +134,7 @@ The model-space bounding sphere of the object.
 ***
 
 ### `textures`
+<div class="search_terms" style="display: none">textures</div>
 
 *Read-only*. The array of texture coordinates. The length of the array is equal to `vertexCount` times `textureSets`.
 
@@ -133,6 +145,7 @@ The model-space bounding sphere of the object.
 ***
 
 ### `textureSets`
+<div class="search_terms" style="display: none">texturesets</div>
 
 The number of texture coordinate sets in the data.
 
@@ -143,6 +156,7 @@ The number of texture coordinate sets in the data.
 ***
 
 ### `triangleCount`
+<div class="search_terms" style="display: none">trianglecount</div>
 
 *Read-only*. The triangle count of the object.
 
@@ -153,6 +167,7 @@ The number of texture coordinate sets in the data.
 ***
 
 ### `uniqueID`
+<div class="search_terms" style="display: none">uniqueid</div>
 
 *Read-only*. A unique ID for this model, assigned at model creation.
 
@@ -163,6 +178,7 @@ The number of texture coordinate sets in the data.
 ***
 
 ### `vertexCount`
+<div class="search_terms" style="display: none">vertexcount</div>
 
 *Read-only*. The vertex count for the object.
 
@@ -173,6 +189,7 @@ The number of texture coordinate sets in the data.
 ***
 
 ### `vertices`
+<div class="search_terms" style="display: none">vertices</div>
 
 *Read-only*. The array of vertex position data. The length of the array is equal to `vertexCount`.
 
@@ -185,6 +202,7 @@ The number of texture coordinate sets in the data.
 ## Methods
 
 ### `clone`
+<div class="search_terms" style="display: none">clone</div>
 
 Creates a copy of this object.
 
@@ -199,6 +217,7 @@ local result = myObject:clone()
 ***
 
 ### `isInstanceOfType`
+<div class="search_terms" style="display: none">isinstanceoftype, instanceoftype</div>
 
 Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
@@ -217,6 +236,7 @@ local result = myObject:isInstanceOfType(type)
 ***
 
 ### `isOfType`
+<div class="search_terms" style="display: none">isoftype, oftype</div>
 
 Determines if the object is of a given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
@@ -235,6 +255,7 @@ local result = myObject:isOfType(type)
 ***
 
 ### `markAsChanged`
+<div class="search_terms" style="display: none">markaschanged</div>
 
 Tells the renderer that the object has changed. Should be called after you have finished changing any vertex data.
 
@@ -247,6 +268,7 @@ myObject:markAsChanged()
 ***
 
 ### `saveBinary`
+<div class="search_terms" style="display: none">savebinary</div>
 
 Serializes the object, and writes it to the given file.
 
@@ -265,6 +287,7 @@ local success = myObject:saveBinary(path)
 ***
 
 ### `updateModelBound`
+<div class="search_terms" style="display: none">updatemodelbound, modelbound</div>
 
 Updates the geometry bounds to match the vertex data. You should call it if vertices have been moved outside the bounds of the original model, or if the effective bounds have become significantly smaller. 
 

@@ -11,6 +11,7 @@ This type inherits the following: [tes3baseObject](../../types/tes3baseObject)
 ## Properties
 
 ### `blocked`
+<div class="search_terms" style="display: none">blocked</div>
 
 The blocked state of the object.
 
@@ -21,6 +22,7 @@ The blocked state of the object.
 ***
 
 ### `deleted`
+<div class="search_terms" style="display: none">deleted</div>
 
 *Read-only*. The deleted state of the object.
 
@@ -31,6 +33,7 @@ The blocked state of the object.
 ***
 
 ### `disabled`
+<div class="search_terms" style="display: none">disabled</div>
 
 *Read-only*. The disabled state of the object.
 
@@ -41,6 +44,7 @@ The blocked state of the object.
 ***
 
 ### `id`
+<div class="search_terms" style="display: none">id</div>
 
 *Read-only*. The unique identifier for the object.
 
@@ -51,6 +55,7 @@ The blocked state of the object.
 ***
 
 ### `modified`
+<div class="search_terms" style="display: none">modified, ified</div>
 
 The modification state of the object since the last save.
 
@@ -61,6 +66,7 @@ The modification state of the object since the last save.
 ***
 
 ### `name`
+<div class="search_terms" style="display: none">name</div>
 
 The region's name. It must be a string less than 32 characters long.
 
@@ -71,6 +77,7 @@ The region's name. It must be a string less than 32 characters long.
 ***
 
 ### `objectFlags`
+<div class="search_terms" style="display: none">objectflags</div>
 
 *Read-only*. The raw flags of the object.
 
@@ -81,6 +88,7 @@ The region's name. It must be a string less than 32 characters long.
 ***
 
 ### `objectType`
+<div class="search_terms" style="display: none">objecttype</div>
 
 *Read-only*. The type of object. Maps to values in [`tes3.objectType`](https://mwse.github.io/MWSE/references/object-types/).
 
@@ -91,6 +99,7 @@ The region's name. It must be a string less than 32 characters long.
 ***
 
 ### `persistent`
+<div class="search_terms" style="display: none">persistent</div>
 
 The persistent flag of the object.
 
@@ -101,6 +110,7 @@ The persistent flag of the object.
 ***
 
 ### `sleepCreature`
+<div class="search_terms" style="display: none">sleepcreature</div>
 
 *Read-only*. The region's leveled creature that can be spawned while the player is sleeping.
 
@@ -111,6 +121,7 @@ The persistent flag of the object.
 ***
 
 ### `sounds`
+<div class="search_terms" style="display: none">sounds</div>
 
 *Read-only*. Array-style table for the different region sounds. Each object in the table is a [`tes3regionSound`](https://mwse.github.io/MWSE/types/tes3regionSound/).
 
@@ -121,6 +132,7 @@ The persistent flag of the object.
 ***
 
 ### `sourceless`
+<div class="search_terms" style="display: none">sourceless</div>
 
 The soruceless flag of the object.
 
@@ -131,6 +143,7 @@ The soruceless flag of the object.
 ***
 
 ### `sourceMod`
+<div class="search_terms" style="display: none">sourcemod</div>
 
 *Read-only*. The filename (including the extension) of the mod that owns this object. It has `nil` value if the object was anything other than loaded from an ESP or ESM file.
 
@@ -141,6 +154,7 @@ The soruceless flag of the object.
 ***
 
 ### `supportsLuaData`
+<div class="search_terms" style="display: none">supportsluadata</div>
 
 If true, references of this object can store temporary or persistent lua data.
 
@@ -151,6 +165,7 @@ If true, references of this object can store temporary or persistent lua data.
 ***
 
 ### `weather`
+<div class="search_terms" style="display: none">weather</div>
 
 The region's current weather.
 
@@ -161,6 +176,7 @@ The region's current weather.
 ***
 
 ### `weatherChanceAsh`
+<div class="search_terms" style="display: none">weatherchanceash</div>
 
 The chance the Ash weather-type will be used. Must be an integer between `0` and `100`.
 
@@ -171,6 +187,7 @@ The chance the Ash weather-type will be used. Must be an integer between `0` and
 ***
 
 ### `weatherChanceBlight`
+<div class="search_terms" style="display: none">weatherchanceblight</div>
 
 The chance the Blight weather-type will be used. Must be an integer between `0` and `100`.
 
@@ -181,6 +198,7 @@ The chance the Blight weather-type will be used. Must be an integer between `0` 
 ***
 
 ### `weatherChanceBlizzard`
+<div class="search_terms" style="display: none">weatherchanceblizzard</div>
 
 The chance the Blizzard weather-type will be used. Must be an integer between `0` and `100`.
 
@@ -191,6 +209,7 @@ The chance the Blizzard weather-type will be used. Must be an integer between `0
 ***
 
 ### `weatherChanceClear`
+<div class="search_terms" style="display: none">weatherchanceclear</div>
 
 The chance the Clear weather-type will be used. Must be an integer between `0` and `100`.
 
@@ -201,6 +220,7 @@ The chance the Clear weather-type will be used. Must be an integer between `0` a
 ***
 
 ### `weatherChanceCloudy`
+<div class="search_terms" style="display: none">weatherchancecloudy</div>
 
 The chance the Cloudy weather-type will be used. Must be an integer between `0` and `100`.
 
@@ -211,6 +231,7 @@ The chance the Cloudy weather-type will be used. Must be an integer between `0` 
 ***
 
 ### `weatherChanceFoggy`
+<div class="search_terms" style="display: none">weatherchancefoggy</div>
 
 The chance the Foggy weather-type will be used. Must be an integer between `0` and `100`.
 
@@ -221,6 +242,7 @@ The chance the Foggy weather-type will be used. Must be an integer between `0` a
 ***
 
 ### `weatherChanceOvercast`
+<div class="search_terms" style="display: none">weatherchanceovercast</div>
 
 The chance the Overcast weather-type will be used. Must be an integer between `0` and `100`.
 
@@ -231,6 +253,7 @@ The chance the Overcast weather-type will be used. Must be an integer between `0
 ***
 
 ### `weatherChanceRain`
+<div class="search_terms" style="display: none">weatherchancerain</div>
 
 The chance the Rain weather-type will be used. Must be an integer between `0` and `100`.
 
@@ -241,6 +264,7 @@ The chance the Rain weather-type will be used. Must be an integer between `0` an
 ***
 
 ### `weatherChances`
+<div class="search_terms" style="display: none">weatherchances</div>
 
 *Read-only*. Array-style table for the different weather chances. Each object in the table is a number, between 1 - 100. The index of the table is the weather type.
 
@@ -251,6 +275,7 @@ The chance the Rain weather-type will be used. Must be an integer between `0` an
 ***
 
 ### `weatherChanceSnow`
+<div class="search_terms" style="display: none">weatherchancesnow</div>
 
 The chance the Snow weather-type will be used. Must be an integer between `0` and `100`.
 
@@ -261,6 +286,7 @@ The chance the Snow weather-type will be used. Must be an integer between `0` an
 ***
 
 ### `weatherChanceThunder`
+<div class="search_terms" style="display: none">weatherchancethunder</div>
 
 The chance the Thunder weather-type will be used. Must be an integer between `0` and `100`.
 
@@ -273,6 +299,7 @@ The chance the Thunder weather-type will be used. Must be an integer between `0`
 ## Methods
 
 ### `__tojson`
+<div class="search_terms" style="display: none">__tojson</div>
 
 Serializes the object to json.
 
@@ -287,6 +314,7 @@ local string = myObject:__tojson()
 ***
 
 ### `changeWeather`
+<div class="search_terms" style="display: none">changeweather</div>
 
 Changes the current weather for the region to the provided weather-type parameter.
 
@@ -301,6 +329,7 @@ myObject:changeWeather(weatherId)
 ***
 
 ### `randomizeWeather`
+<div class="search_terms" style="display: none">randomizeweather</div>
 
 Changes the weather to a random weather type.
 

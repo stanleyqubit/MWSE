@@ -10,6 +10,7 @@ An attachment-capable structure that maintains lock and trap data.
 ## Properties
 
 ### `key`
+<div class="search_terms" style="display: none">key</div>
 
 The key that will open this door.
 
@@ -20,6 +21,7 @@ The key that will open this door.
 ***
 
 ### `level`
+<div class="search_terms" style="display: none">level</div>
 
 The level of the lock.
 
@@ -30,6 +32,7 @@ The level of the lock.
 ***
 
 ### `locked`
+<div class="search_terms" style="display: none">locked</div>
 
 The locked state.
 
@@ -40,6 +43,7 @@ The locked state.
 ***
 
 ### `trap`
+<div class="search_terms" style="display: none">trap</div>
 
 The trap associated with the object.
 

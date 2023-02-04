@@ -11,6 +11,7 @@ This type inherits the following: [tes3mobileActor](../../types/tes3mobileActor)
 ## Properties
 
 ### `acrobatics`
+<div class="search_terms" style="display: none">acrobatics</div>
 
 *Read-only*. Direct access to the NPC's acrobatics skill statistic.
 
@@ -21,6 +22,7 @@ This type inherits the following: [tes3mobileActor](../../types/tes3mobileActor)
 ***
 
 ### `actionBeforeCombat`
+<div class="search_terms" style="display: none">actionbeforecombat</div>
 
 *Read-only*. Action data stored before the actor entered combat.
 
@@ -31,6 +33,7 @@ This type inherits the following: [tes3mobileActor](../../types/tes3mobileActor)
 ***
 
 ### `actionData`
+<div class="search_terms" style="display: none">actiondata</div>
 
 *Read-only*. Current action data. Pre-combat action data is stored in the `actionBeforeCombat` property.
 
@@ -41,6 +44,7 @@ This type inherits the following: [tes3mobileActor](../../types/tes3mobileActor)
 ***
 
 ### `activeAI`
+<div class="search_terms" style="display: none">activeai</div>
 
 Friendly access to the actor's flag that controls if AI is active.
 
@@ -51,6 +55,7 @@ Friendly access to the actor's flag that controls if AI is active.
 ***
 
 ### `activeMagicEffectList`
+<div class="search_terms" style="display: none">activemagiceffectlist</div>
 
 *Read-only*. The active magic effects on the actor, from which all others can be accessed. A table with [`tes3activeMagicEffect`](https://mwse.github.io/MWSE/types/tes3activeMagicEffect/) items.
 
@@ -61,6 +66,7 @@ Friendly access to the actor's flag that controls if AI is active.
 ***
 
 ### `actorType`
+<div class="search_terms" style="display: none">actortype</div>
 
 *Read-only*. The type of the mobile actor. Maps to values in [`tes3.actorType`](https://mwse.github.io/MWSE/references/actor-types/) namespace.
 
@@ -71,6 +77,7 @@ Friendly access to the actor's flag that controls if AI is active.
 ***
 
 ### `agility`
+<div class="search_terms" style="display: none">agility</div>
 
 *Read-only*. Direct access to the actor's agility attribute statistic.
 
@@ -81,6 +88,7 @@ Friendly access to the actor's flag that controls if AI is active.
 ***
 
 ### `aiPlanner`
+<div class="search_terms" style="display: none">aiplanner</div>
 
 *Read-only*. Access to the mobile's AI planner and AI package information. Doesn't exist on the player mobile.
 
@@ -91,6 +99,7 @@ Friendly access to the actor's flag that controls if AI is active.
 ***
 
 ### `alarm`
+<div class="search_terms" style="display: none">alarm</div>
 
 The actor's alarm AI value.
 
@@ -101,6 +110,7 @@ The actor's alarm AI value.
 ***
 
 ### `alchemy`
+<div class="search_terms" style="display: none">alchemy</div>
 
 *Read-only*. Direct access to the NPC's alchemy skill statistic.
 
@@ -111,6 +121,7 @@ The actor's alarm AI value.
 ***
 
 ### `alteration`
+<div class="search_terms" style="display: none">alteration</div>
 
 *Read-only*. Direct access to the NPC's alteration skill statistic.
 
@@ -121,6 +132,7 @@ The actor's alarm AI value.
 ***
 
 ### `animationController`
+<div class="search_terms" style="display: none">animationcontroller</div>
 
 *Read-only*. No description yet available.
 
@@ -131,6 +143,7 @@ The actor's alarm AI value.
 ***
 
 ### `armorer`
+<div class="search_terms" style="display: none">armorer</div>
 
 *Read-only*. Direct access to the NPC's armorer skill statistic.
 
@@ -141,6 +154,7 @@ The actor's alarm AI value.
 ***
 
 ### `armorRating`
+<div class="search_terms" style="display: none">armorrating</div>
 
 *Read-only*. The actor's current armour rating, taking equipment condition into account. Armour mitigation can be automatically applied to damage by using the `applyDamage` function.
 
@@ -163,6 +177,7 @@ The actor's alarm AI value.
 ***
 
 ### `athletics`
+<div class="search_terms" style="display: none">athletics</div>
 
 *Read-only*. Direct access to the NPC's athletics skill statistic.
 
@@ -173,6 +188,7 @@ The actor's alarm AI value.
 ***
 
 ### `attackBonus`
+<div class="search_terms" style="display: none">attackbonus</div>
 
 Direct access to the actor's attack bonus effect attribute.
 
@@ -183,6 +199,7 @@ Direct access to the actor's attack bonus effect attribute.
 ***
 
 ### `attacked`
+<div class="search_terms" style="display: none">attacked</div>
 
 *Read-only*. Friendly access to the actor's flag that controls if the actor has been attacked.
 
@@ -193,6 +210,7 @@ Direct access to the actor's attack bonus effect attribute.
 ***
 
 ### `attributes`
+<div class="search_terms" style="display: none">attributes</div>
 
 *Read-only*. Access to a table of 8 [`tes3statistic`](https://mwse.github.io/MWSE/types/tes3statistic/) objects for the actor's attributes.
 
@@ -203,6 +221,7 @@ Direct access to the actor's attack bonus effect attribute.
 ***
 
 ### `axe`
+<div class="search_terms" style="display: none">axe</div>
 
 *Read-only*. Direct access to the NPC's axe skill statistic.
 
@@ -213,6 +232,7 @@ Direct access to the actor's attack bonus effect attribute.
 ***
 
 ### `barterGold`
+<div class="search_terms" style="display: none">bartergold</div>
 
 The current amount of gold that the actor has access to for bartering.
 
@@ -223,6 +243,7 @@ The current amount of gold that the actor has access to for bartering.
 ***
 
 ### `blind`
+<div class="search_terms" style="display: none">blind</div>
 
 Direct access to the actor's blind effect attribute.
 
@@ -233,6 +254,7 @@ Direct access to the actor's blind effect attribute.
 ***
 
 ### `block`
+<div class="search_terms" style="display: none">block</div>
 
 *Read-only*. Direct access to the NPC's block skill statistic.
 
@@ -243,6 +265,7 @@ Direct access to the actor's blind effect attribute.
 ***
 
 ### `bluntWeapon`
+<div class="search_terms" style="display: none">bluntweapon</div>
 
 *Read-only*. Direct access to the NPC's blunt weapon skill statistic.
 
@@ -253,6 +276,7 @@ Direct access to the actor's blind effect attribute.
 ***
 
 ### `boundSize`
+<div class="search_terms" style="display: none">boundsize</div>
 
 A vector that shows the size of the bounding box in each direction. Note that this is a convenience feature, and delivers the `x` and `y` values from `boundSize2D` with the `z` value of the mobile's `height`. Editing the values of the returned vector will not change the values that they came from, though setting the property itself will work.
 
@@ -263,6 +287,7 @@ A vector that shows the size of the bounding box in each direction. Note that th
 ***
 
 ### `boundSize2D`
+<div class="search_terms" style="display: none">boundsize2d</div>
 
 A vector that shows the size of the bounding box in X and Y directions. `boundSize` is a convenience property that exposes the bounding in 3 dimensions.
 
@@ -273,6 +298,7 @@ A vector that shows the size of the bounding box in X and Y directions. `boundSi
 ***
 
 ### `canAct`
+<div class="search_terms" style="display: none">canact, act</div>
 
 *Read-only*. If `true`, the actor is able to freely execute actions like attacking or casting magic. This is equal to checking if the actor is not dead, knocked down, knocked out, hit stunned, paralyzed, drawing/sheathing their weapon, attacking, casting magic or using a lockpick or probe.
 
@@ -283,6 +309,7 @@ A vector that shows the size of the bounding box in X and Y directions. `boundSi
 ***
 
 ### `canJump`
+<div class="search_terms" style="display: none">canjump, jump</div>
 
 *Read-only*. If `true`, the actor is currently able to jump. This is equal to checking if the actor is not dead, knocked down, knocked out, paralyzed, jumping, falling, swimming or flying.
 
@@ -293,6 +320,7 @@ A vector that shows the size of the bounding box in X and Y directions. `boundSi
 ***
 
 ### `canJumpMidair`
+<div class="search_terms" style="display: none">canjumpmidair, jumpmidair</div>
 
 *Read-only*. If `true`, the actor is currently able to jump midair. This is equal to checking if the actor is not dead, knocked down, knocked out, paralyzed, swimming or flying. For more information on midair jumping see [`tes3mobileActor:doJump()`](https://mwse.github.io/MWSE/types/tes3mobileActor/#dojump).
 
@@ -303,6 +331,7 @@ A vector that shows the size of the bounding box in X and Y directions. `boundSi
 ***
 
 ### `canMove`
+<div class="search_terms" style="display: none">canmove, move</div>
 
 *Read-only*. If `true`, the actor is able to freely move along the ground or in the air. This does not include jumping (see `canJump`). This is equal to checking if the actor is not dead, knocked down, knocked out, hit stunned, or paralyzed.
 
@@ -313,6 +342,7 @@ A vector that shows the size of the bounding box in X and Y directions. `boundSi
 ***
 
 ### `cell`
+<div class="search_terms" style="display: none">cell</div>
 
 *Read-only*. Fetches the cell that the actor is in.
 
@@ -323,6 +353,7 @@ A vector that shows the size of the bounding box in X and Y directions. `boundSi
 ***
 
 ### `cellX`
+<div class="search_terms" style="display: none">cellx</div>
 
 *Read-only*. The X grid coordinate of the cell the mobile is in.
 
@@ -333,6 +364,7 @@ A vector that shows the size of the bounding box in X and Y directions. `boundSi
 ***
 
 ### `cellY`
+<div class="search_terms" style="display: none">celly</div>
 
 *Read-only*. The Y grid coordinate of the cell the mobile is in.
 
@@ -343,6 +375,7 @@ A vector that shows the size of the bounding box in X and Y directions. `boundSi
 ***
 
 ### `chameleon`
+<div class="search_terms" style="display: none">chameleon</div>
 
 Direct access to the actor's chameleon effect attribute.
 
@@ -353,6 +386,7 @@ Direct access to the actor's chameleon effect attribute.
 ***
 
 ### `collidingReference`
+<div class="search_terms" style="display: none">collidingreference</div>
 
 *Read-only*. The reference that the mobile has collided with this frame. Doesn't include actors and terrain.
 
@@ -363,6 +397,7 @@ Direct access to the actor's chameleon effect attribute.
 ***
 
 ### `combatSession`
+<div class="search_terms" style="display: none">combatsession</div>
 
 *Read-only*. Combat session data. This exists while the actor is in combat to provide memory for AI combat decisions. Doesn't exist on the player's mobile.
 
@@ -373,6 +408,7 @@ Direct access to the actor's chameleon effect attribute.
 ***
 
 ### `conjuration`
+<div class="search_terms" style="display: none">conjuration</div>
 
 *Read-only*. Direct access to the NPC's conjuration skill statistic.
 
@@ -383,6 +419,7 @@ Direct access to the actor's chameleon effect attribute.
 ***
 
 ### `corpseHourstamp`
+<div class="search_terms" style="display: none">corpsehourstamp</div>
 
 This is the time measured in hours from the beginning of the game when the actor died. Returns a UNIX-style timestamp based on in-world simulation time since the start of the era. For living actors this field has value a of `0`.
 
@@ -393,6 +430,7 @@ This is the time measured in hours from the beginning of the game when the actor
 ***
 
 ### `currentEnchantedItem`
+<div class="search_terms" style="display: none">currentenchanteditem</div>
 
 *Read-only*. The currently equipped enchanted item that the actor will use.
 
@@ -403,6 +441,7 @@ This is the time measured in hours from the beginning of the game when the actor
 ***
 
 ### `currentSpell`
+<div class="search_terms" style="display: none">currentspell</div>
 
 *Read-only*. The currently equipped spell that the actor will use.
 
@@ -413,6 +452,7 @@ This is the time measured in hours from the beginning of the game when the actor
 ***
 
 ### `destruction`
+<div class="search_terms" style="display: none">destruction</div>
 
 *Read-only*. Direct access to the NPC's destruction skill statistic.
 
@@ -423,6 +463,7 @@ This is the time measured in hours from the beginning of the game when the actor
 ***
 
 ### `effectAttributes`
+<div class="search_terms" style="display: none">effectattributes</div>
 
 *Read-only*. Access to a table of 24 numbers for the actor's effect attributes. In order those are: `attackBonus`, `sanctuary`, `resistMagicka`, `resistFire`, `resistFrost`, `resistShock`, `resistCommonDisease`, `resistBlightDisease`, `resistCorprus`, `resistPoison`, `resistParalysis`, `chameleon`, `resistNormalWeapons`, `waterBreathing`, `waterWalking`, `swiftSwim`, `jump`, `levitate`, `shield`, `sound`, `silence`, `blind`, `paralyze`, and `invisibility`. Each of those can be accessed individually. For example, `tes3mobileActor.chameleon`.
 
@@ -433,6 +474,7 @@ This is the time measured in hours from the beginning of the game when the actor
 ***
 
 ### `enchant`
+<div class="search_terms" style="display: none">enchant</div>
 
 *Read-only*. Direct access to the NPC's enchant skill statistic.
 
@@ -443,6 +485,7 @@ This is the time measured in hours from the beginning of the game when the actor
 ***
 
 ### `encumbrance`
+<div class="search_terms" style="display: none">encumbrance</div>
 
 *Read-only*. Access to the actor's encumbrance statistic.
 
@@ -453,6 +496,7 @@ This is the time measured in hours from the beginning of the game when the actor
 ***
 
 ### `endurance`
+<div class="search_terms" style="display: none">endurance</div>
 
 *Read-only*. Direct access to the actor's endurance attribute statistic.
 
@@ -463,6 +507,7 @@ This is the time measured in hours from the beginning of the game when the actor
 ***
 
 ### `facing`
+<div class="search_terms" style="display: none">facing</div>
 
 *Read-only*. The facing of the actor, in radians. It corresponds to the `mobile.reference.orientation.z`. Facing of 0 corresponds to the in game North, facing of PI corresponds to the game South. It's in clockwise direction.
 
@@ -473,6 +518,7 @@ This is the time measured in hours from the beginning of the game when the actor
 ***
 
 ### `fatigue`
+<div class="search_terms" style="display: none">fatigue</div>
 
 *Read-only*. Access to the actor's fatigue statistic.
 
@@ -483,6 +529,7 @@ This is the time measured in hours from the beginning of the game when the actor
 ***
 
 ### `fight`
+<div class="search_terms" style="display: none">fight</div>
 
 The actor's fight AI value.
 
@@ -493,6 +540,7 @@ The actor's fight AI value.
 ***
 
 ### `flags`
+<div class="search_terms" style="display: none">flags</div>
 
 Access to the root mobile object flags, represented as an integer. Should not be accessed directly.
 
@@ -503,6 +551,7 @@ Access to the root mobile object flags, represented as an integer. Should not be
 ***
 
 ### `flee`
+<div class="search_terms" style="display: none">flee</div>
 
 The actor's flee AI value.
 
@@ -513,6 +562,7 @@ The actor's flee AI value.
 ***
 
 ### `flySpeed`
+<div class="search_terms" style="display: none">flyspeed</div>
 
 *Read-only*. The calculated fly movement speed.
 
@@ -523,6 +573,7 @@ The actor's flee AI value.
 ***
 
 ### `forceJump`
+<div class="search_terms" style="display: none">forcejump</div>
 
 Toggle flag for if the NPC jumps.
 
@@ -533,6 +584,7 @@ Toggle flag for if the NPC jumps.
 ***
 
 ### `forceMoveJump`
+<div class="search_terms" style="display: none">forcemovejump</div>
 
 Toggle flag for if the NPC moves and jumps.
 
@@ -543,6 +595,7 @@ Toggle flag for if the NPC moves and jumps.
 ***
 
 ### `forceRun`
+<div class="search_terms" style="display: none">forcerun</div>
 
 Toggle flag for if the NPC runs.
 
@@ -553,6 +606,7 @@ Toggle flag for if the NPC runs.
 ***
 
 ### `forceSneak`
+<div class="search_terms" style="display: none">forcesneak</div>
 
 Toggle flag for if the NPC sneaks.
 
@@ -563,6 +617,7 @@ Toggle flag for if the NPC sneaks.
 ***
 
 ### `friendlyActors`
+<div class="search_terms" style="display: none">friendlyactors</div>
 
 *Read-only*. A collection of other `tes3mobileActor`s that this actor considers friendly.
 
@@ -573,6 +628,7 @@ Toggle flag for if the NPC sneaks.
 ***
 
 ### `greetDuration`
+<div class="search_terms" style="display: none">greetduration</div>
 
 No description yet available.
 
@@ -583,6 +639,7 @@ No description yet available.
 ***
 
 ### `greetTimer`
+<div class="search_terms" style="display: none">greettimer</div>
 
 *Read-only*. No description yet available.
 
@@ -593,6 +650,7 @@ No description yet available.
 ***
 
 ### `handToHand`
+<div class="search_terms" style="display: none">handtohand</div>
 
 *Read-only*. Direct access to the NPC's hand to hand skill statistic.
 
@@ -603,6 +661,7 @@ No description yet available.
 ***
 
 ### `hasFreeAction`
+<div class="search_terms" style="display: none">hasfreeaction, freeaction</div>
 
 *Read-only*. If true, the actor isn't knocked down or knocked out.
 
@@ -613,6 +672,7 @@ No description yet available.
 ***
 
 ### `health`
+<div class="search_terms" style="display: none">health</div>
 
 *Read-only*. Access to the actor's health statistic.
 
@@ -623,6 +683,7 @@ No description yet available.
 ***
 
 ### `heavyArmor`
+<div class="search_terms" style="display: none">heavyarmor</div>
 
 *Read-only*. Direct access to the NPC's heavy armor skill statistic.
 
@@ -633,6 +694,7 @@ No description yet available.
 ***
 
 ### `height`
+<div class="search_terms" style="display: none">height</div>
 
 The height of the mobile above the ground.
 
@@ -643,6 +705,7 @@ The height of the mobile above the ground.
 ***
 
 ### `hello`
+<div class="search_terms" style="display: none">hello</div>
 
 The actor's hello AI value.
 
@@ -653,6 +716,7 @@ The actor's hello AI value.
 ***
 
 ### `holdBreathTime`
+<div class="search_terms" style="display: none">holdbreathtime</div>
 
 This is the time the actor can stay underwater without taking drowning damage, measured in seconds. It's starting value is `fHoldBreathTime`(GMST) seconds by default. Once the actor is underwater, this value is decreasing based on the time passed while underwater. The actor will start taking drowning damage once this time is below 0. During drowning this time will have more and more negative values based on the duration of the drowning. Changing this allows manipulating for how long the actor can stay underwater without drowning. Note that player's Breath HUD element won't show values larger than `fHoldBreathTime`.
 
@@ -663,6 +727,7 @@ This is the time the actor can stay underwater without taking drowning damage, m
 ***
 
 ### `hostileActors`
+<div class="search_terms" style="display: none">hostileactors</div>
 
 *Read-only*. A collection of other `tes3mobileActor`s that this actor considers hostile.
 
@@ -673,6 +738,7 @@ This is the time the actor can stay underwater without taking drowning damage, m
 ***
 
 ### `idleAnim`
+<div class="search_terms" style="display: none">idleanim</div>
 
 *Read-only*. Friendly access to the actor's flag that controls if the actor is using their idle animation.
 
@@ -683,6 +749,7 @@ This is the time the actor can stay underwater without taking drowning damage, m
 ***
 
 ### `illusion`
+<div class="search_terms" style="display: none">illusion</div>
 
 *Read-only*. Direct access to the NPC's illusion skill statistic.
 
@@ -693,6 +760,7 @@ This is the time the actor can stay underwater without taking drowning damage, m
 ***
 
 ### `impulseVelocity`
+<div class="search_terms" style="display: none">impulsevelocity</div>
 
 A vector that represents the 3D acceleration of the object.
 
@@ -703,6 +771,7 @@ A vector that represents the 3D acceleration of the object.
 ***
 
 ### `inCombat`
+<div class="search_terms" style="display: none">incombat</div>
 
 *Read-only*. Friendly access to the actor's flag that controls if the actor is in combat.
 
@@ -713,6 +782,7 @@ A vector that represents the 3D acceleration of the object.
 ***
 
 ### `intelligence`
+<div class="search_terms" style="display: none">intelligence</div>
 
 *Read-only*. Direct access to the actor's intelligence attribute statistic.
 
@@ -723,6 +793,7 @@ A vector that represents the 3D acceleration of the object.
 ***
 
 ### `inventory`
+<div class="search_terms" style="display: none">inventory</div>
 
 *Read-only*. Access to the items the mobile object has in its inventory.
 
@@ -733,6 +804,7 @@ A vector that represents the 3D acceleration of the object.
 ***
 
 ### `invisibility`
+<div class="search_terms" style="display: none">invisibility</div>
 
 Direct access to the actor's invisibility effect attribute.
 
@@ -743,6 +815,7 @@ Direct access to the actor's invisibility effect attribute.
 ***
 
 ### `isAffectedByGravity`
+<div class="search_terms" style="display: none">isaffectedbygravity, affectedbygravity</div>
 
 If `true`, the mobile is affected by gravity. Does not have any effect on spell projectiles.
 
@@ -753,6 +826,7 @@ If `true`, the mobile is affected by gravity. Does not have any effect on spell 
 ***
 
 ### `isAttackingOrCasting`
+<div class="search_terms" style="display: none">isattackingorcasting, attackingorcasting</div>
 
 *Read-only*. If `true`, the actor is attacking, casting magic or using a lockpick or probe.
 
@@ -763,6 +837,7 @@ If `true`, the mobile is affected by gravity. Does not have any effect on spell 
 ***
 
 ### `isCrittable`
+<div class="search_terms" style="display: none">iscrittable, crittable</div>
 
 *Read-only*. Friendly access to the actor's flag that controls if the actor can be critically hit.
 
@@ -773,6 +848,7 @@ If `true`, the mobile is affected by gravity. Does not have any effect on spell 
 ***
 
 ### `isDead`
+<div class="search_terms" style="display: none">isdead, dead</div>
 
 *Read-only*. True if the actor is dead.
 
@@ -783,6 +859,7 @@ If `true`, the mobile is affected by gravity. Does not have any effect on spell 
 ***
 
 ### `isDiseased`
+<div class="search_terms" style="display: none">isdiseased, diseased</div>
 
 *Read-only*. True if the actor is has a disease effect. This counts normal, blight, and corprus effects.
 
@@ -793,6 +870,7 @@ If `true`, the mobile is affected by gravity. Does not have any effect on spell 
 ***
 
 ### `isFalling`
+<div class="search_terms" style="display: none">isfalling, falling</div>
 
 Direct access to the actor's current movement flags, showing if the actor is falling. This is when the actor is falling without having jumped, e.g. if they walked off a ledge.
 
@@ -803,6 +881,7 @@ Direct access to the actor's current movement flags, showing if the actor is fal
 ***
 
 ### `isFlying`
+<div class="search_terms" style="display: none">isflying, flying</div>
 
 Direct access to the actor's current movement flags, showing if the actor is flying.
 
@@ -813,6 +892,7 @@ Direct access to the actor's current movement flags, showing if the actor is fly
 ***
 
 ### `isHitStunned`
+<div class="search_terms" style="display: none">ishitstunned, hitstunned</div>
 
 *Read-only*. If `true`, the actor is affected by hit stun. This prevents the actor from initiating an attack, but not continuing and finishing an attack. It also prevents movement except for jumping.
 
@@ -823,6 +903,7 @@ Direct access to the actor's current movement flags, showing if the actor is fly
 ***
 
 ### `isJumping`
+<div class="search_terms" style="display: none">isjumping, jumping</div>
 
 Direct access to the actor's current movement flags, showing if the actor is jumping.
 
@@ -833,6 +914,7 @@ Direct access to the actor's current movement flags, showing if the actor is jum
 ***
 
 ### `isKnockedDown`
+<div class="search_terms" style="display: none">isknockeddown, knockeddown</div>
 
 *Read-only*. If `true`, the actor is knocked down. An actor can be knocked down after being attacked or falling.
 
@@ -843,6 +925,7 @@ Direct access to the actor's current movement flags, showing if the actor is jum
 ***
 
 ### `isKnockedOut`
+<div class="search_terms" style="display: none">isknockedout, knockedout</div>
 
 *Read-only*. If `true`, the actor is knocked out. An actor can be knocked out if their fatigue has been reduced below zero.
 
@@ -853,6 +936,7 @@ Direct access to the actor's current movement flags, showing if the actor is jum
 ***
 
 ### `isMovingBack`
+<div class="search_terms" style="display: none">ismovingback, movingback</div>
 
 Direct access to the actor's current movement flags, showing if the actor is moving backwards.
 
@@ -863,6 +947,7 @@ Direct access to the actor's current movement flags, showing if the actor is mov
 ***
 
 ### `isMovingForward`
+<div class="search_terms" style="display: none">ismovingforward, movingforward</div>
 
 Direct access to the actor's current movement flags, showing if the actor is moving forwards.
 
@@ -873,6 +958,7 @@ Direct access to the actor's current movement flags, showing if the actor is mov
 ***
 
 ### `isMovingLeft`
+<div class="search_terms" style="display: none">ismovingleft, movingleft</div>
 
 Direct access to the actor's current movement flags, showing if the actor is moving left.
 
@@ -883,6 +969,7 @@ Direct access to the actor's current movement flags, showing if the actor is mov
 ***
 
 ### `isMovingRight`
+<div class="search_terms" style="display: none">ismovingright, movingright</div>
 
 Direct access to the actor's current movement flags, showing if the actor is moving right.
 
@@ -893,6 +980,7 @@ Direct access to the actor's current movement flags, showing if the actor is mov
 ***
 
 ### `isParalyzed`
+<div class="search_terms" style="display: none">isparalyzed, paralyzed</div>
 
 *Read-only*. If `true`, the actor is affected by the magic effect paralyze.
 
@@ -903,6 +991,7 @@ Direct access to the actor's current movement flags, showing if the actor is mov
 ***
 
 ### `isPlayerDetected`
+<div class="search_terms" style="display: none">isplayerdetected, playerdetected</div>
 
 Direct access to the actor's flag showing the player was detected on the last detection check.
 
@@ -913,6 +1002,7 @@ Direct access to the actor's flag showing the player was detected on the last de
 ***
 
 ### `isPlayerHidden`
+<div class="search_terms" style="display: none">isplayerhidden, playerhidden</div>
 
 Direct access to the actor's flag showing the player was hidden on the last detection check.
 
@@ -923,6 +1013,7 @@ Direct access to the actor's flag showing the player was hidden on the last dete
 ***
 
 ### `isReadyingWeapon`
+<div class="search_terms" style="display: none">isreadyingweapon, readyingweapon</div>
 
 *Read-only*. If `true`, the actor is drawing or sheathing their weapon.
 
@@ -933,6 +1024,7 @@ Direct access to the actor's flag showing the player was hidden on the last dete
 ***
 
 ### `isRunning`
+<div class="search_terms" style="display: none">isrunning, running</div>
 
 Direct access to the actor's current movement flags, showing if the actor is running.
 
@@ -943,6 +1035,7 @@ Direct access to the actor's current movement flags, showing if the actor is run
 ***
 
 ### `isSneaking`
+<div class="search_terms" style="display: none">issneaking, sneaking</div>
 
 Direct access to the actor's current movement flags, showing if the actor is sneaking.
 
@@ -953,6 +1046,7 @@ Direct access to the actor's current movement flags, showing if the actor is sne
 ***
 
 ### `isSwimming`
+<div class="search_terms" style="display: none">isswimming, swimming</div>
 
 Direct access to the actor's current movement flags, showing if the actor is swimming.
 
@@ -963,6 +1057,7 @@ Direct access to the actor's current movement flags, showing if the actor is swi
 ***
 
 ### `isTurningLeft`
+<div class="search_terms" style="display: none">isturningleft, turningleft</div>
 
 Direct access to the actor's current movement flags, showing if the actor is turning left.
 
@@ -973,6 +1068,7 @@ Direct access to the actor's current movement flags, showing if the actor is tur
 ***
 
 ### `isTurningRight`
+<div class="search_terms" style="display: none">isturningright, turningright</div>
 
 Direct access to the actor's current movement flags, showing if the actor is turning right.
 
@@ -983,6 +1079,7 @@ Direct access to the actor's current movement flags, showing if the actor is tur
 ***
 
 ### `isWalking`
+<div class="search_terms" style="display: none">iswalking, walking</div>
 
 Direct access to the actor's current movement flags, showing if the actor is walking.
 
@@ -993,6 +1090,7 @@ Direct access to the actor's current movement flags, showing if the actor is wal
 ***
 
 ### `jump`
+<div class="search_terms" style="display: none">jump</div>
 
 Direct access to the actor's jump effect attribute.
 
@@ -1003,6 +1101,7 @@ Direct access to the actor's jump effect attribute.
 ***
 
 ### `lastGroundZ`
+<div class="search_terms" style="display: none">lastgroundz</div>
 
 This has a large negative value if the actor is on the ground. When the actor jumps, this will have a positive value. During `jump` event this value is still negative. A split second after, it will have the value of the `.z` coordinate when the actor was on the ground. Beware that this value changes after some amount of time while the actors is in the air.
 
@@ -1013,6 +1112,7 @@ This has a large negative value if the actor is on the ground. When the actor ju
 ***
 
 ### `levitate`
+<div class="search_terms" style="display: none">levitate</div>
 
 Direct access to the actor's levitate effect attribute.
 
@@ -1023,6 +1123,7 @@ Direct access to the actor's levitate effect attribute.
 ***
 
 ### `lightArmor`
+<div class="search_terms" style="display: none">lightarmor</div>
 
 *Read-only*. Direct access to the NPC's light armor skill statistic.
 
@@ -1033,6 +1134,7 @@ Direct access to the actor's levitate effect attribute.
 ***
 
 ### `longBlade`
+<div class="search_terms" style="display: none">longblade</div>
 
 *Read-only*. Direct access to the NPC's long blade skill statistic.
 
@@ -1043,6 +1145,7 @@ Direct access to the actor's levitate effect attribute.
 ***
 
 ### `luck`
+<div class="search_terms" style="display: none">luck</div>
 
 *Read-only*. Direct access to the actor's luck attribute statistic.
 
@@ -1053,6 +1156,7 @@ Direct access to the actor's levitate effect attribute.
 ***
 
 ### `magicka`
+<div class="search_terms" style="display: none">magicka</div>
 
 *Read-only*. Access to the actor's magicka statistic.
 
@@ -1063,6 +1167,7 @@ Direct access to the actor's levitate effect attribute.
 ***
 
 ### `magickaMultiplier`
+<div class="search_terms" style="display: none">magickamultiplier</div>
 
 *Read-only*. Access to the actor's magicka multiplier statistic.
 
@@ -1073,6 +1178,7 @@ Direct access to the actor's levitate effect attribute.
 ***
 
 ### `marksman`
+<div class="search_terms" style="display: none">marksman</div>
 
 *Read-only*. Direct access to the NPC's marksman skill statistic.
 
@@ -1083,6 +1189,7 @@ Direct access to the actor's levitate effect attribute.
 ***
 
 ### `mediumArmor`
+<div class="search_terms" style="display: none">mediumarmor</div>
 
 *Read-only*. Direct access to the NPC's medium armor skill statistic.
 
@@ -1093,6 +1200,7 @@ Direct access to the actor's levitate effect attribute.
 ***
 
 ### `mercantile`
+<div class="search_terms" style="display: none">mercantile</div>
 
 *Read-only*. Direct access to the NPC's mercantile skill statistic.
 
@@ -1103,6 +1211,7 @@ Direct access to the actor's levitate effect attribute.
 ***
 
 ### `mobToMobCollision`
+<div class="search_terms" style="display: none">mobtomobcollision</div>
 
 Allows modifying if this actor will collide with other actors. When `true` (default), the actor cannot move through other actors. When `false`, the actor is allowed to move through other actors, and other actors can move through it.
 
@@ -1115,6 +1224,7 @@ May be useful when free movement is required in crowded situations, or to tempor
 ***
 
 ### `movementCollision`
+<div class="search_terms" style="display: none">movementcollision</div>
 
 Controls if the mobile has movement collision active. When false, the mobile can move through any object, but can still block other mobiles, and can still be hit in combat. Actors will still follow pathgrids, ramps and stairs when navigating.
 
@@ -1125,6 +1235,7 @@ Controls if the mobile has movement collision active. When false, the mobile can
 ***
 
 ### `movementFlags`
+<div class="search_terms" style="display: none">movementflags</div>
 
 Access to the root mobile object movement flags, represented as an integer. Should not be accessed directly.
 
@@ -1135,6 +1246,7 @@ Access to the root mobile object movement flags, represented as an integer. Shou
 ***
 
 ### `moveSpeed`
+<div class="search_terms" style="display: none">movespeed</div>
 
 *Read-only*. The calculated base movement speed.
 
@@ -1145,6 +1257,7 @@ Access to the root mobile object movement flags, represented as an integer. Shou
 ***
 
 ### `mysticism`
+<div class="search_terms" style="display: none">mysticism</div>
 
 *Read-only*. Direct access to the NPC's mysticism skill statistic.
 
@@ -1155,6 +1268,7 @@ Access to the root mobile object movement flags, represented as an integer. Shou
 ***
 
 ### `nextActionWeight`
+<div class="search_terms" style="display: none">nextactionweight</div>
 
 *Read-only*. No description yet available.
 
@@ -1165,6 +1279,7 @@ Access to the root mobile object movement flags, represented as an integer. Shou
 ***
 
 ### `object`
+<div class="search_terms" style="display: none">object</div>
 
 *Read-only*. The actor object that maps to this mobile.
 
@@ -1175,6 +1290,7 @@ Access to the root mobile object movement flags, represented as an integer. Shou
 ***
 
 ### `objectType`
+<div class="search_terms" style="display: none">objecttype</div>
 
 *Read-only*. The type of mobile object. Maps to values in [`tes3.objectType`](https://mwse.github.io/MWSE/references/object-types/) namespace.
 
@@ -1185,6 +1301,7 @@ Access to the root mobile object movement flags, represented as an integer. Shou
 ***
 
 ### `paralyze`
+<div class="search_terms" style="display: none">paralyze</div>
 
 Direct access to the actor's paralyze effect attribute.
 
@@ -1195,6 +1312,7 @@ Direct access to the actor's paralyze effect attribute.
 ***
 
 ### `personality`
+<div class="search_terms" style="display: none">personality</div>
 
 *Read-only*. Direct access to the actor's personality attribute statistic.
 
@@ -1205,6 +1323,7 @@ Direct access to the actor's paralyze effect attribute.
 ***
 
 ### `playerDistance`
+<div class="search_terms" style="display: none">playerdistance</div>
 
 The distance to the player. Updated every frame when the mobile is in an active cell.
 
@@ -1215,6 +1334,7 @@ The distance to the player. Updated every frame when the mobile is in an active 
 ***
 
 ### `position`
+<div class="search_terms" style="display: none">position</div>
 
 A vector that represents the 3D position of the object.
 
@@ -1225,6 +1345,7 @@ A vector that represents the 3D position of the object.
 ***
 
 ### `prevMovementFlags`
+<div class="search_terms" style="display: none">prevmovementflags</div>
 
 Access to the root mobile object movement flags from the previous frame, represented as an integer. Should not be accessed directly.
 
@@ -1235,6 +1356,7 @@ Access to the root mobile object movement flags from the previous frame, represe
 ***
 
 ### `readiedAmmo`
+<div class="search_terms" style="display: none">readiedammo</div>
 
 The currently equipped ammo, if any.
 
@@ -1245,6 +1367,7 @@ The currently equipped ammo, if any.
 ***
 
 ### `readiedAmmoCount`
+<div class="search_terms" style="display: none">readiedammocount</div>
 
 The number of ammo equipped for the readied ammo.
 
@@ -1255,6 +1378,7 @@ The number of ammo equipped for the readied ammo.
 ***
 
 ### `readiedShield`
+<div class="search_terms" style="display: none">readiedshield</div>
 
 The currently equipped shield, if any.
 
@@ -1265,6 +1389,7 @@ The currently equipped shield, if any.
 ***
 
 ### `readiedWeapon`
+<div class="search_terms" style="display: none">readiedweapon</div>
 
 The currently equipped weapon, if any.
 
@@ -1275,6 +1400,7 @@ The currently equipped weapon, if any.
 ***
 
 ### `reference`
+<div class="search_terms" style="display: none">reference</div>
 
 *Read-only*. Access to the reference object for the mobile, if any.
 
@@ -1285,6 +1411,7 @@ The currently equipped weapon, if any.
 ***
 
 ### `resistBlightDisease`
+<div class="search_terms" style="display: none">resistblightdisease</div>
 
 Direct access to the actor's blight disease resistance effect attribute.
 
@@ -1295,6 +1422,7 @@ Direct access to the actor's blight disease resistance effect attribute.
 ***
 
 ### `resistCommonDisease`
+<div class="search_terms" style="display: none">resistcommondisease</div>
 
 Direct access to the actor's common disease resistance effect attribute.
 
@@ -1305,6 +1433,7 @@ Direct access to the actor's common disease resistance effect attribute.
 ***
 
 ### `resistCorprus`
+<div class="search_terms" style="display: none">resistcorprus</div>
 
 Direct access to the actor's corprus disease resistance effect attribute.
 
@@ -1315,6 +1444,7 @@ Direct access to the actor's corprus disease resistance effect attribute.
 ***
 
 ### `resistFire`
+<div class="search_terms" style="display: none">resistfire</div>
 
 Direct access to the actor's fire resistance effect attribute.
 
@@ -1325,6 +1455,7 @@ Direct access to the actor's fire resistance effect attribute.
 ***
 
 ### `resistFrost`
+<div class="search_terms" style="display: none">resistfrost</div>
 
 Direct access to the actor's frost resistance effect attribute.
 
@@ -1335,6 +1466,7 @@ Direct access to the actor's frost resistance effect attribute.
 ***
 
 ### `resistMagicka`
+<div class="search_terms" style="display: none">resistmagicka</div>
 
 Direct access to the actor's magicka resistance effect attribute.
 
@@ -1345,6 +1477,7 @@ Direct access to the actor's magicka resistance effect attribute.
 ***
 
 ### `resistNormalWeapons`
+<div class="search_terms" style="display: none">resistnormalweapons</div>
 
 Direct access to the actor's normal weapon resistance effect attribute.
 
@@ -1355,6 +1488,7 @@ Direct access to the actor's normal weapon resistance effect attribute.
 ***
 
 ### `resistParalysis`
+<div class="search_terms" style="display: none">resistparalysis</div>
 
 Direct access to the actor's paralysis resistance effect attribute.
 
@@ -1365,6 +1499,7 @@ Direct access to the actor's paralysis resistance effect attribute.
 ***
 
 ### `resistPoison`
+<div class="search_terms" style="display: none">resistpoison</div>
 
 Direct access to the actor's poison resistance effect attribute.
 
@@ -1375,6 +1510,7 @@ Direct access to the actor's poison resistance effect attribute.
 ***
 
 ### `resistShock`
+<div class="search_terms" style="display: none">resistshock</div>
 
 Direct access to the actor's shock resistance effect attribute.
 
@@ -1385,6 +1521,7 @@ Direct access to the actor's shock resistance effect attribute.
 ***
 
 ### `restoration`
+<div class="search_terms" style="display: none">restoration</div>
 
 *Read-only*. Direct access to the NPC's restoration skill statistic.
 
@@ -1395,6 +1532,7 @@ Direct access to the actor's shock resistance effect attribute.
 ***
 
 ### `runSpeed`
+<div class="search_terms" style="display: none">runspeed</div>
 
 *Read-only*. The calculated run movement speed.
 
@@ -1405,6 +1543,7 @@ Direct access to the actor's shock resistance effect attribute.
 ***
 
 ### `sanctuary`
+<div class="search_terms" style="display: none">sanctuary</div>
 
 Direct access to the actor's sanctuary effect attribute.
 
@@ -1415,6 +1554,7 @@ Direct access to the actor's sanctuary effect attribute.
 ***
 
 ### `scanInterval`
+<div class="search_terms" style="display: none">scaninterval</div>
 
 The time interval in seconds between specific actor AI checks. These checks include checking for hostile actors and engaging combat, as well as checking if the actor should equip a light source if it is too dark. The specified time in seconds will always be increased by one second when checking, therefore a value of `0.0` will actually cause the actor AI checks to occur every second instead of every frame. Setting this to lower values than the default increases the impact on performance. The default value for a newly created actor depends on the total amount of all currently active [`tes3aiPlanner`](https://mwse.github.io/MWSE/types/tes3aiPlanner), meaning the checks will be executed at different intervals for each actor.
 
@@ -1425,6 +1565,7 @@ The time interval in seconds between specific actor AI checks. These checks incl
 ***
 
 ### `scanTimer`
+<div class="search_terms" style="display: none">scantimer</div>
 
 *Read-only*. The time in seconds since the last time the checks specified in [`scanInterval`](https://mwse.github.io/MWSE/types/tes3mobileActor/#scaninterval) were executed.
 
@@ -1435,6 +1576,7 @@ The time interval in seconds between specific actor AI checks. These checks incl
 ***
 
 ### `security`
+<div class="search_terms" style="display: none">security</div>
 
 *Read-only*. Direct access to the NPC's security skill statistic.
 
@@ -1445,6 +1587,7 @@ The time interval in seconds between specific actor AI checks. These checks incl
 ***
 
 ### `shield`
+<div class="search_terms" style="display: none">shield</div>
 
 Direct access to the actor's shield effect attribute.
 
@@ -1455,6 +1598,7 @@ Direct access to the actor's shield effect attribute.
 ***
 
 ### `shortBlade`
+<div class="search_terms" style="display: none">shortblade</div>
 
 *Read-only*. Direct access to the NPC's short blade skill statistic.
 
@@ -1465,6 +1609,7 @@ Direct access to the actor's shield effect attribute.
 ***
 
 ### `silence`
+<div class="search_terms" style="display: none">silence</div>
 
 Direct access to the actor's silence effect attribute.
 
@@ -1475,6 +1620,7 @@ Direct access to the actor's silence effect attribute.
 ***
 
 ### `skills`
+<div class="search_terms" style="display: none">skills</div>
 
 *Read-only*. An array-style table with access to the twenty seven NPC skill statistics ([tes3statisticSkill](https://mwse.github.io/MWSE/types/tes3statisticSkill/)).
 
@@ -1485,6 +1631,7 @@ Direct access to the actor's silence effect attribute.
 ***
 
 ### `sneak`
+<div class="search_terms" style="display: none">sneak</div>
 
 *Read-only*. Direct access to the NPC's sneak skill statistic.
 
@@ -1495,6 +1642,7 @@ Direct access to the actor's silence effect attribute.
 ***
 
 ### `sound`
+<div class="search_terms" style="display: none">sound</div>
 
 Direct access to the actor's sound effect attribute.
 
@@ -1505,6 +1653,7 @@ Direct access to the actor's sound effect attribute.
 ***
 
 ### `spear`
+<div class="search_terms" style="display: none">spear</div>
 
 *Read-only*. Direct access to the NPC's spear skill statistic.
 
@@ -1515,6 +1664,7 @@ Direct access to the actor's sound effect attribute.
 ***
 
 ### `speechcraft`
+<div class="search_terms" style="display: none">speechcraft</div>
 
 *Read-only*. Direct access to the NPC's speechcraft skill statistic.
 
@@ -1525,6 +1675,7 @@ Direct access to the actor's sound effect attribute.
 ***
 
 ### `speed`
+<div class="search_terms" style="display: none">speed</div>
 
 *Read-only*. Direct access to the actor's speed attribute statistic.
 
@@ -1535,6 +1686,7 @@ Direct access to the actor's sound effect attribute.
 ***
 
 ### `spellReadied`
+<div class="search_terms" style="display: none">spellreadied</div>
 
 *Read-only*. Friendly access to the actor's flag that controls if the actor has a spell readied.
 
@@ -1545,6 +1697,7 @@ Direct access to the actor's sound effect attribute.
 ***
 
 ### `strength`
+<div class="search_terms" style="display: none">strength</div>
 
 *Read-only*. Direct access to the actor's strength attribute statistic.
 
@@ -1555,6 +1708,7 @@ Direct access to the actor's sound effect attribute.
 ***
 
 ### `swiftSwim`
+<div class="search_terms" style="display: none">swiftswim</div>
 
 Direct access to the actor's swift swim effect attribute.
 
@@ -1565,6 +1719,7 @@ Direct access to the actor's swift swim effect attribute.
 ***
 
 ### `swimRunSpeed`
+<div class="search_terms" style="display: none">swimrunspeed</div>
 
 *Read-only*. The calculated swim movement speed while running.
 
@@ -1575,6 +1730,7 @@ Direct access to the actor's swift swim effect attribute.
 ***
 
 ### `swimSpeed`
+<div class="search_terms" style="display: none">swimspeed</div>
 
 *Read-only*. The calculated swim movement speed.
 
@@ -1585,6 +1741,7 @@ Direct access to the actor's swift swim effect attribute.
 ***
 
 ### `talkedTo`
+<div class="search_terms" style="display: none">talkedto</div>
 
 Direct access to the actor's flag that shows it was recently talked to.
 
@@ -1595,6 +1752,7 @@ Direct access to the actor's flag that shows it was recently talked to.
 ***
 
 ### `torchSlot`
+<div class="search_terms" style="display: none">torchslot</div>
 
 The currently equipped light.
 
@@ -1605,6 +1763,7 @@ The currently equipped light.
 ***
 
 ### `unarmored`
+<div class="search_terms" style="display: none">unarmored</div>
 
 *Read-only*. Direct access to the NPC's unarmored skill statistic.
 
@@ -1615,6 +1774,7 @@ The currently equipped light.
 ***
 
 ### `underwater`
+<div class="search_terms" style="display: none">underwater</div>
 
 *Read-only*. Friendly access to the actor's flag that controls if the actor is under water.
 
@@ -1625,6 +1785,7 @@ The currently equipped light.
 ***
 
 ### `velocity`
+<div class="search_terms" style="display: none">velocity</div>
 
 A vector that represents the 3D velocity of the object.
 
@@ -1635,6 +1796,7 @@ A vector that represents the 3D velocity of the object.
 ***
 
 ### `walkSpeed`
+<div class="search_terms" style="display: none">walkspeed</div>
 
 *Read-only*. The calculated walk movement speed.
 
@@ -1645,6 +1807,7 @@ A vector that represents the 3D velocity of the object.
 ***
 
 ### `waterBreathing`
+<div class="search_terms" style="display: none">waterbreathing</div>
 
 Direct access to the actor's water breathing effect attribute.
 
@@ -1655,6 +1818,7 @@ Direct access to the actor's water breathing effect attribute.
 ***
 
 ### `waterWalking`
+<div class="search_terms" style="display: none">waterwalking</div>
 
 Direct access to the actor's water walking effect attribute.
 
@@ -1665,6 +1829,7 @@ Direct access to the actor's water walking effect attribute.
 ***
 
 ### `weaponDrawn`
+<div class="search_terms" style="display: none">weapondrawn</div>
 
 *Read-only*. Friendly access to the actor's flag that shows if the weapon model is visible. When readying a weapon, there is a short period of time at the start of the animation, where the weapon is not visible yet. This flag will only be set after this initial stage is done. This flag is still set with hand-to-hand even though it doesn't use a model. Setting this to false while a weapon is drawn will normally cause the actor to play its weapon draw animation again.
 
@@ -1675,6 +1840,7 @@ Direct access to the actor's water walking effect attribute.
 ***
 
 ### `weaponReady`
+<div class="search_terms" style="display: none">weaponready</div>
 
 A flag for if the actor has a weapon ready or being readied (visible and held in the hand). Setting it to true will cause the actor to take out their weapon. Setting it to false will cause the actor to put it away.
 
@@ -1685,6 +1851,7 @@ A flag for if the actor has a weapon ready or being readied (visible and held in
 ***
 
 ### `werewolf`
+<div class="search_terms" style="display: none">werewolf</div>
 
 *Read-only*. Friendly access to the actor's flag that controls if the actor in werewolf form.
 
@@ -1695,6 +1862,7 @@ A flag for if the actor has a weapon ready or being readied (visible and held in
 ***
 
 ### `width`
+<div class="search_terms" style="display: none">width</div>
 
 *Read-only*. No description yet available.
 
@@ -1705,6 +1873,7 @@ A flag for if the actor has a weapon ready or being readied (visible and held in
 ***
 
 ### `willpower`
+<div class="search_terms" style="display: none">willpower</div>
 
 *Read-only*. Direct access to the actor's willpower attribute statistic.
 
@@ -1717,6 +1886,7 @@ A flag for if the actor has a weapon ready or being readied (visible and held in
 ## Methods
 
 ### `applyDamage`
+<div class="search_terms" style="display: none">applydamage, damage</div>
 
 Damages the actor, with options to control mitigation and difficulty scaling. Invokes the [`damage`](https://mwse.github.io/MWSE/events/damage/) and [`damaged`](https://mwse.github.io/MWSE/events/damaged/) events, with `tes3.damageSource.script` source. Returns the actual damage done after armor mitigation and resistance, but before difficulty scaling.
 
@@ -1741,6 +1911,7 @@ local result = myObject:applyDamage({ damage = ..., applyArmor = ..., resistAttr
 ***
 
 ### `applyFatigueDamage`
+<div class="search_terms" style="display: none">applyfatiguedamage, fatiguedamage</div>
 
 Damages the actor's fatigue, with accompanying reaction from the reciever. Invokes the [`damageHandToHand`](https://mwse.github.io/MWSE/events/damageHandToHand/) and [`damagedHandToHand`](https://mwse.github.io/MWSE/events/damagedHandToHand/) events, with `tes3.damageSource.script` source. Returns the actual fatigue damage done.
 
@@ -1761,6 +1932,7 @@ local result = myObject:applyFatigueDamage(fatigueDamage, swing, alwaysPlayHitVo
 ***
 
 ### `applyJumpFatigueCost`
+<div class="search_terms" style="display: none">applyjumpfatiguecost, jumpfatiguecost</div>
 
 Reduces the actor's current fatigue by the amount a regular jump would currently cost.
 
@@ -1771,6 +1943,7 @@ myObject:applyJumpFatigueCost()
 ***
 
 ### `calcEffectiveDamage`
+<div class="search_terms" style="display: none">calceffectivedamage</div>
 
 Calculates the damage that would be inflicted to an actor after armor and/or resistance. Returns the actual damage done after armor mitigation and resistance, but before difficulty scaling.
 
@@ -1792,6 +1965,7 @@ local result = myObject:calcEffectiveDamage({ damage = ..., applyArmor = ..., re
 ***
 
 ### `calculateJumpVelocity`
+<div class="search_terms" style="display: none">calculatejumpvelocity</div>
 
 Calculates the starting velocity of a jump.
 
@@ -1811,6 +1985,7 @@ local result = myObject:calculateJumpVelocity({ direction = ... })
 ***
 
 ### `doJump`
+<div class="search_terms" style="display: none">dojump</div>
 
 Forces the actor to jump. If `velocity` or other parameters with non-default values are specified it will be treated as a non-default jump during the [`jump`](https://mwse.github.io/MWSE/events/jump) event. Returns `false` if the actor is currently unable to jump or the jump has been cancelled, otherwise returns `true`.
 
@@ -1832,6 +2007,7 @@ local result = myObject:doJump({ velocity = ..., applyFatigueCost = ..., allowMi
 ***
 
 ### `equip`
+<div class="search_terms" style="display: none">equip</div>
 
 Equips an item, optionally adding the item if needed. If the best match is already equipped, it does not perform an unequip-equip cycle, but does return `true`.
 
@@ -1855,6 +2031,7 @@ local itemEquipped = myObject:equip({ item = ..., itemData = ..., addItem = ...,
 ***
 
 ### `equipMagic`
+<div class="search_terms" style="display: none">equipmagic</div>
 
 Equips a spell or enchantment, optionally equipping the enchanted item if needed. Returns `false` if the item could not be equipped.
 
@@ -1882,6 +2059,7 @@ local result = myObject:equipMagic({ source = ..., itemData = ..., equipItem = .
 ***
 
 ### `getActiveMagicEffects`
+<div class="search_terms" style="display: none">getactivemagiceffects, activemagiceffects</div>
 
 Fetches a filtered list of the active magic effects on the actor.
 
@@ -1902,6 +2080,7 @@ local result = myObject:getActiveMagicEffects({ effect = ..., serial = ... })
 ***
 
 ### `getBootsWeight`
+<div class="search_terms" style="display: none">getbootsweight, bootsweight</div>
 
 *Read-only*. Gets the weight of the boots equipped on the actor, or 0 if no boots are equipped.
 
@@ -1916,6 +2095,7 @@ local result = myObject:getBootsWeight()
 ***
 
 ### `getFatigueTerm`
+<div class="search_terms" style="display: none">getfatigueterm, fatigueterm</div>
 
 Gets the fatigue-based skill scaling term used by many game mechanics, based on the actor's current and maximum fatigue. It is equal to `max(0, fFatigueBase - fFatigueMult * max(0, 1 - fatigue.current/fatigue.base))`
 
@@ -1930,6 +2110,7 @@ local result = myObject:getFatigueTerm()
 ***
 
 ### `getPowerUseTimestamp`
+<div class="search_terms" style="display: none">getpowerusetimestamp, powerusetimestamp</div>
 
 Finds the timestamp a recharging power was used. Powers recharge 24 hours after this timestamp. The timestamp units are hours. The current time as a timestamp can be accessed at [`tes3.getSimulationTimestamp()`](https://mwse.github.io/MWSE/apis/tes3/#tes3getsimulationtimestamp).
 
@@ -1948,6 +2129,7 @@ local timestamp = myObject:getPowerUseTimestamp(power)
 ***
 
 ### `getSkillStatistic`
+<div class="search_terms" style="display: none">getskillstatistic, skillstatistic</div>
 
 Fetches the statistic object of a skill with a given index. This is the way to access skills for any type of actor, as creatures have a limited version of the skill system. Note that creatures share a statistic between multiple skills (they only have combat, magic, and stealth stats), so many values will be the same.
 
@@ -1966,6 +2148,7 @@ local result = myObject:getSkillStatistic(skillId)
 ***
 
 ### `getSkillValue`
+<div class="search_terms" style="display: none">getskillvalue, skillvalue</div>
 
 Fetches the current value of a skill with a given index. This is the way to access skills for any type of actor, as creatures have a limited version of the skill system. Note that creatures share a statistic between multiple skills (they only have combat, magic, and stealth stats), so many values will be the same.
 
@@ -1984,6 +2167,7 @@ local result = myObject:getSkillValue(skillId)
 ***
 
 ### `getViewToActor`
+<div class="search_terms" style="display: none">getviewtoactor, viewtoactor</div>
 
 Returns the angle between provided actor and the front side of the actor on whom the method was called. The returned angle is in degress in range [-180, 180], where 0 degrees is directly in front of the actor, the negative values are on the actor's left side, and positive values on the actor's right.
 
@@ -2002,6 +2186,7 @@ local angle = myObject:getViewToActor(mobile)
 ***
 
 ### `getViewToPoint`
+<div class="search_terms" style="display: none">getviewtopoint, viewtopoint</div>
 
 Returns the angle between provided point in space and the front side of the actor on whom the method was called. The returned angle is in degress in range [-180, 180], where 0 degrees is directly in front of the actor, the negative values are on the actor's left side, and positive values on the actor's right.
 
@@ -2020,6 +2205,7 @@ local angle = myObject:getViewToPoint(point)
 ***
 
 ### `getViewToPointWithFacing`
+<div class="search_terms" style="display: none">getviewtopointwithfacing, viewtopointwithfacing</div>
 
 Returns the angle between provided point in space and the actor's current position with provided facing (which effectively overrides the actor's facing used in other getViewTo methods). The returned angle is in degress in range [-180, 180], where 0 degrees is directly in front of the provided facing angle with the origin in actor's position.
 
@@ -2039,6 +2225,7 @@ local angle = myObject:getViewToPointWithFacing(facing, point)
 ***
 
 ### `getWeaponSpeed`
+<div class="search_terms" style="display: none">getweaponspeed, weaponspeed</div>
 
 Fetches the weapon speed of the actor's currently equipped weapon, or `1.0` if no weapon is equipped.
 
@@ -2053,6 +2240,7 @@ local result = myObject:getWeaponSpeed()
 ***
 
 ### `hasUsedPower`
+<div class="search_terms" style="display: none">hasusedpower, usedpower</div>
 
 Check if a power has been used and is recharging.
 
@@ -2071,6 +2259,7 @@ local result = myObject:hasUsedPower(power)
 ***
 
 ### `isAffectedByObject`
+<div class="search_terms" style="display: none">isaffectedbyobject, affectedbyobject</div>
 
 Determines if the actor is currently being affected by a given alchemy, enchantment, or spell.
 
@@ -2089,6 +2278,7 @@ local result = myObject:isAffectedByObject(object)
 ***
 
 ### `kill`
+<div class="search_terms" style="display: none">kill</div>
 
 Kills the actor by setting its health to 0.
 
@@ -2099,6 +2289,7 @@ myObject:kill()
 ***
 
 ### `rechargePower`
+<div class="search_terms" style="display: none">rechargepower</div>
 
 Makes a power immediately available for casting again.
 
@@ -2117,6 +2308,7 @@ local result = myObject:rechargePower(power)
 ***
 
 ### `setPowerUseTimestamp`
+<div class="search_terms" style="display: none">setpowerusetimestamp, powerusetimestamp</div>
 
 Sets the timestamp a recharging power was used. Powers recharge 24 hours after this timestamp.
 
@@ -2132,6 +2324,7 @@ myObject:setPowerUseTimestamp(power, timestamp)
 ***
 
 ### `startCombat`
+<div class="search_terms" style="display: none">startcombat</div>
 
 Forces the actor into combat with another actor.
 
@@ -2146,6 +2339,7 @@ myObject:startCombat(target)
 ***
 
 ### `startDialogue`
+<div class="search_terms" style="display: none">startdialogue</div>
 
 Starts dialogue with this actor for the player.
 
@@ -2156,6 +2350,7 @@ myObject:startDialogue()
 ***
 
 ### `stopCombat`
+<div class="search_terms" style="display: none">stopcombat</div>
 
 Ends combat for the actor.
 
@@ -2170,6 +2365,7 @@ myObject:stopCombat(force)
 ***
 
 ### `unequip`
+<div class="search_terms" style="display: none">unequip</div>
 
 Unequips one or more items from the actor.
 
@@ -2193,6 +2389,7 @@ local itemUnequipped = myObject:unequip({ item = ..., itemData = ..., type = ...
 ***
 
 ### `unequipMagic`
+<div class="search_terms" style="display: none">unequipmagic</div>
 
 Unequips the currently equipped magic, optionally unequipping the enchanted item if needed.
 
@@ -2209,6 +2406,7 @@ myObject:unequipMagic({ unequipItem = ..., updateGUI = ... })
 ***
 
 ### `updateDerivedStatistics`
+<div class="search_terms" style="display: none">updatederivedstatistics, derivedstatistics</div>
 
 Updates statistics derived from attributes, which are magicka, fatigue, and encumbrance. Will also update the UI if used on the player. Normally handled automatically when you use `tes3.modStatistic()`.
 
@@ -2223,6 +2421,7 @@ myObject:updateDerivedStatistics(attribute)
 ***
 
 ### `updateOpacity`
+<div class="search_terms" style="display: none">updateopacity, opacity</div>
 
 Updates the actor's visual opacity. Used after modifying applied chameleon or invisiblity effects.
 

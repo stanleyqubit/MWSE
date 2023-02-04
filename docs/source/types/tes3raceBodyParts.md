@@ -10,6 +10,7 @@ A substructure for a race, storing the used body parts for a given sex.
 ## Properties
 
 ### `ankle`
+<div class="search_terms" style="display: none">ankle</div>
 
 The ankle that an actor of this race and sex will use.
 
@@ -20,6 +21,7 @@ The ankle that an actor of this race and sex will use.
 ***
 
 ### `chest`
+<div class="search_terms" style="display: none">chest</div>
 
 The chest that an actor of this race and sex will use.
 
@@ -30,6 +32,7 @@ The chest that an actor of this race and sex will use.
 ***
 
 ### `clavicle`
+<div class="search_terms" style="display: none">clavicle</div>
 
 The clavicle that an actor of this race and sex will use.
 
@@ -40,6 +43,7 @@ The clavicle that an actor of this race and sex will use.
 ***
 
 ### `foot`
+<div class="search_terms" style="display: none">foot</div>
 
 The foot that an actor of this race and sex will use.
 
@@ -50,6 +54,7 @@ The foot that an actor of this race and sex will use.
 ***
 
 ### `forearm`
+<div class="search_terms" style="display: none">forearm</div>
 
 The forearm that an actor of this race and sex will use.
 
@@ -60,6 +65,7 @@ The forearm that an actor of this race and sex will use.
 ***
 
 ### `groin`
+<div class="search_terms" style="display: none">groin</div>
 
 The groin that an actor of this race and sex will use.
 
@@ -70,6 +76,7 @@ The groin that an actor of this race and sex will use.
 ***
 
 ### `hair`
+<div class="search_terms" style="display: none">hair</div>
 
 The base hair that an actor of this race and sex will use.
 
@@ -80,6 +87,7 @@ The base hair that an actor of this race and sex will use.
 ***
 
 ### `hands`
+<div class="search_terms" style="display: none">hands</div>
 
 The hands that an actor of this race and sex will use.
 
@@ -90,6 +98,7 @@ The hands that an actor of this race and sex will use.
 ***
 
 ### `head`
+<div class="search_terms" style="display: none">head</div>
 
 The head that an actor of this race and sex will use. If the actor is a vampire, the `.vampireHead` part will be used instead.
 
@@ -100,6 +109,7 @@ The head that an actor of this race and sex will use. If the actor is a vampire,
 ***
 
 ### `knee`
+<div class="search_terms" style="display: none">knee</div>
 
 The knee that an actor of this race and sex will use.
 
@@ -110,6 +120,7 @@ The knee that an actor of this race and sex will use.
 ***
 
 ### `neck`
+<div class="search_terms" style="display: none">neck</div>
 
 The neck that an actor of this race and sex will use.
 
@@ -120,6 +131,7 @@ The neck that an actor of this race and sex will use.
 ***
 
 ### `tail`
+<div class="search_terms" style="display: none">tail</div>
 
 The tail that an actor of this race and sex will use.
 
@@ -130,6 +142,7 @@ The tail that an actor of this race and sex will use.
 ***
 
 ### `upperArm`
+<div class="search_terms" style="display: none">upperarm</div>
 
 The upper arm that an actor of this race and sex will use.
 
@@ -140,6 +153,7 @@ The upper arm that an actor of this race and sex will use.
 ***
 
 ### `upperLeg`
+<div class="search_terms" style="display: none">upperleg</div>
 
 The upper leg that an actor of this race and sex will use.
 
@@ -150,6 +164,7 @@ The upper leg that an actor of this race and sex will use.
 ***
 
 ### `vampireHead`
+<div class="search_terms" style="display: none">vampirehead</div>
 
 The head that an actor of this race and sex will use when they are a vampire.
 
@@ -160,6 +175,7 @@ The head that an actor of this race and sex will use when they are a vampire.
 ***
 
 ### `wrist`
+<div class="search_terms" style="display: none">wrist</div>
 
 The wrist that an actor of this race and sex will use.
 

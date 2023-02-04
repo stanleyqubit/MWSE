@@ -10,12 +10,14 @@ A node from a collection, which has a link to the previous and next node, as wel
 ## Properties
 
 ### `data`
+<div class="search_terms" style="display: none">data</div>
 
 *Read-only*. The data stored in the node. Its type depends on the specific collection.
 
 ***
 
 ### `head`
+<div class="search_terms" style="display: none">head</div>
 
 *Read-only*. The previous node in the collection.
 
@@ -26,6 +28,7 @@ A node from a collection, which has a link to the previous and next node, as wel
 ***
 
 ### `tail`
+<div class="search_terms" style="display: none">tail</div>
 
 *Read-only*. The next node in the collection.
 

@@ -10,6 +10,7 @@ The mwse string library provides functions for interacting with mwscript string 
 ## Functions
 
 ### `mwse.string.create`
+<div class="search_terms" style="display: none">create</div>
 
 Creates a string in storage, and returns the numerical key for it.
 
@@ -30,6 +31,7 @@ local result = mwse.string.create(value)
 ***
 
 ### `mwse.string.get`
+<div class="search_terms" style="display: none">get</div>
 
 Returns the numerical key for a given string in storage, or nil if the string isn't in storage.
 

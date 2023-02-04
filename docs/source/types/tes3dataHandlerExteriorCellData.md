@@ -10,6 +10,7 @@ A structure the data handler uses to track loaded exterior cell data.
 ## Properties
 
 ### `cell`
+<div class="search_terms" style="display: none">cell</div>
 
 *Read-only*. The exterior cell.
 
@@ -20,6 +21,7 @@ A structure the data handler uses to track loaded exterior cell data.
 ***
 
 ### `loadingFlags`
+<div class="search_terms" style="display: none">loadingflags</div>
 
 *Read-only*. Direct access to cell load flags. Shouldn't be accessed directly.
 

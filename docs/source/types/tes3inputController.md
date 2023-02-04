@@ -10,6 +10,7 @@ A data structure, off of the world controller, that handles input.
 ## Properties
 
 ### `creationFlags`
+<div class="search_terms" style="display: none">creationflags</div>
 
 *Read-only*. A bit field representing device capabilities and settings.
 
@@ -20,6 +21,7 @@ A data structure, off of the world controller, that handles input.
 ***
 
 ### `inputMaps`
+<div class="search_terms" style="display: none">inputmaps</div>
 
 *Read-only*. The array-style access to input bindings ([tes3inputConfig](https://mwse.github.io/MWSE/types/tes3inputConfig/) objects).
 
@@ -30,6 +32,7 @@ A data structure, off of the world controller, that handles input.
 ***
 
 ### `keyboardState`
+<div class="search_terms" style="display: none">keyboardstate</div>
 
 *Read-only*. The array-style access to raw key states.
 
@@ -40,6 +43,7 @@ A data structure, off of the world controller, that handles input.
 ***
 
 ### `mouseState`
+<div class="search_terms" style="display: none">mousestate</div>
 
 *Read-only*. The raw DirectInput mouse state.
 
@@ -50,6 +54,7 @@ A data structure, off of the world controller, that handles input.
 ***
 
 ### `previousKeyboardState`
+<div class="search_terms" style="display: none">previouskeyboardstate</div>
 
 *Read-only*. The array-style access to the previous frame's raw key states.
 
@@ -60,6 +65,7 @@ A data structure, off of the world controller, that handles input.
 ***
 
 ### `previousMouseState`
+<div class="search_terms" style="display: none">previousmousestate</div>
 
 *Read-only*. The raw DirectInput mouse state for the previous state.
 
@@ -72,6 +78,7 @@ A data structure, off of the world controller, that handles input.
 ## Methods
 
 ### `isAltDown`
+<div class="search_terms" style="display: none">isaltdown, altdown</div>
 
 Returns true if either alt modifier key is pressed.
 
@@ -86,6 +93,7 @@ local isPressed = myObject:isAltDown()
 ***
 
 ### `isCapsLockActive`
+<div class="search_terms" style="display: none">iscapslockactive, capslockactive</div>
 
 Returns true if the caps lock mode is active.
 
@@ -100,6 +108,7 @@ local isPressed = myObject:isCapsLockActive()
 ***
 
 ### `isControlDown`
+<div class="search_terms" style="display: none">iscontroldown, controldown</div>
 
 Returns true if either control modifier key is pressed.
 
@@ -114,6 +123,7 @@ local isPressed = myObject:isControlDown()
 ***
 
 ### `isKeyDown`
+<div class="search_terms" style="display: none">iskeydown, keydown</div>
 
 Performs a key down test for a given scan key code.
 
@@ -132,6 +142,7 @@ local result = myObject:isKeyDown(key)
 ***
 
 ### `isKeyPressedThisFrame`
+<div class="search_terms" style="display: none">iskeypressedthisframe, keypressedthisframe</div>
 
 Checks to see if a given scan code is pressed, and wasn't pressed last frame.
 
@@ -150,6 +161,7 @@ local result = myObject:isKeyPressedThisFrame(key)
 ***
 
 ### `isKeyReleasedThisFrame`
+<div class="search_terms" style="display: none">iskeyreleasedthisframe, keyreleasedthisframe</div>
 
 Checks to see if a given scan code is released, and was pressed last frame.
 
@@ -168,6 +180,7 @@ local result = myObject:isKeyReleasedThisFrame(key)
 ***
 
 ### `isMouseButtonDown`
+<div class="search_terms" style="display: none">ismousebuttondown, mousebuttondown</div>
 
 Returns the mouse down state for a given mouse button.
 
@@ -186,6 +199,7 @@ local result = myObject:isMouseButtonDown(button)
 ***
 
 ### `isMouseButtonPressedThisFrame`
+<div class="search_terms" style="display: none">ismousebuttonpressedthisframe, mousebuttonpressedthisframe</div>
 
 Returns true if a mouse button was up last frame, and down this frame.
 
@@ -204,6 +218,7 @@ local result = myObject:isMouseButtonPressedThisFrame(button)
 ***
 
 ### `isMouseButtonReleasedThisFrame`
+<div class="search_terms" style="display: none">ismousebuttonreleasedthisframe, mousebuttonreleasedthisframe</div>
 
 Returns true if a mouse button was down last frame, and up this frame.
 
@@ -222,6 +237,7 @@ local result = myObject:isMouseButtonReleasedThisFrame(button)
 ***
 
 ### `isShiftDown`
+<div class="search_terms" style="display: none">isshiftdown, shiftdown</div>
 
 Returns true if either shift modifier key is pressed. It does not take into account caps lock.
 
@@ -236,6 +252,7 @@ local isPressed = myObject:isShiftDown()
 ***
 
 ### `isSuperDown`
+<div class="search_terms" style="display: none">issuperdown, superdown</div>
 
 Returns true if either super/windows modifier key is pressed.
 
@@ -250,6 +267,7 @@ local isPressed = myObject:isSuperDown()
 ***
 
 ### `keybindTest`
+<div class="search_terms" style="display: none">keybindtest</div>
 
 Performs a test for a given keybind, and optionally a transition state.
 

@@ -10,6 +10,7 @@ An object that represents a RGB color. The values are in [0.0, 1.0] range.
 ## Properties
 
 ### `b`
+<div class="search_terms" style="display: none">b</div>
 
 The blue value of the color.
 
@@ -20,6 +21,7 @@ The blue value of the color.
 ***
 
 ### `blue`
+<div class="search_terms" style="display: none">blue</div>
 
 Alias for the blue value of the color.
 
@@ -30,6 +32,7 @@ Alias for the blue value of the color.
 ***
 
 ### `g`
+<div class="search_terms" style="display: none">g</div>
 
 The green value of the color.
 
@@ -40,6 +43,7 @@ The green value of the color.
 ***
 
 ### `green`
+<div class="search_terms" style="display: none">green</div>
 
 Alias for the green value of the color.
 
@@ -50,6 +54,7 @@ Alias for the green value of the color.
 ***
 
 ### `r`
+<div class="search_terms" style="display: none">r</div>
 
 The red value of the color.
 
@@ -60,6 +65,7 @@ The red value of the color.
 ***
 
 ### `red`
+<div class="search_terms" style="display: none">red</div>
 
 Alias for the red value of the color.
 
@@ -72,6 +78,7 @@ Alias for the red value of the color.
 ## Methods
 
 ### `clamp`
+<div class="search_terms" style="display: none">clamp</div>
 
 Clamps the color object to [0.0, 1.0] range.
 
@@ -82,6 +89,7 @@ myObject:clamp()
 ***
 
 ### `copy`
+<div class="search_terms" style="display: none">copy</div>
 
 Creates a copy of the color object.
 
@@ -96,6 +104,7 @@ local result = myObject:copy()
 ***
 
 ### `lerp`
+<div class="search_terms" style="display: none">lerp</div>
 
 Calculates the interpolated color between this color and another, given a transition.
 
@@ -115,6 +124,7 @@ local lerpedcolor = myObject:lerp(tocolor, transition)
 ***
 
 ### `toVector3`
+<div class="search_terms" style="display: none">tovector3</div>
 
 Creates a vector3 of the color object.
 
@@ -131,6 +141,7 @@ local result = myObject:toVector3()
 ## Functions
 
 ### `new`
+<div class="search_terms" style="display: none">new</div>
 
 Creates a new niColor.
 

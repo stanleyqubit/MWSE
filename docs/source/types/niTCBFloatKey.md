@@ -11,6 +11,7 @@ This type inherits the following: [niFloatKey](../../types/niFloatKey), [niAnima
 ## Properties
 
 ### `bias`
+<div class="search_terms" style="display: none">bias</div>
 
 The bias value for the TCB scale animation key.
 
@@ -21,6 +22,7 @@ The bias value for the TCB scale animation key.
 ***
 
 ### `continuity`
+<div class="search_terms" style="display: none">continuity</div>
 
 The continuity value for the TCB scale animation key.
 
@@ -31,6 +33,7 @@ The continuity value for the TCB scale animation key.
 ***
 
 ### `tension`
+<div class="search_terms" style="display: none">tension</div>
 
 The tension value for the TCB scale animation key.
 
@@ -41,6 +44,7 @@ The tension value for the TCB scale animation key.
 ***
 
 ### `timing`
+<div class="search_terms" style="display: none">timing</div>
 
 The timing of the animation key.
 
@@ -51,6 +55,7 @@ The timing of the animation key.
 ***
 
 ### `value`
+<div class="search_terms" style="display: none">value</div>
 
 The arbitrary value of the NiFloatKey.
 

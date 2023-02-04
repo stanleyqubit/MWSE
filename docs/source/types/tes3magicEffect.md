@@ -10,6 +10,7 @@ A core magic effect definition.
 ## Properties
 
 ### `allowEnchanting`
+<div class="search_terms" style="display: none">allowenchanting</div>
 
 Access to the flag that determines if this effect can be used in enchanting.
 
@@ -20,6 +21,7 @@ Access to the flag that determines if this effect can be used in enchanting.
 ***
 
 ### `allowSpellmaking`
+<div class="search_terms" style="display: none">allowspellmaking</div>
 
 Access to the flag that determines if this effect can be used with spellmaking.
 
@@ -30,6 +32,7 @@ Access to the flag that determines if this effect can be used with spellmaking.
 ***
 
 ### `appliesOnce`
+<div class="search_terms" style="display: none">appliesonce</div>
 
 Access to the base flag that determines if this effect is applied only once.
 
@@ -40,6 +43,7 @@ Access to the base flag that determines if this effect is applied only once.
 ***
 
 ### `areaSoundEffect`
+<div class="search_terms" style="display: none">areasoundeffect</div>
 
 The sound effect that plays on area of effect impacts. Can be set to ``nil`` to use the default sound effect for the magic school.
 
@@ -50,6 +54,7 @@ The sound effect that plays on area of effect impacts. Can be set to ``nil`` to 
 ***
 
 ### `areaVisualEffect`
+<div class="search_terms" style="display: none">areavisualeffect</div>
 
 The visual played when a spell with this effect, with area of effect hits something.
 
@@ -60,6 +65,7 @@ The visual played when a spell with this effect, with area of effect hits someth
 ***
 
 ### `baseFlags`
+<div class="search_terms" style="display: none">baseflags</div>
 
 No description yet available.
 
@@ -70,6 +76,7 @@ No description yet available.
 ***
 
 ### `baseMagickaCost`
+<div class="search_terms" style="display: none">basemagickacost</div>
 
 The base magicka cost to use in calculations.
 
@@ -80,6 +87,7 @@ The base magicka cost to use in calculations.
 ***
 
 ### `bigIcon`
+<div class="search_terms" style="display: none">bigicon</div>
 
 The path to the large icon to use for the effect. This is derived from the base icon path.
 
@@ -90,6 +98,7 @@ The path to the large icon to use for the effect. This is derived from the base 
 ***
 
 ### `boltSoundEffect`
+<div class="search_terms" style="display: none">boltsoundeffect</div>
 
 The sound effect that plays for magic projectiles. Can be set to ``nil`` to use the default sound effect for the magic school.
 
@@ -100,6 +109,7 @@ The sound effect that plays for magic projectiles. Can be set to ``nil`` to use 
 ***
 
 ### `boltVisualEffect`
+<div class="search_terms" style="display: none">boltvisualeffect</div>
 
 The visual played when a spell with this effect is in flight.
 
@@ -110,6 +120,7 @@ The visual played when a spell with this effect is in flight.
 ***
 
 ### `canCastSelf`
+<div class="search_terms" style="display: none">cancastself, castself</div>
 
 Access to the base flag that determines if this effect can be used with a range of self.
 
@@ -120,6 +131,7 @@ Access to the base flag that determines if this effect can be used with a range 
 ***
 
 ### `canCastTarget`
+<div class="search_terms" style="display: none">cancasttarget, casttarget</div>
 
 Access to the base flag that determines if this effect can be used with a range of target.
 
@@ -130,6 +142,7 @@ Access to the base flag that determines if this effect can be used with a range 
 ***
 
 ### `canCastTouch`
+<div class="search_terms" style="display: none">cancasttouch, casttouch</div>
 
 Access to the base flag that determines if this effect can be used with a range of touch.
 
@@ -140,6 +153,7 @@ Access to the base flag that determines if this effect can be used with a range 
 ***
 
 ### `casterLinked`
+<div class="search_terms" style="display: none">casterlinked</div>
 
 Access to the base flag that determines if this effect must end if caster is dead, or not an NPC/creature. Not allowed in container or door trap spells.
 
@@ -152,6 +166,7 @@ Note that this property is hidden in the Construction Set.
 ***
 
 ### `castSoundEffect`
+<div class="search_terms" style="display: none">castsoundeffect</div>
 
 The sound effect that plays when casting. Can be set to ``nil`` to use the default sound effect for the magic school.
 
@@ -162,6 +177,7 @@ The sound effect that plays when casting. Can be set to ``nil`` to use the defau
 ***
 
 ### `castVisualEffect`
+<div class="search_terms" style="display: none">castvisualeffect</div>
 
 The visual played when a spell with this effect is cast.
 
@@ -172,6 +188,7 @@ The visual played when a spell with this effect is cast.
 ***
 
 ### `description`
+<div class="search_terms" style="display: none">description</div>
 
 Player-facing description of the effect.
 
@@ -182,6 +199,7 @@ Player-facing description of the effect.
 ***
 
 ### `flags`
+<div class="search_terms" style="display: none">flags</div>
 
 Raw access to the numerical representation of flags. Typically shouldn't be used.
 
@@ -192,6 +210,7 @@ Raw access to the numerical representation of flags. Typically shouldn't be used
 ***
 
 ### `hasContinuousVFX`
+<div class="search_terms" style="display: none">hascontinuousvfx, continuousvfx</div>
 
 Access to the base flag that determines if this effect's VFX continuously plays for the full duration of the spell, rather than occuring once on hit.
 
@@ -202,6 +221,7 @@ Access to the base flag that determines if this effect's VFX continuously plays 
 ***
 
 ### `hasNoDuration`
+<div class="search_terms" style="display: none">hasnoduration, noduration</div>
 
 Access to the base flag that determines if this effect doesn't use a duration.
 
@@ -212,6 +232,7 @@ Access to the base flag that determines if this effect doesn't use a duration.
 ***
 
 ### `hasNoMagnitude`
+<div class="search_terms" style="display: none">hasnomagnitude, nomagnitude</div>
 
 Access to the base flag that determines if this effect doesn't make use of its magnitude.
 
@@ -222,6 +243,7 @@ Access to the base flag that determines if this effect doesn't make use of its m
 ***
 
 ### `hitSoundEffect`
+<div class="search_terms" style="display: none">hitsoundeffect</div>
 
 The sound effect that plays when the effect hits a target. Can be set to ``nil`` to use the default sound effect for the magic school.
 
@@ -232,6 +254,7 @@ The sound effect that plays when the effect hits a target. Can be set to ``nil``
 ***
 
 ### `hitVisualEffect`
+<div class="search_terms" style="display: none">hitvisualeffect</div>
 
 The visual played when a spell with this effect hits something.
 
@@ -242,6 +265,7 @@ The visual played when a spell with this effect hits something.
 ***
 
 ### `icon`
+<div class="search_terms" style="display: none">icon</div>
 
 The path to the icon to use for the effect.
 
@@ -252,6 +276,7 @@ The path to the icon to use for the effect.
 ***
 
 ### `id`
+<div class="search_terms" style="display: none">id</div>
 
 *Read-only*. The unique identifier for the magic effect. Maps to values in [`tes3.effect`](https://mwse.github.io/MWSE/references/magic-effects/). Values not defined in `tes3.effect` are also possible for magic effects added by mods that don't use [`tes3.claimSpellEffectId()`](https://mwse.github.io/MWSE/apis/tes3/#tes3claimspelleffectid) to register their id.
 
@@ -262,6 +287,7 @@ The path to the icon to use for the effect.
 ***
 
 ### `illegalDaedra`
+<div class="search_terms" style="display: none">illegaldaedra</div>
 
 Access to the base flag that determines if this effect summons an illegal daedra. This flag isn't used.
 
@@ -272,6 +298,7 @@ Access to the base flag that determines if this effect summons an illegal daedra
 ***
 
 ### `isHarmful`
+<div class="search_terms" style="display: none">isharmful, harmful</div>
 
 Access to the base flag that determines if this effect is counted as a hostile action.
 
@@ -282,6 +309,7 @@ Access to the base flag that determines if this effect is counted as a hostile a
 ***
 
 ### `lightingBlue`
+<div class="search_terms" style="display: none">lightingblue</div>
 
 The amount of blue lighting to use when lighting projectiles.
 
@@ -292,6 +320,7 @@ The amount of blue lighting to use when lighting projectiles.
 ***
 
 ### `lightingGreen`
+<div class="search_terms" style="display: none">lightinggreen</div>
 
 The amount of green lighting to use when lighting projectiles.
 
@@ -302,6 +331,7 @@ The amount of green lighting to use when lighting projectiles.
 ***
 
 ### `lightingRed`
+<div class="search_terms" style="display: none">lightingred</div>
 
 The amount of red lighting to use when lighting projectiles.
 
@@ -312,6 +342,7 @@ The amount of red lighting to use when lighting projectiles.
 ***
 
 ### `name`
+<div class="search_terms" style="display: none">name</div>
 
 *Read-only*. Player-facing name of the effect.
 
@@ -322,6 +353,7 @@ The amount of red lighting to use when lighting projectiles.
 ***
 
 ### `nonRecastable`
+<div class="search_terms" style="display: none">nonrecastable</div>
 
 Access to the base flag that determines if this effect can be refreshed by recasting.
 
@@ -332,6 +364,7 @@ Access to the base flag that determines if this effect can be refreshed by recas
 ***
 
 ### `particleTexture`
+<div class="search_terms" style="display: none">particletexture</div>
 
 *Read-only*. The path to use for the particle effect texture.
 
@@ -342,6 +375,7 @@ Access to the base flag that determines if this effect can be refreshed by recas
 ***
 
 ### `school`
+<div class="search_terms" style="display: none">school</div>
 
 The school that the effect is associated with. Maps to [`tes3.magicSchool`](https://mwse.github.io/MWSE/references/magic-schools/) constants.
 
@@ -352,6 +386,7 @@ The school that the effect is associated with. Maps to [`tes3.magicSchool`](http
 ***
 
 ### `size`
+<div class="search_terms" style="display: none">size</div>
 
 Controls how much the visual effect scales with its magnitude.
 
@@ -362,6 +397,7 @@ Controls how much the visual effect scales with its magnitude.
 ***
 
 ### `sizeCap`
+<div class="search_terms" style="display: none">sizecap</div>
 
 The maximum possible size of the spell projectile with this effect.
 
@@ -372,6 +408,7 @@ The maximum possible size of the spell projectile with this effect.
 ***
 
 ### `skill`
+<div class="search_terms" style="display: none">skill</div>
 
 *Read-only*. The skill for the associated school that the effect is associated with. This skill is used when calculating experience gain per skill after a spell with this effect is cast. Maps to values in [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) namespace.
 
@@ -382,6 +419,7 @@ The maximum possible size of the spell projectile with this effect.
 ***
 
 ### `speed`
+<div class="search_terms" style="display: none">speed</div>
 
 No description yet available.
 
@@ -392,6 +430,7 @@ No description yet available.
 ***
 
 ### `spellFailureSoundEffect`
+<div class="search_terms" style="display: none">spellfailuresoundeffect</div>
 
 *Read-only*. The sound effect that plays when a spell fails to cast, and when magic is resisted. This is determined only by the spell school.
 
@@ -402,6 +441,7 @@ No description yet available.
 ***
 
 ### `targetsAttributes`
+<div class="search_terms" style="display: none">targetsattributes</div>
 
 Access to the base flag that determines if this effect makes use of attributes.
 
@@ -412,6 +452,7 @@ Access to the base flag that determines if this effect makes use of attributes.
 ***
 
 ### `targetsSkills`
+<div class="search_terms" style="display: none">targetsskills</div>
 
 Access to the base flag that determines if this effect makes use of skills.
 
@@ -422,6 +463,7 @@ Access to the base flag that determines if this effect makes use of skills.
 ***
 
 ### `unreflectable`
+<div class="search_terms" style="display: none">unreflectable</div>
 
 Access to the base flag that determines if this effect can't be reflected.
 
@@ -432,6 +474,7 @@ Access to the base flag that determines if this effect can't be reflected.
 ***
 
 ### `usesNegativeLighting`
+<div class="search_terms" style="display: none">usesnegativelighting</div>
 
 Access to the base flag that determines if this effect provides negative lighting.
 

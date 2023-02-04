@@ -10,6 +10,7 @@ Layout for the table passed to tooltip callback function of buttons in menu crea
 ## Properties
 
 ### `button`
+<div class="search_terms" style="display: none">button</div>
 
 The button table of the button this tooltip was created over.
 
@@ -20,6 +21,7 @@ The button table of the button this tooltip was created over.
 ***
 
 ### `data`
+<div class="search_terms" style="display: none">data</div>
 
 The table passed to `tes3ui.showMessageMenu` when this menu was created.
 
@@ -30,6 +32,7 @@ The table passed to `tes3ui.showMessageMenu` when this menu was created.
 ***
 
 ### `tooltip`
+<div class="search_terms" style="display: none">tooltip</div>
 
 The actual ui element for the tooltip.
 

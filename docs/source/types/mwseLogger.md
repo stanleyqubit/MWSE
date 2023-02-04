@@ -10,6 +10,7 @@ A logging class. Needs to be required before use. See [this guide](https://mwse.
 ## Properties
 
 ### `logToConsole`
+<div class="search_terms" style="display: none">logtoconsole</div>
 
 If `true`, all the logged messages will also be logged to console.
 
@@ -20,6 +21,7 @@ If `true`, all the logged messages will also be logged to console.
 ***
 
 ### `name`
+<div class="search_terms" style="display: none">name</div>
 
 Name of the mod, also counts as unique id of the logger.
 
@@ -32,6 +34,7 @@ Name of the mod, also counts as unique id of the logger.
 ## Methods
 
 ### `assert`
+<div class="search_terms" style="display: none">assert</div>
 
 Assert a condition and log an error if it fails.
 
@@ -48,6 +51,7 @@ myObject:assert(condition, message, formatValues)
 ***
 
 ### `debug`
+<div class="search_terms" style="display: none">debug</div>
 
 Log debug message.
 
@@ -63,6 +67,7 @@ myObject:debug(message, formatValues)
 ***
 
 ### `doLog`
+<div class="search_terms" style="display: none">dolog</div>
 
 Returns true if the messages of the given log level will be logged.
 
@@ -81,6 +86,7 @@ local doLog = myObject:doLog(logLevel)
 ***
 
 ### `error`
+<div class="search_terms" style="display: none">error</div>
 
 Log error message.
 
@@ -96,6 +102,7 @@ myObject:error(message, formatValues)
 ***
 
 ### `info`
+<div class="search_terms" style="display: none">info</div>
 
 Log info message.
 
@@ -111,6 +118,7 @@ myObject:info(message, formatValues)
 ***
 
 ### `setLogLevel`
+<div class="search_terms" style="display: none">setloglevel, loglevel</div>
 
 Set the log level. Options are: "TRACE", "DEBUG", "INFO", "WARN", "ERROR" and "NONE".
 
@@ -125,6 +133,7 @@ myObject:setLogLevel(newLogLevel)
 ***
 
 ### `setOutputFile`
+<div class="search_terms" style="display: none">setoutputfile, outputfile</div>
 
 Set the output file. If set, logs will be sent to a file of this name.
 
@@ -139,6 +148,7 @@ myObject:setOutputFile(outputFile)
 ***
 
 ### `trace`
+<div class="search_terms" style="display: none">trace</div>
 
 Log trace message.
 
@@ -154,6 +164,7 @@ myObject:trace(message, formatValues)
 ***
 
 ### `warn`
+<div class="search_terms" style="display: none">warn</div>
 
 Log warn message.
 

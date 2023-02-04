@@ -10,6 +10,7 @@ A core came structure responsible for managing the input around menu elements.
 ## Properties
 
 ### `lastInputTime`
+<div class="search_terms" style="display: none">lastinputtime</div>
 
 The amount of seconds that have passed since the last time the input was updated.
 
@@ -20,6 +21,7 @@ The amount of seconds that have passed since the last time the input was updated
 ***
 
 ### `menuController`
+<div class="search_terms" style="display: none">menucontroller</div>
 
 A handle back to the main menu controller.
 
@@ -30,6 +32,7 @@ A handle back to the main menu controller.
 ***
 
 ### `textInputFocus`
+<div class="search_terms" style="display: none">textinputfocus</div>
 
 The element that is currently focused for text input.
 
@@ -42,6 +45,7 @@ The element that is currently focused for text input.
 ## Methods
 
 ### `flushBufferedTextEvents`
+<div class="search_terms" style="display: none">flushbufferedtextevents</div>
 
 Clears the current text input. If no text has been passed to the current text focus, this will prevent it from doing so.
 

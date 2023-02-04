@@ -10,6 +10,7 @@ A collection that can be iterated over. Contains items in a simple linked list, 
 ## Properties
 
 ### `current`
+<div class="search_terms" style="display: none">current</div>
 
 *Read-only*. A reference for the currently iterated node. This is used by the core game engine, but should not be accessed from lua.
 
@@ -20,6 +21,7 @@ A collection that can be iterated over. Contains items in a simple linked list, 
 ***
 
 ### `head`
+<div class="search_terms" style="display: none">head</div>
 
 *Read-only*. The first node in the collection.
 
@@ -30,6 +32,7 @@ A collection that can be iterated over. Contains items in a simple linked list, 
 ***
 
 ### `tail`
+<div class="search_terms" style="display: none">tail</div>
 
 *Read-only*. The last node in the collection.
 
@@ -42,6 +45,7 @@ A collection that can be iterated over. Contains items in a simple linked list, 
 ## Methods
 
 ### `size`
+<div class="search_terms" style="display: none">size</div>
 
 *Read-only*. Returns the amount of items in the iterator.
 

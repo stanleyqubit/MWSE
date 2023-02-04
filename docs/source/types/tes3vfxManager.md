@@ -10,6 +10,7 @@ A manager for VFX lifetime and rendering. VFXs can be created through script wit
 ## Properties
 
 ### `data`
+<div class="search_terms" style="display: none">data</div>
 
 A collection of active managed visual effects.
 
@@ -20,6 +21,7 @@ A collection of active managed visual effects.
 ***
 
 ### `worldVFXRoot`
+<div class="search_terms" style="display: none">worldvfxroot</div>
 
 The root node that general VFXs are attached to.
 

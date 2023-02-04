@@ -13,6 +13,7 @@ This type inherits the following: [tes3object](../../types/tes3object), [tes3bas
 ## Properties
 
 ### `activationReference`
+<div class="search_terms" style="display: none">activationreference</div>
 
 The current reference, if any, that this reference will activate.
 
@@ -23,6 +24,7 @@ The current reference, if any, that this reference will activate.
 ***
 
 ### `attachments`
+<div class="search_terms" style="display: none">attachments</div>
 
 *Read-only*. A table with friendly named access to all supported attachments.
 
@@ -33,6 +35,7 @@ The current reference, if any, that this reference will activate.
 ***
 
 ### `baseObject`
+<div class="search_terms" style="display: none">baseobject</div>
 
 *Read-only*. This is similar to the object field, but is guaranteed to provide the base-most object. If object is an actor clone, the base actor will be given instead.
 
@@ -43,6 +46,7 @@ The current reference, if any, that this reference will activate.
 ***
 
 ### `blocked`
+<div class="search_terms" style="display: none">blocked</div>
 
 The blocked state of the object.
 
@@ -53,6 +57,7 @@ The blocked state of the object.
 ***
 
 ### `bodyPartManager`
+<div class="search_terms" style="display: none">bodypartmanager</div>
 
 *Read-only*. Access to the reference's body part manager, if available. Typically this is only available on NPC references.
 
@@ -63,6 +68,7 @@ The blocked state of the object.
 ***
 
 ### `cell`
+<div class="search_terms" style="display: none">cell</div>
 
 *Read-only*. The cell that the reference is currently in.
 
@@ -73,6 +79,7 @@ The blocked state of the object.
 ***
 
 ### `context`
+<div class="search_terms" style="display: none">context</div>
 
 *Read-only*. Access to the script context for this reference and its associated script.
 
@@ -155,6 +162,7 @@ The blocked state of the object.
 ***
 
 ### `data`
+<div class="search_terms" style="display: none">data</div>
 
 A generic lua table that data can be written to, and synced to/from the save. All information stored must be valid for serialization to json. For item references, this is the same table as on the `tes3itemData` structure. To store data that doesn't get serialized to/from the save, use `tempData`.
 
@@ -167,6 +175,7 @@ There is a guide available [here](https://mwse.github.io/MWSE/guides/storing-dat
 ***
 
 ### `deleted`
+<div class="search_terms" style="display: none">deleted</div>
 
 *Read-only*. The deleted state of the object.
 
@@ -177,6 +186,7 @@ There is a guide available [here](https://mwse.github.io/MWSE/guides/storing-dat
 ***
 
 ### `destination`
+<div class="search_terms" style="display: none">destination</div>
 
 *Read-only*. Returns the travel destination node for this reference, or `nil`. This can be used to determine where a given door links to.
 
@@ -187,6 +197,7 @@ There is a guide available [here](https://mwse.github.io/MWSE/guides/storing-dat
 ***
 
 ### `disabled`
+<div class="search_terms" style="display: none">disabled</div>
 
 *Read-only*. The disabled state of the object.
 
@@ -197,6 +208,7 @@ There is a guide available [here](https://mwse.github.io/MWSE/guides/storing-dat
 ***
 
 ### `facing`
+<div class="search_terms" style="display: none">facing</div>
 
 Convenient access to the z-component of the reference's orientation. Setting the facing sets the reference as modified.
 
@@ -207,6 +219,7 @@ Convenient access to the z-component of the reference's orientation. Setting the
 ***
 
 ### `forwardDirection`
+<div class="search_terms" style="display: none">forwarddirection</div>
 
 *Read-only*. The normalized forward or Y direction vector of the reference.
 
@@ -217,6 +230,7 @@ Convenient access to the z-component of the reference's orientation. Setting the
 ***
 
 ### `hasNoCollision`
+<div class="search_terms" style="display: none">hasnocollision, nocollision</div>
 
 Sets the no-collision flag on this reference, and recalculates collision groups. Use the [`setNoCollisionFlag()`](https://mwse.github.io/MWSE/types/tes3reference/?h=setnocollisionflag#setnocollisionflag) function to manage collision group recalculation instead.
 
@@ -227,6 +241,7 @@ Sets the no-collision flag on this reference, and recalculates collision groups.
 ***
 
 ### `id`
+<div class="search_terms" style="display: none">id</div>
 
 *Read-only*. The unique identifier for the object.
 
@@ -237,6 +252,7 @@ Sets the no-collision flag on this reference, and recalculates collision groups.
 ***
 
 ### `isDead`
+<div class="search_terms" style="display: none">isdead, dead</div>
 
 *Read-only*. Returns `true` if the object is dead, `false` if they are alive, or `nil` if that couldn't be determined.
 
@@ -247,6 +263,7 @@ Sets the no-collision flag on this reference, and recalculates collision groups.
 ***
 
 ### `isEmpty`
+<div class="search_terms" style="display: none">isempty, empty</div>
 
 Friendly access onto the reference's empty inventory flag.
 
@@ -257,6 +274,7 @@ Friendly access onto the reference's empty inventory flag.
 ***
 
 ### `isLeveledSpawn`
+<div class="search_terms" style="display: none">isleveledspawn, leveledspawn</div>
 
 *Read-only*. If true, this reference was created as a result of a leveled spawn.
 
@@ -267,6 +285,7 @@ Friendly access onto the reference's empty inventory flag.
 ***
 
 ### `isLocationMarker`
+<div class="search_terms" style="display: none">islocationmarker, locationmarker</div>
 
 True if this object is an editor marker for a gameplay location. These include travel, intervention, prison, door, and interior north markers. Markers are invisible in-game.
 
@@ -277,6 +296,7 @@ True if this object is an editor marker for a gameplay location. These include t
 ***
 
 ### `isRespawn`
+<div class="search_terms" style="display: none">isrespawn, respawn</div>
 
 *Read-only*. If true, the references respawn flag is set.
 
@@ -287,6 +307,7 @@ True if this object is an editor marker for a gameplay location. These include t
 ***
 
 ### `itemData`
+<div class="search_terms" style="display: none">itemdata</div>
 
 Gets or sets the attached `itemData` for this reference. If set to `nil`, the item data will be unhooked but not deleted.
 
@@ -297,6 +318,7 @@ Gets or sets the attached `itemData` for this reference. If set to `nil`, the it
 ***
 
 ### `leveledBaseReference`
+<div class="search_terms" style="display: none">leveledbasereference</div>
 
 *Read-only*. If this reference is a leveled spawn, this is the leveled creature spawn reference. If this reference wasn't the result of a leveled spawn, the value is `nil`.
 
@@ -307,6 +329,7 @@ Gets or sets the attached `itemData` for this reference. If set to `nil`, the it
 ***
 
 ### `light`
+<div class="search_terms" style="display: none">light</div>
 
 *Read-only*. Direct access to the scene graph light, if a dynamic light is set.
 
@@ -317,6 +340,7 @@ Gets or sets the attached `itemData` for this reference. If set to `nil`, the it
 ***
 
 ### `lockNode`
+<div class="search_terms" style="display: none">locknode</div>
 
 *Read-only*. Quick access to the reference's lock node, if any. Doors or containers that aren't locked nor trapped have this property set to `nil`.
 
@@ -327,6 +351,7 @@ Gets or sets the attached `itemData` for this reference. If set to `nil`, the it
 ***
 
 ### `mesh`
+<div class="search_terms" style="display: none">mesh</div>
 
 The path to the object's mesh.
 
@@ -337,6 +362,7 @@ The path to the object's mesh.
 ***
 
 ### `mobile`
+<div class="search_terms" style="display: none">mobile</div>
 
 *Read-only*. Access to the attached mobile object, if applicable.
 
@@ -347,6 +373,7 @@ The path to the object's mesh.
 ***
 
 ### `modified`
+<div class="search_terms" style="display: none">modified, ified</div>
 
 The modification state of the object since the last save.
 
@@ -357,6 +384,7 @@ The modification state of the object since the last save.
 ***
 
 ### `nextInCollection`
+<div class="search_terms" style="display: none">nextincollection</div>
 
 The next object in parent collection's list.
 
@@ -367,6 +395,7 @@ The next object in parent collection's list.
 ***
 
 ### `nextNode`
+<div class="search_terms" style="display: none">nextnode</div>
 
 *Read-only*. The next reference in the parent reference list.
 
@@ -377,6 +406,7 @@ The next object in parent collection's list.
 ***
 
 ### `nodeData`
+<div class="search_terms" style="display: none">nodedata</div>
 
 *Read-only*. Redundant access to this object, for iterating over a tes3referenceList.
 
@@ -387,6 +417,7 @@ The next object in parent collection's list.
 ***
 
 ### `object`
+<div class="search_terms" style="display: none">object</div>
 
 *Read-only*. The object that the reference is for, such as a weapon, armor, or actor.
 
@@ -397,6 +428,7 @@ The next object in parent collection's list.
 ***
 
 ### `objectFlags`
+<div class="search_terms" style="display: none">objectflags</div>
 
 *Read-only*. The raw flags of the object.
 
@@ -407,6 +439,7 @@ The next object in parent collection's list.
 ***
 
 ### `objectType`
+<div class="search_terms" style="display: none">objecttype</div>
 
 *Read-only*. The type of object. Maps to values in [`tes3.objectType`](https://mwse.github.io/MWSE/references/object-types/).
 
@@ -417,6 +450,7 @@ The next object in parent collection's list.
 ***
 
 ### `orientation`
+<div class="search_terms" style="display: none">orientation</div>
 
 Access to the reference's orientation, in XYZ Euler angles in Radians. Changing the orientation marks the reference as modified.
 
@@ -427,6 +461,7 @@ Access to the reference's orientation, in XYZ Euler angles in Radians. Changing 
 ***
 
 ### `owningCollection`
+<div class="search_terms" style="display: none">owningcollection</div>
 
 The collection responsible for holding this object.
 
@@ -437,6 +472,7 @@ The collection responsible for holding this object.
 ***
 
 ### `persistent`
+<div class="search_terms" style="display: none">persistent</div>
 
 The persistent flag of the object.
 
@@ -447,6 +483,7 @@ The persistent flag of the object.
 ***
 
 ### `position`
+<div class="search_terms" style="display: none">position</div>
 
 Access to the reference's position. Setting the position sets the reference as modified.
 
@@ -464,6 +501,7 @@ For actors, the axes are:
 ***
 
 ### `previousInCollection`
+<div class="search_terms" style="display: none">previousincollection</div>
 
 The previous object in parent collection's list.
 
@@ -474,6 +512,7 @@ The previous object in parent collection's list.
 ***
 
 ### `previousNode`
+<div class="search_terms" style="display: none">previousnode</div>
 
 *Read-only*. The previous reference in the parent reference list.
 
@@ -484,6 +523,7 @@ The previous object in parent collection's list.
 ***
 
 ### `rightDirection`
+<div class="search_terms" style="display: none">rightdirection</div>
 
 *Read-only*. The normalized right or X direction vector of the reference.
 
@@ -494,6 +534,7 @@ The previous object in parent collection's list.
 ***
 
 ### `scale`
+<div class="search_terms" style="display: none">scale</div>
 
 The object's scale. The value range is (0, 10).
 
@@ -504,6 +545,7 @@ The object's scale. The value range is (0, 10).
 ***
 
 ### `sceneCollisionRoot`
+<div class="search_terms" style="display: none">scenecollisionroot</div>
 
 The scene graph node for this object's physics collision, if its mesh has a root collision node.
 
@@ -514,6 +556,7 @@ The scene graph node for this object's physics collision, if its mesh has a root
 ***
 
 ### `sceneNode`
+<div class="search_terms" style="display: none">scenenode</div>
 
 *Read-only*. The scene graph node that the reference uses for rendering.
 
@@ -524,6 +567,7 @@ The scene graph node for this object's physics collision, if its mesh has a root
 ***
 
 ### `sourceFormId`
+<div class="search_terms" style="display: none">sourceformid</div>
 
 No description yet available.
 
@@ -534,6 +578,7 @@ No description yet available.
 ***
 
 ### `sourceless`
+<div class="search_terms" style="display: none">sourceless</div>
 
 The soruceless flag of the object.
 
@@ -544,6 +589,7 @@ The soruceless flag of the object.
 ***
 
 ### `sourceMod`
+<div class="search_terms" style="display: none">sourcemod</div>
 
 *Read-only*. The filename (including the extension) of the mod that owns this object. It has `nil` value if the object was anything other than loaded from an ESP or ESM file.
 
@@ -554,6 +600,7 @@ The soruceless flag of the object.
 ***
 
 ### `sourceModId`
+<div class="search_terms" style="display: none">sourcemodid</div>
 
 No description yet available.
 
@@ -564,6 +611,7 @@ No description yet available.
 ***
 
 ### `stackSize`
+<div class="search_terms" style="display: none">stacksize</div>
 
 Access to the size of a stack, if the reference represents one or more items.
 
@@ -574,6 +622,7 @@ Access to the size of a stack, if the reference represents one or more items.
 ***
 
 ### `startingOrientation`
+<div class="search_terms" style="display: none">startingorientation</div>
 
 *Read-only*. Access to the reference's original orientation. Note that this value is invalid for NPCs and creatures.
 
@@ -584,6 +633,7 @@ Access to the size of a stack, if the reference represents one or more items.
 ***
 
 ### `startingPosition`
+<div class="search_terms" style="display: none">startingposition</div>
 
 *Read-only*. Access to the reference's original position. Note that this value is invalid for NPCs and creatures.
 
@@ -594,6 +644,7 @@ Access to the size of a stack, if the reference represents one or more items.
 ***
 
 ### `supportsLuaData`
+<div class="search_terms" style="display: none">supportsluadata</div>
 
 If true, this reference can store temporary or persistent lua data.
 
@@ -604,6 +655,7 @@ If true, this reference can store temporary or persistent lua data.
 ***
 
 ### `targetFormId`
+<div class="search_terms" style="display: none">targetformid</div>
 
 No description yet available.
 
@@ -614,6 +666,7 @@ No description yet available.
 ***
 
 ### `targetModId`
+<div class="search_terms" style="display: none">targetmodid</div>
 
 No description yet available.
 
@@ -624,6 +677,7 @@ No description yet available.
 ***
 
 ### `tempData`
+<div class="search_terms" style="display: none">tempdata</div>
 
 As with the `data` field, a generic lua table that data can be written to. No information in this table will persist into saves. For item references, this is the same table as on the `tes3itemData` structure.
 
@@ -636,6 +690,7 @@ There is a guide available [here](https://mwse.github.io/MWSE/guides/storing-dat
 ***
 
 ### `upDirection`
+<div class="search_terms" style="display: none">updirection</div>
 
 *Read-only*. The normalized up or Z direction vector of the reference.
 
@@ -648,6 +703,7 @@ There is a guide available [here](https://mwse.github.io/MWSE/guides/storing-dat
 ## Methods
 
 ### `__tojson`
+<div class="search_terms" style="display: none">__tojson</div>
 
 Serializes the object to json.
 
@@ -662,6 +718,7 @@ local string = myObject:__tojson()
 ***
 
 ### `activate`
+<div class="search_terms" style="display: none">activate</div>
 
 Causes this reference to activate another. This will lead them to go through doors, pick up items, etc.
 
@@ -676,6 +733,7 @@ myObject:activate(reference)
 ***
 
 ### `clearActionFlag`
+<div class="search_terms" style="display: none">clearactionflag</div>
 
 Unsets a bit in the reference's action data attachment
 
@@ -690,6 +748,7 @@ myObject:clearActionFlag(flagIndex)
 ***
 
 ### `clone`
+<div class="search_terms" style="display: none">clone</div>
 
 Clones a reference for a base actor into a reference to an instance of that actor. For example, this will force a container to resolve its leveled items and have its own unique inventory.
 
@@ -704,6 +763,7 @@ local result = myObject:clone()
 ***
 
 ### `delete`
+<div class="search_terms" style="display: none">delete</div>
 
 Disables the reference, removes all its attachments, resets its scale, and sets the reference to be deleted.
 
@@ -714,6 +774,7 @@ myObject:delete()
 ***
 
 ### `deleteDynamicLightAttachment`
+<div class="search_terms" style="display: none">deletedynamiclightattachment, dynamiclightattachment</div>
 
 Deletes the dynamic light attachment, if it exists. This will automatically detach the dynamic light from affected nodes.
 
@@ -728,6 +789,7 @@ myObject:deleteDynamicLightAttachment(removeLightFromParent)
 ***
 
 ### `detachDynamicLightFromAffectedNodes`
+<div class="search_terms" style="display: none">detachdynamiclightfromaffectednodes</div>
 
 Removes the dynamic light from any affected scene graph nodes, but will not delete the associated attachment.
 
@@ -738,6 +800,7 @@ myObject:detachDynamicLightFromAffectedNodes()
 ***
 
 ### `disable`
+<div class="search_terms" style="display: none">disable</div>
 
 Hides the reference, detaches all dynamic lights and sounds, and stops any mobile simulation. Sets the reference as modified implicitly.
 
@@ -752,6 +815,7 @@ local success = myObject:disable()
 ***
 
 ### `enable`
+<div class="search_terms" style="display: none">enable</div>
 
 Shows the reference, reattaches all dynamic lights and sounds, and restarts any mobile simulation if the player is close enough. Sets the reference as modified implicitly.
 
@@ -766,6 +830,7 @@ local success = myObject:enable()
 ***
 
 ### `getAngleTo`
+<div class="search_terms" style="display: none">getangleto, angleto</div>
 
 Calculates the angle from this reference's current facing to the target reference.
 
@@ -784,6 +849,7 @@ local angle = myObject:getAngleTo(reference)
 ***
 
 ### `getAttachedDynamicLight`
+<div class="search_terms" style="display: none">getattacheddynamiclight, attacheddynamiclight</div>
 
 Fetches the dynamic light attachment.
 
@@ -798,6 +864,7 @@ local result = myObject:getAttachedDynamicLight()
 ***
 
 ### `getOrCreateAttachedDynamicLight`
+<div class="search_terms" style="display: none">getorcreateattacheddynamiclight, orcreateattacheddynamiclight</div>
 
 Fetches the dynamic light attachment. If there isn't one, a new one will be created with the given light and value.
 
@@ -821,6 +888,7 @@ local result = myObject:getOrCreateAttachedDynamicLight(light, phase)
 ***
 
 ### `onCloseInventory`
+<div class="search_terms" style="display: none">oncloseinventory</div>
 
 A function that tells the game that an inventory has been closed, if you are simulating inventory operations. It has the capability of un-cloning an inventory if it has not been modified. Typically not used outside of specific purposes.
 
@@ -835,6 +903,7 @@ local result = myObject:onCloseInventory()
 ***
 
 ### `setActionFlag`
+<div class="search_terms" style="display: none">setactionflag, actionflag</div>
 
 Sets a bit in the reference's action data attachment.
 
@@ -849,6 +918,7 @@ myObject:setActionFlag(flagIndex)
 ***
 
 ### `setDynamicLighting`
+<div class="search_terms" style="display: none">setdynamiclighting, dynamiclighting</div>
 
 Sets the dynamic lighting state of the reference using the global data handler.
 
@@ -859,6 +929,7 @@ myObject:setDynamicLighting()
 ***
 
 ### `setNoCollisionFlag`
+<div class="search_terms" style="display: none">setnocollisionflag, nocollisionflag</div>
 
 Sets if this reference has active collision. This is preferable to changing the `hasNoCollision` property, if you are manipulating multiple objects at once and do not want to constantly recalculate collision groups.
 
@@ -874,6 +945,7 @@ myObject:setNoCollisionFlag(hasNoCollision, updateCollisions)
 ***
 
 ### `testActionFlag`
+<div class="search_terms" style="display: none">testactionflag, actionflag</div>
 
 Returns the flag's value in the reference's action data attachment.
 
@@ -892,6 +964,7 @@ local result = myObject:testActionFlag(flagIndex)
 ***
 
 ### `updateEquipment`
+<div class="search_terms" style="display: none">updateequipment, equipment</div>
 
 Causes the reference, if of an actor, to update the reference's bodyparts with the currently equipped ones.
 
@@ -902,6 +975,7 @@ myObject:updateEquipment()
 ***
 
 ### `updateLighting`
+<div class="search_terms" style="display: none">updatelighting, lighting</div>
 
 Updates the lighting of the reference using the global data handler.
 
@@ -912,6 +986,7 @@ myObject:updateLighting()
 ***
 
 ### `updateSceneGraph`
+<div class="search_terms" style="display: none">updatescenegraph, scenegraph</div>
 
 Updates the reference's local rotation matrix, propagates position changes to the scene graph, and sets the reference's modified flag. You need to call this if the orientation or position was manually modified.
 

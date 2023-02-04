@@ -10,6 +10,7 @@ A node within a path grid.
 ## Properties
 
 ### `connectedNodes`
+<div class="search_terms" style="display: none">connectednodes</div>
 
 *Read-only*. The list of nodes connected to this node. This table value is a copy generated from the actual data.
 
@@ -20,6 +21,7 @@ A node within a path grid.
 ***
 
 ### `grid`
+<div class="search_terms" style="display: none">grid</div>
 
 *Read-only*. The pathgrid that this node belongs to.
 
@@ -30,6 +32,7 @@ A node within a path grid.
 ***
 
 ### `position`
+<div class="search_terms" style="display: none">position</div>
 
 *Read-only*. The world position of the node.
 

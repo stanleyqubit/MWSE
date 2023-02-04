@@ -16,6 +16,7 @@ There is also a copy in the MWSE repo at: deps/lpeg/lpeg.html
 ## Functions
 
 ### `lpeg.B`
+<div class="search_terms" style="display: none">b</div>
 
 Returns a pattern that matches only if the input string at the current position is preceded by pattern p.
 	
@@ -38,6 +39,7 @@ local result = lpeg.B(p)
 ***
 
 ### `lpeg.C`
+<div class="search_terms" style="display: none">c</div>
 
 Create a simple capture pattern, which captures the substring of the subject that matches pattern p.
 	
@@ -58,6 +60,7 @@ local result = lpeg.C(p)
 ***
 
 ### `lpeg.Carg`
+<div class="search_terms" style="display: none">carg</div>
 
 Create an argument capture.
 	
@@ -79,6 +82,7 @@ local result = lpeg.Carg(n)
 ***
 
 ### `lpeg.Cb`
+<div class="search_terms" style="display: none">cb</div>
 
 Create a back capture.
 
@@ -107,6 +111,7 @@ local result = lpeg.Cb(name)
 ***
 
 ### `lpeg.Cc`
+<div class="search_terms" style="display: none">cc</div>
 
 Create a constant capture.
 
@@ -127,6 +132,7 @@ local result = lpeg.Cc(...)
 ***
 
 ### `lpeg.Cf`
+<div class="search_terms" style="display: none">cf</div>
 
 Create a fold capture.
 	
@@ -157,6 +163,7 @@ local result = lpeg.Cf(p, f)
 ***
 
 ### `lpeg.Cg`
+<div class="search_terms" style="display: none">cg</div>
 
 Create a group capture.
 
@@ -183,6 +190,7 @@ local result = lpeg.Cg(p, name)
 ***
 
 ### `lpeg.Cmt`
+<div class="search_terms" style="display: none">cmt</div>
 
 Create a match-time capture.
 	
@@ -217,6 +225,7 @@ local result = lpeg.Cmt(p, f)
 ***
 
 ### `lpeg.Cp`
+<div class="search_terms" style="display: none">cp</div>
 
 Create a position capture.
 	
@@ -234,6 +243,7 @@ local result = lpeg.Cp()
 ***
 
 ### `lpeg.Cs`
+<div class="search_terms" style="display: none">cs</div>
 
 Create a substitution capture, which captures the substring of the subject that matches pattern p, with substitutions.
 	
@@ -256,6 +266,7 @@ local result = lpeg.Cs(p)
 ***
 
 ### `lpeg.Ct`
+<div class="search_terms" style="display: none">ct</div>
 
 Create a table capture.
 	
@@ -279,6 +290,7 @@ local result = lpeg.Ct(p)
 ***
 
 ### `lpeg.locale`
+<div class="search_terms" style="display: none">locale</div>
 
 Return a table with patterns for matching some character classes according to the current locale.
 	
@@ -304,6 +316,7 @@ local result = lpeg.locale(t)
 ***
 
 ### `lpeg.match`
+<div class="search_terms" style="display: none">match</div>
 
 Attempt to match the given pattern against the subject string.
 
@@ -358,6 +371,7 @@ local result = lpeg.match(p, subject, init)
 ***
 
 ### `lpeg.P`
+<div class="search_terms" style="display: none">p</div>
 
 Converts the given value into a proper lpeg pattern.
 
@@ -396,6 +410,7 @@ local result = lpeg.P(value)
 ***
 
 ### `lpeg.R`
+<div class="search_terms" style="display: none">r</div>
 
 Returns a pattern that matches any single character belonging to one of the given ranges.
 	
@@ -440,6 +455,7 @@ local result = lpeg.R(p)
 ***
 
 ### `lpeg.S`
+<div class="search_terms" style="display: none">s</div>
 
 Returns a pattern that matches any single character that appears in the given string.
 	
@@ -464,6 +480,7 @@ local result = lpeg.S(s)
 ***
 
 ### `lpeg.setmaxstack`
+<div class="search_terms" style="display: none">setmaxstack, maxstack</div>
 
 Set a limit for the size of the backtrack stack used by LPeg to track calls and choices.
 
@@ -483,6 +500,7 @@ lpeg.setmaxstack(max)
 ***
 
 ### `lpeg.type`
+<div class="search_terms" style="display: none">type</div>
 
 If the given value is a pattern, return the string "pattern". Otherwise return nil.
 
@@ -501,6 +519,7 @@ local result = lpeg.type(value)
 ***
 
 ### `lpeg.V`
+<div class="search_terms" style="display: none">v</div>
 
 Create a non-terminal (a variable) for a grammar.
 	
@@ -522,6 +541,7 @@ local result = lpeg.V(v)
 ***
 
 ### `lpeg.version`
+<div class="search_terms" style="display: none">version</div>
 
 Return a string with the running version of lpeg.
 

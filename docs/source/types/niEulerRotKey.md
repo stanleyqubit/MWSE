@@ -11,6 +11,7 @@ This type inherits the following: [niRotKey](../../types/niRotKey), [niAnimation
 ## Properties
 
 ### `keyOrder`
+<div class="search_terms" style="display: none">keyorder</div>
 
 *Read-only*. An array of 3 values that define the ordering used for the contained keys. Maps to values in [`ni.eulerRotKeyOrder`](https://mwse.github.io/MWSE/references/ni/euler-rotation-key-orders/) table.
 
@@ -21,6 +22,7 @@ This type inherits the following: [niRotKey](../../types/niRotKey), [niAnimation
 ***
 
 ### `keys`
+<div class="search_terms" style="display: none">keys</div>
 
 *Read-only*. A table of x/y/z rotation keys. Each value in the table is an array of animation keys, with a length matching `numKeys`. Because an axis key can be `nil`, use `pairs` instead of `ipairs` to iterate over this table.
 
@@ -31,6 +33,7 @@ This type inherits the following: [niRotKey](../../types/niRotKey), [niAnimation
 ***
 
 ### `keyTypes`
+<div class="search_terms" style="display: none">keytypes</div>
 
 *Read-only*. An array of 3 values that define the types used for the contained keys. The types map to values in [`ni.animationKeyType`](https://mwse.github.io/MWSE/references/ni/animation-key-types/) table.
 
@@ -41,6 +44,7 @@ This type inherits the following: [niRotKey](../../types/niRotKey), [niAnimation
 ***
 
 ### `lastIndices`
+<div class="search_terms" style="display: none">lastindices</div>
 
 *Read-only*. An array of 3 values that define the last indices used for each key.
 
@@ -51,6 +55,7 @@ This type inherits the following: [niRotKey](../../types/niRotKey), [niAnimation
 ***
 
 ### `numKeys`
+<div class="search_terms" style="display: none">numkeys</div>
 
 *Read-only*. An array of 3 values that define the number of keys in each xRotations/yRotations/zRotations.
 
@@ -61,6 +66,7 @@ This type inherits the following: [niRotKey](../../types/niRotKey), [niAnimation
 ***
 
 ### `timing`
+<div class="search_terms" style="display: none">timing</div>
 
 The timing of the animation key.
 
@@ -71,6 +77,7 @@ The timing of the animation key.
 ***
 
 ### `value`
+<div class="search_terms" style="display: none">value</div>
 
 The rotation value of the animation key.
 

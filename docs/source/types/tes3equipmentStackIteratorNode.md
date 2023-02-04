@@ -10,6 +10,7 @@ A node from a collection, which has a link to the previous and next node, as wel
 ## Properties
 
 ### `nextNode`
+<div class="search_terms" style="display: none">nextnode</div>
 
 The next node in the collection.
 
@@ -20,6 +21,7 @@ The next node in the collection.
 ***
 
 ### `nodeData`
+<div class="search_terms" style="display: none">nodedata</div>
 
 The equipment stack object stored in the node.
 
@@ -30,6 +32,7 @@ The equipment stack object stored in the node.
 ***
 
 ### `previousNode`
+<div class="search_terms" style="display: none">previousnode</div>
 
 The previous node in the collection.
 

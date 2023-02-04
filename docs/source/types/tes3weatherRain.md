@@ -11,6 +11,7 @@ This type inherits the following: [tes3weather](../../types/tes3weather)
 ## Properties
 
 ### `ambientDayColor`
+<div class="search_terms" style="display: none">ambientdaycolor</div>
 
 *Read-only*. The weather's ambient day color. The values can range from 0 to 1.
 
@@ -21,6 +22,7 @@ This type inherits the following: [tes3weather](../../types/tes3weather)
 ***
 
 ### `ambientLoopSound`
+<div class="search_terms" style="display: none">ambientloopsound</div>
 
 *Read-only*. The weather's ambient looping sound.
 
@@ -31,6 +33,7 @@ This type inherits the following: [tes3weather](../../types/tes3weather)
 ***
 
 ### `ambientLoopSoundId`
+<div class="search_terms" style="display: none">ambientloopsoundid</div>
 
 The weather's ambient looping sound ID.
 
@@ -41,6 +44,7 @@ The weather's ambient looping sound ID.
 ***
 
 ### `ambientNightColor`
+<div class="search_terms" style="display: none">ambientnightcolor</div>
 
 *Read-only*. The weather's ambient night color. The values can range from 0 to 1.
 
@@ -51,6 +55,7 @@ The weather's ambient looping sound ID.
 ***
 
 ### `ambientPlaying`
+<div class="search_terms" style="display: none">ambientplaying</div>
 
 *Read-only*. The weather's ambient playing flag.
 
@@ -61,6 +66,7 @@ The weather's ambient looping sound ID.
 ***
 
 ### `ambientSunriseColor`
+<div class="search_terms" style="display: none">ambientsunrisecolor</div>
 
 *Read-only*. The weather's ambient sunrise color. The values can range from 0 to 1.
 
@@ -71,6 +77,7 @@ The weather's ambient looping sound ID.
 ***
 
 ### `ambientSunsetColor`
+<div class="search_terms" style="display: none">ambientsunsetcolor</div>
 
 *Read-only*. The weather's ambient sunset color. The values can range from 0 to 1.
 
@@ -81,6 +88,7 @@ The weather's ambient looping sound ID.
 ***
 
 ### `cloudsMaxPercent`
+<div class="search_terms" style="display: none">cloudsmaxpercent</div>
 
 The weather's cloud maximum percentage.
 
@@ -91,6 +99,7 @@ The weather's cloud maximum percentage.
 ***
 
 ### `cloudsSpeed`
+<div class="search_terms" style="display: none">cloudsspeed</div>
 
 The weather's cloud speed.
 
@@ -101,6 +110,7 @@ The weather's cloud speed.
 ***
 
 ### `cloudTexture`
+<div class="search_terms" style="display: none">cloudtexture</div>
 
 The weather's cloud texture path.
 
@@ -111,6 +121,7 @@ The weather's cloud texture path.
 ***
 
 ### `controller`
+<div class="search_terms" style="display: none">controller</div>
 
 *Read-only*. The weather's weather controller.
 
@@ -121,6 +132,7 @@ The weather's cloud texture path.
 ***
 
 ### `fogDayColor`
+<div class="search_terms" style="display: none">fogdaycolor</div>
 
 *Read-only*. The weather's fog day color. The values can range from 0 to 1.
 
@@ -131,6 +143,7 @@ The weather's cloud texture path.
 ***
 
 ### `fogNightColor`
+<div class="search_terms" style="display: none">fognightcolor</div>
 
 *Read-only*. The weather's fog night color. The values can range from 0 to 1.
 
@@ -141,6 +154,7 @@ The weather's cloud texture path.
 ***
 
 ### `fogSunriseColor`
+<div class="search_terms" style="display: none">fogsunrisecolor</div>
 
 *Read-only*. The weather's fog sunrise color. The values can range from 0 to 1.
 
@@ -151,6 +165,7 @@ The weather's cloud texture path.
 ***
 
 ### `fogSunsetColor`
+<div class="search_terms" style="display: none">fogsunsetcolor</div>
 
 *Read-only*. The weather's fog sunset color. The values can range from 0 to 1.
 
@@ -161,6 +176,7 @@ The weather's cloud texture path.
 ***
 
 ### `glareView`
+<div class="search_terms" style="display: none">glareview</div>
 
 The weather's glare view.
 
@@ -171,6 +187,7 @@ The weather's glare view.
 ***
 
 ### `index`
+<div class="search_terms" style="display: none">index</div>
 
 *Read-only*. The weather's index ID. Maps to values in the [`tes3.weather`](https://mwse.github.io/MWSE/references/weather-types/) table.
 
@@ -181,6 +198,7 @@ The weather's glare view.
 ***
 
 ### `landFogDayDepth`
+<div class="search_terms" style="display: none">landfogdaydepth</div>
 
 The weather's land fog day depth value.
 
@@ -191,6 +209,7 @@ The weather's land fog day depth value.
 ***
 
 ### `landFogNightDepth`
+<div class="search_terms" style="display: none">landfognightdepth</div>
 
 The weather's land fog night depth value.
 
@@ -201,6 +220,7 @@ The weather's land fog night depth value.
 ***
 
 ### `maxParticles`
+<div class="search_terms" style="display: none">maxparticles</div>
 
 The weather's maximum particles.
 
@@ -211,6 +231,7 @@ The weather's maximum particles.
 ***
 
 ### `name`
+<div class="search_terms" style="display: none">name</div>
 
 *Read-only*. The weather's user-friendly name, hardcoded in English to match the INI settings name. These values can be `"Ashstorm"`, `"Blight"`, `"Blizzard"`, `"Clear"`, `"Cloudy"`, `"Foggy"`, `"Overcast"`, `"Rain"`, `"Snow"`, or `"Thunderstorm"` as appropriate.
 
@@ -221,6 +242,7 @@ The weather's maximum particles.
 ***
 
 ### `particleEntranceSpeed`
+<div class="search_terms" style="display: none">particleentrancespeed</div>
 
 The weather's particle entrance speed.
 
@@ -231,6 +253,7 @@ The weather's particle entrance speed.
 ***
 
 ### `particleHeightMax`
+<div class="search_terms" style="display: none">particleheightmax</div>
 
 The weather's particle maximum height.
 
@@ -241,6 +264,7 @@ The weather's particle maximum height.
 ***
 
 ### `particleHeightMin`
+<div class="search_terms" style="display: none">particleheightmin</div>
 
 The weather's particle minimum height.
 
@@ -251,6 +275,7 @@ The weather's particle minimum height.
 ***
 
 ### `particleRadius`
+<div class="search_terms" style="display: none">particleradius</div>
 
 The weather's particle radius.
 
@@ -261,6 +286,7 @@ The weather's particle radius.
 ***
 
 ### `rainActive`
+<div class="search_terms" style="display: none">rainactive</div>
 
 *Read-only*. The weather's active rain flag.
 
@@ -271,6 +297,7 @@ The weather's particle radius.
 ***
 
 ### `rainLoopSound`
+<div class="search_terms" style="display: none">rainloopsound</div>
 
 *Read-only*. The weather's rain loop sound object.
 
@@ -281,6 +308,7 @@ The weather's particle radius.
 ***
 
 ### `rainLoopSoundId`
+<div class="search_terms" style="display: none">rainloopsoundid</div>
 
 The weather's rain loop sound ID.
 
@@ -291,6 +319,7 @@ The weather's rain loop sound ID.
 ***
 
 ### `skyDayColor`
+<div class="search_terms" style="display: none">skydaycolor</div>
 
 *Read-only*. The weather's sky day color. The values can range from 0 to 1.
 
@@ -301,6 +330,7 @@ The weather's rain loop sound ID.
 ***
 
 ### `skyNightColor`
+<div class="search_terms" style="display: none">skynightcolor</div>
 
 *Read-only*. The weather's sky night color. The values can range from 0 to 1.
 
@@ -311,6 +341,7 @@ The weather's rain loop sound ID.
 ***
 
 ### `skySunriseColor`
+<div class="search_terms" style="display: none">skysunrisecolor</div>
 
 *Read-only*. The weather's sky sunrise color. The values can range from 0 to 1.
 
@@ -321,6 +352,7 @@ The weather's rain loop sound ID.
 ***
 
 ### `skySunsetColor`
+<div class="search_terms" style="display: none">skysunsetcolor</div>
 
 *Read-only*. The weather's sky sunset color. The values can range from 0 to 1.
 
@@ -331,6 +363,7 @@ The weather's rain loop sound ID.
 ***
 
 ### `sunDayColor`
+<div class="search_terms" style="display: none">sundaycolor</div>
 
 *Read-only*. The weather's sun day color. The values can range from 0 to 1.
 
@@ -341,6 +374,7 @@ The weather's rain loop sound ID.
 ***
 
 ### `sundiscSunsetColor`
+<div class="search_terms" style="display: none">sundiscsunsetcolor</div>
 
 *Read-only*. The weather's sundisc sunset color. The values can range from 0 to 1.
 
@@ -351,6 +385,7 @@ The weather's rain loop sound ID.
 ***
 
 ### `sunNightColor`
+<div class="search_terms" style="display: none">sunnightcolor</div>
 
 *Read-only*. The weather's sun night color. The values can range from 0 to 1.
 
@@ -361,6 +396,7 @@ The weather's rain loop sound ID.
 ***
 
 ### `sunSunriseColor`
+<div class="search_terms" style="display: none">sunsunrisecolor</div>
 
 *Read-only*. The weather's sun sunrise color. The values can range from 0 to 1.
 
@@ -371,6 +407,7 @@ The weather's rain loop sound ID.
 ***
 
 ### `sunSunsetColor`
+<div class="search_terms" style="display: none">sunsunsetcolor</div>
 
 *Read-only*. The weather's sun sunset color. The values can range from 0 to 1.
 
@@ -381,6 +418,7 @@ The weather's rain loop sound ID.
 ***
 
 ### `threshold`
+<div class="search_terms" style="display: none">threshold</div>
 
 The weather's threshold value.
 
@@ -391,6 +429,7 @@ The weather's threshold value.
 ***
 
 ### `transitionDelta`
+<div class="search_terms" style="display: none">transitiondelta</div>
 
 The weather's transition delta.
 
@@ -401,6 +440,7 @@ The weather's transition delta.
 ***
 
 ### `underwaterSoundState`
+<div class="search_terms" style="display: none">underwatersoundstate</div>
 
 *Read-only*. The weather's underwater sound state flag. This value will be `true`, while the player is underwater.
 
@@ -411,6 +451,7 @@ The weather's transition delta.
 ***
 
 ### `windSpeed`
+<div class="search_terms" style="display: none">windspeed</div>
 
 The weather's wind speed.
 

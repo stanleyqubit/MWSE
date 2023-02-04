@@ -10,6 +10,7 @@ A container mapping a reputation for an associated faction.
 ## Properties
 
 ### `faction`
+<div class="search_terms" style="display: none">faction</div>
 
 *Read-only*. The faction whose reaction will be adjusted.
 
@@ -20,6 +21,7 @@ A container mapping a reputation for an associated faction.
 ***
 
 ### `reputation`
+<div class="search_terms" style="display: none">reputation</div>
 
 The reaction adjustment for the faction.
 

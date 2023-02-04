@@ -10,6 +10,7 @@ This library is an interface to the standard C math library. This library has be
 ## Properties
 
 ### `math.epsilon`
+<div class="search_terms" style="display: none">epsilon</div>
 
 The *machine* epsilon available for double-precision numbers. This is the difference between 1.0 and the next representable value using lua numbers.
 
@@ -20,6 +21,7 @@ The *machine* epsilon available for double-precision numbers. This is the differ
 ***
 
 ### `math.fepsilon`
+<div class="search_terms" style="display: none">fepsilon</div>
 
 The *machine* epsilon available for single-precision numbers. This is the difference between 1.0 and the next representable value for many Morrowind structures.
 
@@ -30,6 +32,7 @@ The *machine* epsilon available for single-precision numbers. This is the differ
 ***
 
 ### `math.fhuge`
+<div class="search_terms" style="display: none">fhuge</div>
 
 The *machine* maximum available value for single-precision numbers. This is the maximum representable value for any floating-point Morrowind structures.
 
@@ -40,6 +43,7 @@ The *machine* maximum available value for single-precision numbers. This is the 
 ***
 
 ### `math.nfhuge`
+<div class="search_terms" style="display: none">nfhuge</div>
 
 The *machine* minimum available value for single-precision numbers. This is the minimum representable value for any floating-point Morrowind structures.
 
@@ -52,6 +56,7 @@ The *machine* minimum available value for single-precision numbers. This is the 
 ## Functions
 
 ### `math.clamp`
+<div class="search_terms" style="display: none">clamp</div>
 
 Returns a value, limited by upper and lower bounds.
 
@@ -72,6 +77,7 @@ local result = math.clamp(value, min, max)
 ***
 
 ### `math.isclose`
+<div class="search_terms" style="display: none">isclose, close</div>
 
 This function compares `a` and `b` and returns true if they are close together. This can be useful when comparing floating-point numbers with some degree of tolerance.
 
@@ -93,6 +99,7 @@ local result = math.isclose(a, b, absoluteTolerance, relativeTolerance)
 ***
 
 ### `math.lerp`
+<div class="search_terms" style="display: none">lerp</div>
 
 Performs linear interpolation between values v0 and v1. Returns a value that is t percent between them.
 
@@ -113,6 +120,7 @@ local result = math.lerp(v0, v1, t)
 ***
 
 ### `math.remap`
+<div class="search_terms" style="display: none">remap</div>
 
 Returns a value, scaled from expected values [lowIn, highIn] to [lowOut, highOut].
 
@@ -137,6 +145,7 @@ local result = math.remap(value, lowIn, highIn, lowOut, highOut)
 ***
 
 ### `math.round`
+<div class="search_terms" style="display: none">round</div>
 
 Rounds a number to a given count of digits.
 

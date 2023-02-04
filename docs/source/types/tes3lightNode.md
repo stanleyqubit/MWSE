@@ -10,6 +10,7 @@ An attachment-capable structure that maintains dynamic lights.
 ## Properties
 
 ### `light`
+<div class="search_terms" style="display: none">light</div>
 
 Access to the `niLight` object mantained by this `tes3lightNode` object.
 
@@ -20,6 +21,7 @@ Access to the `niLight` object mantained by this `tes3lightNode` object.
 ***
 
 ### `value`
+<div class="search_terms" style="display: none">value</div>
 
 The flicker phase of the light.
 

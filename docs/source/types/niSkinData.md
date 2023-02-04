@@ -11,6 +11,7 @@ This type inherits the following: [niObject](../../types/niObject)
 ## Properties
 
 ### `boneData`
+<div class="search_terms" style="display: none">bonedata</div>
 
 *Read-only*. An array of objects containing one entry for each bone that influences vertices in the skinned mesh. The order of the entries in the `boneData` array corresponds to the order of the bones in the bone array in the `niSkinInstance` objects that point to this `niSkinData`. Each object in this array contains all the data needed to deform vertices by a single bone.
 
@@ -21,6 +22,7 @@ This type inherits the following: [niObject](../../types/niObject)
 ***
 
 ### `partition`
+<div class="search_terms" style="display: none">partition</div>
 
 Access to the container with the skinning data optimized for hardware skinning. If the `niSkinData` object has not been partitioned, this property is `nil`.
 
@@ -31,6 +33,7 @@ Access to the container with the skinning data optimized for hardware skinning. 
 ***
 
 ### `refCount`
+<div class="search_terms" style="display: none">refcount</div>
 
 *Read-only*. The number of references that exist for this object. When this value reaches zero, the object will be deleted.
 
@@ -41,6 +44,7 @@ Access to the container with the skinning data optimized for hardware skinning. 
 ***
 
 ### `rotation`
+<div class="search_terms" style="display: none">rotation</div>
 
 Defines the rotation of the root bone in the bind pose from the parent node of the root bone to the coordinate system of the skinned object.
 
@@ -51,6 +55,7 @@ Defines the rotation of the root bone in the bind pose from the parent node of t
 ***
 
 ### `RTTI`
+<div class="search_terms" style="display: none">rtti</div>
 
 *Read-only*. The runtime type information for this object. This is an alias for the `.runTimeTypeInformation` property.
 
@@ -61,6 +66,7 @@ Defines the rotation of the root bone in the bind pose from the parent node of t
 ***
 
 ### `runTimeTypeInformation`
+<div class="search_terms" style="display: none">runtimetypeinformation</div>
 
 *Read-only*. The runtime type information for this object.
 
@@ -71,6 +77,7 @@ Defines the rotation of the root bone in the bind pose from the parent node of t
 ***
 
 ### `scale`
+<div class="search_terms" style="display: none">scale</div>
 
 Defines the scale of the root bone in the bind pose from the parent node of the root bone to the coordinate system of the skinned object.
 
@@ -81,6 +88,7 @@ Defines the scale of the root bone in the bind pose from the parent node of the 
 ***
 
 ### `translation`
+<div class="search_terms" style="display: none">translation</div>
 
 Defines the translation of the root bone in the bind pose from the parent node of the root bone to the coordinate system of the skinned object.
 
@@ -93,6 +101,7 @@ Defines the translation of the root bone in the bind pose from the parent node o
 ## Methods
 
 ### `clone`
+<div class="search_terms" style="display: none">clone</div>
 
 Creates a copy of this object.
 
@@ -107,6 +116,7 @@ local result = myObject:clone()
 ***
 
 ### `isInstanceOfType`
+<div class="search_terms" style="display: none">isinstanceoftype, instanceoftype</div>
 
 Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
@@ -125,6 +135,7 @@ local result = myObject:isInstanceOfType(type)
 ***
 
 ### `isOfType`
+<div class="search_terms" style="display: none">isoftype, oftype</div>
 
 Determines if the object is of a given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
@@ -143,6 +154,7 @@ local result = myObject:isOfType(type)
 ***
 
 ### `saveBinary`
+<div class="search_terms" style="display: none">savebinary</div>
 
 Serializes the object, and writes it to the given file.
 

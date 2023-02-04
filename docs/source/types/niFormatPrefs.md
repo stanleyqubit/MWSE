@@ -10,6 +10,7 @@ A class that represents a set of preferences for texture formats. These preferen
 ## Properties
 
 ### `alphaLayout`
+<div class="search_terms" style="display: none">alphalayout</div>
 
 The Alpha format. Maps to values in [`ni.textureFormatPrefsAlphaFormat`](https://mwse.github.io/MWSE/references/ni/texture-format-preference-alpha-formats/) table.
 
@@ -20,6 +21,7 @@ The Alpha format. Maps to values in [`ni.textureFormatPrefsAlphaFormat`](https:/
 ***
 
 ### `mipLayout`
+<div class="search_terms" style="display: none">miplayout</div>
 
 The MIP format. Maps to values in [`ni.textureFormatPrefsMipFlag`](https://mwse.github.io/MWSE/references/ni/texture-format-preference-mip-flags/) table.
 
@@ -30,6 +32,7 @@ The MIP format. Maps to values in [`ni.textureFormatPrefsMipFlag`](https://mwse.
 ***
 
 ### `pixelLayout`
+<div class="search_terms" style="display: none">pixellayout</div>
 
 The pixel layout. Maps to values in [`ni.textureFormatPrefsPixelLayout`](https://mwse.github.io/MWSE/references/ni/texture-format-preference-pixel-layouts/) table.
 

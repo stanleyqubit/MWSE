@@ -10,6 +10,7 @@ Provides support for interacting with toml data through an extended toml.lua mod
 ## Functions
 
 ### `toml.decode`
+<div class="search_terms" style="display: none">decode</div>
 
 Decode string representing toml into a table.
 
@@ -28,6 +29,7 @@ local result = toml.decode(input)
 ***
 
 ### `toml.encode`
+<div class="search_terms" style="display: none">encode</div>
 
 Encodes a table into a toml string.
 
@@ -46,6 +48,7 @@ local result = toml.encode(input)
 ***
 
 ### `toml.loadFile`
+<div class="search_terms" style="display: none">loadfile</div>
 
 Loads a toml file from `path`, using `toml.decode`. Unlike the related `json.loadfile` function, this is relative to the current working directory, and not relative to Data Files\MWSE. A file extension should be part of the `path` string.
 
@@ -64,6 +67,7 @@ local data = toml.loadFile(path)
 ***
 
 ### `toml.saveFile`
+<div class="search_terms" style="display: none">savefile</div>
 
 Saves a serializable table to `path`, using `toml.encode`. Unlike the related `json.savefile` function, this is relative to the current working directory, and not relative to Data Files\MWSE. A file extension should be part of the `path` string.
 

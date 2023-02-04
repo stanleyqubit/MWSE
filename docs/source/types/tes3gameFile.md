@@ -10,6 +10,7 @@ Represents a loaded ESM, ESP, or ESS file.
 ## Properties
 
 ### `author`
+<div class="search_terms" style="display: none">author</div>
 
 *Read-only*. The file's author.
 
@@ -20,6 +21,7 @@ Represents a loaded ESM, ESP, or ESS file.
 ***
 
 ### `cellName`
+<div class="search_terms" style="display: none">cellname</div>
 
 *Read-only*. The current cell, from a save game.
 
@@ -30,6 +32,7 @@ Represents a loaded ESM, ESP, or ESS file.
 ***
 
 ### `currentHealth`
+<div class="search_terms" style="display: none">currenthealth</div>
 
 *Read-only*. The player's health, from a save game.
 
@@ -40,6 +43,7 @@ Represents a loaded ESM, ESP, or ESS file.
 ***
 
 ### `day`
+<div class="search_terms" style="display: none">day</div>
 
 *Read-only*. The current day, from a save game.
 
@@ -50,6 +54,7 @@ Represents a loaded ESM, ESP, or ESS file.
 ***
 
 ### `daysPassed`
+<div class="search_terms" style="display: none">dayspassed</div>
 
 *Read-only*. The number of days passed, from a save game.
 
@@ -60,6 +65,7 @@ Represents a loaded ESM, ESP, or ESS file.
 ***
 
 ### `description`
+<div class="search_terms" style="display: none">description</div>
 
 *Read-only*. The description of the file.
 
@@ -70,6 +76,7 @@ Represents a loaded ESM, ESP, or ESS file.
 ***
 
 ### `filename`
+<div class="search_terms" style="display: none">filename</div>
 
 *Read-only*. The simple filename.
 
@@ -80,6 +87,7 @@ Represents a loaded ESM, ESP, or ESS file.
 ***
 
 ### `fileSize`
+<div class="search_terms" style="display: none">filesize</div>
 
 *Read-only*. The size of the file.
 
@@ -90,6 +98,7 @@ Represents a loaded ESM, ESP, or ESS file.
 ***
 
 ### `gameHour`
+<div class="search_terms" style="display: none">gamehour</div>
 
 *Read-only*. The current game hour, from a save game.
 
@@ -100,6 +109,7 @@ Represents a loaded ESM, ESP, or ESS file.
 ***
 
 ### `highestFormID`
+<div class="search_terms" style="display: none">highestformid</div>
 
 *Read-only*. No description yet available.
 
@@ -110,6 +120,7 @@ Represents a loaded ESM, ESP, or ESS file.
 ***
 
 ### `masterFileSizes`
+<div class="search_terms" style="display: none">masterfilesizes</div>
 
 *Read-only*. An array-style table of strings containing the file sizes of masters.
 
@@ -120,6 +131,7 @@ Represents a loaded ESM, ESP, or ESS file.
 ***
 
 ### `masterNames`
+<div class="search_terms" style="display: none">masternames</div>
 
 *Read-only*. An array-style table of strings containing the name of master files.
 
@@ -130,6 +142,7 @@ Represents a loaded ESM, ESP, or ESS file.
 ***
 
 ### `masters`
+<div class="search_terms" style="display: none">masters</div>
 
 *Read-only*. An array-style table of the tes3gameFiles that this is dependent upon.
 
@@ -140,6 +153,7 @@ Represents a loaded ESM, ESP, or ESS file.
 ***
 
 ### `maxHealth`
+<div class="search_terms" style="display: none">maxhealth</div>
 
 *Read-only*. The player's maximum health, from a save game.
 
@@ -150,6 +164,7 @@ Represents a loaded ESM, ESP, or ESS file.
 ***
 
 ### `modifiedTime`
+<div class="search_terms" style="display: none">modifiedtime, ifiedtime</div>
 
 *Read-only*. The timestamp that the file was modified.
 
@@ -160,6 +175,7 @@ Represents a loaded ESM, ESP, or ESS file.
 ***
 
 ### `month`
+<div class="search_terms" style="display: none">month</div>
 
 *Read-only*. The current month, from a save game.
 
@@ -170,6 +186,7 @@ Represents a loaded ESM, ESP, or ESS file.
 ***
 
 ### `path`
+<div class="search_terms" style="display: none">path</div>
 
 *Read-only*. The path to the file.
 
@@ -180,6 +197,7 @@ Represents a loaded ESM, ESP, or ESS file.
 ***
 
 ### `playerName`
+<div class="search_terms" style="display: none">playername</div>
 
 *Read-only*. The player's name, from a save game.
 
@@ -190,6 +208,7 @@ Represents a loaded ESM, ESP, or ESS file.
 ***
 
 ### `year`
+<div class="search_terms" style="display: none">year</div>
 
 *Read-only*. The current year, from a save game.
 
@@ -202,6 +221,7 @@ Represents a loaded ESM, ESP, or ESS file.
 ## Methods
 
 ### `deleteFile`
+<div class="search_terms" style="display: none">deletefile, file</div>
 
 Deletes the file.
 

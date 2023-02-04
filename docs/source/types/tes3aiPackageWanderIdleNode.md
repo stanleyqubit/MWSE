@@ -10,6 +10,7 @@ An AI Wander package idle node game object. Contains information on the chance t
 ## Properties
 
 ### `chance`
+<div class="search_terms" style="display: none">chance</div>
 
 A chance that the actor will play corresponding idle animation while standing when parent tes3aiPackageWander is active.
 
@@ -20,6 +21,7 @@ A chance that the actor will play corresponding idle animation while standing wh
 ***
 
 ### `index`
+<div class="search_terms" style="display: none">index</div>
 
 The index of this idle node. Determines the chance that certain idle animation will be played.
 

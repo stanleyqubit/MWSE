@@ -11,6 +11,7 @@ This type inherits the following: [niTimeController](../../types/niTimeControlle
 ## Properties
 
 ### `active`
+<div class="search_terms" style="display: none">active</div>
 
 If the controller is active. When inactive, the target does not get updated and animation timing does not advance.
 
@@ -21,6 +22,7 @@ If the controller is active. When inactive, the target does not get updated and 
 ***
 
 ### `animTimingType`
+<div class="search_terms" style="display: none">animtimingtype</div>
 
 How the time parameter passed to the update function is treated. Type 0 is the default, which treats the update time as a delta time. Type 1 treats the update time an offset from the start of the animation.
 
@@ -33,6 +35,7 @@ Maps to values in [`ni.animType`](https://mwse.github.io/MWSE/references/ni/anim
 ***
 
 ### `cycleType`
+<div class="search_terms" style="display: none">cycletype</div>
 
 The animation cycle type. Type 0 is looping, type 2 is reverse, type 4 is clamped.
 
@@ -45,6 +48,7 @@ Maps to values in [`ni.animCycleType`](https://mwse.github.io/MWSE/references/ni
 ***
 
 ### `data`
+<div class="search_terms" style="display: none">data</div>
 
 *Read-only*. The keyframe data used by the controller.
 
@@ -55,6 +59,7 @@ Maps to values in [`ni.animCycleType`](https://mwse.github.io/MWSE/references/ni
 ***
 
 ### `frequency`
+<div class="search_terms" style="display: none">frequency</div>
 
 The animation controller's frequency value. It is a scaling value used to convert from update time units to keyframe time units, if necessary.
 
@@ -65,6 +70,7 @@ The animation controller's frequency value. It is a scaling value used to conver
 ***
 
 ### `highKeyFrame`
+<div class="search_terms" style="display: none">highkeyframe</div>
 
 This is the end animation key time of the animation controller.
 
@@ -75,6 +81,7 @@ This is the end animation key time of the animation controller.
 ***
 
 ### `lastScaledTime`
+<div class="search_terms" style="display: none">lastscaledtime</div>
 
 This function returns the last scaled time computed by this controller. The scaled time takes the `frequency` and `phase` into account, along with the `cycleType` and `animTimingType`. This is the last value used to interpolate animation keys.
 
@@ -85,6 +92,7 @@ This function returns the last scaled time computed by this controller. The scal
 ***
 
 ### `lastTime`
+<div class="search_terms" style="display: none">lasttime</div>
 
 No description.
 
@@ -95,6 +103,7 @@ No description.
 ***
 
 ### `lastUsedPositionIndex`
+<div class="search_terms" style="display: none">lastusedpositionindex</div>
 
 The last position index that the game engine used.
 
@@ -105,6 +114,7 @@ The last position index that the game engine used.
 ***
 
 ### `lastUsedRotationIndex`
+<div class="search_terms" style="display: none">lastusedrotationindex</div>
 
 The last rotation index that the game engine used.
 
@@ -115,6 +125,7 @@ The last rotation index that the game engine used.
 ***
 
 ### `lastUsedScaleIndex`
+<div class="search_terms" style="display: none">lastusedscaleindex</div>
 
 The last scale index that the game engine used.
 
@@ -125,6 +136,7 @@ The last scale index that the game engine used.
 ***
 
 ### `lowKeyFrame`
+<div class="search_terms" style="display: none">lowkeyframe</div>
 
 This is the beginning animation key time of the animation controller.
 
@@ -135,6 +147,7 @@ This is the beginning animation key time of the animation controller.
 ***
 
 ### `nextController`
+<div class="search_terms" style="display: none">nextcontroller</div>
 
 The next animation controller in the list of controllers containing the calling controller.
 
@@ -145,6 +158,7 @@ The next animation controller in the list of controllers containing the calling 
 ***
 
 ### `phase`
+<div class="search_terms" style="display: none">phase</div>
 
 The phase value. It is an offset applied to the animation's update time, in seconds.
 
@@ -155,6 +169,7 @@ The phase value. It is an offset applied to the animation's update time, in seco
 ***
 
 ### `refCount`
+<div class="search_terms" style="display: none">refcount</div>
 
 *Read-only*. The number of references that exist for this object. When this value reaches zero, the object will be deleted.
 
@@ -165,6 +180,7 @@ The phase value. It is an offset applied to the animation's update time, in seco
 ***
 
 ### `RTTI`
+<div class="search_terms" style="display: none">rtti</div>
 
 *Read-only*. The runtime type information for this object. This is an alias for the `.runTimeTypeInformation` property.
 
@@ -175,6 +191,7 @@ The phase value. It is an offset applied to the animation's update time, in seco
 ***
 
 ### `runTimeTypeInformation`
+<div class="search_terms" style="display: none">runtimetypeinformation</div>
 
 *Read-only*. The runtime type information for this object.
 
@@ -185,6 +202,7 @@ The phase value. It is an offset applied to the animation's update time, in seco
 ***
 
 ### `startTime`
+<div class="search_terms" style="display: none">starttime</div>
 
 The time at which the animation controller starts playing its animation.
 
@@ -195,6 +213,7 @@ The time at which the animation controller starts playing its animation.
 ***
 
 ### `target`
+<div class="search_terms" style="display: none">target</div>
 
 *Read-only*. The scene graph object that this animation controller is to animate.
 
@@ -207,6 +226,7 @@ The time at which the animation controller starts playing its animation.
 ## Methods
 
 ### `clone`
+<div class="search_terms" style="display: none">clone</div>
 
 Creates a copy of this object.
 
@@ -221,6 +241,7 @@ local result = myObject:clone()
 ***
 
 ### `isInstanceOfType`
+<div class="search_terms" style="display: none">isinstanceoftype, instanceoftype</div>
 
 Determines if the object is of a given type, or of a type derived from the given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
@@ -239,6 +260,7 @@ local result = myObject:isInstanceOfType(type)
 ***
 
 ### `isOfType`
+<div class="search_terms" style="display: none">isoftype, oftype</div>
 
 Determines if the object is of a given type. Types can be found in the [`ni.type`](https://mwse.github.io/MWSE/references/ni/types/) table.
 
@@ -257,6 +279,7 @@ local result = myObject:isOfType(type)
 ***
 
 ### `saveBinary`
+<div class="search_terms" style="display: none">savebinary</div>
 
 Serializes the object, and writes it to the given file.
 
@@ -275,6 +298,7 @@ local success = myObject:saveBinary(path)
 ***
 
 ### `setTarget`
+<div class="search_terms" style="display: none">settarget, target</div>
 
 This method assigns a new target to the animation controller.
 
@@ -289,6 +313,7 @@ myObject:setTarget(target)
 ***
 
 ### `start`
+<div class="search_terms" style="display: none">start</div>
 
 Starts the controller at the specified time. Intended for controllers with `animTimingType` of 1.
 
@@ -303,6 +328,7 @@ myObject:start(time)
 ***
 
 ### `stop`
+<div class="search_terms" style="display: none">stop</div>
 
 Stops the controller. If you only want to pause the controller, use the `update` property.
 

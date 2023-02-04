@@ -10,6 +10,7 @@ Class used in the picking intersection system within the game engine. Using a ra
 ## Properties
 
 ### `coordinateType`
+<div class="search_terms" style="display: none">coordinatetype</div>
 
 The coordinate type for the object. Maps to values in [`ni.pickCoordinateType`](https://mwse.github.io/MWSE/references/ni/pick-coordinate-types/) table.
 
@@ -20,6 +21,7 @@ The coordinate type for the object. Maps to values in [`ni.pickCoordinateType`](
 ***
 
 ### `frontOnly`
+<div class="search_terms" style="display: none">frontonly</div>
 
 If true, back face triangles (those with clockwise winding order) are culled prior to intersection calculations. If false, intersections of ray with triangles are computed regardless of triangle orientation.
 	
@@ -31,6 +33,7 @@ If true, back face triangles (those with clockwise winding order) are culled pri
 ***
 
 ### `intersectType`
+<div class="search_terms" style="display: none">intersecttype</div>
 
 The intersect type for the object. Maps to values in [`ni.pickIntersectType`](https://mwse.github.io/MWSE/references/ni/pick-intersection-types/) table.
 
@@ -41,6 +44,7 @@ The intersect type for the object. Maps to values in [`ni.pickIntersectType`](ht
 ***
 
 ### `lastAddedRecord`
+<div class="search_terms" style="display: none">lastaddedrecord</div>
 
 The pick record that was last added to the object.
 
@@ -51,6 +55,7 @@ The pick record that was last added to the object.
 ***
 
 ### `observeAppCullFlag`
+<div class="search_terms" style="display: none">observeappcullflag</div>
 
 If true, the pick stops if it encounters an object with the 'app culled' flag set.  If false, the pick will continue over 'app culled' objects.
 	
@@ -62,6 +67,7 @@ If true, the pick stops if it encounters an object with the 'app culled' flag se
 ***
 
 ### `pickType`
+<div class="search_terms" style="display: none">picktype</div>
 
 The pick type for the object. Maps to values in [`ni.pickType`](https://mwse.github.io/MWSE/references/ni/pick-types/) table.
 
@@ -72,6 +78,7 @@ The pick type for the object. Maps to values in [`ni.pickType`](https://mwse.git
 ***
 
 ### `results`
+<div class="search_terms" style="display: none">results</div>
 
 *Read-only*. The array of pick records obtained by the last call to `pickObjects`.
 
@@ -82,6 +89,7 @@ The pick type for the object. Maps to values in [`ni.pickType`](https://mwse.git
 ***
 
 ### `returnColor`
+<div class="search_terms" style="display: none">returncolor</div>
 
 If true, a vertex color value is returned for the point of intersection of triangles during picking.
 
@@ -92,6 +100,7 @@ If true, a vertex color value is returned for the point of intersection of trian
 ***
 
 ### `returnNormal`
+<div class="search_terms" style="display: none">returnnormal</div>
 
 If true, a unit-length normal is returned for the point of intersection of triangles intersected during the picking.
 
@@ -102,6 +111,7 @@ If true, a unit-length normal is returned for the point of intersection of trian
 ***
 
 ### `returnSmoothNormal`
+<div class="search_terms" style="display: none">returnsmoothnormal</div>
 
 If true and if vertex normals exist, then a unit-length normal vector is interpolated from the vertex normals and returned during the picking operation.
 
@@ -112,6 +122,7 @@ If true and if vertex normals exist, then a unit-length normal vector is interpo
 ***
 
 ### `returnTexture`
+<div class="search_terms" style="display: none">returntexture</div>
 
 If true, texture coordinates are returned for the point of intersection of triangles during the picking operation.
 
@@ -122,6 +133,7 @@ If true, texture coordinates are returned for the point of intersection of trian
 ***
 
 ### `root`
+<div class="search_terms" style="display: none">root</div>
 
 The root pick type for the object.
 
@@ -132,6 +144,7 @@ The root pick type for the object.
 ***
 
 ### `sortType`
+<div class="search_terms" style="display: none">sorttype</div>
 
 The sort type for the object. Maps to values in [`ni.pickSortType`](https://mwse.github.io/MWSE/references/ni/pick-sort-types/) table.
 
@@ -144,6 +157,7 @@ The sort type for the object. Maps to values in [`ni.pickSortType`](https://mwse
 ## Methods
 
 ### `clearResults`
+<div class="search_terms" style="display: none">clearresults</div>
 
 Clears the results of any previous picking operation.
 
@@ -154,6 +168,7 @@ myObject:clearResults()
 ***
 
 ### `pickObjects`
+<div class="search_terms" style="display: none">pickobjects</div>
 
 Performs the picking operation by casting a ray.
 

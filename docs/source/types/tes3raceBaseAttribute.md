@@ -10,6 +10,7 @@ A substructure for a race, storing a base attribute value for male and female ac
 ## Properties
 
 ### `female`
+<div class="search_terms" style="display: none">female</div>
 
 The base attribute for female actors.
 
@@ -20,6 +21,7 @@ The base attribute for female actors.
 ***
 
 ### `male`
+<div class="search_terms" style="display: none">male</div>
 
 The base attribute for male actors.
 

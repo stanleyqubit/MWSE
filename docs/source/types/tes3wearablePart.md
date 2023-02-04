@@ -10,6 +10,7 @@ A container class that maps a body part id to its male and female body parts.
 ## Properties
 
 ### `female`
+<div class="search_terms" style="display: none">female</div>
 
 The body part object used for female actors.
 
@@ -20,6 +21,7 @@ The body part object used for female actors.
 ***
 
 ### `male`
+<div class="search_terms" style="display: none">male</div>
 
 The body part object used for male actors.
 
@@ -30,6 +32,7 @@ The body part object used for male actors.
 ***
 
 ### `type`
+<div class="search_terms" style="display: none">type</div>
 
 The type of the wearable part. Maps to [`tes3.activeBodyPart`](https://mwse.github.io/MWSE/references/active-body-parts/) namespace.
 

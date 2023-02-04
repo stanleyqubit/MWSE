@@ -10,6 +10,7 @@ A rotation in quaternion representation.
 ## Properties
 
 ### `w`
+<div class="search_terms" style="display: none">w</div>
 
 The W component of the quaternion.
 
@@ -20,6 +21,7 @@ The W component of the quaternion.
 ***
 
 ### `x`
+<div class="search_terms" style="display: none">x</div>
 
 The X component of the quaternion.
 
@@ -30,6 +32,7 @@ The X component of the quaternion.
 ***
 
 ### `y`
+<div class="search_terms" style="display: none">y</div>
 
 The Y component of the quaternion.
 
@@ -40,6 +43,7 @@ The Y component of the quaternion.
 ***
 
 ### `z`
+<div class="search_terms" style="display: none">z</div>
 
 The Z component of the quaternion.
 
@@ -52,6 +56,7 @@ The Z component of the quaternion.
 ## Methods
 
 ### `copy`
+<div class="search_terms" style="display: none">copy</div>
 
 Creates a copy of the quaternion.
 
@@ -66,6 +71,7 @@ local result = myObject:copy()
 ***
 
 ### `dot`
+<div class="search_terms" style="display: none">dot</div>
 
 Calculates the dot product between this quaternion and another.
 
@@ -84,6 +90,7 @@ local result = myObject:dot(other)
 ***
 
 ### `exp`
+<div class="search_terms" style="display: none">exp</div>
 
 Calculates the exponential e^q.
 
@@ -98,6 +105,7 @@ local result = myObject:exp()
 ***
 
 ### `fromAngleAxis`
+<div class="search_terms" style="display: none">fromangleaxis</div>
 
 Fill the quaternion by converting an angle-axis rotation. The angle must be within the interval [0, PI] and the axis must be unit length.
 
@@ -113,6 +121,7 @@ myObject:fromAngleAxis(angle, axis)
 ***
 
 ### `fromRotation`
+<div class="search_terms" style="display: none">fromrotation</div>
 
 Fill the quaternion by converting a rotation matrix.
 
@@ -127,6 +136,7 @@ myObject:fromRotation(matrix)
 ***
 
 ### `invert`
+<div class="search_terms" style="display: none">invert</div>
 
 Inverting or conjugating a rotation quaternion has the effect of reversing the axis of rotation, which modifies it to rotate in the opposite direction from the original. That is, if an object is rotated to a new position using a quaternion, then rotating it again by quaternion's inverse will return it to its original location.
 
@@ -141,6 +151,7 @@ local result = myObject:invert()
 ***
 
 ### `log`
+<div class="search_terms" style="display: none">log</div>
 
 Calculates the logarithm log(q).
 
@@ -155,6 +166,7 @@ local result = myObject:log()
 ***
 
 ### `normalize`
+<div class="search_terms" style="display: none">normalize</div>
 
 Normalizes the quaternion to unit length in-place. Returns true if result is unit length, false if the quaternion magnitude is very near to zero and cannot be normalized.
 
@@ -169,6 +181,7 @@ local isNormalized = myObject:normalize()
 ***
 
 ### `normalized`
+<div class="search_terms" style="display: none">normalized</div>
 
 Returns a normalized copy of this quaternion. The quaternion will be all zero if the quaternion magnitude is very near to zero and cannot be normalized.
 
@@ -183,6 +196,7 @@ local result = myObject:normalized()
 ***
 
 ### `rotateTowards`
+<div class="search_terms" style="display: none">rotatetowards</div>
 
 Calculates a spherical linear interpolation between this quaternion and another, limited to a maximum rotation angle. Chooses the shortest path of interpolation between quaternions, which means it minimizes spin but the interpolation arc is limited to pi radians or 180 degrees of interpolation.
 
@@ -202,6 +216,7 @@ local result = myObject:rotateTowards(target, rotationLimit)
 ***
 
 ### `slerp`
+<div class="search_terms" style="display: none">slerp</div>
 
 Calculates a spherical linear interpolation between this quaternion and another. Chooses the shortest path of interpolation between quaternions, which means it minimizes spin but the interpolation arc is limited to pi radians or 180 degrees of interpolation.
 
@@ -221,6 +236,7 @@ local result = myObject:slerp(target, transition)
 ***
 
 ### `slerpKeyframe`
+<div class="search_terms" style="display: none">slerpkeyframe</div>
 
 Calculates a spherical linear interpolation between this quaternion and another. Does not choose a direction of interpolation. This means the interpolation arc can be up to 2pi radians or 360 degrees, depending on the signs of the quaternions.
 
@@ -240,6 +256,7 @@ local result = myObject:slerpKeyframe(target, transition)
 ***
 
 ### `toAngleAxis`
+<div class="search_terms" style="display: none">toangleaxis</div>
 
 Convert this quaternion into an angle-axis rotation.
 
@@ -255,6 +272,7 @@ local angle, axis = myObject:toAngleAxis()
 ***
 
 ### `toRotation`
+<div class="search_terms" style="display: none">torotation</div>
 
 Convert this quaternion into a rotation matrix.
 
@@ -271,6 +289,7 @@ local result = myObject:toRotation()
 ## Functions
 
 ### `new`
+<div class="search_terms" style="display: none">new</div>
 
 Creates a new niQuaternion object.
 

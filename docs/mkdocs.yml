@@ -13,7 +13,7 @@ plugins:
   - search:
       # Default search is quite bad. Try with a better token separator. Taken directly from:
       # https://squidfunk.github.io/mkdocs-material/setup/setting-up-site-search/#+search.separator
-      separator: '[\s\-,:!=\[\]()"/]+|(?!\b)(?=[A-Z][a-z])|\.(?!\d)|&[lg]t;'
+      separator: '[\s\-,:!=\[\]()"/]+|(?!\b)(?=[A-Z][a-z])|\.(?!\d)|&[lg]t;|\b'
 
 extra_javascript:
   - assets/js/reloadMermaidPagesOnPaletteSwitch.js

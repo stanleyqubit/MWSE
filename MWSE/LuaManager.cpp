@@ -3792,9 +3792,8 @@ namespace mwse::lua {
 			// Fire off the event.
 			if (event::EnchantChargeUseEvent::getEventEnabled()) {
 				auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
-				bool isCast = magicSource != nullptr;
 
-				sol::object eventResult = stateHandle.triggerEvent(new event::EnchantChargeUseEvent(enchant, mobile, charge, isCast));
+				sol::object eventResult = stateHandle.triggerEvent(new event::EnchantChargeUseEvent(enchant, mobile, magicSource, charge));
 				if (eventResult.valid()) {
 					sol::table eventData = eventResult;
 					sol::optional<float> newCharge = eventData["charge"];

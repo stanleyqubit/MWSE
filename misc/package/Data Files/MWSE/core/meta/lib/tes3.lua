@@ -1003,10 +1003,16 @@ function tes3.getCell(params) end
 --- @return number days No description yet available.
 function tes3.getCumulativeDaysForMonth(month) end
 
---- Returns an actor's current AI package ID, just as the mwscript function `GetCurrentAIPackage` would.
---- @param reference tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference No description yet available.
+--- Returns an actor's current AI package ID, just as the mwscript function `GetCurrentAIPackage` would. The return value maps to values in `tes3.aiPackage` namespace.
+--- @param params tes3.getCurrentAIPackageId.params This table accepts the following values:
+--- 
+--- `reference`: tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference — No description yet available.
 --- @return number packageID No description yet available.
-function tes3.getCurrentAIPackageId(reference) end
+function tes3.getCurrentAIPackageId(params) end
+
+---Table parameter definitions for `tes3.getCurrentAIPackageId`.
+--- @class tes3.getCurrentAIPackageId.params
+--- @field reference tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference No description yet available.
 
 --- Gets the currently active weather, from the player's current region.
 --- @return tes3weatherAsh|tes3weatherBlight|tes3weatherBlizzard|tes3weatherClear|tes3weatherCloudy|tes3weatherFoggy|tes3weatherOvercast|tes3weatherRain|tes3weatherSnow|tes3weatherThunder weather No description yet available.

@@ -1723,15 +1723,16 @@ local days = tes3.getCumulativeDaysForMonth(month)
 ### `tes3.getCurrentAIPackageId`
 <div class="search_terms" style="display: none">getcurrentaipackageid, currentaipackageid</div>
 
-Returns an actor's current AI package ID, just as the mwscript function `GetCurrentAIPackage` would.
+Returns an actor's current AI package ID, just as the mwscript function `GetCurrentAIPackage` would. The return value maps to values in `tes3.aiPackage` namespace.
 
 ```lua
-local packageID = tes3.getCurrentAIPackageId(reference)
+local packageID = tes3.getCurrentAIPackageId({ reference = ... })
 ```
 
 **Parameters**:
 
-* `reference` ([tes3mobileActor](../../types/tes3mobileActor), [tes3reference](../../types/tes3reference))
+* `params` (table)
+	* `reference` ([tes3mobileActor](../../types/tes3mobileActor), [tes3reference](../../types/tes3reference))
 
 **Returns**:
 

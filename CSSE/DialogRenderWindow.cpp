@@ -283,7 +283,11 @@ namespace se::cs::dialog::render_window {
 				reference->position = (userRotation * p) + selectionData->bound.center;
 				reference->unknown_0x10 = reference->position;
 				reference->sceneNode->localTranslate = reference->position;
-				DataHandler::get()->updateLightingForReference(reference);
+
+				// Avoid lighting updates when moving large number of targets.
+				if (selectionData->numberOfTargets <= 20) {
+					DataHandler::get()->updateLightingForReference(reference);
+				}
 			}
 
 			reference->sceneNode->update(0.0f, true, true);
@@ -340,7 +344,10 @@ namespace se::cs::dialog::render_window {
 			reference->sceneNode->localTranslate = reference->position;
 			reference->sceneNode->update(0.0f, true, true);
 
-			DataHandler::get()->updateLightingForReference(reference);
+			// Avoid lighting updates when moving large number of targets.
+			if (selectionData->numberOfTargets <= 20) {
+				DataHandler::get()->updateLightingForReference(reference);
+			}
 
 			reference->setAsEdited();
 		}
@@ -720,7 +727,10 @@ namespace se::cs::dialog::render_window {
 			reference->sceneNode->localTranslate = reference->position;
 			reference->sceneNode->update(0.0f, true, true);
 
-			DataHandler::get()->updateLightingForReference(reference);
+			// Avoid lighting updates when moving large number of targets.
+			if (selectionData->numberOfTargets <= 20) {
+				DataHandler::get()->updateLightingForReference(reference);
+			}
 
 			reference->setAsEdited();
 		}

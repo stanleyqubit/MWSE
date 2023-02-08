@@ -712,12 +712,6 @@ namespace se::cs::dialog::render_window {
 			}
 		}
 
-		// We probably don't want to be sending things off into far distant cells.
-		// Can happen unintentionally if camera direction is parallel with movement axis.
-		if (intersection.distance(&planeOrigin) > 8192.0f) {
-			return 0;
-		}
-
 		// Update positions.
 		for (auto target = selectionData->firstTarget; target; target = target->next) {
 			auto reference = target->reference;

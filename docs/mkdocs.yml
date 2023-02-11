@@ -9,6 +9,7 @@ plugins:
   - git-revision-date-localized:
       type: datetime
       enable_creation_date: true
+      enabled: !ENV [CI, false]
   - mermaid2:
       arguments:
         theme: |

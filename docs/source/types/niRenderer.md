@@ -154,5 +154,3 @@ local screenshot = myObject:takeScreenshot(bounds)
 
 * `screenshot` ([niPixelData](../../types/niPixelData))
 
-***
-

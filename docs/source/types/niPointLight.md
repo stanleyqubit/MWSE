@@ -942,5 +942,3 @@ local light = niPointLight.new()
 
 * `light` ([niPointLight](../../types/niPointLight))
 
-***
-

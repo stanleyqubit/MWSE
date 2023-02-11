@@ -499,5 +499,3 @@ local property = niStencilProperty.new()
 
 * `property` ([niStencilProperty](../../types/niStencilProperty))
 
-***
-

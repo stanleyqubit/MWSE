@@ -41,5 +41,3 @@ The splash's maximum age, measured in seconds.
 
 * `result` ([niNode](../../types/niNode))
 
-***
-

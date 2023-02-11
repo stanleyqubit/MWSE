@@ -41,5 +41,3 @@ A global script object. Any script (in mwscript) that is not attached to any obj
 
 * `result` ([tes3script](../../types/tes3script))
 
-***
-

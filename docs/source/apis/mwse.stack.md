@@ -230,5 +230,3 @@ local result = mwse.stack.size()
 
 * `result` (number)
 
-***
-

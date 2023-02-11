@@ -1783,5 +1783,3 @@ Updates a menu's element layout and all child elements. Needs to be called on a 
 myObject:updateLayout()
 ```
 
-***
-

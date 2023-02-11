@@ -130,5 +130,3 @@ The state of the button. Controls which color set to use for its text. Maps to v
 
 * `result` (number)
 
-***
-

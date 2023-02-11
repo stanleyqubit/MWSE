@@ -463,5 +463,3 @@ local texture = niSourceTexture.createFromPath(path, useCached)
 
 * `texture` ([niSourceTexture](../../types/niSourceTexture))
 
-***
-

@@ -932,5 +932,3 @@ local node = niNode.new()
 
 * `node` ([niNode](../../types/niNode))
 
-***
-

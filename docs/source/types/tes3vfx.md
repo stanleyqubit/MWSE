@@ -173,5 +173,3 @@ The VFX's vertical offset, at the time of creation. Changing this value will not
 
 * `result` (number)
 
-***
-

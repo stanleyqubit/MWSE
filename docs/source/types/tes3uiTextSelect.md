@@ -130,5 +130,3 @@ The state of the text select. Controls which color set to use for text. Maps to 
 
 * `result` (number)
 
-***
-

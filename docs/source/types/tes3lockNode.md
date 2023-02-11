@@ -52,5 +52,3 @@ The trap associated with the object.
 
 * `result` ([tes3spell](../../types/tes3spell))
 
-***
-

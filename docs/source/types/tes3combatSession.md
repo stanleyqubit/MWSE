@@ -193,5 +193,3 @@ local result = myObject:selectAlchemyWithEffect(id)
 
 * `result` (number)
 
-***
-

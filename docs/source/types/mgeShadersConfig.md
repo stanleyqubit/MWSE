@@ -93,5 +93,3 @@ local shader = mgeShadersConfig.load({ name = ... })
 
 * `shader` ([mgeShaderHandle](../../types/mgeShaderHandle), nil)
 
-***
-

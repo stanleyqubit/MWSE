@@ -400,5 +400,3 @@ local newObject = myObject:createCopy({ id = ..., addToObjectList = ..., sourcel
 
 * `newObject` ([tes3clothing](../../types/tes3clothing))
 
-***
-

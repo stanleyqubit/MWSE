@@ -243,5 +243,3 @@ If you already know the effective radius of the vertex data, you could more effi
 myObject:updateModelBound()
 ```
 
-***
-

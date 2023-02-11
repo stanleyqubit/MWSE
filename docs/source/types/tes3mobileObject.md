@@ -195,5 +195,3 @@ A vector that represents the 3D velocity of the object.
 
 * `result` ([tes3vector3](../../types/tes3vector3))
 
-***
-

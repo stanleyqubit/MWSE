@@ -223,5 +223,3 @@ local volume = myObject:getMixVolume(mix)
 
 * `volume` (number)
 
-***
-

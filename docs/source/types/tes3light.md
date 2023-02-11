@@ -474,5 +474,3 @@ local result = myObject:getTimeLeft(data)
 
 * `result` (number)
 
-***
-

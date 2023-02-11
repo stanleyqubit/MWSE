@@ -52,8 +52,6 @@ A collection for references, holding a cell and a linked list of references cont
 
 * `result` ([tes3reference](../../types/tes3reference))
 
-***
-
 ??? example "Example: Converting reference list to array style table"
 
 	An example is given of a general function that can be used to convert a tes3referenceList to simple array which can be looped over with standard ipairs().

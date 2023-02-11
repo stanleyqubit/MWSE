@@ -170,5 +170,3 @@ local trimmed = string.trim(s)
 
 * `trimmed` (string)
 
-***
-

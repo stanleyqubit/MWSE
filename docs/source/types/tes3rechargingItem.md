@@ -41,5 +41,3 @@ Data for a recharging item. Not necessarily an item owned by the player.
 
 * `result` ([tes3item](../../types/tes3item))
 
-***
-

@@ -41,5 +41,3 @@ The actual ui element for the tooltip.
 
 * `result` ([tes3uiElement](../../types/tes3uiElement))
 
-***
-

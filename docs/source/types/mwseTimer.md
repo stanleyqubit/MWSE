@@ -143,5 +143,3 @@ local resumed = myObject:resume()
 
 * `resumed` (boolean)
 
-***
-

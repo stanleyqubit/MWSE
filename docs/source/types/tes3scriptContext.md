@@ -40,8 +40,6 @@ Each entry has following fields:
 | ----------- | ----------- |
 | number | Returns the total amount of variables in this tes3scriptContext. |
 
-***
-
 ??? example "Example: An example of indexing local script variables inside `tes3scriptContext` objects"
 
 	Companions usually have a mwscript script with variable named `companion` set to 1. This can be used to determine if a reference is player's companion or not.

@@ -481,5 +481,3 @@ local schoolID = myObject:getLeastProficientSchool(actor)
 
 * `schoolID` (number, nil): The least proficient school ID (from [`tes3.magicSchool`](https://mwse.github.io/MWSE/references/magic-schools/) table), or `nil` if the spell has no valid effects.
 
-***
-

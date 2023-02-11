@@ -393,5 +393,3 @@ local success = myObject:setOverrideLayerKeyframes(kfData)
 
 * `success` (boolean)
 
-***
-

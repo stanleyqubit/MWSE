@@ -151,5 +151,3 @@ local vector = tes3vector4.new(x, y, z, w)
 | ----------------- | ------------------ | ----------- | ----------- |
 | [tes3vector4](../../types/tes3vector4) | [tes3vector4](../../types/tes3vector4) | [tes3vector4](../../types/tes3vector4) | Standard vector subtraction. |
 
-***
-

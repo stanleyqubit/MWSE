@@ -66,5 +66,3 @@ local result = mwseTimerController.new(startTime)
 
 * `result` ([mwseTimerController](../../types/mwseTimerController))
 
-***
-

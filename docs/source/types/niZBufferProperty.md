@@ -392,5 +392,3 @@ local property = niZBufferProperty.new()
 
 * `property` ([niZBufferProperty](../../types/niZBufferProperty))
 
-***
-

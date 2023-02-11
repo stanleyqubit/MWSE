@@ -129,5 +129,3 @@ myObject:setMagic(source, data)
 * `source` ([tes3spell](../../types/tes3spell), [tes3item](../../types/tes3item)): The castable source to be bound to the quick key.
 * `data` ([tes3itemData](../../types/tes3itemData), nil): If given an item as the source, the optional item data to be paired with the binding.
 
-***
-

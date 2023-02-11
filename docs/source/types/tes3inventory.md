@@ -206,5 +206,3 @@ myObject:resolveLeveledItems(mobile)
 
 * `mobile` ([tes3mobileActor](../../types/tes3mobileActor)): *Optional*. The mobile actor whose stats will be updated.
 
-***
-

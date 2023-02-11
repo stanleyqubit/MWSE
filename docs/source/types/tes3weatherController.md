@@ -721,5 +721,3 @@ myObject:updateVisuals()
 **Parameters**:
 
 
-***
-

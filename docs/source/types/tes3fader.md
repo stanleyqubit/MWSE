@@ -262,5 +262,3 @@ local fader = tes3fader.new(distance, unknownBool)
 
 	```
 
-***
-

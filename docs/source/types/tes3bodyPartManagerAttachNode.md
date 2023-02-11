@@ -52,5 +52,3 @@ The translation for this Attachment node.
 
 * `result` ([tes3vector3](../../types/tes3vector3))
 
-***
-

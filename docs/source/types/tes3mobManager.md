@@ -82,5 +82,3 @@ The maximum velocity that actors can reach through the application of gravity. H
 
 * `result` ([tes3vector3](../../types/tes3vector3))
 
-***
-

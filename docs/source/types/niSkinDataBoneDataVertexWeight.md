@@ -30,5 +30,3 @@ The weight of the bone's influence on the vertex. The sum of the weights for all
 
 * `result` (number)
 
-***
-

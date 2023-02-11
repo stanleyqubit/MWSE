@@ -28,5 +28,3 @@ Access back to the element this widget interface is for.
 
 * `result` ([tes3uiElement](../../types/tes3uiElement))
 
-***
-

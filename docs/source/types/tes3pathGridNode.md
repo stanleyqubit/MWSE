@@ -41,5 +41,3 @@ A node within a path grid.
 
 * `result` ([tes3vector3](../../types/tes3vector3))
 
-***
-

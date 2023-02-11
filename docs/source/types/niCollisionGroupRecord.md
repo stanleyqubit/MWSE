@@ -34,5 +34,3 @@
 
 * `result` ([niAVObject](../../types/niAVObject))
 
-***
-

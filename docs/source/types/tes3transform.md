@@ -117,5 +117,3 @@ myObject:toIdentity()
 | [tes3transform](../../types/tes3transform) | [tes3transform](../../types/tes3transform) | [tes3transform](../../types/tes3transform) | Calculate the combination of two transforms. |
 | [tes3transform](../../types/tes3transform) | [tes3vector3](../../types/tes3vector3) | [tes3vector3](../../types/tes3vector3) | Calculate the result of applying this transform to a vector. |
 
-***
-

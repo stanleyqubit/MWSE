@@ -846,5 +846,3 @@ local effect = niTextureEffect.new()
 
 * `effect` ([niTextureEffect](../../types/niTextureEffect))
 
-***
-

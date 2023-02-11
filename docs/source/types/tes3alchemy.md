@@ -422,5 +422,3 @@ local index = myObject:getFirstIndexOfEffect(effectId)
 
 * `index` (number)
 
-***
-

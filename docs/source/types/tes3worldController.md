@@ -948,5 +948,3 @@ local result = myObject:applyEnchantEffect(node, enchantment)
 
 * `result` (boolean)
 
-***
-

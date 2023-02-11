@@ -107,5 +107,3 @@ If `true`, the tile represents an item that is equipped.
 
 * `result` (number)
 
-***
-

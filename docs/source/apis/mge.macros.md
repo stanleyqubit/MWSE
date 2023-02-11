@@ -426,5 +426,3 @@ Triggers the MGE "Toggle Zoom" macro.
 mge.macros.toggleZoom()
 ```
 
-***
-

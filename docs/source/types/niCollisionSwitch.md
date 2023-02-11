@@ -943,5 +943,3 @@ local new = niCollisionSwitch.new()
 
 * `new` ([niCollisionSwitch](../../types/niCollisionSwitch))
 
-***
-

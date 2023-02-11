@@ -255,5 +255,3 @@ local questName = myObject:loadQuestName()
 
 * `questName` (string, nil)
 
-***
-

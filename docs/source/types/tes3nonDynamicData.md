@@ -408,5 +408,3 @@ myObject:showLocationOnMap(cellNamePrefix)
 
 * `cellNamePrefix` (string)
 
-***
-

@@ -63,5 +63,3 @@ Skinning data for a submesh, optimized for hardware skinning.
 
 * `result` (integer[])
 
-***
-

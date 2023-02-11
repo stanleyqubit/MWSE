@@ -42,5 +42,3 @@ local value = debug.log(value)
 
 * `value` (string)
 
-***
-

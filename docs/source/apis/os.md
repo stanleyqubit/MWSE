@@ -112,5 +112,3 @@ local result = os.setClipboardText(text)
 
 * `result` (boolean)
 
-***
-

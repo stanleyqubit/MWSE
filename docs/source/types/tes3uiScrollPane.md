@@ -91,5 +91,3 @@ Updates the scrollbar slider and scrollbar limits after adding or removing eleme
 myObject:contentsChanged()
 ```
 
-***
-

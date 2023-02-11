@@ -174,5 +174,3 @@ The final position to be reached by the escort, follow, and travel AI packages.
 
 * `result` (number)
 
-***
-

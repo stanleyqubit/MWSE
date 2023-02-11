@@ -356,5 +356,3 @@ local result = myObject:remove(entry, level)
 
 * `result` (boolean)
 
-***
-

@@ -149,5 +149,3 @@ local vector = tes3vector2.new(x, y)
 | ----------------- | ------------------ | ----------- | ----------- |
 | [tes3vector2](../../types/tes3vector2) | [tes3vector2](../../types/tes3vector2) | [tes3vector2](../../types/tes3vector2) | Standard vector subtraction. |
 
-***
-

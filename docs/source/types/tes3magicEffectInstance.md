@@ -184,5 +184,3 @@ The associated visual effect.
 
 * `result` ([tes3vfx](../../types/tes3vfx))
 
-***
-

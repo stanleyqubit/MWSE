@@ -30,5 +30,3 @@ An optional value associated with this option.
 
 * `result` (any)
 
-***
-

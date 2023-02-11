@@ -41,5 +41,3 @@ The pixel layout. Maps to values in [`ni.textureFormatPrefsPixelLayout`](https:/
 
 * `result` (integer)
 
-***
-

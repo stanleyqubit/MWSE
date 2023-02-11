@@ -31,5 +31,3 @@ The timing of the animation key.
 
 * `result` (number)
 
-***
-

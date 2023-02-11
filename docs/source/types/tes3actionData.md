@@ -151,5 +151,3 @@ If moving to a location, this is the position to be walked to.
 
 * `result` ([tes3vector3](../../types/tes3vector3))
 
-***
-

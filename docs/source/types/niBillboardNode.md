@@ -962,5 +962,3 @@ local node = niBillboardNode.new()
 
 * `node` ([niBillboardNode](../../types/niBillboardNode))
 
-***
-

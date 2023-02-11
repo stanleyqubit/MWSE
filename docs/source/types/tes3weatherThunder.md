@@ -592,5 +592,3 @@ The weather's wind speed.
 
 * `result` (number)
 
-***
-

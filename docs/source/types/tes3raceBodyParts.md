@@ -184,5 +184,3 @@ The wrist that an actor of this race and sex will use.
 
 * `result` ([tes3bodyPart](../../types/tes3bodyPart))
 
-***
-

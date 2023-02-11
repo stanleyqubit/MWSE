@@ -178,5 +178,3 @@ mgeWeatherConfig.setWind({ weather = ..., speed = ... })
 	* `weather` (number)
 	* `speed` (number)
 
-***
-

@@ -131,5 +131,3 @@ A flag that controls whether the stats menu is enabled or disabled. Stats menu l
 
 * `result` (boolean)
 
-***
-

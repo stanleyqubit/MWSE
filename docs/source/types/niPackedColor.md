@@ -120,5 +120,3 @@ local color = niPackedColor.new(r, g, b, a)
 
 * `color` ([niPackedColor](../../types/niPackedColor))
 
-***
-

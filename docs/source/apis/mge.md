@@ -205,5 +205,3 @@ mge.setUIScale(scale)
 
 * `scale` (number)
 
-***
-

@@ -403,5 +403,3 @@ local property = niVertexColorProperty.new()
 
 * `property` ([niVertexColorProperty](../../types/niVertexColorProperty))
 
-***
-

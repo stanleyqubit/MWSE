@@ -58,8 +58,6 @@ local result = myObject:size()
 
 * `result` (number)
 
-***
-
 ??? example "Example: Iterating Lists"
 
 	In this example, a list is iterated using the pairs iterator function. The node can be used directly.

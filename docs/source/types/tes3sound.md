@@ -250,5 +250,3 @@ This stops playing the sound.
 myObject:stop()
 ```
 
-***
-

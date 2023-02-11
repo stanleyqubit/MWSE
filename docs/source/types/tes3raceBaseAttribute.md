@@ -30,5 +30,3 @@ The base attribute for male actors.
 
 * `result` (number)
 
-***
-

@@ -42,5 +42,3 @@ Index | Animation description
 
 * `result` (number)
 
-***
-

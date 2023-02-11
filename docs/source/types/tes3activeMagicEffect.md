@@ -195,5 +195,3 @@ An active magic effect.
 
 * `result` (integer)
 
-***
-

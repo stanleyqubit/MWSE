@@ -316,5 +316,3 @@ myObject:setRankName(rank, name)
 * `rank` (number): A rank number in range [0, 9] inclusive.
 * `name` (string): A new name to set.
 
-***
-

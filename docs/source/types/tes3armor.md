@@ -459,5 +459,3 @@ local newObject = myObject:createCopy({ id = ..., addToObjectList = ..., sourcel
 
 * `newObject` ([tes3armor](../../types/tes3armor))
 
-***
-

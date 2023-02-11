@@ -63,5 +63,3 @@ Defines the translation of the bone in bind pose from the skinned object's coord
 
 * `result` ([niSkinDataBoneDataVertexWeight](../../types/niSkinDataBoneDataVertexWeight)[])
 
-***
-

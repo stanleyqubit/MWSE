@@ -64,5 +64,3 @@ The arbitrary value of the NiFloatKey.
 
 * `result` (number)
 
-***
-

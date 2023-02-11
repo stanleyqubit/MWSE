@@ -106,5 +106,3 @@ event.unregister(eventId, callback, { filter = ... })
 * `options` (table): *Optional*.
 	* `filter` (userdata, string, number): *Optional*. If a callback function was registered with a filter, the same filter needs to be passed to `event.unregister` to successfully unregister the callback function.
 
-***
-

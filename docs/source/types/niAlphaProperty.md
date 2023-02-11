@@ -392,5 +392,3 @@ local property = niAlphaProperty.new()
 
 * `property` ([niAlphaProperty](../../types/niAlphaProperty))
 
-***
-

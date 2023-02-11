@@ -52,5 +52,3 @@ local archive, index = myObject:findFile(path)
 * `archive` ([tes3archive](../../types/tes3archive), nil): The found archive, or `nil` if no result was found.
 * `index` (number, nil): The index in the archive that the path was found at, or `nil` if no result was found.
 
-***
-

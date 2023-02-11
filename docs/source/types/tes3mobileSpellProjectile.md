@@ -319,5 +319,3 @@ Detonates the projectile, as if it hit a static object. The effects of detonatio
 myObject:explode()
 ```
 
-***
-

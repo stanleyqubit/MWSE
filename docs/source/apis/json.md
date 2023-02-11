@@ -128,5 +128,3 @@ json.savefile(fileName, object, config)
 * `object` (table)
 * `config` (table): *Optional*.
 
-***
-

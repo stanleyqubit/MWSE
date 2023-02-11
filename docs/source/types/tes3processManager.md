@@ -114,5 +114,3 @@ local isDetected = myObject:detectSneak({ detector = ..., target = ..., unknown 
 
 * `isDetected` (boolean)
 
-***
-

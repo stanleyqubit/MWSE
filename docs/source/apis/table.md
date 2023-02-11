@@ -412,5 +412,3 @@ local index = table.wrapindex(t, index)
 
 * `index` (number)
 
-***
-

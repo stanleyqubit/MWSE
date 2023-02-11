@@ -262,5 +262,3 @@ local pixelData = niPixelData.new(width, height, mipMapLevels)
 
 * `pixelData` ([niPixelData](../../types/niPixelData))
 
-***
-

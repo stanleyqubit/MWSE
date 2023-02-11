@@ -86,5 +86,3 @@ If `true`, shows a centered text with the format `current/max` inside the fillba
 
 * `result` (boolean)
 
-***
-

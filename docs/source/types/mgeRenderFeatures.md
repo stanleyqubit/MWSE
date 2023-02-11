@@ -250,5 +250,3 @@ No description yet available.
 
 * `result` (boolean)
 
-***
-

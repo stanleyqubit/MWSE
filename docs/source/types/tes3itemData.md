@@ -144,5 +144,3 @@ The time remaining on a light. Provides incorrect values on non-light items, whi
 
 * `result` (number)
 
-***
-

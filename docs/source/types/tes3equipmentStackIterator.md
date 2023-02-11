@@ -52,5 +52,3 @@ The last node in the collection.
 
 * `result` ([tes3equipmentStackIteratorNode](../../types/tes3equipmentStackIteratorNode))
 
-***
-

@@ -176,5 +176,3 @@ Updates the pre-defined character classes to the current locale.
 re.updatelocale()
 ```
 
-***
-

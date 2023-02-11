@@ -193,5 +193,3 @@ myObject:updateForReference(reference)
 
 * `reference` ([tes3reference](../../types/tes3reference)): The reference whose body parts to update.
 
-***
-

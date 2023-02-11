@@ -63,5 +63,3 @@ The sound's volume.
 
 * `result` (number)
 
-***
-

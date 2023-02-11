@@ -259,5 +259,3 @@ myObject:updateCollisionGroupsForActiveCells({ force = ..., isResettingData = ..
 	* `isResettingData` (boolean): *Default*: `false`.
 	* `resetCollisionGroups` (boolean): *Default*: `true`.
 
-***
-

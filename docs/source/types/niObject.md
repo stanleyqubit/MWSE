@@ -115,5 +115,3 @@ local success = myObject:saveBinary(path)
 
 * `success` (boolean): If true the object was successfully serialized.
 
-***
-

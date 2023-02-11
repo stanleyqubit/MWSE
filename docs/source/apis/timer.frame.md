@@ -27,5 +27,3 @@ local timer = timer.frame.delayOneFrame(callback)
 
 * `timer` ([mwseTimer](../../types/mwseTimer))
 
-***
-

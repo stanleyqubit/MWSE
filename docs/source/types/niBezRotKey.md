@@ -31,5 +31,3 @@ The rotation value of the animation key.
 
 * `result` ([niQuaternion](../../types/niQuaternion))
 
-***
-

@@ -30,5 +30,3 @@ A structure the data handler uses to track loaded exterior cell data.
 
 * `result` (number)
 
-***
-

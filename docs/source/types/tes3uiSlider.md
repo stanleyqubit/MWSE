@@ -64,5 +64,3 @@ The change in value when clicking the left and right arrow buttons.
 
 * `result` (number)
 
-***
-

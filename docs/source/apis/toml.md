@@ -81,5 +81,3 @@ toml.saveFile(path, data)
 * `path` (string): The file to write to, relative to the current working directory (typically the Morrowind installation folder).
 * `data` (table): The data to encode and write.
 
-***
-

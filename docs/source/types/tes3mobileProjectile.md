@@ -284,5 +284,3 @@ Access to the current velocity of the projectile.
 
 * `result` ([tes3vector3](../../types/tes3vector3))
 
-***
-

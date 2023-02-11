@@ -84,5 +84,3 @@ local index = myObject:findFileIndex(path)
 
 * `index` (number, nil): The index in the archive that the path was found at, or `nil` if no result was found.
 
-***
-

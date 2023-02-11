@@ -74,5 +74,3 @@ A table with header and text that will display as a tooltip when a disabled butt
 
 * `result` ([tes3ui.showMessageMenu.params.tooltip](../../types/tes3ui.showMessageMenu.params.tooltip), fun(callbackParams: table): tes3ui.showMessageMenu.params.tooltip, nil)
 
-***
-

@@ -4674,5 +4674,3 @@ local wokeUp = tes3.wakeUp()
 
 * `wokeUp` (boolean)
 
-***
-

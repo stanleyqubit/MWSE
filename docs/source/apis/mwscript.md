@@ -816,5 +816,3 @@ Use [`tes3.wakeUp()`](https://mwse.github.io/MWSE/apis/tes3/#tes3wakeup) instead
 mwscript.wakeUpPC()
 ```
 
-***
-

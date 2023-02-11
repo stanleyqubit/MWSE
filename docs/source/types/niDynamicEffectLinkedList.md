@@ -30,5 +30,3 @@ A linked list of dynamic effects.
 
 * `result` ([niDynamicEffectLinkedList](../../types/niDynamicEffectLinkedList))
 
-***
-

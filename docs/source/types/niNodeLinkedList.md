@@ -30,5 +30,3 @@ A linked list of scene graph nodes.
 
 * `result` ([niNodeLinkedList](../../types/niNodeLinkedList))
 
-***
-

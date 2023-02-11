@@ -30,5 +30,3 @@ The root node that general VFXs are attached to.
 
 * `result` ([niNode](../../types/niNode))
 
-***
-

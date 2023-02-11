@@ -30,5 +30,3 @@ Item data associated with the stack's object, if any. All equipped items except 
 
 * `result` ([tes3item](../../types/tes3item))
 
-***
-

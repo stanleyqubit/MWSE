@@ -31,5 +31,3 @@ Access back to the element this widget interface is for.
 
 * `result` (number)
 
-***
-

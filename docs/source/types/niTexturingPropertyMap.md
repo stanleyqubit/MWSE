@@ -78,5 +78,3 @@ local map = niTexturingPropertyMap.new({ texture = ..., clampMode = ..., filterM
 
 * `map` ([niTexturingPropertyMap](../../types/niTexturingPropertyMap)): The created basic or bump map.
 
-***
-

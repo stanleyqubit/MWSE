@@ -213,5 +213,3 @@ Each entry has the following fields:
  3. value - this can have `nil` value
 
 
-***
-

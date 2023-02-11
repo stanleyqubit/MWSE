@@ -332,5 +332,3 @@ local iterator = lfs.walkdir(path)
 
 	```
 
-***
-

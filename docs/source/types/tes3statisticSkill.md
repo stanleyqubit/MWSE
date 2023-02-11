@@ -77,5 +77,3 @@ The type of the skill, as assigned by the actor's class. Maps to values in [`tes
 
 * `result` (number)
 
-***
-

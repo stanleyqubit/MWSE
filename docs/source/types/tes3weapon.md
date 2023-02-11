@@ -661,5 +661,3 @@ myObject:setMaterialFlag(flagBit, value)
 * `flagBit` (integer): `0` corresponds to the `ignoresNormalWeaponResistance` field, `1` corresponds to the `isSilver`.
 * `value` (boolean)
 
-***
-

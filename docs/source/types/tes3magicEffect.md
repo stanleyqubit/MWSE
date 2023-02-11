@@ -483,5 +483,3 @@ Access to the base flag that determines if this effect provides negative lightin
 
 * `result` (boolean)
 
-***
-

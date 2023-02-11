@@ -74,5 +74,3 @@ The velocity of the particle.
 
 * `result` ([tes3weatherController](../../types/tes3weatherController))
 
-***
-

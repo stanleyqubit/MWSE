@@ -163,5 +163,3 @@ local result = math.round(value, digits)
 
 * `result` (number)
 
-***
-

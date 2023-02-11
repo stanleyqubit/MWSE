@@ -80,5 +80,3 @@ local result = myObject:reload()
 
 * `result` (boolean)
 
-***
-

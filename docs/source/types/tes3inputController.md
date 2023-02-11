@@ -285,5 +285,3 @@ local result = myObject:keybindTest(key, transition)
 
 * `result` (boolean)
 
-***
-

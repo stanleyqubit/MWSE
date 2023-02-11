@@ -184,5 +184,3 @@ myObject:pickObjects(origin, direction, append, maxDistance)
 * `append` (boolean): *Default*: `false`. This parameter indicates whether the new results are appended to the results array, or if a new array is formed clearing the results array.
 * `maxDistance` (number): *Optional*. Default value: 0.0F
 
-***
-

@@ -96,5 +96,3 @@ The red color value. Another alias for r.
 
 * `result` (number)
 
-***
-

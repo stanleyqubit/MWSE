@@ -41,5 +41,3 @@ The text in the body of the tooltip. Can also be a function that returns a strin
 
 * `result` (string, fun(callbackParams: table): string, nil)
 
-***
-

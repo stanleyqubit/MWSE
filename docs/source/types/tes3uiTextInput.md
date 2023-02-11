@@ -42,5 +42,3 @@ The character limit. Inputting additional characters will not be possible if thi
 
 * `result` (number)
 
-***
-

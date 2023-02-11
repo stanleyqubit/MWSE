@@ -30,5 +30,3 @@ The runtime type information that this type derives from.
 
 * `result` ([niRTTI](../../types/niRTTI))
 
-***
-

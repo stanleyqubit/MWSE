@@ -48,5 +48,3 @@ local unnamed1 = mwse.string.get(id)
 
 * `unnamed` (string)
 
-***
-

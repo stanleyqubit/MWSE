@@ -85,5 +85,3 @@ A core game controller responsible for controlling temporary graphics.
 
 * `result` ([niSourceTexture](../../types/niSourceTexture)[])
 
-***
-

@@ -554,5 +554,3 @@ local result = lpeg.version()
 
 * `result` (string)
 
-***
-

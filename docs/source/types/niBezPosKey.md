@@ -53,5 +53,3 @@ The position value of the animation key.
 
 * `result` ([tes3vector3](../../types/tes3vector3))
 
-***
-

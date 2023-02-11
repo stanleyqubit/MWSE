@@ -187,5 +187,3 @@ local color = niColor.new(r, g, b)
 | ----------------- | ------------------ | ----------- | ----------- |
 | [niColor](../../types/niColor) | [niColor](../../types/niColor) | [niColor](../../types/niColor) | Subtracts the color channel values. |
 
-***
-

@@ -44,8 +44,6 @@ A collection of variables that are associated with the stack's object, or nil if
 
 * `result` ([tes3itemData](../../types/tes3itemData)[])
 
-***
-
 ??? example "Example: In the iterItems() function we can see that the an item stack can consist of items with itemData and items without it"
 
 	```lua

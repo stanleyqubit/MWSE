@@ -114,5 +114,3 @@ local result = myObject:remove(spell)
 
 * `result` (boolean)
 
-***
-

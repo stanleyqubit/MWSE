@@ -117,5 +117,3 @@ Value | Collsion type
 
 * `result` ([tes3vector3](../../types/tes3vector3))
 
-***
-

@@ -69,5 +69,3 @@ local result = myObject:getActivePackage()
 
 * `result` ([tes3aiPackageActivate](../../types/tes3aiPackageActivate), [tes3aiPackageEscort](../../types/tes3aiPackageEscort), [tes3aiPackageFollow](../../types/tes3aiPackageFollow), [tes3aiPackageTravel](../../types/tes3aiPackageTravel), [tes3aiPackageWander](../../types/tes3aiPackageWander))
 
-***
-

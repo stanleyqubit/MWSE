@@ -414,5 +414,3 @@ local texture = niRenderedTexture.create(width, height)
 
 * `texture` ([niRenderedTexture](../../types/niRenderedTexture))
 
-***
-

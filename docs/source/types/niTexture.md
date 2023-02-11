@@ -375,5 +375,3 @@ myObject:setFlag(state, index)
 * `state` (boolean)
 * `index` (number)
 
-***
-

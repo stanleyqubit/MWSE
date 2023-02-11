@@ -169,5 +169,3 @@ local result = myObject:__tojson()
 
 * `result` (string)
 
-***
-

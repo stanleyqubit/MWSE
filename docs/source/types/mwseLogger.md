@@ -178,5 +178,3 @@ myObject:warn(message, formatValues)
 * `message` (string)
 * `formatValues` (variadic): *Optional*. Formatting and additional parameters matching string.format's usage.
 
-***
-

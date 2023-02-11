@@ -320,5 +320,3 @@ myObject:setGamma(value)
 
 * `value` (number)
 
-***
-

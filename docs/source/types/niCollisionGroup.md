@@ -43,5 +43,3 @@ The `niCollisionGroup` class is used to group the object into two main groups, b
 
 * `result` ([niCollisionGroupRecord](../../types/niCollisionGroupRecord)[])
 
-***
-

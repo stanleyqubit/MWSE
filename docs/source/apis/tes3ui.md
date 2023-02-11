@@ -1053,5 +1053,3 @@ Forces the game to update the spellmaking menu GUI.
 tes3ui.updateSpellmakingMenu()
 ```
 
-***
-

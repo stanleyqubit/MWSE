@@ -327,5 +327,3 @@ local quaternion = niQuaternion.new(w, x, y, z)
 | ----------- | ----------- |
 | [niQuaternion](../../types/niQuaternion) | Unary negation. |
 
-***
-

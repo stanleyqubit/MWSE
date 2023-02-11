@@ -30,5 +30,3 @@ The minimum value in the range.
 
 * `result` (number)
 
-***
-

@@ -54,5 +54,3 @@ Clears the current text input. If no text has been passed to the current text fo
 myObject:flushBufferedTextEvents()
 ```
 
-***
-

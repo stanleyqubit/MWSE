@@ -514,5 +514,3 @@ myObject:iterateReferences(filter)
 
 * `filter` (integer, integer[]): *Optional*. The TES3 object type to filter results by. Those are stored in [`tes3.objectType`](https://mwse.github.io/MWSE/references/object-types/) namespace.
 
-***
-

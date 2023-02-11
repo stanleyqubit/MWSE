@@ -118,5 +118,3 @@ The skill associated with this effect, or `nil` if no skill is used. Maps to val
 
 * `result` (integer, nil)
 
-***
-

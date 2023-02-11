@@ -386,5 +386,3 @@ myObject:runScript(reference)
 
 * `reference` ([tes3reference](../../types/tes3reference)): The reference on which to run the script on.
 
-***
-

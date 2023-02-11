@@ -341,5 +341,3 @@ myObject:randomizeWeather()
 **Parameters**:
 
 
-***
-

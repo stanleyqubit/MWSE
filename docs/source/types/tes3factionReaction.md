@@ -30,5 +30,3 @@ The reaction adjustment for the faction.
 
 * `result` (number)
 
-***
-

@@ -52,5 +52,3 @@ A core game object used for storing camera objects.
 
 * `result` ([niNode](../../types/niNode))
 
-***
-

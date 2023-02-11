@@ -170,5 +170,3 @@ local extraData = niStringExtraData.new(string)
 
 * `extraData` ([niStringExtraData](../../types/niStringExtraData))
 
-***
-

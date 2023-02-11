@@ -995,5 +995,3 @@ Updates the reference's local rotation matrix, propagates position changes to th
 myObject:updateSceneGraph()
 ```
 
-***
-

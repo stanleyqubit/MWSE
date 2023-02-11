@@ -34,8 +34,6 @@ Returns true if the object of this handle is still valid. Objects that are inval
 myObject:valid()
 ```
 
-***
-
 ??? example "Example: An example of usage"
 
 	```lua

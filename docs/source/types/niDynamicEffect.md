@@ -816,5 +816,3 @@ Update all attached properties.
 myObject:updateProperties()
 ```
 
-***
-

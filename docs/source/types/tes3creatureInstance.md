@@ -733,5 +733,3 @@ local result = myObject:tradesItemType(objectType)
 
 * `result` (boolean)
 
-***
-

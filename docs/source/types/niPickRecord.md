@@ -118,5 +118,3 @@ An array containing the 3 indices of the vertices that form the triangle at the 
 
 * `result` (integer[])
 
-***
-

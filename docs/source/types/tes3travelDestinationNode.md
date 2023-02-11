@@ -30,5 +30,3 @@ The reference door marker that the destination places the traveling actor at.
 
 * `result` ([tes3reference](../../types/tes3reference))
 
-***
-

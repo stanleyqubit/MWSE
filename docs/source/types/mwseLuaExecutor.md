@@ -80,5 +80,3 @@ Pauses the main thread, locking up the program until the program has finished.
 myObject:wait()
 ```
 
-***
-

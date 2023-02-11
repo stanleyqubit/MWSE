@@ -30,5 +30,3 @@ The flicker phase of the light.
 
 * `result` (number)
 
-***
-

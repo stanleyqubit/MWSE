@@ -30,5 +30,3 @@ A class used to represent text notes that have an associated time value. They ar
 
 * `result` (number)
 
-***
-

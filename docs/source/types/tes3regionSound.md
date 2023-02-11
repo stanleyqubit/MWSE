@@ -30,5 +30,3 @@ The access to object's associated sound.
 
 * `result` ([tes3sound](../../types/tes3sound))
 
-***
-

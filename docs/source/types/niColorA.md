@@ -157,5 +157,3 @@ local color = niColorA.new(r, g, b, a)
 
 * `color` ([niColorA](../../types/niColorA))
 
-***
-

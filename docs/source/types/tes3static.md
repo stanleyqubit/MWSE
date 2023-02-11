@@ -281,5 +281,3 @@ local newObject = myObject:createCopy({ id = ..., addToObjectList = ..., sourcel
 
 * `newObject` ([tes3static](../../types/tes3static))
 
-***
-

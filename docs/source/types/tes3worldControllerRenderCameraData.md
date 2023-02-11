@@ -74,5 +74,3 @@ The viewport width.
 
 * `result` (number)
 
-***
-

@@ -96,5 +96,3 @@ A structure that holds (sometimes redundant) information on a soul gem.
 
 * `result` (number)
 
-***
-

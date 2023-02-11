@@ -147,5 +147,3 @@ mgeCameraConfig.zoomOut({ amount = ... })
 * `params` (table)
 	* `amount` (number)
 
-***
-

@@ -62,5 +62,3 @@ local result = myObject:vertices()
 
 * `result` ([tes3vector3](../../types/tes3vector3)[])
 
-***
-

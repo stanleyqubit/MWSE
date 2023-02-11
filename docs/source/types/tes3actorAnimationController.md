@@ -280,5 +280,3 @@ local result = myObject:calculateAttackSwing()
 
 * `result` (number)
 
-***
-

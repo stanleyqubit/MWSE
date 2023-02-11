@@ -963,5 +963,3 @@ local screenPosition = myObject:worldPointToScreenPoint(point)
 
 * `screenPosition` ([tes3vector2](../../types/tes3vector2)): The screen space position. Screen space is measured as ([-screenWidth/2, screenWidth/2], [-screenHeight/2, screenHeight/2]) with up-right being positive and an origin at the center of the screen.
 
-***
-

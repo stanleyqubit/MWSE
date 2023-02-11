@@ -30,5 +30,3 @@ A linked list of properties.
 
 * `result` ([niPropertyLinkedList](../../types/niPropertyLinkedList))
 
-***
-

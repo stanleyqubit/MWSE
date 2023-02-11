@@ -331,5 +331,3 @@ local result = mwse.stringToLong(tag)
 
 * `result` (number)
 
-***
-

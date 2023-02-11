@@ -65,5 +65,3 @@ The normalized value of the statistic. For example, for an account with current 
 
 * `result` (number)
 
-***
-

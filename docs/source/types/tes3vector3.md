@@ -382,5 +382,3 @@ local vector = tes3vector3.new(x, y, z)
 | ----------- | ----------- |
 | [tes3vector3](../../types/tes3vector3) | Swaps the sign of the vector's components. |
 
-***
-

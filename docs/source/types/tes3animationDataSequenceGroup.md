@@ -41,5 +41,3 @@ The niSequence object for the actor's upper body.
 
 * `result` (niSequence)
 
-***
-

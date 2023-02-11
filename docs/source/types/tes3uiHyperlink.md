@@ -55,5 +55,3 @@ Opens a contained URL. If the `confirm` property is set, a modal prompt will be 
 myObject:openURL()
 ```
 
-***
-

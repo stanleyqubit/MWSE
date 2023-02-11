@@ -188,5 +188,3 @@ local timer = timer.start({ type = ..., duration = ..., callback = ..., iteratio
 
 	```
 
-***
-

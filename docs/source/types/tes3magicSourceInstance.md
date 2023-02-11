@@ -397,5 +397,3 @@ myObject:playVisualEffect({ effectIndex = ..., position = ..., visual = ..., sca
 
 	```
 
-***
-

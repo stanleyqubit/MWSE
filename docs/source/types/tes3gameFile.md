@@ -230,5 +230,3 @@ Deletes the file.
 myObject:deleteFile()
 ```
 
-***
-

@@ -137,5 +137,3 @@ Cycles the button to the previous option.
 myObject:previous()
 ```
 
-***
-

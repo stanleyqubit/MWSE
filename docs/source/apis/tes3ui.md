@@ -680,7 +680,7 @@ tes3ui.setConsoleReference(reference)
 ### `tes3ui.showBookMenu`
 <div class="search_terms" style="display: none">showbookmenu, bookmenu</div>
 
-Displays the book menu with arbitrary text. Paging is automatically handled. It needs to follow [book text conventions](https://mwse.github.io/MWSE/references/other/books/) as in the Construction Set. In essence, it uses HTML syntax. Important: every book needs to end with a `<BR>` statement to be displayed properly. See [`bookGetText`](https://mwse.github.io/MWSE/events/bookGetText/#examples) for an example of properly formatted book text.
+Displays the book menu with arbitrary text. Paging is automatically handled. It needs to follow [book text conventions](https://mwse.github.io/MWSE/references/general/books/) as in the Construction Set. In essence, it uses HTML syntax. Important: every book needs to end with a `<BR>` statement to be displayed properly. See [`bookGetText`](https://mwse.github.io/MWSE/events/bookGetText/#examples) for an example of properly formatted book text.
 
 ```lua
 tes3ui.showBookMenu(text)
@@ -929,7 +929,7 @@ local menu = tes3ui.showNotifyMenu(string, formatValues)
 ### `tes3ui.showScrollMenu`
 <div class="search_terms" style="display: none">showscrollmenu, scrollmenu</div>
 
-Displays the scroll menu with arbitrary text. It needs to follow [book text conventions](https://mwse.github.io/MWSE/references/other/books/) as in the Construction Set. In essence, it uses HTML syntax. Important: every book needs to end with a `<BR>` statement to be displayed properly. See [`bookGetText`](https://mwse.github.io/MWSE/events/bookGetText/#examples) for an example of properly formatted scroll text.
+Displays the scroll menu with arbitrary text. It needs to follow [book text conventions](https://mwse.github.io/MWSE/references/general/books/) as in the Construction Set. In essence, it uses HTML syntax. Important: every book needs to end with a `<BR>` statement to be displayed properly. See [`bookGetText`](https://mwse.github.io/MWSE/events/bookGetText/#examples) for an example of properly formatted scroll text.
 
 ```lua
 tes3ui.showScrollMenu(text)

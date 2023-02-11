@@ -28,7 +28,7 @@ The same download can be found on the [Automated Build release on GitHub](https:
 
 Once you have the zip file downloaded, extract its contents to the Morrowind installation directory. Both CSSE.dll and TES Construction Set.exe must reside in the same directory.
 
-If you are strictly an OpenMW user but also a TES Construction Set user, you need only extract the CSSE.dll file into your Morrowind directory. However, for testing in the vanilla engine you should still have the [Morrowind Code Patch](https://www.nexusmods.com/morrowind/mods/19510) and MWSE installed. MWSE offers various [patches and other features](https://mwse.github.io/MWSE/references/other/patches/) to help make the original engine faster and more stable, in the same way that CSSE does for the Construction Set.
+If you are strictly an OpenMW user but also a TES Construction Set user, you need only extract the CSSE.dll file into your Morrowind directory. However, for testing in the vanilla engine you should still have the [Morrowind Code Patch](https://www.nexusmods.com/morrowind/mods/19510) and MWSE installed. MWSE offers various [patches and other features](https://mwse.github.io/MWSE/references/general/patches/) to help make the original engine faster and more stable, in the same way that CSSE does for the Construction Set.
 
 ## Compatibility
 

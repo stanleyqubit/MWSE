@@ -47,7 +47,7 @@ The direction of action for planar gravity.
 ### `force`
 <div class="search_terms" style="display: none">force</div>
 
-The magnitude of the gravitational force in [units/second](https://mwse.github.io/MWSE/references/other/game-units/).
+The magnitude of the gravitational force in [units/second](https://mwse.github.io/MWSE/references/general/game-units/).
 
 **Returns**:
 

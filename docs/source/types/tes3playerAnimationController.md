@@ -333,7 +333,7 @@ For NPCs this corresponds to how long the weapon was charged by the NPC after th
 ### `vanityCameraDistance`
 <div class="search_terms" style="display: none">vanitycameradistance</div>
 
-*Read-only*. The orbiting radius of the camera during vanity mode in [game units](https://mwse.github.io/MWSE/references/other/game-units/). Measured from the center of the player's head.
+*Read-only*. The orbiting radius of the camera during vanity mode in [game units](https://mwse.github.io/MWSE/references/general/game-units/). Measured from the center of the player's head.
 
 **Returns**:
 
@@ -355,7 +355,7 @@ For NPCs this corresponds to how long the weapon was charged by the NPC after th
 ### `vanityCameraZ`
 <div class="search_terms" style="display: none">vanitycameraz</div>
 
-*Read-only*. The offset on up-down (world z) axis of the camera in third person or during vanity mode from the player's head height in [game units](https://mwse.github.io/MWSE/references/other/game-units/).
+*Read-only*. The offset on up-down (world z) axis of the camera in third person or during vanity mode from the player's head height in [game units](https://mwse.github.io/MWSE/references/general/game-units/).
 
 **Returns**:
 

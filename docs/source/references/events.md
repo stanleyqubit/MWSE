@@ -45,6 +45,7 @@ calcSwimSpeed                 | `"calcSwimSpeed"`                 | [`calcSwimSp
 calcTrainingPrice             | `"calcTrainingPrice"`             | [`calcTrainingPrice`](https://mwse.github.io/MWSE/events/calcTrainingPrice)
 calcTravelPrice               | `"calcTravelPrice"`               | [`calcTravelPrice`](https://mwse.github.io/MWSE/events/calcTravelPrice)
 calcWalkSpeed                 | `"calcWalkSpeed"`                 | [`calcWalkSpeed`](https://mwse.github.io/MWSE/events/calcWalkSpeed)
+cameraControl                 | `"cameraControl"`                 | [`cameraControl`](https://mwse.github.io/MWSE/events/cameraControl)
 cellActivated                 | `"cellActivated"`                 | [`cellActivated`](https://mwse.github.io/MWSE/events/cellActivated)
 cellChanged                   | `"cellChanged"`                   | [`cellChanged`](https://mwse.github.io/MWSE/events/cellChanged)
 cellDeactivated               | `"cellDeactivated"`               | [`cellDeactivated`](https://mwse.github.io/MWSE/events/cellDeactivated)

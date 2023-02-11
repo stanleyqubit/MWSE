@@ -54,6 +54,10 @@ The following admonition classes are available: `abstract`, `bug`, `danger`, `ex
 	This will be on the same line as the line before this one on the renderd page.
 ```
 
+### Customizing Navigation
+
+To customize the navigation MkDocs Awesome Pages Plugin is used. Read [it's documentation](https://github.com/lukasgeiter/mkdocs-awesome-pages-plugin#features) for usage examples.
+
 ### Diagrams
 
 You can write diagrams using Mermaid.js annotation. Mermaid syntax is covered in detail in its [documentation](https://mermaid.js.org/syntax/flowchart.html). For quick editing, you can write your concept online [here](https://mermaid-js.github.io/mermaid-live-editor/). For an example of such a diagram you can look at [The hierarchy of NetImmerse Classes](source/references/other/ni-class-hierarchy.md#diagrammatic-representation).

@@ -309,6 +309,7 @@ namespace se::cs {
 	}
 
 	void Settings_t::from_toml(const toml::value& v) {
+		enabled = toml::find_or(v, "enabled", enabled);
 		dialogue_window = toml::find_or(v, "dialogue_window", dialogue_window);
 		object_window = toml::find_or(v, "object_window", object_window);
 		quickstart = toml::find_or(v, "quickstart", quickstart);
@@ -319,6 +320,7 @@ namespace se::cs {
 	toml::value Settings_t::into_toml() const {
 		return toml::value(
 			{
+				{ "enabled", enabled },
 				{ "title", "Construction Set Extender" },
 				{ "dialogue_window", dialogue_window },
 				{ "object_window", object_window },

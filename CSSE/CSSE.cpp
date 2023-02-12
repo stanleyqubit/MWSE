@@ -410,6 +410,12 @@ namespace se::cs {
 		}
 		settings.save();
 
+		// We can stop now if we're (mostly) disabled.
+		if (!settings.enabled) {
+			log::stream << "CSSE is disabled." << std::endl;
+			return;
+		}
+
 		// Install TES Construction Set executable patches.
 		installPatches();
 

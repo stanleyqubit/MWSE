@@ -133,6 +133,7 @@ namespace se::cs {
 		} script_editor;
 
 		bool valid = true;
+		bool enabled = true;
 
 		void load();
 		void save();

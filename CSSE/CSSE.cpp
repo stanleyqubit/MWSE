@@ -167,7 +167,7 @@ namespace se::cs {
 			{
 				return true;
 			}
-			else if (_wcsicmp(szFileName, L"MWSE") == 0)
+			else if (_wcsicmp(szFileName, L"CSSE") == 0)
 			{
 				return true;
 			}

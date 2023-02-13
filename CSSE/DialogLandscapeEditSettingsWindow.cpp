@@ -172,4 +172,47 @@ namespace se::cs::dialog::landscape_edit_settings_window {
 
 		return true;
 	}
+
+	//
+	// Patch: Extend Render Window message handling.
+	//
+
+	static std::optional<LRESULT> PatchDialogProc_OverrideResult = {};
+
+	void PatchDialogProc_AfterDestroy(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		// Cleanup global handle address so we can rely on it being NULL.
+		gWindowHandle::set(0x0);
+	}
+
+	LRESULT CALLBACK PatchDialogProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		PatchDialogProc_OverrideResult.reset();
+
+		if (PatchDialogProc_OverrideResult) {
+			return PatchDialogProc_OverrideResult.value();
+		}
+
+		// Call original function.
+		const auto CS_RenderWindowDialogProc = reinterpret_cast<WNDPROC>(0x44D470);
+		auto vanillaResult = CS_RenderWindowDialogProc(hWnd, msg, wParam, lParam);
+
+		switch (msg) {
+		case WM_DESTROY:
+			PatchDialogProc_AfterDestroy(hWnd, msg, wParam, lParam);
+			break;
+		}
+
+		return PatchDialogProc_OverrideResult.value_or(vanillaResult);
+	}
+
+	//
+	//
+	//
+
+	void installPatches() {
+		using memory::genJumpEnforced;
+
+		// Patch: Extend Render Window message handling.
+		genJumpEnforced(0x4036A7, 0x44D470, reinterpret_cast<DWORD>(PatchDialogProc));
+	}
+
 }

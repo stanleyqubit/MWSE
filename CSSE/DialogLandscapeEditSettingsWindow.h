@@ -32,4 +32,6 @@ namespace se::cs::dialog::landscape_edit_settings_window {
 
 	bool incrementEditRadius();
 	bool decrementEditRadius();
+
+	void installPatches();
 }

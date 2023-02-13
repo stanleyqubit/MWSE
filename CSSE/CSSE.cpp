@@ -16,6 +16,7 @@
 #include "DialogCellWindow.h"
 #include "DialogDialogueWindow.h"
 #include "DialogEditObjectWindow.h"
+#include "DialogLandscapeEditSettingsWindow.h"
 #include "DialogObjectWindow.h"
 #include "DialogPreviewWindow.h"
 #include "DialogReferenceData.h"
@@ -346,6 +347,7 @@ namespace se::cs {
 		dialog::cell_window::installPatches();
 		dialog::dialogue_window::installPatches();
 		dialog::edit_object_window::installPatches();
+		dialog::landscape_edit_settings_window::installPatches();
 		dialog::object_window::installPatches();
 		dialog::preview_window::installPatches();
 		dialog::reference_data::installPatches();

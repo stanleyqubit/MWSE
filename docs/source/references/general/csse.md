@@ -93,6 +93,8 @@ If you are using [Construction Set Better UI](https://www.nexusmods.com/morrowin
 
 The following changes to the rendering window apply when landscape editing:
 
+* The `F` and `S` keys can now be used to enter flatten and smooth vertices modes.
+* The `[` and `]` keys can be used to decrement/increment the terrain editing radius.
 * The terrain editing disc is no longer hidden when hiding objects (Shift+C).
 * You can use control+right mouse button to sample the texture at the cursor's position. This will select the matching texture under the cursor automatically in the landscape editing menu.
 

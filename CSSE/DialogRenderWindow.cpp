@@ -1321,6 +1321,18 @@ namespace se::cs::dialog::render_window {
 			return;
 		}
 
+		// Decode parameters.
+		auto vkCode = LOWORD(wParam);
+		auto keyFlags = HIWORD(lParam);
+		auto scanCode = WORD(LOBYTE(keyFlags));
+		auto isExtendedKey = (keyFlags & KF_EXTENDED) == KF_EXTENDED;
+		if (isExtendedKey) {
+			scanCode = MAKEWORD(scanCode, 0xE0);
+		}
+		auto wasKeyDown = (keyFlags & KF_REPEAT) == KF_REPEAT;
+		auto repeatCount = LOWORD(lParam);
+		auto isKeyReleased = (keyFlags & KF_UP) == KF_UP;
+
 		using namespace landscape_edit_settings_window;
 
 		switch (wParam) {
@@ -1333,15 +1345,21 @@ namespace se::cs::dialog::render_window {
 			PatchDialogProc_OverrideResult = TRUE;
 			break;
 		case 'F':
-			setFlattenLandscapeVertices(!getFlattenLandscapeVertices());
+			if (!wasKeyDown) {
+				setFlattenLandscapeVertices(!getFlattenLandscapeVertices());
+			}
 			PatchDialogProc_OverrideResult = TRUE;
 			break;
 		case 'S':
-			setSoftenLandscapeVertices(!getSoftenLandscapeVertices());
+			if (!wasKeyDown) {
+				setSoftenLandscapeVertices(!getSoftenLandscapeVertices());
+			}
 			PatchDialogProc_OverrideResult = TRUE;
 			break;
 		case 'O':
-			setEditLandscapeColor(!getEditLandscapeColor());
+			if (!wasKeyDown) {
+				setEditLandscapeColor(!getEditLandscapeColor());
+			}
 			PatchDialogProc_OverrideResult = TRUE;
 			break;
 		}

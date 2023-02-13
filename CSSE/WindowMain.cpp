@@ -326,6 +326,19 @@ namespace se::cs::window::main {
 		sgController->widgets = nullptr;
 	}
 
+	void PatchDialogProc_AfterCommand_ToggleLandscapeEditing(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		// Restore focus to the render window.
+		SetFocus(memory::ExternalGlobal<HWND, 0x6CE93C>::get());
+	}
+
+	void PatchDialogProc_AfterCommand(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		switch (wParam) {
+		case CUSTOM_WM_COMMAND_WPARAM_TOGGLE_LANDSCAPE_EDITING:
+			PatchDialogProc_AfterCommand_ToggleLandscapeEditing(hWnd, msg, wParam, lParam);
+			break;
+		}
+	}
+
 	LRESULT CALLBACK PatchDialogProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		blockNormalExecution = false;
 
@@ -346,6 +359,12 @@ namespace se::cs::window::main {
 		// Call original function.
 		const auto CS_MainWindowDialogProc = reinterpret_cast<WNDPROC>(0x444590);
 		auto result = CS_MainWindowDialogProc(hWnd, msg, wParam, lParam);
+
+		switch (msg) {
+		case WM_COMMAND:
+			PatchDialogProc_AfterCommand(hWnd, msg, wParam, lParam);
+			break;
+		}
 
 		return result;
 	}

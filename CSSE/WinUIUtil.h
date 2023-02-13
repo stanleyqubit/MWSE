@@ -40,6 +40,8 @@ namespace se::cs::winui {
 	void RemoveStyles(HWND hWnd, LONG lStyle);
 
 	std::string GetWindowTextA(HWND hWnd);
+	std::optional<int> GetDlgItemSignedInt(HWND hWnd, UINT nIDDlgItem);
+	std::optional<unsigned int> GetDlgItemUnsignedInt(HWND hWnd, UINT nIDDlgItem);
 
 	//
 	// ComboBox

@@ -27,9 +27,11 @@
 #include "RenderWindowSelectionData.h"
 #include "RenderWindowWidgets.h"
 
+#include "DialogLandscapeEditSettingsWindow.h"
+
 namespace se::cs::dialog::render_window {
-	static WORD lastRenderWindowPosX = 0;
-	static WORD lastRenderWindowPosY = 0;
+	WORD lastCursorPosX = 0;
+	WORD lastCursorPosY = 0;
 
 	using gObjectMove = memory::ExternalGlobal<float, 0x6CE9B4>;
 	using gObjectRotate = memory::ExternalGlobal<float, 0x6CE9B0>;
@@ -328,7 +330,7 @@ namespace se::cs::dialog::render_window {
 
 		// Scale all selected references and their positions relative to last target.
 		const auto center = selectionData->getLastTarget()->reference->position;
-		const auto factor = 1.0 + delta;
+		const auto factor = 1.0f + delta;
 
 		for (auto target = firstTarget; target; target = target->next) {
 			auto reference = target->reference;
@@ -454,7 +456,7 @@ namespace se::cs::dialog::render_window {
 
 		NI::Vector3 origin;
 		NI::Vector3 direction;
-		if (rendererController->camera->windowPointToRay(lastRenderWindowPosX, lastRenderWindowPosY, origin, direction)) {
+		if (rendererController->camera->windowPointToRay(lastCursorPosX, lastCursorPosY, origin, direction)) {
 			direction.normalize();
 
 			if (rendererPicker->pickObjects(&origin, &direction)) {
@@ -606,7 +608,7 @@ namespace se::cs::dialog::render_window {
 		NI::Vector3 rayOrigin;
 		NI::Vector3 rayDirection;
 		auto camera = RenderController::get()->camera;
-		if (!camera->windowPointToRay(lastRenderWindowPosX, lastRenderWindowPosY, rayOrigin, rayDirection)) {
+		if (!camera->windowPointToRay(lastCursorPosX, lastCursorPosY, rayOrigin, rayDirection)) {
 			return 0;
 		}
 
@@ -891,72 +893,60 @@ namespace se::cs::dialog::render_window {
 
 	static std::optional<LRESULT> PatchDialogProc_OverrideResult = {};
 
-	constexpr auto landscapeEditWindowId = 203;
+	NI::Texture* getLandscapeTextureUnderCursor() {
+		auto rendererController = RenderController::get();
+		auto sceneGraphController = SceneGraphController::get();
+
+		NI::Vector3 origin;
+		NI::Vector3 direction;
+		if (!rendererController->camera->windowPointToRay(lastCursorPosX, lastCursorPosY, origin, direction)) {
+			return nullptr;
+		}
+
+		auto pick = sceneGraphController->landscapePick;
+		if (!pick->pickObjects(&origin, &direction)) {
+			return nullptr;
+		}
+
+		auto firstResult = pick->results.at(0);
+		if (firstResult == nullptr || firstResult->object == nullptr) {
+			return nullptr;
+		}
+
+		auto texturingProperty = firstResult->object->getTexturingProperty();
+		if (texturingProperty == nullptr) {
+			return nullptr;
+		}
+
+		auto baseMap = texturingProperty->getBaseMap();
+		if (baseMap == nullptr) {
+			return nullptr;
+		}
+
+		return baseMap->texture;
+	}
 
 	bool PickLandscapeTexture(HWND hWnd) {
-		auto editorWindow = memory::MemAccess<HWND>::Get(0x6CE95C);
+		using landscape_edit_settings_window::getEditLandscapeColor;
+		using landscape_edit_settings_window::setSelectTexture;
+		using gLandscapeEditWindowHandle = landscape_edit_settings_window::gWindowHandle;
+
+		auto editorWindow = gLandscapeEditWindowHandle::get();
 		if (!editorWindow) {
 			return false;
 		}
 
-		// Make sure that we're not in color mode.
-		if (IsDlgButtonChecked(editorWindow, 1008)) {
+		// Make sure we are in texture edit mode.
+		if (getEditLandscapeColor()) {
 			return false;
 		}
 
-		auto& rendererPicker = gRenderWindowPick::get();
-		auto rendererController = RenderController::get();
-		auto sceneGraphController = SceneGraphController::get();
-
-		// Cache picker settings we care about.
-		const auto previousRoot = rendererPicker.root;
-		const auto previousPickType = rendererPicker.pickType;
-
-		// Make changes to the pick that we need to.
-		rendererPicker.root = sceneGraphController->landscapeRoot;
-		rendererPicker.pickType = NI::PickType::FIND_ALL;
-
-		NI::Vector3 origin;
-		NI::Vector3 direction;
-		if (rendererController->camera->windowPointToRay(lastRenderWindowPosX, lastRenderWindowPosY, origin, direction)) {
-			direction.normalize();
-
-			if (rendererPicker.pickObjects(&origin, &direction)) {
-				auto firstResult = rendererPicker.getFirstUnskinnedResult();
-				if (firstResult->object) {
-					auto texturingProperty = firstResult->object->getTexturingProperty();
-					if (texturingProperty) {
-						auto baseMap = texturingProperty->getBaseMap();
-						if (baseMap && baseMap->texture) {
-							LVITEMA queryData = {};
-							queryData.mask = LVIF_PARAM;
-							auto textureList = GetDlgItem(editorWindow, 1492);
-							int textureCount = ListView_GetItemCount(textureList);
-							for (int row = 0; row < textureCount; ++row) {
-								queryData.iItem = row;
-								if (ListView_GetItem(textureList, &queryData)) {
-									auto landTexture = reinterpret_cast<LandTexture*>(queryData.lParam);
-									if (landTexture) {
-										if (landTexture->texture == baseMap->texture) {
-											ListView_SetItemState(textureList, row, LVIS_SELECTED, LVIS_SELECTED);
-											ListView_EnsureVisible(textureList, row, TRUE);
-											break;
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
+		auto texture = getLandscapeTextureUnderCursor();
+		if (!texture) {
+			return false;
 		}
 
-		// Restore pick settings.
-		rendererPicker.clearResults();
-		rendererPicker.root = previousRoot;
-		rendererPicker.pickType = previousPickType;
-
-		return true;
+		return setSelectTexture(texture);
 	}
 
 	void hideSelectedReferences() {
@@ -1325,6 +1315,38 @@ namespace se::cs::dialog::render_window {
 		}
 	}
 
+	void PatchDialogProc_BeforeKeyDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		auto editorWindow = landscape_edit_settings_window::gWindowHandle::get();
+		if (!editorWindow) {
+			return;
+		}
+
+		using namespace landscape_edit_settings_window;
+
+		switch (wParam) {
+		case VK_OEM_4: // [
+			decrementEditRadius();
+			PatchDialogProc_OverrideResult = TRUE;
+			break;
+		case VK_OEM_6: // ]
+			incrementEditRadius();
+			PatchDialogProc_OverrideResult = TRUE;
+			break;
+		case 'F':
+			setFlattenLandscapeVertices(!getFlattenLandscapeVertices());
+			PatchDialogProc_OverrideResult = TRUE;
+			break;
+		case 'S':
+			setSoftenLandscapeVertices(!getSoftenLandscapeVertices());
+			PatchDialogProc_OverrideResult = TRUE;
+			break;
+		case 'O':
+			setEditLandscapeColor(!getEditLandscapeColor());
+			PatchDialogProc_OverrideResult = TRUE;
+			break;
+		}
+	}
+
 	void PatchDialogProc_AfterKeyDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		switch (wParam) {
 		case 'Q':
@@ -1369,14 +1391,17 @@ namespace se::cs::dialog::render_window {
 
 		switch (msg) {
 		case WM_MOUSEMOVE:
-			lastRenderWindowPosX = LOWORD(lParam);
-			lastRenderWindowPosY = HIWORD(lParam);
+			lastCursorPosX = LOWORD(lParam);
+			lastCursorPosY = HIWORD(lParam);
 			break;
 		case WM_LBUTTONDOWN:
 			PatchDialogProc_BeforeLMouseButtonDown(hWnd, msg, wParam, lParam);
 			break;
 		case WM_RBUTTONDOWN:
 			PatchDialogProc_BeforeRMouseButtonDown(hWnd, msg, wParam, lParam);
+			break;
+		case WM_KEYDOWN:
+			PatchDialogProc_BeforeKeyDown(hWnd, msg, wParam, lParam);
 			break;
 		case CustomWindowMessage::SetCameraPosition:
 			PatchDialogProc_BeforeSetCameraPosition(hWnd, msg, wParam, lParam);

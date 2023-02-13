@@ -27,6 +27,8 @@ namespace mwse::lua {
 		// Functions as properties.
 		usertypeDefinition["name"] = sol::readonly_property(&TES3::Skill::getName);
 		usertypeDefinition["iconPath"] = sol::readonly_property(&TES3::Skill::getIconPath);
+		// Description may need to be loaded from disk, handle it specially.
+		usertypeDefinition["description"] = sol::readonly_property(&TES3::Skill::getAndLoadDescription);
 
 		// Indirect bindings to unions and arrays.
 		usertypeDefinition["actions"] = sol::readonly_property(&TES3::Skill::getProgressActions);

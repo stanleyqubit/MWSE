@@ -132,7 +132,7 @@ namespace se::cs::dialog::landscape_edit_settings_window {
 			}
 
 			auto landTexture = reinterpret_cast<LandTexture*>(queryData.lParam);
-			if (landTexture) {
+			if (!landTexture) {
 				continue;
 			}
 

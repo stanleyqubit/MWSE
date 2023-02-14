@@ -949,6 +949,64 @@ namespace se::cs::dialog::render_window {
 		return setSelectTexture(texture);
 	}
 
+	void alignSelection(bool posX, bool posY, bool posZ, bool rotX, bool rotY, bool rotZ, bool scale) {
+		auto selectionData = SelectionData::get();
+		auto lastTarget = selectionData->getLastTarget();
+		if (!lastTarget) {
+			return;
+		}
+
+		for (auto target = selectionData->firstTarget; target != lastTarget; target = target->next) {
+			auto reference = target->reference;
+
+			if (posX) {
+				reference->position.x = lastTarget->reference->position.x;
+			}
+			if (posY) {
+				reference->position.y = lastTarget->reference->position.y;
+			}
+			if (posZ) {
+				reference->position.z = lastTarget->reference->position.z;
+			}
+
+			if (rotX) {
+				reference->yetAnotherOrientation.x = lastTarget->reference->yetAnotherOrientation.x;
+			}
+			if (rotY) {
+				reference->yetAnotherOrientation.y = lastTarget->reference->yetAnotherOrientation.y;
+			}
+			if (rotZ) {
+				reference->yetAnotherOrientation.z = lastTarget->reference->yetAnotherOrientation.z;
+			}
+
+			if (scale) {
+				reference->setScale(lastTarget->reference->getScale());
+			}
+
+			// Not sure exactly why these exist...
+
+			reference->unknown_0x10 = reference->position;
+			reference->orientationNonAttached = reference->yetAnotherOrientation;
+		
+			// Update Scene Graph.
+
+			NI::Matrix33 rotation;
+			auto orientation = reference->yetAnotherOrientation;
+			rotation.fromEulerXYZ(orientation.x, orientation.y, orientation.z);
+			
+			reference->sceneNode->setLocalRotationMatrix(&rotation);
+			reference->sceneNode->localTranslate = reference->position; 
+			reference->sceneNode->localScale = reference->getScale();
+			reference->sceneNode->update(0.0f, true, true);
+
+			DataHandler::get()->updateLightingForReference(reference);
+
+			reference->setAsEdited();
+		}
+
+		selectionData->recalculateBound();
+	}
+
 	void hideSelectedReferences() {
 		auto selectionData = SelectionData::get();
 		
@@ -1075,6 +1133,14 @@ namespace se::cs::dialog::render_window {
 			SET_SNAPPING_AXIS_NEGATIVE_Y,
 			SET_SNAPPING_AXIS_POSITIVE_Z,
 			SET_SNAPPING_AXIS_NEGATIVE_Z,
+			ALIGN_SELECTION_POSITION_X,
+			ALIGN_SELECTION_POSITION_Y,
+			ALIGN_SELECTION_POSITION_Z,
+			ALIGN_SELECTION_ROTATION_X,
+			ALIGN_SELECTION_ROTATION_Y,
+			ALIGN_SELECTION_ROTATION_Z,
+			ALIGN_SELECTION_SCALE,
+			ALIGN_SELECTION_ALL,
 			USE_GROUP_SCALING,
 			USE_LEGACY_OBJECT_MOVEMENT,
 			USE_WORLD_AXIS_ROTATION,
@@ -1155,6 +1221,93 @@ namespace se::cs::dialog::render_window {
 		menuItem.fState = hasReferencesSelected ? MFS_ENABLED : MFS_DISABLED;
 		menuItem.hSubMenu = subMenuSnappingAxis.hSubMenu;
 		menuItem.dwTypeData = (LPSTR)"Set &Snapping Axis";
+		InsertMenuItemA(menu, index++, TRUE, &menuItem);
+
+		MENUITEMINFO subMenuAlignReferences = {};
+		subMenuAlignReferences.cbSize = sizeof(MENUITEMINFO);
+		subMenuAlignReferences.hSubMenu = CreateMenu();
+
+		{
+			unsigned int subIndex = 0;
+
+			menuItem.wID = ALIGN_SELECTION_POSITION_X;
+			menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID | MIIM_STATE;
+			menuItem.fType = MFT_STRING;
+			menuItem.fState = MFS_ENABLED;
+			menuItem.dwTypeData = (LPSTR)"Align Position X";
+			InsertMenuItemA(subMenuAlignReferences.hSubMenu, subIndex++, TRUE, &menuItem);
+
+			menuItem.wID = ALIGN_SELECTION_POSITION_Y;
+			menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID | MIIM_STATE;
+			menuItem.fType = MFT_STRING;
+			menuItem.fState = MFS_ENABLED;
+			menuItem.dwTypeData = (LPSTR)"Align Position Y";
+			InsertMenuItemA(subMenuAlignReferences.hSubMenu, subIndex++, TRUE, &menuItem);
+
+			menuItem.wID = ALIGN_SELECTION_POSITION_Z;
+			menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID | MIIM_STATE;
+			menuItem.fType = MFT_STRING;
+			menuItem.fState = MFS_ENABLED;
+			menuItem.dwTypeData = (LPSTR)"Align Position Z";
+			InsertMenuItemA(subMenuAlignReferences.hSubMenu, subIndex++, TRUE, &menuItem);
+
+			menuItem.wID = RESERVED_NO_CALLBACK;
+			menuItem.fMask = MIIM_FTYPE | MIIM_ID;
+			menuItem.fType = MFT_SEPARATOR;
+			InsertMenuItemA(subMenuAlignReferences.hSubMenu, subIndex++, TRUE, &menuItem);
+
+			menuItem.wID = ALIGN_SELECTION_ROTATION_X;
+			menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID | MIIM_STATE;
+			menuItem.fType = MFT_STRING;
+			menuItem.fState = MFS_ENABLED;
+			menuItem.dwTypeData = (LPSTR)"Align Rotation X";
+			InsertMenuItemA(subMenuAlignReferences.hSubMenu, subIndex++, TRUE, &menuItem);
+
+			menuItem.wID = ALIGN_SELECTION_ROTATION_Y;
+			menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID | MIIM_STATE;
+			menuItem.fType = MFT_STRING;
+			menuItem.fState = MFS_ENABLED;
+			menuItem.dwTypeData = (LPSTR)"Align Rotation Y";
+			InsertMenuItemA(subMenuAlignReferences.hSubMenu, subIndex++, TRUE, &menuItem);
+
+			menuItem.wID = ALIGN_SELECTION_ROTATION_Z;
+			menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID | MIIM_STATE;
+			menuItem.fType = MFT_STRING;
+			menuItem.fState = MFS_ENABLED;
+			menuItem.dwTypeData = (LPSTR)"Align Rotation Z";
+			InsertMenuItemA(subMenuAlignReferences.hSubMenu, subIndex++, TRUE, &menuItem);
+
+			menuItem.wID = RESERVED_NO_CALLBACK;
+			menuItem.fMask = MIIM_FTYPE | MIIM_ID;
+			menuItem.fType = MFT_SEPARATOR;
+			InsertMenuItemA(subMenuAlignReferences.hSubMenu, subIndex++, TRUE, &menuItem);
+
+			menuItem.wID = ALIGN_SELECTION_SCALE;
+			menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID | MIIM_STATE;
+			menuItem.fType = MFT_STRING;
+			menuItem.fState = MFS_ENABLED;
+			menuItem.dwTypeData = (LPSTR)"Align Scale";
+			InsertMenuItemA(subMenuAlignReferences.hSubMenu, subIndex++, TRUE, &menuItem);
+
+			menuItem.wID = RESERVED_NO_CALLBACK;
+			menuItem.fMask = MIIM_FTYPE | MIIM_ID;
+			menuItem.fType = MFT_SEPARATOR;
+			InsertMenuItemA(subMenuAlignReferences.hSubMenu, subIndex++, TRUE, &menuItem);
+
+			menuItem.wID = ALIGN_SELECTION_ALL;
+			menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID | MIIM_STATE;
+			menuItem.fType = MFT_STRING;
+			menuItem.fState = MFS_ENABLED;
+			menuItem.dwTypeData = (LPSTR)"Align All";
+			InsertMenuItemA(subMenuAlignReferences.hSubMenu, subIndex++, TRUE, &menuItem);
+		}
+
+		menuItem.wID = RESERVED_NO_CALLBACK;
+		menuItem.fMask = MIIM_SUBMENU | MIIM_TYPE;
+		menuItem.fType = MFT_STRING;
+		menuItem.fState = hasReferencesSelected ? MFS_ENABLED : MFS_DISABLED;
+		menuItem.hSubMenu = subMenuAlignReferences.hSubMenu;
+		menuItem.dwTypeData = (LPSTR)"Align References";
 		InsertMenuItemA(menu, index++, TRUE, &menuItem);
 
 		menuItem.wID = USE_GROUP_SCALING;
@@ -1254,6 +1407,30 @@ namespace se::cs::dialog::render_window {
 			break;
 		case SET_SNAPPING_AXIS_NEGATIVE_Z:
 			snappingAxis = SnappingAxis::NEGATIVE_Z;
+			break;
+		case ALIGN_SELECTION_POSITION_X:
+			alignSelection(true, false, false, false, false, false, false);
+			break;
+		case ALIGN_SELECTION_POSITION_Y:
+			alignSelection(false, true, false, false, false, false, false);
+			break;
+		case ALIGN_SELECTION_POSITION_Z:
+			alignSelection(false, false, true, false, false, false, false);
+			break;
+		case ALIGN_SELECTION_ROTATION_X:
+			alignSelection(false, false, false, true, false, false, false);
+			break;
+		case ALIGN_SELECTION_ROTATION_Y:
+			alignSelection(false, false, false, false, true, false, false);
+			break;
+		case ALIGN_SELECTION_ROTATION_Z:
+			alignSelection(false, false, false, false, false, true, false);
+			break;
+		case ALIGN_SELECTION_SCALE:
+			alignSelection(false, false, false, false, false, false, true);
+			break;
+		case ALIGN_SELECTION_ALL:
+			alignSelection(true, true, true, true, true, true, true);
 			break;
 		case USE_GROUP_SCALING:
 			settings.render_window.use_group_scaling = !settings.render_window.use_group_scaling;

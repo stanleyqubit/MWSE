@@ -89,7 +89,7 @@ namespace se::cs::dialog::dialogue_window {
 		Dialogue* currentDialogue; // 0xC
 		DialogueInfo* currentInfo; // 0x10
 		int currentTypeTab; // 0x14
-		BaseObject* currentFilterObject; // 0x18
+		Object* currentFilterObject; // 0x18
 		HMENU menuInfoPopup; // 0x1C
 		HMENU menuInfoPopupNew; // 0x20
 		HMENU menuTopicPopup; // 0x24

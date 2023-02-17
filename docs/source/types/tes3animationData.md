@@ -67,6 +67,19 @@ Animations are divided into three layers. The layer 0 is the base layer containi
 
 ***
 
+### `castSpeed`
+<div class="search_terms" style="display: none">castspeed</div>
+
+The animation speed multiplier for the spell casting animation. This is a feature added by MWSE.
+
+It functions slightly differently to the other animation speed multipliers. It is not reset by the AI like the movement and weapon speeds. Therefore, it can be set before a spell is cast, as well as during casting. The speed will affect all further casting by the actor.
+
+**Returns**:
+
+* `result` (number)
+
+***
+
 ### `currentAnimGroupLayers`
 <div class="search_terms" style="display: none">currentanimgrouplayers</div>
 

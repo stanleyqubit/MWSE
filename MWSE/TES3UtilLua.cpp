@@ -2216,20 +2216,21 @@ namespace mwse::lua {
 				TES3::DataHandler::get()->useCellTransitionFader = false;
 			}
 
+			bool suppressThreadLoad = true;
+			std::swap(TES3::DataHandler::suppressThreadLoad, suppressThreadLoad);
+
 			sol::optional<bool> teleportCompanions = params["teleportCompanions"];
 			if (teleportCompanions.value_or(true) && macp->listFriendlyActors.size() > 0) {
-				TES3::DataHandler::suppressThreadLoad = true;
 				const auto TES3_cellChangeWithCompanions = reinterpret_cast<void(__cdecl*)(TES3::Vector3, TES3::Vector3, TES3::Cell*)>(0x45C9B0);
 				TES3_cellChangeWithCompanions(position.value(), orientation.value(), cell);
-				TES3::DataHandler::suppressThreadLoad = false;
 			}
 			else {
-				TES3::DataHandler::suppressThreadLoad = true;
 				const auto TES3_cellChange = reinterpret_cast<void(__cdecl*)(TES3::Vector3, TES3::Vector3, TES3::Cell*, int)>(0x45CEF0);
 				sol::optional<bool> flag = params["flag"];
 				TES3_cellChange(position.value(), orientation.value(), cell, flag.value_or(true));
-				TES3::DataHandler::suppressThreadLoad = false;
 			}
+
+			std::swap(TES3::DataHandler::suppressThreadLoad, suppressThreadLoad);
 
 			if (suppressFader) {
 				TES3::DataHandler::get()->useCellTransitionFader = faderInitialState;
@@ -5486,9 +5487,8 @@ namespace mwse::lua {
 		// Fire off the event.
 		if (event::EnchantChargeUseEvent::getEventEnabled()) {
 			auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
-			bool isCast = false;
 
-			sol::object eventResult = stateHandle.triggerEvent(new event::EnchantChargeUseEvent(enchant, mobile, charge, isCast));
+			sol::object eventResult = stateHandle.triggerEvent(new event::EnchantChargeUseEvent(enchant, mobile, nullptr, charge));
 
 			// Allow the event to modify charge.
 			if (eventResult.valid()) {

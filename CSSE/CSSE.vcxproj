@@ -173,10 +173,13 @@ if defined APPVEYOR_BUILD_NUMBER (echo #define APPVEYOR_BUILD_NUMBER %APPVEYOR_B
     <ClInclude Include="DialogEditNPCObjectWindow.h" />
     <ClInclude Include="DialogEditObjectWindow.h" />
     <ClInclude Include="DialogEditSpellObjectWindow.h" />
+    <ClInclude Include="DialogLandscapeEditSettingsWindow.h" />
     <ClInclude Include="DialogObjectWindow.h" />
     <ClInclude Include="DialogPreviewWindow.h" />
     <ClInclude Include="DialogReferenceData.h" />
     <ClInclude Include="DialogRenderWindow.h" />
+    <ClInclude Include="DialogScriptEditorWindow.h" />
+    <ClInclude Include="DialogScriptListWindow.h" />
     <ClInclude Include="DialogSearchAndReplaceWindow.h" />
     <ClInclude Include="DialogTextSearchWindow.h" />
     <ClInclude Include="EditBasicExtended.h" />
@@ -216,8 +219,11 @@ if defined APPVEYOR_BUILD_NUMBER (echo #define APPVEYOR_BUILD_NUMBER %APPVEYOR_B
     <ClCompile Include="DialogEditNPCObjectWindow.cpp" />
     <ClCompile Include="DialogEditObjectWindow.cpp" />
     <ClCompile Include="DialogEditSpellObjectWindow.cpp" />
+    <ClCompile Include="DialogLandscapeEditSettingsWindow.cpp" />
     <ClCompile Include="DialogPreviewWindow.cpp" />
     <ClCompile Include="DialogReferenceData.cpp" />
+    <ClCompile Include="DialogScriptEditorWindow.cpp" />
+    <ClCompile Include="DialogScriptListWindow.cpp" />
     <ClCompile Include="DialogTextSearchWindow.cpp" />
     <ClCompile Include="EditBasicExtended.cpp" />
     <ClCompile Include="CSBaseObject.cpp" />

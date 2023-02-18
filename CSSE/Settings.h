@@ -3,6 +3,7 @@
 namespace se::cs {
 	struct Settings_t {
 		struct RenderWindowSettings {
+			bool use_group_scaling = false;
 			bool use_legacy_grid_snap = true;
 			bool use_legacy_object_movement = false;
 			bool use_world_axis_rotations_by_default = true;
@@ -123,7 +124,16 @@ namespace se::cs {
 			toml::value into_toml() const;
 		} quickstart;
 
+		struct ScriptEditorSettings {
+			std::string font_face = { "Consolas" };
+			int font_size = 10;
+
+			void from_toml(const toml::value& v);
+			toml::value into_toml() const;
+		} script_editor;
+
 		bool valid = true;
+		bool enabled = true;
 
 		void load();
 		void save();

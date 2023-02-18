@@ -4,4 +4,6 @@
 --- @meta
 --- A node within a path grid.
 --- @class tes3pathGridNode
+--- @field connectedNodes tes3pathGridNode[] *Read-only*. The list of nodes connected to this node. This table value is a copy generated from the actual data.
+--- @field grid tes3pathGrid *Read-only*. The pathgrid that this node belongs to.
 --- @field position tes3vector3 *Read-only*. The world position of the node.

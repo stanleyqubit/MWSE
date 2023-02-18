@@ -20,7 +20,7 @@ namespace se::cs {
 			LeftBracer = 0x9,
 			RightBracer = 0xA,
 
-			// Unusued in Morrowind itself, only used for MWSE operations.
+			// Unusued itself, only used for MWSE operations.
 			Invalid = 0xFFFFFFFF,
 
 			First = Helmet,

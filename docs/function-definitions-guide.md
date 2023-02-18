@@ -15,7 +15,7 @@ Each library definition is just a regular Lua table. The following fields are av
 
 For example, the table library definition looks like this:
 
-```Lua
+```lua
 -- autocomplete\definitions\global\table.lua
 return {
 	type = "lib",
@@ -53,7 +53,7 @@ Each function definition is just a regular Lua table. The following fields are a
 
 An example of a function with multiple return values is `tes3.checkMerchantOffersService()`. Its definition looks like this:
 
-```Lua
+```lua
 -- autocomplete\definitions\global\tes3\checkMerchantOffersService.lua
 return {
 	type = "function",
@@ -79,7 +79,7 @@ Some functions accept multiple arguments. In that case the arguments table shoul
 
 An example of such function is `tes3.claimSpellEffectId()`. This is the definition for that function:
 
-```Lua
+```lua
 -- autocomplete\definitions\global\tes3\claimSpellEffectId.lua
 return {
 	type = "function",
@@ -93,7 +93,7 @@ return {
 
 Some other functions accept a table called `params`. In that case you can follow this convention (the function definition for `tes3.addItem()`):
 
-```Lua
+```lua
 -- autocomplete\definitions\global\tes3\cast.lua
 return {
 	type = "function",

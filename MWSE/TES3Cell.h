@@ -35,14 +35,15 @@ namespace TES3 {
 			int relativeX;
 			int relativeY;
 			int relativeZ;
-			IteratedList<Node*>* connectedNodes; // 0xC
+			IteratedList<Node**>* connectedNodes; // 0xC
 			PathGrid* parentGrid; // 0x10
-			int index; // 0x14
+			unsigned char connectedCount; // 0x14
 			NI::Pointer<NI::Node> debugNode; // 0x18
 
 			Node() = delete;
 			~Node() = delete;
 
+			sol::object getConnectedNodes_lua(sol::this_state ts) const;
 			Vector3 getPosition() const;
 		};
 

@@ -27,9 +27,11 @@
 #include "RenderWindowSelectionData.h"
 #include "RenderWindowWidgets.h"
 
+#include "DialogLandscapeEditSettingsWindow.h"
+
 namespace se::cs::dialog::render_window {
-	static WORD lastRenderWindowPosX = 0;
-	static WORD lastRenderWindowPosY = 0;
+	WORD lastCursorPosX = 0;
+	WORD lastCursorPosY = 0;
 
 	using gObjectMove = memory::ExternalGlobal<float, 0x6CE9B4>;
 	using gObjectRotate = memory::ExternalGlobal<float, 0x6CE9B0>;
@@ -283,7 +285,11 @@ namespace se::cs::dialog::render_window {
 				reference->position = (userRotation * p) + selectionData->bound.center;
 				reference->unknown_0x10 = reference->position;
 				reference->sceneNode->localTranslate = reference->position;
-				DataHandler::get()->updateLightingForReference(reference);
+
+				// Avoid lighting updates when moving large number of targets.
+				if (selectionData->numberOfTargets <= 20) {
+					DataHandler::get()->updateLightingForReference(reference);
+				}
 			}
 
 			reference->sceneNode->update(0.0f, true, true);
@@ -296,39 +302,59 @@ namespace se::cs::dialog::render_window {
 	// Patch: Improve multi-reference scaling.
 	//
 
-	void __cdecl Patch_ReplaceScalingLogic(RenderController* renderController, SelectionData::Target* firstTarget, int scaler) {
+	static auto selectionNeedsScaleUpdate = false;
+	void __cdecl Patch_ReplaceScalingLogic(RenderController* renderController, SelectionData::Target* firstTarget, int mouseDelta) {
 		using windows::isKeyDown;
 
 		auto selectionData = SelectionData::get();
-		if (!isKeyDown(VK_MENU) || selectionData->numberOfTargets == 1) {
+		bool useGroupScaling = settings.render_window.use_group_scaling;
+		if (!useGroupScaling || selectionData->numberOfTargets == 1) {
 			const auto VanillaScalingHandler = reinterpret_cast<void(__cdecl*)(RenderController*, SelectionData::Target*, int)>(0x404949);
-			VanillaScalingHandler(renderController, firstTarget, scaler);
+			VanillaScalingHandler(renderController, firstTarget, mouseDelta);
 			return;
 		}
 
-		const auto scaleDelta = scaler * 0.01f;
+		// Clamp such that no reference will be scaled beyond supported bounds. [0.5, 2.0]
+		auto delta = mouseDelta * 0.01f;
+		for (auto target = firstTarget; target; target = target->next) {
+			const auto scale = target->reference->sceneNode->localScale;
+			delta = std::clamp(delta, 0.5f - scale, 2.0f - scale);
+		}
+		if (fabs(delta) < 0.01) {
+			return;
+		}
+		
+		// Avoid using `setScale` every update, its implementation causes huge precision loss.
+		// Instead set this flag which will trigger `setScale` just once when finished scaling.
+		selectionNeedsScaleUpdate = true;
 
-		const auto& center = selectionData->bound.center;
+		// Scale all selected references and their positions relative to last target.
+		const auto center = selectionData->getLastTarget()->reference->position;
+		const auto factor = 1.0f + delta;
 
 		for (auto target = firstTarget; target; target = target->next) {
 			auto reference = target->reference;
 
-			const auto oldScale = reference->getScale();
-			reference->setScale(oldScale + scaleDelta);
+			// Update scale.
+			reference->sceneNode->localScale *= factor;
 
-			const auto newScale = reference->getScale();
-			if (newScale != oldScale) {
-				const auto offset = reference->position - center;
-				const auto multiplier = newScale / oldScale;
+			// Update position.
+			const auto relativePosition = reference->position - center;
+			reference->position = center + (relativePosition * factor);
 
-				reference->position = center + offset * multiplier;
-				reference->unknown_0x10 = reference->position;
-				reference->sceneNode->localTranslate = reference->position;
-				reference->sceneNode->update(0.0f, true, true);
+			reference->unknown_0x10 = reference->position;
+			reference->sceneNode->localTranslate = reference->position;
+			reference->sceneNode->update(0.0f, true, true);
 
-				reference->setAsEdited();
+			// Avoid lighting updates when moving large number of targets.
+			if (selectionData->numberOfTargets <= 20) {
+				DataHandler::get()->updateLightingForReference(reference);
 			}
+
+			reference->setAsEdited();
 		}
+
+		selectionData->recalculateBound();
 	}
 
 	//
@@ -430,7 +456,7 @@ namespace se::cs::dialog::render_window {
 
 		NI::Vector3 origin;
 		NI::Vector3 direction;
-		if (rendererController->camera->windowPointToRay(lastRenderWindowPosX, lastRenderWindowPosY, origin, direction)) {
+		if (rendererController->camera->windowPointToRay(lastCursorPosX, lastCursorPosY, origin, direction)) {
 			direction.normalize();
 
 			if (rendererPicker->pickObjects(&origin, &direction)) {
@@ -582,7 +608,7 @@ namespace se::cs::dialog::render_window {
 		NI::Vector3 rayOrigin;
 		NI::Vector3 rayDirection;
 		auto camera = RenderController::get()->camera;
-		if (!camera->windowPointToRay(lastRenderWindowPosX, lastRenderWindowPosY, rayOrigin, rayDirection)) {
+		if (!camera->windowPointToRay(lastCursorPosX, lastCursorPosY, rayOrigin, rayDirection)) {
 			return 0;
 		}
 
@@ -695,12 +721,6 @@ namespace se::cs::dialog::render_window {
 			}
 		}
 
-		// We probably don't want to be sending things off into far distant cells.
-		// Can happen unintentionally if camera direction is parallel with movement axis.
-		if (intersection.distance(&planeOrigin) > 8192.0f) {
-			return 0;
-		}
-
 		// Update positions.
 		for (auto target = selectionData->firstTarget; target; target = target->next) {
 			auto reference = target->reference;
@@ -709,7 +729,10 @@ namespace se::cs::dialog::render_window {
 			reference->sceneNode->localTranslate = reference->position;
 			reference->sceneNode->update(0.0f, true, true);
 
-			DataHandler::get()->updateLightingForReference(reference);
+			// Avoid lighting updates when moving large number of targets.
+			if (selectionData->numberOfTargets <= 20) {
+				DataHandler::get()->updateLightingForReference(reference);
+			}
 
 			reference->setAsEdited();
 		}
@@ -870,72 +893,118 @@ namespace se::cs::dialog::render_window {
 
 	static std::optional<LRESULT> PatchDialogProc_OverrideResult = {};
 
-	constexpr auto landscapeEditWindowId = 203;
+	NI::Texture* getLandscapeTextureUnderCursor() {
+		auto rendererController = RenderController::get();
+		auto sceneGraphController = SceneGraphController::get();
+
+		NI::Vector3 origin;
+		NI::Vector3 direction;
+		if (!rendererController->camera->windowPointToRay(lastCursorPosX, lastCursorPosY, origin, direction)) {
+			return nullptr;
+		}
+
+		auto pick = sceneGraphController->landscapePick;
+		if (!pick->pickObjects(&origin, &direction)) {
+			return nullptr;
+		}
+
+		auto firstResult = pick->results.at(0);
+		if (firstResult == nullptr || firstResult->object == nullptr) {
+			return nullptr;
+		}
+
+		auto texturingProperty = firstResult->object->getTexturingProperty();
+		if (texturingProperty == nullptr) {
+			return nullptr;
+		}
+
+		auto baseMap = texturingProperty->getBaseMap();
+		if (baseMap == nullptr) {
+			return nullptr;
+		}
+
+		return baseMap->texture;
+	}
 
 	bool PickLandscapeTexture(HWND hWnd) {
-		auto editorWindow = memory::MemAccess<HWND>::Get(0x6CE95C);
+		using landscape_edit_settings_window::getEditLandscapeColor;
+		using landscape_edit_settings_window::setSelectTexture;
+		using gLandscapeEditWindowHandle = landscape_edit_settings_window::gWindowHandle;
+
+		auto editorWindow = gLandscapeEditWindowHandle::get();
 		if (!editorWindow) {
 			return false;
 		}
 
-		// Make sure that we're not in color mode.
-		if (IsDlgButtonChecked(editorWindow, 1008)) {
+		// Make sure we are in texture edit mode.
+		if (getEditLandscapeColor()) {
 			return false;
 		}
 
-		auto& rendererPicker = gRenderWindowPick::get();
-		auto rendererController = RenderController::get();
-		auto sceneGraphController = SceneGraphController::get();
-
-		// Cache picker settings we care about.
-		const auto previousRoot = rendererPicker.root;
-		const auto previousPickType = rendererPicker.pickType;
-
-		// Make changes to the pick that we need to.
-		rendererPicker.root = sceneGraphController->landscapeRoot;
-		rendererPicker.pickType = NI::PickType::FIND_ALL;
-
-		NI::Vector3 origin;
-		NI::Vector3 direction;
-		if (rendererController->camera->windowPointToRay(lastRenderWindowPosX, lastRenderWindowPosY, origin, direction)) {
-			direction.normalize();
-
-			if (rendererPicker.pickObjects(&origin, &direction)) {
-				auto firstResult = rendererPicker.getFirstUnskinnedResult();
-				if (firstResult->object) {
-					auto texturingProperty = firstResult->object->getTexturingProperty();
-					if (texturingProperty) {
-						auto baseMap = texturingProperty->getBaseMap();
-						if (baseMap && baseMap->texture) {
-							LVITEMA queryData = {};
-							queryData.mask = LVIF_PARAM;
-							auto textureList = GetDlgItem(editorWindow, 1492);
-							int textureCount = ListView_GetItemCount(textureList);
-							for (int row = 0; row < textureCount; ++row) {
-								queryData.iItem = row;
-								if (ListView_GetItem(textureList, &queryData)) {
-									auto landTexture = reinterpret_cast<LandTexture*>(queryData.lParam);
-									if (landTexture) {
-										if (landTexture->texture == baseMap->texture) {
-											ListView_SetItemState(textureList, row, LVIS_SELECTED, LVIS_SELECTED);
-											ListView_EnsureVisible(textureList, row, TRUE);
-											break;
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
+		auto texture = getLandscapeTextureUnderCursor();
+		if (!texture) {
+			return false;
 		}
 
-		// Restore pick settings.
-		rendererPicker.clearResults();
-		rendererPicker.root = previousRoot;
-		rendererPicker.pickType = previousPickType;
+		return setSelectTexture(texture);
+	}
 
-		return true;
+	void alignSelection(bool posX, bool posY, bool posZ, bool rotX, bool rotY, bool rotZ, bool scale) {
+		auto selectionData = SelectionData::get();
+		auto lastTarget = selectionData->getLastTarget();
+		if (!lastTarget) {
+			return;
+		}
+
+		for (auto target = selectionData->firstTarget; target != lastTarget; target = target->next) {
+			auto reference = target->reference;
+
+			if (posX) {
+				reference->position.x = lastTarget->reference->position.x;
+			}
+			if (posY) {
+				reference->position.y = lastTarget->reference->position.y;
+			}
+			if (posZ) {
+				reference->position.z = lastTarget->reference->position.z;
+			}
+
+			if (rotX) {
+				reference->yetAnotherOrientation.x = lastTarget->reference->yetAnotherOrientation.x;
+			}
+			if (rotY) {
+				reference->yetAnotherOrientation.y = lastTarget->reference->yetAnotherOrientation.y;
+			}
+			if (rotZ) {
+				reference->yetAnotherOrientation.z = lastTarget->reference->yetAnotherOrientation.z;
+			}
+
+			if (scale) {
+				reference->setScale(lastTarget->reference->getScale());
+			}
+
+			// Not sure exactly why these exist...
+
+			reference->unknown_0x10 = reference->position;
+			reference->orientationNonAttached = reference->yetAnotherOrientation;
+		
+			// Update Scene Graph.
+
+			NI::Matrix33 rotation;
+			auto orientation = reference->yetAnotherOrientation;
+			rotation.fromEulerXYZ(orientation.x, orientation.y, orientation.z);
+			
+			reference->sceneNode->setLocalRotationMatrix(&rotation);
+			reference->sceneNode->localTranslate = reference->position; 
+			reference->sceneNode->localScale = reference->getScale();
+			reference->sceneNode->update(0.0f, true, true);
+
+			DataHandler::get()->updateLightingForReference(reference);
+
+			reference->setAsEdited();
+		}
+
+		selectionData->recalculateBound();
 	}
 
 	void hideSelectedReferences() {
@@ -1064,6 +1133,15 @@ namespace se::cs::dialog::render_window {
 			SET_SNAPPING_AXIS_NEGATIVE_Y,
 			SET_SNAPPING_AXIS_POSITIVE_Z,
 			SET_SNAPPING_AXIS_NEGATIVE_Z,
+			ALIGN_SELECTION_POSITION_X,
+			ALIGN_SELECTION_POSITION_Y,
+			ALIGN_SELECTION_POSITION_Z,
+			ALIGN_SELECTION_ROTATION_X,
+			ALIGN_SELECTION_ROTATION_Y,
+			ALIGN_SELECTION_ROTATION_Z,
+			ALIGN_SELECTION_SCALE,
+			ALIGN_SELECTION_ALL,
+			USE_GROUP_SCALING,
 			USE_LEGACY_OBJECT_MOVEMENT,
 			USE_WORLD_AXIS_ROTATION,
 			SAVE_STATE_TO_QUICKSTART,
@@ -1144,6 +1222,101 @@ namespace se::cs::dialog::render_window {
 		menuItem.hSubMenu = subMenuSnappingAxis.hSubMenu;
 		menuItem.dwTypeData = (LPSTR)"Set &Snapping Axis";
 		InsertMenuItemA(menu, index++, TRUE, &menuItem);
+
+		MENUITEMINFO subMenuAlignReferences = {};
+		subMenuAlignReferences.cbSize = sizeof(MENUITEMINFO);
+		subMenuAlignReferences.hSubMenu = CreateMenu();
+
+		{
+			unsigned int subIndex = 0;
+
+			menuItem.wID = ALIGN_SELECTION_POSITION_X;
+			menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID | MIIM_STATE;
+			menuItem.fType = MFT_STRING;
+			menuItem.fState = MFS_ENABLED;
+			menuItem.dwTypeData = (LPSTR)"Align Position X";
+			InsertMenuItemA(subMenuAlignReferences.hSubMenu, subIndex++, TRUE, &menuItem);
+
+			menuItem.wID = ALIGN_SELECTION_POSITION_Y;
+			menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID | MIIM_STATE;
+			menuItem.fType = MFT_STRING;
+			menuItem.fState = MFS_ENABLED;
+			menuItem.dwTypeData = (LPSTR)"Align Position Y";
+			InsertMenuItemA(subMenuAlignReferences.hSubMenu, subIndex++, TRUE, &menuItem);
+
+			menuItem.wID = ALIGN_SELECTION_POSITION_Z;
+			menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID | MIIM_STATE;
+			menuItem.fType = MFT_STRING;
+			menuItem.fState = MFS_ENABLED;
+			menuItem.dwTypeData = (LPSTR)"Align Position Z";
+			InsertMenuItemA(subMenuAlignReferences.hSubMenu, subIndex++, TRUE, &menuItem);
+
+			menuItem.wID = RESERVED_NO_CALLBACK;
+			menuItem.fMask = MIIM_FTYPE | MIIM_ID;
+			menuItem.fType = MFT_SEPARATOR;
+			InsertMenuItemA(subMenuAlignReferences.hSubMenu, subIndex++, TRUE, &menuItem);
+
+			menuItem.wID = ALIGN_SELECTION_ROTATION_X;
+			menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID | MIIM_STATE;
+			menuItem.fType = MFT_STRING;
+			menuItem.fState = MFS_ENABLED;
+			menuItem.dwTypeData = (LPSTR)"Align Rotation X";
+			InsertMenuItemA(subMenuAlignReferences.hSubMenu, subIndex++, TRUE, &menuItem);
+
+			menuItem.wID = ALIGN_SELECTION_ROTATION_Y;
+			menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID | MIIM_STATE;
+			menuItem.fType = MFT_STRING;
+			menuItem.fState = MFS_ENABLED;
+			menuItem.dwTypeData = (LPSTR)"Align Rotation Y";
+			InsertMenuItemA(subMenuAlignReferences.hSubMenu, subIndex++, TRUE, &menuItem);
+
+			menuItem.wID = ALIGN_SELECTION_ROTATION_Z;
+			menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID | MIIM_STATE;
+			menuItem.fType = MFT_STRING;
+			menuItem.fState = MFS_ENABLED;
+			menuItem.dwTypeData = (LPSTR)"Align Rotation Z";
+			InsertMenuItemA(subMenuAlignReferences.hSubMenu, subIndex++, TRUE, &menuItem);
+
+			menuItem.wID = RESERVED_NO_CALLBACK;
+			menuItem.fMask = MIIM_FTYPE | MIIM_ID;
+			menuItem.fType = MFT_SEPARATOR;
+			InsertMenuItemA(subMenuAlignReferences.hSubMenu, subIndex++, TRUE, &menuItem);
+
+			menuItem.wID = ALIGN_SELECTION_SCALE;
+			menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID | MIIM_STATE;
+			menuItem.fType = MFT_STRING;
+			menuItem.fState = MFS_ENABLED;
+			menuItem.dwTypeData = (LPSTR)"Align Scale";
+			InsertMenuItemA(subMenuAlignReferences.hSubMenu, subIndex++, TRUE, &menuItem);
+
+			menuItem.wID = RESERVED_NO_CALLBACK;
+			menuItem.fMask = MIIM_FTYPE | MIIM_ID;
+			menuItem.fType = MFT_SEPARATOR;
+			InsertMenuItemA(subMenuAlignReferences.hSubMenu, subIndex++, TRUE, &menuItem);
+
+			menuItem.wID = ALIGN_SELECTION_ALL;
+			menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID | MIIM_STATE;
+			menuItem.fType = MFT_STRING;
+			menuItem.fState = MFS_ENABLED;
+			menuItem.dwTypeData = (LPSTR)"Align All";
+			InsertMenuItemA(subMenuAlignReferences.hSubMenu, subIndex++, TRUE, &menuItem);
+		}
+
+		menuItem.wID = RESERVED_NO_CALLBACK;
+		menuItem.fMask = MIIM_SUBMENU | MIIM_TYPE;
+		menuItem.fType = MFT_STRING;
+		menuItem.fState = hasReferencesSelected ? MFS_ENABLED : MFS_DISABLED;
+		menuItem.hSubMenu = subMenuAlignReferences.hSubMenu;
+		menuItem.dwTypeData = (LPSTR)"Align References";
+		InsertMenuItemA(menu, index++, TRUE, &menuItem);
+
+		menuItem.wID = USE_GROUP_SCALING;
+		menuItem.fMask = MIIM_FTYPE | MIIM_CHECKMARKS | MIIM_STRING | MIIM_ID;
+		menuItem.fType = MFT_STRING;
+		menuItem.fState = (settings.render_window.use_group_scaling) ? MFS_CHECKED : MFS_UNCHECKED;
+		menuItem.dwTypeData = (LPSTR)"Use Group Scaling";
+		InsertMenuItemA(menu, index++, TRUE, &menuItem);
+		CheckMenuItem(menu, USE_GROUP_SCALING, (settings.render_window.use_group_scaling) ? MFS_CHECKED : MFS_UNCHECKED);
 
 		menuItem.wID = USE_LEGACY_OBJECT_MOVEMENT;
 		menuItem.fMask = MIIM_FTYPE | MIIM_CHECKMARKS | MIIM_STRING | MIIM_ID;
@@ -1235,6 +1408,34 @@ namespace se::cs::dialog::render_window {
 		case SET_SNAPPING_AXIS_NEGATIVE_Z:
 			snappingAxis = SnappingAxis::NEGATIVE_Z;
 			break;
+		case ALIGN_SELECTION_POSITION_X:
+			alignSelection(true, false, false, false, false, false, false);
+			break;
+		case ALIGN_SELECTION_POSITION_Y:
+			alignSelection(false, true, false, false, false, false, false);
+			break;
+		case ALIGN_SELECTION_POSITION_Z:
+			alignSelection(false, false, true, false, false, false, false);
+			break;
+		case ALIGN_SELECTION_ROTATION_X:
+			alignSelection(false, false, false, true, false, false, false);
+			break;
+		case ALIGN_SELECTION_ROTATION_Y:
+			alignSelection(false, false, false, false, true, false, false);
+			break;
+		case ALIGN_SELECTION_ROTATION_Z:
+			alignSelection(false, false, false, false, false, true, false);
+			break;
+		case ALIGN_SELECTION_SCALE:
+			alignSelection(false, false, false, false, false, false, true);
+			break;
+		case ALIGN_SELECTION_ALL:
+			alignSelection(true, true, true, true, true, true, true);
+			break;
+		case USE_GROUP_SCALING:
+			settings.render_window.use_group_scaling = !settings.render_window.use_group_scaling;
+			settings.save();
+			break;
 		case USE_LEGACY_OBJECT_MOVEMENT:
 			settings.render_window.use_legacy_object_movement = !settings.render_window.use_legacy_object_movement;
 			settings.save();
@@ -1278,6 +1479,66 @@ namespace se::cs::dialog::render_window {
 	void PatchDialogProc_BeforeSetCameraPosition(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		if (RenderController::get()->node == nullptr) {
 			PatchDialogProc_OverrideResult = FALSE;
+		}
+	}
+
+	void PatchDialogProc_AfterLMouseButtonUp(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		// see: Patch_ReplaceScalingLogic
+		if (selectionNeedsScaleUpdate) {
+			selectionNeedsScaleUpdate = false;
+			for (auto target = SelectionData::get()->firstTarget; target; target = target->next) {
+				target->reference->setScale(target->reference->sceneNode->localScale);
+			}
+		}
+	}
+
+	void PatchDialogProc_BeforeKeyDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		auto editorWindow = landscape_edit_settings_window::gWindowHandle::get();
+		if (!editorWindow) {
+			return;
+		}
+
+		// Decode parameters.
+		auto vkCode = LOWORD(wParam);
+		auto keyFlags = HIWORD(lParam);
+		auto scanCode = WORD(LOBYTE(keyFlags));
+		auto isExtendedKey = (keyFlags & KF_EXTENDED) == KF_EXTENDED;
+		if (isExtendedKey) {
+			scanCode = MAKEWORD(scanCode, 0xE0);
+		}
+		auto wasKeyDown = (keyFlags & KF_REPEAT) == KF_REPEAT;
+		auto repeatCount = LOWORD(lParam);
+		auto isKeyReleased = (keyFlags & KF_UP) == KF_UP;
+
+		using namespace landscape_edit_settings_window;
+
+		switch (wParam) {
+		case VK_OEM_4: // [
+			decrementEditRadius();
+			PatchDialogProc_OverrideResult = TRUE;
+			break;
+		case VK_OEM_6: // ]
+			incrementEditRadius();
+			PatchDialogProc_OverrideResult = TRUE;
+			break;
+		case 'F':
+			if (!wasKeyDown) {
+				setFlattenLandscapeVertices(!getFlattenLandscapeVertices());
+			}
+			PatchDialogProc_OverrideResult = TRUE;
+			break;
+		case 'S':
+			if (!wasKeyDown) {
+				setSoftenLandscapeVertices(!getSoftenLandscapeVertices());
+			}
+			PatchDialogProc_OverrideResult = TRUE;
+			break;
+		case 'O':
+			if (!wasKeyDown) {
+				setEditLandscapeColor(!getEditLandscapeColor());
+			}
+			PatchDialogProc_OverrideResult = TRUE;
+			break;
 		}
 	}
 
@@ -1325,14 +1586,17 @@ namespace se::cs::dialog::render_window {
 
 		switch (msg) {
 		case WM_MOUSEMOVE:
-			lastRenderWindowPosX = LOWORD(lParam);
-			lastRenderWindowPosY = HIWORD(lParam);
+			lastCursorPosX = LOWORD(lParam);
+			lastCursorPosY = HIWORD(lParam);
 			break;
 		case WM_LBUTTONDOWN:
 			PatchDialogProc_BeforeLMouseButtonDown(hWnd, msg, wParam, lParam);
 			break;
 		case WM_RBUTTONDOWN:
 			PatchDialogProc_BeforeRMouseButtonDown(hWnd, msg, wParam, lParam);
+			break;
+		case WM_KEYDOWN:
+			PatchDialogProc_BeforeKeyDown(hWnd, msg, wParam, lParam);
 			break;
 		case CustomWindowMessage::SetCameraPosition:
 			PatchDialogProc_BeforeSetCameraPosition(hWnd, msg, wParam, lParam);
@@ -1353,6 +1617,9 @@ namespace se::cs::dialog::render_window {
 			break;
 		case WM_KEYUP:
 			PatchDialogProc_AfterKeyUp(hWnd, msg, wParam, lParam);
+			break;
+		case WM_LBUTTONUP:
+			PatchDialogProc_AfterLMouseButtonUp(hWnd, msg, wParam, lParam);
 			break;
 		case WM_INITDIALOG:
 			PatchDialogProc_AfterInitDialog(hWnd, msg, wParam, lParam);

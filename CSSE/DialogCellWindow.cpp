@@ -236,7 +236,7 @@ namespace se::cs::dialog::cell_window {
 		case BN_CLICKED:
 			switch (id) {
 			case CONTROL_ID_SHOW_MODIFIED_ONLY_BUTTON:
-				modeShowModifiedOnly = SendDlgItemMessage(hWnd, id, BM_GETCHECK, 0, 0);
+				modeShowModifiedOnly = SendDlgItemMessageA(hWnd, id, BM_GETCHECK, 0, 0);
 				RefreshCellListView(hWnd);
 				RefreshRefsListView(hWnd);
 				break;

@@ -25,7 +25,7 @@ eventData table entries can have the following fields:
 
 An example of a event definition is the `activate` event definition file found in autocomplete\definitions\events\standard:
 
-```Lua
+```lua
 -- autocomplete\definitions\events\standard\activate.lua
 return {
 	type = "event",

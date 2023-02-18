@@ -37,11 +37,11 @@ namespace TES3 {
 		NI::Node * spine2Node; // 0x18
 		float spineAngle; // 0x1C
 		NI::Node * headNode; // 0x20
-		float unknown_0x24;
-		float unknown_0x28;
-		float unknown_0x2C;
-		float unknown_0x30;
-		float unknown_0x34;
+		float headLookTargetAngleX; // 0x24
+		float headLookTargetAngleZ; // 0x28
+		float headLookAngleX; // 0x2C
+		float headLookAngleZ; // 0x30
+		float headLookClosestDistance; // 0x34
 		unsigned char currentAnimGroup[3]; // 0x38
 		int currentNodeIndices[3]; // 0x3C
 		int loopCounts[3]; // 0x48
@@ -53,15 +53,16 @@ namespace TES3 {
 		SequenceGroup keyframeLayers[3]; // 0x2C4
 		NI::Geometry* headGeometry; // 0x2E8
 		float lipsyncLevel; // 0x2EC
-		int unknown_0x2F0;
-		int unknown_0x2F4;
-		int unknown_0x2F8;
-		int unknown_0x2FC;
-		int unknown_0x300;
-		int unknown_0x304;
+		float lipsyncTimeToNextUpdate; // 0x2F0
+		float headMorphTiming; // 0x2F4
+		float talkMorphStartTime; // 0x2F8
+		float talkMorphEndTime; // 0x2FC
+		float blinkMorphStartTime; // 0x300
+		float blinkMorphEndTime; // 0x304
 		int currentAnimGroupLayer[3];
 		signed char animGroupLayerIndex[150]; // 0x314
 		short approxRootTravelSpeed[150]; // 0x3AA
+		unsigned short patchedCastSpeed; // 0x4D6 (8.8 fixed point format)
 		float movementSpeed; // 0x4D8
 		float weaponSpeed; // 0x4DC
 		int currentSoundgenIndices[3]; // 0x4E0
@@ -77,6 +78,8 @@ namespace TES3 {
 		// Other related this-call functions.
 		//
 
+		AnimationData* ctor();
+
 		void playAnimationGroupForIndex(int animationGroup, int triIndex, int startFlag = 0, int loopCount = -1);
 		void setHeadNode(NI::Node* head);
 
@@ -89,6 +92,9 @@ namespace TES3 {
 		void playAnimationGroup(int animationGroup, int startFlag = 0, int loopCount = -1);
 		bool setOverrideLayerKeyframes(KeyframeDefinition* animData);
 		bool hasOverrideAnimations() const;
+
+		float AnimationData::getCastSpeed() const;
+		void AnimationData::setCastSpeed(float speed);
 
 		std::reference_wrapper<decltype(currentAnimGroup)> getCurrentAnimGroups();
 		std::reference_wrapper<decltype(currentNodeIndices)> getCurrentNodeIndices();

@@ -22,6 +22,34 @@ namespace se::cs::dialog::dialogue_window {
 	constexpr auto ENABLE_ALL_OPTIMIZATIONS = true;
 	constexpr auto LOG_PERFORMANCE_RESULTS = false;
 
+	static bool modeShowModifiedOnly = false;
+
+	void redisplayAllData() {
+		const auto hWnd = ghWnd::get();
+		if (hWnd == NULL) {
+			return;
+		}
+
+		// Invoke update logic by simulating the combo box selection changing.
+		// There may be a better way.
+		auto hFilterCombo = GetDlgItem(hWnd, CONTROL_ID_FILTER_FOR_COMBO);
+		SendMessage(hWnd, WM_COMMAND, MAKEWPARAM(CONTROL_ID_FILTER_FOR_COMBO, CBN_SELCHANGE), (LPARAM)hFilterCombo);
+	}
+
+	void clearFilters() {
+		const auto hWnd = ghWnd::get();
+		if (hWnd == NULL) {
+			return;
+		}
+
+		modeShowModifiedOnly = false;
+
+		Button_SetCheck(GetDlgItem(hWnd, CONTROL_ID_SHOW_MODIFIED_ONLY_BUTTON), BST_UNCHECKED);
+		ComboBox_SetCurSel(GetDlgItem(hWnd, CONTROL_ID_FILTER_FOR_COMBO), 0);
+
+		redisplayAllData();
+	}
+
 	HWND createOrFocus(Actor* filter) {
 		auto hWnd = ghWnd::get();
 		if (hWnd) {
@@ -32,6 +60,28 @@ namespace se::cs::dialog::dialogue_window {
 		return CreateDialogParamA(window::main::hInstance::get(), (LPSTR)DIALOG_ID, window::main::ghWnd::get(), (DLGPROC)0x401334, (LPARAM)filter);
 	}
 
+	void selectTab(DialogueType type) {
+		const auto hWnd = ghWnd::get();
+		if (hWnd == NULL) {
+			return;
+		}
+
+		auto hTabControl = GetDlgItem(hWnd, CONTROL_ID_TOPIC_TABS);
+		if (hTabControl == NULL) {
+			return;
+		}
+
+		unsigned int index = (unsigned int)type;
+
+		// Note: This is currently being relied on to always call the UI update code for above filter changes.
+		// If optimizing this function to just use TabCtrl_SetCurSel, be sure to modify the focusDialogue function.
+		winui::TabCtrl_SetCurSelEx(hTabControl, index);
+	}
+
+	void selectTab(Dialogue* dialogue) {
+		selectTab(dialogue->type);
+	}
+
 	bool focusDialogue(Dialogue* dialogue, DialogueInfo* info) {
 		using namespace se::cs::winui;
 
@@ -39,6 +89,38 @@ namespace se::cs::dialog::dialogue_window {
 		if (hWnd == NULL) {
 			return false;
 		}
+
+		// If the dialog isn't modified and we're filtered to it, make sure it still shows.
+		if (!dialogue->getModified() && modeShowModifiedOnly) {
+			modeShowModifiedOnly = false;
+		}
+
+		// If the dialogue/info isn't available for the current filter actor, remove that too.
+		auto userData = reinterpret_cast<DialogueWindowData*>(GetWindowLongA(hWnd, GWL_USERDATA));
+		if (userData->currentFilterObject) {
+			if (info) {
+				if (!info->filter(userData->currentFilterObject, nullptr, 1, dialogue)) {
+					userData->currentFilterObject = nullptr;
+					ComboBox_SetCurSel(GetDlgItem(hWnd, CONTROL_ID_FILTER_FOR_COMBO), 0);
+				}
+			}
+			else {
+				bool hasValidInfo = false;
+				for (const auto& topic : dialogue->topics) {
+					if (topic->filter(userData->currentFilterObject, nullptr, 1, dialogue)) {
+						hasValidInfo = true;
+						break;
+					}
+				}
+				if (!hasValidInfo) {
+					userData->currentFilterObject = nullptr;
+					ComboBox_SetCurSel(GetDlgItem(hWnd, CONTROL_ID_FILTER_FOR_COMBO), 0);
+				}
+			}
+		}
+
+		// Select the right tab.
+		selectTab(dialogue);
 
 		const auto hDlgTopicList = GetDlgItem(hWnd, CONTROL_ID_TOPIC_LIST);
 		if (!ListView_SelectByParam(hDlgTopicList, (LPARAM)dialogue)) {
@@ -309,8 +391,6 @@ namespace se::cs::dialog::dialogue_window {
 	//
 	// Patch: Allow filtering of topic list.
 	//
-
-	static bool modeShowModifiedOnly = false;
 
 	bool PatchFilterTopicList(const Dialogue* topic) {
 		if (modeShowModifiedOnly && !topic->getModified()) {
@@ -826,12 +906,8 @@ namespace se::cs::dialog::dialogue_window {
 		case BN_CLICKED:
 			switch (id) {
 			case CONTROL_ID_SHOW_MODIFIED_ONLY_BUTTON:
-				modeShowModifiedOnly = SendDlgItemMessage(hWnd, id, BM_GETCHECK, 0, 0);
-
-				// Invoke update logic by simulating the combo box selection changing.
-				// There may be a better way.
-				auto hFilterCombo = GetDlgItem(hWnd, CONTROL_ID_FILTER_FOR_COMBO);
-				SendMessage(hWnd, WM_COMMAND, MAKEWPARAM(CONTROL_ID_FILTER_FOR_COMBO, CBN_SELCHANGE), (LPARAM)hFilterCombo);
+				modeShowModifiedOnly = SendDlgItemMessageA(hWnd, id, BM_GETCHECK, 0, 0);
+				redisplayAllData();
 				break;
 			}
 			break;

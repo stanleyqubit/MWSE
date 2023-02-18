@@ -133,6 +133,26 @@ namespace se::cs::winui {
 		return std::move(text);
 	}
 
+	std::optional<int> GetDlgItemSignedInt(HWND hWnd, UINT nIDDlgItem) {
+		BOOL successful;
+		auto result = GetDlgItemInt(hWnd, nIDDlgItem, &successful, TRUE);
+		if (!successful) {
+			return {};
+		}
+
+		return (int)result;
+	}
+
+	std::optional<unsigned int> GetDlgItemUnsignedInt(HWND hWnd, UINT nIDDlgItem) {
+		BOOL successful;
+		auto result = GetDlgItemInt(hWnd, nIDDlgItem, &successful, FALSE);
+		if (!successful) {
+			return {};
+		}
+
+		return result;
+	}
+
 	//
 	// ComboBox
 	//

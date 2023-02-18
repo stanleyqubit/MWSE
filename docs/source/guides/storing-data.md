@@ -27,11 +27,11 @@ Besides saving your data to files, you can save your data to some of the MWSE's 
 !!! note
 	Both `data` and `tempData` tables can only be used to store *serializible* data.
 
-Data stored in the `data` table on a certain object will persist between savegame sessions, while data stored in `tempData` table will be cleared on game reload. There are some peculiarities when working with these tables - each of the table fields needs to be declared one by one.
+Data stored in the `data` table on a certain object will persist between savegame sessions, while data stored in `tempData` table will be cleared on game reload. There are some peculiarities when working with these tables - each of the table fields needs to be declared one by one. In addition, not every object can have Lua data. You can check that with `myRef.supportsLuaData` property.
 
 
 !!! example "Example: creating a table inside `data` table on the player's reference"
-	```Lua
+	```lua
 	-- Correct way
 	tes3.player.data.myMod = {}
 	tes3.player.data.myMod.var1 = {}
@@ -63,7 +63,7 @@ The field `data` on the player's reference could be the perfect way to store som
 
 Here an example of a simple mod is given which stores some variables to `tes3.player.data` and `tes3.player.tempData`.
 
-```Lua
+```lua
 local shrineIds = {
 	["fields of kummu"] = true,
 	["vivec, temple"] = true,

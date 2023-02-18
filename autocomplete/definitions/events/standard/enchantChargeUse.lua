@@ -20,6 +20,16 @@ return {
 			type = "boolean",
 			description = "True if the calculation is for a on-strike or on-use action, false if for UI enchant charge display. The type of action is found at `e.source.castType`.",
 		},
+		["item"] = {
+			type = "tes3item",
+			readOnly = true,
+			description = "Only available when isCast is true. The item used to cast the enchantment.",
+		},
+		["itemData"] = {
+			type = "tes3itemData",
+			readOnly = true,
+			description = "Only available when isCast is true. The item data of the item used to cast the enchantment.",
+		},
 	},
 	filter = "caster",
 }

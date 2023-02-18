@@ -16,4 +16,9 @@ namespace se::cs {
 		}
 		return nullptr;
 	}
+
+	bool DialogueInfo::filter(Object* actor, Reference* reference, int source, Dialogue* dialogue) const {
+		const auto TES3_DialogueInfo_filter = reinterpret_cast<bool(__thiscall*)(const DialogueInfo*, Object*, Reference*, int, Dialogue*)>(0x402BB7);
+		return TES3_DialogueInfo_filter(this, actor, reference, source, dialogue);
+	}
 }

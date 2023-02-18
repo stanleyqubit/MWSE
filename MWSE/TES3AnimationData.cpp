@@ -9,6 +9,19 @@
 #include "LuaPlayAnimationGroupEvent.h"
 
 namespace TES3 {
+	constexpr float fixedPointSpeedScale = 256.0f;
+
+	const auto TES3_AnimationData_ctor = reinterpret_cast<void(__thiscall*)(AnimationData*)>(0x46B7A0);
+	AnimationData* AnimationData::ctor() {
+		// Call original function.
+		TES3_AnimationData_ctor(this);
+
+		// Initialize custom data.
+		patchedCastSpeed = (unsigned short)(1 * fixedPointSpeedScale);
+
+		return this;
+	}
+
 	const auto TES3_AnimationData_playAnimationGroupForIndex = reinterpret_cast<void(__thiscall*)(AnimationData*, int, int, int, int)>(0x470AE0);
 	void AnimationData::playAnimationGroupForIndex(int animationGroup, int triIndex, int startFlag, int loopCount) {
 		if (mwse::lua::event::PlayAnimationGroupEvent::getEventEnabled()) {
@@ -64,6 +77,22 @@ namespace TES3 {
 
 	bool AnimationData::hasOverrideAnimations() const {
 		return keyframeLayers[0].lower != nullptr;
+	}
+
+	float AnimationData::getCastSpeed() const {
+		return patchedCastSpeed / fixedPointSpeedScale;
+	}
+
+	void AnimationData::setCastSpeed(float speed) {
+		speed = std::max(0.0f, std::min(255.0f, speed));
+		patchedCastSpeed = (unsigned short)(speed * fixedPointSpeedScale);
+
+		// Update current animation speed if currently casting.
+		constexpr unsigned char spellCastAnimID = 0x80;
+		if (currentAnimGroup[1] == spellCastAnimID) {
+			// Ensure non-zero weaponSpeed to bypass the actor controller resetting the value on zero.
+			weaponSpeed = speed + FLT_MIN;
+		}
 	}
 
 	std::reference_wrapper<decltype(AnimationData::currentAnimGroup)> AnimationData::getCurrentAnimGroups() {

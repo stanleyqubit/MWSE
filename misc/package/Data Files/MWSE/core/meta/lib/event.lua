@@ -40,6 +40,7 @@
 --- @field register fun(eventId: '"calcTrainingPrice"', callback: fun(e: calcTrainingPriceEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"calcTravelPrice"', callback: fun(e: calcTravelPriceEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"calcWalkSpeed"', callback: fun(e: calcWalkSpeedEventData): boolean?, options: table?)
+--- @field register fun(eventId: '"cameraControl"', callback: fun(e: cameraControlEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"cellActivated"', callback: fun(e: cellActivatedEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"cellChanged"', callback: fun(e: cellChangedEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"cellDeactivated"', callback: fun(e: cellDeactivatedEventData): boolean?, options: table?)

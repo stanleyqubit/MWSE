@@ -4,16 +4,17 @@
 #include "LuaUtil.h"
 
 #include "TES3Enchantment.h"
+#include "TES3ItemData.h"
 #include "TES3MobileActor.h"
 #include "TES3Reference.h"
 
 namespace mwse::lua::event {
-	EnchantChargeUseEvent::EnchantChargeUseEvent(TES3::Enchantment* enchant, TES3::MobileActor* caster, float chargeRequired, bool isCast) :
+	EnchantChargeUseEvent::EnchantChargeUseEvent(TES3::Enchantment* enchant, TES3::MobileActor* caster, TES3::MagicSourceInstance* magicSource, float chargeRequired) :
 		GenericEvent("enchantChargeUse"),
 		m_Enchant(enchant),
 		m_Caster(caster),
-		m_ChargeRequired(chargeRequired),
-		m_IsCast(isCast)
+		m_MagicSource(magicSource),
+		m_ChargeRequired(chargeRequired)
 	{
 
 	}
@@ -26,7 +27,12 @@ namespace mwse::lua::event {
 		eventData["caster"] = m_Caster->reference;
 		eventData["source"] = m_Enchant;
 		eventData["charge"] = m_ChargeRequired;
-		eventData["isCast"] = m_IsCast;
+		eventData["isCast"] = m_MagicSource != nullptr;
+
+		if (m_MagicSource) {
+			eventData["item"] = m_MagicSource->castingItem;
+			eventData["itemData"] = m_MagicSource->castingItemCondition;
+		}
 
 		return eventData;
 	}

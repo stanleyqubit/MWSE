@@ -52,6 +52,7 @@ namespace mwse::lua {
 			//usertypeDefinition["animationGroupSoundgens"] = sol::readonly_property(&TES3::AnimationData::getAnimationGroupSoundgens);
 			usertypeDefinition["animGroupLayerIndicies"] = sol::readonly_property(&TES3::AnimationData::getAnimGroupLayerIndicies);
 			usertypeDefinition["approxRootTravelSpeeds"] = sol::readonly_property(&TES3::AnimationData::getApproxRootTravelSpeeds);
+			usertypeDefinition["castSpeed"] = sol::property(&TES3::AnimationData::getCastSpeed, &TES3::AnimationData::setCastSpeed);
 			usertypeDefinition["currentAnimGroupLayers"] = sol::readonly_property(&TES3::AnimationData::getCurrentAnimGroupLayers);
 			usertypeDefinition["currentAnimGroups"] = sol::readonly_property(&TES3::AnimationData::getCurrentAnimGroups);
 			usertypeDefinition["currentNodeIndices"] = sol::readonly_property(&TES3::AnimationData::getCurrentNodeIndices);
@@ -75,7 +76,7 @@ namespace mwse::lua {
 			usertypeDefinition["timings"] = sol::readonly_property(&TES3::AnimationData::getTimings);
 			usertypeDefinition["weaponSpeed"] = &TES3::AnimationData::weaponSpeed;
 
-			// Basic function bondings.
+			// Basic function bindings.
 			usertypeDefinition["getReference"] = &TES3::AnimationData::getReference;
 			usertypeDefinition["playAnimationGroup"] = &TES3::AnimationData::playAnimationGroup;
 			usertypeDefinition["playAnimationGroupForIndex"] = &TES3::AnimationData::playAnimationGroupForIndex;

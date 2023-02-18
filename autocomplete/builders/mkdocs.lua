@@ -40,14 +40,15 @@ common.compilePath(lfs.join(common.pathDefinitions, "events", "standard"), event
 --
 
 ---@param packages package[]
-local function getDeprecatedCount(packages)
-	local count = 0
-	for _, pack in ipairs(packages) do
-		if pack.deprecated then
-			count = count + 1
+---@return package[] packages The provided packages without the deprecated fields.
+local function removeDeprecated(packages)
+	for i, package in ipairs(packages) do
+		if package.deprecated then
+			packages[i] = nil
 		end
 	end
-	return count
+	-- Make sure there are no gaps in the returned array
+	return table.values(packages)
 end
 
 local function buildParentChain(className)
@@ -176,7 +177,7 @@ local operatorToTitle = {
 	div = "Division (`/`)",
 	idiv = "Floor division (`//`)",
 	mod = "Modulo (`%`)",
-	pow = "Exponentation (`^`)",
+	pow = "Exponentiation (`^`)",
 	concat = "Concatenation (`..`)",
 	len = "Length (`#`)",
 }
@@ -203,6 +204,39 @@ local function writeOperatorPackage(file, operator, package)
 	file:write("\n")
 end
 
+--- This function is used to write out properties, methods, functions, and operators of a package.
+---@param file file* The file to write to.
+---@param package package The package whose fields that will be written out.
+---@param field string The name of the fields to write. Can be "values", "methods", "functions", and "operators"
+---@param fieldName string The name of the section for the fields.
+---@param writeFunction fun(file: file*, package: package, from: package) The function that write a single package definition.
+---@param writeRule boolean If true a horizontal rule will be written before the section.
+---@return boolean written True if at least one field was written to file.
+local function writeFields(file, package, field, fieldName, writeFunction, writeRule)
+	local fields = table.values(getPackageComponentsArray(package, field), sortPackagesByKey)
+	fields = removeDeprecated(fields)
+	local count = #fields
+
+	if (count > 0) then
+		if (writeRule) then
+			file:write("***\n\n")
+		end
+		file:write(string.format("## %s\n\n", fieldName))
+		for i, field in ipairs(fields) do
+			if (not field.deprecated) then
+				writeFunction(file, field, package)
+				if (i < count) then
+					file:write("***\n\n")
+				end
+			end
+		end
+		return true
+	end
+	return false
+end
+
+---@param file file*
+---@param package any
 local function writePackageDetails(file, package)
 	-- Write description.
 	file:write(string.format("%s\n\n", common.getDescriptionString(package)))
@@ -219,52 +253,31 @@ local function writePackageDetails(file, package)
 		file:write("!!! tip\n\tAn event can be claimed by setting `e.claim` to `true`, or by returning `false` from the callback. Claiming the event prevents any lower priority callbacks from being called.\n\n")
 	end
 
+	local needsHorizontalRule = false
+
 	-- Write out fields.
-	local values = table.values(getPackageComponentsArray(package, "values"), sortPackagesByKey)
-	if (#values > 0) then
-		file:write("## Properties\n\n")
-		for _, value in ipairs(values) do
-			if (not value.deprecated) then
-				writeSubPackage(file, value, package)
-				file:write("***\n\n")
-			end
-		end
-	end
+	needsHorizontalRule = (
+		writeFields(file, package, "values", "Properties", writeSubPackage, needsHorizontalRule)
+		or needsHorizontalRule
+	)
 
 	-- Write out methods.
-	local methods = table.values(getPackageComponentsArray(package, "methods"), sortPackagesByKey)
-	if (#methods > 0) then
-		file:write("## Methods\n\n")
-		for _, method in ipairs(methods) do
-			if (not method.deprecated) then
-				writeSubPackage(file, method, package)
-				file:write("***\n\n")
-			end
-		end
-	end
+	needsHorizontalRule = (
+		writeFields(file, package, "methods", "Methods", writeSubPackage, needsHorizontalRule)
+		or needsHorizontalRule
+	)
 
 	-- Write out functions.
-	local functions = table.values(getPackageComponentsArray(package, "functions"), sortPackagesByKey)
-	local deprecatedCount = getDeprecatedCount(functions)
-	if (#functions > 0 and #functions > deprecatedCount) then
-		file:write("## Functions\n\n")
-		for _, fn in ipairs(functions) do
-			if (not fn.deprecated) then
-				writeSubPackage(file, fn, package)
-				file:write("***\n\n")
-			end
-		end
-	end
+	needsHorizontalRule = (
+		writeFields(file, package, "functions", "Functions", writeSubPackage, needsHorizontalRule)
+		or needsHorizontalRule
+	)
 
 	-- Write out operators.
-	local operators = table.values(getPackageComponentsArray(package, "operators"), sortPackagesByKey)
-	if (#operators > 0) then
-		file:write("## Math Operations\n\n")
-		for _, operator in ipairs(operators) do
-			writeOperatorPackage(file, operator, package)
-			file:write("***\n\n")
-		end
-	end
+	needsHorizontalRule = (
+		writeFields(file, package, "operators", "Math Operations", writeOperatorPackage, needsHorizontalRule)
+		or needsHorizontalRule
+	)
 
 	local returns = common.getConsistentReturnValues(package)
 	if (package.type == "method" or package.type == "function") then
@@ -356,6 +369,45 @@ local function writePackageDetails(file, package)
 	end
 end
 
+local identifierStems = {
+	functions = {
+		"get", "set", "mod",
+		"is", "has", "can",
+		"open", "close",
+		"add", "remove",
+		"enable", "disable",
+		"apply", "update",
+		"find", "show",
+		"create", "delete",
+		"test", "toggle",
+	},
+	classes = {
+		"ni", "tes3ui", "tes3",
+	}
+}
+
+local function writeSearchTerms(file, key, stems)
+	-- Hidden search terms, to work around deficiencies in lunr.
+	-- Include lower-cased variants of the identifier.
+	-- Include lower-cased stemmed variant, unless it is a single character.
+	local stemmedKey = nil
+	for _, stem in ipairs(stems) do
+		if (key:startswith(stem) and key ~= stem) then
+			stemmedKey = string.sub(key, 1 + stem:len(), -1):lower()
+			break
+		end
+	end
+
+	file:write("<div class=\"search_terms\" style=\"display: none\">")
+	local lowercaseKey = key:lower()
+	if (stemmedKey and stemmedKey:len() > 1) then
+		file:write(string.format("%s, %s", lowercaseKey, stemmedKey))
+	else
+		file:write(string.format("%s", lowercaseKey))
+	end
+	file:write("</div>\n\n")
+end
+
 writeSubPackage = function(file, package, from)
 	-- Don't document deprecated APIs on the website.
 	if (package.deprecated) then
@@ -366,7 +418,10 @@ writeSubPackage = function(file, package, from)
 	if (from.type == "lib") then
 		key = string.format("%s.%s", from.namespace, package.key)
 	end
-	file:write(string.format("### `%s`\n\n", key))
+
+	-- Add title and hidden search terms.
+	file:write(string.format("### `%s`\n", key))
+	writeSearchTerms(file, package.key, identifierStems.functions)
 
 	writePackageDetails(file, package)
 end
@@ -378,13 +433,19 @@ local function build(package, outDir)
 	-- Get the package.
 	local outPath = lfs.join(docsSourceFolder, outDir, package.namespace .. ".md")
 
-	-- Create the file. Make it clear this is auto-generated.
+	-- Create the file.
 	local file = assert(io.open(outPath, "w"))
+
+	-- Add title and hidden search terms. The heading has to be before any other line to be recognized as the title.
+	-- This avoids mkdocs using the auto-capitalized filename as the sidebar title.
+	file:write(string.format("# %s\n", package.namespace))
+	writeSearchTerms(file, package.namespace, identifierStems.classes)
+
+	-- Make it clear this is auto-generated.
 	file:write("<!---\n")
 	file:write("\tThis file is autogenerated. Do not edit this file manually. Your changes will be ignored.\n")
 	file:write("\tMore information: https://github.com/MWSE/MWSE/tree/master/docs\n")
 	file:write("-->\n\n")
-	file:write(string.format("# %s\n\n", package.namespace))
 
 	-- Warn of deprecated packages.
 	if (package.deprecated) then

@@ -2,7 +2,6 @@ local util = require("dependencyManagement.util")
 local function isArchiveActive(archive)
     local loadedArchives = tes3.getArchiveList()
     for _, loadedArchive in ipairs(loadedArchives) do
-        ---@diagnostic disable-next-line
         if loadedArchive:lower() == "data files\\".. archive:lower() then
             return true
         end

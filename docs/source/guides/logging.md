@@ -7,6 +7,7 @@ The MWSE Logger library allows you to register a logger for your mod. It provide
 - Log messages can be color coded according to log level (via MWSE MCM)
 - Optional setting to print messages to a separate log file
 - Optional setting to print messages to the in-game console
+- Optional setting to print messages with a timestamp prepended
 
 ## Log Levels
 
@@ -33,6 +34,7 @@ local log = logger.new{
 	name = "Test Mod",
 	logLevel = "TRACE",
 	logToConsole = true,
+	includeTimestamp = true,
 }
 log:trace("This is a trace message")
 log:debug("This is a debug message")

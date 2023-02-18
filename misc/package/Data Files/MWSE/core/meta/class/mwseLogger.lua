@@ -4,6 +4,7 @@
 --- @meta
 --- A logging class. Needs to be required before use. See [this guide](https://mwse.github.io/MWSE/guides/logging/).
 --- @class mwseLogger
+--- @field includeTimestamp boolean If set to `true`, all the logged messages will include a timestamp.
 --- @field logToConsole boolean If `true`, all the logged messages will also be logged to console.
 --- @field name string Name of the mod, also counts as unique id of the logger.
 mwseLogger = {}

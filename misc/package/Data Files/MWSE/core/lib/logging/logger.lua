@@ -13,6 +13,7 @@ local ansicolors = require("logging.colors")
 ---@field outputFile string? Optional. If set, logs will be sent to a file of this name
 ---@field logLevel mwseLoggerLogLevel? Set the log level. Options are: TRACE, DEBUG, INFO, WARN, ERROR and NONE
 ---@field logToConsole boolean? Default: `false`. If set to `true`, all the logged messages will also be logged to console
+---@field includeTimestamp boolean? Default: `false`. If set to `true`, all the logged messages will include a timestamp
 
 --[[
 	A logger class that can be registered by multiple mods.
@@ -54,6 +55,8 @@ end
 --- `logLevel`: mwseLoggerLogLevel? Set the log level. Options are: TRACE, DEBUG, INFO, WARN, ERROR and NONE
 ---
 --- `logToConsole` boolean? Default: `false`. If set to `true`, all the messages will be logged to console
+---
+--- `includeTimestamp` boolean? Default: `false`. If set to `true`, all the messages will include a timestamp
 ---@return mwseLogger
 function Logger.new(data)
 	local newLogger = table.copy(data) ---@type mwseLogger
@@ -118,6 +121,19 @@ end
 ---@param ...  any?
 function Logger:write(logLevel, color, message, ...)
 	local output = string.format("[%s: %s] %s", self.name, logLevel, tostring(message):format(...))
+    if self.includeTimestamp then
+        local socket = require("socket")
+        local timestamp = socket.gettime()
+        local milliseconds = math.floor((timestamp % 1) * 1000)
+        timestamp = math.floor(timestamp)
+
+        -- convert timestamp to a table containing time components
+        local timeTable = os.date("*t", timestamp)
+
+        -- format time components into H:M:S:MS string
+        local formattedTime = string.format("%02d:%02d:%02d.%03d", timeTable.hour, timeTable.min, timeTable.sec, milliseconds)
+        output = string.format("[%s] %s", formattedTime, output)
+    end
 
 	-- Add log colors if enabled
 	if mwse.getConfig("EnableLogColors") then

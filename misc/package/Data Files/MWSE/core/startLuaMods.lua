@@ -1,5 +1,5 @@
 local logger = require("logging.logger")
-local dependencyManagerModule = require("Metadata.DependencyManager")
+local dependencyManagerModule = require("dependencyManagement.DependencyManager")
 
 local function execLuaMod(runtime)
 	-- Check for dependencies if we need to.

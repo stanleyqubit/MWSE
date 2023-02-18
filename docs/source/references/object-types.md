@@ -21,7 +21,9 @@ alchemy               | `1212369985` | ALCH    | Alchemy
 ammunition            | `1330466113` | AMMO    | Ammunition
 apparatus             | `1095782465` | APPA    | Apparatus
 armor                 | `1330467393` | ARMO    | Armor
+bodyPart              | `1497648962` | BODY    | Body Part
 book                  | `1263488834` | BOOK    | Book
+class                 | `1396788291` | CLAS    | Class
 clothing              | `1414483011` | CLOT    | Clothing
 container             | `1414418243` | CONT    | Container
 creature              | `1095062083` | CREA    | Creature
@@ -44,7 +46,6 @@ soundGenerator        | `1195658835` | SNDG    | Sound Generator
 spell                 | `1279610963` | SPEL    | Spell
 static                | `1413567571` | STAT    | Static
 weapon                | `1346454871` | WEAP    | Weapon
-class                 | `1396788291` |         | Class
 mobileActor           | `1413693773` |         | Mobile Actor
 mobileCreature        | `1380139341` |         | Mobile Creature
 mobileNPC             | `1212367181` |         | Mobile NPC

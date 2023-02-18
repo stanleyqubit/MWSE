@@ -122,10 +122,17 @@ end
 function Logger:write(logLevel, color, message, ...)
 	local output = string.format("[%s: %s] %s", self.name, logLevel, tostring(message):format(...))
     if self.includeTimestamp then
-        local timestamp = os.clock()
-        local seconds = math.floor(timestamp)
-        local milliseconds = math.floor((timestamp - seconds) * 1000)
-        output = string.format("[%s.%03d] %s", os.date("%H:%M:%S", seconds), milliseconds, output)
+        local socket = require("socket")
+        local timestamp = socket.gettime()
+        local milliseconds = math.floor((timestamp % 1) * 1000)
+        timestamp = math.floor(timestamp)
+
+        -- convert timestamp to a table containing time components
+        local timeTable = os.date("*t", timestamp)
+
+        -- format time components into H:M:S:MS string
+        local formattedTime = string.format("%02d:%02d:%02d.%03d", timeTable.hour, timeTable.min, timeTable.sec, milliseconds)
+        output = string.format("[%s] %s", formattedTime, output)
     end
 
 	-- Add log colors if enabled

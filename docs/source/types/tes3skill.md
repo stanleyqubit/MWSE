@@ -55,6 +55,17 @@ The blocked state of the object.
 
 ***
 
+### `description`
+<div class="search_terms" style="display: none">description</div>
+
+Loads from disk and returns the description of the skill.
+
+**Returns**:
+
+* `result` (string)
+
+***
+
 ### `disabled`
 <div class="search_terms" style="display: none">disabled</div>
 

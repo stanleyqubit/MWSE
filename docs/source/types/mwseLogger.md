@@ -10,6 +10,17 @@ A logging class. Needs to be required before use. See [this guide](https://mwse.
 
 ## Properties
 
+### `includeTimestamp`
+<div class="search_terms" style="display: none">includetimestamp</div>
+
+If set to `true`, all the logged messages will include a timestamp.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
 ### `logToConsole`
 <div class="search_terms" style="display: none">logtoconsole</div>
 

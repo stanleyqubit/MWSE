@@ -11,16 +11,6 @@ local reasons = {
             }
         }
     end,
-    outOfDate = function(_)
-        return {
-            {
-                title = "MGE XE is out of date",
-                reasons = {
-                    "MGE XE is out of date"
-                }
-            }
-        }
-    end,
     invalidTargetVerion = function(targetVersion)
         return {
             {

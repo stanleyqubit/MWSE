@@ -22,7 +22,6 @@ local reasons = {
 local function getDownloadButton(modId, dependency, text)
     if dependency.url then
         if not util.isValidUrl(dependency.url) then
-            mwse.log(string.format("Invalid url for dependency %s: %s", modId, dependency.url))
             return false
         end
         return {
@@ -30,7 +29,6 @@ local function getDownloadButton(modId, dependency, text)
             tooltip = string.format('Go to "%s"', dependency.url),
             callback = function()
                 local downloadExe = string.format('start %s', dependency.url)
-                mwse.log("Executing command: %s", downloadExe)
                 os.execute(downloadExe)
                 os.exit()
             end

@@ -1589,7 +1589,7 @@ local result = tes3.getAnimationTiming({ reference = ... })
 ### `tes3.getArchiveList`
 <div class="search_terms" style="display: none">getarchivelist, archivelist</div>
 
-Returns a 1-indexed table of active archives.
+Returns a 1-indexed table of active archives. The paths are relative to Morrowind folder. For example: "Data Files\\Tribunal.bsa".
 
 ```lua
 local archives = tes3.getArchiveList()
@@ -1597,7 +1597,7 @@ local archives = tes3.getArchiveList()
 
 **Returns**:
 
-* `archives` ([tes3archive](../../types/tes3archive)[])
+* `archives` (string[])
 
 ***
 

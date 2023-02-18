@@ -949,8 +949,8 @@ function tes3.getAnimationTiming(params) end
 --- @class tes3.getAnimationTiming.params
 --- @field reference tes3reference|tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string A reference whose animation groups' timings to fetch.
 
---- Returns a 1-indexed table of active archives.
---- @return tes3archive[] archives No description yet available.
+--- Returns a 1-indexed table of active archives. The paths are relative to Morrowind folder. For example: "Data Files\\Tribunal.bsa".
+--- @return string[] archives No description yet available.
 function tes3.getArchiveList() end
 
 --- Fetches an attachment with a given type from a reference. Will return `nil` if no attachment of that type has been found.

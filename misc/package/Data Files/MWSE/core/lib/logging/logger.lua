@@ -3,7 +3,7 @@ local ansicolors = require("logging.colors")
 ---@alias mwseLoggerLogLevel
 ---|  "TRACE"
 ---|  "DEBUG"
----|> "INFO" # The default log level
+---|> "INFO" # The dafault log level
 ---|  "WARN"
 ---|  "ERROR"
 ---|  "NONE"
@@ -13,6 +13,7 @@ local ansicolors = require("logging.colors")
 ---@field outputFile string? Optional. If set, logs will be sent to a file of this name
 ---@field logLevel mwseLoggerLogLevel? Set the log level. Options are: TRACE, DEBUG, INFO, WARN, ERROR and NONE
 ---@field logToConsole boolean? Default: `false`. If set to `true`, all the logged messages will also be logged to console
+---@field includeTimestamp boolean? Default: `false`. If set to `true`, all the logged messages will include a timestamp
 
 --[[
 	A logger class that can be registered by multiple mods.
@@ -54,6 +55,8 @@ end
 --- `logLevel`: mwseLoggerLogLevel? Set the log level. Options are: TRACE, DEBUG, INFO, WARN, ERROR and NONE
 ---
 --- `logToConsole` boolean? Default: `false`. If set to `true`, all the messages will be logged to console
+---
+--- `includeTimestamp` boolean? Default: `false`. If set to `true`, all the messages will include a timestamp
 ---@return mwseLogger
 function Logger.new(data)
 	local newLogger = table.copy(data) ---@type mwseLogger
@@ -118,6 +121,12 @@ end
 ---@param ...  any?
 function Logger:write(logLevel, color, message, ...)
 	local output = string.format("[%s: %s] %s", self.name, logLevel, tostring(message):format(...))
+    if self.includeTimestamp then
+        local timestamp = os.clock()
+        local seconds = math.floor(timestamp)
+        local milliseconds = math.floor((timestamp - seconds) * 1000)
+        output = string.format("[%s.%03d] %s", os.date("%H:%M:%S", seconds), milliseconds, output)
+    end
 
 	-- Add log colors if enabled
 	if mwse.getConfig("EnableLogColors") then

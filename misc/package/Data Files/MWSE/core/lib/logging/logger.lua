@@ -3,7 +3,7 @@ local ansicolors = require("logging.colors")
 ---@alias mwseLoggerLogLevel
 ---|  "TRACE"
 ---|  "DEBUG"
----|> "INFO" # The dafault log level
+---|> "INFO" # The default log level
 ---|  "WARN"
 ---|  "ERROR"
 ---|  "NONE"

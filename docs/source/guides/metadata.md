@@ -8,7 +8,7 @@ The following sections will describe how to make a metadata file for your mod. A
 
 ## Creating a Metadata File
 
-First, create a new file in the `Data Files` directory. For an MWSE mod, the name has to have the following name format: `"<mwse-module>-metadata.toml"`. For example, if your main.lua file is located in `"Data Files\MWSE\mods\mySubfolder\myMod\main.lua"`, then your metadata file must be named `"mySubfolder.myMod-metadata.toml"`.
+First, create a new file in the `Data Files` directory. For an MWSE mod, the name has to have the following name format: `"<mwse-module>-metadata.toml"`. For example, if your main.lua file is located in `"Data Files\MWSE\mods\g7\myMod\main.lua"`, then your metadata file must be named `"Data Files\g7.myMod-metadata.toml"`.
 
 Metadata files are written in the TOML configuration file format. For more information on the TOML syntax, see the [TOML website](https://toml.io/en/).
 
@@ -22,11 +22,11 @@ The following fields are available:
 * `name` - The name of your mod.
 * `description` - A short description of your mod.
 * `homepage` - The URL of your mod's homepage, such as the NexusMods download page.
-* `repository` - The URL of your mod's repository.
+* `repository` - The URL of your mod's repository (e.g github) if you have one.
 * `authors` - A list of the authors of your mod.
 * `version` - The version of your mod, used for dependency checking
 
-At a minimum you should provide a `name` and `version`.
+At a minimum you should provide a `name` and `version`, and probably a `homepage`.
 
 Example:
 
@@ -34,8 +34,8 @@ Example:
     [package]
     name = "My Mod"
     description = "A description of the mod"
-    homepage = "google.com"
-    repository = "github.com"
+    homepage = "https://www.nexusmods.com/morrowind/mods/49658"
+    repository = "https://github.com/jhaakma/skoomaesthesia"
     authors = ["Merlord", "Greatness7"]
     version = "7.8.9"
 ```
@@ -46,9 +46,18 @@ The `version` field uses semver (Semantic Versioning) format. This consists of t
 
 For more information on semver, see the [semver website](https://semver.org/).
 
+When you are using a dependency, you can specify a minimum version using the following syntax:
+
+```toml
+    [dependencies.mods."My Dependency"]
+    version = ">=1.2.3"
+```
+
+Available dependency operators are: `=`, `>=`, `<=`, `>`, `<`.
+
 ## Dependencies
 
-The `[dependencies]` section of the metadata file is where you should list any dependencies your mod has. Dependencies are checked on `initialized` before your `main.lua` file is executed and will warn the player if any are missing.
+The `[dependencies]` section of the metadata file is where you should list any dependencies your mod has. Dependencies are checked before your `main.lua` file is executed and will warn the player if any are missing.
 
 The following dependencies are available:
 
@@ -100,15 +109,13 @@ The following dependencies are available:
 
 -  `mge-xe`
 
-    A dependency the MGE XE version.
+    A dependency the MGE XE version. This follows the same semver pattern as mod dependencies, so you should put `>=` before the version number to require a minimum version.
 
     The version is checked using the version string, which can be found in the second line of `MWSE.log` (ignore the last `.0`):
 
         Found MGE XE. Version: 0.15.0.0
 
     The version can also be checked using `mge.getVersion()` in the lua console.
-
-    Put `>=` before the version number to require a minimum version.
 
     Example:
 
@@ -177,8 +184,8 @@ The following dependencies are available:
 [package]
 name = "My Mod"
 description = "A description of the mod"
-homepage = "google.com"
-repository = "github.com"
+homepage = "https://www.nexusmods.com/morrowind/mods/49658"
+repository = "https://github.com/jhaakma/skoomaesthesia"
 authors = ["Merlord", "Greatness7"]
 version = "7.8.9"
 

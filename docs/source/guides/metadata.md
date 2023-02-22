@@ -4,7 +4,7 @@ A metadata file is a file that contains information about your mod, such as its 
 
 It is highly recommended you provide a metadata file for your mod. Not only will it allow users of your mod to be notified if any dependencies are missing, but it will also allow other mods to easily add your mod as a dependency as well.
 
-The following sections will describe how to make a metadata file for your mod.
+The following sections will describe how to make a metadata file for your mod. A full example is provided at the end.
 
 ## Creating a Metadata File
 
@@ -25,6 +25,8 @@ The following fields are available:
 * `repository` - The URL of your mod's repository.
 * `authors` - A list of the authors of your mod.
 * `version` - The version of your mod, used for dependency checking
+
+At a minimum you should provide a `name` and `version`.
 
 Example:
 
@@ -54,7 +56,7 @@ The following dependencies are available:
 
     A list of assets that your mod requires, such as sounds, textures and meshes. Assets can be directories or loose files. The path is relative to the `Data Files` directory.
 
-    ### Example:
+    Example:
 
     ```toml
         [dependencies]
@@ -70,7 +72,7 @@ The following dependencies are available:
 
     A list of archives (e.g BSA files) required by your mod and the assets they contain. This dependency will only fail if the BSA is inactive and the assets are missing. If the BSA has been unpacked manually, the assets will be found and the dependency will pass.
 
-    ### Example:
+    Example:
 
     ```toml
         [dependencies.archives]
@@ -89,7 +91,7 @@ The following dependencies are available:
 
     The buildnumber can also be checked using `mwse.buildNumber` in the lua console.
 
-    ### Example:
+    Example:
 
     ```toml
         [dependencies.mwse]
@@ -108,7 +110,7 @@ The following dependencies are available:
 
     Put `>=` before the version number to require a minimum version.
 
-    ### Example:
+    Example:
 
     ```toml
         [dependencies.mge-xe]
@@ -122,7 +124,7 @@ The following dependencies are available:
     Put the name of the dependency in the key, e.g `testDependency` in the following example:
 
     ```toml
-        [dependencies.mods.""]
+        [dependencies.mods."Test Dependency"]
     ```
 
     You can have spaces in the dependency like so:
@@ -137,7 +139,7 @@ The following dependencies are available:
 
         The name of the plugin (esp or esm) to check for.
 
-        ### Example:
+        Example:
 
         ```toml
             [dependencies.mods."OAAB Data"]
@@ -148,7 +150,7 @@ The following dependencies are available:
 
         The name of the lua mod to check for. This can be a file in `Data Files\MWSE\mods\` or `Data Files\MWSE\lib` etc, using the mwse module loading syntax (i.e, the string you would pass to `include` or `require` to load the mod).
 
-        ### Example:
+        Example:
 
         ```toml
             [dependencies.mods."My Lua mod"]
@@ -159,7 +161,7 @@ The following dependencies are available:
 
         The minimum version of the mod required. This is checked using the version field in the mod's metadata file.
 
-        ### Example:
+        Example:
 
         ```toml
             [dependencies.mods."My Other Mod"]

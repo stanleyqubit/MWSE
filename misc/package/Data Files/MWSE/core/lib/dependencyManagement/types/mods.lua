@@ -1,5 +1,4 @@
 local util = require("dependencyManagement.util")
-local Metadata = require("Metadata")
 
 local reasons = {
     plugin = function(dependency)
@@ -85,7 +84,7 @@ local function doVersionCheck(dependencyManager, mods, failures)
         if dependency.version then
 
             dependencyManager.logger:debug("Dependency version %s", dependency.version)
-            local metadata = Metadata.getMetadata(modId)
+            local metadata = toml.loadMetadata(modId)
             local modVersion = metadata and metadata.package and metadata.package.version
             if not modVersion then
                 local reason = reasons.missingMod(dependency)

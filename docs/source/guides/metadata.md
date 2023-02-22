@@ -174,6 +174,20 @@ The following dependencies are available:
             [dependencies.mods."My Other Mod"]
             version = ">=7.8.9"
         ```
+		
+	- `url`
+	
+		The url to download the missing/outdated mod dependency. If provided and this dependency fails, a button will appear in the failed dependency pop-up which will close the game and launch this URL in their browser.
+		
+		Example:
+		
+		```toml
+		    [dependencies.mods."My Other Mod"]
+			mwse-module = "mer.myOtherMod"
+			version = ">=7.8.9"
+			url = "https://www.nexusmods.com/morrowind/mods/52116"
+		
+		```
 
 ## Full Example
 

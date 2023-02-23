@@ -80,8 +80,8 @@ for _, runtime in ipairs(runtimes) do
 	local metadata_tools = metadata.tools or {}
 	local metadata_tools_mwse = metadata_tools.mwse or {}
 
-	runtime.load_priority = metadata_tools_mwse.load_priority or 0
-	runtime.wait_until_initialize = metadata_tools_mwse.wait_until_initialize or false
+	runtime.load_priority = table.get(metadata_tools_mwse, "load-priority", 0)
+	runtime.wait_until_initialize = table.get(metadata_tools_mwse, "wait-until-initialize", false)
 
 	-- Prepare a list of modules we require.
 	if (metadata.dependencies and metadata.dependencies.mods) then

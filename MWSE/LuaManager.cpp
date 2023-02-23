@@ -2434,6 +2434,74 @@ namespace mwse::lua {
 		OnSkillTrained_SkillId = -1;
 	}
 
+	void LuaManager::gatherModMetadata() {
+		sol::table luaMWSE = luaState["mwse"];
+		auto activeLuaMods = luaMWSE["activeLuaMods"];
+
+		// Try to match any mwse information from -metadata.toml files to an active lua mod.
+		for (const auto& p : std::filesystem::directory_iterator("Data Files", std::filesystem::directory_options::follow_directory_symlink)) {
+			auto lowerPath = p.path().string();
+			string::to_lower(lowerPath);
+
+			// We only care *-metadata.toml files.
+			if (!string::ends_with(lowerPath, "-metadata.toml")) {
+				continue;
+			}
+
+			// Load the metadata.
+			sol::safe_function_result metadata_result = luaState["toml"]["loadFile"](lowerPath);
+			if (metadata_result.valid()) {
+				sol::table metadata = metadata_result;
+				if (metadata == sol::nil) {
+					continue;
+				}
+
+				sol::table metadata_tools = metadata["tools"];
+				if (metadata_tools == sol::nil) {
+					continue;
+				}
+
+				sol::table metadata_tools_mwse = metadata_tools["mwse"];
+				if (metadata_tools_mwse == sol::nil) {
+					continue;
+				}
+
+				sol::optional<std::string> luaKey = metadata_tools_mwse["lua-mod"];
+				if (!luaKey) {
+					continue;
+				}
+
+				sol::table runtime = activeLuaMods[luaKey.value()];
+				if (runtime == sol::nil) {
+					continue;
+				}
+
+				// Make sure we don't already have a metadata assigned.
+				if (runtime["metadata"] != sol::nil) {
+					log::getLog() << "[LuaManager] WARNING: More than one metadata found claiming mod '" << luaKey.value() << "'." << std::endl;
+					continue;
+				}
+
+				runtime["metadata"] = metadata;
+			}
+			else {
+				sol::error error = metadata_result;
+				log::getLog() << "[LuaManager] ERROR: Could not parse mod metadata '" << p.path().string() << "':" << std::endl << error.what() << std::endl;
+				continue;
+			}
+		}
+	}
+
+	const std::array<std::string, 2> disabledMarkers = { ".disabled", ".mohidden" };
+
+	bool isPathDisabled(const std::string_view& path) {
+		const auto disabledPathItt = std::find_if(disabledMarkers.begin(), disabledMarkers.end(),
+			[&](const std::string& s) {
+				return path.find(s) != std::string::npos;
+			});
+		return disabledPathItt != disabledMarkers.end();
+	}
+
 	void LuaManager::gatherMainModScripts(const std::string_view& path, bool core, const std::string_view& filename) {
 		if (!std::filesystem::exists(path)) {
 			return;
@@ -2443,19 +2511,12 @@ namespace mwse::lua {
 		sol::table luaMWSE = luaState["mwse"];
 		auto activeLuaMods = luaMWSE["activeLuaMods"];
 
-		// Parent folder suffixes that we'll skip.
-		std::array<std::string, 2> disabledMarkers = { ".disabled", ".mohidden" };
-
 		auto subclassOrder = 0u;
 		for (const auto& p : std::filesystem::recursive_directory_iterator(path, std::filesystem::directory_options::follow_directory_symlink)) {
 			if (p.path().filename() == filename) {
 				// If a parent directory is marked .disabled, ignore files in it.
 				const auto pathString = p.path().string();
-				const auto disabledPathItt = std::find_if(disabledMarkers.begin(), disabledMarkers.end(),
-					[&](const std::string& s) {
-						return pathString.find(s) != std::string::npos;
-					});
-				if (disabledPathItt != disabledMarkers.end()) {
+				if (isPathDisabled(pathString)) {
 					log::getLog() << "[LuaManager] Skipping mod initializer in disabled directory: " << pathString << std::endl;
 					continue;
 				}
@@ -2479,20 +2540,6 @@ namespace mwse::lua {
 				runtime["core_mod"] = core;
 				runtime["legacy_mod"] = !string::equal(filename, "main.lua");
 				runtime["load_std_order"] = subclassOrder++;
-
-				// Find metadata if applicable.
-				sol::safe_function_result metadata_result = luaState["toml"]["loadMetadata"](luaModKey);
-				if (metadata_result.valid()) {
-					sol::optional<sol::table> metadata = metadata_result;
-					if (metadata) {
-						runtime["metadata"] = metadata.value();
-					}
-				}
-				else {
-					sol::error error = metadata_result;
-					log::getLog() << "[LuaManager] ERROR: Could not parse lua mod metadata for lua mod '" << luaModKey << "':" << std::endl << error.what() << std::endl;
-					continue;
-				}
 
 				activeLuaMods[luaModKey] = runtime;
 			}
@@ -5648,6 +5695,9 @@ namespace mwse::lua {
 		if (Configuration::EnableLegacyLuaMods) {
 			gatherMainModScripts("Data Files\\MWSE\\lua", false, "mod_init.lua");
 		}
+
+		// Gather any metadata for the mods.
+		gatherModMetadata();
 
 		// Finally execute the scripts.
 		executeMainModScripts();

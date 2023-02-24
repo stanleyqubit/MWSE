@@ -917,6 +917,10 @@ namespace mwse::patch {
 		// Patch: Always clone scene graph nodes.
 		writeValueEnforced(0x4EF9FB, BYTE(0x02), BYTE(0x00));
 
+		// Patch: Always copy all NiExtraData on clone, instead of only the first NiStringExtraData.
+		genJumpUnprotected(0x4E8295, 0x4E82BB);
+		genJumpUnprotected(0x4E82C4, 0x4E82CE);
+
 		// Patch: Update player first and third person animations when the idle flag is pausing the controller.
 		genCallUnprotected(0x41B836, reinterpret_cast<DWORD>(PatchUpdateAllIdles));
 

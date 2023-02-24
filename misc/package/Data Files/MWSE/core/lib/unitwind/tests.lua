@@ -105,6 +105,12 @@ if DO_POSITIVE_TESTS then
             error("This is an error")
         end).toFail()
     end)
+    unitwind:test("Test toFailWithError", function()
+        unitwind:expect(function()
+            error("This is an error")
+        end).toFailWithError("This is an error")
+    end)
+
     unitwind:test("Test NOT toFail", function()
         unitwind:expect(function()
             return true

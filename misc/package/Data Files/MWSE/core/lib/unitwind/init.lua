@@ -117,6 +117,25 @@ function UnitWind:expect(result)
             return true
         end,
 
+        toFailWithError = function(expectedError, isNot)
+            if not self.enabled then return false end
+            local status, res = pcall(result)
+            local errorMessage = string.match(res, ":%d+: (.*)") or res
+            if not isNot then
+                if status then
+                    error(string.format("Expected function to fail, but instead returned %s", res))
+                end
+                if errorMessage ~= expectedError then
+                    error(string.format("Expected function to fail with error %s, but instead failed with error: %s", expectedError, errorMessage))
+                end
+            else
+                if not status then
+                    error(string.format("Expected function to succeed, but it failed with error: %s", errorMessage))
+                end
+            end
+            return true
+        end,
+
         toBeCalled = function(_, isNot)
             if not self.enabled then return false end
             if not result._mockCalls then
@@ -218,6 +237,7 @@ function UnitWind:expect(result)
     ---@field toBe fun(expectedResult: any, isNot: boolean?): boolean #Check if the result is equal to the expected value
     ---@field toBeType fun(expectedType: string, isNot: boolean?): boolean #Check if the result is of the expected type
     ---@field toFail fun(isNot: boolean?): boolean #Check if the result is a function that fails
+    ---@field toFailWithError fun(expectedError: string, isNot: boolean?): boolean #Check if the result is a function that fails with the expected error
     ---@field toBeCalled fun(isNot: boolean?): boolean #Check if the result is a mock function that has been called
     ---@field toBeCalledTimes fun(expectedTimes: number, isNot: boolean?): boolean #Check if the result is a mock function that has been called the expected number of times
     ---@field toBeCalledWith fun(expectedArgs: any, isNot: boolean?): boolean #Check if the result is a mock function that has been called with the expected arguments
@@ -228,6 +248,7 @@ function UnitWind:expect(result)
     ---@field toBe fun(expectedResult: any, isNot: boolean?): boolean #Check if the result is not equal to the expected value
     ---@field toBeType fun(expectedType: string, isNot: boolean?): boolean #Check if the result is not of the expected type
     ---@field toFail fun(isNot: boolean?): boolean #Check if the result is a function that succeeds
+    ---@field toFailWithError fun(expectedError: string, isNot: boolean?): boolean #Check if the result is a function that succeeds or fails with a different error
     ---@field toBeCalled fun(isNot: boolean?): boolean #Check if the result is a mock function that has not been called
     ---@field toBeCalledTimes fun(expectedTimes: number, isNot: boolean?): boolean #Check if the result is a mock function that has not been called the expected number of times
     ---@field toBeCalledWith fun(expectedArgs: any, isNot: boolean?): boolean #Check if the result is a mock function that has not been called with the expected arguments
@@ -487,6 +508,7 @@ function UnitWind:reset()
     self.testsFailed = 0
     self.completedTests = {}
     self:clearMocks()
+    self:clearSpies()
 end
 
 --Finish all tests and print the results

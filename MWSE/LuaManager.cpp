@@ -2471,6 +2471,9 @@ namespace mwse::lua {
 					continue;
 				}
 
+				// Ensure that keys are lowercased for lookup.
+				string::to_lower(luaKey.value());
+
 				sol::table runtime = activeLuaMods[luaKey.value()];
 				if (runtime == sol::nil) {
 					continue;

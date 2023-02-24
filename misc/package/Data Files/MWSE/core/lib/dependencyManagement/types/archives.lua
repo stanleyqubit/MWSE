@@ -11,8 +11,12 @@ end
 
 return {
     id = "archives",
+    ---@param _ DependencyManager
+    ---@param archives table<string, string[]>
     checkDependency = function(_, archives)
         local failures = {}
+        ---@param archive string
+        ---@param assets string[]
         for archive, assets in pairs(archives) do
             local missingAssets = {}
             if not isArchiveActive(archive) then

@@ -1,3 +1,8 @@
+---Mod dependency - checks if a mod is installed and active
+---@class MWSE.Metadata.Dependency.Mod : MWSE.Metadata.Dependency
+---@field plugin string
+---@field version string
+
 local util = require("dependencyManagement.util")
 
 local reasons = {
@@ -50,6 +55,9 @@ local function insertReason(e)
     table.insert(e.failures[e.modId].reasons, e.reason)
 end
 
+---@param dependencyManager DependencyManager
+---@param mods table<string, MWSE.Metadata.Dependency.Mod>
+---@param failures MWSE.DependencyType.Failure[]
 local function doPluginCheck(dependencyManager, mods, failures)
     dependencyManager.logger:debug("Checking plugins")
     for modId, dependency in pairs(mods) do
@@ -76,13 +84,15 @@ local function doPluginCheck(dependencyManager, mods, failures)
     return failures
 end
 
+---@param dependencyManager DependencyManager
+---@param mods table<string, MWSE.Metadata.Dependency.Mod>
+---@param failures MWSE.DependencyType.Failure[]
 local function doVersionCheck(dependencyManager, mods, failures)
     dependencyManager.logger:debug("Checking mod versions")
     for modId, dependency in pairs(mods) do
         dependencyManager.logger:debug("mod: %s", modId)
          --check version
         if dependency.version then
-
             dependencyManager.logger:debug("Dependency version %s", dependency.version)
             local metadata = toml.loadMetadata(modId)
             local modVersion = metadata and metadata.package and metadata.package.version
@@ -134,13 +144,15 @@ local function doVersionCheck(dependencyManager, mods, failures)
     end
 end
 
+---@param dependencyManager DependencyManager
+---@param mods table<string, MWSE.Metadata.Dependency.Mod>
+---@param failures MWSE.DependencyType.Failure[]
 local function doModuleCheck(dependencyManager, mods, failures)
     dependencyManager.logger:debug("Checking mwse modules")
     for modId, dependency in pairs(mods) do
         dependencyManager.logger:debug("mod: %s", modId)
         --check module
         if dependency["mwse-module"] then
-
             dependencyManager.logger:debug("Checking mwse module %s", dependency["mwse-module"])
             local path = dependency["mwse-module"]:gsub("[/.]", "\\"):lower()
             local packagePaths = package.path:gsub("%?%.lua", "?")

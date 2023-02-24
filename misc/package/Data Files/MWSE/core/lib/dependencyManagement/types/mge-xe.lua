@@ -1,3 +1,7 @@
+---MGE XE Dependency - checks the version of MGE XE
+---@class MWSE.Metadata.Dependency.MGE-XE : MWSE.Metadata.Dependency
+---@field version string The version of MGE XE to check for. Can be a specific version, or a comparison operator and version. E,g ">= 1.0.0"
+
 local util = require("dependencyManagement.util")
 
 local reasons = {
@@ -43,15 +47,12 @@ local reasons = {
     end
 }
 
----@class MWSE.DependencyType.MGE_XE
----@field version string The version of MGE XE to check for. Can be a specific version, or a comparison operator and version. E,g ">= 1.0.0"
 return {
     id = "mge-xe",
     logLevel = "DEBUG",
     ---@param dependencyManager DependencyManager
-    ---@param mgeDependency MWSE.DependencyType.MGE_XE
+    ---@param mgeDependency MWSE.Metadata.Dependency.MGE-XE
     checkDependency = function(dependencyManager, mgeDependency)
-
         if not mgeDependency.version then return true end
         local mgeVersionTable = mge.getVersion()
         if not mgeVersionTable then

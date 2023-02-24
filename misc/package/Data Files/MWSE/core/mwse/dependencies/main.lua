@@ -3,7 +3,7 @@ local DependencyNotifier = require("dependencyManagement.DependencyNotifier")
 local DependencyManager = require("dependencyManagement.DependencyManager")
 local LOG_LEVEL = "INFO"
 local logger = require("logging.logger").new{
-    name = "Register Dependency Types",
+    name = "Dependencies",
     logLevel = LOG_LEVEL
 }
 local function isLuaFile(file) return file:sub(-4, -1) == ".lua" end
@@ -28,23 +28,65 @@ for file in lfs.dir(path) do
     end
 end
 
+local function checkDependencies()
+    if not mwse.getConfig("EnableDependencyChecks") then return end
+    logger:debug("Checking dependencies")
+    ---@param file string
+    local function isMetadataFile(file)
+        file = file:lower()
+        --ends in `-metadata.toml`
+        return file:endswith("-metadata.toml")
+    end
+    --[[
+        For each `-metadata.toml` file in Data Files,
+        that do not have a `tools.mwse.lua-mod` field,
+        create a dependency manager for it and check dependencies
+    ]]
+    local path = "Data Files"
+    for file in lfs.dir(path) do
+        if file ~= "." and file ~= ".." then
+            if isMetadataFile(file) then
+                logger:debug("Found metadata file: %s", file)
+                local filePath = path .. "\\" .. file
+                local metadata = toml.loadFile(filePath)
+                if metadata then
+                    logger:debug("Checking dependencies for: %s", metadata.package.name)
+                    local manager = DependencyManager.new {
+                        metadata = metadata,
+                        logLevel = LOG_LEVEL
+                    }
+                    manager:checkDependencies()
+                else
+                    logger:error("Could not load metadata file: %s", file)
+                end
+            end
+        end
+    end
+end
+checkDependencies()
+
+local function showNextMessage()
+    local manager = table.remove(DependencyManager.registeredManagers, 1)
+    if manager and manager.failedDependencies then
+        local notifier = DependencyNotifier:new {
+            logger = manager.logger,
+            failedDependencies = manager.failedDependencies,
+            packageName = manager.metadata
+                and manager.metadata.package
+                and manager.metadata.package.name
+        }
+        notifier:dependenciesFailMessage(showNextMessage)
+    end
+end
+
 --[[
     Once all mods have been initialized, this function will be called
     to display a message box for each dependency manager that has failed dependencies.
 ]]
 event.register(tes3.event.initialized, function()
-    local function showNextMessage()
-        local manager = table.remove(DependencyManager.registeredManagers, 1)
-        if manager and manager.failedDependencies then
-            local notifier = DependencyNotifier:new {
-                logger = manager.logger,
-                failedDependencies = manager.failedDependencies,
-                packageName = manager.metadata
-                    and manager.metadata.package
-                    and manager.metadata.package.name
-            }
-            notifier:dependenciesFailMessage(showNextMessage)
-        end
-    end
+    logger:debug("Displaying failed dependencies. Number of dependency managers with failures: %s", #DependencyManager.registeredManagers)
     showNextMessage()
+
 end, { priority = -math.huge })
+
+

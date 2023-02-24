@@ -1,5 +1,12 @@
+
+---MWSE dependecy - checks the build number of MWSE
+---@class MWSE.Metadata.Dependency.MWSE : MWSE.Metadata.Dependency
+---@field buildnumber number
+
 return {
     id = "mwse",
+    ---@param self DependencyManager
+    ---@param dependency MWSE.Metadata.Dependency.MWSE
     checkDependency = function(self, dependency)
         if not dependency.buildnumber then return true end
         self.logger:debug("Checking MWSE version: %s", dependency.buildnumber)

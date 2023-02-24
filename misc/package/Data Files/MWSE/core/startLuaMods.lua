@@ -14,6 +14,7 @@ local function execLuaMod(runtime)
 		local dependencyManager = dependencyManagerModule.new({
 			metadata = runtime.metadata,
 			logger = logger.new({ name = name, logLevel = "INFO" }),
+			showFailureMessage = false,
 		})
 
 		-- Prevent loading if we don't meet dependency requirements.

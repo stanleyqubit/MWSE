@@ -81,11 +81,7 @@ The output of this test suite will look like this:
     [UnitWind] ✔️ MY EXAMPLE TEST SUITE PASSED ✔️
     [UnitWind]
     [UnitWind] -----------------------------------------------------
-    [UnitWind] Exiting Morrowind[UnitWind] -----------------------------------------------------
-
-## Fail Tests
-
-
+    [UnitWind] Exiting Morrowind
 
 ## Expect
 

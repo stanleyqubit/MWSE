@@ -8,10 +8,11 @@ The following sections will describe how to make a metadata file for your mod. A
 
 ## Creating a Metadata File
 
-First, create a new file in the `Data Files` directory. For an MWSE mod, the name has to have the following name format: `"<mwse-module>-metadata.toml"`. For example, if your main.lua file is located in `"Data Files\MWSE\mods\g7\myMod\main.lua"`, then your metadata file must be named `"Data Files\g7.myMod-metadata.toml"`.
+First, create a new file in the `Data Files` directory called `"<Mod Name>-metadata.toml"` (for example, the metadata for the mod Ashfall would be called `"Ashfall-metadata.toml"`). While not necessary, it is recommended that the name of your metadata file matches the name of your `.ESP` file, if your mod has one.
 
-Metadata files are written in the TOML configuration file format. For more information on the TOML syntax, see the [TOML website](https://toml.io/en/).
+Now open your new file and enter the following sections.
 
+***NOTE:** Metadata files are written in the TOML configuration file format. It is highly recommended you use an IDE or text editor with TOML syntax highlighting, such as [VS Code](https://code.visualstudio.com/) or [notepad++](https://notepad-plus-plus.org/) to ensure your file is valid. For more information on the TOML syntax, see the [TOML website](https://toml.io/en/).*
 
 ## Package Section
 
@@ -40,22 +41,31 @@ Example:
     version = "7.8.9"
 ```
 
-### Versioning
+## Tools Section
 
-The `version` field uses semver (Semantic Versioning) format. This consists of three numbers separated by periods, such as `1.2.3`. The first number is the major version, the second is the minor version, and the third is the patch version. You should increment the major version when you make a breaking change, the minor version when you add new features, and the patch version when you make bug fixes.
+The `[tools]` section is for tool-specific configuration.
 
-For more information on semver, see the [semver website](https://semver.org/).
+The following fields are available:
+* `mwse`
 
-When you are using a dependency, you can specify a minimum version using the following syntax:
+    Here you can specify MWSE-specific information about your mod.
 
-```toml
-    [dependencies.mods."My Dependency"]
-    version = ">=1.2.3"
-```
+    The following fields are available:
 
-Available dependency operators are: `=`, `>=`, `<=`, `>`, `<`.
+    * `lua-mod` - The path to the main.lua associated with this mod. For example, if your main.lua file is located in `"Data Files\MWSE\mods\g7\myMod\main.lua"`, then this field should be set to `"g7.myMod"`.
+    * `load-order` - The priority for when this mod is loaded. Lower numbers are loaded first.
+    * `wait-until-initialize` - Whether to wait until the game has initialized before loading this mod.
 
-## Dependencies
+    Example:
+    ```toml
+        [tools.mwse]
+        lua-mod = "mer.myMod"
+        load-order = 100
+        wait-until-initialize = true
+    ```
+
+
+## Dependencies Section
 
 The `[dependencies]` section of the metadata file is where you should list any dependencies your mod has. Dependencies are checked before your `main.lua` file is executed and will warn the player if any are missing.
 
@@ -128,18 +138,6 @@ The following dependencies are available:
 
     A list of mods required by your mod. This can be used to check if a plugin (esp or esm) is active, or if a lua mod is installed.
 
-    Put the name of the dependency in the key, e.g `testDependency` in the following example:
-
-    ```toml
-        [dependencies.mods."Test Dependency"]
-    ```
-
-    You can have spaces in the dependency like so:
-
-    ```toml
-        [dependencies.mods."My Dependency"]
-    ```
-
     The following fields are available:
 
     -  `plugin`
@@ -153,7 +151,7 @@ The following dependencies are available:
             plugin = "OAAB_Data.esm"
         ```
 
-    -  `mwse-module`
+    -  `lua-mod`
 
         The name of the lua mod to check for. This can be a file in `Data Files\MWSE\mods\` or `Data Files\MWSE\lib` etc, using the mwse module loading syntax (i.e, the string you would pass to `include` or `require` to load the mod).
 
@@ -161,33 +159,51 @@ The following dependencies are available:
 
         ```toml
             [dependencies.mods."My Lua mod"]
-            mwse-module = "mer.myLuaMod"
+            lua-mod = "mer.myLuaMod"
         ```
 
     -  `version`
 
         The minimum version of the mod required. This is checked using the version field in the mod's metadata file.
 
+        The key must match the metadata file name. For example, in the below example, the key `"My Other Mod"` must match the metadata file `"Data Files\My Other Mod-metadata.toml"`.
+
+        See the `Versions` section below for more information about versioning.
+
         Example:
 
         ```toml
             [dependencies.mods."My Other Mod"]
-            version = ">=7.8.9"
+            version = "^7.8.9"
         ```
-		
+
 	- `url`
-	
+
 		The url to download the missing/outdated mod dependency. If provided and this dependency fails, a button will appear in the failed dependency pop-up which will close the game and launch this URL in their browser.
-		
+
 		Example:
-		
+
 		```toml
 		    [dependencies.mods."My Other Mod"]
-			mwse-module = "mer.myOtherMod"
+			lua-mod = "mer.myOtherMod"
 			version = ">=7.8.9"
 			url = "https://www.nexusmods.com/morrowind/mods/52116"
-		
+
 		```
+
+## Versions
+
+The version strings in `[package]`, `[dependencies.mge-xe]` and `[dependencies.mods]` uses semver (Semantic Versioning) format. This consists of three numbers separated by periods, such as `1.2.3`. The first number is the `major` version, the second is the `minor` version, and the third is the `patch` version. You should increment the major version when you make a breaking change, the minor version when you add new features, and the patch version when you make bug fixes.
+
+For more information on semver, see the [semver website](https://semver.org/).
+
+### Comparison Operators
+
+When specifying a version for a mod or mge-xe dependency, use a comparison operators to specify a minimum version.
+
+Available dependency operators are: `^`, `=`, `>=`, `<=`, `>`, `<`.
+
+Most operators are self explanatory, but the most useful one is the pessemistic operator: `^`. This will assert that the major version is the same, and the minor/patch versions are the same or higher than the target version. This is because a major version update indicates a breaking change. For example, if your target version is `^1.2.3`, then `1.2.3`, `1.3.3`, and `1.2.4` will be compatible, but `2.0.0`, `1.1.3`, and `1.2.2` will not.
 
 ## Full Example
 
@@ -202,6 +218,12 @@ homepage = "https://www.nexusmods.com/morrowind/mods/49658"
 repository = "https://github.com/jhaakma/skoomaesthesia"
 authors = ["Merlord", "Greatness7"]
 version = "7.8.9"
+
+# MWSE specific information about this mod
+[tools.mwse]
+lua-mod = "mer.myMod"
+load-order = 100
+wait-until-initialized = true
 
 # Dependencies are checked on `initialized` and warn the player if any are missing
 [dependencies]
@@ -226,9 +248,9 @@ buildnumber = 2907
 [dependencies.mge-xe]
 version = ">=0.15.0"
 
-# mwse-module can be a folder or lua file, anywhere in /mods, /lib etc
+# lua-mod can be a folder or lua file, anywhere in /mods, /lib etc
 [dependencies.mods."My Lua mod"]
-mwse-module = "mer.myLuaMod"
+lua-mod = "mer.myLuaMod"
 
 # Check if a plugin (esp or esm) is active
 [dependencies.mods."OAAB Data"]

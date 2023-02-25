@@ -297,6 +297,7 @@ namespace se::cs {
 		using memory::genJumpEnforced;
 		using memory::genJumpUnprotected;
 		using memory::writeDoubleWordUnprotected;
+		using memory::writeValueEnforced;
 		using memory::overrideVirtualTableEnforced;
 
 		// Patch: Collect crash dumps.
@@ -341,6 +342,13 @@ namespace se::cs {
 		// Patch: Fix NiLinesData binary loading.
 		auto NiLinesData_loadBinary = &NI::LinesData::loadBinary;
 		overrideVirtualTableEnforced(0x67A220, 0xC, 0x5CAEF0, *reinterpret_cast<DWORD*>(&NiLinesData_loadBinary));
+
+		// Patch: Always clone scene graph nodes.
+		writeValueEnforced(0x548973, BYTE(0x02), BYTE(0x00));
+
+		// Patch: Always copy all NiExtraData on clone, instead of only the first NiStringExtraData.
+		genJumpUnprotected(0x53FEE8, 0x53FF0E);
+		genJumpUnprotected(0x53FF17, 0x53FF21);
 
 		// Install all our sectioned patches.
 		window::main::installPatches();

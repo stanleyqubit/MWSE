@@ -262,6 +262,7 @@
 #include "LuaSpellResistedEvent.h"
 #include "LuaSpellTickEvent.h"
 #include "LuaUiRefreshedEvent.h"
+#include "LuaUiSkillTooltipEvent.h"
 #include "LuaUiSpellTooltipEvent.h"
 #include "LuaWeaponReadiedEvent.h"
 #include "LuaWeaponUnreadiedEvent.h"
@@ -1844,6 +1845,39 @@ namespace mwse::lua {
 		}
 
 		return created;
+	}
+
+	//
+	// Event: UI Skill Tooltip (in stat menu) post-creation.
+	//
+
+	bool __cdecl OnUISkillStatTooltip(TES3::UI::Element* widget, int event, int data0, int data1, TES3::UI::Element* element) {
+		// Call original function.
+		bool created = reinterpret_cast<bool(__cdecl*)(TES3::UI::Element*, int, int, int, TES3::UI::Element*)>(0x627D70)(widget, event, data0, data1, element);
+
+		// Fire off the event.
+		if (created && event::UiSkillTooltipEvent::getEventEnabled()) {
+			TES3::UI::Element* tooltip = TES3::UI::findHelpLayerMenu(TES3::UI::UI_ID(TES3::UI::Property::HelpMenu));
+			int skillID = element->getProperty(TES3::UI::PropertyType::Integer, *reinterpret_cast<TES3::UI::Property*>(0x7D6B82)).integerValue;
+			LuaManager::getInstance().getThreadSafeStateHandle().triggerEvent(new event::UiSkillTooltipEvent(tooltip, skillID, 1));
+		}
+
+		return created;
+	}
+
+	//
+	// Event: UI Skill Tooltip post-creation.
+	//
+
+	void __cdecl OnUISkillTooltip(char skillID) {
+		// Call original function.
+		reinterpret_cast<void(__cdecl*)(char)>(0x6297F0)(skillID);
+
+		// Fire off the event.
+		if (event::UiSkillTooltipEvent::getEventEnabled()) {
+			TES3::UI::Element* tooltip = TES3::UI::findHelpLayerMenu(TES3::UI::UI_ID(TES3::UI::Property::HelpMenu));
+			LuaManager::getInstance().getThreadSafeStateHandle().triggerEvent(new event::UiSkillTooltipEvent(tooltip, skillID, 0));
+		}
 	}
 
 	//
@@ -4640,6 +4674,26 @@ namespace mwse::lua {
 		genPushEnforced(0x5E3F8E, reinterpret_cast<DWORD>(OnUISpellTooltip));
 		genPushEnforced(0x5E4069, reinterpret_cast<DWORD>(OnUISpellTooltip));
 		genPushEnforced(0x5E4165, reinterpret_cast<DWORD>(OnUISpellTooltip));
+
+		// Event: UI Tooltip post-creation for statmenu skills.
+		genPushEnforced(0x6267BF, reinterpret_cast<DWORD>(OnUISkillStatTooltip));
+		genPushEnforced(0x626825, reinterpret_cast<DWORD>(OnUISkillStatTooltip));
+		genPushEnforced(0x626A3D, reinterpret_cast<DWORD>(OnUISkillStatTooltip));
+		genPushEnforced(0x626AA3, reinterpret_cast<DWORD>(OnUISkillStatTooltip));
+		genPushEnforced(0x626CDE, reinterpret_cast<DWORD>(OnUISkillStatTooltip));
+		genPushEnforced(0x626D4C, reinterpret_cast<DWORD>(OnUISkillStatTooltip));
+		//genPushEnforced(0x626F88, reinterpret_cast<DWORD>(OnUISkillStatTooltip));	//factions, not skills
+		//genPushEnforced(0x627083, reinterpret_cast<DWORD>(OnUISkillStatTooltip)); //birthsign, not skills
+		//genPushEnforced(0x6271AD, reinterpret_cast<DWORD>(OnUISkillStatTooltip)); //reputation, not skills
+		//genPushEnforced(0x627259, reinterpret_cast<DWORD>(OnUISkillStatTooltip)); //bounty, not skills
+
+		//And for other skill tooltips.
+		genCallEnforced(0x5AFBBD, 0x6297F0, reinterpret_cast<DWORD>(OnUISkillTooltip));
+		genCallEnforced(0x5BAEF8, 0x6297F0, reinterpret_cast<DWORD>(OnUISkillTooltip));
+		genCallEnforced(0x60C9EF, 0x6297F0, reinterpret_cast<DWORD>(OnUISkillTooltip));
+		genCallEnforced(0x61811D, 0x6297F0, reinterpret_cast<DWORD>(OnUISkillTooltip));
+		genCallEnforced(0x61DFED, 0x6297F0, reinterpret_cast<DWORD>(OnUISkillTooltip));
+		genCallEnforced(0x62EB28, 0x6297F0, reinterpret_cast<DWORD>(OnUISkillTooltip));
 
 		/*
 		// TODO: Figure out a good hook point for this.

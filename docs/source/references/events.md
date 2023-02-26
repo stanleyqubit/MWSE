@@ -159,6 +159,7 @@ uiObjectTooltip               | `"uiObjectTooltip"`               | [`uiObjectTo
 uiPreEvent                    | `"uiPreEvent"`                    | [`uiPreEvent`](https://mwse.github.io/MWSE/events/uiPreEvent)
 uiRefreshed                   | `"uiRefreshed"`                   | [`uiRefreshed`](https://mwse.github.io/MWSE/events/uiRefreshed)
 uiShowRestMenu                | `"uiShowRestMenu"`                | [`uiShowRestMenu`](https://mwse.github.io/MWSE/events/uiShowRestMenu)
+uiSkillTooltip                | `"uiSkillTooltip"`                | [`uiSkillTooltip`](https://mwse.github.io/MWSE/events/uiSkillTooltip)
 uiSpellTooltip                | `"uiSpellTooltip"`                | [`uiSpellTooltip`](https://mwse.github.io/MWSE/events/uiSpellTooltip)
 unequipped                    | `"unequipped"`                    | [`unequipped`](https://mwse.github.io/MWSE/events/unequipped)
 vfxCreated                    | `"vfxCreated"`                    | [`vfxCreated`](https://mwse.github.io/MWSE/events/vfxCreated/)

@@ -54,7 +54,7 @@ end
 ---
 ---    expect(myFunction).toBeCalledWith(UnitWind.any("number"), UnitWind.any("string"))
 ---
----@param expectedType string? #The expected type of the argument
+---@param expectedType type? #The expected type of the argument. If no type is provided, any value will be accepted.
 function UnitWind.any(expectedType)
     return {
         _unitwind_type = expectedType ~= nil and expectedType or "any"

@@ -155,6 +155,7 @@
 --- @field register fun(eventId: '"uiPreEvent"', callback: fun(e: uiPreEventEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"uiRefreshed"', callback: fun(e: uiRefreshedEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"uiShowRestMenu"', callback: fun(e: uiShowRestMenuEventData): boolean?, options: table?)
+--- @field register fun(eventId: '"uiSkillTooltip"', callback: fun(e: uiSkillTooltipEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"uiSpellTooltip"', callback: fun(e: uiSpellTooltipEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"unequipped"', callback: fun(e: unequippedEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"vfxCreated"', callback: fun(e: vfxCreatedEventData): boolean?, options: table?)

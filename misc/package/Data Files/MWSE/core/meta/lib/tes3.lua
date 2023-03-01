@@ -927,11 +927,13 @@ function tes3.get3rdPersonCameraOffset() end
 --- @return tes3cell[] cells No description yet available.
 function tes3.getActiveCells() end
 
---- This function fetches a reference's attached animation groups.
+--- This function fetches a reference's attached animation groups. The animation groups match the values from [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) table.
 --- @param params tes3.getAnimationGroups.params This table accepts the following values:
 --- 
 --- `reference`: tes3reference — A reference whose animation groups to fetch.
---- @return number[] animData No description yet available.
+--- @return integer lowerBodyGroup No description yet available.
+--- @return integer upperBodyGroup No description yet available.
+--- @return integer leftArmGroup No description yet available.
 function tes3.getAnimationGroups(params) end
 
 ---Table parameter definitions for `tes3.getAnimationGroups`.
@@ -939,6 +941,8 @@ function tes3.getAnimationGroups(params) end
 --- @field reference tes3reference A reference whose animation groups to fetch.
 
 --- This function fetches a reference's attached animation groups' timings.
+---
+--- [Examples available in online documentation](https://mwse.github.io/MWSE/apis/tes3/#tes3getanimationtiming).
 --- @param params tes3.getAnimationTiming.params This table accepts the following values:
 --- 
 --- `reference`: tes3reference|tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string — A reference whose animation groups' timings to fetch.

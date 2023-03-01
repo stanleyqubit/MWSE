@@ -1549,10 +1549,10 @@ local cells = tes3.getActiveCells()
 ### `tes3.getAnimationGroups`
 <div class="search_terms" style="display: none">getanimationgroups, animationgroups</div>
 
-This function fetches a reference's attached animation groups.
+This function fetches a reference's attached animation groups. The animation groups match the values from [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) table.
 
 ```lua
-local animData = tes3.getAnimationGroups({ reference = ... })
+local lowerBodyGroup, upperBodyGroup, leftArmGroup = tes3.getAnimationGroups({ reference = ... })
 ```
 
 **Parameters**:
@@ -1562,7 +1562,9 @@ local animData = tes3.getAnimationGroups({ reference = ... })
 
 **Returns**:
 
-* `animData` (number[])
+* `lowerBodyGroup` (integer)
+* `upperBodyGroup` (integer)
+* `leftArmGroup` (integer)
 
 ***
 
@@ -1583,6 +1585,18 @@ local result = tes3.getAnimationTiming({ reference = ... })
 **Returns**:
 
 * `result` (number[])
+
+??? example "Example: An elegent usage example"
+
+	The function returns animation timings for three body segments. This array can be nicely broken down into three variables using Lua's `unpack()` function.
+
+	```lua
+	
+	local lowerTiming, upperTiming, leftArmTiming = unpack(
+		tes3.getAnimationTiming({ reference = tes3.player })
+	)
+
+	```
 
 ***
 

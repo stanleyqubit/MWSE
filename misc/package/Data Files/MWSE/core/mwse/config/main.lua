@@ -85,6 +85,16 @@ local config = {
 						class = "TableVariable",
 						table = mwseConfig,
 					},
+				},
+				{
+					class = "OnOffButton",
+					label = i18n("enableDependencyChecks.label"),
+					description = i18n("enableDependencyChecks.description"),
+					variable = {
+						id = "EnableDependencyChecks",
+						class = "TableVariable",
+						table = mwseConfig,
+					},
 				}
 			},
 			sidebarComponents = {

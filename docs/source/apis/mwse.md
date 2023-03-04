@@ -37,7 +37,7 @@ Formatted as YYYYMMDD.
 ### `mwse.buildNumber`
 <div class="search_terms" style="display: none">buildnumber</div>
 
-Equal to the `APPVEYOR_BUILD_NUMBER` in builds by AppVeyor. Equal to `UINT_MAX` in regular builds.
+Equal to the `APPVEYOR_BUILD_NUMBER` in builds by AppVeyor (these builds are installed using the MWSE-Update). Equal to `UINT_MAX` in regular builds. This number is used for [mod metadata](https://mwse.github.io/MWSE/guides/metadata/#dependencies-section) files, when a mod depends on MWSE being installed.
 
 **Returns**:
 
@@ -94,21 +94,6 @@ It is usually better to use `mwse.buildDate` instead.
 ***
 
 ## Functions
-
-### `mwse.breakpoint`
-<div class="search_terms" style="display: none">breakpoint</div>
-
-Prints "[MWSE] Hit breakpoint: ", with the provided `message` string appended, to the `mwse.log` file. This function is meant for debugging purposes.
-
-```lua
-mwse.breakpoint(message)
-```
-
-**Parameters**:
-
-* `message` (string): *Optional*. Provides a way to mark in the log which breakpoint was reached.
-
-***
 
 ### `mwse.clearScriptOverride`
 <div class="search_terms" style="display: none">clearscriptoverride</div>

@@ -7,7 +7,7 @@
 --- @field buildDate number A numerical representation of the date that version of MWSE currently being used was built on.
 --- 
 --- Formatted as YYYYMMDD.
---- @field buildNumber integer Equal to the `APPVEYOR_BUILD_NUMBER` in builds by AppVeyor. Equal to `UINT_MAX` in regular builds.
+--- @field buildNumber integer Equal to the `APPVEYOR_BUILD_NUMBER` in builds by AppVeyor (these builds are installed using the MWSE-Update). Equal to `UINT_MAX` in regular builds. This number is used for [mod metadata](https://mwse.github.io/MWSE/guides/metadata/#dependencies-section) files, when a mod depends on MWSE being installed.
 --- @field gameTimers mwseTimerController The mwseTimerController responsible for game-type timers.
 --- @field realTimers mwseTimerController The mwseTimerController responsible for real-type timers.
 --- @field simulateTimers mwseTimerController The mwseTimerController responsible for simulate-type timers.
@@ -17,10 +17,6 @@
 --- 
 --- It is usually better to use `mwse.buildDate` instead.
 mwse = {}
-
---- Prints "[MWSE] Hit breakpoint: ", with the provided `message` string appended, to the `mwse.log` file. This function is meant for debugging purposes.
---- @param message string? *Optional*. Provides a way to mark in the log which breakpoint was reached.
-function mwse.breakpoint(message) end
 
 --- Configures MWSE to no longer execute a lua function instead when a script would run. This undoes the work of `mwse.overrideScript`.
 --- @param scriptId string No description yet available.

@@ -7,10 +7,11 @@
 --- @field buildDate number A numerical representation of the date that version of MWSE currently being used was built on.
 --- 
 --- Formatted as YYYYMMDD.
+--- @field buildNumber integer Equal to the `APPVEYOR_BUILD_NUMBER` in builds by AppVeyor (these builds are installed using the MWSE-Update). Equal to `UINT_MAX` in regular builds. This number is used for [mod metadata](https://mwse.github.io/MWSE/guides/metadata/#dependencies-section) files, when a mod depends on MWSE being installed.
 --- @field gameTimers mwseTimerController The mwseTimerController responsible for game-type timers.
 --- @field realTimers mwseTimerController The mwseTimerController responsible for real-type timers.
 --- @field simulateTimers mwseTimerController The mwseTimerController responsible for simulate-type timers.
---- @field version number A numerical representation of the release version of MWSE currently being used.
+--- @field version integer A numerical representation of the release version of MWSE currently being used.
 --- 
 --- Formatted as AAABBBCCC, where A is the major version, BBB is the minor version, and CCC is the patch version. BBB and CCC are forward-padded.
 --- 
@@ -28,12 +29,18 @@ function mwse.clearScriptOverride(scriptId) end
 function mwse.getCurrentMorrowindScriptState() end
 
 --- Equivalent to mwse.version.
---- @return number result No description yet available.
+--- @return integer result No description yet available.
 function mwse.getVersion() end
 
 --- Returns the amount of memory used, in bytes.
 --- @return number result No description yet available.
 function mwse.getVirtualMemoryUsage() end
+
+--- Converts the provided string in UTF8 encoding to Morrowind's codepage base encoding.
+--- @param languageCode integer Determines the language (and appropriate encoding) to use. Maps to values in [`tes3.languageCode`](https://mwse.github.io/MWSE/references/language-codes/) table.
+--- @param utf8string string The string to convert
+--- @return string converted No description yet available.
+function mwse.iconv(languageCode, utf8string) end
 
 --- Loads a config table from Data Files\\MWSE\\config\\{fileName}.json.
 --- 	
@@ -61,6 +68,8 @@ function mwse.log(message, ...) end
 function mwse.longToString(type) end
 
 --- Configures MWSE to execute a given function instead when a script would run.
+--- 
+--- In most cases its intended to stop the execution of the original mwscript script. You can do so in the callback function by calling `mwscript.stopScript()`.
 ---
 --- [Examples available in online documentation](https://mwse.github.io/MWSE/apis/mwse/#mwseoverridescript).
 --- @param scriptId string No description yet available.
@@ -79,4 +88,9 @@ function mwse.saveConfig(fileName, object, config) end
 --- @param tag string No description yet available.
 --- @return number result No description yet available.
 function mwse.stringToLong(tag) end
+
+--- Determines whether a key is pressed. A wrapper for `GetAsyncKeyState` function in Win32 API.
+--- @param VK_key integer No description yet available.
+--- @return boolean result No description yet available.
+function mwse.virtualKeyPressed(VK_key) end
 

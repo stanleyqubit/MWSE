@@ -299,6 +299,17 @@ If true, the cell is an interior.
 
 ***
 
+### `landscape`
+<div class="search_terms" style="display: none">landscape</div>
+
+*Read-only*. Access to the cell's landscape object. It's only available on exterior cells.
+
+**Returns**:
+
+* `result` ([tes3land](../../types/tes3land))
+
+***
+
 ### `modified`
 <div class="search_terms" style="display: none">modified, ified</div>
 
@@ -340,6 +351,17 @@ The name and id of the cell. See also `displayName` and `editorName`.
 **Returns**:
 
 * `result` (number)
+
+***
+
+### `pathGrid`
+<div class="search_terms" style="display: none">pathgrid</div>
+
+*Read-only*. Access to the cell's pathgrid.
+
+**Returns**:
+
+* `result` ([tes3pathGrid](../../types/tes3pathGrid))
 
 ***
 

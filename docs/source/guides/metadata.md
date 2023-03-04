@@ -46,6 +46,7 @@ Example:
 The `[tools]` section is for tool-specific configuration.
 
 The following fields are available:
+
 * `mwse`
 
     Here you can specify MWSE-specific information about your mod.

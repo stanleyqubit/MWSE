@@ -98,6 +98,17 @@ A child container from [`tes3dataHandler`](https://mwse.github.io/MWSE/types/tes
 
 ***
 
+### `landTextures`
+<div class="search_terms" style="display: none">landtextures</div>
+
+*Read-only*. A collection of all land texture objects.
+
+**Returns**:
+
+* `result` ([tes3landTexture](../../types/tes3landTexture)[])
+
+***
+
 ### `lastLoadedFile`
 <div class="search_terms" style="display: none">lastloadedfile</div>
 

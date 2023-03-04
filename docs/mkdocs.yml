@@ -3,15 +3,21 @@ site_name: Morrowind Script Extender
 docs_dir: source
 
 repo_url: https://github.com/MWSE/MWSE
-edit_uri: "" # Hide the edit button, most files are auto-generated
 
 plugins:
-  - search
   - awesome-pages
+  - git-revision-date-localized:
+      type: datetime
+      enable_creation_date: true
+      enabled: !ENV [CI, false]
   - mermaid2:
       arguments:
         theme: |
           ^(JSON.parse(__md_get("__palette").index == 1)) ? 'dark' : 'light'
+  - search:
+      # Default search is quite bad. Try with a better token separator. Taken directly from:
+      # https://squidfunk.github.io/mkdocs-material/setup/setting-up-site-search/#+search.separator
+      separator: '[\s\-,:!=\[\]()"/]+|(?!\b)(?=[A-Z][a-z])'
 
 extra_javascript:
   - assets/js/reloadMermaidPagesOnPaletteSwitch.js
@@ -38,10 +44,11 @@ theme:
         name: Switch to light mode
   features:
     - content.code.annotate
+    - content.code.copy
     - content.tabs.link
     # - header.autohide
     # - navigation.expand
-    - navigation.indexes        # Currently insider-only, but we want it whenever it gets released to plebs
+    - navigation.indexes
     - navigation.instant
     - navigation.sections
     - navigation.tabs

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "NiVector3.h"
+
 namespace se::math {
 	constexpr auto M_PI = 3.14159265358979323846; // pi
 	constexpr auto M_PIf = float(M_PI);
@@ -19,4 +21,11 @@ namespace se::math {
 	}
 
 	void standardizeAngleRadians(float& value);
+	
+	std::tuple<float, NI::Vector3> rayPlaneIntersection(
+		const NI::Vector3& rayOrigin, 
+		const NI::Vector3& rayDirection, 
+		const NI::Vector3& planeOrigin, 
+		const NI::Vector3& planeNormal
+	);
 }

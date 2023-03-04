@@ -14,10 +14,12 @@
     <ClInclude Include="ArrayUtil.h" />
     <ClInclude Include="BitUtil.h" />
     <ClInclude Include="BSAnimationManager.h" />
+    <ClInclude Include="TES3LandLua.h" />
     <ClInclude Include="LuaActiveMagicEffectIconsUpdatedEvent.h" />
     <ClInclude Include="LuaAttackHitEvent.h" />
     <ClInclude Include="LuaCalcBlockChanceEvent.h" />
     <ClInclude Include="LuaCalcEnchantmentPriceEvent.h" />
+    <ClInclude Include="LuaCameraControlEvent.h" />
     <ClInclude Include="LuaConsoleReferenceChangedEvent.h" />
     <ClInclude Include="LuaDialogueEnvironmentCreatedEvent.h" />
     <ClInclude Include="LuaDispositionEvent.h" />
@@ -29,6 +31,7 @@
     <ClInclude Include="LuaKeyframesLoadEvent.h" />
     <ClInclude Include="LuaMagicEffectRemovedEvent.h" />
     <ClInclude Include="LuaMeshLoadEvent.h" />
+    <ClInclude Include="LuaRepairEvent.h" />
     <ClInclude Include="LuaSpellResistedEvent.h" />
     <ClInclude Include="LuaVFXCreatedEvent.h" />
     <ClInclude Include="MathUtil.h" />
@@ -42,13 +45,17 @@
     <ClInclude Include="NIColorData.h" />
     <ClInclude Include="NIColorKey.h" />
     <ClInclude Include="NICopyTransformController.h" />
+    <ClInclude Include="NIDX8TextureData.h" />
     <ClInclude Include="NIPosData.h" />
     <ClInclude Include="NIQuaternion.h" />
     <ClInclude Include="NIQuaternionLua.h" />
+    <ClInclude Include="NiRenderedTextureLua.h" />
+    <ClInclude Include="NiRendererLua.h" />
     <ClInclude Include="NIScreenPolygon.h" />
     <ClInclude Include="TES3AnimationDataLua.h" />
     <ClInclude Include="TES3ArchiveLua.h" />
     <ClInclude Include="TES3CutscenePlayer.h" />
+    <ClInclude Include="TES3LandTextureLua.h" />
     <ClInclude Include="TES3LoadScreenManager.h" />
     <ClInclude Include="LuaAbsorbedMagicEvent.h" />
     <ClInclude Include="LuaAttackStartEvent.h" />
@@ -542,6 +549,7 @@
     <ClCompile Include="LuaCalcSunDamageScalarEvent.cpp" />
     <ClCompile Include="LuaCalcTrainingPriceEvent.cpp" />
     <ClCompile Include="LuaCalcTravelPriceEvent.cpp" />
+    <ClCompile Include="LuaCameraControlEvent.cpp" />
     <ClCompile Include="LuaCellActivatedEvent.cpp" />
     <ClCompile Include="LuaCellChangedEvent.cpp" />
     <ClCompile Include="LuaCellDeactivatedEvent.cpp" />
@@ -637,6 +645,7 @@
     <ClCompile Include="LuaReferenceActivatedEvent.cpp" />
     <ClCompile Include="LuaReferenceDeactivatedEvent.cpp" />
     <ClCompile Include="LuaReferenceSceneNodeCreatedEvent.cpp" />
+    <ClCompile Include="LuaRepairEvent.cpp" />
     <ClCompile Include="LuaRestInterruptEvent.cpp" />
     <ClCompile Include="LuaSavedGameEvent.cpp" />
     <ClCompile Include="LuaSaveGameEvent.cpp" />
@@ -684,6 +693,7 @@
     <ClCompile Include="NIColorData.cpp" />
     <ClCompile Include="NICopyTransformController.cpp" />
     <ClCompile Include="NIDirectionalLight.cpp" />
+    <ClCompile Include="NIDX8TextureData.cpp" />
     <ClCompile Include="NIDynamicEffectLua.cpp" />
     <ClCompile Include="NIExtraData.cpp" />
     <ClCompile Include="NIExtraDataLua.cpp" />
@@ -704,7 +714,9 @@
     <ClCompile Include="NIQuaternion.cpp" />
     <ClCompile Include="NIQuaternionLua.cpp" />
     <ClCompile Include="NIRenderedTexture.cpp" />
+    <ClCompile Include="NiRenderedTextureLua.cpp" />
     <ClCompile Include="NIRenderer.cpp" />
+    <ClCompile Include="NIRendererLua.cpp" />
     <ClCompile Include="NISkinInstance.cpp" />
     <ClCompile Include="NISkinInstanceLua.cpp" />
     <ClCompile Include="NISpotLight.cpp" />
@@ -741,6 +753,8 @@
     <ClCompile Include="TES3Door.cpp" />
     <ClCompile Include="TES3GlobalVariable.cpp" />
     <ClCompile Include="TES3Land.cpp" />
+    <ClCompile Include="TES3LandLua.cpp" />
+    <ClCompile Include="TES3LandTextureLua.cpp" />
     <ClCompile Include="TES3Lockpick.cpp" />
     <ClCompile Include="TES3MagicEffectController.cpp" />
     <ClCompile Include="MemoryUtil.cpp" />

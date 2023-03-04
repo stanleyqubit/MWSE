@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A reference is a sort of container structure for objects. It holds a base object, as well as various variables associated with that object that make it unique.
 --- 
 --- For example, many doors may share the same base object. However, each door reference might have a different owner, different lock/trap statuses, etc. that make the object unique.
@@ -15,6 +13,8 @@
 --- @field cell tes3cell *Read-only*. The cell that the reference is currently in.
 --- @field context tes3scriptContext *Read-only*. Access to the script context for this reference and its associated script.
 --- @field data table A generic lua table that data can be written to, and synced to/from the save. All information stored must be valid for serialization to json. For item references, this is the same table as on the `tes3itemData` structure. To store data that doesn't get serialized to/from the save, use `tempData`.
+--- 
+--- There is a guide available [here](https://mwse.github.io/MWSE/guides/storing-data/) on using this table.
 --- @field destination tes3travelDestinationNode|nil *Read-only*. Returns the travel destination node for this reference, or `nil`. This can be used to determine where a given door links to.
 --- @field facing number Convenient access to the z-component of the reference's orientation. Setting the facing sets the reference as modified.
 --- @field forwardDirection tes3vector3 *Read-only*. The normalized forward or Y direction vector of the reference.
@@ -26,7 +26,7 @@
 --- @field itemData tes3itemData Gets or sets the attached `itemData` for this reference. If set to `nil`, the item data will be unhooked but not deleted.
 --- @field leveledBaseReference tes3reference|nil *Read-only*. If this reference is a leveled spawn, this is the leveled creature spawn reference. If this reference wasn't the result of a leveled spawn, the value is `nil`.
 --- @field light niPointLight|niSpotLight *Read-only*. Direct access to the scene graph light, if a dynamic light is set.
---- @field lockNode tes3lockNode *Read-only*. Quick access to the reference's lock node, if any.
+--- @field lockNode tes3lockNode|nil *Read-only*. Quick access to the reference's lock node, if any. Doors or containers that aren't locked nor trapped have this property set to `nil`.
 --- @field mesh string The path to the object's mesh.
 --- @field mobile tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3mobilePlayer|tes3mobileProjectile|tes3mobileSpellProjectile|tes3mobileSpellProjectile|nil *Read-only*. Access to the attached mobile object, if applicable.
 --- @field nextNode tes3reference *Read-only*. The next reference in the parent reference list.
@@ -53,6 +53,8 @@
 --- @field targetFormId number No description yet available.
 --- @field targetModId number No description yet available.
 --- @field tempData table As with the `data` field, a generic lua table that data can be written to. No information in this table will persist into saves. For item references, this is the same table as on the `tes3itemData` structure.
+--- 
+--- There is a guide available [here](https://mwse.github.io/MWSE/guides/storing-data/) on using this table.
 --- @field upDirection tes3vector3 *Read-only*. The normalized up or Z direction vector of the reference.
 tes3reference = {}
 

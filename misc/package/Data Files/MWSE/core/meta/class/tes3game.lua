@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A core game object used for storing game settings.
 --- @class tes3game
 --- @field activationAmbientLight niAmbientLight *Read-only*. An ambiental light inside the `worldObjectRoot`.
@@ -34,6 +32,18 @@ tes3game = {}
 
 --- Clears data related to activation, resetting what the player can activate.
 function tes3game:clearTarget() end
+
+--- Saves all options menu settings, including those changed by editing controller variables. Writes to the Windows registry.
+--- 
+--- Options saved:
+--- 
+--- - Difficulty and AI distance
+--- - Render distance and actor shadow options
+--- - Volume controls and subtitles
+--- - All keybinds and mouse sensitivity
+--- - Use best attack mode and save on rest mode
+--- - Tooltip delay and menu background alpha
+function tes3game:savePlayerOptions() end
 
 --- This method allows changing gamma correction.
 --- @param value number No description yet available.

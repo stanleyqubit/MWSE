@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A game object which contains information on actor's animations.
 --- 
 --- Animations are divided into three layers. The layer 0 is the base layer containing all the base animations for every humanoid in the game, including the player (when in third person). These animations come from `base_anim.nif`. Layer 1 is for female animations. Any animations present in `base_anim_female.nif` override their male counterparts for humanoid races. For beast races, layer 1 animations come from `base_anim_kna.nif`. Layer 2 are the custom animations assigned to the actor.
@@ -13,6 +11,9 @@
 --- @field animationGroupSoundgenCounts number[] *Read-only*. The number of sound generators for each of the animation groups, indexed by the [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) namespace.
 --- @field animGroupLayerIndicies number[] *Read-only*. The layer from which each of the actor's animation groups come, indexed by the [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) namespace.
 --- @field approxRootTravelSpeeds number[] *Read-only*. The approximate root node travel speed for each of the animation groups, indexed by the [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) namespace.
+--- @field castSpeed number The animation speed multiplier for the spell casting animation. This is a feature added by MWSE.
+--- 
+--- It functions slightly differently to the other animation speed multipliers. It is not reset by the AI like the movement and weapon speeds. Therefore, it can be set before a spell is cast, as well as during casting. The speed will affect all further casting by the actor.
 --- @field currentAnimGroupLayers number[] *Read-only*. 
 --- @field currentAnimGroups number[] *Read-only*. The currently playing [animation group](https://mwse.github.io/MWSE/references/animation-groups/), on each of the [body sections](https://mwse.github.io/MWSE/references/animation-body-sections/).
 --- @field currentNodeIndices number[] *Read-only*. 

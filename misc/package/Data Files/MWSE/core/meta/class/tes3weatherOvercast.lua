@@ -2,9 +2,5 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A structure that contains weather information for the overcast weather type.
 --- @class tes3weatherOvercast : tes3weather
-tes3weatherOvercast = {}
-

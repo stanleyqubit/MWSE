@@ -2,11 +2,7 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A container mapping a reputation for an associated faction.
 --- @class tes3factionReaction
 --- @field faction tes3faction *Read-only*. The faction whose reaction will be adjusted.
 --- @field reputation number The reaction adjustment for the faction.
-tes3factionReaction = {}
-

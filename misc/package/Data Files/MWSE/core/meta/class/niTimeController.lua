@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- An abstract base class from which all the animation controllers inherit. It has all the functionality needed to control the timing and update animations.
 --- @class niTimeController : niObject
 --- @field active boolean If the controller is active. When inactive, the target does not get updated and animation timing does not advance.
@@ -21,11 +19,11 @@
 --- @field nextController niKeyframeController|niLookAtController|niParticleSystemController The next animation controller in the list of controllers containing the calling controller.
 --- @field phase number The phase value. It is an offset applied to the animation's update time, in seconds.
 --- @field startTime number The time at which the animation controller starts playing its animation.
---- @field target niAlphaProperty|niAmbientLight|niBillboardNode|niCamera|niCollisionSwitch|niDirectionalLight|niFogProperty|niMaterialProperty|niNode|niParticles|niPointLight|niRotatingParticles|niSourceTexture|niSpotLight|niStencilProperty|niSwitchNode|niTexture|niTextureEffect|niTexturingProperty|niTriShape|niVertexColorProperty|niZBufferProperty *Read-only*. The scene graph object that this animation controller is to animate.
+--- @field target niAlphaProperty|niAmbientLight|niBillboardNode|niCamera|niCollisionSwitch|niDirectionalLight|niFogProperty|niMaterialProperty|niNode|niParticles|niPointLight|niRenderedTexture|niRotatingParticles|niSourceTexture|niSpotLight|niStencilProperty|niSwitchNode|niTexture|niTextureEffect|niTexturingProperty|niTriShape|niVertexColorProperty|niZBufferProperty *Read-only*. The scene graph object that this animation controller is to animate.
 niTimeController = {}
 
 --- This method assigns a new target to the animation controller.
---- @param target niAlphaProperty|niAmbientLight|niBillboardNode|niCamera|niCollisionSwitch|niDirectionalLight|niFogProperty|niMaterialProperty|niNode|niParticles|niPointLight|niRotatingParticles|niSourceTexture|niSpotLight|niStencilProperty|niSwitchNode|niTexture|niTextureEffect|niTexturingProperty|niTriShape|niVertexColorProperty|niZBufferProperty The new target to assign.
+--- @param target niAlphaProperty|niAmbientLight|niBillboardNode|niCamera|niCollisionSwitch|niDirectionalLight|niFogProperty|niMaterialProperty|niNode|niParticles|niPointLight|niRenderedTexture|niRotatingParticles|niSourceTexture|niSpotLight|niStencilProperty|niSwitchNode|niTexture|niTextureEffect|niTexturingProperty|niTriShape|niVertexColorProperty|niZBufferProperty The new target to assign.
 function niTimeController:setTarget(target) end
 
 --- Starts the controller at the specified time. Intended for controllers with `animTimingType` of 1.

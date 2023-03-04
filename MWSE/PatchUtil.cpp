@@ -642,6 +642,71 @@ namespace mwse::patch {
 	const size_t PatchLoadActiveMagicEffect_size = 0x32;
 
 	//
+	// Patch: Fix crash in NPC flee logic when trying to pick a random node from a pathgrid with 0 nodes.
+	// 
+
+	TES3::PathGrid* __fastcall PatchCellGetPathGridWithNodes(TES3::Cell* cell) {
+		auto pathGrid = cell->pathGrid;
+		if (pathGrid && pathGrid->nodeCount == 0) {
+			return nullptr;
+		}
+		return pathGrid;
+	}
+
+	//
+	// Patch: UI element image mirroring on negative image scale.
+	// 
+
+	// Mirror image texcoords with negative image scale.
+	void __cdecl PatchUIElementTexcoordWrite(TES3::UI::Element* element, TES3::Vector2* texCoords) {
+		float left = 0.0f, top = 0.0f, right = 1.0f, bottom = 1.0f;
+
+		if (element->imageScaleX < 0) {
+			std::swap(left, right);
+		}
+		if (element->imageScaleY < 0) {
+			std::swap(top, bottom);
+		}
+		texCoords[0].x = left;
+		texCoords[0].y = top;
+		texCoords[1].x = left;
+		texCoords[1].y = bottom;
+		texCoords[2].x = right;
+		texCoords[2].y = top;
+		texCoords[3].x = right;
+		texCoords[3].y = bottom;
+	}
+
+	// Change pixel width/height calculation to floor(abs(imageScale{X,Y} * texture{Width,Height}) + 0.5)
+	const float f_half = 0.5f;
+	__declspec(naked) void PatchUIUpdateLayoutImageContent1() {
+		__asm {
+			fmulp	st(1), st			// imageScale * textureDimension
+			fabs						// abs
+			fadd	[f_half]			// + 0.5
+			fstp	qword ptr [esp]		// double argument for floor
+		}
+	}
+	const size_t PatchUIUpdateLayoutImageContent1_size = 0xD;
+
+	// Replace texcoord writer.
+	__declspec(naked) void PatchUIUpdateLayoutImageContent2() {
+		__asm {
+			push eax		// texcoord data pointer
+			push esi		// UiElement pointer
+			nop				// call to patch placeholder
+			nop
+			nop
+			nop
+			nop
+			add esp, 8
+			xor ecx, ecx
+			jmp $ + 0x51
+		}
+	}
+	const size_t PatchUIUpdateLayoutImageContent2_size = 0x11;
+
+	//
 	// Install all the patches.
 	//
 
@@ -829,9 +894,9 @@ namespace mwse::patch {
 #endif
 
 		// Patch: Fix crash when trying to draw cell markers that don't fit on the map.
-		auto NonDynamicData_drawCellMapMarker = &TES3::NonDynamicData::drawCellMapMarker;
-		genCallEnforced(0x4C840F, 0x4C8540, *reinterpret_cast<DWORD*>(&NonDynamicData_drawCellMapMarker));
-		genCallEnforced(0x4C8520, 0x4C8540, *reinterpret_cast<DWORD*>(&NonDynamicData_drawCellMapMarker));
+		// Compatible with MCP map expansion.
+		writeValueEnforced<DWORD>(0x4C85BC + 2, 0x200, 0x1F7);
+		writeValueEnforced<DWORD>(0x4C85CC + 1, 0x200, 0x1F7);
 
 		// Patch: Optimize ShowMap (and FillMap) mwscript command.
 		auto NonDynamicData_showLocationOnMap = &TES3::NonDynamicData::showLocationOnMap;
@@ -851,6 +916,10 @@ namespace mwse::patch {
 
 		// Patch: Always clone scene graph nodes.
 		writeValueEnforced(0x4EF9FB, BYTE(0x02), BYTE(0x00));
+
+		// Patch: Always copy all NiExtraData on clone, instead of only the first NiStringExtraData.
+		genJumpUnprotected(0x4E8295, 0x4E82BB);
+		genJumpUnprotected(0x4E82C4, 0x4E82CE);
 
 		// Patch: Update player first and third person animations when the idle flag is pausing the controller.
 		genCallUnprotected(0x41B836, reinterpret_cast<DWORD>(PatchUpdateAllIdles));
@@ -922,6 +991,15 @@ namespace mwse::patch {
 
 		// Patch: Set ActiveMagicEffect.isIllegalSummon correctly on loading a savegame.
 		writePatchCodeUnprotected(0x454826, (BYTE*)&PatchLoadActiveMagicEffect, PatchLoadActiveMagicEffect_size);
+
+		// Patch: Fix crash in NPC flee logic when trying to pick a random node from a pathgrid with 0 nodes.
+		genCallEnforced(0x549E76, 0x4E2850, reinterpret_cast<DWORD>(PatchCellGetPathGridWithNodes));
+
+		// Patch: UI element image mirroring on negative image scale.
+		writePatchCodeUnprotected(0x57DE02, (BYTE*)&PatchUIUpdateLayoutImageContent1, PatchUIUpdateLayoutImageContent1_size);
+		writePatchCodeUnprotected(0x57DE3F, (BYTE*)&PatchUIUpdateLayoutImageContent1, PatchUIUpdateLayoutImageContent1_size);
+		writePatchCodeUnprotected(0x57E1E8, (BYTE*)&PatchUIUpdateLayoutImageContent2, PatchUIUpdateLayoutImageContent2_size);
+		genCallUnprotected(0x57E1E8 + 0x2, reinterpret_cast<DWORD>(PatchUIElementTexcoordWrite));
 	}
 
 	void installPostLuaPatches() {
@@ -1042,6 +1120,24 @@ namespace mwse::patch {
 		}
 	}
 
+	const char* GetThreadName(DWORD threadId) {
+		const auto dataHandler = TES3::DataHandler::get();
+		if (dataHandler) {
+			if (threadId == dataHandler->mainThreadID) {
+				return "Main";
+			}
+			else if (threadId == dataHandler->backgroundThreadID) {
+				return "Background";
+			}
+		}
+
+		return "Unknown";
+	}
+
+	const char* GetThreadName() {
+		return GetThreadName(GetCurrentThreadId());
+	}
+
 	template <typename T>
 	void safePrintObjectToLog(const char* title, const T* object) {
 		if (object) {
@@ -1091,8 +1187,13 @@ namespace mwse::patch {
 		}
 
 		// Show if we failed to load a mesh.
-		if (TES3::DataHandler::currentlyLoadingMesh) {
-			log::getLog() << "Currently loading mesh: " << TES3::DataHandler::currentlyLoadingMesh << std::endl;
+		if (!TES3::DataHandler::currentlyLoadingMeshes.empty()) {
+			TES3::DataHandler::currentlyLoadingMeshesMutex.lock();
+			const auto worldController = TES3::WorldController::get();
+			for (const auto& itt : TES3::DataHandler::currentlyLoadingMeshes) {
+				log::getLog() << "Currently loading mesh: " << itt.second << "; Thread: " << GetThreadName(itt.first) << std::endl;
+			}
+			TES3::DataHandler::currentlyLoadingMeshesMutex.unlock();
 		}
 
 		// Open the file.

@@ -32,16 +32,19 @@ namespace TES3 {
 
 	struct PathGrid : BaseObject {
 		struct Node {
-			int x;
-			int y;
-			int z;
-			IteratedList<Node*>* connectedNodes; // 0xC
+			int relativeX;
+			int relativeY;
+			int relativeZ;
+			IteratedList<Node**>* connectedNodes; // 0xC
 			PathGrid* parentGrid; // 0x10
-			int index; // 0x14
+			unsigned char connectedCount; // 0x14
 			NI::Pointer<NI::Node> debugNode; // 0x18
 
 			Node() = delete;
 			~Node() = delete;
+
+			sol::object getConnectedNodes_lua(sol::this_state ts) const;
+			Vector3 getPosition() const;
 		};
 
 		NI::Pointer<NI::Node> sceneNode; // 0x10
@@ -51,10 +54,10 @@ namespace TES3 {
 		char unknown_0x17;
 		Cell* parentCell; // 0x18
 		short granularity; // 0x1C
-		short pointCount; // 0x1E
+		unsigned short nodeCount; // 0x1E
 		IteratedList<Node*> nodes; // 0x20
 		unsigned int fileOffset; // 0x34
-		char unknown_0x38;
+		bool isLoaded;
 
 		PathGrid() = delete;
 		~PathGrid() = delete;
@@ -108,7 +111,7 @@ namespace TES3 {
 		union {
 			struct {
 				NI::PackedColor regionMapColor; // 0x0
-				void * landscape; // 0x4
+				Land * landscape; // 0x4
 				int gridX; // 0x8
 				int gridY; // 0xC
 			} exterior;
@@ -130,7 +133,7 @@ namespace TES3 {
 		GameFile * lastModifyingFile;
 		MappingVisuals * mappingVisuals;
 		IteratedList<MapNote*> * mapNotes; // 0x88
-		void * pathGrid; // 0x8C
+		PathGrid * pathGrid; // 0x8C
 		union {
 			float waterLevel;
 			Region * region;
@@ -176,7 +179,8 @@ namespace TES3 {
 		std::optional<float> getWaterLevel() const;
 		void setWaterLevel(float);
 
-		Region * getRegion() const;
+		Land* getLandscape() const;
+		Region* getRegion() const;
 
 		NI::PackedColor* getAmbientColor();
 		NI::PackedColor* getFogColor();

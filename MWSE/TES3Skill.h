@@ -64,15 +64,20 @@ namespace TES3 {
 		int governingAttribute;
 		int specialization;
 		float progressActions[4];
-		void * description;
-		float descriptionFileOffset;
+		char* description;
+		unsigned int descriptionFileOffset;
 
 		Skill() = delete;
 		~Skill() = delete;
 
+		char* loadDescription();
+		void freeDescription();
+
 		//
 		// Custom functions
 		//
+
+		sol::optional<std::string> getAndLoadDescription();
 
 		const char* getName() const;
 

@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- The tes3ui library provides access to manipulating the game's GUI.
 --- @class tes3uilib
 tes3ui = {}
@@ -142,9 +140,12 @@ function tes3ui.getMenuOnTop() end
 
 --- Gets a standard palette color. Returns an array containing the RGB color values, in the range [0.0, 1.0].
 --- 
---- ![Palette colors](https://raw.githubusercontent.com/MWSE/MWSE/master/docs/source/assets/images/ui%20palletes.png){ loading = lazy }
+--- ![Palette colors](https://raw.githubusercontent.com/MWSE/MWSE/master/docs/source/assets/images/ui%20palletes.png)
+--- 
 --- *Above: All the palette colors in-game with default settings. Note that some entries are entirely black. In order of appearance, those are backgroundColor, blackColor, and journalTopicColor.*
 --- 
+---
+--- [Examples available in online documentation](https://mwse.github.io/MWSE/apis/tes3ui/#tes3uigetpalette).
 --- @param name string The name of the palette color. Maps to values in [`tes3.palette`](https://mwse.github.io/MWSE/references/palettes/) enumeration.
 --- @return number[] palette An array containing the RGB color values, in the range [0.0, 1.0].
 function tes3ui.getPalette(name) end
@@ -214,7 +215,7 @@ function tes3ui.registerProperty(s) end
 --- @param reference tes3reference|nil No description yet available.
 function tes3ui.setConsoleReference(reference) end
 
---- Displays the book menu with arbitrary text. Paging is automatically handled. It needs to follow [book text conventions](https://mwse.github.io/MWSE/references/other/books/) as in the Construction Set. In essence, it uses HTML syntax. Important: every book needs to end with a `<BR>` statement to be displayed properly. See [`bookGetText`](https://mwse.github.io/MWSE/events/bookGetText/#examples) for an example of properly formatted book text.
+--- Displays the book menu with arbitrary text. Paging is automatically handled. It needs to follow [book text conventions](https://mwse.github.io/MWSE/references/general/books/) as in the Construction Set. In essence, it uses HTML syntax. Important: every book needs to end with a `<BR>` statement to be displayed properly. See [`bookGetText`](https://mwse.github.io/MWSE/events/bookGetText/#examples) for an example of properly formatted book text.
 --- @param text string No description yet available.
 function tes3ui.showBookMenu(text) end
 
@@ -318,13 +319,53 @@ function tes3ui.showInventorySelectMenu(params) end
 --- @return boolean wasShown No description yet available.
 function tes3ui.showJournal() end
 
+--- Displays a message box. This may be a simple toast-style message, or a box with choice buttons.
+--- @param params tes3ui.showMessageMenu.params This table accepts the following values:
+--- 
+--- `id`: string? — *Default*: `MenuMessage`. The menu ID of the message menu.
+--- 
+--- `buttons`: tes3ui.showMessageMenu.params.button[] — **Required** The list of buttons.
+--- 
+--- `callbackParams`: table? — *Optional*. The table of parameters to pass to the callback functions.
+--- 
+--- `cancels`: boolean? — *Default*: `false`. When set to true, a cancel button is automatically added to the buttom of the list, even when paginated.
+--- 
+--- `cancelText`: string? — *Default*: `tes3.findGMST(tes3.gmst.sCancel).value`. The text on the cancel button.
+--- 
+--- `cancelCallback`: function? — *Optional*. The function to call when the user clicks the cancel button.
+--- 
+--- `header`: string|fun(callbackParams: table): string|nil — *Optional*. The optional header displayed above the message. Can also be a function that returns a string.
+--- 
+--- `message`: string|fun(callbackParams: table): string — **Required** The message at the top of the messagebox. Can also be a function that returns a string.
+--- 
+--- `customBlock`: fun(parent: tes3uiElement)? — *Optional*. A custom element to be displayed below the header.
+--- 
+--- `page`: integer? — *Default*: `1`. No description yet available.
+--- 
+--- `pageSize`: integer? — *Default*: `30`. No description yet available.
+function tes3ui.showMessageMenu(params) end
+
+---Table parameter definitions for `tes3ui.showMessageMenu`.
+--- @class tes3ui.showMessageMenu.params
+--- @field id string? *Default*: `MenuMessage`. The menu ID of the message menu.
+--- @field buttons tes3ui.showMessageMenu.params.button[] **Required** The list of buttons.
+--- @field callbackParams table? *Optional*. The table of parameters to pass to the callback functions.
+--- @field cancels boolean? *Default*: `false`. When set to true, a cancel button is automatically added to the buttom of the list, even when paginated.
+--- @field cancelText string? *Default*: `tes3.findGMST(tes3.gmst.sCancel).value`. The text on the cancel button.
+--- @field cancelCallback function? *Optional*. The function to call when the user clicks the cancel button.
+--- @field header string|fun(callbackParams: table): string|nil *Optional*. The optional header displayed above the message. Can also be a function that returns a string.
+--- @field message string|fun(callbackParams: table): string **Required** The message at the top of the messagebox. Can also be a function that returns a string.
+--- @field customBlock fun(parent: tes3uiElement)? *Optional*. A custom element to be displayed below the header.
+--- @field page integer? *Default*: `1`. No description yet available.
+--- @field pageSize integer? *Default*: `30`. No description yet available.
+
 --- Creates a new notify menu with a formatted string. A notify menu is a toast-style display that shows at the bottom of the screen. It will expire after an amount of time, determined by the length of the message and the `fMessageTimePerChar` GMST.
 --- @param string string The message to display. If it supports formatting, additional arguments are used.
 --- @param ... any? Optional values to feed to formatting found in the first parameter.
 --- @return tes3uiElement menu The notify menu created.
 function tes3ui.showNotifyMenu(string, ...) end
 
---- Displays the scroll menu with arbitrary text. It needs to follow [book text conventions](https://mwse.github.io/MWSE/references/other/books/) as in the Construction Set. In essence, it uses HTML syntax. Important: every book needs to end with a `<BR>` statement to be displayed properly. See [`bookGetText`](https://mwse.github.io/MWSE/events/bookGetText/#examples) for an example of properly formatted scroll text.
+--- Displays the scroll menu with arbitrary text. It needs to follow [book text conventions](https://mwse.github.io/MWSE/references/general/books/) as in the Construction Set. In essence, it uses HTML syntax. Important: every book needs to end with a `<BR>` statement to be displayed properly. See [`bookGetText`](https://mwse.github.io/MWSE/events/bookGetText/#examples) for an example of properly formatted scroll text.
 --- @param text string No description yet available.
 function tes3ui.showScrollMenu(text) end
 

@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A mobile object for a creature, NPC, or the player.
 --- @class tes3mobileActor : tes3mobileObject
 --- @field actionBeforeCombat tes3actionData *Read-only*. Action data stored before the actor entered combat.
@@ -17,18 +15,26 @@
 --- @field animationController tes3actorAnimationController|tes3playerAnimationController *Read-only*. No description yet available.
 --- @field armorRating number *Read-only*. The actor's current armour rating, taking equipment condition into account. Armour mitigation can be automatically applied to damage by using the `applyDamage` function.
 --- 
---- Armour mitigation calculation:
---- x = damage / (damage + target.armorRating)
---- damage *= max(fCombatArmorMinMult, x)
---- if damage < 1 then damage = 1 end
+--- !!! note "Armour mitigation calculation:"
+--- 	x = damage / (damage + target.armorRating)
+--- 
+--- 	damage *= max(fCombatArmorMinMult, x)
+--- 
+--- 	if damage < 1 then
+--- 
+--- 		damage = 1
+--- 
+--- 	end
+--- 
 --- @field attackBonus number Direct access to the actor's attack bonus effect attribute.
 --- @field attacked boolean *Read-only*. Friendly access to the actor's flag that controls if the actor has been attacked.
 --- @field attributes tes3statistic[]|tes3statisticSkill[] *Read-only*. Access to a table of 8 [`tes3statistic`](https://mwse.github.io/MWSE/types/tes3statistic/) objects for the actor's attributes.
 --- @field barterGold number The current amount of gold that the actor has access to for bartering.
 --- @field blind number Direct access to the actor's blind effect attribute.
---- @field canAct boolean *Read-only*. If `true`, the actor is able to freely execute actions like attacking or casting magic. This is equal to checking if the actor is not dead, knocked down, knocked out, paralyzed, drawing/sheathing their weapon, attacking, casting magic or using a lockpick or probe.
+--- @field canAct boolean *Read-only*. If `true`, the actor is able to freely execute actions like attacking or casting magic. This is equal to checking if the actor is not dead, knocked down, knocked out, hit stunned, paralyzed, drawing/sheathing their weapon, attacking, casting magic or using a lockpick or probe.
 --- @field canJump boolean *Read-only*. If `true`, the actor is currently able to jump. This is equal to checking if the actor is not dead, knocked down, knocked out, paralyzed, jumping, falling, swimming or flying.
 --- @field canJumpMidair boolean *Read-only*. If `true`, the actor is currently able to jump midair. This is equal to checking if the actor is not dead, knocked down, knocked out, paralyzed, swimming or flying. For more information on midair jumping see [`tes3mobileActor:doJump()`](https://mwse.github.io/MWSE/types/tes3mobileActor/#dojump).
+--- @field canMove boolean *Read-only*. If `true`, the actor is able to freely move along the ground or in the air. This does not include jumping (see `canJump`). This is equal to checking if the actor is not dead, knocked down, knocked out, hit stunned, or paralyzed.
 --- @field cell tes3cell *Read-only*. Fetches the cell that the actor is in.
 --- @field chameleon number Direct access to the actor's chameleon effect attribute.
 --- @field collidingReference tes3reference|nil *Read-only*. The reference that the mobile has collided with this frame. Doesn't include actors and terrain.
@@ -61,6 +67,7 @@
 --- @field isDiseased boolean *Read-only*. True if the actor is has a disease effect. This counts normal, blight, and corprus effects.
 --- @field isFalling boolean Direct access to the actor's current movement flags, showing if the actor is falling. This is when the actor is falling without having jumped, e.g. if they walked off a ledge.
 --- @field isFlying boolean Direct access to the actor's current movement flags, showing if the actor is flying.
+--- @field isHitStunned boolean *Read-only*. If `true`, the actor is affected by hit stun. This prevents the actor from initiating an attack, but not continuing and finishing an attack. It also prevents movement except for jumping.
 --- @field isJumping boolean Direct access to the actor's current movement flags, showing if the actor is jumping.
 --- @field isKnockedDown boolean *Read-only*. If `true`, the actor is knocked down. An actor can be knocked down after being attacked or falling.
 --- @field isKnockedOut boolean *Read-only*. If `true`, the actor is knocked out. An actor can be knocked out if their fatigue has been reduced below zero.
@@ -223,7 +230,7 @@ function tes3mobileActor:doJump(params) end
 --- 
 --- `item`: tes3alchemy|tes3apparatus|tes3armor|tes3book|tes3clothing|tes3ingredient|tes3light|tes3lockpick|tes3misc|tes3probe|tes3repairTool|tes3weapon|string — The item to equip.
 --- 
---- `itemData`: tes3itemData? — *Optional*. The item data of the specific item to equip.
+--- `itemData`: tes3itemData? — *Optional*. The item data of the specific item to equip, if a specific item is required.
 --- 
 --- `addItem`: boolean? — *Default*: `false`. If `true`, the item will be added to the actor's inventory if needed.
 --- 
@@ -236,7 +243,7 @@ function tes3mobileActor:equip(params) end
 ---Table parameter definitions for `tes3mobileActor.equip`.
 --- @class tes3mobileActor.equip.params
 --- @field item tes3alchemy|tes3apparatus|tes3armor|tes3book|tes3clothing|tes3ingredient|tes3light|tes3lockpick|tes3misc|tes3probe|tes3repairTool|tes3weapon|string The item to equip.
---- @field itemData tes3itemData? *Optional*. The item data of the specific item to equip.
+--- @field itemData tes3itemData? *Optional*. The item data of the specific item to equip, if a specific item is required.
 --- @field addItem boolean? *Default*: `false`. If `true`, the item will be added to the actor's inventory if needed.
 --- @field selectBestCondition boolean? *Default*: `false`. If `true`, the item in the inventory with the best condition and best charge will be selected.
 --- @field selectWorstCondition boolean? *Default*: `false`. If `true`, the item in the inventory with the worst condition and worst charge will be selected. Can be useful for selecting tools.
@@ -359,13 +366,15 @@ function tes3mobileActor:startCombat(target) end
 function tes3mobileActor:startDialogue() end
 
 --- Ends combat for the actor.
---- @param force boolean If `false`, the function won't stop combat if the actor has other valid hostile targets.
+--- @param force boolean? *Default*: `false`. If `false`, the function won't stop combat if the actor has other valid hostile targets.
 function tes3mobileActor:stopCombat(force) end
 
 --- Unequips one or more items from the actor.
 --- @param params tes3mobileActor.unequip.params This table accepts the following values:
 --- 
 --- `item`: tes3alchemy|tes3apparatus|tes3armor|tes3book|tes3clothing|tes3ingredient|tes3light|tes3lockpick|tes3misc|tes3probe|tes3repairTool|tes3weapon|string|nil — *Optional*. The item to unequip.
+--- 
+--- `itemData`: tes3itemData? — *Optional*. The item data of the specific item to unequip, if a specific item is required.
 --- 
 --- `type`: number? — *Optional*. The item type to unequip. Only used if no other parameter is provided. Only values pertaining to equipment from [`tes3.objectType`](https://mwse.github.io/MWSE/references/object-types/) can be passed here.
 --- 
@@ -378,6 +387,7 @@ function tes3mobileActor:unequip(params) end
 ---Table parameter definitions for `tes3mobileActor.unequip`.
 --- @class tes3mobileActor.unequip.params
 --- @field item tes3alchemy|tes3apparatus|tes3armor|tes3book|tes3clothing|tes3ingredient|tes3light|tes3lockpick|tes3misc|tes3probe|tes3repairTool|tes3weapon|string|nil *Optional*. The item to unequip.
+--- @field itemData tes3itemData? *Optional*. The item data of the specific item to unequip, if a specific item is required.
 --- @field type number? *Optional*. The item type to unequip. Only used if no other parameter is provided. Only values pertaining to equipment from [`tes3.objectType`](https://mwse.github.io/MWSE/references/object-types/) can be passed here.
 --- @field armorSlot number? *Optional*. The armor slot to unequip. Maps to values in [`tes3.armorSlot`](https://mwse.github.io/MWSE/references/armor-slots/) namespace.
 --- @field clothingSlot number? *Optional*. The clothing slot to unequip. Maps to values in [`tes3.clothingSlot`](https://mwse.github.io/MWSE/references/clothing-slots/) namespace

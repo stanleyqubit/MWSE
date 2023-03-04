@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- This modifier provides framework for collision testing. The classes derived from this one: niSphericalCollider, and niPlanarCollider, test for collisions. Each frame a niParticleSystemController traverses its list of niParticlesColliders to determine if any collisions happened.
 --- @class niParticleCollider : niParticleModifier, niObject
 --- @field collisionPoint tes3vector3 
@@ -11,5 +9,3 @@
 --- @field dieOnCollide boolean If this flag is true a particle that collides with something will be destroyed.
 --- @field restitution number The fraction of the original amount of energy the particle retains after a collision.
 --- @field spawnOnCollide boolean This flag controls if a new particle will be spawned on a collision. The new particle is spawned at the position of the old particle with the same attributes.
-niParticleCollider = {}
-

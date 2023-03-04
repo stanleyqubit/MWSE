@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- This modifer applies acceleration to particles in the parent niParticleSystemController.
 --- @class niParticleBomb : niParticleModifier, niObject
 --- @field decay number The niParticleBomb modifers with `decayType` linear and exponential have their strength attenuated with distance. No attenuation occurs within the `.decay` distance of the niParticelBomb's position.
@@ -16,5 +14,3 @@
 --- @field symmetryType integer Controls how this modifer affects the particles. Spherical modifer operates around the point defined by `.position` property. Cylindrical modifer applied the force parallel to the `.direction` vector, centered at `position` property. Planar modifers operate perpendicular to the `.direction` vector.
 --- 
 --- Maps to values in [`ni.particleBombSymmetryType`](https://mwse.github.io/MWSE/references/ni/particle-bomb-symmetry-types/) table.
-niParticleBomb = {}
-

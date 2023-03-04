@@ -114,6 +114,8 @@
 #include "TES3IngredientLua.h"
 #include "TES3InputControllerLua.h"
 #include "TES3InventoryLua.h"
+#include "TES3LandLua.h"
+#include "TES3LandTextureLua.h"
 #include "TES3LeveledListLua.h"
 #include "TES3LightLua.h"
 #include "TES3LockpickLua.h"
@@ -169,6 +171,8 @@
 #include "NIPixelDataLua.h"
 #include "NIPropertyLua.h"
 #include "NIQuaternionLua.h"
+#include "NIRenderedTextureLua.h"
+#include "NIRendererLua.h"
 #include "NISkinInstanceLua.h"
 #include "NISourceTextureLua.h"
 #include "NISwitchNodeLua.h"
@@ -247,6 +251,7 @@
 #include "LuaPreventRestEvent.h"
 #include "LuaProjectileExpireEvent.h"
 #include "LuaReferenceActivatedEvent.h"
+#include "LuaRepairEvent.h"
 #include "LuaRestInterruptEvent.h"
 #include "LuaSimulateEvent.h"
 #include "LuaSkillRaisedEvent.h"
@@ -484,6 +489,8 @@ namespace mwse::lua {
 		bindTES3Ingredient();
 		bindTES3InputController();
 		bindTES3Inventory();
+		bindTES3Land();
+		bindTES3LandTexture();
 		bindTES3LeveledList();
 		bindTES3Light();
 		bindTES3Lockpick();
@@ -542,6 +549,8 @@ namespace mwse::lua {
 		bindNIPixelData();
 		bindNIProperties();
 		bindNIQuaternion();
+		bindNIRenderedTexture();
+		bindNIRenderer();
 		bindNISkinInstance();
 		bindNISourceTexture();
 		bindNISwitchNode();
@@ -610,7 +619,7 @@ namespace mwse::lua {
 #define HookRunScript_TargetReference 0x7CEBECu
 	static_assert(TES3_SCRIPTTARGETREF_IMAGE == HookRunScript_TargetReference, "Script reference address failed validation for hook. constexpr cannot be used in assembly reliably.");
 	static __declspec(naked) void HookRunScript() {
-		_asm
+		__asm
 		{
 			// Save all registers.
 			pushad
@@ -623,7 +632,7 @@ namespace mwse::lua {
 			popad
 
 			// Overwritten code.
-			mov ecx, dword ptr ds : [HookRunScript_TargetReference]
+			mov ecx, dword ptr ds:[HookRunScript_TargetReference]
 
 			// Resume normal execution.
 			jmp callbackRunScript
@@ -1007,7 +1016,7 @@ namespace mwse::lua {
 
 	static DWORD callbackUIEvent = TES3_HOOK_UI_EVENT_RETURN;
 	static __declspec(naked) void HookUIEvent() {
-		_asm
+		__asm
 		{
 			push edi
 			call OnUIEvent
@@ -1145,7 +1154,7 @@ namespace mwse::lua {
 	}
 
 	static __declspec(naked) float OnApplyFatigueDamageFromAttack_Wrapper() {
-		_asm {
+		__asm {
 			mov edx, esi
 			jmp OnApplyFatigueDamageFromAttack
 		}
@@ -1168,7 +1177,7 @@ namespace mwse::lua {
 	}
 
 	static __declspec(naked) bool OnApplyDamageFromMagicShield_Wrapper() {
-		_asm {
+		__asm {
 			mov edx, ebx
 			jmp OnApplyDamageFromMagicShield
 		}
@@ -1269,7 +1278,7 @@ namespace mwse::lua {
 
 	//
 	// Alchemy brewing potion strength and skill check event.
-	// 
+	//
 
 	TES3::Item* getAlchemyMenuObject(DWORD parentIdAddress) {
 		using namespace TES3::UI;
@@ -1483,7 +1492,7 @@ namespace mwse::lua {
 
 	static DWORD postMagicCastSuccess = TES3_HOOK_MAGIC_CAST_SUCCESS_RETURN;
 	static __declspec(naked) void HookMagicCastSuccess() {
-		_asm
+		__asm
 		{
 			// Save all registers.
 			pushad
@@ -1498,7 +1507,7 @@ namespace mwse::lua {
 			popad
 
 			// Overwritten code.
-			mov dword ptr[esi + 0xB4], 1
+			mov dword ptr [esi + 0xB4], 1
 
 			// Resume normal execution.
 			jmp postMagicCastSuccess
@@ -1517,7 +1526,7 @@ namespace mwse::lua {
 
 	static DWORD postSpellCastFailure = TES3_HOOK_SPELL_CAST_FAILURE_RETURN;
 	static __declspec(naked) void HookSpellCastFailure() {
-		_asm
+		__asm
 		{
 			// Save all registers.
 			pushad
@@ -1532,7 +1541,7 @@ namespace mwse::lua {
 			popad
 
 			// Overwritten code.
-			mov dword ptr[esi + 0xB4], 7
+			mov dword ptr [esi + 0xB4], 7
 
 			// Resume normal execution.
 			jmp postSpellCastFailure
@@ -1846,8 +1855,8 @@ namespace mwse::lua {
 	static bool ActivationTargetChanged_invalidated = false;
 
 	static __declspec(naked) void HookPreFindActivationTarget() {
-		_asm {
-			mov		eax, ds: [0x7C6CDC]  // global_TES3_Game
+		__asm {
+			mov		eax, ds:[0x7C6CDC]  // global_TES3_Game
 			mov		eax, [eax + 0xE8]	// game->playerTarget
 			mov		ActivationTargetChanged_preActivationTarget, eax
 			mov		ActivationTargetChanged_invalidated, 0
@@ -1858,7 +1867,7 @@ namespace mwse::lua {
 	static __declspec(naked) void HookPostActivate() {
 		// On ref activation, clear remembered reference to avoid using a stale pointer to a possibly destroyed reference.
 		// The invalidation flag is required to identify change when the current target also becomes nullptr.
-		_asm {
+		__asm {
 			xor		edx, edx
 			mov		ActivationTargetChanged_preActivationTarget, edx
 			mov		ActivationTargetChanged_invalidated, 1
@@ -1895,7 +1904,7 @@ namespace mwse::lua {
 	__declspec(naked) void patchWeatherRegionCheck() {
 		__asm {
 			mov ecx, [esi + 0x58]	// ecx = WorldController->weatherController
-			mov[ecx + 0x1D0], eax  // weatherController->lastActiveRegion = eax
+			mov [ecx + 0x1D0], eax  // weatherController->lastActiveRegion = eax
 			nop
 		}
 	}
@@ -2425,7 +2434,78 @@ namespace mwse::lua {
 		OnSkillTrained_SkillId = -1;
 	}
 
-	void LuaManager::executeMainModScripts(const char* path, const char* filename) {
+	void LuaManager::gatherModMetadata() {
+		sol::table luaMWSE = luaState["mwse"];
+		auto activeLuaMods = luaMWSE["activeLuaMods"];
+
+		// Try to match any mwse information from -metadata.toml files to an active lua mod.
+		for (const auto& p : std::filesystem::directory_iterator("Data Files", std::filesystem::directory_options::follow_directory_symlink)) {
+			auto lowerPath = p.path().string();
+			string::to_lower(lowerPath);
+
+			// We only care *-metadata.toml files.
+			if (!string::ends_with(lowerPath, "-metadata.toml")) {
+				continue;
+			}
+
+			// Load the metadata.
+			sol::safe_function_result metadata_result = luaState["toml"]["loadFile"](lowerPath);
+			if (metadata_result.valid()) {
+				sol::table metadata = metadata_result;
+				if (metadata == sol::nil) {
+					continue;
+				}
+
+				sol::table metadata_tools = metadata["tools"];
+				if (metadata_tools == sol::nil) {
+					continue;
+				}
+
+				sol::table metadata_tools_mwse = metadata_tools["mwse"];
+				if (metadata_tools_mwse == sol::nil) {
+					continue;
+				}
+
+				sol::optional<std::string> luaKey = metadata_tools_mwse["lua-mod"];
+				if (!luaKey) {
+					continue;
+				}
+
+				// Ensure that keys are lowercased for lookup.
+				string::to_lower(luaKey.value());
+
+				sol::table runtime = activeLuaMods[luaKey.value()];
+				if (runtime == sol::nil) {
+					continue;
+				}
+
+				// Make sure we don't already have a metadata assigned.
+				if (runtime["metadata"] != sol::nil) {
+					log::getLog() << "[LuaManager] WARNING: More than one metadata found claiming mod '" << luaKey.value() << "'." << std::endl;
+					continue;
+				}
+
+				runtime["metadata"] = metadata;
+			}
+			else {
+				sol::error error = metadata_result;
+				log::getLog() << "[LuaManager] ERROR: Could not parse mod metadata '" << p.path().string() << "':" << std::endl << error.what() << std::endl;
+				continue;
+			}
+		}
+	}
+
+	const std::array<std::string, 2> disabledMarkers = { ".disabled", ".mohidden" };
+
+	bool isPathDisabled(const std::string_view& path) {
+		const auto disabledPathItt = std::find_if(disabledMarkers.begin(), disabledMarkers.end(),
+			[&](const std::string& s) {
+				return path.find(s) != std::string::npos;
+			});
+		return disabledPathItt != disabledMarkers.end();
+	}
+
+	void LuaManager::gatherMainModScripts(const std::string_view& path, bool core, const std::string_view& filename) {
 		if (!std::filesystem::exists(path)) {
 			return;
 		}
@@ -2433,38 +2513,47 @@ namespace mwse::lua {
 		// Do some precomputing for storing and calculating active lua mods.
 		sol::table luaMWSE = luaState["mwse"];
 		auto activeLuaMods = luaMWSE["activeLuaMods"];
-		auto luaDirectoryLength = strnlen_s(path, 260);
-		auto luaFilenameLength = strnlen_s(filename, 260);
 
-		// Parent folder suffixes that we'll skip.
-		std::array<std::string, 2> disabledMarkers = { ".disabled", ".mohidden" };
-
-		for (auto& p : std::filesystem::recursive_directory_iterator(path, std::filesystem::directory_options::follow_directory_symlink)) {
+		auto subclassOrder = 0u;
+		for (const auto& p : std::filesystem::recursive_directory_iterator(path, std::filesystem::directory_options::follow_directory_symlink)) {
 			if (p.path().filename() == filename) {
 				// If a parent directory is marked .disabled, ignore files in it.
-				auto pathString = p.path().string();
-				auto disabledPathItt = std::find_if(disabledMarkers.begin(), disabledMarkers.end(), [&](const std::string& s) {
-					return pathString.find(s) != std::string::npos;
-				});
-				if (disabledPathItt != disabledMarkers.end()) {
+				const auto pathString = p.path().string();
+				if (isPathDisabled(pathString)) {
 					log::getLog() << "[LuaManager] Skipping mod initializer in disabled directory: " << pathString << std::endl;
 					continue;
 				}
 
-				// Execute the script.
-				sol::protected_function_result result = luaState.safe_script_file(pathString, &sol::script_pass_on_error);
-				if (!result.valid()) {
-					sol::error error = result;
-					log::getLog() << "[LuaManager] ERROR: Failed to run mod initialization script:" << std::endl << error.what() << std::endl;
+				// Get a version of its path as a key.
+				auto luaModKey = pathString.substr(path.length() + 1, pathString.length() - path.length() - filename.length() - 2);
+				std::replace(luaModKey.begin(), luaModKey.end(), '\\', '.');
+				string::to_lower(luaModKey);
+
+				// Check for key conflicts.
+				if (activeLuaMods[luaModKey] != sol::nil) {
+					log::getLog() << "[LuaManager] Skipping mod with duplicate key '" << luaModKey << "' in direcotry: " << pathString << std::endl;
 					continue;
 				}
 
-				// Store a version of its path as a key to be checked with tes3.isLuaModActive.
-				auto luaModKey = pathString.substr(luaDirectoryLength + 1, pathString.length() - luaDirectoryLength - luaFilenameLength - 2);
-				std::replace(luaModKey.begin(), luaModKey.end(), '\\', '.');
-				string::to_lower(luaModKey);
-				activeLuaMods[luaModKey] = true;
+				// Prepare runtime data.
+				auto runtime = luaState.create_table();
+				runtime["path"] = p.path().string();
+				runtime["parent_path"] = p.path().parent_path().string();
+				runtime["key"] = luaModKey;
+				runtime["core_mod"] = core;
+				runtime["legacy_mod"] = !string::equal(filename, "main.lua");
+				runtime["load_std_order"] = subclassOrder++;
+
+				activeLuaMods[luaModKey] = runtime;
 			}
+		}
+	}
+
+	void LuaManager::executeMainModScripts() {
+		sol::protected_function_result result = luaState.safe_script_file("Data Files\\MWSE\\core\\startLuaMods.lua");
+		if (!result.valid()) {
+			sol::error error = result;
+			log::getLog() << "[LuaManager] ERROR: Failed to start up lua mods!" << std::endl << error.what() << std::endl;
 		}
 	}
 
@@ -2952,7 +3041,7 @@ namespace mwse::lua {
 	const size_t patchJump_size = 0xC;
 
 	//
-	// Event: Filters created. 
+	// Event: Filters created.
 	//
 
 	const auto TES3_WorldController_CreateFilters = reinterpret_cast<void(__thiscall*)(TES3::WorldController*)>(0x411400);
@@ -3119,8 +3208,9 @@ namespace mwse::lua {
 			return 0;
 		}
 
-		// MCP value change.
-		return int(pow(baseValue, 3) / 1000 + baseValue * 2);
+		// MCP value change. Uses floating point to avoid risk of overflow.
+		double v = baseValue;
+		return int(0.0001 * (v * v * v) + 2 * v);
 	}
 
 	__declspec(naked) void PatchGetSoulValueForTooltip_NoMCPLoader() {
@@ -3239,7 +3329,7 @@ namespace mwse::lua {
 		// Get the associated tile and fire off the update event.
 		TriggerItemTileUpdatedEventForElement(element, 0x7D308C);
 	}
-	
+
 	void __fastcall OnMenuBarterInventoryTileChildPropertySet(TES3::UI::Element* element, DWORD _UNUSED_, TES3::UI::Property property, TES3::UI::PropertyValue value, TES3::UI::PropertyType type) {
 		// Overwritten code.
 		element->setProperty(property, value, type);
@@ -3532,7 +3622,12 @@ namespace mwse::lua {
 
 	// Override the effect id, but only if this is a custom effect with a valid summon or bound item.
 	short __stdcall PatchMagicSaveLoad_UpdateId(const TES3::EquipmentStack* const stack, short id) {
-		if (id > TES3::EffectID::LastEffect && stack->object) {
+		// The original code's switch statement only covers magic effect IDs up to Vampirism (0x85).
+		// However, there are more vanilla summon effects with higher effect IDs, as well our custom effects.
+		// Corprus and vampirism must be excluded, because they may use integers in the created data field.
+		const short overrideSavingMagicEffectsFromID = TES3::EffectID::SummonCenturionSphere;
+
+		if (id >= overrideSavingMagicEffectsFromID && stack->object) {
 			if (stack->object->objectType == TES3::ObjectType::Armor || stack->object->objectType == TES3::ObjectType::Weapon) {
 				id = TES3::EffectID::BoundDagger;
 			}
@@ -3546,13 +3641,13 @@ namespace mwse::lua {
 	static DWORD postPatchMagicSaveLoad = TES3_PATCH_MAGIC_SAVE_LOAD_RETURN;
 
 	// Intercept the effect id. If it's a custom effect and there's a summon or bound item, change it to an appropriate vanilla effect,
-	// so that the game will select the appropriate branch of the switch. This will allow the game to properly serialize the bound item or 
+	// so that the game will select the appropriate branch of the switch. This will allow the game to properly serialize the bound item or
 	// summon associated with this effect.
 	static __declspec(naked) short PatchMagicSaveLoad() {
-		_asm {
+		__asm {
 			// Restore overwritten code. Read the id from the appropriate effect and place it in eax.
-			mov ecx, dword ptr[esp + 0x20]
-			movsx eax, word ptr[eax + ecx]
+			mov ecx, dword ptr [esp + 0x20]
+			movsx eax, word ptr [eax + ecx]
 
 			// short id
 			push eax
@@ -3777,9 +3872,8 @@ namespace mwse::lua {
 			// Fire off the event.
 			if (event::EnchantChargeUseEvent::getEventEnabled()) {
 				auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
-				bool isCast = magicSource != nullptr;
 
-				sol::object eventResult = stateHandle.triggerEvent(new event::EnchantChargeUseEvent(enchant, mobile, charge, isCast));
+				sol::object eventResult = stateHandle.triggerEvent(new event::EnchantChargeUseEvent(enchant, mobile, magicSource, charge));
 				if (eventResult.valid()) {
 					sol::table eventData = eventResult;
 					sol::optional<float> newCharge = eventData["charge"];
@@ -3813,13 +3907,13 @@ namespace mwse::lua {
 
 	__declspec(naked) void patchEnchantItemChargeRequired_onCast() {
 		__asm {
-			push esi					// magicSourceInstance
+			push esi							// magicSourceInstance
 			push ecx
-			fstp[esp]					// Charge required
-			push[esi + 0xA0]				// Casting enchantment
-			push edi					// Casting mobileActor
+			fstp [esp]							// Charge required
+			push [esi + 0xA0]					// Casting enchantment
+			push edi							// Casting mobileActor
 			call onEnchantItemChargeRequired	// Replace with call generation
-			fstp[ebp - 0x18]				// Store updated charge required
+			fstp [ebp - 0x18]					// Store updated charge required
 		}
 	}
 	const size_t patchEnchantItemChargeRequired_onCast_size = 0x14;
@@ -3831,41 +3925,41 @@ namespace mwse::lua {
 	__declspec(naked) void patchGetEntityLightRadius() {
 		__asm {
 			push ebx
-			mov ebx, [esi + 0x28]			// ebx = esi->Reference.baseEntity
+			mov ebx, [esi + 0x28]		// ebx = esi->Reference.baseEntity
 
 			mov eax, [eax]				// eax = eax->RefrAttachment_Light.sgLight
-			cmp dword ptr[ebx + 4], 0x4847494C		// tag == 'LIGH'
+			cmp dword ptr [ebx + 4], 0x4847494C		// tag == 'LIGH'
 			jnz non_light
-			mov ecx, [ebx + 0x64]			// ecx = ebx->EntityLight.radius
+			mov ecx, [ebx + 0x64]		// ecx = ebx->EntityLight.radius
 			jmp done
 
-			non_light :
-			fld dword ptr[eax + 0xC4]	// Load radius from eax->NiLight.specular
-				push ecx
-				fistp dword ptr[esp]
-				pop ecx						// Radius converted to integer
+		non_light:
+			fld dword ptr [eax + 0xC4]	// Load radius from eax->NiLight.specular
+			push ecx
+			fistp dword ptr [esp]
+			pop ecx						// Radius converted to integer
 
-				done :
-			mov edx, [esp + 0x10]			// edx = <reference argument>
-				nop
-				push 1
-				push 1
-				push ecx
-				push edx
-				push eax
+		done:
+			mov edx, [esp + 0x10]		// edx = <reference argument>
+			nop
+			push 1
+			push 1
+			push ecx
+			push edx
+			push eax
 		}
 	}
 	const size_t patchGetEntityLightRadius_size = 0x2B;
 
 	//
 	// Patch: Play animation while retaining player control.
-	// 
+	//
 
 	// Patches ActorAnimData::ctor.
 	__declspec(naked) void patchActorAnimInit() {
 		__asm {
 			// Initialize members ActorAnimData+0x98..0x9B in one op. Patch uses ActorAnimData+0x9B for new state.
-			mov dword ptr[esi + 0x98], 0xFF00FFFF
+			mov dword ptr [esi + 0x98], 0xFF00FFFF
 			nop
 			nop
 		}
@@ -3876,11 +3970,12 @@ namespace mwse::lua {
 	__declspec(naked) bool CheckTogglePOV() {
 		__asm {
 			xor al, al
-			cmp[esi + 0x9B], 0xFF // esi->PlayerAnimData.patchedOverrideState == 0xFF
+			cmp [esi + 0x9B], 0xFF			// esi->PlayerAnimData.patchedOverrideState == 0xFF
 			jnz done
 
-			mov al, byte ptr[esi + 0xE9] // al = esi->PlayerAnimData.togglePOV
-			done:
+			mov al, byte ptr [esi + 0xE9]	// al = esi->PlayerAnimData.togglePOV
+
+		done:
 			ret
 		}
 	}
@@ -3888,6 +3983,46 @@ namespace mwse::lua {
 	// Call our custom function when updating animation playback.
 	void __fastcall ActorAnimController_selectMovementAnimAndUpdate(TES3::ActorAnimationController* animController, DWORD _UNUSED_, float deltaTime, bool flag) {
 		animController->selectMovementAnimAndUpdate(deltaTime, flag);
+	}
+
+	//
+	// Patch: Allow changing cast animation speed. Custom speed is read and applied on initial cast.
+	//
+
+	__declspec(naked) bool patchApplyAnimationSpeed() {
+		__asm {
+			fld [ebp + 0x64]		// ebp->AnimationData.deltaTime
+
+		isMovementAnim:
+			cmp cl, 0x2B			// AnimGroup_SwimWalkForward
+			jb isWeaponAnim
+			cmp cl, 0x7F			// AnimGroup_Jump2w
+			ja isWeaponAnim
+		movement:
+			fmul [ebp + 0x4D8]		// * ebp->AnimationData.movementSpeed
+			jmp done
+
+		isWeaponAnim:
+			cmp cl, 0x80			// AnimGroup_SpellCast (added test)
+			je weapon
+			cmp cl, 0x8A			// AnimGroup_Crossbow
+			jb done
+			cmp cl, 0x8F			// AnimGroup_WeaponTwoWide
+			ja done
+		weapon:
+			fmul [ebp + 0x4DC]		// * ebp->AnimationData.weaponSpeed
+			nop
+			nop
+			nop
+		done:
+		}
+	}
+
+	const size_t patchApplyAnimationSpeed_size = 0x2D;
+
+	void __fastcall SetAnimSpeedOnCast(TES3::AnimationData* animData) {
+		// Ensure non-zero weaponSpeed to bypass the actor controller resetting the value on zero.
+		animData->weaponSpeed = animData->getCastSpeed() + FLT_MIN;
 	}
 
 	//
@@ -3901,6 +4036,69 @@ namespace mwse::lua {
 
 		// Multiply our delta time by our scalar.
 		worldController->deltaTime *= TES3::WorldController::simulationTimeScalar;
+	}
+
+	//
+	// Event: Repair
+	//
+
+	static TES3::UI::Element* AttemptRepair_LastTarget = nullptr;
+
+	const auto TES3_OnClickRepairOrRecharge = reinterpret_cast<bool(__cdecl*)(TES3::UI::Element*, TES3::UI::Property, int, int, TES3::UI::Element*)>(0x60E260);
+	bool __cdecl OnClickRepairOrRecharge(TES3::UI::Element* source, TES3::UI::Property prop, int dataA, int dataB, TES3::UI::Element* target) {
+		AttemptRepair_LastTarget = target;
+		return TES3_OnClickRepairOrRecharge(source, prop, dataA, dataB, target);
+	}
+
+	int __cdecl AttemptRepair() {
+		auto repairMenu = TES3::UI::findMenu("MenuRepair");
+		if (!repairMenu) {
+			return 0;
+		}
+
+		// Get the tool data that is used to do the repair.
+		auto tool = repairMenu->getPropertyPointer<TES3::RepairTool>("MenuRepair_Object");
+		auto toolData = repairMenu->getPropertyPointer<TES3::ItemData>("MenuRepair_extra");
+
+		// Get the item and its data that is being repaired.
+		const auto listNumber = AttemptRepair_LastTarget->getProperty(TES3::UI::PropertyType::Integer, TES3::UI::registerProperty("MenuRepair_ListNumber")).integerValue;
+		auto clickedStack = AttemptRepair_LastTarget->getPropertyPointer<TES3::ItemStack>("MenuRepair_Object");
+		auto item = static_cast<TES3::Item*>(clickedStack->object);
+		auto itemData = clickedStack->variables->at(listNumber);
+
+		// Calculate the chance of the repair.
+		const auto macp = TES3::WorldController::get()->getMobilePlayer();
+		const auto skillTerm = macp->getSkillValue(TES3::SkillID::Armorer);
+		const auto luckTerm = macp->getAttributeLuck()->getCurrent() * 0.1f;
+		const auto strengthTerm = macp->getAttributeStrength()->getCurrent() * 0.1f;
+		const auto fatigueTerm = macp->getFatigueTerm();
+		auto chance = fatigueTerm * (skillTerm + strengthTerm + luckTerm);
+		const auto roll = tes3::rand() % 100;
+
+		// Calculate the repair amount.
+		const auto fRepairAmountMult = TES3::DataHandler::get()->nonDynamicData->GMSTs[TES3::GMST::fRepairAmountMult]->value.asFloat;
+		auto repairAmount = int(tool ? tool->getQuality() * fRepairAmountMult * roll : 1.0f);
+		if (repairAmount < 1) {
+			repairAmount = 1;
+		}
+
+		// Allow changing the repair chance/amount.
+		if (event::RepairEvent::getEventEnabled()) {
+			auto& luaManager = mwse::lua::LuaManager::getInstance();
+			auto stateHandle = luaManager.getThreadSafeStateHandle();
+			sol::table result = stateHandle.triggerEvent(new event::RepairEvent(macp, item, itemData, tool, toolData, chance, repairAmount));
+			if (result.valid()) {
+				chance = result.get_or("chance", chance);
+				repairAmount = result.get_or("repairAmount", repairAmount);
+			}
+		}
+
+		// If it was a failure, return -1.
+		if (roll >= chance) {
+			return -1;
+		}
+
+		return std::max(repairAmount, 1);
 	}
 
 	//
@@ -3980,7 +4178,7 @@ namespace mwse::lua {
 
 		// Execute mwse_init.lua
 		try {
-			sol::protected_function_result result = luaState.safe_script_file("Data Files\\MWSE\\core\\mwse_init.lua");
+			sol::protected_function_result result = luaState.safe_script_file("Data Files\\MWSE\\core\\initialize.lua");
 			if (!result.valid()) {
 				sol::error error = result;
 				log::getLog() << "[LuaManager] ERROR: Failed to initialize MWSE Lua interface." << std::endl << error.what() << std::endl;
@@ -5074,6 +5272,12 @@ namespace mwse::lua {
 		overrideVirtualTableEnforced(TES3::VirtualTableAddress::ContainerBase, offsetof(TES3::ActorVirtualTable, onCloseInventory), 0x58D230, *reinterpret_cast<DWORD*>(&actorOnCloseInventory));
 		overrideVirtualTableEnforced(TES3::VirtualTableAddress::ContainerInstance, offsetof(TES3::ActorVirtualTable, onCloseInventory), 0x4A4460, *reinterpret_cast<DWORD*>(&containerOnCloseInventory));
 
+		// Event: Camera control.
+		auto mobilePlayerUpdateScenegraph = &TES3::MobilePlayer::updateSceneGraph;
+		auto playerAnimControllerSyncRotation = &TES3::PlayerAnimationController::syncRotation;
+		overrideVirtualTableEnforced(TES3::VirtualTableAddress::MobilePlayer, 0x1C, 0x5679E0, *reinterpret_cast<DWORD*>(&mobilePlayerUpdateScenegraph));
+		overrideVirtualTableEnforced(TES3::VirtualTableAddress::PlayerAnimController, 0xC, 0x5438F0, *reinterpret_cast<DWORD*>(&playerAnimControllerSyncRotation));
+
 		// Allow overriding of guard status.
 		auto npcBaseIsGuard = &TES3::NPCBase::isGuard;
 		overrideVirtualTableEnforced(TES3::VirtualTableAddress::NPCBase, offsetof(TES3::ActorVirtualTable, isGuard), 0x04DA5E0, *reinterpret_cast<DWORD*>(&npcBaseIsGuard));
@@ -5102,7 +5306,7 @@ namespace mwse::lua {
 		genCallEnforced(0x4D9F7C, 0x473CB0, *reinterpret_cast<DWORD*>(&bodyPartManagerSetBodyPartForObject));
 		genCallEnforced(0x4D9FBC, 0x473CB0, *reinterpret_cast<DWORD*>(&bodyPartManagerSetBodyPartForObject));
 
-		// Fix BPM constructor to always have a reference. 
+		// Fix BPM constructor to always have a reference.
 		auto bodyPartManagerConstructor = &TES3::BodyPartManager::ctor;
 		genCallEnforced(0x4D8235, 0x472580, *reinterpret_cast<DWORD*>(&bodyPartManagerConstructor));
 		genCallEnforced(0x4D8248, 0x472580, *reinterpret_cast<DWORD*>(&bodyPartManagerConstructor));
@@ -5310,6 +5514,18 @@ namespace mwse::lua {
 		genJumpEnforced(0x46DA0D, 0x46E64E, 0x46E49E);
 		genJumpUnprotected(0x46E498, 0x46E64E);
 
+		// Override AnimationData creation.
+		auto AnimationData_ctor = &TES3::AnimationData::ctor;
+		genCallEnforced(0x4E63A5, 0x46B7A0, *reinterpret_cast<DWORD*>(&AnimationData_ctor));
+		genCallEnforced(0x4E64E6, 0x46B7A0, *reinterpret_cast<DWORD*>(&AnimationData_ctor));
+		genCallEnforced(0x4E6766, 0x46B7A0, *reinterpret_cast<DWORD*>(&AnimationData_ctor));
+		genCallEnforced(0x4E69EC, 0x46B7A0, *reinterpret_cast<DWORD*>(&AnimationData_ctor));
+		genCallEnforced(0x4E6C5F, 0x46B7A0, *reinterpret_cast<DWORD*>(&AnimationData_ctor));
+
+		// Patch: Allow changing cast animation speed. Custom speed is read and applied on initial cast.
+		writePatchCodeUnprotected(0x46CAC0, (BYTE*)&patchApplyAnimationSpeed, patchApplyAnimationSpeed_size);
+		genCallUnprotected(0x541B81, reinterpret_cast<DWORD>(&SetAnimSpeedOnCast), 0xA);
+
 		// Event: Power Recharged
 		overrideVirtualTableEnforced(0x74AC54, offsetof(PowersHashMap::VirtualTable, deleteKeyValuePair), 0x4F1C50, reinterpret_cast<DWORD>(OnDeletePowerHashMapKVP));
 
@@ -5420,6 +5636,11 @@ namespace mwse::lua {
 		genCallEnforced(0x5077EA, 0x4DA330, *reinterpret_cast<DWORD*>(&TES3_NPCInstance_getDisposition));
 		genCallEnforced(0x54DC88, 0x4DA330, *reinterpret_cast<DWORD*>(&TES3_NPCInstance_getDisposition));
 
+		// Event: Repair
+		genCallEnforced(0x59A3AE, 0x60E260, reinterpret_cast<DWORD>(OnClickRepairOrRecharge));
+		genPushEnforced(0x60DAF6, reinterpret_cast<DWORD>(OnClickRepairOrRecharge));
+		genCallEnforced(0x60E37C, 0x60ECD0, reinterpret_cast<DWORD>(AttemptRepair));
+
 		// UI framework hooks
 		TES3::UI::hook();
 
@@ -5470,13 +5691,19 @@ namespace mwse::lua {
 		}
 
 		// Look for main.lua scripts in the usual directories.
-		executeMainModScripts("Data Files\\MWSE\\core");
-		executeMainModScripts("Data Files\\MWSE\\mods");
+		gatherMainModScripts("Data Files\\MWSE\\core", true);
+		gatherMainModScripts("Data Files\\MWSE\\mods", false);
 
 		// Temporary backwards compatibility for old-style MWSE mods.
 		if (Configuration::EnableLegacyLuaMods) {
-			executeMainModScripts("Data Files\\MWSE\\lua", "mod_init.lua");
+			gatherMainModScripts("Data Files\\MWSE\\lua", false, "mod_init.lua");
 		}
+
+		// Gather any metadata for the mods.
+		gatherModMetadata();
+
+		// Finally execute the scripts.
+		executeMainModScripts();
 	}
 
 	void LuaManager::cleanup() {

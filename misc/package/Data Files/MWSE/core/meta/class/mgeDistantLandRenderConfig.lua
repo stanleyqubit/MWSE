@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- Allows control of MGE distant land features.
 --- @class mgeDistantLandRenderConfig
 --- @field aboveWaterFogEnd number The above water fog end distance, in cells.
@@ -23,5 +21,3 @@
 --- @field waterCaustics number The % brightness of water caustics.
 --- @field waterWaveHeight number The maximum height of dynamic waves.
 --- @field wind number[] An array containing the wind speed multiplier for each weather.
-mgeDistantLandRenderConfig = {}
-

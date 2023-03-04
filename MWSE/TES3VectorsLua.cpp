@@ -63,7 +63,8 @@ namespace mwse::lua {
 
 			// Operator overloading.
 			usertypeDefinition[sol::meta_function::addition] = &TES3::Vector3::operator+;
-			usertypeDefinition[sol::meta_function::subtraction] = &TES3::Vector3::operator-;
+			usertypeDefinition[sol::meta_function::subtraction] = sol::resolve<TES3::Vector3(const TES3::Vector3&) const>(&TES3::Vector3::operator-);
+			usertypeDefinition[sol::meta_function::unary_minus] = sol::resolve<TES3::Vector3() const>(&TES3::Vector3::operator-);;
 			usertypeDefinition[sol::meta_function::multiplication] = sol::overload(
 				sol::resolve<TES3::Vector3(const TES3::Vector3&) const>(&TES3::Vector3::operator*),
 				sol::resolve<TES3::Vector3(const float) const>(&TES3::Vector3::operator*)
@@ -201,6 +202,9 @@ namespace mwse::lua {
 			usertypeDefinition["toEulerXYZ"] = &TES3::Matrix33::toEulerXYZ_lua;
 			usertypeDefinition["toEulerZYX"] = &TES3::Matrix33::toEulerZYX_lua;
 			usertypeDefinition["toQuaternion"] = &TES3::Matrix33::toQuaternion;
+			usertypeDefinition["getForwardVector"] = &TES3::Matrix33::getForwardVector;
+			usertypeDefinition["getRightVector"] = &TES3::Matrix33::getRightVector;
+			usertypeDefinition["getUpVector"] = &TES3::Matrix33::getUpVector;
 		}
 
 		// Binding for TES3::Matrix44.
@@ -241,15 +245,26 @@ namespace mwse::lua {
 		{
 			// Start our usertype.
 			auto usertypeDefinition = state.new_usertype<TES3::Transform>("tes3transform");
-			usertypeDefinition["new"] = sol::no_constructor;
+			usertypeDefinition["new"] = sol::constructors<
+				TES3::Transform(),
+				TES3::Transform(const TES3::Matrix33& rotation, const TES3::Vector3& translation, const float scale)
+			>();
+
+			// Operator overloading.
+			usertypeDefinition[sol::meta_function::multiplication] = sol::overload(
+				sol::resolve<TES3::Transform(const TES3::Transform&)>(&TES3::Transform::operator*),
+				sol::resolve<TES3::Vector3(const TES3::Vector3&)>(&TES3::Transform::operator*)
+			);
 
 			// Basic property bindings.
-			usertypeDefinition["rotation"] = sol::readonly_property(&TES3::Transform::rotation);
-			usertypeDefinition["translation"] = sol::readonly_property(&TES3::Transform::translation);
-			usertypeDefinition["scale"] = sol::readonly_property(&TES3::Transform::scale);
+			usertypeDefinition["rotation"] = &TES3::Transform::rotation;
+			usertypeDefinition["translation"] = &TES3::Transform::translation;
+			usertypeDefinition["scale"] = &TES3::Transform::scale;
 
 			// Basic function binding.
 			usertypeDefinition["copy"] = &TES3::Transform::copy;
+			usertypeDefinition["invert"] = sol::resolve<std::tuple<TES3::Transform, bool>() const>(&TES3::Transform::invert);
+			usertypeDefinition["toIdentity"] = &TES3::Transform::toIdentity;
 		}
 	}
 }

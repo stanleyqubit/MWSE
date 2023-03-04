@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A core game object used for storing additional data for camera objects.
 --- @class tes3worldControllerRenderCameraData
 --- @field camera niCamera The camera scene node.
@@ -12,5 +10,3 @@
 --- @field nearPlaneDistance number The distance of the camera's near plane.
 --- @field viewportHeight number The viewport height.
 --- @field viewportWidth number The viewport width.
-tes3worldControllerRenderCameraData = {}
-

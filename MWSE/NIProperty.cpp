@@ -16,6 +16,7 @@ namespace NI {
 
 	const auto NI_Property_ctor = reinterpret_cast<Property * (__thiscall*)(Property*)>(0x405990);
 	Property::Property() {
+		flags = 0;
 		NI_Property_ctor(this);
 	}
 
@@ -147,6 +148,31 @@ namespace NI {
 
 	void MaterialProperty::incrementRevisionId() {
 		revisionID++;
+	}
+
+	//
+	// NiStencilProperty
+	//
+
+
+	StencilProperty::StencilProperty() {
+		vTable.asProperty = (Property_vTable*)0x746A5C;
+		enabled = false;
+		testFunc = TEST_GREATER;
+		reference = 0;
+		mask = UINT_MAX;
+		failAction = ACTION_KEEP;
+		zFailAction = ACTION_KEEP;
+		passAction = ACTION_INCREMENT;
+		drawMode = DRAW_CCW_OR_BOTH;
+	}
+
+	StencilProperty::~StencilProperty() {
+
+	}
+
+	Pointer<StencilProperty> StencilProperty::create() {
+		return new StencilProperty();
 	}
 
 	//

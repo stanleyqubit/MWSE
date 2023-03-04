@@ -2,13 +2,9 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- 
 --- @class tes3uiProperty
 --- @field id integer UI property's unique ID.
 --- @field name string *Read-only*. The name of this UI property.
 --- @field type integer *Read-only*. The type of this UI property.
 --- @field value integer|number|boolean|tes3uiProperty|nil *Read-only*. The value of this UI property.
-tes3uiProperty = {}
-

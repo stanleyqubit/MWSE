@@ -2,11 +2,7 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A linked list of scene graph nodes.
 --- @class niNodeLinkedList
 --- @field data niBillboardNode|niCollisionSwitch|niNode|niSwitchNode *Read-only*. The current scene graph node in the linked list.
 --- @field next niNodeLinkedList *Read-only*. The next scene graph node in the linked list.
-niNodeLinkedList = {}
-

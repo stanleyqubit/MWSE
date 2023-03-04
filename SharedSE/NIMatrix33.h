@@ -19,13 +19,13 @@ namespace NI {
 		// Basic operators.
 		//
 
-		bool operator==(const Matrix33& matrix);
-		bool operator!=(const Matrix33& matrix);
-		Matrix33 operator+(const Matrix33& matrix);
-		Matrix33 operator-(const Matrix33& matrix);
-		Matrix33 operator*(const Matrix33& matrix);
-		Vector3 operator*(const Vector3& vector);
-		Matrix33 operator*(float scalar);
+		bool operator==(const Matrix33& matrix) const;
+		bool operator!=(const Matrix33& matrix) const;
+		Matrix33 operator+(const Matrix33& matrix) const;
+		Matrix33 operator-(const Matrix33& matrix) const;
+		Matrix33 operator*(const Matrix33& matrix) const;
+		Vector3 operator*(const Vector3& vector) const;
+		Matrix33 operator*(float scalar) const;
 
 		friend std::ostream& operator<<(std::ostream& str, const Matrix33& matrix);
 		std::string toString() const;
@@ -42,7 +42,7 @@ namespace NI {
 		void toRotationX(float x);
 		void toRotationY(float y);
 		void toRotationZ(float z);
-		void toRotation(float angle, float x, float y, float z);
+		void toRotation(float angle, const Vector3& axis);
 		bool toRotationDifference(const Vector3& a, const Vector3& b);
 
 		//

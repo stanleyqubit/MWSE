@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A mobile object for a creature.
 --- @class tes3mobileCreature : tes3mobileActor, tes3mobileObject
 --- @field combat tes3statistic|tes3statisticSkill *Read-only*. Direct access to the creature's combat statistic. This is a creature-specific generalization of skills, where this statistic is used in place of all combat skills. To get an individual skill value by skill ID, see the `getSkillValue` or `getSkillStatistic` methods.
@@ -17,5 +15,3 @@
 --- @field swimRunSpeed number *Read-only*. The calculated swim movement speed while running.
 --- @field swimSpeed number *Read-only*. The calculated swim movement speed.
 --- @field walkSpeed number *Read-only*. The calculated walk movement speed.
-tes3mobileCreature = {}
-

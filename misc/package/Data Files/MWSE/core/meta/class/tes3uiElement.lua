@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A UI element, the main building block of the UI system. All elements are created with methods on a parent Element.  Elements are very configurable, and have many HTML-like layout features. All layout properties can be set to `nil` to reset them to the default value, which will deactivate any related layout mode.
 --- 
 --- Elements can have custom data attached using their `Property`_ key-value store, and specific Elements have specific `element.widget` accessors to control behaviour.
@@ -28,7 +26,7 @@
 --- @field borderTop integer The top border size in pixels. When this is set to `-1`, the `borderAllSides` setting is used for this side instead.
 --- @field childAlignX number Sets alignment of child elements inside its parent, though it only works in specific conditions. 0.0 = left/top edge touches left/top edge of parent, 0.5 = centred, 1.0 = right/bottom edge touches right/bottom edge of parent. For negative values, there is a special case behaviour: all children but the last will be left-aligned/top-aligned, the last child will be right-aligned/bottom-aligned.
 --- 
---- !!! important
+--- !!! success
 --- 	Child alignment only works if the element has proportional sizing (using widthProportional/heightProportional) and all children use non-proportional sizing (widthProportional and heightProportional are nil).
 --- @field childAlignY number See childAlignX.
 --- @field childOffsetX integer The view offset in pixels, applied to the position of child nodes. Used in scroll panes.
@@ -58,8 +56,8 @@
 --- @field ignoreLayoutY boolean If `true`, the element's [`positionY`](https://mwse.github.io/MWSE/types/tes3uiElement/#positiony) can be modified and will not be affected by any layout restrictions imposed by the parent element. Incompatible with and will change the value of [`absolutePosAlignY`](https://mwse.github.io/MWSE/types/tes3uiElement/#absoluteposaligny).
 --- 	
 --- Elements that bypass parent layout will be ignored when automatically determing the parent's height. See [`autoHeight`](https://mwse.github.io/MWSE/types/tes3uiElement/#autoheight) for more information.
---- @field imageScaleX number Image scaling multipliers. Only applies to image elements.
---- @field imageScaleY number Image scaling multipliers. Only applies to image elements.
+--- @field imageScaleX number Image scaling multipliers. Only applies to image elements. `0` disables scaling and displays the original image. Negative numbers will mirror and scale along this axis.
+--- @field imageScaleY number Image scaling multipliers. Only applies to image elements. `0` disables scaling and displays the original image. Negative numbers will mirror and scale along this axis.
 --- @field justifyText string Can have values `"left"`, `"center"`, or `"right"`. Controls text justification. Maps to values in the [`tes3.justifyText`](https://mwse.github.io/MWSE/references/justify-text/) table. To work correctly for center/right justification, `wrapText` must be `true`.
 --- @field maxHeight integer The maximum height for auto-size layout and resizable frames.
 --- @field maxWidth integer The maximum width for auto-size layout and resizable frames.
@@ -76,7 +74,7 @@
 --- @field positionY integer The element's vertical position relative to its parent's top-left content area. For top-level menus, the position will be relative to the the centre of the screen. Modifying this value will not have any effect on most elements due to child element's positions being controlled by the layout and positioning settings of their parent elements, unless [`ignoreLayoutY`](https://mwse.github.io/MWSE/types/tes3uiElement/#ignorelayouty) is `true`.
 --- @field rawText string The raw value of the element's text. This, unlike the normal text property, will not directly read widget information or handle the removal of the positional cursor.
 --- @field repeatKeys boolean Controls if there is repeating text input when keys are held down. `true` by default.
---- @field scaleMode boolean When set to `true` on image and NIF elements, they are scaled to fit `width` and `height`.
+--- @field scaleMode boolean When set to `true` on image and NIF elements, the image or NIF is scaled to fit the element `width` and `height`.
 --- @field sceneNode niBillboardNode|niCollisionSwitch|niNode|niSwitchNode *Read-only*. Underlying access to the scene graph responsible for this element.
 --- @field text string The element's text. Text input can be read by accessing this property.
 --- 
@@ -435,6 +433,8 @@ function tes3uiElement:createThinBorder(params) end
 --- Creates a vertically scrolling pane. Useful as a list box.
 --- 
 --- Scroll pane specific properties can be accessed through the `widget` property. The widget type for scroll panes is [`tes3uiScrollPane`](https://mwse.github.io/MWSE/types/tes3uiScrollPane/).
+---
+--- [Examples available in online documentation](https://mwse.github.io/MWSE/types/tes3uiElement/#createVerticalScrollPane).
 --- @param params tes3uiElement.createVerticalScrollPane.params? This table accepts the following values:
 --- 
 --- `id`: string|number|nil — *Optional*. An identifier to help find this element later.
@@ -457,7 +457,7 @@ function tes3uiElement:destroyChildren() end
 function tes3uiElement:findChild(id) end
 
 --- Forwards an event to the original Morrowind event handler, using this element as a source. This may be optionally called at any point in a callback. Note that handler may or may not destroy the event widget or the menu, so you should know how it behaves before accessing any elements after a callback. 
---- @param id tes3uiEvent The original UI event.
+--- @param id tes3uiEventData The original UI event.
 function tes3uiElement:forwardEvent(id) end
 
 --- Returns the descendant element that creation functions used on this element will place children into, or the calling element if there is no specific descendant for children.
@@ -494,7 +494,7 @@ function tes3uiElement:getPropertyInt(property) end
 --- Properties are extra variables attached to an element. Morrowind uses these to bind variables to the UI, and they can be useful for element class-specific properties. This function gets a property as an object value, defaulting to `nil` if the property was not set. This function can be dangerous to use, and can lead to crashes if not properly understood.
 --- @param property number|string The property to get.
 --- @param typeCast string|nil *Default*: `"tes3baseObject"`. The casting of the property to get.
---- @return number value The value of the property, defaulting to `nil` if the property was not set.
+--- @return any object The value of the property, defaulting to `nil` if the property was not set.
 function tes3uiElement:getPropertyObject(property, typeCast) end
 
 --- Properties are extra variables attached to an element. Morrowind uses these to bind variables to the UI, and they can be useful for element class-specific properties. This function gets a property whose value is, itself, a property, defaulting to `0` if the property was not set.
@@ -577,7 +577,7 @@ function tes3uiElement:move(to) end
 --- The original Morrowind event handler is saved when you first register an event. It may be optionally invoked with the `forwardEvent` method.  Note that handler may or may not destroy the event widget or the menu, so you should know how it behaves before accessing any elements after a callback.
 --- 
 --- **Example**
---- ```Lua
+--- ```lua
 --- local function onClick(e)
 --- 	-- pre-event code
 --- 	e.source:forwardEvent(e)
@@ -671,7 +671,7 @@ function tes3uiElement:setPropertyInt(property, value) end
 
 --- Sets a property value with `prop` as the property key. Properties are named variables attached to an element. Gets a property value with `propName` as the property key. Morrowind uses these to bind variables to the UI. Useful for element class-specific properties.
 --- @param property number|string The property to get.
---- @param value object The value to set.
+--- @param value any The value to set.
 function tes3uiElement:setPropertyObject(property, value) end
 
 --- Properties are named variables attached to an element. Sets a property value with `property` as the property key. Morrowind uses these to bind variables to the UI. Useful for element class-specific properties. This function sets a property whose value is, itself, a property.
@@ -684,7 +684,7 @@ function tes3uiElement:setPropertyProperty(property, value) end
 function tes3uiElement:sortChildren(sortFunction) end
 
 --- Triggers a UI event on an element, either using supplied event data, or by constructing new event data using `eventName`. `eventName` is the same as used in `register`.
---- @param eventID tes3uiEvent|string The event, or event ID.
+--- @param eventID tes3uiEventData|string The event, or event ID.
 function tes3uiElement:triggerEvent(eventID) end
 
 --- Unregisters an `event` handler.

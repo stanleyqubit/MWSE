@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- Works in conjuction with mobile AI to perform idle, movement, and attack animations. Holds data on the status of the current and next desired animation states for the different body sections that can be animated.
 --- @class tes3playerAnimationController : tes3actorAnimationController
 --- @field allowVerticalAirControl boolean *Read-only*. 
@@ -15,8 +13,6 @@
 --- @field togglePOV boolean *Read-only*. This property is set to `true` for one frame to change the point of view. Since this property is read-only, you can use [tes3.force1stPerson](https://mwse.github.io/MWSE/apis/tes3/#tes3force1stperson) and [tes3.force3rdPerson](https://mwse.github.io/MWSE/apis/tes3/#tes3force3rdperson).
 --- @field useThirdPersonAfterVanityCameraDone boolean *Read-only*. This flag is set to `true` if vanity mode was entered from third person view. If vanity mode was entered from first person view, this flag is set to `false`.
 --- @field vanityCamera niCamera *Read-only*. 
---- @field vanityCameraDistance integer *Read-only*. The orbiting radius of the camera during vanity mode in [game units](https://mwse.github.io/MWSE/references/other/game-units/). Measured from the center of the player's head.
+--- @field vanityCameraDistance integer *Read-only*. The orbiting radius of the camera during vanity mode in [game units](https://mwse.github.io/MWSE/references/general/game-units/). Measured from the center of the player's head.
 --- @field vanityCameraEnabled integer *Read-only*. The value of this property is `1` during vanity camera mode, and `0` otherwise.
---- @field vanityCameraZ number *Read-only*. The offset on up-down (world z) axis of the camera in third person or during vanity mode from the player's head height in [game units](https://mwse.github.io/MWSE/references/other/game-units/).
-tes3playerAnimationController = {}
-
+--- @field vanityCameraZ number *Read-only*. The offset on up-down (world z) axis of the camera in third person or during vanity mode from the player's head height in [game units](https://mwse.github.io/MWSE/references/general/game-units/).

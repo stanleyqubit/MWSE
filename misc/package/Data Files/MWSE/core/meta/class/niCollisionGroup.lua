@@ -2,10 +2,10 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
+--- 
 --- !!! warning
 --- 	This part of the API isn't fully understood yet and thus is considered experimental. That means that there can be breaking changes requiring the code using this part of the API to be rewritten. The MWSE team will not make any effort to keep backward compatibility with the mods using experimental APIs.
+--- 
 ---  
 --- ### Collision Basics:
 --- 
@@ -19,5 +19,3 @@
 --- @class niCollisionGroup
 --- @field collidees niCollisionGroupRecord[] *Read-only*. The array of collidee objects.
 --- @field colliders niCollisionGroupRecord[] *Read-only*. The array of collider objects.
-niCollisionGroup = {}
-

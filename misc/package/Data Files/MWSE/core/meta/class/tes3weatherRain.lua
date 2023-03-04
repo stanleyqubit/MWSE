@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A structure that contains weather information for the rain weather type.
 --- @class tes3weatherRain : tes3weather
 --- @field maxParticles number The weather's maximum particles.
@@ -15,5 +13,3 @@
 --- @field rainLoopSound tes3sound *Read-only*. The weather's rain loop sound object.
 --- @field rainLoopSoundId string The weather's rain loop sound ID.
 --- @field threshold number The weather's threshold value.
-tes3weatherRain = {}
-

@@ -2,13 +2,9 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- An object representing a birthsign.
 --- @class tes3birthsign : tes3baseObject
 --- @field description string *Read-only*. Loads from disk and returns the description of the birthsign.
 --- @field name string The player-facing name for the object.
 --- @field spells tes3spellList *Read-only*. A list of spells granted by the birthsign.
 --- @field texturePath string Path to the related image representing the birthsign.
-tes3birthsign = {}
-

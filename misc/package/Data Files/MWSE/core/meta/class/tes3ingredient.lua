@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- An ingredient game object.
 --- @class tes3ingredient : tes3item, tes3physicalObject, tes3object, tes3baseObject
 --- @field effectAttributeIds number[] *Read-only*. An array-style table access the attributes associated with the effects.
@@ -15,5 +13,3 @@
 --- @field script tes3script The script that runs on the object.
 --- @field value number The value of the object.
 --- @field weight number The weight of the object.
-tes3ingredient = {}
-

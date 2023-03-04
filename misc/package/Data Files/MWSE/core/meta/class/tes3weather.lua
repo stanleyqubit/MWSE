@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A structure that contains base weather information shared by inheriting weather structures.
 --- @class tes3weather
 --- @field ambientDayColor tes3vector3 *Read-only*. The weather's ambient day color. The values can range from 0 to 1.
@@ -38,5 +36,3 @@
 --- @field transitionDelta number The weather's transition delta.
 --- @field underwaterSoundState boolean *Read-only*. The weather's underwater sound state flag. This value will be `true`, while the player is underwater.
 --- @field windSpeed number The weather's wind speed.
-tes3weather = {}
-

@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A rendering property that controls the methods used to filter texture pixels, and blend texture colors and vertex colors.
 --- @class niTexturingProperty : niProperty, niObjectNET, niObject
 --- @field applyMode integer The texture apply mode. The texture apply mode controls how the vertex colors are blended with the texture color. Maps to values in [`ni.texturingPropertyApplyMode`](https://mwse.github.io/MWSE/references/ni/texturing-property-apply-modes/) table.
@@ -19,7 +17,7 @@
 niTexturingProperty = {}
 
 --- Attempts to create a new decal map. If successful, it returns both the new map and the index it was created in.
---- @param texture niSourceTexture|niTexture|nil *Optional*. The texture to assign to the new decal.
+--- @param texture niRenderedTexture|niSourceTexture|niTexture|nil *Optional*. The texture to assign to the new decal.
 --- @return niTexturingPropertyMap|nil map A newly created decal map.
 --- @return integer|nil index The index of the newly added decal map.
 function niTexturingProperty:addDecalMap(texture) end

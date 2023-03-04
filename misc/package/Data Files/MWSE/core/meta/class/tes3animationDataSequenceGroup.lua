@@ -2,12 +2,8 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A game object which contains niSequence objects for each animation body section.
 --- @class tes3animationDataSequenceGroup
 --- @field leftArm niSequence The niSequence object for the actor's left arm.
 --- @field lower niSequence The niSequence object for the actor's legs.
 --- @field upper niSequence The niSequence object for the actor's upper body.
-tes3animationDataSequenceGroup = {}
-

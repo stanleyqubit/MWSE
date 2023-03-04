@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A game object which contains information that map actor sounds to animations.
 --- @class tes3animationDataSoundGenKey
 --- @field pitch number The pitch of the sound.
@@ -11,5 +9,3 @@
 --- @field startFrame number The starting frame of animation at which the sound plays.
 --- @field startTime number 
 --- @field volume number The sound's volume.
-tes3animationDataSoundGenKey = {}
-

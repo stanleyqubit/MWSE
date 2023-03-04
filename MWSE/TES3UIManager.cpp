@@ -1097,6 +1097,41 @@ namespace TES3::UI {
 		pushNewUIID(0x5CA67B, "MenuInventory_bottom_layout");
 		pushNewUIID(0x5CA68B, "MenuInventory_character_layout");
 		pushNewUIID(0x5CA818, "MenuInventory_items_layout");
+		pushNewUIID(0x5CCAEF, "itemTile_column");
+		pushNewUIID(0x5CB155, "itemTile_column");
+		pushNewUIID(0x5CCBD2, "itemTile_tile");
+		pushNewUIID(0x5CCCB5, "itemTile_shadow");
+		pushNewUIID(0x5CCDC0, "itemTile_icon");
+		//On drop
+		pushNewUIID(0x5CC021, "itemTile_tile");
+		pushNewUIID(0x5CC102, "itemTile_shadow");
+		pushNewUIID(0x5CC20D, "itemTile_icon");
+
+		// Container Menu (MenuContents)
+		pushNewUIID(0x5B69B8, "itemTile_column");
+		pushNewUIID(0x5B49BE, "itemTile_column");
+		pushNewUIID(0x5B6A92, "itemTile_tile");
+		pushNewUIID(0x5B6B4A, "itemTile_shadow");
+		pushNewUIID(0x5B6C69, "itemTile_icon");
+		//On drop
+		pushNewUIID(0x5B63A1, "itemTile_tile");
+		pushNewUIID(0x5B6455, "itemTile_shadow");
+		pushNewUIID(0x5B6573, "itemTile_icon");
+
+		// Barter Menu (MenuBarter)
+		pushNewUIID(0x5A579B, "itemTile_column");
+		pushNewUIID(0x5A40AE, "itemTile_column");
+		pushNewUIID(0x5A5883, "itemTile_tile");
+		pushNewUIID(0x5A5959, "itemTile_shadow");
+		pushNewUIID(0x5A5A8D, "itemTile_icon");
+		//On drop
+		pushNewUIID(0x5A4D49, "itemTile_tile");
+		pushNewUIID(0x5A4E1C, "itemTile_shadow");
+		pushNewUIID(0x5A4F27, "itemTile_icon");
+
+		// Cursor Icon
+		pushNewUIID(0x5D1708, "itemTile_shadow");
+		pushNewUIID(0x5D1813, "itemTile_icon");
 
 		// Status Menu (MenuStat)
 		pushNewUIID(0x624F7F, "MenuStat_layout");

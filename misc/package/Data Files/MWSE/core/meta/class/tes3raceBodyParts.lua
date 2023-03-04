@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A substructure for a race, storing the used body parts for a given sex.
 --- @class tes3raceBodyParts
 --- @field ankle tes3bodyPart The ankle that an actor of this race and sex will use.
@@ -22,5 +20,3 @@
 --- @field upperLeg tes3bodyPart The upper leg that an actor of this race and sex will use.
 --- @field vampireHead tes3bodyPart The head that an actor of this race and sex will use when they are a vampire.
 --- @field wrist tes3bodyPart The wrist that an actor of this race and sex will use.
-tes3raceBodyParts = {}
-

@@ -2,12 +2,12 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A structure that keeps track of combat session data.
 --- @class tes3combatSession
 --- @field alchemyPriority number No description yet available.
 --- @field data table A generic lua table that data can be written to, and synced to/from the save. All information stored must be valid for serialization to json.
+--- 
+--- There is a guide available [here](https://mwse.github.io/MWSE/guides/storing-data/) on using this table.
 --- @field distance number The combat distance.
 --- @field lastUseTimestamp number No description yet available.
 --- @field mobile tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer *Read-only*. Convenience access back to the associated actor.

@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- The base object holding the information of a collision.
 --- @class tes3mobileObjectCollision
 --- @field colliderRef tes3reference *Read-only*. Access to the reference of the colliding object.
@@ -25,5 +23,3 @@
 --- @field time number *Read-only*. No description yet available.
 --- @field valid boolean *Read-only*. No description yet available.
 --- @field velocity tes3vector3 *Read-only*. The velocity of the associated mobile object at the point of collision.
-tes3mobileObjectCollision = {}
-

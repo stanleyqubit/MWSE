@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- The tes3 library provides the majority of the functions for interacting with the game system.
 --- @class tes3lib
 --- @field bsaLoader tes3bsaLoader One of the core game objects, responsible for loaded BSA files.
@@ -929,11 +927,13 @@ function tes3.get3rdPersonCameraOffset() end
 --- @return tes3cell[] cells No description yet available.
 function tes3.getActiveCells() end
 
---- This function fetches a reference's attached animation groups.
+--- This function fetches a reference's attached animation groups. The animation groups match the values from [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) table.
 --- @param params tes3.getAnimationGroups.params This table accepts the following values:
 --- 
 --- `reference`: tes3reference — A reference whose animation groups to fetch.
---- @return number[] animData No description yet available.
+--- @return integer lowerBodyGroup No description yet available.
+--- @return integer upperBodyGroup No description yet available.
+--- @return integer leftArmGroup No description yet available.
 function tes3.getAnimationGroups(params) end
 
 ---Table parameter definitions for `tes3.getAnimationGroups`.
@@ -941,6 +941,8 @@ function tes3.getAnimationGroups(params) end
 --- @field reference tes3reference A reference whose animation groups to fetch.
 
 --- This function fetches a reference's attached animation groups' timings.
+---
+--- [Examples available in online documentation](https://mwse.github.io/MWSE/apis/tes3/#tes3getanimationtiming).
 --- @param params tes3.getAnimationTiming.params This table accepts the following values:
 --- 
 --- `reference`: tes3reference|tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string — A reference whose animation groups' timings to fetch.
@@ -951,8 +953,8 @@ function tes3.getAnimationTiming(params) end
 --- @class tes3.getAnimationTiming.params
 --- @field reference tes3reference|tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string A reference whose animation groups' timings to fetch.
 
---- Returns a 1-indexed table of active archives.
---- @return tes3archive[] archives No description yet available.
+--- Returns a 1-indexed table of active archives. The paths are relative to Morrowind folder. For example: "Data Files\\Tribunal.bsa".
+--- @return string[] archives No description yet available.
 function tes3.getArchiveList() end
 
 --- Fetches an attachment with a given type from a reference. Will return `nil` if no attachment of that type has been found.
@@ -1005,10 +1007,16 @@ function tes3.getCell(params) end
 --- @return number days No description yet available.
 function tes3.getCumulativeDaysForMonth(month) end
 
---- Returns an actor's current AI package ID, just as the mwscript function `GetCurrentAIPackage` would.
---- @param reference tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference No description yet available.
+--- Returns an actor's current AI package ID, just as the mwscript function `GetCurrentAIPackage` would. The return value maps to values in `tes3.aiPackage` namespace.
+--- @param params tes3.getCurrentAIPackageId.params This table accepts the following values:
+--- 
+--- `reference`: tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference — No description yet available.
 --- @return number packageID No description yet available.
-function tes3.getCurrentAIPackageId(reference) end
+function tes3.getCurrentAIPackageId(params) end
+
+---Table parameter definitions for `tes3.getCurrentAIPackageId`.
+--- @class tes3.getCurrentAIPackageId.params
+--- @field reference tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference No description yet available.
 
 --- Gets the currently active weather, from the player's current region.
 --- @return tes3weatherAsh|tes3weatherBlight|tes3weatherBlizzard|tes3weatherClear|tes3weatherCloudy|tes3weatherFoggy|tes3weatherOvercast|tes3weatherRain|tes3weatherSnow|tes3weatherThunder weather No description yet available.
@@ -1501,15 +1509,15 @@ function tes3.isLuaModActive(key) end
 function tes3.isModActive(filename) end
 
 --- This function returns a function that iterates over a tes3iterator object. This is useful for for loops.
---- 		
+--- 
 --- Note that tes3iterator objects support iteration with `pairs()` function.
 --- @param iterator tes3iterator No description yet available.
---- @return function function No description yet available.
+--- @return fun(): tes3object iterator No description yet available.
 function tes3.iterate(iterator) end
 
 --- Iteration function used for looping over game options.
---- @param filter number|number[]|nil Maps to [`tes3.objectType`](https://mwse.github.io/MWSE/references/object-types/) constants.
---- @return tes3activator|tes3alchemy|tes3apparatus|tes3armor|tes3bodyPart|tes3book|tes3clothing|tes3container|tes3containerInstance|tes3creature|tes3creatureInstance|tes3door|tes3enchantment|tes3ingredient|tes3leveledCreature|tes3leveledItem|tes3light|tes3lockpick|tes3misc|tes3npc|tes3npcInstance|tes3probe|tes3reference|tes3repairTool|tes3spell|tes3static|tes3weapon object No description yet available.
+--- @param filter integer|integer[]|nil *Optional*. Maps to [`tes3.objectType`](https://mwse.github.io/MWSE/references/object-types/) constants.
+--- @return fun(): tes3object objectIterator No description yet available.
 function tes3.iterateObjects(filter) end
 
 --- Loads an animation and uses it to override existing animations on an actor. Animation groups present in the file will replace the actor's animation groups. The actor's model must be already loaded into memory to have its animations modified. The overridden animations only persist until the actor is unloaded.
@@ -1561,11 +1569,13 @@ function tes3.lock(params) end
 
 --- This function returns a function that iterates over a tes3tarray object. This is useful for for loops.
 --- @param tarray tes3tarray No description yet available.
---- @return function iterationFunction No description yet available.
+--- @return fun(): tes3object iterationFunction No description yet available.
 function tes3.loopTArray(tarray) end
 
 --- Returns a safe handle for the object. To get the object use `:getObject()`. To check if it still exists use `:valid()`.
---- @param object tes3activator|tes3alchemy|tes3apparatus|tes3armor|tes3bodyPart|tes3book|tes3clothing|tes3container|tes3containerInstance|tes3creature|tes3creatureInstance|tes3door|tes3enchantment|tes3ingredient|tes3leveledCreature|tes3leveledItem|tes3light|tes3lockpick|tes3misc|tes3npc|tes3npcInstance|tes3probe|tes3reference|tes3repairTool|tes3spell|tes3static|tes3weapon An object to make a safe handle for.
+---
+--- [Examples available in online documentation](https://mwse.github.io/MWSE/apis/tes3/#tes3makesafeobjecthandle).
+--- @param object tes3reference An object to make a safe handle for.
 --- @return mwseSafeObjectHandle safeObjectHandle No description yet available.
 function tes3.makeSafeObjectHandle(object) end
 
@@ -2070,7 +2080,7 @@ function tes3.say(params) end
 
 --- Changes the 3rd person camera offset from the player's head.
 --- 
---- !!! important
+--- !!! note
 --- 	This function can be used once tes3worldController and tes3mobilePlayer have finished initializing.
 --- @param params tes3.set3rdPersonCameraOffset.params This table accepts the following values:
 --- 
@@ -2371,7 +2381,7 @@ function tes3.setPlayerControlState(params) end
 --- @field viewSwitch boolean? *Default*: `false`. If this is false, it will block player changing view mod from 1st to 3rd person camera and vice versa.
 
 --- Sets an object (of any kind) to be sourceless, which are objects the game does not store in savegames. This can be useful for mod-created temporary objects which are not necessary to save.
---- @param object tes3activator|tes3alchemy|tes3apparatus|tes3armor|tes3birthsign|tes3bodyPart|tes3book|tes3cell|tes3class|tes3clothing|tes3container|tes3containerInstance|tes3creature|tes3creatureInstance|tes3dialogue|tes3dialogueInfo|tes3door|tes3enchantment|tes3faction|tes3gameSetting|tes3globalVariable|tes3ingredient|tes3leveledCreature|tes3leveledItem|tes3light|tes3lockpick|tes3magicSourceInstance|tes3misc|tes3npc|tes3npcInstance|tes3probe|tes3quest|tes3race|tes3reference|tes3region|tes3repairTool|tes3script|tes3skill|tes3sound|tes3soundGenerator|tes3spell|tes3startScript|tes3static|tes3weapon The object whose sourceless flag to modify.
+--- @param object tes3activator|tes3alchemy|tes3apparatus|tes3armor|tes3birthsign|tes3bodyPart|tes3book|tes3cell|tes3class|tes3clothing|tes3container|tes3containerInstance|tes3creature|tes3creatureInstance|tes3dialogue|tes3dialogueInfo|tes3door|tes3enchantment|tes3faction|tes3gameSetting|tes3globalVariable|tes3ingredient|tes3land|tes3landTexture|tes3leveledCreature|tes3leveledItem|tes3light|tes3lockpick|tes3magicSourceInstance|tes3misc|tes3npc|tes3npcInstance|tes3pathGrid|tes3probe|tes3quest|tes3race|tes3reference|tes3region|tes3repairTool|tes3script|tes3skill|tes3sound|tes3soundGenerator|tes3spell|tes3startScript|tes3static|tes3weapon The object whose sourceless flag to modify.
 --- @param sourceless boolean? *Default*: `true`. Allows flagging an object as sourceless or undoing that action.
 function tes3.setSourceless(object, sourceless) end
 

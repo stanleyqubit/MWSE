@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- An AI package game object.
 --- @class tes3aiPackage
 --- @field destinationCell tes3cell The destination cell for escort and follow AI packages. For wander package, this is the cell the actor wanders in.
@@ -20,5 +18,3 @@
 --- @field targetActor tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer The target actor for activate, follow and escort AI packages.
 --- @field targetPosition tes3vector3 The final position to be reached by the escort, follow, and travel AI packages.
 --- @field type number *Read-only*. Maps to values in [`tes3.aiPackage`](https://mwse.github.io/MWSE/references/ai-packages/) namespace.
-tes3aiPackage = {}
-

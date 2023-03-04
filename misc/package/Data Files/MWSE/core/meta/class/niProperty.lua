@@ -2,11 +2,7 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A base class representing all rendering properties.
 --- @class niProperty : niObjectNET, niObject
 --- @field propertyFlags integer 
 --- @field type integer *Read-only*. The unique class identifier number of the given rendering property. The types are available in [`ni.propertyType`](https://mwse.github.io/MWSE/references/ni/property-types/) table.
-niProperty = {}
-

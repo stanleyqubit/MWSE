@@ -2,12 +2,8 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A node from a collection, which has a link to the previous and next node, as well as its contained data.
 --- @class tes3equipmentStackIteratorNode
 --- @field nextNode tes3equipmentStackIteratorNode The next node in the collection.
 --- @field nodeData tes3equipmentStack The equipment stack object stored in the node.
 --- @field previousNode tes3equipmentStackIteratorNode The previous node in the collection.
-tes3equipmentStackIteratorNode = {}
-

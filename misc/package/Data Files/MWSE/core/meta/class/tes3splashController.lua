@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A core game controller responsible for controlling temporary graphics.
 --- @class tes3splashController
 --- @field activeSplashes tes3splashControllerActiveSplash[] *Read-only*. A list of tes3splashControllerActiveSplash objects.
@@ -13,5 +11,3 @@
 --- @field bloodTextureCount number *Read-only*. The number of loaded blood textures.
 --- @field bloodTextureProperties niTexturingProperty[] *Read-only*. A list of loaded blood texturing properties.
 --- @field bloodTextures niSourceTexture[] *Read-only*. A list of blood splash textures.
-tes3splashController = {}
-

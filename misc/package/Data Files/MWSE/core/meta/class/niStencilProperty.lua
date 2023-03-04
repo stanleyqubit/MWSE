@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A rendering property that controls the use of a stencil buffer when rendering. Stencil buffering allows effects such as cutouts in a screen, decal polygons without Z-buffer "aliasing", and advanced effects such as volumetric shadows. It also includes a draw-mode setting to allow the game engine to control the culling mode of a set of geometry.
 --- 
 --- This table describes the actions that can be set to occur as a result of tests for niStencilProperty:
@@ -45,4 +43,8 @@
 --- 
 --- @field zFailAction integer The action that is taken in the stencil buffer when the stencil test passes but the pixel fails the Z-buffer test. See the table at the top for available actions.
 niStencilProperty = {}
+
+--- Creates a new, niStencilProperty. By default it will use a GREATER test function, KEEP on fail, INCREMENT on pass, and use the CCW_OR_BOTH draw mode.
+--- @return niStencilProperty property No description yet available.
+function niStencilProperty.new() end
 

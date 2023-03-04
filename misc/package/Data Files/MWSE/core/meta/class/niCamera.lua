@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- Object that represent a camera. Position and orientation is determined by parent properties. This enables the cameras to be attached to scene graph objects and follow them automatically, as they move.
 --- @class niCamera : niAVObject, niObjectNET, niObject
 --- @field cullingPlanes tes3vector4[] The culling planes of the camera: near, far, left, right, top, and bottom.
@@ -18,9 +16,22 @@
 --- @field worldUp tes3vector3 Defines the Y-axis of the camera.
 niCamera = {}
 
+--- This method clears the current render target of the camera's renderer. Uses flag values from [`ni.cameraClearFlags`](https://mwse.github.io/MWSE/references/ni/camera-clear-flags/).
+--- @param flags number? *Default*: `ni.cameraClearFlags.all`. No description yet available.
+function niCamera:clear(flags) end
+
 --- This method renders the currently-attached scene graph to the active renderer.
 --- @param something boolean? *Default*: `false`. No description yet available.
 function niCamera:click(something) end
+
+--- Update the camera's local rotation so that it is looking at the given point, with an up vector as close as possible to the given up vector. Both parameters are assumed to be in world space.
+--- @param point tes3vector3 No description yet available.
+--- @param up tes3vector3 No description yet available.
+--- @return boolean success It's false when the provided location is equal to the location of the camera. It's true on success.
+function niCamera:lookAtWorldPoint(point, up) end
+
+--- Causes the current backbuffer of the attached display to be drawn to the frontbuffer, by swapping the two.
+function niCamera:swapBuffers() end
 
 --- Given a screen space position, calculates the world position and outlook direction. This can be useful when trying to find a reference under a UI element, such as the cusor.
 --- @param point tes3vector2 The screen position to calculate a world ray for. Screen space is measured as ([-screenWidth/2, screenWidth/2], [-screenHeight/2, screenHeight/2]) with up-right being positive and an origin at the center of the screen.

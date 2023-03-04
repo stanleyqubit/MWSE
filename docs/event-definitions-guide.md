@@ -1,5 +1,7 @@
 # Event Definitions Guide
 
+When writing definitions for a new event add an entry to the `tes3.event` table and related [reference table](https://github.com/MWSE/MWSE/blob/master/docs/source/references/events.md).
+
 Event definitions are formatted as regular Lua tables. The available fields are:
 | Field       | Type      | Description |
 | ----------- | --------- | ----------- |
@@ -25,7 +27,7 @@ eventData table entries can have the following fields:
 
 An example of a event definition is the `activate` event definition file found in autocomplete\definitions\events\standard:
 
-```Lua
+```lua
 -- autocomplete\definitions\events\standard\activate.lua
 return {
 	type = "event",

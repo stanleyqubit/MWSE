@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- Base class that represents the nodes of a scene graph. A node can have any number of child nodes.
 --- @class niNode : niAVObject, niObjectNET, niObject
 --- @field children niAmbientLight[]|niBillboardNode[]|niCamera[]|niCollisionSwitch[]|niDirectionalLight[]|niNode[]|niParticles[]|niPointLight[]|niRotatingParticles[]|niSpotLight[]|niSwitchNode[]|niTextureEffect[]|niTriShape[] *Read-only*. The children of the node. Can have `nil` entries.
@@ -26,6 +24,9 @@ function niNode:attachEffect(effect) end
 --- Calculates and creates a bounding box for the object. The existing bounding box, if any, will not be used, a fresh one will always be calculated.
 --- @return tes3boundingBox boundingBox The newly created bounding box.
 function niNode:createBoundingBox() end
+
+--- Detaches all children from the children list of the node.
+function niNode:detachAllChildren() end
 
 --- Detaches all dynamic effect from the effect list of the node.
 function niNode:detachAllEffects() end

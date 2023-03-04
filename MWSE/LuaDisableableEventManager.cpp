@@ -33,6 +33,7 @@
 #include "LuaCalcSunDamageScalarEvent.h"
 #include "LuaCalcTrainingPriceEvent.h"
 #include "LuaCalcTravelPriceEvent.h"
+#include "LuaCameraControlEvent.h"
 #include "LuaCellActivatedEvent.h"
 #include "LuaCellChangedEvent.h"
 #include "LuaCellDeactivatedEvent.h"
@@ -121,6 +122,7 @@
 #include "LuaReferenceActivatedEvent.h"
 #include "LuaReferenceDeactivatedEvent.h"
 #include "LuaReferenceSceneNodeCreatedEvent.h"
+#include "LuaRepairEvent.h"
 #include "LuaRestInterruptEvent.h"
 #include "LuaSavedGameEvent.h"
 #include "LuaSaveGameEvent.h"
@@ -194,6 +196,7 @@ namespace mwse::lua::event {
 		usertypeDefinition["calcTrainingPrice"] = sol::property(&CalculateTrainingPriceEvent::getEventEnabled, &CalculateTrainingPriceEvent::setEventEnabled);
 		usertypeDefinition["calcTravelPrice"] = sol::property(&CalculateTravelPriceEvent::getEventEnabled, &CalculateTravelPriceEvent::setEventEnabled);
 		usertypeDefinition["calcWalkSpeed"] = sol::property(&CalculateMovementSpeed::getEventEnabled, &CalculateMovementSpeed::setEventEnabled);
+		usertypeDefinition["cameraControl"] = sol::property(&CameraControlEvent::getEventEnabled, &CameraControlEvent::setEventEnabled);
 		usertypeDefinition["cellActivated"] = sol::property(&CellActivatedEvent::getEventEnabled, &CellActivatedEvent::setEventEnabled);
 		usertypeDefinition["cellChanged"] = sol::property(&CellChangedEvent::getEventEnabled, &CellChangedEvent::setEventEnabled);
 		usertypeDefinition["cellDeactivated"] = sol::property(&CellDeactivatedEvent::getEventEnabled, &CellDeactivatedEvent::setEventEnabled);
@@ -279,6 +282,7 @@ namespace mwse::lua::event {
 		usertypeDefinition["referenceActivated"] = sol::property(&ReferenceActivatedEvent::getEventEnabled, &ReferenceActivatedEvent::setEventEnabled);
 		usertypeDefinition["referenceDeactivated"] = sol::property(&ReferenceDeactivatedEvent::getEventEnabled, &ReferenceDeactivatedEvent::setEventEnabled);
 		usertypeDefinition["referenceSceneNodeCreated"] = sol::property(&ReferenceSceneNodeCreatedEvent::getEventEnabled, &ReferenceSceneNodeCreatedEvent::setEventEnabled);
+		usertypeDefinition["repair"] = sol::property(&RepairEvent::getEventEnabled, &RepairEvent::setEventEnabled);
 		usertypeDefinition["restInterrupt"] = sol::property(&RestInterruptEvent::getEventEnabled, &RestInterruptEvent::setEventEnabled);
 		usertypeDefinition["save"] = sol::property(&SaveGameEvent::getEventEnabled, &SaveGameEvent::setEventEnabled);
 		usertypeDefinition["saved"] = sol::property(&SavedGameEvent::getEventEnabled, &SavedGameEvent::setEventEnabled);

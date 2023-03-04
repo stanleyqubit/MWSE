@@ -144,6 +144,45 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)BasicLinkedList.h">
       <Filter>Header Files\Collections</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)NIBoundingBox.h">
+      <Filter>Header Files\NI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)NIRange.h">
+      <Filter>Header Files\NI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)NICollisionSwitch.h">
+      <Filter>Header Files\NI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)NIGeometry.h">
+      <Filter>Header Files\NI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)NIGeometryData.h">
+      <Filter>Header Files\NI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)NISkinInstance.h">
+      <Filter>Header Files\NI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)NITriangle.h">
+      <Filter>Header Files\NI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)NITriBasedGeometry.h">
+      <Filter>Header Files\NI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)NITriBasedGeometryData.h">
+      <Filter>Header Files\NI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)NITriShape.h">
+      <Filter>Header Files\NI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)NITriShapeData.h">
+      <Filter>Header Files\NI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)NISwitchNode.h">
+      <Filter>Header Files\NI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)NILines.h">
+      <Filter>Header Files\NI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)NIVector3.cpp">
@@ -207,6 +246,36 @@
       <Filter>Source Files\NI</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)NICamera.cpp">
+      <Filter>Source Files\NI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)NIBoundingBox.cpp">
+      <Filter>Source Files\NI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)NIGeometryData.cpp">
+      <Filter>Source Files\NI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)NITransform.cpp">
+      <Filter>Source Files\NI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)NISkinInstance.cpp">
+      <Filter>Source Files\NI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)NICollisionSwitch.cpp">
+      <Filter>Source Files\NI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)NITriShapeData.cpp">
+      <Filter>Source Files\NI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)NITriShape.cpp">
+      <Filter>Source Files\NI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)NIGeometry.cpp">
+      <Filter>Source Files\NI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)NISwitchNode.cpp">
+      <Filter>Source Files\NI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)NILines.cpp">
       <Filter>Source Files\NI</Filter>
     </ClCompile>
   </ItemGroup>

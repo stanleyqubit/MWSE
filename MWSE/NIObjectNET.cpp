@@ -42,7 +42,7 @@ namespace NI {
 		NI_ObjectNET_addExtraData(this, data);
 	}
 
-	const auto NI_ObjectNET_removeExtraData = reinterpret_cast<void(__thiscall*)(ObjectNET*, ExtraData*)>(0x6EA220);
+	const auto NI_ObjectNET_removeExtraData = reinterpret_cast<void(__thiscall*)(ObjectNET*, ExtraData*)>(0x6EA260);
 	void ObjectNET::removeExtraData(ExtraData* data) {
 		NI_ObjectNET_removeExtraData(this, data);
 	}

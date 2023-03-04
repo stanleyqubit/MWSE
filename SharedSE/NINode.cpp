@@ -24,32 +24,26 @@ namespace NI {
 		vTable.asNode->attachChild(this, child, useFirstAvailable);
 	}
 
-	void Node::detachChild(AVObject** out_detached, AVObject* child) {
-		vTable.asNode->detachChild(this, out_detached, child);
+	Pointer<AVObject> Node::detachChild(AVObject* child) {
+		Pointer<AVObject> result;
+		vTable.asNode->detachChild(this, &result, child);
+		return result;
 	}
 
-	void Node::detachChildAt(AVObject** out_detached, unsigned int index) {
-		vTable.asNode->detachChildAt(this, out_detached, index);
+	Pointer<AVObject> Node::detachChildAt(unsigned int index) {
+		Pointer<AVObject> result;
+		vTable.asNode->detachChildAt(this, &result, index);
+		return result;
 	}
 
-	void Node::setChildAt(AVObject** out_detached, unsigned int index, AVObject* child) {
-		vTable.asNode->setChildAt(this, out_detached, index, child);
+	Pointer<AVObject> Node::setChildAt(unsigned int index, AVObject* child) {
+		Pointer<AVObject> displaced;
+		vTable.asNode->setChildAt(this, &displaced, index, child);
+		return displaced;
 	}
 
 	Pointer<Node> Node::create() {
 		return new Node();
-	}
-
-	Pointer<AVObject> Node::detachChildHandled(AVObject* child) {
-		AVObject* returnedChild = nullptr;
-		detachChild(&returnedChild, child);
-		return returnedChild;
-	}
-
-	Pointer<AVObject> Node::detachChildAtHandled(size_t index) {
-		AVObject* returnedChild = nullptr;
-		detachChildAt(&returnedChild, index);
-		return returnedChild;
 	}
 
 	void Node::attachEffect(DynamicEffect* effect) {

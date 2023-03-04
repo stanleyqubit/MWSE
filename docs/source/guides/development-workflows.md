@@ -5,7 +5,7 @@ This guide will demonstrate how to set up your workflow for modding *The Elder S
 
 A development workflow is the environment and processes used to facilitate software development. There are many ways that you can develop MWSE-Lua mods. This guide will show you how to to use [Visual Studio Code](https://code.visualstudio.com) to get syntax highlighting, autocompletion, and doc integration. It will also show you how to use a simple install, Wrye Mash, or Mod Organizer 2 to work on your mods.
 
-!!! summary 
+!!! abstract
 	Want to simply get to work? Open the `Data Files\MWSE` folder in [Visual Studio Code](https://code.visualstudio.com). Install the recommended plugins MWSE suggests in that workspace. You're good to go.
 
 ## Requirements
@@ -21,7 +21,7 @@ Other editors can be used if desired, but little support will be offered. All MW
 
 ### Simple
 
-The simplest workflow is already complete for you. There's nothing extra to download, simple open 
+The simplest workflow is already complete for you. There's nothing extra to download, simple open
 
 !!! note
 	This workflow has some drawbacks. If you develop your mods directly in your Morrowind-Dev install, you have to be aware of other mod installations to prevent conflicts during testing.

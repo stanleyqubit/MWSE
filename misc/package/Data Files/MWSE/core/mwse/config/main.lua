@@ -1,6 +1,3 @@
--- Removes "Undefined global `mwseConfig`." warnings
---- @diagnostic disable:undefined-global
-
 local function saveConfig()
 	local values = {}
 	for k, _ in pairs(mwseConfig.getDefaults()) do
@@ -85,6 +82,16 @@ local config = {
 					description = i18n("enableLogColors.description"),
 					variable = {
 						id = "EnableLogColors",
+						class = "TableVariable",
+						table = mwseConfig,
+					},
+				},
+				{
+					class = "OnOffButton",
+					label = i18n("enableDependencyChecks.label"),
+					description = i18n("enableDependencyChecks.description"),
+					variable = {
+						id = "EnableDependencyChecks",
 						class = "TableVariable",
 						table = mwseConfig,
 					},

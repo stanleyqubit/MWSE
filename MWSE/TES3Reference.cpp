@@ -35,6 +35,7 @@
 #include "TES3MobileProjectile.h"
 #include "TES3MobManager.h"
 #include "TES3NPC.h"
+#include "TES3PlayerAnimationController.h"
 #include "TES3WorldController.h"
 #include "TES3VFXManager.h"
 
@@ -158,8 +159,8 @@ namespace TES3 {
 		if (removeLightFromParent.value_or(false)) {
 			auto attachedLight = getAttachedDynamicLight();
 			if (attachedLight) {
-				auto light = attachedLight->light;
-				light->parentNode->detachChildHandled(light);
+				auto& light = attachedLight->light;
+				light->parentNode->detachChild(light);
 			}
 		}
 		detachDynamicLightFromAffectedNodes();
@@ -250,7 +251,9 @@ namespace TES3 {
 	}
 
 
-	const auto TES3_MobilePlayer_sub566500 = reinterpret_cast<void(__thiscall*)(MobilePlayer*)>(0x566500);
+	const auto TES3_MobilePlayer_setupCameras = reinterpret_cast<void(__thiscall*)(MobilePlayer*)>(0x566500);
+	const auto TES3_MobilePlayer_update1stPersonTransform = reinterpret_cast<void(__thiscall*)(MobilePlayer*)>(0x5684E0);
+	const auto TES3_PlayerAnimationController_updateCameraPosition = reinterpret_cast<void(__thiscall*)(PlayerAnimationController*)>(0x542E60);
 
 	void Reference::setModelPath(const char* path, bool temporary) {
 		auto baseObject = static_cast<TES3::Object*>(getBaseObject());
@@ -307,6 +310,7 @@ namespace TES3 {
 		if (mobile != nullptr) {
 			if (mobile->actorType == TES3::MobileActorType::Player) {
 				auto firstPersonRef = macp->firstPersonReference;
+				auto savedArmCameraPosition = worldController->armCamera.cameraRoot.get()->localTranslate;
 
 				if (firstPersonRef->sceneNode) {
 					if (this == firstPersonRef && path != nullptr) {
@@ -338,7 +342,18 @@ namespace TES3 {
 
 				macp->aiPlanner->assignMobileActor(macp);
 				worldController->mobManager->addPlayerAsCollider();
-				TES3_MobilePlayer_sub566500(macp);
+
+				// Fix cameras after scenegraph branch has been replaced.
+				TES3_MobilePlayer_setupCameras(macp);
+
+				if (!macp->is3rdPerson()) {
+					// The first person camera position additionally needs to be restored after setup,
+					// because in menu mode, the logic for positioning the camera fails to execute.
+					auto animController = macp->animationController.asPlayer;
+					animController->firstPersonHeadCameraNode->worldTransform.translation = savedArmCameraPosition;
+					TES3_MobilePlayer_update1stPersonTransform(macp);
+					TES3_PlayerAnimationController_updateCameraPosition(animController);
+				}
 			}
 			else {
 				mobile->vTable.mobileObject->enterLeaveSimulation(mobile, true);
@@ -645,17 +660,17 @@ namespace TES3 {
 
 	Vector3 Reference::getForwardDirectionVector() {
 		Matrix33 rotation = getRotationMatrix();
-		return Vector3(rotation.m0.y, rotation.m1.y, rotation.m2.y);
+		return rotation.getForwardVector();
 	}
 
 	Vector3 Reference::getRightDirectionVector() {
 		Matrix33 rotation = getRotationMatrix();
-		return Vector3(rotation.m0.x, rotation.m1.x, rotation.m2.x);
+		return rotation.getRightVector();
 	}
 
 	Vector3 Reference::getUpDirectionVector() {
 		Matrix33 rotation = getRotationMatrix();
-		return Vector3(rotation.m0.z, rotation.m1.z, rotation.m2.z);
+		return rotation.getUpVector();
 	}
 
 	float Reference::getFacing() {

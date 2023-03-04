@@ -1,6 +1,8 @@
 #include "NIVector3.h"
 
 namespace NI {
+	const Vector3 Vector3::DirectionDown = { 0.0f, 0.0f, -1.0f };
+
 	Vector3::Vector3() :
 		x(0.0f),
 		y(0.0f),
@@ -82,6 +84,10 @@ namespace NI {
 
 	Vector3 Vector3::operator+(const Vector3& vec3) const {
 		return Vector3(x + vec3.x, y + vec3.y, z + vec3.z);
+	}
+
+	Vector3 Vector3::operator-() const {
+		return Vector3(-x, -y, -z);
 	}
 
 	Vector3 Vector3::operator-(const Vector3& vec3) const {

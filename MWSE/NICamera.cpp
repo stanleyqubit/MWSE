@@ -20,9 +20,18 @@ namespace NI {
 		NI_Camera_clear(this, flags);
 	}
 
+	void Camera::clear_lua(sol::optional<int> flags) {
+		clear(Renderer::ClearFlags(flags.value_or(Renderer::ClearFlags::ALL)));
+	}
+
 	const auto NI_Camera_click = reinterpret_cast<void (__thiscall*)(Camera*, bool)>(0x6CC7B0);
 	void Camera::click(bool something) {
 		NI_Camera_click(this, something);
+	}
+
+	const auto NI_Camera_swapBuffers = reinterpret_cast<void(__thiscall*)(Camera*)>(0x6CC780);
+	void Camera::swapBuffers() {
+		NI_Camera_swapBuffers(this);
 	}
 
 	void Camera::click_lua(sol::optional<bool> something) {
@@ -41,6 +50,11 @@ namespace NI {
 	const auto NI_Camera_worldPointToScreenPoint = reinterpret_cast<bool(__thiscall*)(Camera*, const TES3::Vector3*, float&, float&)>(0x6CD450);
 	bool Camera::worldPointToScreenPoint(const TES3::Vector3* point, float& out_screenX, float& out_screenY) {
 		return NI_Camera_worldPointToScreenPoint(this, point, out_screenX, out_screenY);
+	}
+
+	const auto NI_Camera_lookAtWorldPoint = reinterpret_cast<bool(__thiscall*)(Camera*, const TES3::Vector3*, const TES3::Vector3*)>(0x6CD5D0);
+	bool Camera::LookAtWorldPoint(const TES3::Vector3* worldPoint, const TES3::Vector3* worldUp) {
+		return NI_Camera_lookAtWorldPoint(this, worldPoint, worldUp);
 	}
 
 	sol::optional<std::tuple<TES3::Vector3, TES3::Vector3>> Camera::windowPointToRay_lua(sol::stack_object luaPoint) {

@@ -131,6 +131,8 @@ namespace TES3 {
 
 		void clearTarget();
 
+		void savePlayerOptions();
+
 		//
 		// Custom functions.
 		//

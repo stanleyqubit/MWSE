@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- The event library helps to instruct mwse to call a given function when a specific action is taken in the game.
 --- @class eventlib
 --- @field register fun(eventId: string, callback: fun(e: table): boolean?, options: table?)
@@ -42,6 +40,7 @@
 --- @field register fun(eventId: '"calcTrainingPrice"', callback: fun(e: calcTrainingPriceEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"calcTravelPrice"', callback: fun(e: calcTravelPriceEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"calcWalkSpeed"', callback: fun(e: calcWalkSpeedEventData): boolean?, options: table?)
+--- @field register fun(eventId: '"cameraControl"', callback: fun(e: cameraControlEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"cellActivated"', callback: fun(e: cellActivatedEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"cellChanged"', callback: fun(e: cellChangedEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"cellDeactivated"', callback: fun(e: cellDeactivatedEventData): boolean?, options: table?)
@@ -133,6 +132,7 @@
 --- @field register fun(eventId: '"referenceActivated"', callback: fun(e: referenceActivatedEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"referenceDeactivated"', callback: fun(e: referenceDeactivatedEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"referenceSceneNodeCreated"', callback: fun(e: referenceSceneNodeCreatedEventData): boolean?, options: table?)
+--- @field register fun(eventId: '"repair"', callback: fun(e: repairEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"restInterrupt"', callback: fun(e: restInterruptEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"save"', callback: fun(e: saveEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"saved"', callback: fun(e: savedEventData): boolean?, options: table?)

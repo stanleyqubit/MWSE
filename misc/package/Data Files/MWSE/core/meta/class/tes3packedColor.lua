@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A densely packed structure for single-byte red, green, blue and alpha values. The values are from 0 to 255.
 --- @class tes3packedColor
 --- @field a number The alpha color value.
@@ -14,5 +12,3 @@
 --- @field green number The green color value. Another alias for g.
 --- @field r number The red color value.
 --- @field red number The red color value. Another alias for r.
-tes3packedColor = {}
-

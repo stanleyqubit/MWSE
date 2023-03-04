@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A UI widget is a special interface to an element that offers functionality in a more friendly way.
 --- 
 --- Some core widget interfaces offered by MWSE include:
@@ -16,5 +14,3 @@
 --- * [tes3uiTextSelect](https://mwse.github.io/MWSE/types/tes3uiTextSelect)
 --- @class tes3uiWidget
 --- @field element tes3uiElement Access back to the element this widget interface is for.
-tes3uiWidget = {}
-

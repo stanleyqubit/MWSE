@@ -2,10 +2,10 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A rotation matrix, translation vector, and scale that marks an object's transformation.
 --- @class tes3transform
+--- @operator mul(tes3transform): tes3transform
+--- @operator mul(tes3vector3): tes3vector3
 --- @field rotation tes3matrix33 The transform's rotation matrix.
 --- @field scale number The transform's scale.
 --- @field translation tes3vector3 The transform's translation vector.
@@ -14,4 +14,19 @@ tes3transform = {}
 --- Creates a copy of the transform.
 --- @return tes3transform result No description yet available.
 function tes3transform:copy() end
+
+--- Returns a new transform that is the inverse of this transform. The second return value indicates whether the calculating the inverse was possible.
+--- @return tes3transform transform No description yet available.
+--- @return boolean valid No description yet available.
+function tes3transform:invert() end
+
+--- Creates a new instance of this type.
+--- @param rotation tes3matrix33? *Optional*. No description yet available.
+--- @param translation tes3vector3? *Optional*. No description yet available.
+--- @param scale number? *Optional*. No description yet available.
+--- @return tes3transform result No description yet available.
+function tes3transform:new(rotation, translation, scale) end
+
+--- Sets transform's rotation matrix to the identity matrix, translation to null vector, and scale to 1.0.
+function tes3transform:toIdentity() end
 

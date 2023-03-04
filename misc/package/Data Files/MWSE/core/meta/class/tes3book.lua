@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A book game object.
 --- @class tes3book : tes3item, tes3physicalObject, tes3object, tes3baseObject
 --- @field enchantCapacity number The object's enchantment capacity.
@@ -17,5 +15,3 @@
 --- @field type number The book type. Maps to values in [`tes3.bookType`](https://mwse.github.io/MWSE/references/book-types/) namespace.
 --- @field value number The value of the object.
 --- @field weight number The weight of the object.
-tes3book = {}
-

@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A structure that contains weather information for the thunder weather type.
 --- @class tes3weatherThunder : tes3weather
 --- @field flashDecrement number The weather's flash decrement value.
@@ -27,5 +25,3 @@
 --- @field thunderSound4Id string The weather's thunder sound 4 ID.
 --- @field thunderSoundCount number The weather's thunder sound count.
 --- @field thunderThreshold number The weather's thunder threshold.
-tes3weatherThunder = {}
-

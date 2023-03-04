@@ -1,6 +1,8 @@
 #pragma once
 
 #include "NIObjectNET.h"
+
+#include "NIBoundingBox.h"
 #include "NILinkedList.h"
 #include "NIProperty.h"
 #include "NITransform.h"
@@ -22,9 +24,9 @@ namespace NI {
 		void(__thiscall* updateWorldNormals)(AVObject*); // 0x48
 		void(__thiscall* destroyWorldNormals)(AVObject*); // 0x4C
 		void(__thiscall* setAppCulled)(AVObject*, bool); // 0x50
-		bool(__thiscall* getAppCulled)(AVObject*); // 0x54
+		bool(__thiscall* getAppCulled)(const AVObject*); // 0x54
 		void(__thiscall* setPropagationMode)(AVObject*, int); // 0x58
-		AVObject* (__thiscall* getObjectByName)(AVObject*, const char*); // 0x5C
+		AVObject* (__thiscall* getObjectByName)(const AVObject*, const char*); // 0x5C
 		void(__thiscall* updateDownwardPass)(AVObject*, float, bool, bool); // 0x60
 		bool(__thiscall* isVisualObject)(AVObject*); // 0x64
 		void(__thiscall* updatePropertiesDownward)(AVObject*, void*); // 0x68
@@ -65,15 +67,18 @@ namespace NI {
 		Vector3 getLocalVelocity() const;
 		void setLocalVelocity(Vector3*);
 
-		AVObject* getObjectByName(const char*);
+		AVObject* getObjectByName(const char*) const;
+		AVObject* getObjectByNameAndType(const char* name, uintptr_t rtti, bool allowSubtypes = true) const;
 
-		template <typename T>
-		T* getObjectByNameAndType(const char* name) {
-			return static_cast<T*>(vTable.asAVObject->getObjectByName(this, name));
-		}
-
-		bool getAppCulled();
+		bool getAppCulled() const;
 		void setAppCulled(bool culled);
+
+		void createWorldVertices();
+		void updateWorldVertices();
+		void createWorldNormals();
+		void updateWorldNormals();
+		void updateWorldDeforms();
+		void updateWorldBound();
 
 		//
 		// Other related this-call functions.
@@ -83,7 +88,7 @@ namespace NI {
 		void updateEffects();
 		void updateProperties();
 		Matrix33* getLocalRotationMatrix() const;
-		void setLocalRotationMatrix(Matrix33* matrix);
+		void setLocalRotationMatrix(const Matrix33* matrix);
 
 		void attachProperty(Property* property);
 		Pointer<Property> detachPropertyByType(PropertyType type);
@@ -99,7 +104,14 @@ namespace NI {
 		std::shared_ptr<TES3::BoundingBox> createBoundingBox_lua() const;
 #endif
 
+		Transform getLocalTransform() const;
+		float getLowestVertexZ() const;
+
 		void clearTransforms();
+		void copyTransforms(const AVObject* from);
+		void copyTransforms(const Transform* from);
+
+		void detachFromParent();
 
 		Pointer<Property> getProperty(PropertyType type) const;
 		Pointer<AlphaProperty> getAlphaProperty() const;
@@ -123,6 +135,10 @@ namespace NI {
 
 	};
 	static_assert(sizeof(AVObject) == 0x90, "NI::AVObject failed size validation");
+
+	void __cdecl CalculateBounds(const AVObject* object, Vector3& out_min, Vector3& out_max, const Vector3& translation, const Matrix33& rotation, const float& scale);
+
+	void __cdecl VerifyWorldVertices(const AVObject* object);
 }
 
 #if defined(SE_USE_LUA) && SE_USE_LUA == 1

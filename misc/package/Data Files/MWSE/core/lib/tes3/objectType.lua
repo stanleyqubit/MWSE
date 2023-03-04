@@ -4,6 +4,7 @@ return {
 	["ammunition"] = 1330466113,
 	["apparatus"] = 1095782465,
 	["armor"] = 1330467393,
+	["bodyPart"] = 1497648962,
 	["book"] = 1263488834,
 	["class"] = 1396788291,
 	["clothing"] = 1414483011,

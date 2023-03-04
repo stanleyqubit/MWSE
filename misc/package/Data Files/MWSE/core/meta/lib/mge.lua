@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- The mge library accesses MGE XE functionality, including control over shaders. Many older functions have been deprecated.
 --- @class mgelib
 --- @field camera mgeCameraConfig Allows control of MGE camera features.
@@ -47,8 +45,8 @@ function mge.enableShader(params) end
 --- @deprecated
 function mge.enableZoom() end
 
---- Returns the lighting mode used by MGE XE. These values map to `mge.lightingMode.*` constants.
---- @return number mode Maps to the `mge.lightingMode.*` constants.
+--- Returns the lighting mode used by MGE XE. These values map to [`mge.lightingMode`](https://mwse.github.io/MWSE/references/mge/lighting-modes/) constants.
+--- @return integer mode Maps to the `mge.lightingMode` constants.
 function mge.getLightingMode() end
 
 --- Gets the window's vertical resolution. Use `tes3.getViewportSize()` instead.
@@ -65,8 +63,8 @@ function mge.getScreenWidth() end
 --- @return number scale No description yet available.
 function mge.getUIScale() end
 
---- Gets the MGE version. Wrapper for MGEGetVersion.
---- @return number result No description yet available.
+--- Gets the MGE version. Returns a table with keys `major`, `minor`, and `patch`. In some older MGE XE versions, the versions are concatenated to a string.
+--- @return mgeVersionTable|string result No description yet available.
 function mge.getVersion() end
 
 --- Gets the weather distant land fog. Use `mge.weather.getDistantFog()` instead.
@@ -102,8 +100,21 @@ function mge.reloadDistantLand() end
 --- Saves the MGE config file. This is primarily an internal function and shouldn't be called casually.
 function mge.saveConfig() end
 
---- Sets the lighting mode used by MGE XE. The values passed can be used from the `mge.lightingMode.*` constants.
---- @param mode number Maps from the `mge.lightingMode.*` constants.
+--- Saves a screenshot.
+--- @param params mge.saveScreenshot.params This table accepts the following values:
+--- 
+--- `path`: string — No description yet available.
+--- 
+--- `captureWithUI`: boolean? — *Default*: `false`. If set to `true`, the screenshot will include the user interface.
+function mge.saveScreenshot(params) end
+
+---Table parameter definitions for `mge.saveScreenshot`.
+--- @class mge.saveScreenshot.params
+--- @field path string No description yet available.
+--- @field captureWithUI boolean? *Default*: `false`. If set to `true`, the screenshot will include the user interface.
+
+--- Sets the lighting mode used by MGE XE. The values passed can be used from the [`mge.lightingMode`](https://mwse.github.io/MWSE/references/mge/lighting-modes/) constants.
+--- @param mode integer Maps to the `mge.lightingMode` constants.
 function mge.setLightingMode(mode) end
 
 --- Sets a shader float value. Use the named variable interface on the shader handle instead.

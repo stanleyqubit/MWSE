@@ -9,7 +9,7 @@ namespace mge::lua {
 	class CoreInterface {
 	public:
 		static bool enabled();
-		static int getVersion();
+		static sol::object getVersion(sol::this_state ts);
 		static void loadConfig();
 		static void saveConfig();
 
@@ -80,8 +80,8 @@ namespace mge::lua {
 	public:
 		static sol::table getScattering(sol::this_state ts);
 		static void setScattering(sol::optional<sol::table> params);
-		static sol::table getFarScattering(sol::this_state ts);
-		static void setFarScattering(sol::optional<sol::table> params);
+		static sol::table getSkylightScattering(sol::this_state ts);
+		static void setSkylightScattering(sol::optional<sol::table> params);
 		static sol::table getDLFog(int weatherID, sol::this_state ts);
 		static void setDLFog(sol::optional<sol::table> params);
 		static sol::table getPPLLight(int weatherID, sol::this_state ts);

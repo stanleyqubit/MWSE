@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- Base class that represents light sources in a scene graph. This includes the ambient, diffuse, and specular colors of a light, as well as its intensity.
 --- @class niLight : niDynamicEffect, niAVObject, niObjectNET, niObject
 --- @field ambient niColor The ambient light color.
@@ -12,5 +10,3 @@
 --- @field specular niColor This property was inteded to be specular light color in NetImmerse, but in Morrowind it represents the dynamic culling radius. All the color channels are equal to the radius.
 --- 
 --- In practice, this radius represents the light's influence radius.
-niLight = {}
-

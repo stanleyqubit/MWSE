@@ -1,6 +1,8 @@
 #include "NIAVObject.h"
-
+#include "NIDefines.h"
+#include "NINode.h"
 #include "NIProperty.h"
+#include "NICamera.h"
 
 #include "MemoryUtil.h"
 
@@ -39,6 +41,28 @@ namespace NI {
 		vTable.asAVObject->setAppCulled(this, culled);
 	}
 
+	bool AVObject::isAppCulled() {
+		if (getAppCulled()) {
+			return true;
+		}
+		return parentNode ? parentNode->isAppCulled() : false;
+	}
+
+	bool AVObject::isFrustumCulled(Camera* camera) {
+		for (auto i = 0u; i < 6; i++) {
+			auto plane = camera->cullingPlanes[i];
+			auto distance = (
+				plane.x * worldBoundOrigin.x +
+				plane.y * worldBoundOrigin.y +
+				plane.z * worldBoundOrigin.z - plane.w
+			);
+			if (distance < -worldBoundRadius) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	void AVObject::update(float fTime, bool bUpdateControllers, bool bUpdateBounds) {
 		reinterpret_cast<void(__thiscall*)(AVObject*, float, int, int)>(NI_AVObject_update)(this, fTime, bUpdateControllers, bUpdateBounds);
 	}
@@ -55,8 +79,8 @@ namespace NI {
 		return localRotation;
 	}
 
-	void AVObject::setLocalRotationMatrix(TES3::Matrix33 * matrix) {
-		reinterpret_cast<void(__thiscall *)(AVObject*, TES3::Matrix33*)>(0x50E020)(this, matrix);
+	void AVObject::setLocalRotationMatrix(const TES3::Matrix33 * matrix) {
+		reinterpret_cast<void(__thiscall *)(AVObject*, const TES3::Matrix33*)>(0x50E020)(this, matrix);
 	}
 
 	const auto NI_PropertyList_addHead = reinterpret_cast<void(__thiscall*)(PropertyLinkedList*, Pointer<Property>)>(0x405840);
@@ -100,6 +124,38 @@ namespace NI {
 		localTranslate.y = 0.0f;
 		localTranslate.z = 0.0f;
 		setLocalRotationMatrix(reinterpret_cast<TES3::Matrix33*>(0x7DE664));
+	}
+
+	void AVObject::copyTransforms(const AVObject* source) {
+		setLocalRotationMatrix(source->getLocalRotationMatrix());
+		localTranslate = source->localTranslate;
+		localScale = source->localScale;
+	}
+
+	void AVObject::copyTransforms(const TES3::Transform* source) {
+		setLocalRotationMatrix(&source->rotation);
+		localTranslate = source->translation;
+		localScale = source->scale;
+	}
+
+	void AVObject::copyTransforms_lua(const sol::stack_object source) {
+		if (source.is<AVObject*>()) {
+			copyTransforms(source.as<AVObject*>());
+		}
+		else if (source.is<TES3::Transform*>()) {
+			copyTransforms(source.as<TES3::Transform*>());
+		}
+		else {
+			throw std::invalid_argument("Invalid 'source' parameter provided");
+		}
+	}
+
+	TES3::Transform AVObject::getTransforms() const {
+		TES3::Transform t;
+		t.rotation = *localRotation;
+		t.translation = localTranslate;
+		t.scale = localScale;
+		return t;
 	}
 
 	Pointer<Property> AVObject::getProperty(PropertyType type) const {

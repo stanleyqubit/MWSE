@@ -54,13 +54,16 @@ namespace NI {
 		~Pick();
 
 		bool pickObjects(const Vector3* origin, const Vector3* direction, bool append = false, float maxDistance = 0.0f);
+		bool pickObjectsWithSkinDeforms(const Vector3* origin, const Vector3* direction, bool append = false, float maxDistance = 0.0f);
 		void clearResults();
+
+		PickRecord* getFirstUnskinnedResult() const;
 
 	};
 	static_assert(sizeof(Pick) == 0x38, "NI::Pick failed size validation");
 
 	struct PickRecord {
-		AVObject* object;
+		Geometry* object;
 		AVObject* proxyParent;
 		Vector3 intersection;
 		float distance;

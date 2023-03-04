@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- The typical base type for most NetImmerse scene graph objects.
 --- @class niAVObject : niObjectNET, niObject
 --- @field alphaProperty niAlphaProperty|nil Convenient access to this object's alpha property. Setting this value to be nil will erase the property, while setting it to a valid alpha property will set (or replace) it.
@@ -33,6 +31,10 @@ function niAVObject:attachProperty(property) end
 --- Resets the object's local transform.
 function niAVObject:clearTransforms() end
 
+--- Update object's local transform by copying from another source.
+--- @param source niAmbientLight|niBillboardNode|niCamera|niCollisionSwitch|niDirectionalLight|niNode|niParticles|niPointLight|niRotatingParticles|niSpotLight|niSwitchNode|niTextureEffect|niTriShape|tes3transform No description yet available.
+function niAVObject:copyTransforms(source) end
+
 --- Detaches all the properties on the object and returns them in the table.
 --- @return niAlphaProperty[]|niFogProperty[]|niMaterialProperty[]|niStencilProperty[]|niTexturingProperty[]|niVertexColorProperty[]|niZBufferProperty[] result No description yet available.
 function niAVObject:detachAllProperties() end
@@ -51,6 +53,15 @@ function niAVObject:getObjectByName(name) end
 --- @param type integer The types are available in [`ni.propertyType`](https://mwse.github.io/MWSE/references/ni/property-types/) table.
 --- @return niAlphaProperty|niFogProperty|niMaterialProperty|niStencilProperty|niTexturingProperty|niVertexColorProperty|niZBufferProperty result No description yet available.
 function niAVObject:getProperty(type) end
+
+--- Recursively checks if either the object or any of its parents are appCulled.
+--- @return boolean result No description yet available.
+function niAVObject:isAppCulled() end
+
+--- Checks if the object is frustum culled for the given camera.
+--- @param camera niCamera No description yet available.
+--- @return boolean result No description yet available.
+function niAVObject:isFrustumCulled(camera) end
 
 --- Alias for `update()` method. Updates the world transforms of this node and its children, which makes changes visible for rendering. Use after changing any local rotation, translation, scale, bounds or after attaching and detaching nodes.
 --- 

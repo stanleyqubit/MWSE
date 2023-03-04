@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A core magic effect definition.
 --- @class tes3magicEffect
 --- @field allowEnchanting boolean Access to the flag that determines if this effect can be used in enchanting.
@@ -51,5 +49,3 @@
 --- @field targetsSkills boolean Access to the base flag that determines if this effect makes use of skills.
 --- @field unreflectable boolean Access to the base flag that determines if this effect can't be reflected.
 --- @field usesNegativeLighting boolean Access to the base flag that determines if this effect provides negative lighting.
-tes3magicEffect = {}
-

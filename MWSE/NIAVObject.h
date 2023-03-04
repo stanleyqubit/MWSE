@@ -74,7 +74,10 @@ namespace NI {
 
 		bool getAppCulled();
 		void setAppCulled(bool culled);
-		
+
+		bool isAppCulled();
+		bool isFrustumCulled(Camera*);
+
 		//
 		// Other related this-call functions.
 		//
@@ -83,7 +86,7 @@ namespace NI {
 		void updateEffects();
 		void updateProperties();
 		TES3::Matrix33* getLocalRotationMatrix() const;
-		void setLocalRotationMatrix(TES3::Matrix33* matrix);
+		void setLocalRotationMatrix(const TES3::Matrix33* matrix);
 
 		void attachProperty(Property* property);
 		Pointer<Property> detachPropertyByType(PropertyType type);
@@ -96,6 +99,10 @@ namespace NI {
 		std::shared_ptr<TES3::BoundingBox> createBoundingBox_lua() const;
 
 		void clearTransforms();
+		void copyTransforms(const AVObject* from);
+		void copyTransforms(const TES3::Transform* from);
+		void copyTransforms_lua(const sol::stack_object from);
+		TES3::Transform getTransforms() const;
 
 		Pointer<Property> getProperty(PropertyType type) const;
 		Pointer<AlphaProperty> getAlphaProperty() const;

@@ -672,17 +672,12 @@ namespace mwse::lua {
 		return std::move(effect->getComplexName(attribute, skill));
 	}
 
-	// This function currently calls out to MGE, which should be changed at some point.
-	TES3::Vector3 getCameraVector() {
-		mwscript::RunOriginalOpCode(nullptr, nullptr, OpCode::MGEGetEyeVec);
-
-		// Get the results from the MWSE stack.
-		Stack& stack = Stack::getInstance();
-		float x = stack.popFloat();
-		float y = stack.popFloat();
-		float z = stack.popFloat();
-
-		return TES3::Vector3(x, y, z);
+	sol::optional<TES3::Vector3> getCameraVector() {
+		auto worldController = TES3::WorldController::get();
+		if (worldController) {
+			return worldController->worldCamera.cameraData.camera->worldDirection;
+		}
+		return sol::optional<TES3::Vector3>();
 	}
 
 	sol::optional<TES3::Vector3> getCameraPosition() {
@@ -863,17 +858,20 @@ namespace mwse::lua {
 		rayTestCache->returnTexture = getOptionalParam<bool>(params, "returnTexture", false);
 
 		// Default root nodes to ignore.
-		std::vector<NI::AVObject*> ignoreRestoreList;
 		if (rayTestIgnoreRoots.empty()) {
-			auto weather = TES3::WorldController::get()->weatherController;
-			auto& world = TES3::Game::get()->worldRoot;
+			// Initialize rayTestIgnoreRoots on first use.
+			auto worldController = TES3::WorldController::get();
+			auto weather = worldController->weatherController;
+
 			rayTestIgnoreRoots.push_back(weather->sgRainRoot);
 			rayTestIgnoreRoots.push_back(weather->sgSnowRoot);
 			rayTestIgnoreRoots.push_back(weather->sgStormRoot);
-			rayTestIgnoreRoots.push_back(world->getObjectByName("WorldProjectileRoot"));
-			rayTestIgnoreRoots.push_back(world->getObjectByName("WorldSpellRoot"));
-			rayTestIgnoreRoots.push_back(world->getObjectByName("WorldVFXRoot"));
+			rayTestIgnoreRoots.push_back(worldController->mobManager->projectileManager->worldProjectileRoot);
+			rayTestIgnoreRoots.push_back(worldController->magicInstanceController->worldSpellRoot);
+			rayTestIgnoreRoots.push_back(worldController->vfxManager->worldVFXRoot);
 		}
+
+		std::vector<NI::AVObject*> ignoreRestoreList;
 		for (const auto node : rayTestIgnoreRoots) {
 			if (!node->getAppCulled()) {
 				node->setAppCulled(true);
@@ -2218,20 +2216,21 @@ namespace mwse::lua {
 				TES3::DataHandler::get()->useCellTransitionFader = false;
 			}
 
+			bool suppressThreadLoad = true;
+			std::swap(TES3::DataHandler::suppressThreadLoad, suppressThreadLoad);
+
 			sol::optional<bool> teleportCompanions = params["teleportCompanions"];
 			if (teleportCompanions.value_or(true) && macp->listFriendlyActors.size() > 0) {
-				TES3::DataHandler::suppressThreadLoad = true;
 				const auto TES3_cellChangeWithCompanions = reinterpret_cast<void(__cdecl*)(TES3::Vector3, TES3::Vector3, TES3::Cell*)>(0x45C9B0);
 				TES3_cellChangeWithCompanions(position.value(), orientation.value(), cell);
-				TES3::DataHandler::suppressThreadLoad = false;
 			}
 			else {
-				TES3::DataHandler::suppressThreadLoad = true;
 				const auto TES3_cellChange = reinterpret_cast<void(__cdecl*)(TES3::Vector3, TES3::Vector3, TES3::Cell*, int)>(0x45CEF0);
 				sol::optional<bool> flag = params["flag"];
 				TES3_cellChange(position.value(), orientation.value(), cell, flag.value_or(true));
-				TES3::DataHandler::suppressThreadLoad = false;
 			}
+
+			std::swap(TES3::DataHandler::suppressThreadLoad, suppressThreadLoad);
 
 			if (suppressFader) {
 				TES3::DataHandler::get()->useCellTransitionFader = faderInitialState;
@@ -5488,9 +5487,8 @@ namespace mwse::lua {
 		// Fire off the event.
 		if (event::EnchantChargeUseEvent::getEventEnabled()) {
 			auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
-			bool isCast = false;
 
-			sol::object eventResult = stateHandle.triggerEvent(new event::EnchantChargeUseEvent(enchant, mobile, charge, isCast));
+			sol::object eventResult = stateHandle.triggerEvent(new event::EnchantChargeUseEvent(enchant, mobile, nullptr, charge));
 
 			// Allow the event to modify charge.
 			if (eventResult.valid()) {

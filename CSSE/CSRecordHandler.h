@@ -18,7 +18,12 @@ namespace se::cs {
 
 	struct RecordHandler {
 		struct GameSettingsContainer {
-
+			HWND hFilteredSettingsList;
+			HWND hSettingsTabs;
+			int currentTabLParam;
+			int unknown_0xC;
+			GameSetting* gameSettings[1520]; // 0x10
+			int unknown_0x17D0;
 		};
 		struct Substructure_9B10 {
 			BYTE padding[0x960];
@@ -92,6 +97,15 @@ namespace se::cs {
 		size_t getCellCount() const;
 		Cell* getCellByIndex(size_t index) const;
 		Cell* getCellByID(const char* id) const;
+
+		const char* getBaseAnimation(int sex, bool firstPerson = false) const;
+		bool isBaseAnimation(const char* animation) const;
+
+		GameSetting* getGameSettingForSkill(int id) const;
+		GameSetting* getGameSettingForEffect(int id) const;
+
+		void getNameForEffect(char* buffer, size_t bufferSize, int effect, int attribute, int skill) const;
 	};
 	static_assert(sizeof(RecordHandler) == 0xB0F8, "RecordHandler failed size validation");
+	static_assert(sizeof(RecordHandler::GameSettingsContainer) == 0x17D4, "RecordHandler::GameSettingsContainer failed size validation");
 }

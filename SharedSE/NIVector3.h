@@ -10,6 +10,8 @@ namespace NI {
 
 		friend struct Matrix33;
 
+		static const NI::Vector3 DirectionDown;
+
 		Vector3();
 		Vector3(float x, float y, float z);
 		Vector3(NI::Color& color);
@@ -27,6 +29,7 @@ namespace NI {
 		bool operator==(const Vector3& vector) const;
 		bool operator!=(const Vector3& vector) const;
 		Vector3 operator+(const Vector3&) const;
+		Vector3 operator-() const;
 		Vector3 operator-(const Vector3&) const;
 		Vector3 operator*(const Vector3&) const;
 		Vector3 operator*(const float) const;

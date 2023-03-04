@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- LuaFileSystem is a Lua library developed to complement the set of functions related to file systems offered by the standard Lua distribution. This library has been further extended by MWSE.
 --- @class lfslib
 lfs = {}
@@ -105,6 +103,6 @@ function lfs.unlock(filehandle, mode, start, length) end
 ---
 --- [Examples available in online documentation](https://mwse.github.io/MWSE/apis/lfs/#lfswalkdir).
 --- @param path string The root path of the directory tree.
---- @return iterator result No description yet available.
+--- @return fun(): string, string, string iterator No description yet available.
 function lfs.walkdir(path) end
 

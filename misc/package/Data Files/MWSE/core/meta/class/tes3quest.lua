@@ -2,11 +2,7 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- A representation of a quest, with associated dialogue and info.
 --- @class tes3quest : tes3baseObject
 --- @field dialogue tes3dialogue[] *Read-only*. A collection of dialogues associated with the quest.
 --- @field info tes3dialogueInfo[] *Read-only*. A collection of dialogue info associated with the quest.
-tes3quest = {}
-

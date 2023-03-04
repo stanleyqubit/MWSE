@@ -61,6 +61,7 @@ namespace TES3 {
 		bool operator!=(const Vector3& vector) const;
 		Vector3 operator+(const Vector3&) const;
 		Vector3 operator-(const Vector3&) const;
+		Vector3 operator-() const;
 		Vector3 operator*(const Vector3&) const;
 		Vector3 operator*(const float) const;
 		Vector3 operator/(const float) const;
@@ -180,6 +181,10 @@ namespace TES3 {
 		void fromQuaternion(const NI::Quaternion* q);
 		NI::Quaternion toQuaternion();
 
+		Vector3 getForwardVector();
+		Vector3 getRightVector();
+		Vector3 getUpVector();
+
 		bool reorthogonalize();
 
 	};
@@ -246,7 +251,17 @@ namespace TES3 {
 		TES3::Vector3 translation;
 		float scale;
 
+		Transform();
+		Transform(const Matrix33& rotation, const Vector3& translation, const float scale);
+
+		Transform operator*(const Transform& transform);
+		Vector3 operator*(const Vector3& transform);
+
+		bool invert(Transform* out) const;
+		std::tuple<Transform, bool> invert() const;
+
 		Transform copy() const;
+		void toIdentity();
 	};
 	static_assert(sizeof(Transform) == 0x34, "TES3::Transform failed size validation");
 }

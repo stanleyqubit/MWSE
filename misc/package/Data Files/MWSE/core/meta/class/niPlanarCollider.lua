@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- This modifier makes particles bounce off of a rectangle.
 --- @class niPlanarCollider : niParticleCollider, niParticleModifier, niObject
 --- @field height number The plane size along the y axis.
@@ -12,5 +10,3 @@
 --- @field width number The plane size along the x axis.
 --- @field xAxis tes3vector3 The x axis, lying in the plane of the collider.
 --- @field yAxis tes3vector3 The y axis, lying in the plane of the collider.
-niPlanarCollider = {}
-

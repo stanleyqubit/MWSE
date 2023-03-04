@@ -3,6 +3,8 @@
 #include "CSDefines.h"
 #include "NIDefines.h"
 
+#include "MemoryUtil.h"
+
 namespace se::cs {
 	struct DataHandler {
 		RecordHandler* recordHandler;
@@ -11644,11 +11646,21 @@ namespace se::cs {
 		int unknown_B5D0;
 		int unknown_B5D4;
 
-		void maybeUpdateLightForReference(Reference* reference);
+		//
+		// Other related this-call functions.
+		//
+
+		void updateLightingForNonLightReference(Reference* reference);
 		void updateAllLights();
 
+		//
+		// Custom functions
+		//
+
+		void updateLightingForReference(Reference* reference);
+
 		static DataHandler* get() {
-			return *reinterpret_cast<DataHandler**>(0x6CE8F0);
+			return memory::ExternalGlobal<DataHandler*, 0x6CE8F0>::get();
 		}
 	};
 }

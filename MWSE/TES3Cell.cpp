@@ -123,7 +123,16 @@ namespace TES3 {
 		}
 	}
 
-	Region * Cell::getRegion() const {
+	Land* Cell::getLandscape() const {
+		if (!getIsInterior()) {
+			return variantData.exterior.landscape;
+		}
+		else {
+			return nullptr;
+		}
+	}
+
+	Region* Cell::getRegion() const {
 		if (getIsOrBehavesAsExterior()) {
 			return waterLevelOrRegion.region;
 		}
@@ -287,6 +296,30 @@ namespace TES3 {
 
 	int Cell::toGridCoord(float x) {
 		return int(x) >> 13;
+	}
+
+	sol::object PathGrid::Node::getConnectedNodes_lua(sol::this_state ts) const {
+		sol::state_view state = ts;
+		sol::table conn = state.create_table();
+
+		// Resolve extra indirections to make a flat node table.
+		if (this->connectedNodes) {
+			size_t n = 1;
+			for (auto nodePtr : *this->connectedNodes) {
+				if (nodePtr) {
+					conn[n++] = *nodePtr;
+				}
+			}
+		}
+		return conn;
+	}
+
+	Vector3 PathGrid::Node::getPosition() const {
+		// Convert local position to world position.
+		const auto cell = parentGrid->parentCell;
+		const int cellX = 8192 * cell->getGridX(), cellY = 8192 * cell->getGridY();
+
+		return { float(cellX + relativeX), float(cellY + relativeY), float(relativeZ) };
 	}
 }
 

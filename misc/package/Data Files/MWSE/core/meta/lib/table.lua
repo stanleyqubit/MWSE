@@ -2,8 +2,6 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- @diagnostic disable:undefined-doc-name
-
 --- This library provides generic functions for table manipulation. It provides all its functions inside the table table.
 --- @class tablelib
 table = {}
@@ -121,7 +119,7 @@ function table.size(t) end
 --- [Examples available in online documentation](https://mwse.github.io/MWSE/apis/table/#tabletraverse).
 --- @param t table A table to transverse.
 --- @param k string? *Default*: `children`. The subtable key.
---- @return iterator result No description yet available.
+--- @return fun(): any iterator No description yet available.
 function table.traverse(t, k) end
 
 --- Returns an array-style table of all values in the given table, t. Optionally, it will sort the returned table.

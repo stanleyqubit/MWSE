@@ -11,22 +11,22 @@ namespace se::cs {
 		void* unknown_0x2C;
 		void* unknown_0x30;
 		void* unknown_0x34;
-		char* (__thiscall* getName)(const BaseObject*); // 0x38
-		char* (__thiscall* getIconPath)(const BaseObject*); // 0x3C
+		char* (__thiscall* getName)(const Object*); // 0x38
+		char* (__thiscall* getIconPath)(const Object*); // 0x3C
 		void* unknown_0x40;
 		void* unknown_0x44;
-		void* unknown_0x48;
-		void* unknown_0x4C;
-		void* unknown_0x50;
-		void* unknown_0x54;
-		void* unknown_0x58;
-		void* unknown_0x5C;
+		char* (__thiscall* getModelPath)(const Object*); // 0x48
+		Script* (__thiscall* getScript)(const Object*); // 0x4C
+		Sound* (__thiscall* getSound)(const Object*); // 0x50
+		const char* (__thiscall* getRaceName)(const Object*); // 0x54
+		const char* (__thiscall* getClassName)(const Object*); // 0x58
+		const char* (__thiscall* getFactionName)(const Object*); // 0x5C
 		void* unknown_0x60;
 		void* unknown_0x64;
-		void* unknown_0x68;
-		void* unknown_0x6C;
+		Faction*(__thiscall* getFaction)(const Object*); // 0x68
+		bool(__thiscall* getIsFemale)(const Object*); // 0x6C
 		void* unknown_0x70;
-		void* unknown_0x74;
+		int(__thiscall* getLevel)(const Object*); // 0x74
 		void* unknown_0x78;
 		void* unknown_0x7C;
 		void* unknown_0x80;
@@ -35,33 +35,33 @@ namespace se::cs {
 		void* unknown_0x8C;
 		void* unknown_0x90;
 		void* unknown_0x94;
-		void* unknown_0x98;
-		void* unknown_0x9C;
-		void* unknown_0xA0;
+		const char* (__thiscall* getTypeName)(const Object*); // 0x98
+		float (__thiscall* getWeight)(const Object*); // 0x9C
+		int (__thiscall* getValue)(const Object*); // 0xA0
 		void* unknown_0xA4;
 		void* unknown_0xA8;
 		void* unknown_0xAC;
 		void* unknown_0xB0;
 		void* unknown_0xB4;
 		void* unknown_0xB8;
-		void* unknown_0xBC;
+		bool(__thiscall* getIsEssential)(const Object*); // 0xBC
 		void* unknown_0xC0;
 		void* unknown_0xC4;
 		void* unknown_0xC8;
 		void* unknown_0xCC;
-		void* unknown_0xD0;
+		Object* (__thiscall* getEnchantment)(const Object*); // 0xD0
 		void* unknown_0xD4;
 		void* unknown_0xD8;
 		void* unknown_0xDC;
 		void* unknown_0xE0;
 		void* unknown_0xE4;
-		void* unknown_0xE8;
+		bool (__thiscall* getAutoCalc)(const Object*); // 0xE8
 		void* unknown_0xEC;
 		void* unknown_0xF0;
 		void* unknown_0xF4;
 		void* unknown_0xF8;
 		void* unknown_0xFC;
-		void* unknown_0x100;
+		void(__thiscall* populateObjectWindow)(const Object*, HWND); // 0x100
 		void* unknown_0x104;
 		bool(__thiscall* isMarker)(const Object*); // 0x108
 		void* unknown_0x10C;
@@ -85,20 +85,92 @@ namespace se::cs {
 		Object* nextInCollection; // 0x20
 		int unknown_0x24;
 
-		const char* getName() const {
+		inline const char* getName() const {
 			return vtbl.object->getName(this);
 		}
 
-		bool isMarker() const {
+		inline bool isMarker() const {
 			return vtbl.object->isMarker(this);
 		}
 
-		float getScale() const {
+		inline char* getIcon() const {
+			return vtbl.object->getIconPath(this);
+		}
+
+		inline char* getModel() const {
+			return vtbl.object->getModelPath(this);
+		}
+
+		inline Object* getEnchantment() const {
+			return vtbl.object->getEnchantment(this);
+		}
+
+		inline Script* getScript() const {
+			return vtbl.object->getScript(this);
+		}
+
+		inline float getScale() const {
 			return vtbl.object->getScale(this);
 		}
 
-		void setScale(float scale, bool something = true) {
+		inline void setScale(float scale, bool something = true) {
 			vtbl.object->setScale(this, scale, something);
+		}
+
+		inline int getCount() const {
+			return vtbl.object->getCount(this);
+		}
+
+		inline const char* getTypeName() const {
+			return vtbl.object->getTypeName(this);
+		}
+
+		inline Sound* getSound() const {
+			return vtbl.object->getSound(this);
+		}
+
+		inline const char* getRaceName() const {
+			return vtbl.object->getRaceName(this);
+		}
+
+		inline const char* getClassName() const {
+			return vtbl.object->getClassName(this);
+		}
+
+		inline const char* getFactionName() const {
+			return vtbl.object->getFactionName(this);
+		}
+
+		inline Faction* getFaction() const {
+			return vtbl.object->getFaction(this);
+		}
+
+		inline bool getIsFemale() const {
+			return vtbl.object->getIsFemale(this);
+		}
+
+		inline bool getIsEssential() const {
+			return vtbl.object->getIsEssential(this);
+		}
+
+		inline int getLevel() const {
+			return vtbl.object->getLevel(this);
+		}
+
+		inline bool getAutoCalc() const {
+			return vtbl.object->getAutoCalc(this);
+		}
+
+		inline float getWeight() const {
+			return vtbl.object->getWeight(this);
+		}
+
+		inline int getValue() const {
+			return vtbl.object->getValue(this);
+		}
+
+		inline void populateObjectWindow(HWND hWnd) const {
+			vtbl.object->populateObjectWindow(this, hWnd);
 		}
 	};
 	static_assert(sizeof(Object) == 0x28, "CS::Object failed size validation");

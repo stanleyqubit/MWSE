@@ -4,8 +4,6 @@
 #include "MathUtil.h"
 
 namespace NI {
-	using namespace se::math;
-
 	Matrix33::Matrix33() : m0(), m1(), m2() {
 
 	}
@@ -45,7 +43,7 @@ namespace NI {
 #endif
 	}
 
-	bool Matrix33::operator==(const Matrix33& matrix) {
+	bool Matrix33::operator==(const Matrix33& matrix) const {
 #if defined(SE_NI_MATRIX33_FNADDR_TESTEQUAL) && SE_NI_MATRIX33_FNADDR_TESTEQUAL > 0
 		const auto NI_Matrix33_testEqual = reinterpret_cast<bool(__thiscall*)(Matrix33*, const Matrix33*)>(SE_NI_MATRIX33_FNADDR_TESTEQUAL);
 		return NI_Matrix33_testEqual(this, &matrix);
@@ -54,7 +52,7 @@ namespace NI {
 #endif
 	}
 
-	bool Matrix33::operator!=(const Matrix33& matrix) {
+	bool Matrix33::operator!=(const Matrix33& matrix) const {
 		return m0.x != matrix.m0.x
 			|| m0.y != matrix.m0.y
 			|| m0.z != matrix.m0.z
@@ -66,9 +64,9 @@ namespace NI {
 			|| m2.z != matrix.m2.z;
 	}
 
-	Matrix33 Matrix33::operator+(const Matrix33& matrix) {
+	Matrix33 Matrix33::operator+(const Matrix33& matrix) const {
 #if defined(SE_NI_MATRIX33_FNADDR_ADDMATRIX) && SE_NI_MATRIX33_FNADDR_ADDMATRIX > 0
-		const auto NI_Matrix33_addMatrix = reinterpret_cast<Matrix33 * (__thiscall*)(Matrix33*, Matrix33*, const Matrix33*)>(SE_NI_MATRIX33_FNADDR_ADDMATRIX);
+		const auto NI_Matrix33_addMatrix = reinterpret_cast<Matrix33 * (__thiscall*)(const Matrix33*, Matrix33*, const Matrix33*)>(SE_NI_MATRIX33_FNADDR_ADDMATRIX);
 
 		Matrix33 result;
 		NI_Matrix33_addMatrix(this, &result, &matrix);
@@ -78,9 +76,9 @@ namespace NI {
 #endif
 	}
 
-	Matrix33 Matrix33::operator-(const Matrix33& matrix) {
+	Matrix33 Matrix33::operator-(const Matrix33& matrix) const {
 #if defined(SE_NI_MATRIX33_FNADDR_SUBTRACTMATRIX) && SE_NI_MATRIX33_FNADDR_SUBTRACTMATRIX > 0
-		const auto NI_Matrix33_subtractMatrix = reinterpret_cast<Matrix33 * (__thiscall*)(Matrix33*, Matrix33*, const Matrix33*)>(SE_NI_MATRIX33_FNADDR_SUBTRACTMATRIX);
+		const auto NI_Matrix33_subtractMatrix = reinterpret_cast<Matrix33 * (__thiscall*)(const Matrix33*, Matrix33*, const Matrix33*)>(SE_NI_MATRIX33_FNADDR_SUBTRACTMATRIX);
 
 		Matrix33 result;
 		NI_Matrix33_subtractMatrix(this, &result, &matrix);
@@ -90,9 +88,9 @@ namespace NI {
 #endif
 	}
 
-	Matrix33 Matrix33::operator*(const Matrix33& matrix) {
+	Matrix33 Matrix33::operator*(const Matrix33& matrix) const {
 #if defined(SE_NI_MATRIX33_FNADDR_MULTIPLYMATRIX) && SE_NI_MATRIX33_FNADDR_MULTIPLYMATRIX > 0
-		const auto NI_Matrix33_multiplyMatrix = reinterpret_cast<Matrix33 * (__thiscall*)(Matrix33*, Matrix33*, const Matrix33*)>(SE_NI_MATRIX33_FNADDR_MULTIPLYMATRIX);
+		const auto NI_Matrix33_multiplyMatrix = reinterpret_cast<Matrix33 * (__thiscall*)(const Matrix33*, Matrix33*, const Matrix33*)>(SE_NI_MATRIX33_FNADDR_MULTIPLYMATRIX);
 
 		Matrix33 result;
 		NI_Matrix33_multiplyMatrix(this, &result, &matrix);
@@ -102,9 +100,9 @@ namespace NI {
 #endif
 	}
 
-	Vector3 Matrix33::operator*(const Vector3& vector) {
+	Vector3 Matrix33::operator*(const Vector3& vector) const {
 #if defined(SE_NI_MATRIX33_FNADDR_MULTIPLYVECTOR) && SE_NI_MATRIX33_FNADDR_MULTIPLYVECTOR > 0
-		const auto NI_Matrix33_multiplyVector = reinterpret_cast<Vector3 * (__thiscall*)(Matrix33*, Vector3*, const Vector3*)>(SE_NI_MATRIX33_FNADDR_MULTIPLYVECTOR);
+		const auto NI_Matrix33_multiplyVector = reinterpret_cast<Vector3 * (__thiscall*)(const Matrix33*, Vector3*, const Vector3*)>(SE_NI_MATRIX33_FNADDR_MULTIPLYVECTOR);
 
 		Vector3 result;
 		NI_Matrix33_multiplyVector(this, &result, &vector);
@@ -114,9 +112,9 @@ namespace NI {
 #endif
 	}
 
-	Matrix33 Matrix33::operator*(float scalar) {
+	Matrix33 Matrix33::operator*(float scalar) const {
 #if defined(SE_NI_MATRIX33_FNADDR_MULTIPLYSCALAR) && SE_NI_MATRIX33_FNADDR_MULTIPLYSCALAR > 0
-		const auto NI_Matrix33_multiplyScalar = reinterpret_cast<Matrix33 * (__thiscall*)(Matrix33*, Matrix33*, float)>(SE_NI_MATRIX33_FNADDR_MULTIPLYSCALAR);
+		const auto NI_Matrix33_multiplyScalar = reinterpret_cast<Matrix33 * (__thiscall*)(const Matrix33*, Matrix33*, float)>(SE_NI_MATRIX33_FNADDR_MULTIPLYSCALAR);
 
 		Matrix33 result;
 		NI_Matrix33_multiplyScalar(this, &result, scalar);
@@ -187,7 +185,7 @@ namespace NI {
 #if defined(SE_NI_MATRIX33_FNADDR_TOROTATIONY) && SE_NI_MATRIX33_FNADDR_TOROTATIONY > 0
 		const auto NI_Matrix33_toRotationY = reinterpret_cast<void(__thiscall*)(Matrix33*, float)>(SE_NI_MATRIX33_FNADDR_TOROTATIONY);
 
-		/ NI_Matrix33_toRotationY(this, value);
+		NI_Matrix33_toRotationY(this, value);
 #else
 		throw not_implemented_exception();
 #endif
@@ -203,17 +201,19 @@ namespace NI {
 #endif
 	}
 
-	void Matrix33::toRotation(float angle, float x, float y, float z) {
+	void Matrix33::toRotation(float angle, const Vector3& axis) {
 #if defined(SE_NI_MATRIX33_FNADDR_TOROTATIONXYZ) && SE_NI_MATRIX33_FNADDR_TOROTATIONXYZ > 0
 		const auto NI_Matrix33_toRotationXYZ = reinterpret_cast<void(__thiscall*)(Matrix33*, float, float, float, float)>(SE_NI_MATRIX33_FNADDR_TOROTATIONXYZ);
 
-		NI_Matrix33_toRotationXYZ(this, angle, x, y, z);
+		NI_Matrix33_toRotationXYZ(this, angle, axis.x, axis.y, axis.z);
 #else
 		throw not_implemented_exception();
 #endif
 	}
 
 	bool Matrix33::toRotationDifference(const Vector3& a, const Vector3& b) {
+		using se::math::M_PIf;
+
 		auto axis = a.crossProduct(&b);
 		auto norm = axis.length();
 		if (norm <= 1e-5) {
@@ -224,9 +224,9 @@ namespace NI {
 			axis = axis / norm;
 			auto angle = asin(norm);
 			if (a.dotProduct(&b) < 0) {
-				angle = M_PI - angle;
+				angle = M_PIf - angle;
 			}
-			toRotation(-angle, axis.x, axis.y, axis.z);
+			toRotation(-angle, axis);
 			return true;
 		}
 	}
@@ -291,7 +291,7 @@ namespace NI {
 #if defined(SE_NI_MATRIX33_FNADDR_REORTHOGONALIZE) && SE_NI_MATRIX33_FNADDR_REORTHOGONALIZE > 0
 		const auto NI_Matrix33_reorthogonalize = reinterpret_cast<bool(__thiscall*)(Matrix33*)>(SE_NI_MATRIX33_FNADDR_REORTHOGONALIZE);
 
-		return NI_Matrix33_reorthogonalize(this, out_matrix);
+		return NI_Matrix33_reorthogonalize(this);
 #else
 		throw not_implemented_exception();
 #endif
@@ -324,12 +324,14 @@ namespace NI {
 	}
 
 	bool Matrix33::toEulerZYX(float* x, float* y, float* z) const {
+		using se::math::M_PI_2f;
+
 		*x = 0;
 		*y = asin(m2.x);
 		*z = 0;
 
-		if (*y < M_PI_2) {
-			if (*y > -M_PI_2) {
+		if (*y < M_PI_2f) {
+			if (*y > -M_PI_2f) {
 				*z = -atan2(m1.x, m0.x);
 				*x = -atan2(m2.y, m2.z);
 				return true;

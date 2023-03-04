@@ -48,6 +48,23 @@ local function getPackageLink(package)
 	return table.concat(tokens, "/")
 end
 
+--- Only write table when necessary: for library packages or classes that
+--- have one or more methods or functions. This the avoids creation of tables
+--- in the global namespace for virtual types - types that only existent
+--- in the annotations.
+---@param package packageClass
+---@return boolean
+local function shouldCreateTable(package)
+	return (
+		package.type == "lib" or
+		package.type == "class" and (
+			package.methods and	#package.methods > 0 or
+			package.functions and #package.functions > 0
+		)
+		or false
+	)
+end
+
 local function writeExamples(package, file)
 	if (package.examples) then
 		file:write(string.format("---\n--- [Examples available in online documentation](%s).\n", getPackageLink(package)))
@@ -229,8 +246,6 @@ local function build(package)
 
 	-- Mark the file as a meta file.
 	file:write("--- @meta\n")
-	-- Removes warnings for missing definitions
-	file:write("--- @diagnostic disable:undefined-doc-name\n\n")
 
 	-- Write description.
 	if (package.type == "lib") then
@@ -297,7 +312,7 @@ local function build(package)
 	end
 
 	-- Finalize the main class definition.
-	if (package.type == "lib" or package.type == "class") then
+	if shouldCreateTable(package) then
 		file:write(string.format("%s = {}\n\n", package.namespace))
 	end
 

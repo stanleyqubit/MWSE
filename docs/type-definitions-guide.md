@@ -12,7 +12,7 @@ Type definitions can be found in autocomplete\definitions\namedTypes. Each type 
 
 An example of a typical type definition:
 
-```Lua
+```lua
 -- autocomplete\definitions\namedTypes\niAVObject.lua
 return {
 	type = "class",
@@ -35,7 +35,7 @@ Each of the exposed type values and methods have definition files in a subfolder
 
 An example of a typical value definition:
 
-```Lua
+```lua
 -- autocomplete\definitions\namedTypes\tes3reference\isDead.lua
 return {
 	type = "value",
@@ -47,7 +47,7 @@ return {
 
 An example of a value definition, whose type is a table:
 
-```Lua
+```lua
 -- autocomplete\definitions\namedTypes\tes3weatherController\weathers.lua
 return {
 	type = "value",
@@ -70,7 +70,7 @@ Each type method definition file is just a regular Lua table with the following 
 
 An example of a typical method definition:
 
-```Lua
+```lua
 -- autocomplete\definitions\namedTypes\tes3reference\getAngleTo.lua
 return {
 	type = "method",
@@ -88,7 +88,7 @@ For a more elaborate description of the argument and return tables, please refer
 
 Some types may have fields which are not values nor methods. In that case, you can pass different type to the `type` value of the definition. For example, some types also expose functions. In that case you can pass `type = "function."`. Here is an example of such definition:
 
-```Lua
+```lua
 -- autocomplete\definitions\namedTypes\tes3vector3\new.lua
 return {
 	type = "function",

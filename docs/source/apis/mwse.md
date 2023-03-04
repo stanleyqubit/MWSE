@@ -35,6 +35,7 @@ Formatted as YYYYMMDD.
 ***
 
 ### `mwse.buildNumber`
+<div class="search_terms" style="display: none">buildnumber</div>
 
 Equal to the `APPVEYOR_BUILD_NUMBER` in builds by AppVeyor. Equal to `UINT_MAX` in regular builds.
 
@@ -95,6 +96,7 @@ It is usually better to use `mwse.buildDate` instead.
 ## Functions
 
 ### `mwse.breakpoint`
+<div class="search_terms" style="display: none">breakpoint</div>
 
 Prints "[MWSE] Hit breakpoint: ", with the provided `message` string appended, to the `mwse.log` file. This function is meant for debugging purposes.
 
@@ -174,6 +176,7 @@ local result = mwse.getVirtualMemoryUsage()
 ***
 
 ### `mwse.iconv`
+<div class="search_terms" style="display: none">iconv</div>
 
 Converts the provided string in UTF8 encoding to Morrowind's codepage base encoding.
 
@@ -196,7 +199,7 @@ local converted = mwse.iconv(languageCode, utf8string)
 <div class="search_terms" style="display: none">loadconfig</div>
 
 Loads a config table from Data Files\\MWSE\\config\\{fileName}.json.
-
+	
 If the default values table is passed, empty keys in the config will be filled in using its values. Additionally, if no file exists, the function will return the default table.
 
 ```lua
@@ -295,17 +298,17 @@ local result = mwse.overrideScript(scriptId, callback)
 	```lua
 	-- In this example, the vanilla "RaceCheck" script is overridden
 	-- with our own raceCheck() function that does the same thing.
-
+	
 	local raceCheckScriptID = "RaceCheck"
-
+	
 	local function raceCheck()
 		-- This is almost always the desired behavior,
 		-- since we are overriding the script.
 		mwscript.stopScript({ script = raceCheckScriptID })
-
+	
 		local pcRaceID = tes3.player.object.race.id:lower()
 		local PCRace = tes3.findGlobal("PCRace")
-
+	
 		if pcRaceID == "argonian" then
 			PCRace.value = 1
 		elseif pcRaceID == "breton" then
@@ -328,7 +331,7 @@ local result = mwse.overrideScript(scriptId, callback)
 			PCRace.value = 10
 		end
 	end
-
+	
 	-- Script overrides can be queued when initialited event triggers.
 	event.register(tes3.event.initialized, function()
 		mwse.overrideScript(raceCheckScriptID, raceCheck)
@@ -379,6 +382,7 @@ local result = mwse.stringToLong(tag)
 ***
 
 ### `mwse.virtualKeyPressed`
+<div class="search_terms" style="display: none">virtualkeypressed</div>
 
 Determines whether a key is pressed. A wrapper for `GetAsyncKeyState` function in Win32 API.
 
@@ -393,5 +397,4 @@ local result = mwse.virtualKeyPressed(VK_key)
 **Returns**:
 
 * `result` (boolean)
-
 

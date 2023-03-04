@@ -5,16 +5,16 @@
 --- The mwse library provides methods for interacting with MWSE itself, rather than direct TES3 objects.
 --- @class mwselib
 --- @field buildDate number A numerical representation of the date that version of MWSE currently being used was built on.
----
+--- 
 --- Formatted as YYYYMMDD.
 --- @field buildNumber integer Equal to the `APPVEYOR_BUILD_NUMBER` in builds by AppVeyor. Equal to `UINT_MAX` in regular builds.
 --- @field gameTimers mwseTimerController The mwseTimerController responsible for game-type timers.
 --- @field realTimers mwseTimerController The mwseTimerController responsible for real-type timers.
 --- @field simulateTimers mwseTimerController The mwseTimerController responsible for simulate-type timers.
 --- @field version integer A numerical representation of the release version of MWSE currently being used.
----
+--- 
 --- Formatted as AAABBBCCC, where A is the major version, BBB is the minor version, and CCC is the patch version. BBB and CCC are forward-padded.
----
+--- 
 --- It is usually better to use `mwse.buildDate` instead.
 mwse = {}
 
@@ -47,7 +47,7 @@ function mwse.getVirtualMemoryUsage() end
 function mwse.iconv(languageCode, utf8string) end
 
 --- Loads a config table from Data Files\\MWSE\\config\\{fileName}.json.
----
+--- 	
 --- If the default values table is passed, empty keys in the config will be filled in using its values. Additionally, if no file exists, the function will return the default table.
 --- @param fileName string The non-extensioned name of the config file.
 --- @param defaults table? *Optional*. A table of default values.
@@ -60,7 +60,7 @@ function mwse.loadConfig(fileName, defaults) end
 function mwse.loadTranslations(mod) end
 
 --- This function writes information to the mwse.log file in the user's installation directory.
----
+--- 
 --- The message accepts formatting and additional parameters matching string.format's usage.
 --- @param message string No description yet available.
 --- @param ... any? *Optional*. No description yet available.
@@ -72,7 +72,7 @@ function mwse.log(message, ...) end
 function mwse.longToString(type) end
 
 --- Configures MWSE to execute a given function instead when a script would run.
----
+--- 
 --- In most cases its intended to stop the execution of the original mwscript script. You can do so in the callback function by calling `mwscript.stopScript()`.
 ---
 --- [Examples available in online documentation](https://mwse.github.io/MWSE/apis/mwse/#mwseoverridescript).

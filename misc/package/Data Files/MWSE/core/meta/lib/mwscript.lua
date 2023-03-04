@@ -90,7 +90,7 @@ function mwscript.addToLevCreature(params) end
 --- @deprecated
 --- @param params mwscript.addToLevItem.params This table accepts the following values:
 --- 
---- `list`: tes3leveledItem|string — Leveled item list to add a creature to.
+--- `list`: tes3leveledItem|string — Leveled item list to add an item to.
 --- 
 --- `item`: tes3alchemy|tes3apparatus|tes3armor|tes3book|tes3clothing|tes3ingredient|tes3light|tes3lockpick|tes3misc|tes3probe|tes3repairTool|tes3weapon|string — Item to add to the list.
 --- 
@@ -100,7 +100,7 @@ function mwscript.addToLevItem(params) end
 
 ---Table parameter definitions for `mwscript.addToLevItem`.
 --- @class mwscript.addToLevItem.params
---- @field list tes3leveledItem|string Leveled item list to add a creature to.
+--- @field list tes3leveledItem|string Leveled item list to add an item to.
 --- @field item tes3alchemy|tes3apparatus|tes3armor|tes3book|tes3clothing|tes3ingredient|tes3light|tes3lockpick|tes3misc|tes3probe|tes3repairTool|tes3weapon|string Item to add to the list.
 --- @field level number? *Default*: `0`. Minimum level for the item to spawn.
 

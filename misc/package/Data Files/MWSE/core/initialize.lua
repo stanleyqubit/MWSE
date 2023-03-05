@@ -816,15 +816,41 @@ function mwse.log(str, ...)
 	print(tostring(str):format(...))
 end
 
+-- This will convert the table keys that were converted to
+-- strings when they were saved to json. This happens since
+-- json dictionaries can only have string keys. Use defaults
+-- table to check which keys are integers.
+local function restoreIntegerKeys(configTable, defaults)
+	for key, val in pairs(defaults) do
+		local defaultKeyType = type(key)
+		local defaultValType = type(val)
+		local stringKey = tostring(key)
+		if ((defaultKeyType == "number") and
+			(configTable[stringKey] ~= nil)) then
+				configTable[key] = configTable[stringKey]
+				configTable[stringKey] = nil
+		end
+
+		-- Handle subtables
+		if (defaultValType == "table") then
+			restoreIntegerKeys(configTable[key], defaults[key])
+		end
+	end
+end
+
 function mwse.loadConfig(fileName, defaults)
 	local result = json.loadfile(string.format("config\\%s", fileName))
+	local isDefaultsTable = (type(defaults) == "table")
 
 	if (result) then
-		if (type(defaults) == "table") then
+		if (isDefaultsTable) then
 			table.copymissing(result, defaults)
 		end
 	else
 		result = defaults
+	end
+	if (isDefaultsTable) then
+		restoreIntegerKeys(result, defaults)
 	end
 
 	return result

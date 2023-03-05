@@ -116,7 +116,5 @@ function tes3uiElement:copy(params)
 		mwse.copyLuaCallbacks(self, newElement) --- @diagnostic disable-line
 	end
 
-	params.to:updateLayout()
-
 	return newElement
 end

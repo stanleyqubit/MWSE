@@ -64,7 +64,7 @@ local function postTextInputKeyPress(e)
 	-- Update previous text.
 	element:setLuaData("previousText", element.text)
 
-	element:updateLayout()
+	element:getTopLevelMenu():updateLayout()
 end
 
 function tes3uiElement:createTextInput(params)

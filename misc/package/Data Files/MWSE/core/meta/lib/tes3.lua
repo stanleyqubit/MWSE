@@ -927,6 +927,20 @@ function tes3.get3rdPersonCameraOffset() end
 --- @return tes3cell[] cells No description yet available.
 function tes3.getActiveCells() end
 
+--- This function fetches a dictionary of the timings of the action keys for a specific animation group on an actor. The actor is required, as different actors can use different animations. The result is the a table with action names as keys, and timings as values.
+--- @param params tes3.getAnimationActionTiming.params This table accepts the following values:
+--- 
+--- `reference`: tes3reference|tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string — A reference to the which actor whose animations will be checked.
+--- 
+--- `group`: number? — *Optional*. The animation group id get the action timings for. Maps to [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) constants.
+--- @return table result No description yet available.
+function tes3.getAnimationActionTiming(params) end
+
+---Table parameter definitions for `tes3.getAnimationActionTiming`.
+--- @class tes3.getAnimationActionTiming.params
+--- @field reference tes3reference|tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string A reference to the which actor whose animations will be checked.
+--- @field group number? *Optional*. The animation group id get the action timings for. Maps to [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) constants.
+
 --- This function fetches a reference's attached animation groups. The animation groups match the values from [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) table.
 --- @param params tes3.getAnimationGroups.params This table accepts the following values:
 --- 

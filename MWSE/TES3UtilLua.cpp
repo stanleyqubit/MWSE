@@ -27,6 +27,7 @@
 #include "TES3AIPackage.h"
 #include "TES3Alchemy.h"
 #include "TES3AnimationData.h"
+#include "TES3AnimationGroup.h"
 #include "TES3Archive.h"
 #include "TES3Armor.h"
 #include "TES3AudioController.h"
@@ -4450,6 +4451,35 @@ namespace mwse::lua {
 		}
 	}
 
+	sol::optional<sol::table> getAnimationActionTiming(sol::table params, sol::this_state thisState) {
+		TES3::Reference* reference = getOptionalParamExecutionReference(params);
+		if (reference == nullptr) {
+			throw std::invalid_argument("Invalid 'reference' parameter provided.");
+		}
+
+		int group = getOptionalParam<int>(params, "group", -1);
+		if (group < -1 || group > 149) {
+			throw std::invalid_argument("Invalid 'group' parameter provided: must be between 0 and 149.");
+		}
+
+		auto animData = reference->getAttachedAnimationData();
+		if (animData == nullptr) {
+			return {};
+		}
+
+		auto animGroup = animData->animationGroups[group];
+		const auto animNoteTextByClass = reinterpret_cast<const char**>(0x78ABC8);
+		const auto animGroupNoteClass = reinterpret_cast<const int*>(0x78B0A8);
+		auto noteLabel = animNoteTextByClass + animGroupNoteClass[group];
+
+		sol::state_view state = thisState;
+		sol::table result = state.create_table();
+		for (size_t i = 0; i < animGroup->actionCount; ++i, noteLabel += 8) {
+			result[*noteLabel] = animGroup->actionTimes[i];
+		}
+		return result;
+	}
+
 	bool isAffectedBy(sol::table params) {
 		TES3::Reference* reference = getOptionalParamExecutionReference(params);
 		if (reference == nullptr) {
@@ -5811,6 +5841,7 @@ namespace mwse::lua {
 		tes3["force3rdPerson"] = force3rdPerson;
 		tes3["get3rdPersonCameraOffset"] = get3rdPersonCameraOffset;
 		tes3["getActiveCells"] = getActiveCells;
+		tes3["getAnimationActionTiming"] = getAnimationActionTiming;
 		tes3["getAnimationGroups"] = getCurrentAnimationGroups;
 		tes3["getAnimationTiming"] = getAnimationTiming;
 		tes3["getArchiveList"] = getArchiveList;

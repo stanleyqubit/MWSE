@@ -47,8 +47,8 @@ namespace TES3 {
 	struct Armor : Item {
 		IteratedList<TES3::BaseObject*> stolenList; // 0x30
 		char * name; // 0x44
-		Script * script; // 0x48
-		char * model; // 0x4C
+		char * model; // 0x48
+		Script * script; // 0x4C
 		char * icon; // 0x50
 		WearablePart parts[7];  // 0x54
 		ArmorSlot::value_type slot; // 0xA8

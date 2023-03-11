@@ -1549,7 +1549,7 @@ local cells = tes3.getActiveCells()
 ### `tes3.getAnimationActionTiming`
 <div class="search_terms" style="display: none">getanimationactiontiming, animationactiontiming</div>
 
-This function fetches a dictionary of the timings of the action keys for a specific animation group on an actor. The actor is required, as different actors can use different animations. The result is the a table with action names as keys, and timings as values.
+This function fetches a dictionary of the timings of the action keys for a specific animation group on an actor. The actor is required, as different actors can use different animations. The result is a table with action names as keys, and timings as values.
 
 ```lua
 local result = tes3.getAnimationActionTiming({ reference = ..., group = ... })
@@ -1559,11 +1559,11 @@ local result = tes3.getAnimationActionTiming({ reference = ..., group = ... })
 
 * `params` (table)
 	* `reference` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): A reference to the which actor whose animations will be checked.
-	* `group` (number): *Optional*. The animation group id get the action timings for. Maps to [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) constants.
+	* `group` (number): *Optional*. The animation group id to get the action timings for. Maps to [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) constants.
 
 **Returns**:
 
-* `result` (table)
+* `result` (table&lt;string, number&gt;)
 
 ***
 

@@ -10,17 +10,6 @@ A simple trio of floating-point numbers.
 
 ## Properties
 
-### `angle`
-<div class="search_terms" style="display: none">angle</div>
-
-The angle between the vector and the water plane.
-
-**Returns**:
-
-* `result` (number)
-
-***
-
 ### `b`
 <div class="search_terms" style="display: none">b</div>
 
@@ -88,6 +77,25 @@ The third value in the vector.
 ***
 
 ## Methods
+
+### `angle`
+<div class="search_terms" style="display: none">angle</div>
+
+The returns the angle between the two vectors in radians.
+
+```lua
+local result = myObject:angle(vec)
+```
+
+**Parameters**:
+
+* `vec` ([tes3vector3](../../types/tes3vector3))
+
+**Returns**:
+
+* `result` (number)
+
+***
 
 ### `copy`
 <div class="search_terms" style="display: none">copy</div>

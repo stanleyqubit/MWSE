@@ -1,5 +1,8 @@
 return {
-	type = "value",
-	description = [[The angle between the vector and the water plane.]],
+	type = "method",
+	description = [[The returns the angle between the two vectors in radians.]],
+	arguments = {
+		{ name = "vec", type = "tes3vector3" },
+	},
 	valuetype = "number",
 }

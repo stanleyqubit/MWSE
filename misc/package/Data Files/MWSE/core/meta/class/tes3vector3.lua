@@ -11,7 +11,6 @@
 --- @operator mul(number): tes3vector3
 --- @operator sub(tes3vector3): tes3vector3
 --- @operator unm: tes3vector3
---- @field angle number The angle between the vector and the water plane.
 --- @field b number The third value in the vector. An alias for `z`.
 --- @field g number The second value in the vector. An alias for `y`.
 --- @field r number The first value in the vector. An alias for `x`.
@@ -26,6 +25,11 @@ tes3vector3 = {}
 --- @param z number? *Default*: `0`. No description yet available.
 --- @return tes3vector3 vector No description yet available.
 function tes3vector3.new(x, y, z) end
+
+--- The returns the angle between the two vectors in radians.
+--- @param vec tes3vector3 No description yet available.
+--- @return number result No description yet available.
+function tes3vector3:angle(vec) end
 
 --- Creates a copy of the vector.
 --- @return tes3vector3 result No description yet available.

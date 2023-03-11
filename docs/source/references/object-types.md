@@ -37,6 +37,7 @@ faction               | `1413693766` | FACT    | Faction                 | tes3f
 gmst                  | `1414745415` | GMST    | Game Setting            | tes3gameSetting
 ingredient            | `1380404809` | INGR    | Ingredient              | tes3ingredient
 land                  | `1145979212` | LAND    | Land                    | tes3land
+landTexture           | `1480938572` | LTEX    | Land Texture            | tes3landTexture
 leveledCreature       | `1129727308` | LEVC    | Leveled Creature        | tes3leveledCreature
 leveledItem           | `1230390604` | LEVI    | Leveled Item            | tes3leveledItem
 light                 | `1212631372` | LIGH    | Light                   | tes3light
@@ -49,7 +50,7 @@ mobileNPC             | `1212367181` | MACH    | Mobile NPC              | tes3m
 mobilePlayer          | `1346584909` | MACP    | Mobile Player           | tes3mobilePlayer
 mobileProjectile      | `1246908493` | MPRJ    | Mobile Projectile       | tes3mobileProjectile
 mobileSpellProjectile | `1347637325` | MPSP    | Mobile Spell Projectile | tes3mobileSpellProjectile
-npc                   | `1598246990` | NPC_    | NPC                     | tes3npc
+npc                   | `1598246990` | NPC_    | NPC                     | tes3npc or tes3npcInstance
 pathGrid              | `1146242896` | PGRD    | Pathgrid                | tes3pathGrid
 probe                 | `1112494672` | PROB    | Probe                   | tes3probe
 quest                 | `1397052753` | QUES    | Quest                   | tes3quest

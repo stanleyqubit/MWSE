@@ -357,11 +357,11 @@ The name and id of the cell. See also `displayName` and `editorName`.
 ### `pathGrid`
 <div class="search_terms" style="display: none">pathgrid</div>
 
-*Read-only*. Access to the cell's pathgrid.
+*Read-only*. Access to the cell's pathgrid. Not all cells have a pathgrid. The property is unaccessible on unloaded cells.
 
 **Returns**:
 
-* `result` ([tes3pathGrid](../../types/tes3pathGrid))
+* `result` ([tes3pathGrid](../../types/tes3pathGrid), nil)
 
 ***
 

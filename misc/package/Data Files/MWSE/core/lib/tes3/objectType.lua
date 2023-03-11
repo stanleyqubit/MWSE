@@ -20,6 +20,7 @@ return {
 	["gmst"] = 1414745415,
 	["ingredient"] = 1380404809,
 	["land"] = 1145979212,
+	["landTexture"] = 1480938572,
 	["leveledCreature"] = 1129727308,
 	["leveledItem"] = 1230390604,
 	["light"] = 1212631372,

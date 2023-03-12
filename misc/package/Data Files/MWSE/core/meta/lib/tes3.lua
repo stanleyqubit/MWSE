@@ -1419,6 +1419,10 @@ function tes3.getViewportSize() end
 --- @return number werewolfKills No description yet available.
 function tes3.getWerewolfKillCount() end
 
+--- Gets the worldController.
+--- @return tes3worldController worldController No description yet available.
+function tes3.getWorldController() end
+
 --- Simulates hammering a key.
 --- @param keyCode number No description yet available.
 function tes3.hammerKey(keyCode) end
@@ -1771,14 +1775,14 @@ function tes3.playSound(params) end
 --- 
 --- `actor`: tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference|string — The actor to play a voiceover.
 --- 
---- `voiceover`: number — Maps to [`tes3.voiceover`](https://mwse.github.io/MWSE/references/voiceovers/) constants.
+--- `voiceover`: number|string — Maps to [`tes3.voiceover`](https://mwse.github.io/MWSE/references/voiceovers/) constants.
 --- @return boolean played No description yet available.
 function tes3.playVoiceover(params) end
 
 ---Table parameter definitions for `tes3.playVoiceover`.
 --- @class tes3.playVoiceover.params
 --- @field actor tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference|string The actor to play a voiceover.
---- @field voiceover number Maps to [`tes3.voiceover`](https://mwse.github.io/MWSE/references/voiceovers/) constants.
+--- @field voiceover number|string Maps to [`tes3.voiceover`](https://mwse.github.io/MWSE/references/voiceovers/) constants.
 
 --- Positions a reference to another place.
 --- @param params tes3.positionCell.params This table accepts the following values:

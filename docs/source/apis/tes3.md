@@ -2741,6 +2741,21 @@ local werewolfKills = tes3.getWerewolfKillCount()
 
 ***
 
+### `tes3.getWorldController`
+<div class="search_terms" style="display: none">getworldcontroller, worldcontroller</div>
+
+Gets the worldController.
+
+```lua
+local worldController = tes3.getWorldController()
+```
+
+**Returns**:
+
+* `worldController` ([tes3worldController](../../types/tes3worldController))
+
+***
+
 ### `tes3.hammerKey`
 <div class="search_terms" style="display: none">hammerkey</div>
 
@@ -3437,7 +3452,7 @@ local played = tes3.playVoiceover({ actor = ..., voiceover = ... })
 
 * `params` (table)
 	* `actor` ([tes3mobileActor](../../types/tes3mobileActor), [tes3reference](../../types/tes3reference), string): The actor to play a voiceover.
-	* `voiceover` (number): Maps to [`tes3.voiceover`](https://mwse.github.io/MWSE/references/voiceovers/) constants.
+	* `voiceover` (number, string): Maps to [`tes3.voiceover`](https://mwse.github.io/MWSE/references/voiceovers/) constants.
 
 **Returns**:
 

@@ -74,12 +74,16 @@ local path, error = lfs.currentdir()
 Creates a Lua iterator over the entries of a given directory. This can be used to create a for loop of directories. Be wary that current and parent directory markers may be available in the results.
 
 ```lua
-lfs.dir(path)
+local iterator = lfs.dir(path)
 ```
 
 **Parameters**:
 
 * `path` (string): The path to iterate over.
+
+**Returns**:
+
+* `iterator` (fun(): string)
 
 ***
 

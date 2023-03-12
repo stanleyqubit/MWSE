@@ -33,7 +33,8 @@ function table.binsearch(t, value, compval, reversed) end
 
 --- Returns a random element from the given table.
 --- @param t table No description yet available.
---- @return unknown result No description yet available.
+--- @return unknown value The randomly chosen value.
+--- @return unknown key The table key of the chosen value.
 function table.choice(t) end
 
 --- This clears all keys and values from a table, but preserves the allocated array/hash sizes. This is useful when a table, which is linked from multiple places, needs to be cleared and/or when recycling a table for use by the same context. This avoids managing backlinks, saves an allocation and the overhead of incremental array/hash part growth.

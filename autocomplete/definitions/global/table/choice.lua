@@ -4,5 +4,8 @@ return {
 	arguments = {
 		{ name = "t", type = "table" },
 	},
-	valuetype = "unknown",
+	returns = {
+		{ name = "value", type = "unknown", description = "The randomly chosen value." },
+		{ name = "key", type = "unknown", description = "The table key of the chosen value." }
+	}
 }

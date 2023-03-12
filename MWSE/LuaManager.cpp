@@ -5564,7 +5564,7 @@ namespace mwse::lua {
 		auto TES3_VFXManager_createForReference = &TES3::VFXManager::createForReference;
 		genCallEnforced(0x516093, 0x468370, *reinterpret_cast<DWORD*>(&TES3_VFXManager_createForReference));
 		auto TES3_VFXManager_createAtPosition = &TES3::VFXManager::createAtPosition;
-		genCallEnforced(0x516093, 0x468470, *reinterpret_cast<DWORD*>(&TES3_VFXManager_createAtPosition));
+		genCallEnforced(0x5162FD, 0x468470, *reinterpret_cast<DWORD*>(&TES3_VFXManager_createAtPosition));
 		auto TES3_VFXManager_createForAVObject = &TES3::VFXManager::createForAVObject;
 		genCallEnforced(0x516227, 0x468560, *reinterpret_cast<DWORD*>(&TES3_VFXManager_createForAVObject));
 

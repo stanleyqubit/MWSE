@@ -821,7 +821,7 @@ end
 -- json dictionaries can only have string keys. Use defaults
 -- table to check which keys are integers.
 local function restoreIntegerKeys(configTable, defaults)
-	for key, val in pairs(defaults) do
+	for key, val in pairs(defaults or {}) do
 		local defaultKeyType = type(key)
 		local defaultValType = type(val)
 		local stringKey = tostring(key)

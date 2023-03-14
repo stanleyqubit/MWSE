@@ -3989,6 +3989,8 @@ namespace mwse::lua {
 	// Patch: Allow changing cast animation speed. Custom speed is read and applied on initial cast.
 	//
 
+#pragma warning(push)
+#pragma warning(disable: 4102)
 	__declspec(naked) bool patchApplyAnimationSpeed() {
 		__asm {
 			fld [ebp + 0x64]		// ebp->AnimationData.deltaTime
@@ -4017,6 +4019,7 @@ namespace mwse::lua {
 		done:
 		}
 	}
+#pragma warning(pop)
 
 	const size_t patchApplyAnimationSpeed_size = 0x2D;
 

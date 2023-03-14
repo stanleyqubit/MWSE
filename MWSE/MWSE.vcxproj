@@ -727,6 +727,7 @@
     <ClCompile Include="NITextureLua.cpp" />
     <ClCompile Include="NITimeController.cpp" />
     <ClCompile Include="NITriangle.cpp" />
+    <ClCompile Include="NITriBasedGeometry.cpp" />
     <ClCompile Include="NITriBasedGeometryData.cpp" />
     <ClCompile Include="NITriShape.cpp" />
     <ClCompile Include="NITriShapeData.cpp" />

@@ -3689,6 +3689,9 @@
     <ClCompile Include="NIDX8TextureData.cpp">
       <Filter>Source Files\DataAdapters\NI</Filter>
     </ClCompile>
+    <ClCompile Include="NITriBasedGeometry.cpp">
+      <Filter>Source Files\DataAdapters\NI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MWSE.rc">

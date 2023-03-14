@@ -10,6 +10,40 @@ namespace NI {
 		return ptr;
 	}
 
+	Pointer<TriShapeData> TriShapeData::create(unsigned short vertexCount, bool hasNormals, bool hasColors, bool hasTextureCoords, unsigned short triangleCount) {
+		using TES3::Vector2;
+		using TES3::Vector3;
+
+		Vector3* vertices = mwse::tes3::_new<Vector3>(vertexCount);
+		ZeroMemory(vertices, sizeof(Vector3) * vertexCount);
+
+		Vector3* normals = nullptr;
+		if (hasNormals) {
+			normals = mwse::tes3::_new<Vector3>(vertexCount);
+			ZeroMemory(normals, sizeof(Vector3) * vertexCount);
+		}
+
+		PackedColor* colors = nullptr;
+		if (hasColors) {
+			colors = mwse::tes3::_new<PackedColor>(vertexCount);
+			ZeroMemory(colors, sizeof(PackedColor) * vertexCount);
+		}
+
+		Vector2* textureCoords = nullptr;
+		if (hasNormals) {
+			textureCoords = mwse::tes3::_new<Vector2>(vertexCount);
+			ZeroMemory(textureCoords, sizeof(Vector2) * vertexCount);
+		}
+
+		unsigned short* triangleList = nullptr;
+		if (triangleCount) {
+			triangleList = mwse::tes3::_new<unsigned short>(triangleCount);
+			ZeroMemory(triangleList, sizeof(unsigned short) * triangleCount);
+		}
+
+		return create(vertexCount, vertices, normals, colors, textureCoords, triangleCount, triangleList);
+	}
+
 	Pointer<TriShapeData> TriShapeData::copyData(sol::optional<sol::table> filters) const {
 		auto vertexCount = getActiveVertexCount();
 

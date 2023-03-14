@@ -3,8 +3,19 @@
 #include "NiTriShapeData.h"
 
 namespace NI {
+	TriShape::TriShape(TriBasedGeometryData* data) : TriBasedGeometry(data) {
+		vTable.asObject = reinterpret_cast<Object_vTable*>(0x7508B0);
+	}
+
 	TriShapeData* TriShape::getModelData() const {
 		return static_cast<TriShapeData*>(modelData.get());
+	}
+
+	Pointer<TriShape> TriShape::create(unsigned short vertexCount, bool hasNormals, bool hasColors, bool hasTextureCoords, unsigned short triangleCount) {
+		auto data = TriShapeData::create(vertexCount, hasNormals, hasColors, hasTextureCoords, triangleCount);
+		auto shape = new TriShape(data);
+
+		return shape;
 	}
 
 	nonstd::span<TES3::Vector3> TriShape::getVertices() const {

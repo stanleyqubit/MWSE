@@ -226,8 +226,8 @@
     <ClInclude Include="NITextureEffectLua.h" />
     <ClInclude Include="NITextureLua.h" />
     <ClInclude Include="NITriangle.h" />
-    <ClInclude Include="NiTriBasedGeometry.h" />
-    <ClInclude Include="NiTriBasedGeometryData.h" />
+    <ClInclude Include="NITriBasedGeometry.h" />
+    <ClInclude Include="NITriBasedGeometryData.h" />
     <ClInclude Include="NITriShapeData.h" />
     <ClInclude Include="NIUVController.h" />
     <ClInclude Include="NIUVData.h" />

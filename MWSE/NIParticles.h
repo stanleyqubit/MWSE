@@ -1,6 +1,6 @@
 #pragma once
 
-#include "NiTriBasedGeometry.h"
+#include "NITriBasedGeometry.h"
 
 namespace NI {
 	struct ParticlesData : TriBasedGeometryData {

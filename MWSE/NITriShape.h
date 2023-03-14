@@ -1,7 +1,7 @@
 #pragma once
 
 #include "NIAVObject.h"
-#include "NiTriBasedGeometry.h"
+#include "NITriBasedGeometry.h"
 
 namespace NI {
 	struct TriShape_vTable : TriBasedGeometry_vTable {

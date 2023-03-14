@@ -63,7 +63,7 @@ namespace mwse::lua {
 		{
 			// Start our usertype.
 			auto usertypeDefinition = state.new_usertype<NI::Triangle>("niTriangle");
-			usertypeDefinition["new"] = sol::no_constructor;
+			usertypeDefinition["new"] = sol::constructors<NI::Triangle(), NI::Triangle(unsigned short, unsigned short, unsigned short), NI::Triangle(const sol::table)>();
 
 			// Basic bindings.
 			usertypeDefinition["vertices"] = sol::readonly_property(&NI::Triangle::getVertices);

@@ -822,14 +822,15 @@ myObject:updateProperties()
 Creates a new niTriShape.
 
 ```lua
-local shape = niTriShape.new(vertexCount, hasNormals, hasTextureCoords, triangleCount)
+local shape = niTriShape.new(vertexCount, hasNormals, hasColors, textureCoordSets, triangleCount)
 ```
 
 **Parameters**:
 
 * `vertexCount` (number): The number of vertices the shape will allocate.
 * `hasNormals` (boolean): If `true`, normals will be allocated.
-* `hasTextureCoords` (boolean): If `true`, texture coordinates will be allocated.
+* `hasColors` (boolean): If `true`, colors will be allocated.
+* `textureCoordSets` (number): The number of texture coordinate sets (UV sets) to allocate.
 * `triangleCount` (number): The number of triangles to allocate.
 
 **Returns**:

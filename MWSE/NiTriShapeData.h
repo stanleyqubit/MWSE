@@ -16,7 +16,7 @@ namespace NI {
 		//
 
 		static Pointer<TriShapeData> create(unsigned short _vertexCount, TES3::Vector3* _vertices, TES3::Vector3* _normals, PackedColor* _colors, TES3::Vector2* _textureCoords, unsigned short _triangleCount, unsigned short* _triangleList, int unused = 0);
-		static Pointer<TriShapeData> create(unsigned short vertexCount, bool hasNormals, bool hasColors, bool hasTextureCoords, unsigned short triangleCount);
+		static Pointer<TriShapeData> create(unsigned short vertexCount, bool hasNormals, bool hasColors, unsigned short textureCoordSets, unsigned short triangleCount);
 
 		//
 		// Custom functions.

@@ -26,7 +26,7 @@ namespace NI {
 		// Custom functions.
 		//
 
-		static Pointer<TriShape> create(unsigned short vertexCount, bool hasNormals, bool hasColors, bool hasTextureCoords, unsigned short triangleCount);
+		static Pointer<TriShape> create(unsigned short vertexCount, bool hasNormals, bool hasColors, unsigned short textureCoordSets, unsigned short triangleCount);
 
 		// Convenient access to model data.
 		nonstd::span<TES3::Vector3> getVertices() const;

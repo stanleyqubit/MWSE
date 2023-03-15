@@ -11,8 +11,8 @@ namespace NI {
 		return static_cast<TriShapeData*>(modelData.get());
 	}
 
-	Pointer<TriShape> TriShape::create(unsigned short vertexCount, bool hasNormals, bool hasColors, bool hasTextureCoords, unsigned short triangleCount) {
-		auto data = TriShapeData::create(vertexCount, hasNormals, hasColors, hasTextureCoords, triangleCount);
+	Pointer<TriShape> TriShape::create(unsigned short vertexCount, bool hasNormals, bool hasColors, unsigned short textureCoordSets, unsigned short triangleCount) {
+		auto data = TriShapeData::create(vertexCount, hasNormals, hasColors, textureCoordSets, triangleCount);
 		auto shape = new TriShape(data);
 
 		return shape;

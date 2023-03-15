@@ -1627,18 +1627,18 @@ function tes3.messageBox(messageOrParams, ...) end
 --- @field showInDialog boolean? *Default*: `true`. Specifying showInDialog = false forces the toast-style message, which is not shown in the dialog menu.
 --- @field duration number? *Optional*. Overrides how long the toast-style message remains visible.
 
---- Modifies a statistic on a given actor. This should be used instead of manually setting values on the game structures, to ensure that events and GUI elements are properly handled. Either skill, attribute, or name must be provided.
+--- Modifies a statistic on a given actor. This should be used instead of manually setting values on the game structures, to ensure that events and GUI elements are properly handled. Either skill, attribute, or the statistic's property name must be provided.
 ---
 --- [Examples available in online documentation](https://mwse.github.io/MWSE/apis/tes3/#tes3modstatistic).
 --- @param params tes3.modStatistic.params This table accepts the following values:
 --- 
 --- `reference`: tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference|string — No description yet available.
 --- 
---- `name`: string? — *Optional*. A generic name of an attribute to set.
+--- `attribute`: number? — *Optional*. The attribute to set. Uses a value from [`tes3.attribute`](https://mwse.github.io/MWSE/references/attributes/)
 --- 
---- `attribute`: number? — *Optional*. The attribute to set.
+--- `skill`: number? — *Optional*. The skill to set. Uses a value from [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/)
 --- 
---- `skill`: number? — *Optional*. The skill to set.
+--- `name`: string? — *Optional*. The property name of the statistic to set. The names can be taken from the properties of `tes3mobileNPC` or `tes3mobileCreature`. Useful for specifying health, magicka or fatigue.
 --- 
 --- `base`: number? — *Optional*. If set, the base value will be modified.
 --- 
@@ -1654,9 +1654,9 @@ function tes3.modStatistic(params) end
 ---Table parameter definitions for `tes3.modStatistic`.
 --- @class tes3.modStatistic.params
 --- @field reference tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference|string No description yet available.
---- @field name string? *Optional*. A generic name of an attribute to set.
---- @field attribute number? *Optional*. The attribute to set.
---- @field skill number? *Optional*. The skill to set.
+--- @field attribute number? *Optional*. The attribute to set. Uses a value from [`tes3.attribute`](https://mwse.github.io/MWSE/references/attributes/)
+--- @field skill number? *Optional*. The skill to set. Uses a value from [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/)
+--- @field name string? *Optional*. The property name of the statistic to set. The names can be taken from the properties of `tes3mobileNPC` or `tes3mobileCreature`. Useful for specifying health, magicka or fatigue.
 --- @field base number? *Optional*. If set, the base value will be modified.
 --- @field current number? *Optional*. If set, the current value will be modified.
 --- @field value number? *Optional*. If set, both the base and current value will be modified.
@@ -2403,36 +2403,36 @@ function tes3.setPlayerControlState(params) end
 --- @param sourceless boolean? *Default*: `true`. Allows flagging an object as sourceless or undoing that action.
 function tes3.setSourceless(object, sourceless) end
 
---- Sets a statistic on a given actor. This should be used instead of manually setting values on the game structures, to ensure that events and GUI elements are properly handled. Either skill, attribute, or name must be provided.
+--- Sets a statistic on a given actor. This should be used instead of manually setting values on the game structures, to ensure that events and GUI elements are properly handled. Either skill, attribute, or the statistic's property name must be provided.
 --- @param params tes3.setStatistic.params This table accepts the following values:
 --- 
---- `attribute`: number? — *Optional*. The attribute to set.
+--- `reference`: tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference|string — No description yet available.
+--- 
+--- `attribute`: number? — *Optional*. The attribute to set. Uses a value from [`tes3.attribute`](https://mwse.github.io/MWSE/references/attributes/)
+--- 
+--- `skill`: number? — *Optional*. The skill to set. Uses a value from [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/)
+--- 
+--- `name`: string? — *Optional*. The property name of the statistic to set. The names can be taken from the properties of `tes3mobileNPC` or `tes3mobileCreature`. Useful for specifying health, magicka or fatigue.
 --- 
 --- `base`: number? — *Optional*. If set, the base value will be set.
 --- 
 --- `current`: number? — *Optional*. If set, the current value will be set.
 --- 
---- `limit`: boolean? — *Default*: `false`. If set, the attribute won't rise above 100 or fall below 0.
---- 
---- `name`: string? — *Optional*. A generic name of an attribute to set.
---- 
---- `reference`: tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference|string — No description yet available.
---- 
---- `skill`: number? — *Optional*. The skill to set.
---- 
 --- `value`: number? — *Optional*. If set, both the base and current value will be set.
+--- 
+--- `limit`: boolean? — *Default*: `false`. If set, the attribute won't rise above 100 or fall below 0.
 function tes3.setStatistic(params) end
 
 ---Table parameter definitions for `tes3.setStatistic`.
 --- @class tes3.setStatistic.params
---- @field attribute number? *Optional*. The attribute to set.
+--- @field reference tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference|string No description yet available.
+--- @field attribute number? *Optional*. The attribute to set. Uses a value from [`tes3.attribute`](https://mwse.github.io/MWSE/references/attributes/)
+--- @field skill number? *Optional*. The skill to set. Uses a value from [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/)
+--- @field name string? *Optional*. The property name of the statistic to set. The names can be taken from the properties of `tes3mobileNPC` or `tes3mobileCreature`. Useful for specifying health, magicka or fatigue.
 --- @field base number? *Optional*. If set, the base value will be set.
 --- @field current number? *Optional*. If set, the current value will be set.
---- @field limit boolean? *Default*: `false`. If set, the attribute won't rise above 100 or fall below 0.
---- @field name string? *Optional*. A generic name of an attribute to set.
---- @field reference tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference|string No description yet available.
---- @field skill number? *Optional*. The skill to set.
 --- @field value number? *Optional*. If set, both the base and current value will be set.
+--- @field limit boolean? *Default*: `false`. If set, the attribute won't rise above 100 or fall below 0.
 
 --- Sets the trap on a given reference.
 --- @param params tes3.setTrap.params This table accepts the following values:

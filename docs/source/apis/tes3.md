@@ -3266,19 +3266,19 @@ local element = tes3.messageBox({ message = ..., buttons = ..., callback = ..., 
 ### `tes3.modStatistic`
 <div class="search_terms" style="display: none">modstatistic, statistic</div>
 
-Modifies a statistic on a given actor. This should be used instead of manually setting values on the game structures, to ensure that events and GUI elements are properly handled. Either skill, attribute, or name must be provided.
+Modifies a statistic on a given actor. This should be used instead of manually setting values on the game structures, to ensure that events and GUI elements are properly handled. Either skill, attribute, or the statistic's property name must be provided.
 
 ```lua
-tes3.modStatistic({ reference = ..., name = ..., attribute = ..., skill = ..., base = ..., current = ..., value = ..., limit = ..., limitToBase = ... })
+tes3.modStatistic({ reference = ..., attribute = ..., skill = ..., name = ..., base = ..., current = ..., value = ..., limit = ..., limitToBase = ... })
 ```
 
 **Parameters**:
 
 * `params` (table)
 	* `reference` ([tes3mobileActor](../../types/tes3mobileActor), [tes3reference](../../types/tes3reference), string)
-	* `name` (string): *Optional*. A generic name of an attribute to set.
-	* `attribute` (number): *Optional*. The attribute to set.
-	* `skill` (number): *Optional*. The skill to set.
+	* `attribute` (number): *Optional*. The attribute to set. Uses a value from [`tes3.attribute`](https://mwse.github.io/MWSE/references/attributes/)
+	* `skill` (number): *Optional*. The skill to set. Uses a value from [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/)
+	* `name` (string): *Optional*. The property name of the statistic to set. The names can be taken from the properties of `tes3mobileNPC` or `tes3mobileCreature`. Useful for specifying health, magicka or fatigue.
 	* `base` (number): *Optional*. If set, the base value will be modified.
 	* `current` (number): *Optional*. If set, the current value will be modified.
 	* `value` (number): *Optional*. If set, both the base and current value will be modified.
@@ -4249,23 +4249,23 @@ tes3.setSourceless(object, sourceless)
 ### `tes3.setStatistic`
 <div class="search_terms" style="display: none">setstatistic, statistic</div>
 
-Sets a statistic on a given actor. This should be used instead of manually setting values on the game structures, to ensure that events and GUI elements are properly handled. Either skill, attribute, or name must be provided.
+Sets a statistic on a given actor. This should be used instead of manually setting values on the game structures, to ensure that events and GUI elements are properly handled. Either skill, attribute, or the statistic's property name must be provided.
 
 ```lua
-tes3.setStatistic({ attribute = ..., base = ..., current = ..., limit = ..., name = ..., reference = ..., skill = ..., value = ... })
+tes3.setStatistic({ reference = ..., attribute = ..., skill = ..., name = ..., base = ..., current = ..., value = ..., limit = ... })
 ```
 
 **Parameters**:
 
 * `params` (table)
-	* `attribute` (number): *Optional*. The attribute to set.
+	* `reference` ([tes3mobileActor](../../types/tes3mobileActor), [tes3reference](../../types/tes3reference), string)
+	* `attribute` (number): *Optional*. The attribute to set. Uses a value from [`tes3.attribute`](https://mwse.github.io/MWSE/references/attributes/)
+	* `skill` (number): *Optional*. The skill to set. Uses a value from [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/)
+	* `name` (string): *Optional*. The property name of the statistic to set. The names can be taken from the properties of `tes3mobileNPC` or `tes3mobileCreature`. Useful for specifying health, magicka or fatigue.
 	* `base` (number): *Optional*. If set, the base value will be set.
 	* `current` (number): *Optional*. If set, the current value will be set.
-	* `limit` (boolean): *Default*: `false`. If set, the attribute won't rise above 100 or fall below 0.
-	* `name` (string): *Optional*. A generic name of an attribute to set.
-	* `reference` ([tes3mobileActor](../../types/tes3mobileActor), [tes3reference](../../types/tes3reference), string)
-	* `skill` (number): *Optional*. The skill to set.
 	* `value` (number): *Optional*. If set, both the base and current value will be set.
+	* `limit` (boolean): *Default*: `false`. If set, the attribute won't rise above 100 or fall below 0.
 
 ***
 

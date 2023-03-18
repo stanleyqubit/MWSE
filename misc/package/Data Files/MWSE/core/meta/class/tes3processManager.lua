@@ -11,14 +11,14 @@ tes3processManager = {}
 --- 
 --- @param params tes3processManager.checkAlarmRadius.params This table accepts the following values:
 --- 
---- `actor`: tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer — The actor to perform a check for.
+--- `actor`: tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer — The actor to perform a check for.
 --- 
 --- `container`: tes3iterator — Container is a actor's AI planner e.g. `mobile.aiPlanner`.
 function tes3processManager:checkAlarmRadius(params) end
 
 ---Table parameter definitions for `tes3processManager.checkAlarmRadius`.
 --- @class tes3processManager.checkAlarmRadius.params
---- @field actor tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer The actor to perform a check for.
+--- @field actor tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer The actor to perform a check for.
 --- @field container tes3iterator Container is a actor's AI planner e.g. `mobile.aiPlanner`.
 
 --- Performs a check whether any potential nearby enemies allow the player to rest.
@@ -31,22 +31,22 @@ function tes3processManager:checkPlayerDistance() end
 --- This function performs a check for presence of a given mobile actor.
 --- @param params tes3processManager.detectPresence.params This table accepts the following values:
 --- 
---- `actor`: tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer — The actor to perform a check for.
+--- `actor`: tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer — The actor to perform a check for.
 --- 
 --- `unknown`: boolean — No description yet available.
 function tes3processManager:detectPresence(params) end
 
 ---Table parameter definitions for `tes3processManager.detectPresence`.
 --- @class tes3processManager.detectPresence.params
---- @field actor tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer The actor to perform a check for.
+--- @field actor tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer The actor to perform a check for.
 --- @field unknown boolean No description yet available.
 
 --- This function performs a check whether a detector can detect another actor sneaking.
 --- @param params tes3processManager.detectSneak.params This table accepts the following values:
 --- 
---- `detector`: tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer — The detector actor to perform a check for.
+--- `detector`: tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer — The detector actor to perform a check for.
 --- 
---- `target`: tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer — The target actor to perform a check for.
+--- `target`: tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer — The target actor to perform a check for.
 --- 
 --- `unknown`: boolean — No description yet available.
 --- @return boolean isDetected No description yet available.
@@ -54,7 +54,7 @@ function tes3processManager:detectSneak(params) end
 
 ---Table parameter definitions for `tes3processManager.detectSneak`.
 --- @class tes3processManager.detectSneak.params
---- @field detector tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer The detector actor to perform a check for.
---- @field target tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer The target actor to perform a check for.
+--- @field detector tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer The detector actor to perform a check for.
+--- @field target tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer The target actor to perform a check for.
 --- @field unknown boolean No description yet available.
 

@@ -10,7 +10,7 @@
 --- There is a guide available [here](https://mwse.github.io/MWSE/guides/storing-data/) on using this table.
 --- @field distance number The combat distance.
 --- @field lastUseTimestamp number No description yet available.
---- @field mobile tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer *Read-only*. Convenience access back to the associated actor.
+--- @field mobile tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer *Read-only*. Convenience access back to the associated actor.
 --- @field potionUseFlag number No description yet available.
 --- @field selectedAction integer The next action. From observed behavior, this roughly maps to:
 --- 

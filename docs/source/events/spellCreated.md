@@ -6,7 +6,7 @@
 	More information: https://github.com/MWSE/MWSE/tree/master/docs
 -->
 
-This event is triggered when a new spell is created using spellmaking services or by a script using `tes3spell.create()`.
+This event is triggered when a new spell is created using spellmaking services or by a script using `tes3.createObject()`.
 
 ```lua
 --- @param e spellCreatedEventData

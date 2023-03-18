@@ -200,7 +200,7 @@ local addedCount = tes3.addItem({ reference = ..., item = ..., itemData = ..., s
 ### `tes3.addItemData`
 <div class="search_terms" style="display: none">additemdata, itemdata</div>
 
-Creates an item data if there is room for a new stack in a given inventory. This can be then used to add custom user data or adjust an item's condition. This will return nil if no item data could be allocated for the item -- for example if the reference doesn't have the item in their inventory or each item of that type already has item data.
+Creates an item data if there is room for a new stack in a given inventory. This can be then used to add custom user data or adjust an item's condition. This will return nil if no item data could be allocated for the item -- for example if the reference doesn't have the item in their inventory or each item of that type already has item data. Calling this function will mark the `to` reference as modified.
 
 ```lua
 local createdData = tes3.addItemData({ to = ..., item = ..., updateGUI = ... })
@@ -751,7 +751,7 @@ local canRest = tes3.canRest({ checkForEnemies = ..., checkForSolidGround = ...,
 
 **Parameters**:
 
-* `params` (table)
+* `params` (table): *Optional*.
 	* `checkForEnemies` (boolean): *Default*: `true`. Perform a check whether there are enemies nearby before opening rest menu. If there are, false is returned.
 	* `checkForSolidGround` (boolean): *Default*: `true`. Perform a check if the player is underwater. If underwater, false is returned.
 	* `showMessage` (boolean): *Default*: `false`. If true, a messagebox will be shown if the player can't rest because some condition isn't met.
@@ -1767,7 +1767,7 @@ local packageID = tes3.getCurrentAIPackageId({ reference = ... })
 **Parameters**:
 
 * `params` (table)
-	* `reference` ([tes3mobileActor](../../types/tes3mobileActor), [tes3reference](../../types/tes3reference))
+	* `reference` ([tes3mobileActor](../../types/tes3mobileActor), [tes3reference](../../types/tes3reference), string)
 
 **Returns**:
 
@@ -1830,13 +1830,14 @@ local dayCount = tes3.getDaysInMonth(month)
 Locates and returns a Dialogue Info by a given id. This involves file IO and is an expensive call. Results should be cached.
 
 ```lua
-local dialogueInfo = tes3.getDialogueInfo(dialogue, id)
+local dialogueInfo = tes3.getDialogueInfo({ dialogue = ..., id = ... })
 ```
 
 **Parameters**:
 
-* `dialogue` ([tes3dialogue](../../types/tes3dialogue), string): The dialogue that the info belongs to.
-* `id` (string): The numerical, unique id for the info object.
+* `params` (table)
+	* `dialogue` ([tes3dialogue](../../types/tes3dialogue), string): The dialogue that the info belongs to.
+	* `id` (string): The numerical, unique id for the info object.
 
 **Returns**:
 
@@ -2308,7 +2309,7 @@ local object = tes3.getObject(id)
 
 **Returns**:
 
-* `object` ([tes3object](../../types/tes3object))
+* `object` ([tes3baseObject](../../types/tes3baseObject))
 
 ***
 
@@ -2324,7 +2325,7 @@ local owner, requirement = tes3.getOwner({ reference = ... })
 **Parameters**:
 
 * `params` (table)
-	* `reference` ([tes3reference](../../types/tes3reference))
+	* `reference` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string)
 
 **Returns**:
 
@@ -3473,7 +3474,7 @@ local executed = tes3.positionCell({ reference = ..., cell = ..., position = ...
 
 * `params` (table)
 	* `reference` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): *Default*: `tes3.mobilePlayer`. The reference to reposition.
-	* `cell` ([tes3cell](../../types/tes3cell)): *Optional*. The cell to move the reference to. If not provided, the reference will be moved to a cell in the exterior worldspace at the position provided.
+	* `cell` ([tes3cell](../../types/tes3cell), string, table, nil): *Optional*. The cell to move the reference to. Can be a tes3cell, cell name, or a table with two values that correspond to the exterior cell's grid coordinates. If not provided, the reference will be moved to a cell in the exterior worldspace at the position provided.
 	* `position` ([tes3vector3](../../types/tes3vector3), table): The position to move the reference to.
 	* `orientation` ([tes3vector3](../../types/tes3vector3), table): *Optional*. The new orientation of the reference.
 	* `forceCellChange` (boolean): *Default*: `false`. When true, forces the game to update a reference that has moved within a single cell, as if it was moved into a new cell.
@@ -3834,10 +3835,10 @@ local executed = tes3.runLegacyScript({ script = ..., source = ..., command = ..
 **Parameters**:
 
 * `params` (table)
-	* `script` ([tes3script](../../types/tes3script)): *Default*: `tes3.worldController.scriptGlobals`. The base script to base the execution from.
+	* `script` ([tes3script](../../types/tes3script), string): *Default*: `tes3.worldController.scriptGlobals`. The base script to base the execution from.
 	* `source` (number): The compilation source to use. Defaults to tes3.scriptSource.default
 	* `command` (string): The script text to compile and run.
-	* `variables` (tes3scriptVariables): *Optional*. If a reference is provided, the reference's variables will be used.
+	* `variables` ([tes3scriptVariables](../../types/tes3scriptVariables)): *Optional*. If a reference is provided, the reference's variables will be used.
 	* `reference` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): The reference to target for execution.
 	* `dialogue` ([tes3dialogue](../../types/tes3dialogue), string): *Optional*. If compiling for dialogue context, the dialogue associated with the script.
 	* `info` ([tes3dialogueInfo](../../types/tes3dialogueInfo)): *Optional*. The info associated with the dialogue.
@@ -4199,7 +4200,7 @@ tes3.setOwner({ reference = ..., remove = ..., owner = ..., requiredGlobal = ...
 * `params` (table)
 	* `reference` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): A reference whose owner to set.
 	* `remove` (boolean): *Default*: `false`. If this parameter is set to true, reference's owner field will be removed.
-	* `owner` ([tes3npc](../../types/tes3npc), [tes3faction](../../types/tes3faction), string): Assigns this NPC or a faction as the owner of the reference.
+	* `owner` ([tes3npc](../../types/tes3npc), [tes3npcInstance](../../types/tes3npcInstance), [tes3mobileNPC](../../types/tes3mobileNPC), [tes3mobileCreature](../../types/tes3mobileCreature), [tes3reference](../../types/tes3reference), [tes3faction](../../types/tes3faction), string): Assigns this NPC or a faction as the owner of the reference.
 	* `requiredGlobal` ([tes3globalVariable](../../types/tes3globalVariable)): *Optional*. If `owner` is set to NPC, `requiredGlobal` variable can be set.
 	* `requiredRank` (number): *Default*: `0`. If `owner` is set to faction, `requitedRank` variable controls minimal rank in faction the player has to have to be able to freely take the reference.
 

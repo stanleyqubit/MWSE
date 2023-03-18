@@ -5,7 +5,7 @@ return {
 		name = "params",
 		type = "table",
 		tableParams = {
-			{ name = "reference", type = "tes3reference" },
+			{ name = "reference", type = "tes3reference|tes3mobileActor|string" },
 		},
 	}},
 	returns = {

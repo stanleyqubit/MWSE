@@ -89,7 +89,7 @@ function tes3.addItem(params) end
 --- @field equipProjectiles boolean? *Default*: `true`. If `true`, and the reference has the same projectile already equipped, the stacks will be merged. This will only work if the GUI is updated.
 --- @field updateGUI boolean? *Default*: `true`. If `false`, the function won't manually resync the player's GUI state. This can result in some optimizations, though [`tes3ui.forcePlayerInventoryUpdate()`](https://mwse.github.io/MWSE/apis/tes3ui/#tes3uiforceplayerinventoryupdate) must manually be called after all inventory updates are finished.
 
---- Creates an item data if there is room for a new stack in a given inventory. This can be then used to add custom user data or adjust an item's condition. This will return nil if no item data could be allocated for the item -- for example if the reference doesn't have the item in their inventory or each item of that type already has item data.
+--- Creates an item data if there is room for a new stack in a given inventory. This can be then used to add custom user data or adjust an item's condition. This will return nil if no item data could be allocated for the item -- for example if the reference doesn't have the item in their inventory or each item of that type already has item data. Calling this function will mark the `to` reference as modified.
 --- @param params tes3.addItemData.params This table accepts the following values:
 --- 
 --- `to`: tes3reference|tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string — The reference or mobile whose inventory will be modified.
@@ -530,7 +530,7 @@ function tes3.cancelAnimationLoop(params) end
 --- @field reference tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference|string The reference to the actor.
 
 --- This function returns true if player can rest.
---- @param params tes3.canRest.params This table accepts the following values:
+--- @param params tes3.canRest.params? This table accepts the following values:
 --- 
 --- `checkForEnemies`: boolean? — *Default*: `true`. Perform a check whether there are enemies nearby before opening rest menu. If there are, false is returned.
 --- 
@@ -1024,13 +1024,13 @@ function tes3.getCumulativeDaysForMonth(month) end
 --- Returns an actor's current AI package ID, just as the mwscript function `GetCurrentAIPackage` would. The return value maps to values in `tes3.aiPackage` namespace.
 --- @param params tes3.getCurrentAIPackageId.params This table accepts the following values:
 --- 
---- `reference`: tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference — No description yet available.
+--- `reference`: tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference|string — No description yet available.
 --- @return number packageID No description yet available.
 function tes3.getCurrentAIPackageId(params) end
 
 ---Table parameter definitions for `tes3.getCurrentAIPackageId`.
 --- @class tes3.getCurrentAIPackageId.params
---- @field reference tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference No description yet available.
+--- @field reference tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference|string No description yet available.
 
 --- Gets the currently active weather, from the player's current region.
 --- @return tes3weatherAsh|tes3weatherBlight|tes3weatherBlizzard|tes3weatherClear|tes3weatherCloudy|tes3weatherFoggy|tes3weatherOvercast|tes3weatherRain|tes3weatherSnow|tes3weatherThunder weather No description yet available.
@@ -1046,10 +1046,18 @@ function tes3.getCursorPosition() end
 function tes3.getDaysInMonth(month) end
 
 --- Locates and returns a Dialogue Info by a given id. This involves file IO and is an expensive call. Results should be cached.
---- @param dialogue tes3dialogue|string The dialogue that the info belongs to.
---- @param id string The numerical, unique id for the info object.
+--- @param params tes3.getDialogueInfo.params This table accepts the following values:
+--- 
+--- `dialogue`: tes3dialogue|string — The dialogue that the info belongs to.
+--- 
+--- `id`: string — The numerical, unique id for the info object.
 --- @return tes3dialogueInfo dialogueInfo No description yet available.
-function tes3.getDialogueInfo(dialogue, id) end
+function tes3.getDialogueInfo(params) end
+
+---Table parameter definitions for `tes3.getDialogueInfo`.
+--- @class tes3.getDialogueInfo.params
+--- @field dialogue tes3dialogue|string The dialogue that the info belongs to.
+--- @field id string The numerical, unique id for the info object.
 
 --- This function returns the total effective magnitude and total base magnitude of a certain magic effect affecting a reference. It returns a pair of numbers, the first being the effective magnitude after all the actor's resistances are applied (see examples). The second number is the magnitude before any of the actor's resistances are applied.
 ---
@@ -1253,20 +1261,20 @@ function tes3.getModList() end
 
 --- Fetches the core game object for a given object ID.
 --- @param id string No description yet available.
---- @return tes3activator|tes3alchemy|tes3apparatus|tes3armor|tes3bodyPart|tes3book|tes3clothing|tes3container|tes3containerInstance|tes3creature|tes3creatureInstance|tes3door|tes3enchantment|tes3ingredient|tes3leveledCreature|tes3leveledItem|tes3light|tes3lockpick|tes3misc|tes3npc|tes3npcInstance|tes3probe|tes3reference|tes3repairTool|tes3spell|tes3static|tes3weapon object No description yet available.
+--- @return tes3activator|tes3alchemy|tes3apparatus|tes3armor|tes3birthsign|tes3bodyPart|tes3book|tes3cell|tes3class|tes3clothing|tes3container|tes3containerInstance|tes3creature|tes3creatureInstance|tes3dialogue|tes3dialogueInfo|tes3door|tes3enchantment|tes3faction|tes3gameSetting|tes3globalVariable|tes3ingredient|tes3land|tes3landTexture|tes3leveledCreature|tes3leveledItem|tes3light|tes3lockpick|tes3magicSourceInstance|tes3misc|tes3npc|tes3npcInstance|tes3pathGrid|tes3probe|tes3quest|tes3race|tes3reference|tes3region|tes3repairTool|tes3script|tes3skill|tes3sound|tes3soundGenerator|tes3spell|tes3startScript|tes3static|tes3weapon object No description yet available.
 function tes3.getObject(id) end
 
 --- Returns the object's owner, or nil if the object is unowned.
 --- @param params tes3.getOwner.params This table accepts the following values:
 --- 
---- `reference`: tes3reference — No description yet available.
+--- `reference`: tes3reference|tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string — No description yet available.
 --- @return tes3faction|tes3npc|nil owner No description yet available.
 --- @return number|tes3globalVariable|nil requirement The faction rank required if the owner is a faction, or the global variable needing to be set if the owner is an NPC.
 function tes3.getOwner(params) end
 
 ---Table parameter definitions for `tes3.getOwner`.
 --- @class tes3.getOwner.params
---- @field reference tes3reference No description yet available.
+--- @field reference tes3reference|tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string No description yet available.
 
 --- This function returns the distance that the player can activate objects with. This is a sum of the iMaxActivateDist GMST value and the player's telekinesis strength.
 --- @return number result No description yet available.
@@ -1789,7 +1797,7 @@ function tes3.playVoiceover(params) end
 --- 
 --- `reference`: tes3reference|tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil — *Default*: `tes3.mobilePlayer`. The reference to reposition.
 --- 
---- `cell`: tes3cell? — *Optional*. The cell to move the reference to. If not provided, the reference will be moved to a cell in the exterior worldspace at the position provided.
+--- `cell`: tes3cell|string|table|nil — *Optional*. The cell to move the reference to. Can be a tes3cell, cell name, or a table with two values that correspond to the exterior cell's grid coordinates. If not provided, the reference will be moved to a cell in the exterior worldspace at the position provided.
 --- 
 --- `position`: tes3vector3|table — The position to move the reference to.
 --- 
@@ -1806,7 +1814,7 @@ function tes3.positionCell(params) end
 ---Table parameter definitions for `tes3.positionCell`.
 --- @class tes3.positionCell.params
 --- @field reference tes3reference|tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil *Default*: `tes3.mobilePlayer`. The reference to reposition.
---- @field cell tes3cell? *Optional*. The cell to move the reference to. If not provided, the reference will be moved to a cell in the exterior worldspace at the position provided.
+--- @field cell tes3cell|string|table|nil *Optional*. The cell to move the reference to. Can be a tes3cell, cell name, or a table with two values that correspond to the exterior cell's grid coordinates. If not provided, the reference will be moved to a cell in the exterior worldspace at the position provided.
 --- @field position tes3vector3|table The position to move the reference to.
 --- @field orientation tes3vector3|table|nil *Optional*. The new orientation of the reference.
 --- @field forceCellChange boolean? *Default*: `false`. When true, forces the game to update a reference that has moved within a single cell, as if it was moved into a new cell.
@@ -2029,7 +2037,7 @@ function tes3.removeVisualEffect(params) end
 --- This function will compile and run a mwscript chunk of code. This is not ideal to use, but can be used for features not yet exposed to lua.
 --- @param params tes3.runLegacyScript.params This table accepts the following values:
 --- 
---- `script`: tes3script? — *Default*: `tes3.worldController.scriptGlobals`. The base script to base the execution from.
+--- `script`: tes3script|string|nil — *Default*: `tes3.worldController.scriptGlobals`. The base script to base the execution from.
 --- 
 --- `source`: number — The compilation source to use. Defaults to tes3.scriptSource.default
 --- 
@@ -2047,7 +2055,7 @@ function tes3.runLegacyScript(params) end
 
 ---Table parameter definitions for `tes3.runLegacyScript`.
 --- @class tes3.runLegacyScript.params
---- @field script tes3script? *Default*: `tes3.worldController.scriptGlobals`. The base script to base the execution from.
+--- @field script tes3script|string|nil *Default*: `tes3.worldController.scriptGlobals`. The base script to base the execution from.
 --- @field source number The compilation source to use. Defaults to tes3.scriptSource.default
 --- @field command string The script text to compile and run.
 --- @field variables tes3scriptVariables? *Optional*. If a reference is provided, the reference's variables will be used.
@@ -2357,7 +2365,7 @@ function tes3.setMarkLocation(params) end
 --- 
 --- `remove`: boolean? — *Default*: `false`. If this parameter is set to true, reference's owner field will be removed.
 --- 
---- `owner`: tes3npc|tes3faction|string — Assigns this NPC or a faction as the owner of the reference.
+--- `owner`: tes3npc|tes3npcInstance|tes3mobileNPC|tes3mobilePlayer|tes3mobileCreature|tes3reference|tes3faction|string — Assigns this NPC or a faction as the owner of the reference.
 --- 
 --- `requiredGlobal`: tes3globalVariable? — *Optional*. If `owner` is set to NPC, `requiredGlobal` variable can be set.
 --- 
@@ -2368,7 +2376,7 @@ function tes3.setOwner(params) end
 --- @class tes3.setOwner.params
 --- @field reference tes3reference|tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string A reference whose owner to set.
 --- @field remove boolean? *Default*: `false`. If this parameter is set to true, reference's owner field will be removed.
---- @field owner tes3npc|tes3faction|string Assigns this NPC or a faction as the owner of the reference.
+--- @field owner tes3npc|tes3npcInstance|tes3mobileNPC|tes3mobilePlayer|tes3mobileCreature|tes3reference|tes3faction|string Assigns this NPC or a faction as the owner of the reference.
 --- @field requiredGlobal tes3globalVariable? *Optional*. If `owner` is set to NPC, `requiredGlobal` variable can be set.
 --- @field requiredRank number? *Default*: `0`. If `owner` is set to faction, `requitedRank` variable controls minimal rank in faction the player has to have to be able to freely take the reference.
 

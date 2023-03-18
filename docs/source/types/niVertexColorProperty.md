@@ -102,7 +102,7 @@ The human-facing name of the given object.
 ### `source`
 <div class="search_terms" style="display: none">source</div>
 
-Determines how vertex and material colors are mixed on subclasses of niAVObject. Maps to values in [`ni.sourceVertexModes`](https://mwse.github.io/MWSE/references/ni/source-vertex-modes/) table.
+Determines how vertex and material colors are mixed on subclasses of niAVObject. Maps to values in [`ni.sourceVertexMode`](https://mwse.github.io/MWSE/references/ni/source-vertex-modes/) table.
 
 **Returns**:
 

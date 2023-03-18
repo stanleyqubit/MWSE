@@ -87,7 +87,7 @@ Friendly access to actor's barter gold amount.
 ### `baseObject`
 <div class="search_terms" style="display: none">baseobject</div>
 
-Access to creature that this one is instanced from.
+*Read-only*. Access to creature that this one is instanced from.
 
 **Returns**:
 

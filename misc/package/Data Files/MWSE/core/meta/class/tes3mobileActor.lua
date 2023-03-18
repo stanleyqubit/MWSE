@@ -171,9 +171,9 @@ function tes3mobileActor:applyFatigueDamage(fatigueDamage, swing, alwaysPlayHitV
 --- Damages the actor.
 --- @deprecated
 --- @param damage number The amount of damage to apply.
---- @param isPlayerAttack boolean Used to calculate difficulty scaling.
---- @param scaleWithDifficulty boolean Apply difficulty scaling to the damage.
---- @param doNotChangeHealth boolean Do all the audiovisual effects of damage without the health change.
+--- @param isPlayerAttack boolean? *Default*: `false`. Used to calculate difficulty scaling.
+--- @param scaleWithDifficulty boolean? *Optional*. Apply difficulty scaling to the damage.
+--- @param doNotChangeHealth boolean? *Default*: `false`. Do all the audiovisual effects of damage without the health change.
 --- @return boolean result No description yet available.
 function tes3mobileActor:applyHealthDamage(damage, isPlayerAttack, scaleWithDifficulty, doNotChangeHealth) end
 

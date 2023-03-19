@@ -1,8 +1,7 @@
 local inspect = require("inspect")
---- UnitWind - A unit testing framework for Morrowind Script Extender (MWSE)
----
---- See `unitwind.tests.lua` for examples of how to use UnitWind.
----@class UnitWind
+local mwseLogger = require("logging.logger")
+
+---@class UnitWind.new.params
 ---@field enabled boolean? Whether to enable UnitWind. Defaults to true.
 ---@field highlight boolean? Whether to highlight output. Defaults to true.
 ---@field beforeAll fun(self: UnitWind)? A function to run before all tests are run.
@@ -10,6 +9,17 @@ local inspect = require("inspect")
 ---@field beforeEach fun(self: UnitWind)? A function to run before each test.
 ---@field afterEach fun(self: UnitWind)? A function to run after each test.
 ---@field exitAfter boolean? Whether to exit the game after all tests have been run. Defaults to false.
+---@field outputFile string? The path to the file to write output to. If not defined, output will be written to mwse.log.
+
+--- UnitWind - A unit testing framework for Morrowind Script Extender (MWSE)
+---
+--- See `unitwind.tests.lua` for examples of how to use UnitWind.
+---@class UnitWind : UnitWind.new.params
+---@field totalTests number The total number of tests that have been run.
+---@field testsPassed number The total number of tests that have passed.
+---@field testsFailed number The total number of tests that have failed.
+---@field completedTests table<string, boolean> A table of tests that have been run, with the test name as the key and a boolean indicating whether the test passed as the value.
+---@field logger mwseLogger The logger to use for output.
 ---@field outputFile file*? The file to write output to. If not defined, output will be written to mwse.log.
 local UnitWind = {
     schema = {
@@ -24,10 +34,10 @@ local UnitWind = {
             exitAfter = { type = "boolean", default = false, required = false },
             outputFile = { type = "string", required = false },
             --internal
-            totalTests = { type = "number", default = 0, required = false },
-            testsPassed = { type = "number", default = 0, required = false },
-            testsFailed = { type = "number", default = 0, required = false },
-            completedTests = { type = "table", default = {}, required = false },
+            totalTests = { type = "number", required = false },
+            testsPassed = { type = "number", required = false },
+            testsFailed = { type = "number", required = false },
+            completedTests = { type = "table", required = false },
         }
     },
 }
@@ -35,14 +45,25 @@ local ansicolors = require("logging.colors")
 local validator = require "unitwind.validator"
 
 --- Construct a new UnitWind instance
+---@param data UnitWind.new.params
 ---@return UnitWind
 function UnitWind.new(data)
+    ---@type UnitWind
     local unitwind = table.deepcopy(data)
+    unitwind.totalTests = 0
+    unitwind.testsPassed = 0
+    unitwind.testsFailed = 0
+    unitwind.completedTests = {}
+    unitwind.logger = mwseLogger.new{
+        name = "UnitWind",
+        ---@diagnostic disable-next-line: undefined-global
+        logLevel = "INFO",
+    }
     --Validate and set defaults
     validator.validate(unitwind, UnitWind.schema)
     setmetatable(unitwind, UnitWind)
     UnitWind.__index = UnitWind
-    unitwind:setOutputFile(unitwind.outputFile)
+    unitwind:setOutputFile(data.outputFile)
     return unitwind
 end
 
@@ -300,6 +321,7 @@ end
 ---@param object table|string The table or module which contains the key to unmock
 ---@param key string The function or value to unmock
 function UnitWind:unmock(object, key)
+    self.logger:debug("unmock: %s: %s", object, key)
     if type(object) == "string" then
         object = include(object)
         if not object then
@@ -325,11 +347,15 @@ end
 
 --- Restore all mocked functions to their original state
 function UnitWind:clearMocks()
+    self.logger:debug("clearMocks()")
     if not self.mocks then return end
     for object, mocks in pairs(self.mocks) do
         for key, originalValue in pairs(mocks) do
+            self.logger:debug("Reseting mock %s.%s to %s", object, key, inspect(originalValue))
             object[key] = originalValue
         end
+        --remove from self.spies if its a function
+        --self.spies[object] = nil
     end
     self.mocks = nil
 end
@@ -403,8 +429,12 @@ function UnitWind:unspy(object, key)
         error(string.format("Could not find spy for %s.%s", object, key))
     end
     --restore original value
-    local originalFunction = self.spies[object][key]
-    object[key] = originalFunction
+    local spy = self.spies[object][key]
+    if type(spy) == "table" and spy._mockCalls then
+        local originalFunction = spy.original
+        object[key] = originalFunction
+    end
+    --object[key] = originalFunction
     --remove from self.spies
     self.spies[object][key] = nil
     if not next(self.spies[object]) then
@@ -416,8 +446,10 @@ end
 function UnitWind:clearSpies()
     if not self.spies then return end
     for object, spies in pairs(self.spies) do
-        for key, originalFunction in pairs(spies) do
-            object[key] = originalFunction
+        for key, spy in pairs(spies) do
+            if type(spy) == "table" and spy._mockCalls then
+                object[key] = spy.original
+            end
         end
     end
     self.spies = nil
@@ -502,13 +534,14 @@ end
 
 --Reset the test count, restore mocks and print the results
 function UnitWind:reset()
+    self.logger:debug("Resetting UnitWind")
     self.testsName = ""
     self.totalTests = 0
     self.testsPassed = 0
     self.testsFailed = 0
     self.completedTests = {}
-    self:clearMocks()
     self:clearSpies()
+    self:clearMocks()
 end
 
 --Finish all tests and print the results

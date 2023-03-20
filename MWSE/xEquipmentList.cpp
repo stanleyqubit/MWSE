@@ -19,7 +19,7 @@ namespace mwse {
 
 	private:
 		bool nodeMatchesFilter(TES3::IteratedList<TES3::EquipmentStack*>::Node* node, long typeFilter, long subtypeFilter);
-		long getItemSubType(TES3::BaseObject* object);
+		long getItemSubType(TES3::Object* object);
 	};
 
 	static xEquipmentList xEquipmentListInstance;
@@ -103,7 +103,7 @@ namespace mwse {
 
 		// Validate the node we've obtained.
 		if (node && node->data) {
-			TES3::BaseObject* object = node->data->object;
+			TES3::Object* object = node->data->object;
 
 			id = reinterpret_cast<TES3::PhysicalObject*>(object)->objectID;
 			type = object->objectType;
@@ -151,7 +151,7 @@ namespace mwse {
 	}
 
 	bool xEquipmentList::nodeMatchesFilter(TES3::IteratedList<TES3::EquipmentStack*>::Node* node, long typeFilter, long subtypeFilter) {
-		TES3::BaseObject* object = node->data->object;
+		TES3::Object* object = node->data->object;
 
 		if (typeFilter != 0 && object->objectType != typeFilter) {
 			return false;
@@ -164,7 +164,7 @@ namespace mwse {
 		return true;
 	}
 
-	long xEquipmentList::getItemSubType(TES3::BaseObject* object) {
+	long xEquipmentList::getItemSubType(TES3::Object* object) {
 		if (object == NULL) {
 			return -2;
 		}

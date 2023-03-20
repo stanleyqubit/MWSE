@@ -29,7 +29,7 @@ namespace mwse {
 		}
 
 		// Get record.
-		TES3::BaseObject* object = reference->baseObject;
+		TES3::Object* object = reference->baseObject;
 		if (object == NULL) {
 			if constexpr (DEBUG_MWSCRIPT_FUNCTIONS) {
 				mwse::log::getLog() << "xGetQuality: No base record found." << std::endl;

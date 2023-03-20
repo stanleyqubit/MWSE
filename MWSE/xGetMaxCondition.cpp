@@ -27,7 +27,7 @@ namespace mwse {
 		}
 
 		// Get the max condition.
-		TES3::BaseObject* object = reference->baseObject;
+		TES3::Object* object = reference->baseObject;
 		long value = object->vTable.object->getDurability(object);
 
 		mwse::Stack::getInstance().pushLong(value);

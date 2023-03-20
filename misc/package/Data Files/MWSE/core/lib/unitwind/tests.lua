@@ -73,6 +73,28 @@ local DO_POSITIVE_TESTS = true
 local DO_NEGATIVE_TESTS = true
 
 local UnitWind = require("unitwind")
+
+local finishTestSuit = UnitWind.new{
+    enabled = true,
+    highlight = true,
+    exitAfter = false,
+}
+local testObject = {
+    testFunction = function()
+        return true
+    end
+}
+finishTestSuit:start("UnitWind:finish() test suite")
+finishTestSuit:test("clearMocks", function()
+    finishTestSuit:mock(testObject, "testFunction", function()
+        return false
+    end)
+    finishTestSuit:expect(testObject.testFunction()).toBe(false) -- passed
+    finishTestSuit:clearMocks()
+    finishTestSuit:expect(testObject.testFunction()).toBe(true) -- passed
+end)
+finishTestSuit:finish()
+
 local unitwind = UnitWind.new{
     enabled = true,
     highlight = true,
@@ -80,6 +102,19 @@ local unitwind = UnitWind.new{
 }
 
 unitwind:start("Test Suite")
+
+unitwind:test("Check that data from previous test has been cleared", function()
+    unitwind:expect(unitwind.totalTests).toBe(1)
+    unitwind:expect(unitwind.testsPassed).toBe(0)
+    unitwind:expect(unitwind.testsFailed).toBe(0)
+    unitwind:expect(table.size(unitwind.completedTests)).toBe(0)
+end)
+
+--Test previous testObject is correctly unmocked after `finish`
+unitwind:test("Test mock from previous test suite was correctly reset on :finish()", function()
+    unitwind:expect(testObject.testFunction()).toBe(true)
+end)
+
 
 if DO_POSITIVE_TESTS then
     unitwind:test("Empty test", function()
@@ -367,8 +402,5 @@ if DO_NEGATIVE_TESTS then
     end, 'Expected function to be called with "test", any(number), but it was called with "test", "test2".')
 
 end
-
-
-
 
 unitwind:finish()

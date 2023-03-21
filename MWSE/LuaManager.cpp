@@ -4105,6 +4105,52 @@ namespace mwse::lua {
 	}
 
 	//
+	// Patch: Error reporting for mesh loading
+	//
+
+	static TES3::Object* currentlyLoadingMeshObject = nullptr;
+
+	bool __fastcall PatchObjectLoadMeshMethod(TES3::Object* object) {
+		const auto TES3_Object_LoadMesh = reinterpret_cast<bool(__thiscall*)(TES3::Object*)>(0x4F1380);
+
+		currentlyLoadingMeshObject = object;
+		bool result = TES3_Object_LoadMesh(object);
+		currentlyLoadingMeshObject = nullptr;
+		return result;
+	}
+
+	bool __fastcall PatchAnimatedObjectLoadMeshMethod(TES3::Object* object) {
+		const auto TES3_AnimatedObject_LoadMesh = reinterpret_cast<bool(__thiscall*)(TES3::Object*)>(0x4F0400);
+
+		currentlyLoadingMeshObject = object;
+		bool result = TES3_AnimatedObject_LoadMesh(object);
+		currentlyLoadingMeshObject = nullptr;
+		return result;
+	}
+
+	void __cdecl PatchModelLoaderErrorReport(const char* format, const char* errorText, const char* filename) {
+		if (currentlyLoadingMeshObject) {
+			const char* id = currentlyLoadingMeshObject->getObjectID();
+			const char* mod = currentlyLoadingMeshObject->sourceMod ? currentlyLoadingMeshObject->sourceMod->getFilename() : "no source";
+			tes3::logAndShowError("Object \"%s\" (%s)\r\n\r\nModel Load Error: %s\r\nin %s.", id, mod, errorText, filename);
+		}
+		else {
+			tes3::logAndShowError(format, errorText, filename);
+		}
+	}
+
+	void __cdecl PatchStreamLoaderErrorReport(const char* errorText, const char* caption) {
+		if (currentlyLoadingMeshObject) {
+			const char* id = currentlyLoadingMeshObject->getObjectID();
+			const char* mod = currentlyLoadingMeshObject->sourceMod ? currentlyLoadingMeshObject->sourceMod->getFilename() : "no source";
+			tes3::logAndShowError("Object \"%s\" (%s)\r\n\r\n%s", id, mod, errorText);
+		}
+		else {
+			tes3::logAndShowError("%s", errorText);
+		}
+	}
+
+	//
 	//
 	//
 
@@ -5238,6 +5284,33 @@ namespace mwse::lua {
 		genCallEnforced(0x4C2C74, 0x4EE200, *reinterpret_cast<DWORD*>(&meshDataLoadKeyframes));
 		genCallEnforced(0x4D25DB, 0x4EE200, *reinterpret_cast<DWORD*>(&meshDataLoadKeyframes));
 		genCallEnforced(0x4F086B, 0x4EE200, *reinterpret_cast<DWORD*>(&meshDataLoadKeyframes));
+
+		// Patch: Improved error reporting for mesh loading.
+		overrideVirtualTableEnforced(TES3::VirtualTableAddress::Alchemy, 0x134, 0x4F1380, reinterpret_cast<DWORD>(PatchObjectLoadMeshMethod));
+		overrideVirtualTableEnforced(TES3::VirtualTableAddress::Apparatus, 0x134, 0x4F1380, reinterpret_cast<DWORD>(PatchObjectLoadMeshMethod));
+		overrideVirtualTableEnforced(TES3::VirtualTableAddress::Armor, 0x134, 0x4F1380, reinterpret_cast<DWORD>(PatchObjectLoadMeshMethod));
+		overrideVirtualTableEnforced(TES3::VirtualTableAddress::BodyPart, 0x134, 0x4F1380, reinterpret_cast<DWORD>(PatchObjectLoadMeshMethod));
+		overrideVirtualTableEnforced(TES3::VirtualTableAddress::Book, 0x134, 0x4F1380, reinterpret_cast<DWORD>(PatchObjectLoadMeshMethod));
+		overrideVirtualTableEnforced(TES3::VirtualTableAddress::Clothing, 0x134, 0x4F1380, reinterpret_cast<DWORD>(PatchObjectLoadMeshMethod));
+		overrideVirtualTableEnforced(TES3::VirtualTableAddress::Enchantment, 0x134, 0x4F1380, reinterpret_cast<DWORD>(PatchObjectLoadMeshMethod));
+		overrideVirtualTableEnforced(TES3::VirtualTableAddress::Ingredient, 0x134, 0x4F1380, reinterpret_cast<DWORD>(PatchObjectLoadMeshMethod));
+		overrideVirtualTableEnforced(TES3::VirtualTableAddress::Lockpick, 0x134, 0x4F1380, reinterpret_cast<DWORD>(PatchObjectLoadMeshMethod));
+		overrideVirtualTableEnforced(TES3::VirtualTableAddress::Miscellaneous, 0x134, 0x4F1380, reinterpret_cast<DWORD>(PatchObjectLoadMeshMethod));
+		overrideVirtualTableEnforced(TES3::VirtualTableAddress::Probe, 0x134, 0x4F1380, reinterpret_cast<DWORD>(PatchObjectLoadMeshMethod));
+		overrideVirtualTableEnforced(TES3::VirtualTableAddress::RepairTool, 0x134, 0x4F1380, reinterpret_cast<DWORD>(PatchObjectLoadMeshMethod));
+		overrideVirtualTableEnforced(TES3::VirtualTableAddress::Spell, 0x134, 0x4F1380, reinterpret_cast<DWORD>(PatchObjectLoadMeshMethod));
+		overrideVirtualTableEnforced(TES3::VirtualTableAddress::Static, 0x134, 0x4F1380, reinterpret_cast<DWORD>(PatchObjectLoadMeshMethod));
+		overrideVirtualTableEnforced(TES3::VirtualTableAddress::Weapon, 0x134, 0x4F1380, reinterpret_cast<DWORD>(PatchObjectLoadMeshMethod));
+
+		overrideVirtualTableEnforced(TES3::VirtualTableAddress::Activator, 0x134, 0x4F0400, reinterpret_cast<DWORD>(PatchAnimatedObjectLoadMeshMethod));
+		overrideVirtualTableEnforced(TES3::VirtualTableAddress::ContainerBase, 0x134, 0x4F0400, reinterpret_cast<DWORD>(PatchAnimatedObjectLoadMeshMethod));
+		overrideVirtualTableEnforced(TES3::VirtualTableAddress::CreatureBase, 0x134, 0x4F0400, reinterpret_cast<DWORD>(PatchAnimatedObjectLoadMeshMethod));
+		overrideVirtualTableEnforced(TES3::VirtualTableAddress::Door, 0x134, 0x4F0400, reinterpret_cast<DWORD>(PatchAnimatedObjectLoadMeshMethod));
+		overrideVirtualTableEnforced(TES3::VirtualTableAddress::NPCBase, 0x134, 0x4F0400, reinterpret_cast<DWORD>(PatchAnimatedObjectLoadMeshMethod));
+		genCallEnforced(0x4D2470, 0x4F0400, reinterpret_cast<DWORD>(PatchAnimatedObjectLoadMeshMethod));
+
+		genCallEnforced(0x4ED826, 0x477400, reinterpret_cast<DWORD>(PatchModelLoaderErrorReport));
+		genCallEnforced(0x51AEEE, 0x694460, reinterpret_cast<DWORD>(PatchStreamLoaderErrorReport));
 
 		// Event: CrimeWitnessed
 		genCallEnforced(0x521DB2, 0x522040, reinterpret_cast<DWORD>(OnProcessCrimes));

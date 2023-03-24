@@ -176,6 +176,17 @@ namespace TES3 {
 		actorFlags |= (value << ActorFlagCreature::BloodBitsFirst);
 	}
 
+	sol::optional<int> Actor::getSoulValue() {
+		switch (objectType) {
+		case ObjectType::Creature:
+			return static_cast<Creature*>(this)->getSoulValue();
+		case ObjectType::NPC:
+			return static_cast<NPC*>(this)->getSoulValue();
+		}
+
+		return {};
+	}
+
 	SpellList* Actor::getSpellList() {
 		if (objectType == TES3::ObjectType::NPC) {
 			if (isBaseActor()) {

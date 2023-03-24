@@ -1567,6 +1567,66 @@ namespace mwse::lua {
 		return true;
 	}
 
+	int getValue(sol::table params) {
+		auto item = getOptionalParamObject<TES3::Item>(params, "item");
+		auto itemData = getOptionalParam<TES3::ItemData*>(params, "itemData", nullptr);
+
+		// If we weren't given an item, see if we were given a reference.
+		if (item == nullptr) {
+			auto reference = getOptionalParamExecutionReference(params);
+			if (reference) {
+				if (!reference->baseObject->isItem()) {
+					throw std::invalid_argument("Invalid reference parameter provided: The reference is not an item.");
+				}
+				item = static_cast<TES3::Item*>(reference->baseObject);
+				itemData = reference->getAttachedItemData();
+			}
+		}
+
+		// Were we given valid data?
+		if (item == nullptr) {
+			throw std::invalid_argument("Invalid parameters provided: Must pass either an 'item' parameter or a 'reference' parameter.");
+		}
+		else if (!item->isItem()) {
+			throw std::invalid_argument("Invalid item parameter provided: The object is not an item.");
+		}
+
+		// If we have no item data, just get the base value.
+		const auto value = item->getValue();
+		if (itemData == nullptr) {
+			return value;
+		}
+		
+		// Handle soul- and MCP-dependent value.
+		if (item->objectType == TES3::ObjectType::Misc && getOptionalParam(params, "useSoulValue", true)) {
+			auto asMisc = static_cast<TES3::Misc*>(item);
+			if (asMisc->isSoulGem() && itemData->soul) {
+				auto soulValue = itemData->soul->getSoulValue().value_or(0);
+				if (mcp::getFeatureEnabled(mcp::feature::SoulgemValueRebalance)) {
+					return (soulValue * soulValue * soulValue) / 10000 + soulValue * 2;
+				}
+				else {
+					return value * soulValue;
+				}
+			}
+		}
+
+		// Manage condition.
+		if (getOptionalParam(params, "useDurability", true)) {
+			const auto durability = item->getDurability();
+			if (durability > 0) {
+				return value * itemData->condition / durability;
+			}
+
+			const auto uses = item->getUses();
+			if (uses > 0) {
+				return value * itemData->condition / uses;
+			}
+		}
+
+		return value;
+	}
+
 	bool checkMerchantTradesItem(sol::table params) {
 		auto reference = getOptionalParamExecutionReference(params);
 		if (reference == nullptr) {
@@ -5899,6 +5959,7 @@ namespace mwse::lua {
 		tes3["getSoundPlaying"] = getSoundPlaying;
 		tes3["getTopMenu"] = TES3::UI::getMenuOnTop;
 		tes3["getTrap"] = getTrap;
+		tes3["getValue"] = getValue;
 		tes3["getVanityMode"] = getVanityMode;
 		tes3["getViewportSize"] = getViewportSize;
 		tes3["getWerewolfKillCount"] = getWerewolfKillCount;

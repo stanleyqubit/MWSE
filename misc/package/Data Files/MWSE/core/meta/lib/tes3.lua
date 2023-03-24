@@ -1414,6 +1414,29 @@ function tes3.getTrap(params) end
 --- @class tes3.getTrap.params
 --- @field reference tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string No description yet available.
 
+--- Gets the value of an item and, optionally, an associated itemData. This can be useful if you wish to take durability and soul value into account. It will also take into account any installed Morrowind Code Patch rebalances. It can also be used to get the value of a reference.
+--- @param params tes3.getValue.params This table accepts the following values:
+--- 
+--- `item`: tes3alchemy|tes3apparatus|tes3armor|tes3book|tes3clothing|tes3ingredient|tes3light|tes3lockpick|tes3misc|tes3probe|tes3repairTool|tes3weapon|string|nil — *Optional*. The item to get the value of. Not needed if a reference is given.
+--- 
+--- `itemData`: tes3itemData? — *Optional*. The item data to use to modify the value. Not needed if a reference is given.
+--- 
+--- `reference`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil — *Optional*. The reference to get the value of. Not used if an item is given.
+--- 
+--- `useDurability`: boolean? — *Default*: `true`. If set to false, durability will be ignored.
+--- 
+--- `useSoulValue`: boolean? — *Default*: `true`. If set to false, the soul value will be ignored, effectively giving you the base soul gem value.
+--- @return number value The calculated value of the item.
+function tes3.getValue(params) end
+
+---Table parameter definitions for `tes3.getValue`.
+--- @class tes3.getValue.params
+--- @field item tes3alchemy|tes3apparatus|tes3armor|tes3book|tes3clothing|tes3ingredient|tes3light|tes3lockpick|tes3misc|tes3probe|tes3repairTool|tes3weapon|string|nil *Optional*. The item to get the value of. Not needed if a reference is given.
+--- @field itemData tes3itemData? *Optional*. The item data to use to modify the value. Not needed if a reference is given.
+--- @field reference tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil *Optional*. The reference to get the value of. Not used if an item is given.
+--- @field useDurability boolean? *Default*: `true`. If set to false, durability will be ignored.
+--- @field useSoulValue boolean? *Default*: `true`. If set to false, the soul value will be ignored, effectively giving you the base soul gem value.
+
 --- The function returns true if the player is in the vanity mode. Vanity mode is triggered by a period of inactivity from the player or by a `tes3.setVanityMode()` function. The view is switched to third person (if not already), and the camera is orbiting slowly around the player character.
 --- @return boolean result Is the vanity mode currently active?
 function tes3.getVanityMode() end

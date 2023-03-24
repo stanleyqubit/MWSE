@@ -2696,6 +2696,30 @@ local spell = tes3.getTrap({ reference = ... })
 
 ***
 
+### `tes3.getValue`
+<div class="search_terms" style="display: none">getvalue, value</div>
+
+Gets the value of an item and, optionally, an associated itemData. This can be useful if you wish to take durability and soul value into account. It will also take into account any installed Morrowind Code Patch rebalances. It can also be used to get the value of a reference.
+
+```lua
+local value = tes3.getValue({ item = ..., itemData = ..., reference = ..., useDurability = ..., useSoulValue = ... })
+```
+
+**Parameters**:
+
+* `params` (table)
+	* `item` ([tes3item](../../types/tes3item), string): *Optional*. The item to get the value of. Not needed if a reference is given.
+	* `itemData` ([tes3itemData](../../types/tes3itemData)): *Optional*. The item data to use to modify the value. Not needed if a reference is given.
+	* `reference` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): *Optional*. The reference to get the value of. Not used if an item is given.
+	* `useDurability` (boolean): *Default*: `true`. If set to false, durability will be ignored.
+	* `useSoulValue` (boolean): *Default*: `true`. If set to false, the soul value will be ignored, effectively giving you the base soul gem value.
+
+**Returns**:
+
+* `value` (number): The calculated value of the item.
+
+***
+
 ### `tes3.getVanityMode`
 <div class="search_terms" style="display: none">getvanitymode, vanitymode</div>
 
@@ -3838,7 +3862,7 @@ local executed = tes3.runLegacyScript({ script = ..., source = ..., command = ..
 	* `script` ([tes3script](../../types/tes3script), string): *Default*: `tes3.worldController.scriptGlobals`. The base script to base the execution from.
 	* `source` (number): The compilation source to use. Defaults to tes3.scriptSource.default
 	* `command` (string): The script text to compile and run.
-	* `variables` ([tes3scriptVariables](../../types/tes3scriptVariables)): *Optional*. If a reference is provided, the reference's variables will be used.
+	* `variables` (tes3scriptVariables): *Optional*. If a reference is provided, the reference's variables will be used.
 	* `reference` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): The reference to target for execution.
 	* `dialogue` ([tes3dialogue](../../types/tes3dialogue), string): *Optional*. If compiling for dialogue context, the dialogue associated with the script.
 	* `info` ([tes3dialogueInfo](../../types/tes3dialogueInfo)): *Optional*. The info associated with the dialogue.

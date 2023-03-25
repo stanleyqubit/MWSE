@@ -1,3 +1,4 @@
+---@enum ni.stencilDrawMode
 return {
 	["counterclockwiseOrBoth"] = 0,
 	["counterclockwise"] = 1,

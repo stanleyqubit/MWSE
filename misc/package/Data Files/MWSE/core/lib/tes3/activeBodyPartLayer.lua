@@ -1,3 +1,4 @@
+---@enum tes3.activeBodyPartLayer
 return {
 	["base"] = 0,
 	["clothing"] = 1,

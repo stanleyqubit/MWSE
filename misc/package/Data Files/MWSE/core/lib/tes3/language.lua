@@ -1,3 +1,4 @@
+---@enum tes3.language
 return {
 	[0] = "eng",
 	[1] = "fra",

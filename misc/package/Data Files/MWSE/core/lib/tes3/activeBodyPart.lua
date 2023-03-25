@@ -1,3 +1,4 @@
+---@enum tes3.activeBodyPart
 return {
 	["head"] = 0,
 	["hair"] = 1,

@@ -1,3 +1,4 @@
+---@enum ni.animCycleType
 return {
 	["loop"] = 0,
 	["reverse"] = 2,

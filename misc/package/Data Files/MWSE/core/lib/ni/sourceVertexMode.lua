@@ -1,3 +1,4 @@
+---@enum ni.sourceVertexMode
 return {
 	["ignore"] = 0,
 	["emissive"] = 1,

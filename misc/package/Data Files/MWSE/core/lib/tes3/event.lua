@@ -1,3 +1,4 @@
+---@enum tes3.event
 return {
 	["absorbedMagic"] = "absorbedMagic",
 	["activate"] = "activate",

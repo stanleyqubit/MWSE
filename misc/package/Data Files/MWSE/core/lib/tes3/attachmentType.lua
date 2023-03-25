@@ -1,3 +1,4 @@
+---@enum tes3.attachmentType
 return {
 	["lock"] = 3,
 	["variable"] = 6,

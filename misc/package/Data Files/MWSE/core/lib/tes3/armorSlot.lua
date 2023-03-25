@@ -1,3 +1,4 @@
+---@enum tes3.armorSlot
 return {
 	["helmet"] = 0,
 	["cuirass"] = 1,

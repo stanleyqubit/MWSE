@@ -1,3 +1,4 @@
+---@enum ni.texturingPropertyMapType
 -- These are 1-indexed instead of 0-indexed.
 return {
 	["base"] = 1,

@@ -1,3 +1,4 @@
+---@enum ni.textureFormatPrefsAlphaFormat
 return {
 	["none"] = 0,
 	["binary"] = 1,

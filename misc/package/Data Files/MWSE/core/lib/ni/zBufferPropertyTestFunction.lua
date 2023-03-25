@@ -1,3 +1,4 @@
+---@enum ni.zBufferPropertyTestFunction
 return {
 	["always"] = 0,
 	["less"] = 1,

@@ -1,3 +1,4 @@
+---@enum tes3.physicalAttackType
 return {
 	["none"] = 0,
 	["slash"] = 1,

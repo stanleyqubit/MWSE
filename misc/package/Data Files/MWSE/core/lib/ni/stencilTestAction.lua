@@ -1,3 +1,4 @@
+---@enum ni.stencilTestAction
 return {
 	["keep"] = 0,
 	["zero"] = 1,

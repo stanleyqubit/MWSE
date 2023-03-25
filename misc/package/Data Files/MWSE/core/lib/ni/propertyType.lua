@@ -1,3 +1,4 @@
+---@enum ni.propertyType
 return {
 	["alpha"] = 0x0,
 	["fog"] = 0x1,

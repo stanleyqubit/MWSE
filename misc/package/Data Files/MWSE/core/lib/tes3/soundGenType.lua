@@ -1,3 +1,4 @@
+---@enum tes3.soundGenType
 return {
 	["leftFoot"] = 0,
 	["rightFoot"] = 1,

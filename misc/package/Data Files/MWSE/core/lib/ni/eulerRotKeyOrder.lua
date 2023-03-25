@@ -1,3 +1,4 @@
+---@enum ni.eulerRotKeyOrder
 return {
 	["XYZ"] = 0,
 	["XZY"] = 1,

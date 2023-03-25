@@ -49,7 +49,7 @@ tes3.merchantService = require("tes3.merchantService")
 tes3.musicSituation = require("tes3.musicSituation")
 tes3.niType = require("tes3.niType")
 tes3.objectType = require("tes3.objectType")
-tes3.palette  = require("tes3.palette")
+tes3.palette = require("tes3.palette")
 tes3.partIndex = require("tes3.partIndex")
 tes3.physicalAttackType = require("tes3.physicalAttackType")
 tes3.quickKeyType = require("tes3.quickKeyType")
@@ -195,9 +195,18 @@ function tes3.onMainMenu()
 	return tes3.worldController.charGenState.value == 0
 end
 
+local function getLuaModRuntime(key)
+	return mwse.activeLuaMods[key:gsub("[/\\]", "."):lower()]
+end
+
 -- Checks to see if a lua mod is active.
 function tes3.isLuaModActive(key)
-	return mwse.activeLuaMods[key:gsub("[/\\]", "."):lower()] == true
+	local runtime = getLuaModRuntime(key)
+	if (not runtime) then
+		return false
+	end
+
+	return runtime.initialized == true
 end
 
 return tes3

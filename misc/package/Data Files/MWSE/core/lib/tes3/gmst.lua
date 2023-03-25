@@ -1,3 +1,4 @@
+---@enum tes3.gmst
 return {
 	["sMonthMorningstar"] = 0,
 	["sMonthSunsdawn"] = 1,

@@ -1,3 +1,4 @@
+---@enum tes3.aiPackage
 return {
 	["none"] = -1,
 	["wander"] = 0,

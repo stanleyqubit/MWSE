@@ -509,9 +509,15 @@ namespace mwse::lua {
 		lua_mge["enabled"] = []() {
 			return InstructionStore::getInstance().isOpcode(OpCode::xGetGS);
 		};
-		lua_mge["getVersion"] = []() {
+		lua_mge["getVersion"] = [](sol::this_state ts) {
 			mwscript::RunOriginalOpCode(nullptr, nullptr, OpCode::MGEGetVersion);
-			return Stack::getInstance().popLong();
+
+			// Convert packed version to semver table. MGE XE major version is offset for legacy reasons.
+			int ver = Stack::getInstance().popLong() - 0x40000;
+			int major = (ver >> 16) & 0xFF, minor = (ver >> 8) & 0xFF, patch = ver & 0xFF;
+
+			sol::state_view state = ts;
+			return state.create_table_with("major", major, "minor", minor, "patch", patch);
 		};
 		lua_mge["log"] = [](std::string string) {
 			Stack::getInstance().pushString(string);

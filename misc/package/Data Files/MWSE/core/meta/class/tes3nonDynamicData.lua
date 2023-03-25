@@ -12,6 +12,7 @@
 --- @field factions tes3faction[] *Read-only*. A collection of all faction objects.
 --- @field globals tes3iterator *Read-only*. A collection of all global variable objects.
 --- @field isSavingOrLoading boolean *Read-only*. True when in the process of saving or loading the game.
+--- @field landTextures tes3landTexture[] *Read-only*. A collection of all land texture objects.
 --- @field lastLoadedFile tes3gameFile *Read-only*. The last loaded savegame file.
 --- @field magicEffects table<integer, tes3magicEffect> *Read-only*. A table of references to all magic effects. This is a dictionary, as the effect list may have gaps.
 --- @field mapTexture niSourceTexture Access to the World map texture.

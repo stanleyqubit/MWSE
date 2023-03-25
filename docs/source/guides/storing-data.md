@@ -27,7 +27,11 @@ Besides saving your data to files, you can save your data to some of the MWSE's 
 !!! note
 	Both `data` and `tempData` tables can only be used to store *serializible* data.
 
-Data stored in the `data` table on a certain object will persist between savegame sessions, while data stored in `tempData` table will be cleared on game reload. There are some peculiarities when working with these tables - each of the table fields needs to be declared one by one. In addition, not every object can have Lua data. You can check that with `myRef.supportsLuaData` property.
+Data stored in the `data` table on a certain object will persist between savegame sessions, while data stored in `tempData` table will be cleared on game reload. There are some peculiarities when working with these tables:
+
+ - Each of the table fields needs to be declared one by one.
+ - Not every object can have Lua data. You can check that with `myRef.supportsLuaData` property.
+ - The `data` field on a `tes3reference` won't persist between savegames if the reference isn't marked as modified (NPCs and creatures are usually marked as modified by other parts of the engine). Make sure to mark your reference as modified explicitly: `myRef.modified = true`
 
 
 !!! example "Example: creating a table inside `data` table on the player's reference"
@@ -80,8 +84,11 @@ local regions = {
 
 -- This is the default layout for the table
 -- stored on tes3.player.data
+---@class myData
 local defaults = {
-	reginalBounties = {
+	regionalBounties = {
+		-- This table is unused in this example, but
+		-- it shows how to  initialize a sub-table.
 		["balmora"] = 0,
 		["seyda neen"] = 0,
 		["ald-ruhn"] = 0
@@ -96,15 +103,15 @@ local defaults = {
 ---@param t table
 local function initTableValues(data, t)
 	for k, v in pairs(t) do
-		-- If a field already exists - we did work with
-		-- this character before. Don't do anything.
+		-- If a field already exists - we initialized the data
+		-- table for this character before. Don't do anything.
 		if data[k] == nil then
 			if type(v) ~= "table" then
 				data[k] = v
 			elseif v == {} then
 				data[k] = {}
 			else
-				-- Fill out the sub-table
+				-- Fill out the sub-tables
 				data[k] = {}
 				initTableValues(data[k], v)
 			end
@@ -123,7 +130,7 @@ end
 event.register(tes3.event.loaded, initializeData)
 
 --- This is a convinience function to get our storage
----@return table myData
+---@return myData
 local function getData()
 	return tes3.player.data.myMod
 end
@@ -136,13 +143,16 @@ local function modKarma(delta)
 	local oldKarma = myData.karma
 	myData.karma = myData.karma + delta
 
-	local barrierCrossed = (math.abs(oldKarma) >= 100 and math.abs(myData.karma) < 100) or
-									(math.abs(myData.karma) > 100 and math.abs(oldKarma) <= 100)
+	local karma = myData.karma
+	local absOldKarma = math.abs(oldKarma)
+	local absKarma = math.abs(karma)
+	local barrierCrossed = ((absOldKarma >= 100) and (absKarma < 100)) or
+						   ((absKarma >= 100) and (absOldKarma < 100))
 
 	if barrierCrossed then
 		-- Let's log to see what's happening
-		tes3.messageBox("Current karma: %s", myData.karma)
-		if myData.karma < -100 then
+		tes3.messageBox("Current karma: %s", karma)
+		if karma < -100 then
 			tes3.messageBox("Because of your deeds your karma now reached evil level.")
 
 			-- Now let's store that to tes3.player.tempData for later use
@@ -153,13 +163,13 @@ local function modKarma(delta)
 			-- Now actually store player's karma range
 			temp.encounter = "bad"
 
-		elseif myData.karma < 100 then
-			-- -100 < karmy < 100
+		elseif karma < 100 then
+			-- -100 < karma < 100
 			tes3.messageBox("Because of your deeds your karma now reached neutral level.")
 			local temp = table.getset(tes3.player.tempData, "myMod", {})
 			temp.encounter = "neutral"
 
-		elseif myData.karma >= 100 then
+		elseif karma >= 100 then
 			tes3.messageBox("Through your deeds your karma now reached good level.")
 			local temp = table.getset(tes3.player.tempData, "myMod", {})
 			temp.encounter = "good"
@@ -181,7 +191,7 @@ local function onCellChange(e)
 		-- not to award the karma boost twice.
 		if not data.shrinesVisited[cellId] then
 			-- Player visited this shrine for the first time,
-			-- award some karma points
+			-- award some karma points.
 			modKarma(50)
 
 			-- Let's save that to the list of visited shrines in
@@ -205,7 +215,7 @@ local function onPick(e)
 		local cellId = tes3.player.cell.id:lower()
 		if regions[cellId] then
 			local myData = getData()
-			myData.reginalBounties[cellId] = myData.reginalBounties[cellId] + 25
+			myData.regionalBounties[cellId] = myData.regionalBounties[cellId] + 25
 		end
 
 	end
@@ -215,12 +225,13 @@ event.register(tes3.event.trapDisarm, onPick)
 
 ---@param e calcRestInterruptEventData
 local function onCalcRestInterrupt(e)
-	if not tes3.player.tempData.myMod then return end
+	local temp = tes3.player.tempData.myMod
+	if not temp then return end
 
 	local roll = math.random(100)
 	if roll > 60 then return end
 
-	local encounterType = tes3.player.tempData.myMod.encounter
+	local encounterType = temp.encounter
 	if encounterType == "good" then
 		-- The player has good karma, let's block
 		-- the rest interruption
@@ -236,8 +247,8 @@ local function onCalcRestInterrupt(e)
 			tes3.messageBox("Blocking encounter!")
 		end
 	else
-		-- Player is bad, let's increase the amount
-		-- of spawned creatures by a random number
+		-- Player is a bad guy, let's increase the amount
+		-- of spawned creatures by a random number.
 		local mod = math.random(10)
 		e.count = e.count + mod
 		tes3.messageBox("Increased the spawned enemy count!")

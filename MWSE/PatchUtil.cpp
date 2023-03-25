@@ -21,6 +21,7 @@
 #include "TES3MobManager.h"
 #include "TES3Reference.h"
 #include "TES3Script.h"
+#include "TES3Sound.h"
 #include "TES3UIElement.h"
 #include "TES3UIInventoryTile.h"
 #include "TES3VFXManager.h"
@@ -707,6 +708,16 @@ namespace mwse::patch {
 	const size_t PatchUIUpdateLayoutImageContent2_size = 0x11;
 
 	//
+	// Patch: When adjusting effects mix volume, update looping audio volume correctly.
+	//
+	
+	const auto TES3_AudioController_SetSoundBufferVolume = reinterpret_cast<void(__thiscall*)(TES3::AudioController*, TES3::SoundBuffer*, unsigned char)>(0x4029F0);
+	void __fastcall PatchSetLoopingSoundBufferVolume(TES3::AudioController* audio, DWORD unused, TES3::SoundEvent* soundEvent, unsigned char volume) {
+		unsigned char adjustedVolume = float(volume) * float(soundEvent->sound->volume) / 250.0f;
+		TES3_AudioController_SetSoundBufferVolume(audio, soundEvent->soundBuffer, adjustedVolume);
+	}
+
+	//
 	// Install all the patches.
 	//
 
@@ -1000,6 +1011,12 @@ namespace mwse::patch {
 		writePatchCodeUnprotected(0x57DE3F, (BYTE*)&PatchUIUpdateLayoutImageContent1, PatchUIUpdateLayoutImageContent1_size);
 		writePatchCodeUnprotected(0x57E1E8, (BYTE*)&PatchUIUpdateLayoutImageContent2, PatchUIUpdateLayoutImageContent2_size);
 		genCallUnprotected(0x57E1E8 + 0x2, reinterpret_cast<DWORD>(PatchUIElementTexcoordWrite));
+
+		// Patch: When adjusting effects mix volume, update looping audio volume correctly.
+		writeValueEnforced<BYTE>(0x5A1F24, 0x52, 0x56);
+		genCallEnforced(0x5A1F25, 0x4029F0, reinterpret_cast<DWORD>(PatchSetLoopingSoundBufferVolume));
+		writeValueEnforced<BYTE>(0x5A1FC5, 0x52, 0x56);
+		genCallEnforced(0x5A1FC6, 0x4029F0, reinterpret_cast<DWORD>(PatchSetLoopingSoundBufferVolume));
 	}
 
 	void installPostLuaPatches() {
@@ -1154,7 +1171,7 @@ namespace mwse::patch {
 	}
 
 	void CreateMiniDump(EXCEPTION_POINTERS* pep) {
-		log::getLog() << std::endl;
+		log::getLog() << std::dec << std::endl;
 		log::getLog() << "Morrowind has crashed! To help improve game stability, send MWSE_Minidump.dmp and mwse.log to NullCascade@gmail.com or to NullCascade#1010 on Discord." << std::endl;
 		log::getLog() << "Additional support can be found in the #mwse channel at the Morrowind Modding Community Discord: https://discord.me/mwmods" << std::endl;
 

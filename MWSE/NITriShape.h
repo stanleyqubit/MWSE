@@ -1,7 +1,7 @@
 #pragma once
 
 #include "NIAVObject.h"
-#include "NiTriBasedGeometry.h"
+#include "NITriBasedGeometry.h"
 
 namespace NI {
 	struct TriShape_vTable : TriBasedGeometry_vTable {
@@ -14,11 +14,19 @@ namespace NI {
 
 	struct TriShape : TriBasedGeometry {
 
+		TriShape(TriBasedGeometryData* data);
+
 		//
 		// vTable type overwriting.
 		//
 
 		TriShapeData* getModelData() const;
+
+		//
+		// Custom functions.
+		//
+
+		static Pointer<TriShape> create(unsigned short vertexCount, bool hasNormals, bool hasColors, unsigned short textureCoordSets, unsigned short triangleCount);
 
 		// Convenient access to model data.
 		nonstd::span<TES3::Vector3> getVertices() const;

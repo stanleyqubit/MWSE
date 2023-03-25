@@ -1,3 +1,4 @@
+---@enum ni.type
 return {
 	["AvoidNode"] = 0x7DD794,
 	["BrickNiExtraData"] = 0x7D1D48,

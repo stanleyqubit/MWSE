@@ -1,5 +1,7 @@
 # Event Definitions Guide
 
+When writing definitions for a new event add an entry to the `tes3.event` table and related [reference table](https://github.com/MWSE/MWSE/blob/master/docs/source/references/events.md).
+
 Event definitions are formatted as regular Lua tables. The available fields are:
 | Field       | Type      | Description |
 | ----------- | --------- | ----------- |

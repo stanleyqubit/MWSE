@@ -299,6 +299,17 @@ If true, the cell is an interior.
 
 ***
 
+### `landscape`
+<div class="search_terms" style="display: none">landscape</div>
+
+*Read-only*. Access to the cell's landscape object. It's only available on exterior cells.
+
+**Returns**:
+
+* `result` ([tes3land](../../types/tes3land))
+
+***
+
 ### `modified`
 <div class="search_terms" style="display: none">modified, ified</div>
 
@@ -340,6 +351,17 @@ The name and id of the cell. See also `displayName` and `editorName`.
 **Returns**:
 
 * `result` (number)
+
+***
+
+### `pathGrid`
+<div class="search_terms" style="display: none">pathgrid</div>
+
+*Read-only*. Access to the cell's pathgrid. Not all cells have a pathgrid. The property is unaccessible on unloaded cells.
+
+**Returns**:
+
+* `result` ([tes3pathGrid](../../types/tes3pathGrid), nil)
 
 ***
 
@@ -507,10 +529,14 @@ local inCell = myObject:isPointInCell(x, y)
 Used in a for loop, iterates over objects in the cell.
 
 ```lua
-myObject:iterateReferences(filter)
+local iterator = myObject:iterateReferences(filter)
 ```
 
 **Parameters**:
 
-* `filter` (integer, integer[]): *Optional*. The TES3 object type to filter results by. Those are stored in [`tes3.objectType`](https://mwse.github.io/MWSE/references/object-types/) namespace.
+* `filter` (integer, integer[]): *Optional*. The TES3 object type to filter results by. If you need multiple filters, just pass them as a table, e.g. `{ tes3.objectType.npc, tes3.objectType.creature }`. Those are stored in [`tes3.objectType`](https://mwse.github.io/MWSE/references/object-types/) namespace.
+
+**Returns**:
+
+* `iterator` (fun(): tes3reference)
 

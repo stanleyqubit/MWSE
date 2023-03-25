@@ -128,7 +128,7 @@ local executed = mwscript.addToLevItem({ list = ..., item = ..., level = ... })
 **Parameters**:
 
 * `params` (table)
-	* `list` ([tes3leveledItem](../../types/tes3leveledItem), string): Leveled item list to add a creature to.
+	* `list` ([tes3leveledItem](../../types/tes3leveledItem), string): Leveled item list to add an item to.
 	* `item` ([tes3item](../../types/tes3item), string): Item to add to the list.
 	* `level` (number): *Default*: `0`. Minimum level for the item to spawn.
 

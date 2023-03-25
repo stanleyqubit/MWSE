@@ -1,3 +1,4 @@
+---@enum tes3.partIndex
 return {
 	["head"] = 0,
 	["hair"] = 1,

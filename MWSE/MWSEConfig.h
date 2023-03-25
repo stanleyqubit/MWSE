@@ -10,6 +10,7 @@ namespace mwse {
 		static bool PatchNiFlipController;
 		static bool LetterboxMovies;
 		static bool EnableLogColors;
+		static bool EnableDependencyChecks;
 
 		static sol::table getDefaults();
 

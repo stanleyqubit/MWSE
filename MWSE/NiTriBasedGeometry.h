@@ -11,6 +11,8 @@ namespace NI {
 
 	struct TriBasedGeometry : Geometry {
 
+		TriBasedGeometry(TriBasedGeometryData* data);
+
 		//
 		// vTable type overwriting.
 		//

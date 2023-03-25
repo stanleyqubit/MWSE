@@ -27,6 +27,7 @@ function lfs.currentdir() end
 
 --- Creates a Lua iterator over the entries of a given directory. This can be used to create a for loop of directories. Be wary that current and parent directory markers may be available in the results.
 --- @param path string The path to iterate over.
+--- @return fun(): string iterator No description yet available.
 function lfs.dir(path) end
 
 --- Simple check to determine if a directory exists.

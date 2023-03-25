@@ -10,6 +10,44 @@ namespace NI {
 		return ptr;
 	}
 
+	Pointer<TriShapeData> TriShapeData::create(unsigned short vertexCount, bool hasNormals, bool hasColors, unsigned short textureCoordSets, unsigned short triangleCount) {
+		using TES3::Vector2;
+		using TES3::Vector3;
+
+		Vector3* vertices = mwse::tes3::_new<Vector3>(vertexCount);
+		ZeroMemory(vertices, sizeof(Vector3) * vertexCount);
+
+		Vector3* normals = nullptr;
+		if (hasNormals) {
+			normals = mwse::tes3::_new<Vector3>(vertexCount);
+			ZeroMemory(normals, sizeof(Vector3) * vertexCount);
+		}
+
+		PackedColor* colors = nullptr;
+		if (hasColors) {
+			colors = mwse::tes3::_new<PackedColor>(vertexCount);
+			ZeroMemory(colors, sizeof(PackedColor) * vertexCount);
+		}
+
+		Vector2* textureCoords = nullptr;
+		if (textureCoordSets > 0) {
+			size_t textureCoordTotal = textureCoordSets * vertexCount;
+			textureCoords = mwse::tes3::_new<Vector2>(textureCoordTotal);
+			ZeroMemory(textureCoords, sizeof(Vector2) * textureCoordTotal);
+		}
+
+		unsigned short* triangleList = nullptr;
+		if (triangleCount) {
+			triangleList = mwse::tes3::_new<unsigned short>(triangleCount);
+			ZeroMemory(triangleList, sizeof(unsigned short) * triangleCount);
+		}
+
+		// Create data and update texture set count after creation, as the constructor call assumes there is only 0 or 1 texture set.
+		auto result = create(vertexCount, vertices, normals, colors, textureCoords, triangleCount, triangleList);
+		result->textureSets = textureCoordSets;
+		return result;
+	}
+
 	Pointer<TriShapeData> TriShapeData::copyData(sol::optional<sol::table> filters) const {
 		auto vertexCount = getActiveVertexCount();
 
@@ -30,8 +68,9 @@ namespace NI {
 
 		TES3::Vector2* _textureCoords = nullptr;
 		if (textureCoords && mwse::lua::getOptionalParam(filters, "texCoords", true)) {
-			_textureCoords = mwse::tes3::_new<TES3::Vector2>(vertexCount);
-			memcpy_s(_textureCoords, sizeof(TES3::Vector2) * vertexCount, textureCoords, sizeof(TES3::Vector2) * vertexCount);
+			size_t textureCoordTotal = textureSets * vertexCount;
+			_textureCoords = mwse::tes3::_new<TES3::Vector2>(textureCoordTotal);
+			memcpy_s(_textureCoords, sizeof(TES3::Vector2) * textureCoordTotal, textureCoords, sizeof(TES3::Vector2) * textureCoordTotal);
 		}
 
 		unsigned short* _triangleList = nullptr;
@@ -40,12 +79,12 @@ namespace NI {
 			memcpy_s(_triangleList, sizeof(unsigned short) * triangleListLength, triangleList, sizeof(unsigned short) * triangleListLength);
 		}
 
+		// Create data and update texture set count after creation, as the constructor call assumes there is only 0 or 1 texture set.
 		auto result = create(vertexCount, _vertices, _normals, _colors, _textureCoords, triangleCount, _triangleList);
-
+		result->textureSets = _textureCoords ? textureSets : 0;
 		result->bounds = bounds;
 
 		return result;
-
 	}
 
 	nonstd::span<Triangle> TriShapeData::getTriangles() {

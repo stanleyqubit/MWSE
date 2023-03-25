@@ -1,3 +1,4 @@
+---@enum tes3.palette
 return {
 	["activeColor"] = "active_color",
 	["activeOverColor"] = "active_over_color",

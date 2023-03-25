@@ -5,3 +5,12 @@
 --- Contains the geometry data for an `NiTriShape` object.
 --- @class niTriangle
 --- @field verticies number[] The access to the three indices of the verticies that make up this triangle (0-indexed).
+niTriangle = {}
+
+--- Creates a new niTriangle with the given vertices.
+--- @param first number No description yet available.
+--- @param second number No description yet available.
+--- @param third number No description yet available.
+--- @return niTriangle triangle No description yet available.
+function niTriangle.new(first, second, third) end
+

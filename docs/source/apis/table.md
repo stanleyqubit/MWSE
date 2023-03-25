@@ -69,7 +69,7 @@ local result = table.binsearch(t, value, compval, reversed)
 Returns a random element from the given table.
 
 ```lua
-local result = table.choice(t)
+local value, key = table.choice(t)
 ```
 
 **Parameters**:
@@ -78,7 +78,8 @@ local result = table.choice(t)
 
 **Returns**:
 
-* `result` (unknown)
+* `value` (unknown): The randomly chosen value.
+* `key` (unknown): The table key of the chosen value.
 
 ***
 

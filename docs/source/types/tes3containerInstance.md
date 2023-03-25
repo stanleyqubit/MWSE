@@ -40,7 +40,7 @@ Friendly access to actor's barter gold amount.
 
 **Returns**:
 
-* `result` ([tes3object](../../types/tes3object))
+* `result` ([tes3container](../../types/tes3container))
 
 ***
 

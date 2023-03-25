@@ -1,3 +1,4 @@
+---@enum tes3.voiceover
 return {
 	["hello"] = 0,
 	["idle"] = 1,

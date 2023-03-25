@@ -1,3 +1,4 @@
+---@enum tes3.dialogueType
 return {
 	["topic"] = 0,
 	["voice"] = 1,

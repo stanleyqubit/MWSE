@@ -1,3 +1,4 @@
+---@enum tes3.spellState
 return {
 	["preCast"] = 0,
 	["cast"] = 1,

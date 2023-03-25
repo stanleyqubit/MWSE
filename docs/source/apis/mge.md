@@ -85,7 +85,7 @@ local enabled = mge.enabled()
 ### `mge.getLightingMode`
 <div class="search_terms" style="display: none">getlightingmode, lightingmode</div>
 
-Returns the lighting mode used by MGE XE. These values map to `mge.lightingMode.*` constants.
+Returns the lighting mode used by MGE XE. These values map to [`mge.lightingMode`](https://mwse.github.io/MWSE/references/mge/lighting-modes/) constants.
 
 ```lua
 local mode = mge.getLightingMode()
@@ -93,7 +93,7 @@ local mode = mge.getLightingMode()
 
 **Returns**:
 
-* `mode` (number): Maps to the `mge.lightingMode.*` constants.
+* `mode` (integer): Maps to the `mge.lightingMode` constants.
 
 ***
 
@@ -115,7 +115,7 @@ local scale = mge.getUIScale()
 ### `mge.getVersion`
 <div class="search_terms" style="display: none">getversion, version</div>
 
-Gets the MGE version. Returns a table with keys `major`, `minor`, and `patch`. In some older MGE XE versions, the versions are concatenated to a string.
+Gets the MGE version. Returns a table with keys `major`, `minor`, and `patch`.
 
 ```lua
 local result = mge.getVersion()
@@ -123,7 +123,7 @@ local result = mge.getVersion()
 
 **Returns**:
 
-* `result` ([mgeVersionTable](../../types/mgeVersionTable), string)
+* `result` ([mgeVersionTable](../../types/mgeVersionTable))
 
 ***
 
@@ -180,7 +180,7 @@ mge.saveScreenshot({ path = ..., captureWithUI = ... })
 ### `mge.setLightingMode`
 <div class="search_terms" style="display: none">setlightingmode, lightingmode</div>
 
-Sets the lighting mode used by MGE XE. The values passed can be used from the `mge.lightingMode.*` constants.
+Sets the lighting mode used by MGE XE. The values passed can be used from the [`mge.lightingMode`](https://mwse.github.io/MWSE/references/mge/lighting-modes/) constants.
 
 ```lua
 mge.setLightingMode(mode)
@@ -188,7 +188,7 @@ mge.setLightingMode(mode)
 
 **Parameters**:
 
-* `mode` (number): Maps from the `mge.lightingMode.*` constants.
+* `mode` (integer): Maps to the `mge.lightingMode` constants.
 
 ***
 

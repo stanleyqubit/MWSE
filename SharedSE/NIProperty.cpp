@@ -31,8 +31,6 @@ namespace NI {
 #if defined(SE_NI_PROPERTY_FNADDR_DTOR) && SE_NI_PROPERTY_FNADDR_DTOR > 0
 		const auto NI_Property_dtor = reinterpret_cast<void(__thiscall*)(Property*)>(SE_NI_PROPERTY_FNADDR_DTOR);
 		NI_Property_dtor(this);
-#else
-		throw not_implemented_exception();
 #endif
 	}
 

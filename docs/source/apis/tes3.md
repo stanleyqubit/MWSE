@@ -200,7 +200,7 @@ local addedCount = tes3.addItem({ reference = ..., item = ..., itemData = ..., s
 ### `tes3.addItemData`
 <div class="search_terms" style="display: none">additemdata, itemdata</div>
 
-Creates an item data if there is room for a new stack in a given inventory. This can be then used to add custom user data or adjust an item's condition. This will return nil if no item data could be allocated for the item -- for example if the reference doesn't have the item in their inventory or each item of that type already has item data.
+Creates an item data if there is room for a new stack in a given inventory. This can be then used to add custom user data or adjust an item's condition. This will return nil if no item data could be allocated for the item -- for example if the reference doesn't have the item in their inventory or each item of that type already has item data. Calling this function will mark the `to` reference as modified.
 
 ```lua
 local createdData = tes3.addItemData({ to = ..., item = ..., updateGUI = ... })
@@ -751,7 +751,7 @@ local canRest = tes3.canRest({ checkForEnemies = ..., checkForSolidGround = ...,
 
 **Parameters**:
 
-* `params` (table)
+* `params` (table): *Optional*.
 	* `checkForEnemies` (boolean): *Default*: `true`. Perform a check whether there are enemies nearby before opening rest menu. If there are, false is returned.
 	* `checkForSolidGround` (boolean): *Default*: `true`. Perform a check if the player is underwater. If underwater, false is returned.
 	* `showMessage` (boolean): *Default*: `false`. If true, a messagebox will be shown if the player can't rest because some condition isn't met.
@@ -1546,13 +1546,34 @@ local cells = tes3.getActiveCells()
 
 ***
 
+### `tes3.getAnimationActionTiming`
+<div class="search_terms" style="display: none">getanimationactiontiming, animationactiontiming</div>
+
+This function fetches a dictionary of the timings of the action keys for a specific animation group on an actor. The actor is required, as different actors can use different animations. The result is a table with action names as keys, and timings as values.
+
+```lua
+local result = tes3.getAnimationActionTiming({ reference = ..., group = ... })
+```
+
+**Parameters**:
+
+* `params` (table)
+	* `reference` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): A reference to the which actor whose animations will be checked.
+	* `group` (number): *Optional*. The animation group id to get the action timings for. Maps to [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) constants.
+
+**Returns**:
+
+* `result` (table&lt;string, number&gt;)
+
+***
+
 ### `tes3.getAnimationGroups`
 <div class="search_terms" style="display: none">getanimationgroups, animationgroups</div>
 
-This function fetches a reference's attached animation groups.
+This function fetches a reference's attached animation groups. The animation groups match the values from [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) table.
 
 ```lua
-local animData = tes3.getAnimationGroups({ reference = ... })
+local lowerBodyGroup, upperBodyGroup, leftArmGroup = tes3.getAnimationGroups({ reference = ... })
 ```
 
 **Parameters**:
@@ -1562,7 +1583,9 @@ local animData = tes3.getAnimationGroups({ reference = ... })
 
 **Returns**:
 
-* `animData` (number[])
+* `lowerBodyGroup` (integer)
+* `upperBodyGroup` (integer)
+* `leftArmGroup` (integer)
 
 ***
 
@@ -1583,6 +1606,18 @@ local result = tes3.getAnimationTiming({ reference = ... })
 **Returns**:
 
 * `result` (number[])
+
+??? example "Example: An elegent usage example"
+
+	The function returns animation timings for three body segments. This array can be nicely broken down into three variables using Lua's `unpack()` function.
+
+	```lua
+	
+	local lowerTiming, upperTiming, leftArmTiming = unpack(
+		tes3.getAnimationTiming({ reference = tes3.player })
+	)
+
+	```
 
 ***
 
@@ -1723,7 +1758,7 @@ local days = tes3.getCumulativeDaysForMonth(month)
 ### `tes3.getCurrentAIPackageId`
 <div class="search_terms" style="display: none">getcurrentaipackageid, currentaipackageid</div>
 
-Returns an actor's current AI package ID, just as the mwscript function `GetCurrentAIPackage` would. The return value maps to values in `tes3.aiPackage` namespace.
+Returns an actor's current AI package ID, just as the mwscript function `GetCurrentAIPackage` would.
 
 ```lua
 local packageID = tes3.getCurrentAIPackageId({ reference = ... })
@@ -1732,11 +1767,11 @@ local packageID = tes3.getCurrentAIPackageId({ reference = ... })
 **Parameters**:
 
 * `params` (table)
-	* `reference` ([tes3mobileActor](../../types/tes3mobileActor), [tes3reference](../../types/tes3reference))
+	* `reference` ([tes3mobileActor](../../types/tes3mobileActor), [tes3reference](../../types/tes3reference), string)
 
 **Returns**:
 
-* `packageID` (number)
+* `packageID` (integer): Maps to values in [`tes3.aiPackage`](https://mwse.github.io/MWSE/references/ai-packages/) table.
 
 ***
 
@@ -1795,13 +1830,14 @@ local dayCount = tes3.getDaysInMonth(month)
 Locates and returns a Dialogue Info by a given id. This involves file IO and is an expensive call. Results should be cached.
 
 ```lua
-local dialogueInfo = tes3.getDialogueInfo(dialogue, id)
+local dialogueInfo = tes3.getDialogueInfo({ dialogue = ..., id = ... })
 ```
 
 **Parameters**:
 
-* `dialogue` ([tes3dialogue](../../types/tes3dialogue), string): The dialogue that the info belongs to.
-* `id` (string): The numerical, unique id for the info object.
+* `params` (table)
+	* `dialogue` ([tes3dialogue](../../types/tes3dialogue), string): The dialogue that the info belongs to.
+	* `id` (string): The numerical, unique id for the info object.
 
 **Returns**:
 
@@ -2273,7 +2309,7 @@ local object = tes3.getObject(id)
 
 **Returns**:
 
-* `object` ([tes3object](../../types/tes3object))
+* `object` ([tes3baseObject](../../types/tes3baseObject))
 
 ***
 
@@ -2289,7 +2325,7 @@ local owner, requirement = tes3.getOwner({ reference = ... })
 **Parameters**:
 
 * `params` (table)
-	* `reference` ([tes3reference](../../types/tes3reference))
+	* `reference` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string)
 
 **Returns**:
 
@@ -2660,6 +2696,30 @@ local spell = tes3.getTrap({ reference = ... })
 
 ***
 
+### `tes3.getValue`
+<div class="search_terms" style="display: none">getvalue, value</div>
+
+Gets the value of an item and, optionally, an associated itemData. This can be useful if you wish to take durability and soul value into account. It will also take into account any installed Morrowind Code Patch rebalances. It can also be used to get the value of a reference.
+
+```lua
+local value = tes3.getValue({ item = ..., itemData = ..., reference = ..., useDurability = ..., useSoulValue = ... })
+```
+
+**Parameters**:
+
+* `params` (table)
+	* `item` ([tes3item](../../types/tes3item), string): *Optional*. The item to get the value of. Not needed if a reference is given.
+	* `itemData` ([tes3itemData](../../types/tes3itemData)): *Optional*. The item data to use to modify the value. Not needed if a reference is given.
+	* `reference` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): *Optional*. The reference to get the value of. Not used if an item is given.
+	* `useDurability` (boolean): *Default*: `true`. If set to false, durability will be ignored.
+	* `useSoulValue` (boolean): *Default*: `true`. If set to false, the soul value will be ignored, effectively giving you the base soul gem value.
+
+**Returns**:
+
+* `value` (number): The calculated value of the item.
+
+***
+
 ### `tes3.getVanityMode`
 <div class="search_terms" style="display: none">getvanitymode, vanitymode</div>
 
@@ -2703,6 +2763,21 @@ local werewolfKills = tes3.getWerewolfKillCount()
 **Returns**:
 
 * `werewolfKills` (number)
+
+***
+
+### `tes3.getWorldController`
+<div class="search_terms" style="display: none">getworldcontroller, worldcontroller</div>
+
+Gets the worldController.
+
+```lua
+local worldController = tes3.getWorldController()
+```
+
+**Returns**:
+
+* `worldController` ([tes3worldController](../../types/tes3worldController))
 
 ***
 
@@ -3216,19 +3291,19 @@ local element = tes3.messageBox({ message = ..., buttons = ..., callback = ..., 
 ### `tes3.modStatistic`
 <div class="search_terms" style="display: none">modstatistic, statistic</div>
 
-Modifies a statistic on a given actor. This should be used instead of manually setting values on the game structures, to ensure that events and GUI elements are properly handled. Either skill, attribute, or name must be provided.
+Modifies a statistic on a given actor. This should be used instead of manually setting values on the game structures, to ensure that events and GUI elements are properly handled. Either skill, attribute, or the statistic's property name must be provided.
 
 ```lua
-tes3.modStatistic({ reference = ..., name = ..., attribute = ..., skill = ..., base = ..., current = ..., value = ..., limit = ..., limitToBase = ... })
+tes3.modStatistic({ reference = ..., attribute = ..., skill = ..., name = ..., base = ..., current = ..., value = ..., limit = ..., limitToBase = ... })
 ```
 
 **Parameters**:
 
 * `params` (table)
 	* `reference` ([tes3mobileActor](../../types/tes3mobileActor), [tes3reference](../../types/tes3reference), string)
-	* `name` (string): *Optional*. A generic name of an attribute to set.
-	* `attribute` (number): *Optional*. The attribute to set.
-	* `skill` (number): *Optional*. The skill to set.
+	* `attribute` (number): *Optional*. The attribute to set. Uses a value from [`tes3.attribute`](https://mwse.github.io/MWSE/references/attributes/)
+	* `skill` (number): *Optional*. The skill to set. Uses a value from [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/)
+	* `name` (string): *Optional*. The property name of the statistic to set. The names can be taken from the properties of `tes3mobileNPC` or `tes3mobileCreature`. Useful for specifying health, magicka or fatigue.
 	* `base` (number): *Optional*. If set, the base value will be modified.
 	* `current` (number): *Optional*. If set, the current value will be modified.
 	* `value` (number): *Optional*. If set, both the base and current value will be modified.
@@ -3402,7 +3477,7 @@ local played = tes3.playVoiceover({ actor = ..., voiceover = ... })
 
 * `params` (table)
 	* `actor` ([tes3mobileActor](../../types/tes3mobileActor), [tes3reference](../../types/tes3reference), string): The actor to play a voiceover.
-	* `voiceover` (number): Maps to [`tes3.voiceover`](https://mwse.github.io/MWSE/references/voiceovers/) constants.
+	* `voiceover` (number, string): Maps to [`tes3.voiceover`](https://mwse.github.io/MWSE/references/voiceovers/) constants.
 
 **Returns**:
 
@@ -3423,7 +3498,7 @@ local executed = tes3.positionCell({ reference = ..., cell = ..., position = ...
 
 * `params` (table)
 	* `reference` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): *Default*: `tes3.mobilePlayer`. The reference to reposition.
-	* `cell` ([tes3cell](../../types/tes3cell)): *Optional*. The cell to move the reference to. If not provided, the reference will be moved to a cell in the exterior worldspace at the position provided.
+	* `cell` ([tes3cell](../../types/tes3cell), string, table, nil): *Optional*. The cell to move the reference to. Can be a tes3cell, cell name, or a table with two values that correspond to the exterior cell's grid coordinates. If not provided, the reference will be moved to a cell in the exterior worldspace at the position provided.
 	* `position` ([tes3vector3](../../types/tes3vector3), table): The position to move the reference to.
 	* `orientation` ([tes3vector3](../../types/tes3vector3), table): *Optional*. The new orientation of the reference.
 	* `forceCellChange` (boolean): *Default*: `false`. When true, forces the game to update a reference that has moved within a single cell, as if it was moved into a new cell.
@@ -3784,7 +3859,7 @@ local executed = tes3.runLegacyScript({ script = ..., source = ..., command = ..
 **Parameters**:
 
 * `params` (table)
-	* `script` ([tes3script](../../types/tes3script)): *Default*: `tes3.worldController.scriptGlobals`. The base script to base the execution from.
+	* `script` ([tes3script](../../types/tes3script), string): *Default*: `tes3.worldController.scriptGlobals`. The base script to base the execution from.
 	* `source` (number): The compilation source to use. Defaults to tes3.scriptSource.default
 	* `command` (string): The script text to compile and run.
 	* `variables` (tes3scriptVariables): *Optional*. If a reference is provided, the reference's variables will be used.
@@ -4149,7 +4224,7 @@ tes3.setOwner({ reference = ..., remove = ..., owner = ..., requiredGlobal = ...
 * `params` (table)
 	* `reference` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): A reference whose owner to set.
 	* `remove` (boolean): *Default*: `false`. If this parameter is set to true, reference's owner field will be removed.
-	* `owner` ([tes3npc](../../types/tes3npc), [tes3faction](../../types/tes3faction), string): Assigns this NPC or a faction as the owner of the reference.
+	* `owner` ([tes3npc](../../types/tes3npc), [tes3npcInstance](../../types/tes3npcInstance), [tes3mobileNPC](../../types/tes3mobileNPC), [tes3mobileCreature](../../types/tes3mobileCreature), [tes3reference](../../types/tes3reference), [tes3faction](../../types/tes3faction), string): Assigns this NPC or a faction as the owner of the reference.
 	* `requiredGlobal` ([tes3globalVariable](../../types/tes3globalVariable)): *Optional*. If `owner` is set to NPC, `requiredGlobal` variable can be set.
 	* `requiredRank` (number): *Default*: `0`. If `owner` is set to faction, `requitedRank` variable controls minimal rank in faction the player has to have to be able to freely take the reference.
 
@@ -4199,23 +4274,23 @@ tes3.setSourceless(object, sourceless)
 ### `tes3.setStatistic`
 <div class="search_terms" style="display: none">setstatistic, statistic</div>
 
-Sets a statistic on a given actor. This should be used instead of manually setting values on the game structures, to ensure that events and GUI elements are properly handled. Either skill, attribute, or name must be provided.
+Sets a statistic on a given actor. This should be used instead of manually setting values on the game structures, to ensure that events and GUI elements are properly handled. Either skill, attribute, or the statistic's property name must be provided.
 
 ```lua
-tes3.setStatistic({ attribute = ..., base = ..., current = ..., limit = ..., name = ..., reference = ..., skill = ..., value = ... })
+tes3.setStatistic({ reference = ..., attribute = ..., skill = ..., name = ..., base = ..., current = ..., value = ..., limit = ... })
 ```
 
 **Parameters**:
 
 * `params` (table)
-	* `attribute` (number): *Optional*. The attribute to set.
+	* `reference` ([tes3mobileActor](../../types/tes3mobileActor), [tes3reference](../../types/tes3reference), string)
+	* `attribute` (number): *Optional*. The attribute to set. Uses a value from [`tes3.attribute`](https://mwse.github.io/MWSE/references/attributes/)
+	* `skill` (number): *Optional*. The skill to set. Uses a value from [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/)
+	* `name` (string): *Optional*. The property name of the statistic to set. The names can be taken from the properties of `tes3mobileNPC` or `tes3mobileCreature`. Useful for specifying health, magicka or fatigue.
 	* `base` (number): *Optional*. If set, the base value will be set.
 	* `current` (number): *Optional*. If set, the current value will be set.
-	* `limit` (boolean): *Default*: `false`. If set, the attribute won't rise above 100 or fall below 0.
-	* `name` (string): *Optional*. A generic name of an attribute to set.
-	* `reference` ([tes3mobileActor](../../types/tes3mobileActor), [tes3reference](../../types/tes3reference), string)
-	* `skill` (number): *Optional*. The skill to set.
 	* `value` (number): *Optional*. If set, both the base and current value will be set.
+	* `limit` (boolean): *Default*: `false`. If set, the attribute won't rise above 100 or fall below 0.
 
 ***
 

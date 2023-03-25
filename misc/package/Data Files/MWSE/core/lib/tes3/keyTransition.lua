@@ -1,3 +1,4 @@
+---@enum tes3.keyTransition
 return {
 	["test"] = 0,
 	["up"] = 1,

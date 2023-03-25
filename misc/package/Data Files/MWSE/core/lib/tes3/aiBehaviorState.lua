@@ -1,3 +1,4 @@
+---@enum tes3.aiBehaviorState
 return {
 	["undecided"] = -1,
 	["hello"] = 0,

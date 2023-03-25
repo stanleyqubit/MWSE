@@ -27,6 +27,7 @@
 #include "TES3AIPackage.h"
 #include "TES3Alchemy.h"
 #include "TES3AnimationData.h"
+#include "TES3AnimationGroup.h"
 #include "TES3Archive.h"
 #include "TES3Armor.h"
 #include "TES3AudioController.h"
@@ -1564,6 +1565,66 @@ namespace mwse::lua {
 		lockNode->trap = getOptionalParamSpell(params, "spell");
 		reference->setObjectModified(true);
 		return true;
+	}
+
+	int getValue(sol::table params) {
+		auto item = getOptionalParamObject<TES3::Item>(params, "item");
+		auto itemData = getOptionalParam<TES3::ItemData*>(params, "itemData", nullptr);
+
+		// If we weren't given an item, see if we were given a reference.
+		if (item == nullptr) {
+			auto reference = getOptionalParamExecutionReference(params);
+			if (reference) {
+				if (!reference->baseObject->isItem()) {
+					throw std::invalid_argument("Invalid reference parameter provided: The reference is not an item.");
+				}
+				item = static_cast<TES3::Item*>(reference->baseObject);
+				itemData = reference->getAttachedItemData();
+			}
+		}
+
+		// Were we given valid data?
+		if (item == nullptr) {
+			throw std::invalid_argument("Invalid parameters provided: Must pass either an 'item' parameter or a 'reference' parameter.");
+		}
+		else if (!item->isItem()) {
+			throw std::invalid_argument("Invalid item parameter provided: The object is not an item.");
+		}
+
+		// If we have no item data, just get the base value.
+		const auto value = item->getValue();
+		if (itemData == nullptr) {
+			return value;
+		}
+		
+		// Handle soul- and MCP-dependent value.
+		if (item->objectType == TES3::ObjectType::Misc && getOptionalParam(params, "useSoulValue", true)) {
+			auto asMisc = static_cast<TES3::Misc*>(item);
+			if (asMisc->isSoulGem() && itemData->soul) {
+				auto soulValue = itemData->soul->getSoulValue().value_or(0);
+				if (mcp::getFeatureEnabled(mcp::feature::SoulgemValueRebalance)) {
+					return (soulValue * soulValue * soulValue) / 10000 + soulValue * 2;
+				}
+				else {
+					return value * soulValue;
+				}
+			}
+		}
+
+		// Manage condition.
+		if (getOptionalParam(params, "useDurability", true)) {
+			const auto durability = item->getDurability();
+			if (durability > 0) {
+				return value * itemData->condition / durability;
+			}
+
+			const auto uses = item->getUses();
+			if (uses > 0) {
+				return value * itemData->condition / uses;
+			}
+		}
+
+		return value;
 	}
 
 	bool checkMerchantTradesItem(sol::table params) {
@@ -4450,6 +4511,35 @@ namespace mwse::lua {
 		}
 	}
 
+	sol::optional<sol::table> getAnimationActionTiming(sol::table params, sol::this_state thisState) {
+		TES3::Reference* reference = getOptionalParamExecutionReference(params);
+		if (reference == nullptr) {
+			throw std::invalid_argument("Invalid 'reference' parameter provided.");
+		}
+
+		int group = getOptionalParam<int>(params, "group", -1);
+		if (group < -1 || group > 149) {
+			throw std::invalid_argument("Invalid 'group' parameter provided: must be between 0 and 149.");
+		}
+
+		auto animData = reference->getAttachedAnimationData();
+		if (animData == nullptr) {
+			return {};
+		}
+
+		auto animGroup = animData->animationGroups[group];
+		const auto animNoteTextByClass = reinterpret_cast<const char**>(0x78ABC8);
+		const auto animGroupNoteClass = reinterpret_cast<const int*>(0x78B0A8);
+		auto noteLabel = animNoteTextByClass + animGroupNoteClass[group];
+
+		sol::state_view state = thisState;
+		sol::table result = state.create_table();
+		for (size_t i = 0; i < animGroup->actionCount; ++i, noteLabel += 8) {
+			result[*noteLabel] = animGroup->actionTimes[i];
+		}
+		return result;
+	}
+
 	bool isAffectedBy(sol::table params) {
 		TES3::Reference* reference = getOptionalParamExecutionReference(params);
 		if (reference == nullptr) {
@@ -5811,6 +5901,7 @@ namespace mwse::lua {
 		tes3["force3rdPerson"] = force3rdPerson;
 		tes3["get3rdPersonCameraOffset"] = get3rdPersonCameraOffset;
 		tes3["getActiveCells"] = getActiveCells;
+		tes3["getAnimationActionTiming"] = getAnimationActionTiming;
 		tes3["getAnimationGroups"] = getCurrentAnimationGroups;
 		tes3["getAnimationTiming"] = getAnimationTiming;
 		tes3["getArchiveList"] = getArchiveList;
@@ -5868,6 +5959,7 @@ namespace mwse::lua {
 		tes3["getSoundPlaying"] = getSoundPlaying;
 		tes3["getTopMenu"] = TES3::UI::getMenuOnTop;
 		tes3["getTrap"] = getTrap;
+		tes3["getValue"] = getValue;
 		tes3["getVanityMode"] = getVanityMode;
 		tes3["getViewportSize"] = getViewportSize;
 		tes3["getWerewolfKillCount"] = getWerewolfKillCount;

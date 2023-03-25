@@ -9,6 +9,6 @@
 --- @field item tes3alchemy|tes3apparatus|tes3armor|tes3book|tes3clothing|tes3ingredient|tes3light|tes3lockpick|tes3misc|tes3probe|tes3repairTool|tes3weapon *Read-only*. The item being repaired.
 --- @field itemData tes3itemData *Read-only*. The item data relevant to the repaired item.
 --- @field repairAmount number The amount of condition that will be restored to the item.
---- @field repairer tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer *Read-only*. The actor performing the repair. Note that this is currently always the player, but this may change in future updates.
+--- @field repairer tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer *Read-only*. The actor performing the repair. Note that this is currently always the player, but this may change in future updates.
 --- @field tool tes3repairTool *Read-only*. The repair tool being used.
 --- @field toolData tes3itemData *Read-only*. The item data relevant to repair tool.

@@ -10,6 +10,15 @@
 --- @field vertices tes3vector3[] *Read-only*. The array of vertex position data. The length of the array is equal to vertex count.
 niTriShape = {}
 
+--- Creates a new niTriShape.
+--- @param vertexCount number The number of vertices the shape will allocate.
+--- @param hasNormals boolean If `true`, normals will be allocated.
+--- @param hasColors boolean If `true`, colors will be allocated.
+--- @param textureCoordSets number The number of texture coordinate sets (UV sets) to allocate.
+--- @param triangleCount number The number of triangles to allocate.
+--- @return niTriShape shape No description yet available.
+function niTriShape.new(vertexCount, hasNormals, hasColors, textureCoordSets, triangleCount) end
+
 --- Calculates and creates a bounding box for the object. The existing bounding box, if any, will not be used, a fresh one will always be calculated.
 --- @return tes3boundingBox boundingBox The newly created bounding box.
 function niTriShape:createBoundingBox() end

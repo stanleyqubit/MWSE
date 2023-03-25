@@ -4,4 +4,8 @@ return {
 	arguments = {
 		{ name = "path", type = "string", description = "The path to iterate over." },
 	},
+	returns = {
+		name = "iterator",
+		type = "fun(): string"
+	}
 }

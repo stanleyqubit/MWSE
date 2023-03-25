@@ -1,3 +1,4 @@
+---@enum ni.cameraClearFlags
 return {
 	["backBuffer"] = 1,
 	["stencil"] = 2,

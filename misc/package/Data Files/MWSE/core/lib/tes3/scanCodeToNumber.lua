@@ -1,3 +1,4 @@
+---@enum tes3.scanCodeToNumber
 return {
 	[2] = 1,
 	[3] = 2,

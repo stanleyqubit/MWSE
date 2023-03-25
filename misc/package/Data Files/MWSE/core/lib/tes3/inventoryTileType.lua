@@ -1,3 +1,4 @@
+---@enum tes3.inventoryTileType
 return {
 	["default"] = 0,
 	["equipped"] = 1,

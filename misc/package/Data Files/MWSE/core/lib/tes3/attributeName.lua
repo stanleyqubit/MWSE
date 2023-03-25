@@ -1,3 +1,4 @@
+---@enum tes3.attributeName
 return {
 	[0] = "strength",
 	[1] = "intelligence",

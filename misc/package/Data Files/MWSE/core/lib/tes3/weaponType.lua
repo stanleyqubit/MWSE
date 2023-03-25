@@ -1,3 +1,4 @@
+---@enum tes3.weaponType
 return {
 	["shortBladeOneHand"] = 0,
 	["longBladeOneHand"] = 1,

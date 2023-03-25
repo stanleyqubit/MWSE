@@ -1275,10 +1275,10 @@
     <ClInclude Include="NIGeometry.h">
       <Filter>Header Files\DataAdapters\NI</Filter>
     </ClInclude>
-    <ClInclude Include="NiTriBasedGeometry.h">
+    <ClInclude Include="NITriBasedGeometry.h">
       <Filter>Header Files\DataAdapters\NI</Filter>
     </ClInclude>
-    <ClInclude Include="NiTriBasedGeometryData.h">
+    <ClInclude Include="NITriBasedGeometryData.h">
       <Filter>Header Files\DataAdapters\NI</Filter>
     </ClInclude>
     <ClInclude Include="NIBound.h">
@@ -3262,7 +3262,7 @@
     </ClCompile>
     <ClCompile Include="NIRenderer.cpp">
       <Filter>Source Files\DataAdapters\NI</Filter>
-    </ClCompile>
+    </ClCompile>https://pete.nfshost.com/newtab/
     <ClCompile Include="NICamera.cpp">
       <Filter>Source Files\DataAdapters\NI</Filter>
     </ClCompile>
@@ -3694,6 +3694,8 @@
     </ClCompile>
     <ClCompile Include="LuaUiSkillTooltipEvent.cpp">
       <Filter>Source Files\Lua\Events</Filter>
+    <ClCompile Include="NITriBasedGeometry.cpp">
+      <Filter>Source Files\DataAdapters\NI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

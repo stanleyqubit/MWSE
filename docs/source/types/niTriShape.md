@@ -812,3 +812,28 @@ Update all attached properties.
 myObject:updateProperties()
 ```
 
+***
+
+## Functions
+
+### `new`
+<div class="search_terms" style="display: none">new</div>
+
+Creates a new niTriShape.
+
+```lua
+local shape = niTriShape.new(vertexCount, hasNormals, hasColors, textureCoordSets, triangleCount)
+```
+
+**Parameters**:
+
+* `vertexCount` (number): The number of vertices the shape will allocate.
+* `hasNormals` (boolean): If `true`, normals will be allocated.
+* `hasColors` (boolean): If `true`, colors will be allocated.
+* `textureCoordSets` (number): The number of texture coordinate sets (UV sets) to allocate.
+* `triangleCount` (number): The number of triangles to allocate.
+
+**Returns**:
+
+* `shape` ([niTriShape](../../types/niTriShape))
+

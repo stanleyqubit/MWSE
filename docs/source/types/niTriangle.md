@@ -19,3 +19,26 @@ The access to the three indices of the verticies that make up this triangle (0-i
 
 * `result` (number[])
 
+***
+
+## Functions
+
+### `new`
+<div class="search_terms" style="display: none">new</div>
+
+Creates a new niTriangle with the given vertices.
+
+```lua
+local triangle = niTriangle.new(first, second, third)
+```
+
+**Parameters**:
+
+* `first` (number)
+* `second` (number)
+* `third` (number)
+
+**Returns**:
+
+* `triangle` ([niTriangle](../../types/niTriangle))
+

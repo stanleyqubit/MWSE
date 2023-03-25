@@ -1,3 +1,4 @@
+---@enum ni.texturingPropertyFilterMode
 return {
 	["nearest"] = 0,
 	["bilerp"] = 1,

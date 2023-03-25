@@ -340,23 +340,20 @@ local result = myObject:transpose()
 Creates a new 3 by 3 matrix from 3 provided vectors or 9 numbers. Creates an empty matrix if nothing is provided.
 
 ```lua
-local matrix = tes3matrix33.new(x0, y0, z0, x1, y1, z1, x2, y2, z2, x, y, z)
+local matrix = tes3matrix33.new(x0, y0, z0, x1, y1, z1, x2, y2, z2)
 ```
 
 **Parameters**:
 
-* `x0` (number): *Default*: `0`.
-* `y0` (number): *Default*: `0`.
-* `z0` (number): *Default*: `0`.
+* `x0` (number, [tes3vector3](../../types/tes3vector3)): *Default*: `0`.
+* `y0` (number, [tes3vector3](../../types/tes3vector3)): *Default*: `0`.
+* `z0` (number, [tes3vector3](../../types/tes3vector3)): *Default*: `0`.
 * `x1` (number): *Default*: `0`.
 * `y1` (number): *Default*: `0`.
 * `z1` (number): *Default*: `0`.
 * `x2` (number): *Default*: `0`.
 * `y2` (number): *Default*: `0`.
 * `z2` (number): *Default*: `0`.
-* `x` ([tes3vector3](../../types/tes3vector3)): *Optional*.
-* `y` ([tes3vector3](../../types/tes3vector3)): *Optional*.
-* `z` ([tes3vector3](../../types/tes3vector3)): *Optional*.
 
 **Returns**:
 

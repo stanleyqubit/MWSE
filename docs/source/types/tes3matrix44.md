@@ -90,15 +90,15 @@ myObject:toZero()
 Creates a new 4 by 4 matrix from 4 provided vectors or 16 numbers. Creates an empty matrix if nothing is provided.
 
 ```lua
-local matrix = tes3matrix44.new(w0, x0, y0, z0, w1, x1, y1, z1, w2, x2, y2, z2, w3, x3, y3, z3, w, x, y, z)
+local matrix = tes3matrix44.new(w0, x0, y0, z0, w1, x1, y1, z1, w2, x2, y2, z2, w3, x3, y3, z3)
 ```
 
 **Parameters**:
 
-* `w0` (number): *Default*: `0`.
-* `x0` (number): *Default*: `0`.
-* `y0` (number): *Default*: `0`.
-* `z0` (number): *Default*: `0`.
+* `w0` (number, [tes3vector4](../../types/tes3vector4)): *Default*: `0`.
+* `x0` (number, [tes3vector4](../../types/tes3vector4)): *Default*: `0`.
+* `y0` (number, [tes3vector4](../../types/tes3vector4)): *Default*: `0`.
+* `z0` (number, [tes3vector4](../../types/tes3vector4)): *Default*: `0`.
 * `w1` (number): *Default*: `0`.
 * `x1` (number): *Default*: `0`.
 * `y1` (number): *Default*: `0`.
@@ -111,10 +111,6 @@ local matrix = tes3matrix44.new(w0, x0, y0, z0, w1, x1, y1, z1, w2, x2, y2, z2, 
 * `x3` (number): *Default*: `0`.
 * `y3` (number): *Default*: `0`.
 * `z3` (number): *Default*: `0`.
-* `w` ([tes3vector4](../../types/tes3vector4)): *Optional*.
-* `x` ([tes3vector4](../../types/tes3vector4)): *Optional*.
-* `y` ([tes3vector4](../../types/tes3vector4)): *Optional*.
-* `z` ([tes3vector4](../../types/tes3vector4)): *Optional*.
 
 **Returns**:
 

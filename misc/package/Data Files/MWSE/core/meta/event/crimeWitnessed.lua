@@ -11,6 +11,6 @@
 --- @field value number *Read-only*. The bounty value of the crime.
 --- @field victim tes3container|tes3containerInstance|tes3creature|tes3creatureInstance|tes3npc|tes3npcInstance|tes3faction *Read-only*. The victim of the crime, as a general actor base object or faction.
 --- @field victimFaction tes3faction *Read-only*. The faction that the crime was against, assuming the victim is, or is in, one.
---- @field victimMobile tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer *Read-only*. The mobile of the victim, if applicable, giving access to the unique victim.
+--- @field victimMobile tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer *Read-only*. The mobile of the victim, if applicable, giving access to the unique victim.
 --- @field witness tes3reference *Read-only*. The reference that witnessed the crime.
---- @field witnessMobile tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer *Read-only*. The mobile actor of the reference that witnessed the crime.
+--- @field witnessMobile tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer *Read-only*. The mobile actor of the reference that witnessed the crime.

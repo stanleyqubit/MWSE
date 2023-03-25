@@ -956,6 +956,9 @@ namespace se::cs::dialog::render_window {
 			return;
 		}
 
+		// An undo checkpoint is required before and after the movement or it will crash later on.
+		UndoManager::get()->storeCheckpoint(UndoManager::Action::Moved);
+
 		for (auto target = selectionData->firstTarget; target != lastTarget; target = target->next) {
 			auto reference = target->reference;
 
@@ -1005,6 +1008,9 @@ namespace se::cs::dialog::render_window {
 		}
 
 		selectionData->recalculateBound();
+
+		// An undo checkpoint is required before and after the movement or it will crash later on.
+		UndoManager::get()->storeCheckpoint(UndoManager::Action::Moved);
 	}
 
 	void hideSelectedReferences() {

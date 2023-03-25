@@ -227,8 +227,8 @@
     <ClInclude Include="NITextureEffectLua.h" />
     <ClInclude Include="NITextureLua.h" />
     <ClInclude Include="NITriangle.h" />
-    <ClInclude Include="NiTriBasedGeometry.h" />
-    <ClInclude Include="NiTriBasedGeometryData.h" />
+    <ClInclude Include="NITriBasedGeometry.h" />
+    <ClInclude Include="NITriBasedGeometryData.h" />
     <ClInclude Include="NITriShapeData.h" />
     <ClInclude Include="NIUVController.h" />
     <ClInclude Include="NIUVData.h" />
@@ -729,6 +729,7 @@
     <ClCompile Include="NITextureLua.cpp" />
     <ClCompile Include="NITimeController.cpp" />
     <ClCompile Include="NITriangle.cpp" />
+    <ClCompile Include="NITriBasedGeometry.cpp" />
     <ClCompile Include="NITriBasedGeometryData.cpp" />
     <ClCompile Include="NITriShape.cpp" />
     <ClCompile Include="NITriShapeData.cpp" />

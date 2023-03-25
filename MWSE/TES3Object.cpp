@@ -655,6 +655,10 @@ namespace TES3 {
 		return vTable.object->getSceneGraphNode(this);
 	}
 
+	bool Object::loadMesh() {
+		return vTable.object->loadMesh(this);
+	}
+
 	Object* Object::skipDeletedObjects() {
 		TES3::Object* object = this;
 		while (object && (object->objectFlags & TES3::ObjectFlag::Delete) == TES3::ObjectFlag::Delete)

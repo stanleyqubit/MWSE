@@ -34,7 +34,7 @@ namespace mwse {
 		}
 
 		// Get the base record.
-		TES3::BaseObject* object = reference->baseObject;
+		TES3::Object* object = reference->baseObject;
 		if (object == NULL) {
 			if constexpr (DEBUG_MWSCRIPT_FUNCTIONS) {
 				mwse::log::getLog() << "xSetMaxCharge: No record found for reference." << std::endl;

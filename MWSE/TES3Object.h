@@ -128,7 +128,7 @@ namespace TES3 {
 		int (__thiscall * loadObject)(BaseObject*, GameFile*); // 0xC
 		int (__thiscall * saveObject)(BaseObject*, GameFile*); // 0x10
 		void (__thiscall * setObjectModified)(BaseObject*, bool); // 0x14
-		int (__thiscall * setObjectFlag40)(BaseObject*, unsigned char); // 0x18
+		int (__thiscall * setFlagMovedRef)(BaseObject*, unsigned char); // 0x18
 		void * unknown_0x1C;
 		const char * (__thiscall * getObjectID)(const BaseObject*); // 0x20
 	};
@@ -136,75 +136,75 @@ namespace TES3 {
 
 	struct ObjectVirtualTable : BaseObjectVirtualTable {
 		void (__thiscall * copy)(Object*, const Object*, int); // 0x24
-		void (__thiscall * setID)(BaseObject*, const char*); // 0x28
-		NI::Node * (__thiscall * getSceneGraphNode)(BaseObject*); // 0x2C
+		void (__thiscall * setID)(Object*, const char*); // 0x28
+		NI::Node * (__thiscall * getSceneGraphNode)(Object*); // 0x2C
 		void * unknown_0x30;
 		void * unknown_0x34;
-		char * (__thiscall * getName)(const BaseObject*); // 0x38
-		char * (__thiscall * getIconPath)(const BaseObject*); // 0x3C
+		char * (__thiscall * getName)(const Object*); // 0x38
+		char * (__thiscall * getIconPath)(const Object*); // 0x3C
 		void * unknown_0x40;
 		void * unknown_0x44;
-		char* (__thiscall * getModelPath)(const BaseObject*); // 0x48
-		Script * (__thiscall * getScript)(const BaseObject*); // 0x4C
-		Sound * (__thiscall * getSound)(const BaseObject*); // 0x50
-		char * (__thiscall * getRaceID)(const BaseObject*); // 0x54
-		char * (__thiscall * getClassID)(const BaseObject*); // 0x58
-		char * (__thiscall * getBirthsignID)(const BaseObject*); // 0x5C
-		Race * (__thiscall * getRace)(const BaseObject*); // 0x60
-		Class * (__thiscall * getClass)(const BaseObject*); // 0x64
-		Faction * (__thiscall * getFaction)(const BaseObject*); // 0x68
-		bool (__thiscall * isFemale)(const BaseObject*); // 0x6C
-		int (__thiscall * getFactionRank)(const BaseObject*); // 0x70
-		int (__thiscall * getLevel)(const BaseObject*); // 0x74
+		char* (__thiscall * getModelPath)(const Object*); // 0x48
+		Script * (__thiscall * getScript)(const Object*); // 0x4C
+		Sound * (__thiscall * getSound)(const Object*); // 0x50
+		char * (__thiscall * getRaceID)(const Object*); // 0x54
+		char * (__thiscall * getClassID)(const Object*); // 0x58
+		char * (__thiscall * getBirthsignID)(const Object*); // 0x5C
+		Race * (__thiscall * getRace)(const Object*); // 0x60
+		Class * (__thiscall * getClass)(const Object*); // 0x64
+		Faction * (__thiscall * getFaction)(const Object*); // 0x68
+		bool (__thiscall * isFemale)(const Object*); // 0x6C
+		int (__thiscall * getFactionRank)(const Object*); // 0x70
+		int (__thiscall * getLevel)(const Object*); // 0x74
 		void * unknown_0x78;
-		void (__thiscall * setDispositionRaw)(BaseObject*, int); // 0x7C
-		int (__thiscall * modDisposition)(BaseObject*, signed int); // 0x80
-		int (__thiscall * getReputation)(const BaseObject*); // 0x84
-		int (__thiscall * setReputation)(BaseObject*, int); // 0x88
-		int (__thiscall * getDispositionRaw)(const BaseObject*); // 0x8C
-		signed char(__thiscall * modFactionIndex)(BaseObject*, signed char); // 0x90
-		int (__thiscall * getType)(const BaseObject*); // 0x94
-		char * (__thiscall * getTypeName)(const BaseObject*); // 0x98
-		float (__thiscall * getWeight)(const BaseObject*); // 0x9C
-		int (__thiscall * getValue)(const BaseObject*); // 0xA0
-		void (__thiscall * setDurability)(BaseObject*, int); // 0xA4
-		int (__thiscall * getDurability)(const BaseObject*); // 0xA8
-		int (__thiscall * getMagicka)(const BaseObject*); // 0xAC
-		int (__thiscall * getFatigue)(const BaseObject*); // 0xB0
-		float (__thiscall * getQuality)(const BaseObject*); // 0xB4
-		bool (__thiscall * isLeftPartOfPair)(const BaseObject*); // 0xB8
-		bool (__thiscall * isEssential)(const BaseObject*); // 0xBC
-		bool (__thiscall * isRespawn)(const BaseObject*); // 0xC0
+		void (__thiscall * setDispositionRaw)(Object*, int); // 0x7C
+		int (__thiscall * modDisposition)(Object*, signed int); // 0x80
+		int (__thiscall * getReputation)(const Object*); // 0x84
+		int (__thiscall * setReputation)(Object*, int); // 0x88
+		int (__thiscall * getDispositionRaw)(const Object*); // 0x8C
+		signed char(__thiscall * modFactionIndex)(Object*, signed char); // 0x90
+		int (__thiscall * getType)(const Object*); // 0x94
+		char * (__thiscall * getTypeName)(const Object*); // 0x98
+		float (__thiscall * getWeight)(const Object*); // 0x9C
+		int (__thiscall * getValue)(const Object*); // 0xA0
+		void (__thiscall * setDurability)(Object*, int); // 0xA4
+		int (__thiscall * getDurability)(const Object*); // 0xA8
+		int (__thiscall * getMagicka)(const Object*); // 0xAC
+		int (__thiscall * getFatigue)(const Object*); // 0xB0
+		float (__thiscall * getQuality)(const Object*); // 0xB4
+		bool (__thiscall * isLeftPartOfPair)(const Object*); // 0xB8
+		bool (__thiscall * isEssential)(const Object*); // 0xBC
+		bool (__thiscall * isRespawn)(const Object*); // 0xC0
 		void * unknown_0xC4;
-		int (__thiscall * getUses)(const BaseObject*); // 0xC8
-		int (__thiscall * getEnchantCapacity)(const BaseObject*);  // 0xCC
-		Enchantment * (__thiscall * getEnchantment)(const BaseObject*); // 0xD0
-		Enchantment * (__thiscall * setEnchantment)(BaseObject*, Enchantment*); // 0xD4
-		AIConfig * (__thiscall * getAIConfig)(const BaseObject*); // 0xD8
-		void * (__thiscall * getAIPackageList)(const BaseObject*); // 0xDC
-		void * resolveInternalIDs; // 0xE0
+		int (__thiscall * getUses)(const Object*); // 0xC8
+		int (__thiscall * getEnchantCapacity)(const Object*);  // 0xCC
+		Enchantment * (__thiscall * getEnchantment)(const Object*); // 0xD0
+		Enchantment * (__thiscall * setEnchantment)(Object*, Enchantment*); // 0xD4
+		AIConfig * (__thiscall * getAIConfig)(const Object*); // 0xD8
+		IteratedList<AIConfig> * (__thiscall * getAIConfigsList)(Object*); // 0xDC
+		void (__thiscall * resolveInternalIDs)(Object*, NonDynamicData*); // 0xE0
 		void * unknown_0xE4;
-		unsigned char (__thiscall * getAutoCalc)(const BaseObject*); // 0xE8
-		void (__thiscall * setAutoCalc)(BaseObject*, unsigned char); // 0xEC
+		unsigned char (__thiscall * getAutoCalc)(const Object*); // 0xE8
+		void (__thiscall * setAutoCalc)(Object*, unsigned char); // 0xEC
 		void * unknown_0xF0;
-		void * unknown_0xF4;
-		void * unknown_0xF8;
-		char* (__thiscall * setModelPath)(BaseObject*, const char*); // 0xFC
+		NI::Node * (__thiscall * cloneNewSceneNode)(Object*, Reference*, bool); // 0xF4
+		void (__thiscall * releaseClone)(Object*, Reference*); // 0xF8
+		char* (__thiscall * setModelPath)(Object*, const char*); // 0xFC
 		void * unknown_0x100;
 		void * unknown_0x104;
-		bool (__thiscall* isLocationMarker)(const BaseObject*); // 0x108
-		char* (__thiscall * setName)(BaseObject*, const char*); // 0x10C
-		void (__thiscall* reevaluateEquipment)(BaseObject*); // 0x110
+		bool (__thiscall * isLocationMarker)(const Object*); // 0x108
+		char * (__thiscall * setName)(Object*, const char*); // 0x10C
+		void (__thiscall * reevaluateEquipment)(Object*); // 0x110
 		void * unknown_0x114;
 		void * unknown_0x118;
-		void(__thiscall* resetVisualNode)(BaseObject*, NI::Node*); // 0x11C
-		float (__thiscall * getScale)(const BaseObject*); // 0x120
-		void (__thiscall * setScale)(BaseObject*, float, bool); // 0x124
+		void (__thiscall * resetVisualNode)(Object*, NI::Node*); // 0x11C
+		float (__thiscall * getScale)(const Object*); // 0x120
+		void (__thiscall * setScale)(Object*, float, bool); // 0x124
 		void * unknown_0x128;
-		int(__thiscall* unknown_0x12C)(BaseObject*); // 0x12C
-		void * unknown_0x130;
-		void * loadModel; // 0x134
-		void * unknown_0x138;
+		int (__thiscall * unknown_0x12C)(Object*); // 0x12C
+		bool (__thiscall * saveStolenFlags)(Object*, GameFile*); // 0x130
+		bool (__thiscall * loadMesh)(Object*); // 0x134
+		void (__thiscall * applyCollisionMode)(Object*, NI::Node*, int, int); // 0x138
 	};
 	static_assert(sizeof(ObjectVirtualTable) == 0x13C, "TES3::ObjectVirtualTable failed size validation");
 
@@ -353,6 +353,7 @@ namespace TES3 {
 		bool getSupportsLuaData() const;
 
 		NI::Node * getSceneGraphNode();
+		bool loadMesh();
 
 		//
 		// Custom functions.
@@ -376,8 +377,8 @@ namespace TES3 {
 	static_assert(sizeof(Object) == 0x28, "TES3::Object failed size validation");
 
 	struct PhysicalObjectVirtualTable : ObjectVirtualTable {
-		void * unknown_0x13C;
-		void * unknown_0x140;
+		NI::Node* (__thiscall* cloneNewModelWithBodyParts)(PhysicalObject*, Reference*); // 0x13C
+		bool (__thiscall* reloadBaseModel)(PhysicalObject*, const char*); // 0x140
 		IteratedList<BaseObject*> * (__thiscall * getStolenList)(PhysicalObject*); // 0x144
 	};
 

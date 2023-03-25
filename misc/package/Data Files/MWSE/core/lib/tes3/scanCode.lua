@@ -1,3 +1,4 @@
+---@enum tes3.scanCode
 return {
 	["esc"] = 1,
 	["escape"] = 1,

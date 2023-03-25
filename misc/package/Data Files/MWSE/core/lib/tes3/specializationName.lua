@@ -1,3 +1,4 @@
+---@enum tes3.specializationName
 return {
 	[-1] = "invalid",
 	[0] = "combat",

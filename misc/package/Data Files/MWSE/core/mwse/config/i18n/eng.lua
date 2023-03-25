@@ -16,4 +16,6 @@ return {
 	["enableLegacyLuaMods.description"] = "If enabled, early alpha lua mods will be supported\n\nLegacy lua mods can be found in:\nData Files\\MWSE\\lua folder.",
 	["enableLogColors.label"] = "Enable Log Colors",
 	["enableLogColors.description"] = "If enabled, log colors will be enabled in the console. However, this will make the mwse.log file more difficult to read in a text editor.",
+	["enableDependencyChecks.label"] = "Enable Dependency Checks",
+	["enableDependencyChecks.description"] = "If enabled, MWSE will check for dependencies of mods and warn the user if they are missing.",
 }

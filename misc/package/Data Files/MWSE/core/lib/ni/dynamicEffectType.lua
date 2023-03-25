@@ -1,3 +1,4 @@
+---@enum ni.dynamicEffectType
 return {
 	["ambientLight"] = 0,
 	["directionalLight"] = 1,

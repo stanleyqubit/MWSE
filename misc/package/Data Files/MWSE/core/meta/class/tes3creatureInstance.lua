@@ -7,7 +7,7 @@
 --- @field aiConfig tes3aiConfig *Read-only*. Simplified access to the base creature's AI configuration.
 --- @field attacks tes3rangeInt[] Simplified access to the base creature's attacks. A table of three attacks, represented by a trio of [`tes3rangeInt`](https://mwse.github.io/MWSE/types/tes3rangeInt/).
 --- @field attributes number[] Simplified access to the base creature's attributes. A table of eight numbers, representing the base values for the creature's attributes.
---- @field baseObject tes3creature Access to creature that this one is instanced from.
+--- @field baseObject tes3creature *Read-only*. Access to creature that this one is instanced from.
 --- @field biped boolean Access to the creature's biped flag.
 --- @field equipment tes3equipmentStack[] *Read-only*. A collection that contains the currently equipped items.
 --- @field fatigue number *Read-only*. The creature's current fatigue.
@@ -20,7 +20,7 @@
 --- @field level number *Read-only*. The base level of the creature.
 --- @field magicka number *Read-only*. The creature's current magicka.
 --- @field mesh string The path to the object's mesh.
---- @field mobile tes3mobileActor|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer *Read-only*. The mobile that the object is represented by.
+--- @field mobile tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer *Read-only*. The mobile that the object is represented by.
 --- @field name string The player-facing name for the object.
 --- @field reference tes3reference *Read-only*. The reference that the object is represented by.
 --- @field respawns boolean Access to the creature's respawns flag.

@@ -1,3 +1,4 @@
+---@enum tes3.bodyPartAttachment
 return {
 	["root"] = 0,
 	["head"] = 1,

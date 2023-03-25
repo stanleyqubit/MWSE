@@ -4,6 +4,7 @@ return {
 	arguments = {
 		{ name = "id", type = "string" }
 	},
-	returns = "object",
-	valuetype = "tes3object",
+	returns = {
+		{ name = "object", type = "tes3baseObject" }
+	}
 }

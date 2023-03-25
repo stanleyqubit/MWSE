@@ -1,3 +1,4 @@
+---@enum tes3.soundMix
 return {
 	["master"] = 0,
 	["voice"] = 1,

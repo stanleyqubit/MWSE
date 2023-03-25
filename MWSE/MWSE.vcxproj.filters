@@ -3262,7 +3262,7 @@
     </ClCompile>
     <ClCompile Include="NIRenderer.cpp">
       <Filter>Source Files\DataAdapters\NI</Filter>
-    </ClCompile>https://pete.nfshost.com/newtab/
+    </ClCompile>
     <ClCompile Include="NICamera.cpp">
       <Filter>Source Files\DataAdapters\NI</Filter>
     </ClCompile>

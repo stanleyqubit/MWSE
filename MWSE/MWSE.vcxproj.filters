@@ -1683,9 +1683,6 @@
     <ClInclude Include="NiRenderedTextureLua.h">
       <Filter>Header Files\Lua\Bindings\NI</Filter>
     </ClInclude>
-    <ClInclude Include="NIDX8TextureData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="LuaCameraControlEvent.h">
       <Filter>Header Files\Lua\Events</Filter>
     </ClInclude>
@@ -1697,6 +1694,9 @@
     </ClInclude>
     <ClInclude Include="LuaUiSkillTooltipEvent.h">
       <Filter>Header Files\Lua\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="NIDX8TextureData.h">
+      <Filter>Header Files\DataAdapters\NI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3694,6 +3694,7 @@
     </ClCompile>
     <ClCompile Include="LuaUiSkillTooltipEvent.cpp">
       <Filter>Source Files\Lua\Events</Filter>
+    </ClCompile>
     <ClCompile Include="NITriBasedGeometry.cpp">
       <Filter>Source Files\DataAdapters\NI</Filter>
     </ClCompile>

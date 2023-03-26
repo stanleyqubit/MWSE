@@ -1423,7 +1423,7 @@ function tes3.getTrap(params) end
 --- 
 --- `reference`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil — *Optional*. The reference to get the value of. Not used if an item is given.
 --- 
---- `useDurability`: boolean? — *Default*: `true`. If set to false, durability will be ignored.
+--- `useDurability`: boolean? — *Default*: `true`. If set to false, condition and uses will be ignored.
 --- 
 --- `useSoulValue`: boolean? — *Default*: `true`. If set to false, the soul value will be ignored, effectively giving you the base soul gem value.
 --- @return number value The calculated value of the item.
@@ -1434,7 +1434,7 @@ function tes3.getValue(params) end
 --- @field item tes3alchemy|tes3apparatus|tes3armor|tes3book|tes3clothing|tes3ingredient|tes3light|tes3lockpick|tes3misc|tes3probe|tes3repairTool|tes3weapon|string|nil *Optional*. The item to get the value of. Not needed if a reference is given.
 --- @field itemData tes3itemData? *Optional*. The item data to use to modify the value. Not needed if a reference is given.
 --- @field reference tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil *Optional*. The reference to get the value of. Not used if an item is given.
---- @field useDurability boolean? *Default*: `true`. If set to false, durability will be ignored.
+--- @field useDurability boolean? *Default*: `true`. If set to false, condition and uses will be ignored.
 --- @field useSoulValue boolean? *Default*: `true`. If set to false, the soul value will be ignored, effectively giving you the base soul gem value.
 
 --- The function returns true if the player is in the vanity mode. Vanity mode is triggered by a period of inactivity from the player or by a `tes3.setVanityMode()` function. The view is switched to third person (if not already), and the camera is orbiting slowly around the player character.
@@ -1770,7 +1770,7 @@ function tes3.playItemPickupSound(params) end
 --- @field item tes3alchemy|tes3apparatus|tes3armor|tes3book|tes3clothing|tes3ingredient|tes3light|tes3lockpick|tes3misc|tes3probe|tes3repairTool|tes3weapon No description yet available.
 --- @field pickup boolean? *Default*: `true`. If false, the place down item will be used.
 
---- Plays a sound on a given reference. Provides control over volume (including volume channel), pitch, and loop control.
+--- Plays a sound on a given reference. Provides control over volume (including volume channel), pitch, and loop control. Triggers `addTempSound` event if `soundPath` argument is passed, triggers `playSound` otherwise.
 --- 
 --- **Note**: MP3 sound files can only be played if they are inside \\Vo\\ folder. The files must conform to the MPEG Layer-3, 64 Kbps 44100 kHz, 16-bit mono specification.
 --- @param params tes3.playSound.params This table accepts the following values:
@@ -1787,7 +1787,7 @@ function tes3.playItemPickupSound(params) end
 --- 
 --- `pitch`: number? — *Default*: `1.0`. The pitch-shift multiplier. For 22kHz audio (most typical) it can have the range [0.005, 4.5]; for 44kHz audio it can have the range [0.0025, 2.25].
 --- 
---- `soundPath`: string? — *Optional*. The path to a custom soundfile (useful for playing sounds that are not registered in the Construction Set). Starts in Data Files\Sound.
+--- `soundPath`: string? — *Optional*. The path to a custom soundfile (useful for playing sounds that are not registered in the Construction Set). Starts in Data Files\Sound\.
 --- @return boolean executed No description yet available.
 function tes3.playSound(params) end
 
@@ -1799,7 +1799,7 @@ function tes3.playSound(params) end
 --- @field mixChannel number? *Default*: `tes3.soundMix.effects`. The channel to base volume off of. Maps to [`tes3.soundMix`](https://mwse.github.io/MWSE/references/sound-mix-types/) constants.
 --- @field volume number? *Default*: `1.0`. A value between 0.0 and 1.0 to scale the volume off of.
 --- @field pitch number? *Default*: `1.0`. The pitch-shift multiplier. For 22kHz audio (most typical) it can have the range [0.005, 4.5]; for 44kHz audio it can have the range [0.0025, 2.25].
---- @field soundPath string? *Optional*. The path to a custom soundfile (useful for playing sounds that are not registered in the Construction Set). Starts in Data Files\Sound.
+--- @field soundPath string? *Optional*. The path to a custom soundfile (useful for playing sounds that are not registered in the Construction Set). Starts in Data Files\Sound\.
 
 --- Causes a target actor to play a voiceover.
 --- @param params tes3.playVoiceover.params This table accepts the following values:
@@ -2100,18 +2100,18 @@ function tes3.saveGame(params) end
 --- @field file string? *Default*: `"quiksave"`. The filename of the save that will be created, without extension.
 --- @field name string? *Default*: `"Quicksave"`. The display name of the save.
 
---- Plays a sound file, with an optional alteration and subtitle.
+--- Plays a sound file, with an optional alteration and subtitle. Triggers `addTempSound` event.
 --- 
 --- **Note**: MP3 voice files must conform to the MPEG Layer-3, 64 Kbps 44100 kHz, 16-bit mono specification.
 --- @param params tes3.say.params This table accepts the following values:
 --- 
 --- `reference`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string — The reference to make say something.
 --- 
---- `soundPath`: string — A path to a valid sound file.
+--- `soundPath`: string — A path to a valid sound file. Starts in Data Files\Sound\.
 --- 
---- `pitch`: number? — *Default*: `1`. A pitch shift to adjust the sound with.
+--- `pitch`: number? — *Default*: `1.0`. A pitch shift to adjust the sound with.
 --- 
---- `volume`: number? — *Default*: `1`. The volume to play the sound at, relative to the voice mix channel.
+--- `volume`: number? — *Default*: `1.0`. The volume to play the sound at, relative to the voice mix channel.
 --- 
 --- `forceSubtitle`: boolean? — *Default*: `false`. If true a subtitle will be shown, even if subtitles are disabled.
 --- 
@@ -2121,9 +2121,9 @@ function tes3.say(params) end
 ---Table parameter definitions for `tes3.say`.
 --- @class tes3.say.params
 --- @field reference tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string The reference to make say something.
---- @field soundPath string A path to a valid sound file.
---- @field pitch number? *Default*: `1`. A pitch shift to adjust the sound with.
---- @field volume number? *Default*: `1`. The volume to play the sound at, relative to the voice mix channel.
+--- @field soundPath string A path to a valid sound file. Starts in Data Files\Sound\.
+--- @field pitch number? *Default*: `1.0`. A pitch shift to adjust the sound with.
+--- @field volume number? *Default*: `1.0`. The volume to play the sound at, relative to the voice mix channel.
 --- @field forceSubtitle boolean? *Default*: `false`. If true a subtitle will be shown, even if subtitles are disabled.
 --- @field subtitle string? *Optional*. The subtitle to show if subtitles are enabled, or if forceSubtitle is set.
 

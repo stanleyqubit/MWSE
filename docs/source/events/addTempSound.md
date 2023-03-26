@@ -6,7 +6,7 @@
 	More information: https://github.com/MWSE/MWSE/tree/master/docs
 -->
 
-This event is triggered when the game is about to play a sound from a sound generator.
+This event is triggered when the game is about to play a sound from a sound generator, with `tes3.say()` or with `tes3.playSound()` with `soundPath` passed.
 
 ```lua
 --- @param e addTempSoundEventData

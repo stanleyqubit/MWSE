@@ -1,6 +1,6 @@
 return {
 	type = "event",
-	description = "This event is triggered when the game is about to play a sound from a sound generator.",
+	description = "This event is triggered when the game is about to play a sound from a sound generator, with `tes3.say()` or with `tes3.playSound()` with `soundPath` passed.",
 	related = { "addSound" },
 	eventData = {
 		["path"] = {

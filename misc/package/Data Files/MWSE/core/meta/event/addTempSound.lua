@@ -2,7 +2,7 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- This event is triggered when the game is about to play a sound from a sound generator.
+--- This event is triggered when the game is about to play a sound from a sound generator, with `tes3.say()` or with `tes3.playSound()` with `soundPath` passed.
 --- @class addTempSoundEventData
 --- @field block boolean If set to `true`, vanilla logic will be suppressed. Returning `false` will set this to `true`.
 --- @field claim boolean If set to `true`, any lower-priority event callbacks will be skipped. Returning `false` will set this to `true`.

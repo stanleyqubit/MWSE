@@ -2711,7 +2711,7 @@ local value = tes3.getValue({ item = ..., itemData = ..., reference = ..., useDu
 	* `item` ([tes3item](../../types/tes3item), string): *Optional*. The item to get the value of. Not needed if a reference is given.
 	* `itemData` ([tes3itemData](../../types/tes3itemData)): *Optional*. The item data to use to modify the value. Not needed if a reference is given.
 	* `reference` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): *Optional*. The reference to get the value of. Not used if an item is given.
-	* `useDurability` (boolean): *Default*: `true`. If set to false, durability will be ignored.
+	* `useDurability` (boolean): *Default*: `true`. If set to false, condition and uses will be ignored.
 	* `useSoulValue` (boolean): *Default*: `true`. If set to false, the soul value will be ignored, effectively giving you the base soul gem value.
 
 **Returns**:
@@ -3439,7 +3439,7 @@ local executed = tes3.playItemPickupSound({ reference = ..., item = ..., pickup 
 ### `tes3.playSound`
 <div class="search_terms" style="display: none">playsound</div>
 
-Plays a sound on a given reference. Provides control over volume (including volume channel), pitch, and loop control.
+Plays a sound on a given reference. Provides control over volume (including volume channel), pitch, and loop control. Triggers `addTempSound` event if `soundPath` argument is passed, triggers `playSound` otherwise.
 
 **Note**: MP3 sound files can only be played if they are inside \\Vo\\ folder. The files must conform to the MPEG Layer-3, 64 Kbps 44100 kHz, 16-bit mono specification.
 
@@ -3456,7 +3456,7 @@ local executed = tes3.playSound({ sound = ..., reference = ..., loop = ..., mixC
 	* `mixChannel` (number): *Default*: `tes3.soundMix.effects`. The channel to base volume off of. Maps to [`tes3.soundMix`](https://mwse.github.io/MWSE/references/sound-mix-types/) constants.
 	* `volume` (number): *Default*: `1.0`. A value between 0.0 and 1.0 to scale the volume off of.
 	* `pitch` (number): *Default*: `1.0`. The pitch-shift multiplier. For 22kHz audio (most typical) it can have the range [0.005, 4.5]; for 44kHz audio it can have the range [0.0025, 2.25].
-	* `soundPath` (string): *Optional*. The path to a custom soundfile (useful for playing sounds that are not registered in the Construction Set). Starts in Data Files\Sound.
+	* `soundPath` (string): *Optional*. The path to a custom soundfile (useful for playing sounds that are not registered in the Construction Set). Starts in Data Files\Sound\.
 
 **Returns**:
 
@@ -3897,7 +3897,7 @@ local saved = tes3.saveGame({ file = ..., name = ... })
 ### `tes3.say`
 <div class="search_terms" style="display: none">say</div>
 
-Plays a sound file, with an optional alteration and subtitle.
+Plays a sound file, with an optional alteration and subtitle. Triggers `addTempSound` event.
 
 **Note**: MP3 voice files must conform to the MPEG Layer-3, 64 Kbps 44100 kHz, 16-bit mono specification.
 
@@ -3909,9 +3909,9 @@ tes3.say({ reference = ..., soundPath = ..., pitch = ..., volume = ..., forceSub
 
 * `params` (table)
 	* `reference` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): The reference to make say something.
-	* `soundPath` (string): A path to a valid sound file.
-	* `pitch` (number): *Default*: `1`. A pitch shift to adjust the sound with.
-	* `volume` (number): *Default*: `1`. The volume to play the sound at, relative to the voice mix channel.
+	* `soundPath` (string): A path to a valid sound file. Starts in Data Files\Sound\.
+	* `pitch` (number): *Default*: `1.0`. A pitch shift to adjust the sound with.
+	* `volume` (number): *Default*: `1.0`. The volume to play the sound at, relative to the voice mix channel.
 	* `forceSubtitle` (boolean): *Default*: `false`. If true a subtitle will be shown, even if subtitles are disabled.
 	* `subtitle` (string): *Optional*. The subtitle to show if subtitles are enabled, or if forceSubtitle is set.
 

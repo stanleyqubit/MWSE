@@ -39,6 +39,10 @@ Current version of dkjson.
 
 Decode string into a table.
 
+!!! warning
+	If the table encoded as json had both string and integer indices, this process converted all the integer indices to strings. For example, `[1]` was converted to `["1"]`. So, when loading mixed tables from json, this needs to be considered.
+
+
 ```lua
 local result = json.decode(s, position, nullValue)
 ```
@@ -60,6 +64,10 @@ local result = json.decode(s, position, nullValue)
 
 Create a string representing the object. Object can be a table, a string, a number, a boolean, nil, json.null or any object with a function __tojson in its metatable. A table can only use strings and numbers as keys and its values have to be valid objects as well. It raises an error for any invalid data types or reference cycles.
 
+!!! warning
+	If the table you are encoding as json has both string and integer indices, this action will convert all the integer indices to strings. For example, `[1]` is converted to `["1"]`. So, when loading mixed tables from json, this needs to be considered.
+
+
 ```lua
 local result = json.encode(object, state)
 ```
@@ -79,6 +87,10 @@ local result = json.encode(object, state)
 <div class="search_terms" style="display: none">loadfile</div>
 
 Loads the contents of a file through json.decode. Files loaded from Data Files\\MWSE\\{fileName}.json.
+
+!!! warning
+	If the table encoded as json had both string and integer indices, this process converted all the integer indices to strings. For example, `[1]` was converted to `["1"]`. So, when loading mixed tables from json, this needs to be considered. If you need to save and load your mod's configuration file, consider using [`mwse.loadConfig()`](https://mwse.github.io/MWSE/apis/mwse/#mwseloadconfig) as that function will do this for you.
+
 
 ```lua
 local result = json.loadfile(fileName)

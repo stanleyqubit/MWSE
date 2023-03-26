@@ -11,4 +11,4 @@
 --- @class tes3itemStack
 --- @field count integer The total number of items in the stack.
 --- @field object tes3alchemy|tes3apparatus|tes3armor|tes3book|tes3clothing|tes3ingredient|tes3light|tes3lockpick|tes3misc|tes3probe|tes3repairTool|tes3weapon *Read-only*. The core game object that the stack represents.
---- @field variables tes3itemData[] A collection of variables that are associated with the stack's object, or nil if there aren't any.
+--- @field variables tes3itemData[]|nil A collection of variables that are associated with the stack's object, or nil if there aren't any.

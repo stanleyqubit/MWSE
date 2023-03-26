@@ -42,7 +42,7 @@ A collection of variables that are associated with the stack's object, or nil if
 
 **Returns**:
 
-* `result` ([tes3itemData](../../types/tes3itemData)[])
+* `result` ([tes3itemData](../../types/tes3itemData)[], nil)
 
 ??? example "Example: In the iterItems() function we can see that the an item stack can consist of items with itemData and items without it"
 

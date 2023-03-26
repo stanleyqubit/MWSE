@@ -130,7 +130,7 @@ The bounding box for the object.
 
 **Returns**:
 
-* `result` ([tes3inventory](../../types/tes3inventory))
+* `result` ([tes3inventory](../../types/tes3inventory), [tes3itemStack](../../types/tes3itemStack)[])
 
 ***
 

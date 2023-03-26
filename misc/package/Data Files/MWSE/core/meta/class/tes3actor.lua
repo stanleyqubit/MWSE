@@ -11,7 +11,7 @@
 --- @field blood integer Friendly access to actor's blood type, in [0, 7] range. The available blood types are defined in the Morrowind.ini file, and assigned to the actor via the Construction Set.
 --- @field cloneCount number *Read-only*. The number of clones that exist of this actor.
 --- @field equipment tes3equipmentStack[] *Read-only*. The items currently equipped to the actor.
---- @field inventory tes3inventory *Read-only*. The items currently carried by the actor.
+--- @field inventory tes3inventory|tes3itemStack[] *Read-only*. The items currently carried by the actor.
 tes3actor = {}
 
 --- Checks if the actor has provided item equipped.

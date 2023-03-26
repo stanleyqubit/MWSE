@@ -234,7 +234,7 @@ Access to the creature's flies flag.
 
 **Returns**:
 
-* `result` ([tes3inventory](../../types/tes3inventory))
+* `result` ([tes3inventory](../../types/tes3inventory), [tes3itemStack](../../types/tes3itemStack)[])
 
 ***
 

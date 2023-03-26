@@ -2218,6 +2218,25 @@ local level = tes3.getLockLevel({ reference = ... })
 
 ***
 
+### `tes3.getLuaModMetadata`
+<div class="search_terms" style="display: none">getluamodmetadata, luamodmetadata</div>
+
+Fetches the contents of the [metadata file](https://mwse.github.io/MWSE/guides/metadata/) associated with a given lua mod key.
+
+```lua
+local metadata = tes3.getLuaModMetadata(modKey)
+```
+
+**Parameters**:
+
+* `modKey` (string): The key for the lua mod, which must match the file location and the metadata file's `[tools.mwse]` contents.
+
+**Returns**:
+
+* `metadata` (table, nil)
+
+***
+
 ### `tes3.getMagicEffect`
 <div class="search_terms" style="display: none">getmagiceffect, magiceffect</div>
 
@@ -2711,7 +2730,7 @@ local value = tes3.getValue({ item = ..., itemData = ..., reference = ..., useDu
 	* `item` ([tes3item](../../types/tes3item), string): *Optional*. The item to get the value of. Not needed if a reference is given.
 	* `itemData` ([tes3itemData](../../types/tes3itemData)): *Optional*. The item data to use to modify the value. Not needed if a reference is given.
 	* `reference` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): *Optional*. The reference to get the value of. Not used if an item is given.
-	* `useDurability` (boolean): *Default*: `true`. If set to false, durability will be ignored.
+	* `useDurability` (boolean): *Default*: `true`. If set to false, condition and uses will be ignored.
 	* `useSoulValue` (boolean): *Default*: `true`. If set to false, the soul value will be ignored, effectively giving you the base soul gem value.
 
 **Returns**:

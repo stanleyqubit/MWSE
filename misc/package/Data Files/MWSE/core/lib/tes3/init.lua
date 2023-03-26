@@ -199,6 +199,15 @@ local function getLuaModRuntime(key)
 	return mwse.activeLuaMods[key:gsub("[/\\]", "."):lower()]
 end
 
+function tes3.getLuaModMetadata(key)
+	local runtime = getLuaModRuntime(key)
+	if (not runtime) then
+		return
+	end
+
+	return runtime.metadata
+end
+
 -- Checks to see if a lua mod is active.
 function tes3.isLuaModActive(key)
 	local runtime = getLuaModRuntime(key)

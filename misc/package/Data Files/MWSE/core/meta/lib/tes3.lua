@@ -1222,6 +1222,11 @@ function tes3.getLockLevel(params) end
 --- @class tes3.getLockLevel.params
 --- @field reference tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string No description yet available.
 
+--- Fetches the contents of the [metadata file](https://mwse.github.io/MWSE/guides/metadata/) associated with a given lua mod key.
+--- @param modKey string The key for the lua mod, which must match the file location and the metadata file's `[tools.mwse]` contents.
+--- @return table|nil metadata No description yet available.
+function tes3.getLuaModMetadata(modKey) end
+
 --- Fetches the core game Magic Effect object for a given ID. Can return custom magic effects added with `tes3.addMagicEffect`.
 --- @param id integer Maps to values in [`tes3.effect`](https://mwse.github.io/MWSE/references/magic-effects/) table.
 --- @return tes3magicEffect|nil magicEffect No description yet available.
@@ -1423,7 +1428,7 @@ function tes3.getTrap(params) end
 --- 
 --- `reference`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil — *Optional*. The reference to get the value of. Not used if an item is given.
 --- 
---- `useDurability`: boolean? — *Default*: `true`. If set to false, durability will be ignored.
+--- `useDurability`: boolean? — *Default*: `true`. If set to false, condition and uses will be ignored.
 --- 
 --- `useSoulValue`: boolean? — *Default*: `true`. If set to false, the soul value will be ignored, effectively giving you the base soul gem value.
 --- @return number value The calculated value of the item.
@@ -1434,7 +1439,7 @@ function tes3.getValue(params) end
 --- @field item tes3alchemy|tes3apparatus|tes3armor|tes3book|tes3clothing|tes3ingredient|tes3light|tes3lockpick|tes3misc|tes3probe|tes3repairTool|tes3weapon|string|nil *Optional*. The item to get the value of. Not needed if a reference is given.
 --- @field itemData tes3itemData? *Optional*. The item data to use to modify the value. Not needed if a reference is given.
 --- @field reference tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil *Optional*. The reference to get the value of. Not used if an item is given.
---- @field useDurability boolean? *Default*: `true`. If set to false, durability will be ignored.
+--- @field useDurability boolean? *Default*: `true`. If set to false, condition and uses will be ignored.
 --- @field useSoulValue boolean? *Default*: `true`. If set to false, the soul value will be ignored, effectively giving you the base soul gem value.
 
 --- The function returns true if the player is in the vanity mode. Vanity mode is triggered by a period of inactivity from the player or by a `tes3.setVanityMode()` function. The view is switched to third person (if not already), and the camera is orbiting slowly around the player character.

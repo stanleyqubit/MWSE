@@ -9,7 +9,7 @@ tes3ui = {}
 --- Sends all text input to the specified element.  Calling this function with a nil argument will release text input and allow keybinds to work. Suppresses most keybinds while active, except the Journal open/close keybind (it's up to the individual menu implementation).
 --- 
 --- Only one element can have control of input, and there is no automatic restoration of control if one element takes control from another. Be careful of conflicts with other users of this function.
---- @param element tes3uiElement? *Optional*. No description yet available.
+--- @param element tes3uiElement|nil The element to focus, or `nil` to clear focus.
 function tes3ui.acquireTextInput(element) end
 
 --- When used in a mouse event, causes the element to capture further mouse events even when the cursor goes outside the element. Setting mouse capture should always be accompanied by releasing it on a complementary event. This is commonly used for dragging, so that it can continue even if the mouse moves slightly outside the element.

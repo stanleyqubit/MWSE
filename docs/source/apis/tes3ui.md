@@ -23,7 +23,7 @@ tes3ui.acquireTextInput(element)
 
 **Parameters**:
 
-* `element` ([tes3uiElement](../../types/tes3uiElement)): *Optional*.
+* `element` ([tes3uiElement](../../types/tes3uiElement), nil): The element to focus, or `nil` to clear focus.
 
 ***
 

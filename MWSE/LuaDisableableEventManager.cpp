@@ -140,6 +140,7 @@
 #include "LuaSpellTickEvent.h"
 #include "LuaUiObjectTooltipEvent.h"
 #include "LuaUiRefreshedEvent.h"
+#include "LuaUiSkillTooltipEvent.h"
 #include "LuaUiSpellTooltipEvent.h"
 #include "LuaUnequippedEvent.h"
 #include "LuaVFXCreatedEvent.h"
@@ -305,6 +306,7 @@ namespace mwse::lua::event {
 		usertypeDefinition["uiPreEvent"] = sol::property(&GenericUiPreEvent::getEventEnabled, &GenericUiPreEvent::setEventEnabled);
 		usertypeDefinition["uiRefreshed"] = sol::property(&UiRefreshedEvent::getEventEnabled, &UiRefreshedEvent::setEventEnabled);
 		usertypeDefinition["uiShowRestMenu"] = sol::property(&ShowRestWaitMenuEvent::getEventEnabled, &ShowRestWaitMenuEvent::setEventEnabled);
+		usertypeDefinition["uiSkillTooltip"] = sol::property(&UiSkillTooltipEvent::getEventEnabled, &UiSkillTooltipEvent::setEventEnabled);
 		usertypeDefinition["uiSpellTooltip"] = sol::property(&UiSpellTooltipEvent::getEventEnabled, &UiSpellTooltipEvent::setEventEnabled);
 		usertypeDefinition["unequipped"] = sol::property(&UnequippedEvent::getEventEnabled, &UnequippedEvent::setEventEnabled);
 		usertypeDefinition["vfxCreated"] = sol::property(&VFXCreatedEvent::getEventEnabled, &VFXCreatedEvent::setEventEnabled);

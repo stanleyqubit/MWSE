@@ -1695,6 +1695,9 @@
     <ClInclude Include="TES3LandTextureLua.h">
       <Filter>Header Files\Lua\Bindings\TES3</Filter>
     </ClInclude>
+    <ClInclude Include="LuaUiSkillTooltipEvent.h">
+      <Filter>Header Files\Lua\Events</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -3689,6 +3692,8 @@
     <ClCompile Include="NIDX8TextureData.cpp">
       <Filter>Source Files\DataAdapters\NI</Filter>
     </ClCompile>
+    <ClCompile Include="LuaUiSkillTooltipEvent.cpp">
+      <Filter>Source Files\Lua\Events</Filter>
     <ClCompile Include="NITriBasedGeometry.cpp">
       <Filter>Source Files\DataAdapters\NI</Filter>
     </ClCompile>

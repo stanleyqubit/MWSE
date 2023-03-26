@@ -89,7 +89,7 @@ function tes3ui.createResponseText(params) end
 --- @field type integer? *Default*: `2`. The type for the response. Defaults to `choice` responses. If set to `1`, a title will be made. Value of `0` corresponds to the main text, and value of `2` corresponds to red clickable choice text.
 --- @field index integer? *Optional*. The answer index for the response. Only used for `choice` responses.
 
---- Creates a tooltip menu, which can be an empty menu, an item tooltip, or a spell tooltip. This should be called from within a tooltip event callback. These automatically follow the mouse cursor, and are also destroyed automatically when the mouse leaves the originating element. Creating an item tooltip will invoke the uiObjectTooltip event.
+--- Creates a tooltip menu, which can be an empty menu, an item tooltip, a skill tooltip, or a spell tooltip. This should be called from within a tooltip event callback. These automatically follow the mouse cursor, and are also destroyed automatically when the mouse leaves the originating element. Creating an item tooltip will invoke the uiObjectTooltip event.
 ---
 --- [Examples available in online documentation](https://mwse.github.io/MWSE/apis/tes3ui/#tes3uicreatetooltipmenu).
 --- @param params tes3ui.createTooltipMenu.params? This table accepts the following values:
@@ -99,6 +99,8 @@ function tes3ui.createResponseText(params) end
 --- `itemData`: tes3itemData? — *Optional*. The item data for the item.
 --- 
 --- `spell`: tes3spell? — *Optional*. The spell to create a tooltip for.
+--- 
+--- `skill`: tes3skill? — *Optional*. The skill to create a tooltip for.
 --- @return tes3uiElement result No description yet available.
 function tes3ui.createTooltipMenu(params) end
 
@@ -107,6 +109,7 @@ function tes3ui.createTooltipMenu(params) end
 --- @field item tes3alchemy|tes3apparatus|tes3armor|tes3book|tes3clothing|tes3ingredient|tes3light|tes3lockpick|tes3misc|tes3probe|tes3repairTool|tes3weapon|string|nil *Optional*. The item to create a tooltip for. If not specified, the tooltip will be empty.
 --- @field itemData tes3itemData? *Optional*. The item data for the item.
 --- @field spell tes3spell? *Optional*. The spell to create a tooltip for.
+--- @field skill tes3skill? *Optional*. The skill to create a tooltip for.
 
 --- Requests menu mode be activated on a menu with a given id.
 --- @param id string|number No description yet available.

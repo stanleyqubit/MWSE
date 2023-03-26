@@ -150,6 +150,7 @@ return {
 	["uiPreEvent"] = "uiPreEvent",
 	["uiRefreshed"] = "uiRefreshed",
 	["uiShowRestMenu"] = "uiShowRestMenu",
+	["uiSkillTooltip"] = "uiSkillTooltip",
 	["uiSpellTooltip"] = "uiSpellTooltip",
 	["unequipped"] = "unequipped",
 	["vfxCreated"] = "vfxCreated",

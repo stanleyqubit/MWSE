@@ -21,6 +21,7 @@
 
 #include "LuaConsoleReferenceChangedEvent.h"
 #include "LuaShowRestWaitMenuEvent.h"
+#include "LuaUiSkillTooltipEvent.h"
 #include "LuaUiSpellTooltipEvent.h"
 
 #include "TES3UIManagerLua.h"
@@ -179,6 +180,21 @@ namespace TES3::UI {
 
 			// Clean up temp element.
 			tempElement->destroy();
+			return menu;
+		}
+
+		auto skill = getOptionalParamObject<TES3::Skill>(params, "skill");
+		if (skill) {
+			// Build the tooltip.
+			const auto TES3_buildSkillTooltip = reinterpret_cast<void(__cdecl*)(char)>(0x6297F0);
+			TES3_buildSkillTooltip(skill->skill);
+
+			// Fire off the related event.
+			if (mwse::lua::event::UiSkillTooltipEvent::getEventEnabled()) {
+				mwse::lua::LuaManager& luaManager = mwse::lua::LuaManager::getInstance();
+				luaManager.getThreadSafeStateHandle().triggerEvent(new mwse::lua::event::UiSkillTooltipEvent(menu, skill->skill, 0));
+			}
+
 			return menu;
 		}
 

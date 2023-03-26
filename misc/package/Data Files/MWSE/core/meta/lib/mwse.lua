@@ -43,8 +43,13 @@ function mwse.getVirtualMemoryUsage() end
 function mwse.iconv(languageCode, utf8string) end
 
 --- Loads a config table from Data Files\\MWSE\\config\\{fileName}.json.
---- 	
---- If the default values table is passed, empty keys in the config will be filled in using its values. Additionally, if no file exists, the function will return the default table.
+--- 
+--- If the default values table is passed:
+--- 
+---  - Empty keys in the config will be filled in using its values.
+---  - If no file exists, the function will return the default table.
+---  - In json, tables can be either arrays with integer keys or dictionaries with string keys. If your configuration table is mixed (has both string and integer indices), saving and loading from json will effectively convert all your integer indices to strings. This function will convert your configuration table's integer indices back if defaults table is given.
+--- 
 --- @param fileName string The non-extensioned name of the config file.
 --- @param defaults table? *Optional*. A table of default values.
 --- @return table result No description yet available.

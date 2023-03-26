@@ -2218,6 +2218,25 @@ local level = tes3.getLockLevel({ reference = ... })
 
 ***
 
+### `tes3.getLuaModMetadata`
+<div class="search_terms" style="display: none">getluamodmetadata, luamodmetadata</div>
+
+Fetches the contents of the [metadata file](https://mwse.github.io/MWSE/guides/metadata/) associated with a given lua mod key.
+
+```lua
+local metadata = tes3.getLuaModMetadata(modKey)
+```
+
+**Parameters**:
+
+* `modKey` (string): The key for the lua mod, which must match the file location and the metadata file's `[tools.mwse]` contents.
+
+**Returns**:
+
+* `metadata` (table, nil)
+
+***
+
 ### `tes3.getMagicEffect`
 <div class="search_terms" style="display: none">getmagiceffect, magiceffect</div>
 

@@ -8,7 +8,7 @@
 #include "TES3Reference.h"
 
 namespace mwse::lua::event {
-	ObjectFilteredEvent::ObjectFilteredEvent(const char* name, TES3::BaseObject* filter) :
+	ObjectFilteredEvent::ObjectFilteredEvent(const char* name, const TES3::BaseObject* filter) :
 		GenericEvent(name),
 		m_EventFilter(filter)
 	{

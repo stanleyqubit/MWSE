@@ -45,7 +45,7 @@ namespace TES3 {
 		float attackSwing; // 0x4
 		float swingTimer; // 0x8
 		float physicalDamage; // 0xC
-		signed char aiBehaviourState; // 0x10
+		unsigned char aiBehaviourState; // 0x10
 		AttackAnimationState animStateAttack; // 0x11
 		char blockingState; // 0x12
 		unsigned char maybe_animGroupKnockdown; // 0x13

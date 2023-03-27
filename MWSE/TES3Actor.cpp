@@ -176,6 +176,17 @@ namespace TES3 {
 		actorFlags |= (value << ActorFlagCreature::BloodBitsFirst);
 	}
 
+	int Actor::getEquipmentValue(bool useDurability) const {
+		int value = 0;
+		for (const auto& stack : equipment) {
+			const auto item = static_cast<Item*>(stack->object);
+			if (item->objectType == ObjectType::Armor || item->objectType == ObjectType::Clothing) {
+				value += item->getBaseBarterValue(false, useDurability);
+			}
+		}
+		return value;
+	}
+
 	sol::optional<int> Actor::getSoulValue() {
 		switch (objectType) {
 		case ObjectType::Creature:

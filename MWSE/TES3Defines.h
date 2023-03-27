@@ -51,6 +51,7 @@ namespace TES3 {
 	struct DataHandler;
 	struct Dialogue;
 	struct DialogueConditional;
+	struct DialogueFilterContext;
 	struct DialogueInfo;
 	struct Door;
 	struct Effect;

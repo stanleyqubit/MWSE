@@ -190,7 +190,7 @@ namespace TES3 {
 		short readiedAmmoCount; // 0x368
 		short corpseHourstamp; // 0x36A
 		short greetDuration; // 0x36C
-		char unknown_0x36E;
+		signed char friendlyFireHits; // 0x36E
 		char unknown_0x36F; // Undefined.
 		float holdBreathTime; // 0x370
 		int unknown_0x374;
@@ -296,6 +296,10 @@ namespace TES3 {
 		bool isAffectedBySpell(Spell * spell) const;
 
 		bool isDiseased() const;
+		bool hasCommonDisease() const;
+		bool hasBlightDisease() const;
+		bool hasCorprusDisease() const;
+		bool hasVampirism() const;
 
 		SpellList* getSpellList();
 		IteratedList<Spell*> * getCombatSpellList();

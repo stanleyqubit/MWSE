@@ -1698,6 +1698,9 @@
     <ClInclude Include="NIDX8TextureData.h">
       <Filter>Header Files\DataAdapters\NI</Filter>
     </ClInclude>
+    <ClInclude Include="TES3DialogueFilterContext.h">
+      <Filter>Header Files\DataAdapters\TES3\Dialog</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -3697,6 +3700,12 @@
     </ClCompile>
     <ClCompile Include="NITriBasedGeometry.cpp">
       <Filter>Source Files\DataAdapters\NI</Filter>
+    </ClCompile>
+    <ClCompile Include="TES3DialogueConditional.cpp">
+      <Filter>Source Files\DataAdapters\TES3</Filter>
+    </ClCompile>
+    <ClCompile Include="TES3DialogueFilterContext.cpp">
+      <Filter>Source Files\Lua\Bindings\TES3</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -941,10 +941,8 @@ namespace TES3 {
 
 	Inventory * Reference::getInventory() {
 		// Only actors have equipment.
-		if (baseObject->objectType != ObjectType::Container &&
-			baseObject->objectType != ObjectType::Creature &&
-			baseObject->objectType != ObjectType::NPC) {
-			return NULL;
+		if (!isActor()) {
+			return nullptr;
 		}
 
 		return &reinterpret_cast<Actor*>(baseObject)->inventory;

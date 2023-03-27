@@ -20,6 +20,7 @@ namespace TES3 {
 		// Custom functions
 		//
 
+		float getValue() const;
 		double getValue_lua() const;
 		void setValue_lua(double value);
 

@@ -1591,40 +1591,9 @@ namespace mwse::lua {
 			throw std::invalid_argument("Invalid item parameter provided: The object is not an item.");
 		}
 
-		// If we have no item data, just get the base value.
-		const auto value = item->getValue();
-		if (itemData == nullptr) {
-			return value;
-		}
-		
-		// Handle soul- and MCP-dependent value.
-		if (item->objectType == TES3::ObjectType::Misc && getOptionalParam(params, "useSoulValue", true)) {
-			auto asMisc = static_cast<TES3::Misc*>(item);
-			if (asMisc->isSoulGem() && itemData->soul) {
-				auto soulValue = itemData->soul->getSoulValue().value_or(0);
-				if (mcp::getFeatureEnabled(mcp::feature::SoulgemValueRebalance)) {
-					return (soulValue * soulValue * soulValue) / 10000 + soulValue * 2;
-				}
-				else {
-					return value * soulValue;
-				}
-			}
-		}
-
-		// Manage condition.
-		if (getOptionalParam(params, "useDurability", true)) {
-			const auto durability = item->getDurability();
-			if (durability > 0) {
-				return value * itemData->condition / durability;
-			}
-
-			const auto uses = item->getUses();
-			if (uses > 0) {
-				return value * itemData->condition / uses;
-			}
-		}
-
-		return value;
+		auto useSoulValue = getOptionalParam(params, "useSoulValue", true);
+		auto useDurability = getOptionalParam(params, "useDurability", true);
+		return item->getBaseBarterValue(itemData, useSoulValue, useDurability);
 	}
 
 	bool checkMerchantTradesItem(sol::table params) {

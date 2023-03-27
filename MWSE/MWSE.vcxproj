@@ -15,6 +15,7 @@
     <ClInclude Include="BitUtil.h" />
     <ClInclude Include="BSAnimationManager.h" />
     <ClInclude Include="LuaUiSkillTooltipEvent.h" />
+    <ClInclude Include="TES3DialogueFilterContext.h" />
     <ClInclude Include="TES3LandLua.h" />
     <ClInclude Include="LuaActiveMagicEffectIconsUpdatedEvent.h" />
     <ClInclude Include="LuaAttackHitEvent.h" />
@@ -753,6 +754,8 @@
     <ClCompile Include="TES3Clothing.cpp" />
     <ClCompile Include="TES3Creature.cpp" />
     <ClCompile Include="TES3CriticalSection.cpp" />
+    <ClCompile Include="TES3DialogueConditional.cpp" />
+    <ClCompile Include="TES3DialogueFilterContext.cpp" />
     <ClCompile Include="TES3Door.cpp" />
     <ClCompile Include="TES3GlobalVariable.cpp" />
     <ClCompile Include="TES3Land.cpp" />

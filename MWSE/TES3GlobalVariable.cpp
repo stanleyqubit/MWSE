@@ -1,6 +1,14 @@
 #include "TES3GlobalVariable.h"
 
 namespace TES3 {
+	float GlobalVariable::getValue() const {
+		switch (toupper(valueType)) {
+		case 'S': return short(value);
+		case 'L': return int(value);
+		}
+		return value;
+	}
+
 	double GlobalVariable::getValue_lua() const {
 		switch (toupper(valueType)) {
 		case 'S': return short(value);

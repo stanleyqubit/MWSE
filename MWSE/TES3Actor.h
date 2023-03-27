@@ -82,6 +82,8 @@ namespace TES3 {
 		int getBloodType() const;
 		void setBloodType(int value);
 
+		int getEquipmentValue(bool useDurability) const;
+
 		sol::optional<int> getSoulValue();
 
 		SpellList* getSpellList();

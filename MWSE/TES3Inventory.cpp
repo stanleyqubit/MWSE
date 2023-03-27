@@ -182,6 +182,15 @@ namespace TES3 {
 		return reinterpret_cast<Actor*>(reinterpret_cast<BYTE*>(this) - offsetof(Actor, inventory));
 	}
 
+	int Inventory::getItemCount(Item* item) {
+		auto stack = findItemStack(item);
+		if (stack == nullptr) {
+			return 0;
+		}
+
+		return stack->count;
+	}
+
 	bool Inventory::containsItem(Item * item, ItemData * data) {
 		return findItemStack(item, data) != nullptr;
 	}

@@ -3,6 +3,7 @@
 #include "TES3Defines.h"
 
 #include "TES3Dialogue.h"
+#include "TES3DialogueConditional.h"
 #include "TES3Object.h"
 
 namespace TES3 {
@@ -19,7 +20,7 @@ namespace TES3 {
 		Conditional2,
 		Conditional3,
 		Conditional4,
-		Conditional5
+		Conditional5,
 	};
 
 	namespace ObjectFlag {
@@ -85,12 +86,13 @@ namespace TES3 {
 		// Other related this-call functions.
 		//
 
-		const char* getText();
+		const char* getText() const;
 
 		bool loadId();
 		void unloadId();
 
-		bool filter(Object * actor, Reference * reference, int source, Dialogue * dialogue);
+		bool filterVanillaReplacer(Object* speaker, Reference* reference, int source, Dialogue* dialogue) const;
+		bool filter(Object* speaker, Reference* reference, int source, Dialogue* dialogue) const;
 		void runScript(Reference * reference);
 
 		//

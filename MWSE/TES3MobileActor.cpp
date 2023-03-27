@@ -893,6 +893,58 @@ namespace TES3 {
 		return TES3_MobileActor_isDiseased(this);
 	}
 
+	bool MobileActor::hasCommonDisease() const {
+		for (const auto& effect : activeMagicEffects) {
+			const auto instance = effect.getInstance();
+			if (instance == nullptr) {
+				continue;
+			}
+
+			const auto& combo = instance->sourceCombo;
+			if (combo.sourceType == MagicSourceType::Spell && combo.source.asSpell->castType == SpellCastType::Disease) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	bool MobileActor::hasBlightDisease() const {
+		for (const auto& effect : activeMagicEffects) {
+			const auto instance = effect.getInstance();
+			if (instance == nullptr) {
+				continue;
+			}
+
+			const auto& combo = instance->sourceCombo;
+			if (combo.sourceType == MagicSourceType::Spell && combo.source.asSpell->castType == SpellCastType::Blight) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	bool MobileActor::hasCorprusDisease() const {
+		for (const auto& effect : activeMagicEffects) {
+			if (effect.magicEffectID == EffectID::Corprus) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	bool MobileActor::hasVampirism() const {
+		for (const auto& effect : activeMagicEffects) {
+			if (effect.magicEffectID == EffectID::Vampirism) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	const auto TES3_MobileActor_getSpellList = reinterpret_cast<SpellList * (__thiscall*)(const MobileActor*)>(0x52B3D0);
 	SpellList* MobileActor::getSpellList() {
 		return TES3_MobileActor_getSpellList(this);

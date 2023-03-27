@@ -1,14 +1,26 @@
 #pragma once
 
 namespace TES3 {
-	enum class AIBehavior {
-		AIBehaviour_Hello = 0x0,
-		AIBehaviour_Idle = 0x2,
-		AIBehaviour_Attack = 0x3,
-		AIBehaviour_Avoid = 0x4,
-		AIBehaviour_Flee = 0x6,
-		AIBehaviour_Walk = 0x8,
-		AIBehaviour_Greet = 0xC,
-		AIBehaviour_Undecided = 0xFF,
-	};
+	namespace AIBehavior {
+		enum AIBehavior : unsigned char {
+			Hello,
+			Wait,
+			Idle,
+			Attack,
+			Avoid,
+			Behavior5,
+			Flee,
+			Behavior7,
+			Walk,
+			Alarmed,
+			Behavior10,
+			Behavior11,
+			Greet,
+			Behavior13,
+			CorpseFloatingUp,
+			CorpseFalling,
+			Behavior16,
+			Undecided = 0xFF,
+		};
+	}
 }

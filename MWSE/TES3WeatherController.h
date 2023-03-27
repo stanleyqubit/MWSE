@@ -148,6 +148,7 @@ namespace TES3 {
 		// Other related this-call functions.
 		//
 
+		int getCurrentWeatherIndex() const;
 		float calcSunDamageScalar();
 		void switchWeather(int weatherId, float startingTransition);
 		

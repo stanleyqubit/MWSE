@@ -4,7 +4,8 @@
 
 namespace TES3 {
 	enum class DialogueConditionalType : unsigned char {
-		Function = 1,
+		NoCondition,
+		Function,
 		GlobalVar,
 		LocalVar,
 		JournalIndex,
@@ -15,10 +16,11 @@ namespace TES3 {
 		NotClass,
 		NotRace,
 		NotCell,
-		NotLocal
+		NotLocal,
 	};
 
 	enum class DialogueConditionalConstantType : char {
+		None = '\0',
 		Class = 'C',
 		DeadActor = 'D',
 		Faction = 'F',
@@ -29,7 +31,7 @@ namespace TES3 {
 		NotID = 'X',
 		VariableFloat = 'f',
 		VariableInt = 'i',
-		VariableShort = 's'
+		VariableShort = 's',
 	};
 
 	enum class DialogueConditionalComparator : unsigned char {
@@ -38,7 +40,7 @@ namespace TES3 {
 		Greater,
 		GreaterEqual,
 		Less,
-		LessEqual
+		LessEqual,
 	};
 
 	enum class DialogueConditionalFunction : int {
@@ -115,12 +117,20 @@ namespace TES3 {
 		Flee,
 		ShouldAttack,
 		Werewolf,
-		PCWerewolfKills
+		PCWerewolfKills,
 	};
 
 	struct DialogueConditional {
 		union {
 			BaseObject* object;
+			GlobalVariable* globalVariable;
+			Dialogue* journal;
+			Item* item;
+			Actor* actor;
+			Faction* faction;
+			Class* class_;
+			Cell* cell;
+			Race* race;
 			const char* localVarName;
 			DialogueConditionalFunction function;
 		};
@@ -130,8 +140,8 @@ namespace TES3 {
 		DialogueConditionalComparator compareOperator;
 		float compareValue;
 
-		DialogueConditional() = delete;
-		~DialogueConditional() = delete;
+		DialogueConditional();
+		~DialogueConditional();
 	};
 	static_assert(sizeof(DialogueConditional) == 0x10, "TES3::DialogueConditional failed size validation");
 }

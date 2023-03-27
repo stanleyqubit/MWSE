@@ -24,6 +24,11 @@ namespace TES3 {
 	const auto TES3_WeatherController_updateSun = reinterpret_cast<void(__thiscall*)(WeatherController*, float)>(0x43FF80);
 	const auto TES3_WeatherController_updateTick = reinterpret_cast<void(__thiscall*)(WeatherController*, NI::Property*, float, bool, float)>(0x440C80);
 
+	const auto TES3_WeatherController_getCurrentWeatherIndex = reinterpret_cast<int(__thiscall*)(const WeatherController*)>(0x4424E0);
+	int WeatherController::getCurrentWeatherIndex() const {
+		return TES3_WeatherController_getCurrentWeatherIndex(this);
+	}
+
 	float WeatherController::calcSunDamageScalar() {
 		float damage = TES3_WeatherController_calcSunDamageScalar(this);
 

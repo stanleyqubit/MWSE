@@ -17,11 +17,11 @@ namespace TES3 {
 		return -1;
 	}
 
-	char * Faction::getObjectID() {
+	char* Faction::getObjectID() {
 		return objectID;
 	}
 
-	char * Faction::getName() {
+	char* Faction::getName() {
 		return name;
 	}
 
@@ -115,6 +115,25 @@ namespace TES3 {
 			return { { reaction, faction } };
 		}
 		return {};
+	}
+
+	const auto TES3_Faction_getHighestJoinedReaction = reinterpret_cast<int(__thiscall*)(const Faction*, Faction**)>(0x4AD650);
+	int Faction::getHighestJoinedReaction(Faction** out_faction) const {
+		return TES3_Faction_getHighestJoinedReaction(this, out_faction);
+	}
+
+	sol::optional<std::tuple<int, Faction*>> Faction::getHighestJoinedReaction_lua() const {
+		Faction* faction = nullptr;
+		auto reaction = getHighestJoinedReaction(&faction);
+		if (faction) {
+			return { { reaction, faction } };
+		}
+		return {};
+	}
+
+	const auto TES3_Faction_getAdvancementPotential = reinterpret_cast<Faction::AdvancementPotential(__thiscall*)(const Faction*)>(0x4AD420);
+	Faction::AdvancementPotential Faction::getAdvancementPotential() const {
+		return TES3_Faction_getAdvancementPotential(this);
 	}
 
 	std::reference_wrapper<int[2]> Faction::getAttributes() {

@@ -543,7 +543,7 @@ No description yet available.
 ### `hasVampirism`
 <div class="search_terms" style="display: none">hasvampirism, vampirism</div>
 
-*Read-only*. True if the actor is has a vampirism effect.
+*Read-only*. True if the actor has a vampirism effect.
 
 **Returns**:
 

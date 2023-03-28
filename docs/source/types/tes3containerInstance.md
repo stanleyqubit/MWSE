@@ -414,7 +414,7 @@ local value = myObject:getEquipmentValue({ useDurability = ... })
 **Parameters**:
 
 * `params` (table)
-	* `useDurability` (boolean): *Default*: `false`. If true, damaged items will have a proportionally lower durability.
+	* `useDurability` (boolean): *Default*: `false`. If true, damaged items will have a proportionally lower value.
 
 **Returns**:
 

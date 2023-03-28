@@ -5,7 +5,7 @@ return {
 		name = "params",
 		type = "table",
 		tableParams = {
-			{ name = "useDurability", type = "boolean", default = false, description = "If true, damaged items will have a proportionally lower durability." },
+			{ name = "useDurability", type = "boolean", default = false, description = "If true, damaged items will have a proportionally lower value." },
 		}},
 	},
 	returns = {

@@ -8,7 +8,7 @@
 #include "TES3Reference.h"
 
 namespace mwse::lua::event {
-	InfoFilterEvent::InfoFilterEvent(const TES3::DialogueInfo* info, TES3::Object* actor, TES3::Reference* reference, int source, TES3::Dialogue* dialogue, bool passes) :
+	InfoFilterEvent::InfoFilterEvent(TES3::DialogueInfo* info, TES3::Object* actor, TES3::Reference* reference, int source, TES3::Dialogue* dialogue, bool passes) :
 		ObjectFilteredEvent("infoFilter", info),
 		m_DialogueInfo(info),
 		m_Actor(actor),

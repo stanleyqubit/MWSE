@@ -187,7 +187,7 @@ namespace TES3 {
 	}
 
 	const auto TES3_DialogueInfo_filter = reinterpret_cast<bool(__thiscall*)(const DialogueInfo*, Object*, Reference*, DialogueInfo::FilterSource, Dialogue*)>(0x4B0190);
-	bool DialogueInfo::filter(Object* speaker, Reference* reference, FilterSource source, Dialogue* dialogue) const {
+	bool DialogueInfo::filter(Object* speaker, Reference* reference, FilterSource source, Dialogue* dialogue) {
 		auto result = false;
 		if (mwse::Configuration::ReplaceDialogueFiltering) {
 			result = filterVanillaReplacer(speaker, reference, source, dialogue);

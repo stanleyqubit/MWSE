@@ -8,10 +8,10 @@ namespace mwse::lua::event {
 	// 
 	class ObjectFilteredEvent : public GenericEvent {
 	public:
-		ObjectFilteredEvent(const char* name, const TES3::BaseObject* filter);
+		ObjectFilteredEvent(const char* name, TES3::BaseObject* filter);
 		sol::object getEventOptions();
 
 	protected:
-		const TES3::BaseObject* m_EventFilter;
+		TES3::BaseObject* m_EventFilter;
 	};
 }

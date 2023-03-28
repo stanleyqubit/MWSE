@@ -107,7 +107,7 @@ namespace TES3 {
 		};
 
 		bool filterVanillaReplacer(Object* speaker, Reference* reference, FilterSource source, Dialogue* dialogue) const;
-		bool filter(Object* speaker, Reference* reference, FilterSource source, Dialogue* dialogue) const;
+		bool filter(Object* speaker, Reference* reference, FilterSource source, Dialogue* dialogue);
 		void runScript(Reference * reference);
 
 		//

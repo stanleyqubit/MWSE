@@ -18,6 +18,6 @@ return {
 	["enableLogColors.description"] = "If enabled, log colors will be enabled in the console. However, this will make the mwse.log file more difficult to read in a text editor.",
 	["enableDependencyChecks.label"] = "Enable Dependency Checks",
 	["enableDependencyChecks.description"] = "If enabled, MWSE will check for dependencies of mods and warn the user if they are missing.",
-	["replaceDialogueFiltering.label"] = "Replace Dialogue Filtering",
-	["replaceDialogueFiltering.description"] = "If enabled, MWSE will replace the logic for dialogue filtering.",
+	["replaceDialogueFiltering.label"] = "[BETA] Replace Dialogue Filtering",
+	["replaceDialogueFiltering.description"] = "If enabled, MWSE will replace the logic for dialogue filtering. This feature is currently in beta. Please give feedback on any issues encountered with it.",
 }

@@ -90,7 +90,8 @@ namespace TES3 {
 		// Check for disposition.
 		if (context.speakerMobile && context.speakerBaseActor->objectType == ObjectType::NPC) {
 			const auto mobileNPC = static_cast<MobileNPC*>(context.speakerMobile);
-			if (dialogue == nullptr) { // TODO: Is some kind of service
+			// Service refusal disposition checks are flipped for some reason?
+			if (dialogue->getResponseType() == ResponseType::ServiceRefusal) {
 				if (source && disposition && mobileNPC->getDisposition() >= disposition) {
 					return false;
 				}

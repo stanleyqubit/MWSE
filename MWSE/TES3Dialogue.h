@@ -13,6 +13,60 @@ namespace TES3 {
 		Journal
 	};
 
+	enum class VoiceType : int {
+		Hello,
+		Idle,
+		Intruder,
+		Thief,
+		Hit,
+		Attack,
+		Flee,
+
+		COUNT,
+		Invalid = -1,
+	};
+
+	enum class GreetingType : int {
+		Greeting0,
+		Greeting1,
+		Greeting2,
+		Greeting3,
+		Greeting4,
+		Greeting5,
+		Greeting6,
+		Greeting7,
+		Greeting8,
+		Greeting9,
+
+		COUNT,
+		Invalid = -1,
+	};
+
+	enum class ResponseType : int {
+		InfoRefusal,
+		AdmireSuccess,
+		AdmireFail,
+		IntimidateSuccess,
+		IntimidateFail,
+		TauntSuccess,
+		TauntFail,
+		ServiceRefusal,
+		BribeSuccess,
+		BribeFail,
+
+		COUNT,
+		Invalid = -1,
+	};
+
+	struct DialogueName {
+		Dialogue* dialogue; // 0x0
+		const char* name; // 0x4
+
+		static nonstd::span<DialogueName> getVoices();
+		static nonstd::span<DialogueName> getGreetings();
+		static nonstd::span<DialogueName> getResponses();
+	};
+
 	struct Dialogue : BaseObject {
 		char * name;
 		DialogueType type;
@@ -52,6 +106,10 @@ namespace TES3 {
 		bool addToJournal_lua(sol::table params);
 		DialogueInfo* getDeepFilteredInfo_lua(sol::table params);
 		DialogueInfo* getJournalInfo(sol::optional<int> index) const;
+
+		VoiceType getVoiceType() const;
+		GreetingType getGreetingType() const;
+		ResponseType getResponseType() const;
 
 		//
 		// Other related static functions.

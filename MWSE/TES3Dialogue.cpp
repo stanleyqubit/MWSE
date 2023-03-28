@@ -13,6 +13,27 @@
 #include "TES3WorldController.h"
 
 namespace TES3 {
+
+	//
+	// DialogueName
+	//
+
+	nonstd::span<DialogueName> DialogueName::getVoices() {
+		return nonstd::span(reinterpret_cast<DialogueName*>(0x793248), (size_t)VoiceType::COUNT);
+	}
+
+	nonstd::span<DialogueName> DialogueName::getGreetings() {
+		return nonstd::span(reinterpret_cast<DialogueName*>(0x793280), (size_t)GreetingType::COUNT);
+	}
+
+	nonstd::span<DialogueName> DialogueName::getResponses() {
+		return nonstd::span(reinterpret_cast<DialogueName*>(0x7932D0), (size_t)ResponseType::COUNT);
+	}
+
+	//
+	// Dialogue
+	//
+
 	const char* Dialogue::getObjectID() const {
 		return name;
 	}
@@ -126,7 +147,7 @@ namespace TES3 {
 		auto result = TES3_Dialogue_getFilteredInfo(this, actor, reference, flag);
 
 		// Clean any cached values.
-		cachedActorDisposition = {};
+		cachedActorDisposition.reset();
 
 		return result;
 	}
@@ -153,6 +174,36 @@ namespace TES3 {
 
 	DialogueInfo* Dialogue::getJournalInfo(sol::optional<int> index) const {
 		return getJournalInfoForIndex(index.value_or(journalIndex));
+	}
+
+	VoiceType Dialogue::getVoiceType() const {
+		const auto voices = DialogueName::getVoices();
+		for (size_t i = 0; i < voices.size(); ++i) {
+			if (voices[i].dialogue == this) {
+				return (VoiceType)i;
+			}
+		}
+		return VoiceType::Invalid;
+	}
+
+	GreetingType Dialogue::getGreetingType() const {
+		const auto greetings = DialogueName::getGreetings();
+		for (size_t i = 0; i < greetings.size(); ++i) {
+			if (greetings[i].dialogue == this) {
+				return (GreetingType)i;
+			}
+		}
+		return GreetingType::Invalid;
+	}
+
+	ResponseType Dialogue::getResponseType() const {
+		const auto responses = DialogueName::getResponses();
+		for (size_t i = 0; i < responses.size(); ++i) {
+			if (responses[i].dialogue == this) {
+				return (ResponseType)i;
+			}
+		}
+		return ResponseType::Invalid;
 	}
 
 	const auto TES3_getDialogue = reinterpret_cast<Dialogue* (__cdecl*)(int, int)>(0x4B2C00);

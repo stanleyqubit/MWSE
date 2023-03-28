@@ -284,13 +284,19 @@ namespace TES3 {
 
 	void loadFunctionChoice(DialogueFilterContext::ConditionalContext* context) {
 		const auto uiidMenuDialogue = *reinterpret_cast<UI::UI_ID*>(0x7D3442);
-		auto menuDialog = UI::findMenu(uiidMenuDialogue);
+		const auto menuDialog = UI::findMenu(uiidMenuDialogue);
 		if (menuDialog == nullptr) {
 			return;
 		}
 
+		const auto uiidPartHyperText_dialog = *reinterpret_cast<UI::Property*>(0x7D7C80);
+		const auto currentDialogue = static_cast<Dialogue*>(menuDialog->getProperty(UI::PropertyType::Pointer, uiidPartHyperText_dialog).ptrValue);
+		if (currentDialogue != context->parentContext->dialogue) {
+			return;
+		}
+
 		const auto uiidMenuDialogue_answer = *reinterpret_cast<UI::Property*>(0x7D3420);
-		auto answer = menuDialog->getProperty(UI::PropertyType::Integer, uiidMenuDialogue_answer).integerValue;
+		const auto answer = menuDialog->getProperty(UI::PropertyType::Integer, uiidMenuDialogue_answer).integerValue;
 		if (answer < 0) {
 			return;
 		}

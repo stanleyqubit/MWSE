@@ -11,6 +11,7 @@ namespace mwse {
 		static bool LetterboxMovies;
 		static bool EnableLogColors;
 		static bool EnableDependencyChecks;
+		static bool ReplaceDialogueFiltering;
 
 		static sol::table getDefaults();
 

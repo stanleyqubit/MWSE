@@ -48,6 +48,16 @@ local config = {
 				},
 				{
 					class = "OnOffButton",
+					label = i18n("replaceDialogueFiltering.label"),
+					description = i18n("replaceDialogueFiltering.description"),
+					variable = {
+						id = "ReplaceDialogueFiltering",
+						class = "TableVariable",
+						table = mwseConfig,
+					},
+				},
+				{
+					class = "OnOffButton",
 					label = i18n("patchNiFlipController.label"),
 					description = i18n("patchNiFlipController.description"),
 					variable = {
@@ -95,7 +105,7 @@ local config = {
 						class = "TableVariable",
 						table = mwseConfig,
 					},
-				}
+				},
 			},
 			sidebarComponents = {
 				{

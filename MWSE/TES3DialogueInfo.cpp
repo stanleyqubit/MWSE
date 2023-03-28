@@ -16,11 +16,12 @@
 #include "BitUtil.h"
 #include "MemoryUtil.h"
 
+#include "MWSEConfig.h"
+
 namespace TES3 {
 	const auto TES3_DialogueInfo_getText = reinterpret_cast<const char* (__thiscall*)(const DialogueInfo*)>(0x4B1B80);
 	const auto TES3_DialogueInfo_loadId = reinterpret_cast<bool(__thiscall*)(DialogueInfo*)>(0x4B1A10);
 	const auto TES3_DialogueInfo_unloadId = reinterpret_cast<void(__thiscall*)(DialogueInfo*)>(0x4AF3A0);
-	const auto TES3_DialogueInfo_filter = reinterpret_cast<bool(__thiscall*)(DialogueInfo*, Object*, Reference*, int, Dialogue*)>(0x4B0190);
 
 	const char* DialogueInfo::getText() const {
 		return TES3_DialogueInfo_getText(this);
@@ -184,10 +185,14 @@ namespace TES3 {
 		return true;
 	}
 
+	const auto TES3_DialogueInfo_filter = reinterpret_cast<bool(__thiscall*)(const DialogueInfo*, Object*, Reference*, int, Dialogue*)>(0x4B0190);
 	bool DialogueInfo::filter(Object* speaker, Reference* reference, int source, Dialogue* dialogue) const {
-		auto result = filterVanillaReplacer(speaker, reference, source, dialogue);
-		if (result == true) {
-			int x = 4;
+		auto result = false;
+		if (mwse::Configuration::ReplaceDialogueFiltering) {
+			result = filterVanillaReplacer(speaker, reference, source, dialogue);
+		}
+		else {
+			result = TES3_DialogueInfo_filter(this, speaker, reference, source, dialogue);
 		}
 
 		if (mwse::lua::event::InfoFilterEvent::getEventEnabled()) {

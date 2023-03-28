@@ -53,7 +53,8 @@ namespace TES3 {
 		}
 
 		// Check for sex condition.
-		if (npcSex != -1 && context.speakerBaseActor->isFemale() != (npcSex == 1)) {
+		const auto npcIsFemale = (npcSex == 1);
+		if (npcSex != -1 && context.speakerBaseActor->isFemale() != npcIsFemale) {
 			return false;
 		}
 

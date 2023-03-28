@@ -35,7 +35,7 @@ namespace TES3 {
 		TES3_DialogueInfo_unloadId(this);
 	}
 
-	bool DialogueInfo::filterVanillaReplacer(Object * speaker, Reference * reference, int source, Dialogue * dialogue) const {
+	bool DialogueInfo::filterVanillaReplacer(Object * speaker, Reference * reference, FilterSource source, Dialogue * dialogue) const {
 		if (getDeleted()) {
 			return false;
 		}
@@ -93,11 +93,11 @@ namespace TES3 {
 			const auto mobileNPC = static_cast<MobileNPC*>(context.speakerMobile);
 			// Service refusal disposition checks are flipped for some reason?
 			if (dialogue->getResponseType() == ResponseType::ServiceRefusal) {
-				if (source && disposition && mobileNPC->getDisposition() >= disposition) {
+				if (source != FilterSource::None && disposition && mobileNPC->getDisposition() >= disposition) {
 					return false;
 				}
 			}
-			else if (source) {
+			else if (source != FilterSource::None) {
 				if (mobileNPC->getDisposition() < disposition) {
 					return false;
 				}
@@ -185,8 +185,8 @@ namespace TES3 {
 		return true;
 	}
 
-	const auto TES3_DialogueInfo_filter = reinterpret_cast<bool(__thiscall*)(const DialogueInfo*, Object*, Reference*, int, Dialogue*)>(0x4B0190);
-	bool DialogueInfo::filter(Object* speaker, Reference* reference, int source, Dialogue* dialogue) const {
+	const auto TES3_DialogueInfo_filter = reinterpret_cast<bool(__thiscall*)(const DialogueInfo*, Object*, Reference*, DialogueInfo::FilterSource, Dialogue*)>(0x4B0190);
+	bool DialogueInfo::filter(Object* speaker, Reference* reference, FilterSource source, Dialogue* dialogue) const {
 		auto result = false;
 		if (mwse::Configuration::ReplaceDialogueFiltering) {
 			result = filterVanillaReplacer(speaker, reference, source, dialogue);
@@ -198,7 +198,7 @@ namespace TES3 {
 		if (mwse::lua::event::InfoFilterEvent::getEventEnabled()) {
 			auto& luaManager = mwse::lua::LuaManager::getInstance();
 			auto stateHandle = luaManager.getThreadSafeStateHandle();
-			sol::table eventData = stateHandle.triggerEvent(new mwse::lua::event::InfoFilterEvent(this, speaker, reference, source, dialogue, result));
+			sol::table eventData = stateHandle.triggerEvent(new mwse::lua::event::InfoFilterEvent(this, speaker, reference, (int)source, dialogue, result));
 			sol::object passes = eventData["passes"];
 			if (passes.is<bool>()) {
 				result = passes.as<bool>();

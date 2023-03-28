@@ -17,9 +17,10 @@
 #include "TES3WorldController.h"
 
 #include "StringUtil.h"
+#include "CodePatchUtil.h"
 
 namespace TES3 {
-	DialogueFilterContext::DialogueFilterContext(Object* _speaker, Reference* _reference, int _source, Dialogue* _dialogue, const DialogueInfo* _dialogueInfo) {
+	DialogueFilterContext::DialogueFilterContext(Object* _speaker, Reference* _reference, DialogueInfo::FilterSource _source, Dialogue* _dialogue, const DialogueInfo* _dialogueInfo) {
 		// Store the paramaters passed to DialogueInfo::filter
 		speaker = _speaker;
 		speakerReference = _reference;
@@ -287,6 +288,15 @@ namespace TES3 {
 		const auto menuDialog = UI::findMenu(uiidMenuDialogue);
 		if (menuDialog == nullptr) {
 			return;
+		}
+
+		// Handle support for MCP's choice patch.
+		if (mwse::mcp::getFeatureEnabled(mwse::mcp::feature::ServiceRefusalFiltering)) {
+			const auto source = context->parentContext->source;
+			if (source > DialogueInfo::FilterSource::MCP_Offset) {
+				context->compareValue = int(source) - int(DialogueInfo::FilterSource::MCP_Offset);
+				return;
+			}
 		}
 
 		const auto uiidPartHyperText_dialog = *reinterpret_cast<UI::Property*>(0x7D7C80);

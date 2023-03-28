@@ -91,8 +91,23 @@ namespace TES3 {
 		bool loadId();
 		void unloadId();
 
-		bool filterVanillaReplacer(Object* speaker, Reference* reference, int source, Dialogue* dialogue) const;
-		bool filter(Object* speaker, Reference* reference, int source, Dialogue* dialogue) const;
+		enum class FilterSource : int {
+			None = 0,
+			Unknown = 1,
+
+			MCP_Barter = 17,
+			MCP_Repair = 18,
+			MCP_Spells = 19,
+			MCP_Training = 20,
+			MCP_Travel = 21,
+			MCP_Spellmaking = 22,
+			MCP_Enchanting = 23,
+
+			MCP_Offset = 16,
+		};
+
+		bool filterVanillaReplacer(Object* speaker, Reference* reference, FilterSource source, Dialogue* dialogue) const;
+		bool filter(Object* speaker, Reference* reference, FilterSource source, Dialogue* dialogue) const;
 		void runScript(Reference * reference);
 
 		//

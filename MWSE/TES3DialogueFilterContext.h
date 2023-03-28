@@ -1,6 +1,7 @@
 #pragma once
 
 #include "TES3DialogueConditional.h"
+#include "TES3DialogueInfo.h"
 
 namespace TES3 {
 	struct DialogueFilterContext {
@@ -19,7 +20,7 @@ namespace TES3 {
 		Actor* speakerBaseActor = nullptr;
 		Reference* speakerReference = nullptr;
 		MobileActor* speakerMobile = nullptr;
-		int source = 0;
+		DialogueInfo::FilterSource source = DialogueInfo::FilterSource::None;
 		Dialogue* dialogue = nullptr;
 		const DialogueInfo* dialogueInfo = nullptr;
 
@@ -32,7 +33,7 @@ namespace TES3 {
 		const char* filterResultScript = nullptr;
 		ConditionalContext conditionalContexts[6];
 
-		DialogueFilterContext(Object* speaker, Reference* reference, int source, Dialogue* dialogue, const DialogueInfo* info);
+		DialogueFilterContext(Object* speaker, Reference* reference, DialogueInfo::FilterSource source, Dialogue* dialogue, const DialogueInfo* info);
 		void setConditional(size_t index, DialogueConditional* conditional);
 	};
 }

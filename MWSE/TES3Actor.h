@@ -83,6 +83,7 @@ namespace TES3 {
 		void setBloodType(int value);
 
 		int getEquipmentValue(bool useDurability) const;
+		int getEquipmentValue_lua(sol::table params) const;
 
 		sol::optional<int> getSoulValue();
 

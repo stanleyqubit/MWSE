@@ -248,6 +248,22 @@ local string = myObject:__tojson()
 
 ***
 
+### `getHighestJoinedReaction`
+<div class="search_terms" style="display: none">gethighestjoinedreaction, highestjoinedreaction</div>
+
+For this faction, this function finds the best reaction for another faction that the player has joined. It returns that reaction and its associated faction, or `nil` for both values if the no relationship is applicable.
+
+```lua
+local reaction, faction = myObject:getHighestJoinedReaction()
+```
+
+**Returns**:
+
+* `reaction` (number, nil): The reaction, if any, that is best for the faction.
+* `faction` ([tes3faction](../../types/tes3faction), nil): The faction association, if any, that is best for the faction.
+
+***
+
 ### `getLowestJoinedReaction`
 <div class="search_terms" style="display: none">getlowestjoinedreaction, lowestjoinedreaction</div>
 

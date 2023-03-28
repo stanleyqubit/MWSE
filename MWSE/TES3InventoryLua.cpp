@@ -103,10 +103,11 @@ namespace mwse::lua {
 
 			// Basic function binding.
 			usertypeDefinition["addItem"] = &TES3::Inventory::addItem_lua;
+			usertypeDefinition["calculateWeight"] = &TES3::Inventory::calculateContainedWeight;
 			usertypeDefinition["contains"] = &TES3::Inventory::contains_lua;
 			usertypeDefinition["dropItem"] = &TES3::Inventory::dropItem;
-			usertypeDefinition["calculateWeight"] = &TES3::Inventory::calculateContainedWeight;
 			usertypeDefinition["findItemStack"] = &TES3::Inventory::findItemStack_lua;
+			usertypeDefinition["getItemCount"] = &TES3::Inventory::getItemCount_lua;
 			usertypeDefinition["removeItem"] = &TES3::Inventory::removeItem_lua;
 			usertypeDefinition["resolveLeveledItems"] = &TES3::Inventory::resolveLeveledLists_lua;
 

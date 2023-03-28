@@ -52,7 +52,11 @@
 --- @field friendlyActors tes3mobileCreature[]|tes3mobileNPC[]|tes3mobilePlayer[] *Read-only*. A collection of other `tes3mobileActor`s that this actor considers friendly.
 --- @field greetDuration number No description yet available.
 --- @field greetTimer number *Read-only*. No description yet available.
+--- @field hasBlightDisease boolean *Read-only*. True if the actor is has a blight disease effect. This does not include common or corprus diseases, nor does it include vampirism.
+--- @field hasCommonDisease boolean *Read-only*. True if the actor is has a common disease effect. This does not include blight or corprus diseases, nor does it include vampirism.
+--- @field hasCorprusDisease boolean *Read-only*. True if the actor is has a corprus disease effect. This does not include common or blight diseases, nor does it include vampirism.
 --- @field hasFreeAction boolean *Read-only*. If true, the actor isn't knocked down or knocked out.
+--- @field hasVampirism boolean *Read-only*. True if the actor is has a vampirism effect.
 --- @field health tes3statistic|tes3statisticSkill *Read-only*. Access to the actor's health statistic.
 --- @field hello number The actor's hello AI value.
 --- @field holdBreathTime number This is the time the actor can stay underwater without taking drowning damage, measured in seconds. It's starting value is `fHoldBreathTime`(GMST) seconds by default. Once the actor is underwater, this value is decreasing based on the time passed while underwater. The actor will start taking drowning damage once this time is below 0. During drowning this time will have more and more negative values based on the duration of the drowning. Changing this allows manipulating for how long the actor can stay underwater without drowning. Note that player's Breath HUD element won't show values larger than `fHoldBreathTime`.

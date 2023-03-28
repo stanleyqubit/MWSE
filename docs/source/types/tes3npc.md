@@ -651,6 +651,26 @@ local string = myObject:__tojson()
 
 ***
 
+### `getEquipmentValue`
+<div class="search_terms" style="display: none">getequipmentvalue, equipmentvalue</div>
+
+Returns the combined value of all the items worn by the actor.
+
+```lua
+local value = myObject:getEquipmentValue({ useDurability = ... })
+```
+
+**Parameters**:
+
+* `params` (table)
+	* `useDurability` (boolean): *Default*: `false`. If true, damaged items will have a proportionally lower durability.
+
+**Returns**:
+
+* `value` (number): The value of each equipped item added together.
+
+***
+
 ### `hasItemEquipped`
 <div class="search_terms" style="display: none">hasitemequipped, itemequipped</div>
 

@@ -69,6 +69,7 @@ namespace mwse::lua {
 			// Basic function binding.
 			usertypeDefinition["getReactionWithFaction"] = &TES3::Faction::getReactionWithFaction_lua;
 			usertypeDefinition["getLowestJoinedReaction"] = &TES3::Faction::getLowestJoinedReaction_lua;
+			usertypeDefinition["getHighestJoinedReaction"] = &TES3::Faction::getHighestJoinedReaction_lua;
 			usertypeDefinition["getRankName"] = &TES3::Faction::getRankName;
 			usertypeDefinition["setRankName"] = &TES3::Faction::setRankName;
 		}

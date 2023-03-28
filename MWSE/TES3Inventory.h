@@ -92,6 +92,7 @@ namespace TES3 {
 		Actor* getActor();
 
 		int getItemCount(Item* item);
+		int getItemCount_lua(sol::object itemOrItemId);
 		bool containsItem(Item * item, ItemData * data = nullptr);
 
 		float calculateContainedWeight() const;

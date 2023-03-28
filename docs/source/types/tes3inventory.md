@@ -173,6 +173,25 @@ local result = myObject:findItemStack(item, itemData)
 
 ***
 
+### `getItemCount`
+<div class="search_terms" style="display: none">getitemcount, itemcount</div>
+
+Checks to get the number of items in the given inventory.
+
+```lua
+local count = myObject:getItemCount(item)
+```
+
+**Parameters**:
+
+* `item` ([tes3item](../../types/tes3item), string): The item to check for.
+
+**Returns**:
+
+* `count` (number): The number of the given item in the inventory.
+
+***
+
 ### `removeItem`
 <div class="search_terms" style="display: none">removeitem, item</div>
 

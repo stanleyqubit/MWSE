@@ -187,6 +187,11 @@ namespace TES3 {
 		return value;
 	}
 
+	int Actor::getEquipmentValue_lua(sol::table params) const {
+		const auto useDurability = mwse::lua::getOptionalParam(params, "useDurability", false);
+		return getEquipmentValue(useDurability);
+	}
+
 	sol::optional<int> Actor::getSoulValue() {
 		switch (objectType) {
 		case ObjectType::Creature:

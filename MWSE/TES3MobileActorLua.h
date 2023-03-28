@@ -165,7 +165,11 @@ namespace mwse::lua {
 		usertypeDefinition["canJumpMidair"] = sol::readonly_property(&TES3::MobileActor::canJumpMidair_lua);
 		usertypeDefinition["canMove"] = sol::readonly_property(&TES3::MobileActor::canMove);
 		usertypeDefinition["cell"] = sol::property(&TES3::MobileActor::getCell);
+		usertypeDefinition["hasBlightDisease"] = sol::readonly_property(&TES3::MobileActor::hasBlightDisease);
+		usertypeDefinition["hasCommonDisease"] = sol::readonly_property(&TES3::MobileActor::hasCommonDisease);
+		usertypeDefinition["hasCorprusDisease"] = sol::readonly_property(&TES3::MobileActor::hasCorprusDisease);
 		usertypeDefinition["hasFreeAction"] = sol::readonly_property(&TES3::MobileActor::isNotKnockedDownOrOut);
+		usertypeDefinition["hasVampirism"] = sol::readonly_property(&TES3::MobileActor::hasVampirism);
 		usertypeDefinition["isAttackingOrCasting"] = sol::readonly_property(&TES3::MobileActor::isAttackingOrCasting);
 		usertypeDefinition["isDiseased"] = sol::readonly_property(&TES3::MobileActor::isDiseased);
 		usertypeDefinition["isHitStunned"] = sol::readonly_property(&TES3::MobileActor::isHitStunned);

@@ -53,6 +53,11 @@ function tes3inventory:dropItem(mobile, item, itemData, count, position, orienta
 --- @return tes3itemStack result No description yet available.
 function tes3inventory:findItemStack(item, itemData) end
 
+--- Checks to get the number of items in the given inventory.
+--- @param item tes3alchemy|tes3apparatus|tes3armor|tes3book|tes3clothing|tes3ingredient|tes3light|tes3lockpick|tes3misc|tes3probe|tes3repairTool|tes3weapon|string The item to check for.
+--- @return number count The number of the given item in the inventory.
+function tes3inventory:getItemCount(item) end
+
 --- Removes an item from the inventory directly. This should not be used, in favor of the [`tes3.removeItem()`](https://mwse.github.io/MWSE/apis/tes3/#tes3removeitem) function.
 --- @param params tes3inventory.removeItem.params This table accepts the following values:
 --- 

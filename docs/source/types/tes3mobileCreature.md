@@ -496,10 +496,54 @@ No description yet available.
 
 ***
 
+### `hasBlightDisease`
+<div class="search_terms" style="display: none">hasblightdisease, blightdisease</div>
+
+*Read-only*. True if the actor is has a blight disease effect. This does not include common or corprus diseases, nor does it include vampirism.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
+### `hasCommonDisease`
+<div class="search_terms" style="display: none">hascommondisease, commondisease</div>
+
+*Read-only*. True if the actor is has a common disease effect. This does not include blight or corprus diseases, nor does it include vampirism.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
+### `hasCorprusDisease`
+<div class="search_terms" style="display: none">hascorprusdisease, corprusdisease</div>
+
+*Read-only*. True if the actor is has a corprus disease effect. This does not include common or blight diseases, nor does it include vampirism.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
 ### `hasFreeAction`
 <div class="search_terms" style="display: none">hasfreeaction, freeaction</div>
 
 *Read-only*. If true, the actor isn't knocked down or knocked out.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
+### `hasVampirism`
+<div class="search_terms" style="display: none">hasvampirism, vampirism</div>
+
+*Read-only*. True if the actor is has a vampirism effect.
 
 **Returns**:
 

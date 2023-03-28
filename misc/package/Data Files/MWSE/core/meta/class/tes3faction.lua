@@ -15,6 +15,11 @@
 --- @field skills number[] *Read-only*. An array-style table holding the seven skills that govern advancement. Maps to values in [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) namespace.
 tes3faction = {}
 
+--- For this faction, this function finds the best reaction for another faction that the player has joined. It returns that reaction and its associated faction, or `nil` for both values if the no relationship is applicable.
+--- @return number|nil reaction The reaction, if any, that is best for the faction.
+--- @return tes3faction|nil faction The faction association, if any, that is best for the faction.
+function tes3faction:getHighestJoinedReaction() end
+
 --- For this faction, this function finds the worst reaction for another faction that the player has joined. It returns that reaction and its associated faction, or `nil` for both values if the no relationship is applicable.
 --- @return number|nil reaction The reaction, if any, that is worst for the player.
 --- @return tes3faction|nil faction The faction association, if any, that is worst for the player.

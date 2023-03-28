@@ -191,6 +191,26 @@ namespace TES3 {
 		return stack->count;
 	}
 
+	int Inventory::getItemCount_lua(sol::object itemOrItemId) {
+		if (itemOrItemId.is<TES3::Item*>()) {
+			return getItemCount(itemOrItemId.as<TES3::Item*>());
+		}
+		else if (itemOrItemId.is<const char*>()) {
+			auto dataHandler = TES3::DataHandler::get();
+			if (dataHandler == nullptr) {
+				return 0;
+			}
+
+			auto itemId = itemOrItemId.as<const char*>();
+			auto item = dataHandler->nonDynamicData->resolveObjectByType<TES3::Item>(itemId);
+			if (item == nullptr) {
+				return 0;
+			}
+
+			return getItemCount(item);
+		}
+	}
+
 	bool Inventory::containsItem(Item * item, ItemData * data) {
 		return findItemStack(item, data) != nullptr;
 	}

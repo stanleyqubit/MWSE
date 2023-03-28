@@ -940,20 +940,18 @@ namespace TES3 {
 	}
 
 	Inventory * Reference::getInventory() {
-		// Only actors have equipment.
-		if (!isActor()) {
+		// Only actors have inventories.
+		if (!baseObject->isActor()) {
 			return nullptr;
 		}
 
 		return &reinterpret_cast<Actor*>(baseObject)->inventory;
 	}
 
-	IteratedList<EquipmentStack*> * Reference::getEquipment() {
+	IteratedList<EquipmentStack*>* Reference::getEquipment() {
 		// Only actors have equipment.
-		if (baseObject->objectType != ObjectType::Container &&
-			baseObject->objectType != ObjectType::Creature &&
-			baseObject->objectType != ObjectType::NPC) {
-			return NULL;
+		if (!baseObject->isActor()) {
+			return nullptr;
 		}
 
 		return &reinterpret_cast<Actor*>(baseObject)->equipment;

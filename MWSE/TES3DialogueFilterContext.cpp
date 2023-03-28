@@ -148,7 +148,7 @@ namespace TES3 {
 		if (mobile == nullptr || !mobile->isActor()) {
 			return;
 		}
-		context->compareValue = mobile->health.getNormalized();
+		context->compareValue = mobile->health.getNormalized() * 100.0f;
 	}
 
 	void loadFunctionPCReputation(DialogueFilterContext::ConditionalContext* context) {
@@ -163,7 +163,7 @@ namespace TES3 {
 
 	void loadFunctionPCHealthPercent(DialogueFilterContext::ConditionalContext* context) {
 		const auto macp = WorldController::get()->getMobilePlayer();
-		context->compareValue = macp->health.getNormalized();
+		context->compareValue = macp->health.getNormalized() * 100.0f;
 	}
 
 	void loadFunctionPCMagicka(DialogueFilterContext::ConditionalContext* context) {

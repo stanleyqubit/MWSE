@@ -518,9 +518,9 @@ namespace TES3 {
 			return;
 		}
 
-		unsigned int index = -1;
-		auto localVariableType = script->getLocalVarIndexAndType(context->conditional->localVarName, &index);
-		if (localVariableType == 0) {
+		unsigned int index = 0;
+		const auto varType = script->getLocalVarIndexAndType(context->conditional->localVarName, &index);
+		if (varType == 0) {
 			return;
 		}
 
@@ -529,17 +529,20 @@ namespace TES3 {
 			variables = context->parentContext->speakerReference->getScriptVariables();
 		}
 
-		const auto scriptVariables = context->parentContext->speakerReference->getScriptVariables();
-		switch (localVariableType) {
+		switch (varType) {
 		case 'f':
-			context->compareValue = scriptVariables->floatVarValues[index];
+			context->compareValue = variables->floatVarValues[index];
 			break;
 		case 'l':
-			context->compareValue = scriptVariables->longVarValues[index];
+			context->compareValue = variables->longVarValues[index];
 			break;
 		case 's':
-			context->compareValue = scriptVariables->shortVarValues[index];
+			context->compareValue = variables->shortVarValues[index];
 			break;
+#if _DEBUG
+		default:
+			throw std::runtime_error("Invalid local variable type.");
+#endif
 		}
 	}
 
@@ -611,6 +614,11 @@ namespace TES3 {
 	void loadNotLocal(DialogueFilterContext::ConditionalContext* context) {
 		loadLocalVariableValue(context);
 		context->flipCompareOperator();
+
+		// If we have no value, because we don't have a script or the like, this is considered a pass.
+		if (!context->compareValue) {
+			context->resultOverride = true;
+		}
 	}
 
 	ConditionalLoadFunction getLoadFunctionForType(DialogueConditional* conditional) {

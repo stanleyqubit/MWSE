@@ -2352,6 +2352,23 @@ local result = myObject:rechargePower(power)
 
 ***
 
+### `resurrect`
+<div class="search_terms" style="display: none">resurrect</div>
+
+Resurrects the actor, with more control over the resurrect logic compared to mwscript.
+
+```lua
+myObject:resurrect({ resetState = ..., moveToStartingLocation = ... })
+```
+
+**Parameters**:
+
+* `params` (table)
+	* `resetState` (boolean): *Default*: `true`. Controls if the stats are reset, the inventory contents are respawned, and the reference recreated. This is the logic that mwscript resurrect uses. It can be useful to reset armor, ammunition, and consumables, if the player has already looted the body. When false, the base stats and inventory are unchanged.
+	* `moveToStartingLocation` (boolean): *Default*: `false`. Controls if the actor should be moved to its spawn point on resurrection. Requires `resetState` to be true.
+
+***
+
 ### `setPowerUseTimestamp`
 <div class="search_terms" style="display: none">setpowerusetimestamp, powerusetimestamp</div>
 

@@ -357,6 +357,19 @@ function tes3mobileActor:kill() end
 --- @return boolean result No description yet available.
 function tes3mobileActor:rechargePower(power) end
 
+--- Resurrects the actor, with more control over the resurrect logic compared to mwscript.
+--- @param params tes3mobileActor.resurrect.params This table accepts the following values:
+--- 
+--- `resetState`: boolean? — *Default*: `true`. Controls if the stats are reset, the inventory contents are respawned, and the reference recreated. This is the logic that mwscript resurrect uses. It can be useful to reset armor, ammunition, and consumables, if the player has already looted the body. When false, the base stats and inventory are unchanged.
+--- 
+--- `moveToStartingLocation`: boolean? — *Default*: `false`. Controls if the actor should be moved to its spawn point on resurrection. Requires `resetState` to be true.
+function tes3mobileActor:resurrect(params) end
+
+---Table parameter definitions for `tes3mobileActor.resurrect`.
+--- @class tes3mobileActor.resurrect.params
+--- @field resetState boolean? *Default*: `true`. Controls if the stats are reset, the inventory contents are respawned, and the reference recreated. This is the logic that mwscript resurrect uses. It can be useful to reset armor, ammunition, and consumables, if the player has already looted the body. When false, the base stats and inventory are unchanged.
+--- @field moveToStartingLocation boolean? *Default*: `false`. Controls if the actor should be moved to its spawn point on resurrection. Requires `resetState` to be true.
+
 --- Sets the timestamp a recharging power was used. Powers recharge 24 hours after this timestamp.
 --- @param power tes3spell The spell object for the power.
 --- @param timestamp number The timestamp of the moment the power was casted, or 24 hours before the recharge point. The timestamp units are hours. The current time as a timestamp can be accessed at [`tes3.getSimulationTimestamp()`](https://mwse.github.io/MWSE/apis/tes3/#tes3getsimulationtimestamp).

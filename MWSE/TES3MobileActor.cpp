@@ -198,6 +198,42 @@ namespace TES3 {
 		TES3::WorldController::get()->mobManager->projectileManager->removeProjectilesFiredByActor(this, includeSpellProjectiles);
 	}
 
+	const auto TES3_MobileActor_resurrect = reinterpret_cast<void(__thiscall*)(MobileActor*, bool)>(0x529AF0);
+	void MobileActor::resurrect(bool resetState, bool moveToStartingLocation) {
+		if (resetState) {
+			// Original function will resurrect, but also reset the stats, inventory, and reference of non-players.
+			TES3_MobileActor_resurrect(this, moveToStartingLocation);
+		}
+		else if (this->isDead()) {
+			// Custom resurrect logic that revives with minimal state changes.
+			actionData.animStateAttack = AttackAnimationState::Idle;
+			actionData.aiBehaviourState = 0;
+			actionData.currentAnimGroup = 0xFF;
+			actorFlags &= ~(MobileActorFlag::SpellReadied | MobileActorFlag::WeaponDrawn);
+			movementFlags = 0;
+
+			health.current = this->health.base;
+			magicka.current = this->magicka.base;
+			fatigue.current = this->fatigue.base;
+			magickaMultiplier.current = this->magickaMultiplier.base;
+
+			vTable.mobileActor->setupCollision(this);
+			vTable.mobileActor->handleMovementCollision(this, true);
+			WorldController::get()->mobManager->addMob(reference);
+		}
+
+		// Reset orientation that may have been altered post-death by mods.
+		reference->orientation = Vector3();
+
+		enterLeaveSimulationByDistance();
+	}
+
+	void MobileActor::resurrect_lua(sol::table params) {
+		bool resetState = params.get_or("resetState", true);
+		bool moveToStartingLocation = params.get_or("moveToStartingLocation", false);
+		resurrect(resetState, moveToStartingLocation);
+	}
+
 	bool MobileActor::equipMagic(Object* source, ItemData* itemData, bool equipItem, bool updateGUI) {
 		if (!source) {
 			throw std::invalid_argument("Invalid 'source' parameter provided. Must not be nil.");

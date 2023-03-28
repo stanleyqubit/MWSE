@@ -146,6 +146,7 @@ namespace mwse::lua {
 		usertypeDefinition["hasUsedPower"] = &TES3::MobileActor::hasUsedPower;
 		usertypeDefinition["kill"] = &TES3::MobileActor::kill;
 		usertypeDefinition["rechargePower"] = &TES3::MobileActor::rechargePower;
+		usertypeDefinition["resurrect"] = &TES3::MobileActor::resurrect_lua;
 		usertypeDefinition["setPowerUseTimestamp"] = &TES3::MobileActor::setPowerUseTimestamp;
 		usertypeDefinition["startCombat"] = &TES3::MobileActor::startCombat_lua;
 		usertypeDefinition["startDialogue"] = &TES3::MobileActor::startDialogue;

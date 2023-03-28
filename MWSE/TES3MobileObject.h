@@ -102,82 +102,82 @@ namespace TES3 {
 	}
 
 	struct MobileObject_vTable {
-		void (__thiscall * destructor)(MobileObject*, char); // 0x0
-		void * save; // 0x4
-		void * unknown_0x8;
-		void * unknown_0xC;
-		void * processMovement; // 0x10
-		void * gatherCollisions; // 0x14
-		void * resolveCollisions; // 0x18
-		void (__thiscall * updateVisuals)(MobileObject*); // 0x1C
-		void (__thiscall * simulate)(MobileObject*); // 0x20
-		bool (__thiscall * isActor)(const MobileObject*); // 0x24
-		void * handleMovementCollision; // 0x28
-		void * unknown_0x2C;
-		void * unknown_0x30;
-		void * setCollisionActive; // 0x34
-		void * clearCollisionActive; // 0x38
-		void * setupCollision; // 0x3C
-		void * setPosition; // 0x40
+		void (__thiscall* destructor)(MobileObject*, char); // 0x0
+		void (__thiscall* save)(MobileObject*, GameFile*); // 0x4
+		void (__thiscall* physics_8)(MobileObject*, float); // 0x8
+		void (__thiscall* physics_C)(MobileObject*); // 0xC
+		void (__thiscall* processMovement)(MobileObject*, float); // 0x10
+		void (__thiscall* gatherCollisions)(MobileObject*, float); // 0x14
+		void (__thiscall* resolveCollisions)(MobileObject*); // 0x18
+		void (__thiscall* updateVisuals)(MobileObject*); // 0x1C
+		void (__thiscall* simulate)(MobileObject*); // 0x20
+		bool (__thiscall* isActor)(const MobileObject*); // 0x24
+		void (__thiscall* handleMovementCollision)(MobileObject*, bool); // 0x28
+		void (__thiscall* setUseAirPhysicsFlag)(MobileObject*); // 0x2C
+		void (__thiscall* clearUseAirPhysicsFlag)(MobileObject*); // 0x30
+		void (__thiscall* setCollisionActive)(MobileObject*); // 0x34
+		void (__thiscall* clearCollisionActive)(MobileObject*); // 0x38
+		void (__thiscall* setupCollision)(MobileObject*); // 0x3C
+		void (__thiscall* setPosition)(MobileObject*, Vector3*); // 0x40
 		void (__thiscall* setFacing)(MobileObject*, float); // 0x44
-		void * setOrientation; // 0x48
-		void * setReference; // 0x4C
-		void * jumpingFalling; // 0x50
-		void * unknown_0x54;
-		void * setCrouching; // 0x58
-		void * setWalking; // 0x5C
-		void * setRunning; // 0x60
+		Matrix33* (__thiscall* getOrientation)(MobileObject*, Matrix33*); // 0x48
+		void (__thiscall* setReference)(MobileObject*); // 0x4C
+		void (__thiscall* jumpingFalling)(MobileObject*, bool); // 0x50
+		void (__thiscall* setSlopeSliding)(MobileObject*, bool); // 0x54
+		void (__thiscall* setCrouching)(MobileObject*, bool); // 0x58
+		void (__thiscall* setWalking)(MobileObject*, bool); // 0x5C
+		void (__thiscall* setRunning)(MobileObject*, bool); // 0x60
 		void (__thiscall* setJumping)(MobileObject*, bool); // 0x64
-		void * unknown_0x68;
-		void * waterImpact; // 0x6C
-		void (__thiscall * enterLeaveSimulation)(MobileObject*, bool); // 0x70
-		void * setActorFlag8; // 0x74
+		void (__thiscall* setLevitating)(MobileObject*, bool); // 0x68
+		void (__thiscall* waterImpact)(MobileObject*, bool); // 0x6C
+		void (__thiscall* enterLeaveSimulation)(MobileObject*, bool); // 0x70
+		void (__thiscall* setActorFlag8)(MobileObject*, bool); // 0x74
 		void (__thiscall* setActorFlag40)(MobileObject*, bool); // 0x78
-		bool (__thiscall * findDropPointOnCollider)(MobileObject*, float, NI::AVObject*, float*, Vector3*); // 0x7C
-		bool (__thiscall * onActorCollision)(MobileProjectile*, int); // 0x80
-		bool (__thiscall * onObjectCollision)(MobileProjectile*, int, bool); // 0x84
-		bool (__thiscall * onTerrainCollision)(MobileProjectile*, int); // 0x88
-		bool (__thiscall * onWaterCollision)(MobileProjectile*, int); // 0x8C
-		bool (__thiscall * onActivatorCollision)(MobileProjectile*, int); // 0x90
-		void * createSceneLight;
+		bool (__thiscall* findDropPointOnCollider)(MobileObject*, float, NI::AVObject*, float*, Vector3*); // 0x7C
+		bool (__thiscall* onActorCollision)(MobileProjectile*, int); // 0x80
+		bool (__thiscall* onObjectCollision)(MobileProjectile*, int, bool); // 0x84
+		bool (__thiscall* onTerrainCollision)(MobileProjectile*, int); // 0x88
+		bool (__thiscall* onWaterCollision)(MobileProjectile*, int); // 0x8C
+		bool (__thiscall* onActivatorCollision)(MobileProjectile*, int); // 0x90
+		void (__thiscall* createSceneLight)(MobileObject*); // 0x94
 	};
 	static_assert(sizeof(MobileObject_vTable) == 0x98, "TES3::MobileObject_vTable failed size validation");
 
 	struct MobileActor_vTable : MobileObject_vTable {
-		void * initializeStats; // 0x98
-		void * getDispositionRaw; // 0x9C
-		void * calculateNPCWidth; // 0xA0
-		void * calculateNPCHeight; // 0xA4
-		void * unknown_0xA8; // 0xA8
-		bool (__thiscall * is3rdPerson)(MobileActor*); // 0xAC
+		void (__thiscall* initializeStats)(MobileActor*, void*); // 0x98
+		void (__thiscall* getDispositionRaw)(MobileActor*); // 0x9C
+		void (__thiscall* calculateNPCWidth)(MobileActor*); // 0xA0
+		void (__thiscall* calculateNPCHeight)(MobileActor*); // 0xA4
+		void (__thiscall* decideActionAI)(MobileActor*); // 0xA8
+		bool (__thiscall* is3rdPerson)(MobileActor*); // 0xAC
 		void (__thiscall* changeWerewolf)(MobileActor*, bool); // 0xB0
-		void * calculateWalkSpeed; // 0xB4
-		void * onDeath; // 0xB8
-		void * calculateAttackMin; // 0xBC
-		void * calculateAttackMax; // 0xC0
-		void * calculateWeaponDamage; // 0xC4
-		void * getWeaponSwingWeightProduct; // 0xC8
-		void * getReferenceData0; // 0xCC
-		SkillStatistic * (__thiscall * getSkillStatistic)(MobileActor*, int); // 0xD0
-		float (__thiscall * getSkillValue)(const MobileActor*, int); // 0xD4
-		void * unknown_0xD8;
-		void * unknown_0xDC;
-		float (__thiscall * applyArmorRating)(MobileActor*, float, float, bool); // 0xE0
-		float (__thiscall * calculateArmorRating)(const MobileActor*, int*); // 0xE4
-		void * getReadiedWeaponCurrentSkill; // 0xE8
-		void * getReadiedWeaponAnimationGroup; // 0xEC
-		void * onWeaponEquip; // 0xF0
-		void * onReleaseProjectile; // 0xF4
-		void * onNewProjectile; // 0xF8
-		void * resolveArrowBone; // 0xFC
-		void * setArrowBone; // 0x100
-		void * unknown_0x104; // 0x104
+		void (__thiscall* calculateWalkSpeed)(MobileActor*); // 0xB4
+		void (__thiscall* onDeath)(MobileActor*); // 0xB8
+		int (__thiscall* getWeaponAttackMin)(MobileActor*); // 0xBC
+		int (__thiscall* getWeaponAttackMax)(MobileActor*); // 0xC0
+		void (__thiscall* calculateWeaponDamage)(MobileActor*); // 0xC4
+		float (__thiscall* getWeaponSwingWeightProduct)(MobileActor*); // 0xC8
+		AnimationData* (__thiscall* getAnimationAttachment)(MobileActor*); // 0xCC
+		SkillStatistic * (__thiscall* getSkillStatistic)(MobileActor*, int); // 0xD0
+		float (__thiscall* getSkillValue)(const MobileActor*, int); // 0xD4
+		void (__thiscall* getVampire)(MobileActor*);
+		void (__thiscall* setVampire)(MobileActor*);
+		float (__thiscall* applyArmorRating)(MobileActor*, float, float, bool); // 0xE0
+		float (__thiscall* calculateArmorRating)(const MobileActor*, int*); // 0xE4
+		void (__thiscall* getReadiedWeaponCurrentSkill)(MobileActor*); // 0xE8
+		void (__thiscall* getReadiedWeaponAnimationGroup)(MobileActor*); // 0xEC
+		void (__thiscall* onWeaponEquip)(MobileActor*); // 0xF0
+		void (__thiscall* onReleaseProjectile)(MobileActor*); // 0xF4
+		void (__thiscall* onNewProjectile)(MobileActor*); // 0xF8
+		void (__thiscall* resolveArrowBone)(MobileActor*); // 0xFC
+		void (__thiscall* setArrowBone)(MobileActor*, NI::Node*); // 0x100
+		void (__thiscall* unknown_0x104)(MobileActor*); // 0x104
 	};
 	static_assert(sizeof(MobileActor_vTable) == 0x108, "TES3::MobileActor_vTable failed size validation");
 
 	struct MobileNPC_vTable : MobileActor_vTable {
-		void * unpackSkillValues; // 0x108
-		int (__thiscall * getDisposition)(MobileNPC*); // 0x10C
+		void (__thiscall* unpackSkillValues)(MobileNPC*, int*); // 0x108
+		int (__thiscall* getDisposition)(MobileNPC*); // 0x10C
 	};
 	static_assert(sizeof(MobileNPC_vTable) == 0x110, "TES3::MobileNPC_vTable failed size validation");
 
@@ -252,7 +252,7 @@ namespace TES3 {
 		NI::CollisionGroup * collisionGroup; // 0x60
 		float thisFrameDistanceMoved; // 0x64
 		Vector3 thisFrameDeltaPosition; // 0x68
-		float unknown_0x74;
+		float lastCollidePointZ; // 0x74
 		LightData * lightMagicEffectData; // 0x78
 		unsigned char countCollisionResults; // 0x7C
 

@@ -567,17 +567,23 @@ namespace TES3 {
 	}
 
 	void loadItemCount(DialogueFilterContext::ConditionalContext* context) {
-		auto reference = context->parentContext->speakerReference;
-		if (reference == nullptr) {
+		const auto speakerReference = context->parentContext->speakerReference;
+		if (speakerReference == nullptr) {
 			return;
 		}
 
-		auto inventory = reference->getInventory();
-		if (inventory == nullptr) {
+		const auto item = context->conditional->item;
+		if (item == nullptr) {
 			return;
 		}
 
-		context->compareValue = std::abs(inventory->getItemCount(context->conditional->item));
+		const auto macp = WorldController::get()->getMobilePlayer();
+		const auto playerInventory = macp->reference->getInventory();
+		if (playerInventory == nullptr) {
+			return;
+		}
+
+		context->compareValue = std::abs(playerInventory->getItemCount(item));
 	}
 
 	void loadDeadActorCount(DialogueFilterContext::ConditionalContext* context) {

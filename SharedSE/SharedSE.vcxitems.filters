@@ -186,6 +186,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)NIAccumulator.h">
       <Filter>Header Files\NI</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CodePatchUtil.h">
+      <Filter>Header Files\Util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)NIVector3.cpp">
@@ -280,6 +283,9 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)NILines.cpp">
       <Filter>Source Files\NI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)CodePatchUtil.cpp">
+      <Filter>Source Files\Util</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

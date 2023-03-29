@@ -11,25 +11,29 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <VCProjectVersion>16.0</VCProjectVersion>
-    <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{43673527-012f-4460-b245-96bcd3c1ff89}</ProjectGuid>
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{50562D0F-55B1-49EA-BDBE-D6922BE5957D}</ProjectGuid>
+    <Keyword>MFCDLLProj</Keyword>
     <RootNamespace>CSSE</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <OutDir>$(SolutionDir)build\$(Configuration)\</OutDir>
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
+    <UseOfMfc>Static</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <OutDir>$(SolutionDir)build\$(Configuration)\</OutDir>
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
+    <UseOfMfc>Static</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -45,33 +49,39 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)deps\boost;$(SolutionDir)deps\LuaJIT\src;$(SolutionDir)deps\sol\include;$(SolutionDir)deps\span-lite;$(SolutionDir)deps\toml11\include;$(SolutionDir)deps\DirectX8\include;$(ProjectDir);$(IncludePath)</IncludePath>
+    <LinkIncremental>true</LinkIncremental>
     <LibraryPath>$(OutDir);$(SolutionDir)deps\LuaJIT\src;$(LibraryPath)</LibraryPath>
-    <OutDir>$(SolutionDir)build\$(Configuration)\</OutDir>
+    <IncludePath>$(SolutionDir)deps\boost;$(SolutionDir)deps\LuaJIT\src;$(SolutionDir)deps\sol\include;$(SolutionDir)deps\span-lite;$(SolutionDir)deps\toml11\include;$(SolutionDir)deps\DirectX8\include;$(ProjectDir);$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)deps\boost;$(SolutionDir)deps\LuaJIT\src;$(SolutionDir)deps\sol\include;$(SolutionDir)deps\span-lite;$(SolutionDir)deps\toml11\include;$(SolutionDir)deps\DirectX8\include;$(ProjectDir);$(IncludePath)</IncludePath>
+    <LinkIncremental>false</LinkIncremental>
     <LibraryPath>$(OutDir);$(SolutionDir)deps\LuaJIT\src;$(LibraryPath)</LibraryPath>
-    <OutDir>$(SolutionDir)build\$(Configuration)\</OutDir>
+    <IncludePath>$(SolutionDir)deps\boost;$(SolutionDir)deps\LuaJIT\src;$(SolutionDir)deps\sol\include;$(SolutionDir)deps\span-lite;$(SolutionDir)deps\toml11\include;$(SolutionDir)deps\DirectX8\include;$(ProjectDir);$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;CSSE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PreprocessorDefinitions>CSSE_EXPORTS;WIN32;_WINDOWS;_DEBUG;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp17</LanguageStandard>
       <ForcedIncludeFiles>pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
-      <UseStandardPreprocessor>true</UseStandardPreprocessor>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <EnableUAC>false</EnableUAC>
+      <ModuleDefinitionFile>.\CSSE.def</ModuleDefinitionFile>
       <AdditionalDependencies>comctl32.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
     <PostBuildEvent>
       <Command>copy /y "$(TargetDir)CSSE.dll" "$(SolutionDir)..\CSSE.dll"</Command>
     </PostBuildEvent>
@@ -86,39 +96,112 @@ if defined APPVEYOR_BUILD_NUMBER (echo #define APPVEYOR_BUILD_NUMBER %APPVEYOR_B
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;CSSE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PreprocessorDefinitions>CSSE_EXPORTS;WIN32;_WINDOWS;NDEBUG;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>stdcpp17</LanguageStandard>
       <ForcedIncludeFiles>pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
-      <UseStandardPreprocessor>true</UseStandardPreprocessor>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <EnableUAC>false</EnableUAC>
+      <ModuleDefinitionFile>.\CSSE.def</ModuleDefinitionFile>
       <AdditionalDependencies>comctl32.lib;dbghelp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
     <PostBuildEvent>
       <Command>copy /y "$(TargetDir)CSSE.dll" "$(SolutionDir)..\CSSE.dll"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>set buildTime=
 for /f "skip=1 delims=" %%x in ('wmic os get localdatetime') do if not defined buildTime set buildTime=%%x
-echo #pragma once &gt; $(ProjectDir)/BuildDate.h
-echo. &gt;&gt; $(ProjectDir)/BuildDate.h
-echo #define CSSE_BUILD_DATE %buildTime:~0,8% &gt;&gt; $(ProjectDir)/BuildDate.h
-if defined APPVEYOR_BUILD_NUMBER (echo #define APPVEYOR_BUILD_NUMBER %APPVEYOR_BUILD_NUMBER% &gt;&gt; $(ProjectDir)/BuildDate.h)</Command>
+echo #pragma once &amp;gt; $(ProjectDir)/BuildDate.h
+echo. &amp;gt;&amp;gt; $(ProjectDir)/BuildDate.h
+echo #define CSSE_BUILD_DATE %buildTime:~0,8% &amp;gt;&amp;gt; $(ProjectDir)/BuildDate.h
+if defined APPVEYOR_BUILD_NUMBER (echo #define APPVEYOR_BUILD_NUMBER %APPVEYOR_BUILD_NUMBER% &amp;gt;&amp;gt; $(ProjectDir)/BuildDate.h)</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CSArmor.cpp" />
+    <ClCompile Include="CSBodyPart.cpp" />
+    <ClCompile Include="CSBook.cpp" />
+    <ClCompile Include="CSContainer.cpp" />
+    <ClCompile Include="CSCreature.cpp" />
+    <ClCompile Include="CSDialogueInfo.cpp" />
+    <ClCompile Include="CSIngredient.cpp" />
+    <ClCompile Include="CSLeveledCreature.cpp" />
+    <ClCompile Include="CSLeveledItem.cpp" />
+    <ClCompile Include="CSNPC.cpp" />
+    <ClCompile Include="CSSpell.cpp" />
+    <ClCompile Include="CSWeapon.cpp" />
+    <ClCompile Include="DialogEditAlchemyObjectWindow.cpp" />
+    <ClCompile Include="DialogEditCreatureObjectWindow.cpp" />
+    <ClCompile Include="DialogEditEnchantmentObjectWindow.cpp" />
+    <ClCompile Include="DialogEditLeveledCreatureObjectWindow.cpp" />
+    <ClCompile Include="DialogEditLeveledItemObjectWindow.cpp" />
+    <ClCompile Include="DialogEditNPCObjectWindow.cpp" />
+    <ClCompile Include="DialogEditObjectWindow.cpp" />
+    <ClCompile Include="DialogEditSpellObjectWindow.cpp" />
+    <ClCompile Include="DialogLandscapeEditSettingsWindow.cpp" />
+    <ClCompile Include="DialogPreviewWindow.cpp" />
+    <ClCompile Include="DialogReferenceData.cpp" />
+    <ClCompile Include="DialogScriptEditorWindow.cpp" />
+    <ClCompile Include="DialogScriptListWindow.cpp" />
+    <ClCompile Include="DialogTextSearchWindow.cpp" />
+    <ClCompile Include="EditBasicExtended.cpp" />
+    <ClCompile Include="CSBaseObject.cpp" />
+    <ClCompile Include="CSDataHandler.cpp" />
+    <ClCompile Include="CSGameFile.cpp" />
+    <ClCompile Include="CSLight.cpp" />
+    <ClCompile Include="CSModelLoader.cpp" />
+    <ClCompile Include="CSPhysicalObject.cpp" />
+    <ClCompile Include="CSRecordHandler.cpp" />
+    <ClCompile Include="CSScript.cpp" />
+    <ClCompile Include="CSSE.cpp" />
+    <ClCompile Include="DialogCellWindow.cpp" />
+    <ClCompile Include="DialogDataFilesWindow.cpp" />
+    <ClCompile Include="DialogDialogueWindow.cpp" />
+    <ClCompile Include="DialogObjectWindow.cpp" />
+    <ClCompile Include="DialogRenderWindow.cpp" />
+    <ClCompile Include="DialogSearchAndReplaceWindow.cpp" />
+    <ClCompile Include="LogUtil.cpp" />
+    <ClCompile Include="NILinesData.cpp" />
+    <ClCompile Include="ObjectWindowTabData.cpp" />
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="CSReference.cpp" />
+    <ClCompile Include="RenderWindowSceneGraphController.cpp" />
+    <ClCompile Include="RenderWindowSelectionData.cpp" />
+    <ClCompile Include="RenderWindowWidgets.cpp" />
+    <ClCompile Include="Settings.cpp" />
+    <ClCompile Include="WindowMain.cpp" />
+    <ClCompile Include="WinUIUtil.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CSSE.def" />
+    <None Include="res\CSSE.rc2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CSSE.h" />
+    <ClInclude Include="framework.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="targetver.h" />
     <ClInclude Include="CSActor.h" />
     <ClInclude Include="CSAIConfig.h" />
     <ClInclude Include="CSAnimatedObject.h" />
@@ -183,14 +266,12 @@ if defined APPVEYOR_BUILD_NUMBER (echo #define APPVEYOR_BUILD_NUMBER %APPVEYOR_B
     <ClInclude Include="DialogSearchAndReplaceWindow.h" />
     <ClInclude Include="DialogTextSearchWindow.h" />
     <ClInclude Include="EditBasicExtended.h" />
-    <ClInclude Include="framework.h" />
     <ClInclude Include="CSBaseObject.h" />
     <ClInclude Include="LogUtil.h" />
     <ClInclude Include="NIConfig.h" />
     <ClInclude Include="NILinesData.h" />
     <ClInclude Include="NIRTTIDefines.h" />
     <ClInclude Include="ObjectWindowTabData.h" />
-    <ClInclude Include="pch.h" />
     <ClInclude Include="RenderWindowSceneGraphController.h" />
     <ClInclude Include="RenderWindowSelectionData.h" />
     <ClInclude Include="RenderWindowWidgets.h" />
@@ -199,65 +280,7 @@ if defined APPVEYOR_BUILD_NUMBER (echo #define APPVEYOR_BUILD_NUMBER %APPVEYOR_B
     <ClInclude Include="WinUIUtil.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CSArmor.cpp" />
-    <ClCompile Include="CSBodyPart.cpp" />
-    <ClCompile Include="CSBook.cpp" />
-    <ClCompile Include="CSContainer.cpp" />
-    <ClCompile Include="CSCreature.cpp" />
-    <ClCompile Include="CSDialogueInfo.cpp" />
-    <ClCompile Include="CSIngredient.cpp" />
-    <ClCompile Include="CSLeveledCreature.cpp" />
-    <ClCompile Include="CSLeveledItem.cpp" />
-    <ClCompile Include="CSNPC.cpp" />
-    <ClCompile Include="CSSpell.cpp" />
-    <ClCompile Include="CSWeapon.cpp" />
-    <ClCompile Include="DialogEditAlchemyObjectWindow.cpp" />
-    <ClCompile Include="DialogEditCreatureObjectWindow.cpp" />
-    <ClCompile Include="DialogEditEnchantmentObjectWindow.cpp" />
-    <ClCompile Include="DialogEditLeveledCreatureObjectWindow.cpp" />
-    <ClCompile Include="DialogEditLeveledItemObjectWindow.cpp" />
-    <ClCompile Include="DialogEditNPCObjectWindow.cpp" />
-    <ClCompile Include="DialogEditObjectWindow.cpp" />
-    <ClCompile Include="DialogEditSpellObjectWindow.cpp" />
-    <ClCompile Include="DialogLandscapeEditSettingsWindow.cpp" />
-    <ClCompile Include="DialogPreviewWindow.cpp" />
-    <ClCompile Include="DialogReferenceData.cpp" />
-    <ClCompile Include="DialogScriptEditorWindow.cpp" />
-    <ClCompile Include="DialogScriptListWindow.cpp" />
-    <ClCompile Include="DialogTextSearchWindow.cpp" />
-    <ClCompile Include="EditBasicExtended.cpp" />
-    <ClCompile Include="CSBaseObject.cpp" />
-    <ClCompile Include="CSDataHandler.cpp" />
-    <ClCompile Include="CSGameFile.cpp" />
-    <ClCompile Include="CSLight.cpp" />
-    <ClCompile Include="CSModelLoader.cpp" />
-    <ClCompile Include="CSPhysicalObject.cpp" />
-    <ClCompile Include="CSRecordHandler.cpp" />
-    <ClCompile Include="CSScript.cpp" />
-    <ClCompile Include="CSSE.cpp" />
-    <ClCompile Include="DialogCellWindow.cpp" />
-    <ClCompile Include="DialogDataFilesWindow.cpp" />
-    <ClCompile Include="DialogDialogueWindow.cpp" />
-    <ClCompile Include="DialogObjectWindow.cpp" />
-    <ClCompile Include="DialogRenderWindow.cpp" />
-    <ClCompile Include="DialogSearchAndReplaceWindow.cpp" />
-    <ClCompile Include="LogUtil.cpp" />
-    <ClCompile Include="NILinesData.cpp" />
-    <ClCompile Include="ObjectWindowTabData.cpp" />
-    <ClCompile Include="pch.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="CSReference.cpp" />
-    <ClCompile Include="RenderWindowSceneGraphController.cpp" />
-    <ClCompile Include="RenderWindowSelectionData.cpp" />
-    <ClCompile Include="RenderWindowWidgets.cpp" />
-    <ClCompile Include="Settings.cpp" />
-    <ClCompile Include="WindowMain.cpp" />
-    <ClCompile Include="WinUIUtil.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="CSSE.h" />
+    <ResourceCompile Include="CSSE.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

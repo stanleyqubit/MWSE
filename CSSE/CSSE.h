@@ -1,9 +1,20 @@
 #pragma once
 
-#include "CSDefines.h"
-
 namespace se::cs {
-	extern HMODULE hInstanceCSSE;
+	class CSSE : public CWinApp {
+	public:
+		CSSE();
 
-	bool isVanillaMaster(GameFile* master);
+	public:
+		virtual BOOL InitInstance();
+		virtual int ExitInstance();
+
+		DECLARE_MESSAGE_MAP()
+
+	private:
+		void InstallPatches() const;
+		void UpdateCurrentDirectory() const;
+	};
+
+	extern CSSE application;
 }

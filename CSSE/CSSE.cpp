@@ -1,4 +1,4 @@
-#include "csse.h"
+#include "CSSE.h"
 
 #include "LogUtil.h"
 
@@ -33,11 +33,13 @@
 #include "BuildDate.h"
 #include "Settings.h"
 
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#endif
+
 namespace se::cs {
 	constexpr auto LOG_SUPPRESSED_WARNINGS = false;
 	constexpr auto LOG_NI_MESSAGES = false;
-
-	HMODULE hInstanceCSSE = NULL;
 
 	GameFile* master_Morrowind = nullptr;
 	GameFile* master_Tribunal = nullptr;
@@ -366,34 +368,17 @@ namespace se::cs {
 		dialog::text_search_window::installPatches();
 	}
 
-	void updateCurrentDirectory() {
-		using namespace std::filesystem;
-		using namespace windows;
+	CSSE application;
 
-		// Get the path of CSSE.dll.
-		auto csseDllPath = getModulePath(hInstanceCSSE);
-		if (csseDllPath.empty()) {
-			log::stream << "WARNING: Could not resolve CSSE DLL directory." << std::endl;
-			return;
-		}
+	CSSE::CSSE() {
 
-		// See if we even need to change paths.
-		auto oldPath = current_path();
-		auto installPath = csseDllPath.parent_path();
-		if (oldPath == installPath) {
-			return;
-		}
-
-		// Update and log path change.
-		current_path(installPath);
-		log::stream << "Changed working directory from " << oldPath << " to " << installPath << std::endl;
 	}
 
-	void attachToProcess(HMODULE hModule) {
-		hInstanceCSSE = hModule;
+	BOOL CSSE::InitInstance() {
+		CWinApp::InitInstance();
 
 		// Open our log file.
-		log::stream.open(windows::getModulePath(hInstanceCSSE).parent_path() / "csse.log");
+		log::stream.open(windows::getModulePath(m_hInstance).parent_path() / "csse.log");
 #ifdef APPVEYOR_BUILD_NUMBER
 		log::stream << "Construction Set Extender build " << APPVEYOR_BUILD_NUMBER << " (built " << __DATE__ << ") hooked." << std::endl;
 #else
@@ -401,7 +386,7 @@ namespace se::cs {
 #endif
 
 		// Always force the current path to the root directory.
-		updateCurrentDirectory();
+		UpdateCurrentDirectory();
 
 		// Load settings. Immediately save after so we can see new options if needed.
 		try {
@@ -423,31 +408,122 @@ namespace se::cs {
 		// We can stop now if we're (mostly) disabled.
 		if (!settings.enabled) {
 			log::stream << "CSSE is disabled." << std::endl;
-			return;
+			return FALSE;
 		}
 
 		// Install TES Construction Set executable patches.
-		installPatches();
+		InstallPatches();
 
 		// Report successful initialization.
 		log::stream << "CSSE initialization complete." << std::endl;
+
+		return TRUE;
 	}
 
-	void detachFromProcess() {
+	void CSSE::InstallPatches() const {
+		using memory::genCallEnforced;
+		using memory::genNOPUnprotected;
+		using memory::genJumpEnforced;
+		using memory::genJumpUnprotected;
+		using memory::writeDoubleWordUnprotected;
+		using memory::writeValueEnforced;
+		using memory::overrideVirtualTableEnforced;
+
+		// Patch: Collect crash dumps.
+#ifndef _DEBUG
+		genCallEnforced(0x620DF9, 0x4049B7, reinterpret_cast<DWORD>(patch::onWinMain));
+#endif
+
+		// Get the vanilla masters so we suppress errors from them.
+		genCallEnforced(0x50194E, 0x4041C4, reinterpret_cast<DWORD>(patch::findVanillaMasters));
+
+		// Patch: Prevent GMST pollution.
+		genJumpEnforced(0x4042B4, 0x4F9BE0, reinterpret_cast<DWORD>(patch::preventGMSTPollution));
+
+		// Patch: Suppress "[Following/Previous] string is different for topic" warnings. They're pointless.
+		genCallEnforced(0x4F3186, 0x40123A, reinterpret_cast<DWORD>(patch::suppressDialogueInfoResolveIssues));
+		genCallEnforced(0x4F31AA, 0x40123A, reinterpret_cast<DWORD>(patch::suppressDialogueInfoResolveIssues));
+		genCallEnforced(0x4F3236, 0x40123A, reinterpret_cast<DWORD>(patch::suppressDialogueInfoResolveIssues));
+		genCallEnforced(0x4F325A, 0x40123A, reinterpret_cast<DWORD>(patch::suppressDialogueInfoResolveIssues));
+
+		// Patch: Suppress "1 duplicate references were removed" warning popups for vanilla masters.
+		genCallEnforced(0x50A9ED, 0x40123A, reinterpret_cast<DWORD>(patch::suppressDuplicateReferenceRemovedWarningForVanillaMasters));
+
+		// Restore debug logs.
+		if constexpr (LOG_NI_MESSAGES) {
+			genJumpUnprotected(0x593110, reinterpret_cast<DWORD>(patch::restoreNiLogMessage));
+			genJumpUnprotected(0x593120, reinterpret_cast<DWORD>(patch::restoreNiLogMessage));
+			genJumpUnprotected(0x593130, reinterpret_cast<DWORD>(patch::restoreNiLogMessageWithNewline));
+		}
+
+		// Patch: Prevent directory changing when passing a file to the CS.
+		genNOPUnprotected(0x443E25, 0x443E30 - 0x443E25);
+
+		// Patch: Speed up MO2 load times.
+		writeDoubleWordUnprotected(0x6D9C20, reinterpret_cast<DWORD>(&_stat32));
+
+		// Patch: Ensure master array is initialized for loading plugins.
+		genCallEnforced(0x501884, 0x4016F4, reinterpret_cast<DWORD>(patch::forceLoadFlagsOnActiveMods));
+
+		// Patch: Fix bound calculation.
+		genJumpEnforced(0x404467, 0x548280, reinterpret_cast<DWORD>(NI::CalculateBounds));
+
+		// Patch: Fix NiLinesData binary loading.
+		auto NiLinesData_loadBinary = &NI::LinesData::loadBinary;
+		overrideVirtualTableEnforced(0x67A220, 0xC, 0x5CAEF0, *reinterpret_cast<DWORD*>(&NiLinesData_loadBinary));
+
+		// Patch: Always clone scene graph nodes.
+		writeValueEnforced(0x548973, BYTE(0x02), BYTE(0x00));
+
+		// Patch: Always copy all NiExtraData on clone, instead of only the first NiStringExtraData.
+		genJumpUnprotected(0x53FEE8, 0x53FF0E);
+		genJumpUnprotected(0x53FF17, 0x53FF21);
+
+		// Install all our sectioned patches.
+		window::main::installPatches();
+		dialog::cell_window::installPatches();
+		dialog::dialogue_window::installPatches();
+		dialog::edit_object_window::installPatches();
+		dialog::landscape_edit_settings_window::installPatches();
+		dialog::object_window::installPatches();
+		dialog::preview_window::installPatches();
+		dialog::reference_data::installPatches();
+		dialog::render_window::installPatches();
+		dialog::script_editor_window::installPatches();
+		dialog::script_list_window::installPatches();
+		dialog::search_and_replace_window::installPatches();
+		dialog::text_search_window::installPatches();
+	}
+
+	void CSSE::UpdateCurrentDirectory() const {
+		using namespace std::filesystem;
+		using namespace windows;
+
+		// Get the path of CSSE.dll.
+		auto csseDllPath = getModulePath(m_hInstance);
+		if (csseDllPath.empty()) {
+			log::stream << "WARNING: Could not resolve CSSE DLL directory." << std::endl;
+			return;
+		}
+
+		// See if we even need to change paths.
+		auto oldPath = current_path();
+		auto installPath = csseDllPath.parent_path();
+		if (oldPath == installPath) {
+			return;
+		}
+
+		// Update and log path change.
+		current_path(installPath);
+		log::stream << "Changed working directory from " << oldPath << " to " << installPath << std::endl;
+	}
+
+	int CSSE::ExitInstance() {
 		settings.save();
-		log::stream << "CSSE detached from CS process." << std::endl;
+
+		return CWinApp::ExitInstance();
 	}
 }
 
-BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved) {
-	switch (ul_reason_for_call) {
-	case DLL_PROCESS_ATTACH:
-		se::cs::attachToProcess(hModule);
-		break;
-	case DLL_PROCESS_DETACH:
-		se::cs::detachFromProcess();
-		break;
-	}
-	return TRUE;
-}
-
+BEGIN_MESSAGE_MAP(se::cs::CSSE, CWinApp)
+END_MESSAGE_MAP()

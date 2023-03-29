@@ -57,10 +57,26 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CSSE.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CSSE.def">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="res\CSSE.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
     <ClInclude Include="framework.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="pch.h">
+    <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DialogObjectWindow.h">
@@ -138,7 +154,7 @@
     <ClInclude Include="DialogSearchAndReplaceWindow.h">
       <Filter>Header Files\UI\Dialog</Filter>
     </ClInclude>
-    <ClInclude Include="Settings.h">
+    <ClInclude Include="Resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DialogDataFilesWindow.h">
@@ -290,6 +306,12 @@
     </ClInclude>
     <ClInclude Include="DialogLandscapeEditSettingsWindow.h">
       <Filter>Header Files\UI\Dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="CSSE.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -452,10 +474,18 @@
     <ClCompile Include="DialogLandscapeEditSettingsWindow.cpp">
       <Filter>Source Files\UI\Dialog</Filter>
     </ClCompile>
+    <ClCompile Include="DialogCSSEAbout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="CSSE.h">
       <Filter>Header Files\CS</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="CSSE.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

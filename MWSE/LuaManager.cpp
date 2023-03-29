@@ -3518,7 +3518,7 @@ namespace mwse::lua {
 		if (itemData->luaData) {
 			// If it is empty, don't bother saving it.
 			auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
-			auto table = itemData->luaData->data;
+			auto& table = itemData->luaData->data;
 			if (!fnTableEmpty(table, true)) {
 				// Convert the table to json for storage.
 				std::string json = fnEncodeForSave(table);
@@ -3582,11 +3582,11 @@ namespace mwse::lua {
 
 		auto saveLoadItemData = saveLoadItemDataMap[GetCurrentThreadId()];
 		if (saveLoadItemData->luaData) {
-			sol::table table = saveLoadItemData->luaData->data;
 
 			// If it is empty, don't bother saving it.
 			auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
 			auto& state = stateHandle.state;
+			auto& table = saveLoadItemData->luaData->data;
 			if (!fnTableEmpty(table, true)) {
 				// Convert the table to json for storage.
 				std::string json = fnEncodeForSave(table);

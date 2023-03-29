@@ -27,6 +27,7 @@ namespace se::cs {
 
 	void Settings_t::RenderWindowSettings::from_toml(const toml::value& v) {
 		fov = toml::find_or(v, "fov", fov);
+		milliseconds_between_updates = std::clamp(toml::find_or(v, "milliseconds_between_updates", milliseconds_between_updates), 4u, 40u);
 		multisamples = toml::find_or(v, "multisamples", multisamples);
 		use_group_scaling = toml::find_or(v, "use_group_scaling", use_group_scaling);
 		use_legacy_grid_snap = toml::find_or(v, "use_legacy_grid_snap", use_legacy_grid_snap);
@@ -38,6 +39,7 @@ namespace se::cs {
 		return toml::value(
 			{
 				{ "fov", fov },
+				{ "milliseconds_between_updates", milliseconds_between_updates },
 				{ "multisamples", multisamples },
 				{ "use_group_scaling", use_group_scaling },
 				{ "use_legacy_grid_snap", use_legacy_grid_snap },

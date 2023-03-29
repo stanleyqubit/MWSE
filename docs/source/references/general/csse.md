@@ -89,6 +89,7 @@ If you are using [Construction Set Better UI](https://www.nexusmods.com/morrowin
 	* Restore hidden references, restoring to view any references hidden with the hide selection option.
 	* Set or clear the QuickStart data from the current render window perspective.
 * The field of view (FOV) and antialiasing (multisamples) can be overwritten in the config file.
+* The update rate of the render window can be changed from the default of 40ms. Values between 4 (250 FPS) and 40 (25 FPS) are supported.
 * Fixed an issue with bound calculations. Any bound-related functions, such as focusing the camera (C or T keys) on a light will never send the camera into the stratosphere.
 
 The following changes to the rendering window apply when landscape editing:

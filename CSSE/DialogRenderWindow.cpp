@@ -1646,6 +1646,7 @@ namespace se::cs::dialog::render_window {
 		using memory::genPushEnforced;
 		using memory::writeDoubleWordEnforced;
 		using memory::writePatchCodeUnprotected;
+		using memory::writeValueEnforced;
 
 		// Patch: Extend SceneGraphController structure.
 		static_assert(sizeof(SceneGraphController) < INT8_MAX);
@@ -1694,5 +1695,8 @@ namespace se::cs::dialog::render_window {
 
 		// Patch: Extend Render Window message handling.
 		genJumpEnforced(0x4020EF, 0x45A3F0, reinterpret_cast<DWORD>(PatchDialogProc));
+
+		// Patch: Customize render window update rate.
+		writeValueEnforced<BYTE>(0x45BF58 + 0x1, 40u, settings.render_window.milliseconds_between_updates);
 	}
 }

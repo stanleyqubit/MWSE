@@ -32,6 +32,9 @@
 #include <afxcmn.h>                     // MFC support for Windows Common Controls
 #endif // _AFX_NO_AFXCMN_SUPPORT
 
+// MFC classes.
+#include <afxdialogex.h>
+
 // Standard template libraries.
 #include <algorithm>
 #include <exception>

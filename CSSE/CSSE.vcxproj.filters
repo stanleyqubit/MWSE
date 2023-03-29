@@ -34,17 +34,11 @@
     <Filter Include="Header Files\UI\Dialog">
       <UniqueIdentifier>{3f188b73-08d2-41c8-b8eb-ce4d275520c6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\UI\Classes">
-      <UniqueIdentifier>{55d26094-df7c-4c07-80a9-2bf8bc2154fd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\UI">
       <UniqueIdentifier>{c3107347-89e3-459b-8d01-ab3d671d747a}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\UI\Dialog">
       <UniqueIdentifier>{005593a0-f7ef-47c2-be0d-1b5af6f39a66}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\UI\Classes">
-      <UniqueIdentifier>{a45cab09-92be-4384-b1ab-65c4bf53ea2d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\UI\Controllers">
       <UniqueIdentifier>{426eea90-9e20-4293-9b7c-97ceb28b4a42}</UniqueIdentifier>
@@ -55,6 +49,18 @@
     <Filter Include="Source Files\NI">
       <UniqueIdentifier>{f9bdffe1-0d39-45c0-9896-032b172b4e5b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\UI\ControlClasses">
+      <UniqueIdentifier>{55d26094-df7c-4c07-80a9-2bf8bc2154fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI\ControlClasses">
+      <UniqueIdentifier>{a45cab09-92be-4384-b1ab-65c4bf53ea2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\UI\DialogClasses">
+      <UniqueIdentifier>{297cce26-5a28-4344-8824-65127609a17b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI\DialogClasses">
+      <UniqueIdentifier>{e27d27d9-0a04-49a6-a7ba-63ca1d35d1eb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CSSE.cpp">
@@ -62,6 +68,9 @@
     </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogAboutCSSE.cpp">
+      <Filter>Source Files\UI\DialogClasses</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -170,7 +179,7 @@
       <Filter>Header Files\CS</Filter>
     </ClInclude>
     <ClInclude Include="EditBasicExtended.h">
-      <Filter>Header Files\UI\Classes</Filter>
+      <Filter>Header Files\UI\ControlClasses</Filter>
     </ClInclude>
     <ClInclude Include="ObjectWindowTabData.h">
       <Filter>Header Files\UI\Controllers</Filter>
@@ -313,6 +322,12 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Settings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogAboutCSSE.h">
+      <Filter>Header Files\UI\DialogClasses</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -373,7 +388,7 @@
       <Filter>Source Files\CS</Filter>
     </ClCompile>
     <ClCompile Include="EditBasicExtended.cpp">
-      <Filter>Source Files\UI\Classes</Filter>
+      <Filter>Source Files\UI\ControlClasses</Filter>
     </ClCompile>
     <ClCompile Include="ObjectWindowTabData.cpp">
       <Filter>Source Files\UI\Controllers</Filter>
@@ -474,14 +489,6 @@
     <ClCompile Include="DialogLandscapeEditSettingsWindow.cpp">
       <Filter>Source Files\UI\Dialog</Filter>
     </ClCompile>
-    <ClCompile Include="DialogCSSEAbout.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="CSSE.h">
-      <Filter>Header Files\CS</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="CSSE.rc">

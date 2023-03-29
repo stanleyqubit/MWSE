@@ -22,6 +22,8 @@
 #include "RenderWindowSceneGraphController.h"
 #include "RenderWindowWidgets.h"
 
+#include "DialogAboutCSSE.h"
+
 namespace se::cs::window::main {
 
 	struct ObjectEditLParam {
@@ -273,9 +275,9 @@ namespace se::cs::window::main {
 	// Patch: Extend window messages.
 	//
 
-	bool blockNormalExecution = false;
+	std::optional<LRESULT> messageResultOverride;
 
-	void onFinishInitialization(LPARAM& lParam) {
+	void setupQuicStart() {
 		char* commandLineFile = (char*)0x6CE6CC;
 
 		// Skip any initialization if the preview window is active.
@@ -290,7 +292,7 @@ namespace se::cs::window::main {
 			return;
 		}
 
-		// We can also skip if the enabled 
+		// We don't have to do anything else if we have it disabled.
 		if (!settings.quickstart.enabled || settings.quickstart.data_files.empty()) {
 			return;
 		}
@@ -320,6 +322,50 @@ namespace se::cs::window::main {
 		isQuickStarting = true;
 	}
 
+	HMENU createExtenderMenu() {
+		auto menu = CreateMenu();
+
+		AppendMenuA(menu, MF_STRING, CUSTOM_MENU_ID_CSSE_ABOUT, "&About");
+
+		return menu;
+	}
+
+	void PatchDialogProc_BeforeFinishInitialization(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		// Handle quickstart.
+		setupQuicStart();
+
+		// Add MWSE to the menu.
+		auto menu = GetMenu(hWnd);
+		if (!menu) {
+			return;
+		}
+
+		// Add the MWSE menu to the system.
+		MENUITEMINFO newExtenderMenu = {};
+		newExtenderMenu.cbSize = sizeof(MENUITEMINFO);
+		newExtenderMenu.fMask = MIIM_STRING | MIIM_SUBMENU;
+		newExtenderMenu.hSubMenu = createExtenderMenu();
+		newExtenderMenu.dwTypeData = (char*)"C&SSE";
+		InsertMenuItemA(menu, 6, TRUE, &newExtenderMenu);
+
+		// Redraw the menu.
+		DrawMenuBar(hWnd);
+	}
+
+	void showAboutDialog(HWND hParent) {
+		DialogAboutCSSE dialog;
+		dialog.DoModal();
+	}
+
+	void PatchDialogProc_BeforeCommand(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		int x = 0;
+		switch (wParam) {
+		case CUSTOM_MENU_ID_CSSE_ABOUT:
+			showAboutDialog(hWnd);
+			break;
+		}
+	}
+
 	void PatchDialogProc_BeforeClose(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		auto sgController = dialog::render_window::SceneGraphController::get();
 		delete sgController->widgets;
@@ -340,20 +386,23 @@ namespace se::cs::window::main {
 	}
 
 	LRESULT CALLBACK PatchDialogProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
-		blockNormalExecution = false;
+		messageResultOverride.reset();
 
 		// Handle pre-patches.
 		switch (msg) {
 		case CUSTOM_WM_FINISH_INITIALIZATION:
-			onFinishInitialization(lParam);
+			PatchDialogProc_BeforeFinishInitialization(hWnd, msg, wParam, lParam);
+			break;
+		case WM_COMMAND:
+			PatchDialogProc_BeforeCommand(hWnd, msg, wParam, lParam);
 			break;
 		case WM_CLOSE:
 			PatchDialogProc_BeforeClose(hWnd, msg, wParam, lParam);
 			break;
 		}
 
-		if (blockNormalExecution) {
-			return TRUE;
+		if (messageResultOverride) {
+			return messageResultOverride.value();
 		}
 
 		// Call original function.
@@ -366,7 +415,7 @@ namespace se::cs::window::main {
 			break;
 		}
 
-		return result;
+		return messageResultOverride.value_or(result);
 	}
 
 	void installPatches() {

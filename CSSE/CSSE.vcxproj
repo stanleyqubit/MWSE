@@ -147,6 +147,7 @@ if defined APPVEYOR_BUILD_NUMBER (echo #define APPVEYOR_BUILD_NUMBER %APPVEYOR_B
     <ClCompile Include="CSNPC.cpp" />
     <ClCompile Include="CSSpell.cpp" />
     <ClCompile Include="CSWeapon.cpp" />
+    <ClCompile Include="DialogAboutCSSE.cpp" />
     <ClCompile Include="DialogEditAlchemyObjectWindow.cpp" />
     <ClCompile Include="DialogEditCreatureObjectWindow.cpp" />
     <ClCompile Include="DialogEditEnchantmentObjectWindow.cpp" />
@@ -198,6 +199,7 @@ if defined APPVEYOR_BUILD_NUMBER (echo #define APPVEYOR_BUILD_NUMBER %APPVEYOR_B
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CSSE.h" />
+    <ClInclude Include="DialogAboutCSSE.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />

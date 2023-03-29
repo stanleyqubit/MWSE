@@ -714,17 +714,19 @@ namespace mwse::patch {
 	
 	const auto TES3_AudioController_SetSoundBufferVolume = reinterpret_cast<void(__thiscall*)(TES3::AudioController*, TES3::SoundBuffer*, unsigned char)>(0x4029F0);
 	void __fastcall PatchSetLoopingSoundBufferVolume(TES3::AudioController* audio, DWORD unused, TES3::SoundEvent* soundEvent, unsigned char volume) {
-		unsigned char adjustedVolume = float(volume) * float(soundEvent->sound->volume) / 250.0f;
+		unsigned char adjustedVolume = (unsigned char)(float(volume) * float(soundEvent->sound->volume) / 250.0f);
 		TES3_AudioController_SetSoundBufferVolume(audio, soundEvent->soundBuffer, adjustedVolume);
 	}
 
 	//
-	// Patch: Add deterministic subtree ordering mode to NiSortAdjustNode.
+	// Patch: Add deterministic subtree ordering mode to NiSortAdjustNode. Fix cloning with no accumulator.
 	//
 
 	const auto NI_SortAdjustNode_Display = reinterpret_cast<void(__thiscall*)(NI::SortAdjustNode*, NI::Camera*)>(0x6DE030);
 	const auto NI_ClusterAccumulator_RegisterObject = reinterpret_cast<void(__thiscall*)(NI::Accumulator*, NI::AVObject*)>(0x6CF200);
+
 	void __fastcall PatchNISortAdjustNodeDisplay(NI::SortAdjustNode* node, DWORD unused, NI::Camera* camera) {
+		// Add extra sort adjust mode for accumulating a node instead of geom.
 		auto accumulator = camera->renderer->accumulator.get();
 		if (node->sortingMode == NI::SortAdjustMode::SORTING_ORDERED_SUBTREE_MWSE
 			&& accumulator != nullptr
@@ -735,6 +737,12 @@ namespace mwse::patch {
 			NI_SortAdjustNode_Display(node, camera);
 		}
 	}
+
+	NI::Object* __fastcall PatchNISortAdjustNodeCloneAccumulator(NI::Accumulator* accumulator) {
+		// Only call createClone if accumulator exists.
+		return accumulator ? accumulator->vTable.asObject->createClone(accumulator) : nullptr;
+	}
+
 
 	//
 	// Install all the patches.
@@ -1037,8 +1045,9 @@ namespace mwse::patch {
 		writeValueEnforced<BYTE>(0x5A1FC5, 0x52, 0x56);
 		genCallEnforced(0x5A1FC6, 0x4029F0, reinterpret_cast<DWORD>(PatchSetLoopingSoundBufferVolume));
 
-		// Patch: Add deterministic subtree ordering mode to NiSortAdjustNode.
+		// Patch: Add deterministic subtree ordering mode to NiSortAdjustNode. Fix cloning with no accumulator.
 		overrideVirtualTableEnforced(0x750580, 0x78, 0x6DE030, reinterpret_cast<DWORD>(PatchNISortAdjustNodeDisplay));
+		genCallUnprotected(0x6DE21B, reinterpret_cast<DWORD>(PatchNISortAdjustNodeCloneAccumulator));
 	}
 
 	void installPostLuaPatches() {

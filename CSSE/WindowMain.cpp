@@ -277,7 +277,7 @@ namespace se::cs::window::main {
 
 	std::optional<LRESULT> messageResultOverride;
 
-	void setupQuicStart() {
+	void setupQuickStart() {
 		char* commandLineFile = (char*)0x6CE6CC;
 
 		// Skip any initialization if the preview window is active.
@@ -332,7 +332,7 @@ namespace se::cs::window::main {
 
 	void PatchDialogProc_BeforeFinishInitialization(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		// Handle quickstart.
-		setupQuicStart();
+		setupQuickStart();
 
 		// Add MWSE to the menu.
 		auto menu = GetMenu(hWnd);

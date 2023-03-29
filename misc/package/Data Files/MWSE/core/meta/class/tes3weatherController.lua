@@ -24,14 +24,14 @@
 --- @field nextWeather tes3weatherAsh|tes3weatherBlight|tes3weatherBlizzard|tes3weatherClear|tes3weatherCloudy|tes3weatherFoggy|tes3weatherOvercast|tes3weatherRain|tes3weatherSnow|tes3weatherThunder *Read-only*. The next weather.
 --- @field particlesActive tes3weatherControllerParticle[] *Read-only*. Provides a list of active weather particles.
 --- @field particlesInactive tes3weatherControllerParticle[] *Read-only*. Provides a list of inactive weather particles.
---- @field sceneRainRoot niBillboardNode|niCollisionSwitch|niNode|niSwitchNode *Read-only*. Provides read-only access to the scene rain root NiNode.
+--- @field sceneRainRoot niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode *Read-only*. Provides read-only access to the scene rain root NiNode.
 --- @field sceneSkyLight niDirectionalLight *Read-only*. Provides read-only access to the scene sky light directional light.
---- @field sceneSkyRoot niBillboardNode|niCollisionSwitch|niNode|niSwitchNode *Read-only*. Provides read-only access to the scene sky root NiNode.
---- @field sceneSnowRoot niBillboardNode|niCollisionSwitch|niNode|niSwitchNode *Read-only*. Provides read-only access to the scene snow root NiNode.
---- @field sceneStormRoot niBillboardNode|niCollisionSwitch|niNode|niSwitchNode *Read-only*. Provides read-only access to the scene storm root NiNode.
---- @field sceneSunBase niBillboardNode|niCollisionSwitch|niNode|niSwitchNode *Read-only*. Provides read-only access to the scenesun base NiNode.
---- @field sceneSunGlare niBillboardNode|niCollisionSwitch|niNode|niSwitchNode *Read-only*. Provides read-only access to the scene sun glare NiNode.
---- @field sceneSunVis niBillboardNode|niCollisionSwitch|niNode|niSwitchNode *Read-only*. Provides read-only access to the scene sun vis NiNode.
+--- @field sceneSkyRoot niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode *Read-only*. Provides read-only access to the scene sky root NiNode.
+--- @field sceneSnowRoot niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode *Read-only*. Provides read-only access to the scene snow root NiNode.
+--- @field sceneStormRoot niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode *Read-only*. Provides read-only access to the scene storm root NiNode.
+--- @field sceneSunBase niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode *Read-only*. Provides read-only access to the scenesun base NiNode.
+--- @field sceneSunGlare niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode *Read-only*. Provides read-only access to the scene sun glare NiNode.
+--- @field sceneSunVis niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode *Read-only*. Provides read-only access to the scene sun vis NiNode.
 --- @field secunda tes3moon *Read-only*. Provides read-only access to the Secunda moon object.
 --- @field skyPostSunriseTime number The sky has one color for day and night states each. The day color will be used when the game hour is between `skyPostSunriseTime` and `skyPreSunsetTime`. This corresponds to the setting of the same name in Morrowind.ini file.
 --- @field skyPostSunsetTime number The sky has one color for day and night states each. The night color will be used when the game hour is between `skyPostSunsetTime` and `skyPreSunriseTime`. This corresponds to the setting of the same name in Morrowind.ini file.

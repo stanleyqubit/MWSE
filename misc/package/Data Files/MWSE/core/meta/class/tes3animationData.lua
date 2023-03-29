@@ -6,7 +6,7 @@
 --- 
 --- Animations are divided into three layers. The layer 0 is the base layer containing all the base animations for every humanoid in the game, including the player (when in third person). These animations come from `base_anim.nif`. Layer 1 is for female animations. Any animations present in `base_anim_female.nif` override their male counterparts for humanoid races. For beast races, layer 1 animations come from `base_anim_kna.nif`. Layer 2 are the custom animations assigned to the actor.
 --- @class tes3animationData
---- @field actorNode niBillboardNode|niCollisionSwitch|niNode|niSwitchNode 
+--- @field actorNode niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode 
 --- @field animationGroups tes3animationGroup[] *Read-only*. The animation groups, indexed by the [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) namespace.
 --- @field animationGroupSoundgenCounts number[] *Read-only*. The number of sound generators for each of the animation groups, indexed by the [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) namespace.
 --- @field animGroupLayerIndicies number[] *Read-only*. The layer from which each of the actor's animation groups come, indexed by the [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) namespace.
@@ -22,17 +22,17 @@
 --- @field flags number 
 --- @field hasOverrideAnimations boolean *Read-only*. 
 --- @field headGeometry niParticles|niRotatingParticles|niTriShape 
---- @field headNode niBillboardNode|niCollisionSwitch|niNode|niSwitchNode 
+--- @field headNode niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode 
 --- @field keyframeLayers tes3animationDataSequenceGroup[] *Read-only*. 
 --- @field lipsyncLevel number 
 --- @field loopCounts number[] *Read-only*. 
 --- @field manager niKeyframeManager 
---- @field modelRootNode niBillboardNode|niCollisionSwitch|niNode|niSwitchNode 
+--- @field modelRootNode niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode 
 --- @field movementSpeed number *Read-only*. The animation speed multiplier of movement animations. This includes walking, running, crouching, swimming, turning, jumping and other movement related animations.
 --- @field nextLoopCounts number 
 --- @field positionDeltaModelRoot tes3vector3 
---- @field spine1Node niBillboardNode|niCollisionSwitch|niNode|niSwitchNode 
---- @field spine2Node niBillboardNode|niCollisionSwitch|niNode|niSwitchNode 
+--- @field spine1Node niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode 
+--- @field spine2Node niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode 
 --- @field spineAngle number 
 --- @field timings number[] The time in seconds indicating the current position within the animation for each individual body section, indexed by values in the [`tes3.animationBodySection`](https://mwse.github.io/MWSE/references/animation-body-sections/) table.
 --- @field weaponSpeed number The animation speed multiplier of weapon animations. This includes all weapon related idle, attack, and ready/unready animations.
@@ -56,7 +56,7 @@ function tes3animationData:playAnimationGroup(animationGroup, startFlag, loopCou
 function tes3animationData:playAnimationGroupForIndex(animationGroup, triIndex, startFlag, loopCount) end
 
 --- 
---- @param head niBillboardNode|niCollisionSwitch|niNode|niSwitchNode 
+--- @param head niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode 
 function tes3animationData:setHeadNode(head) end
 
 --- 

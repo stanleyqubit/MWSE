@@ -24,7 +24,7 @@ function tes3bodyPartManager:getActiveBodyPartForItem(item) end
 --- The method fetches the NiNode-derived object for the loaded mesh of an active body part at a given layer and position.
 --- @param layer number A value from [`tes3.activeBodyPartLayer`](https://mwse.github.io/MWSE/references/active-body-part-layers/) namespace.
 --- @param index number A value from [`tes3.activeBodyPart`](https://mwse.github.io/MWSE/references/active-body-parts/) namespace.
---- @return niBillboardNode|niCollisionSwitch|niNode|niSwitchNode result No description yet available.
+--- @return niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode result No description yet available.
 function tes3bodyPartManager:getActiveBodyPartNode(layer, index) end
 
 --- The method removes all currently equipped layers from the actor.
@@ -34,7 +34,7 @@ function tes3bodyPartManager:removeEquippedLayers() end
 --- @param layer number A value from [`tes3.activeBodyPartLayer`](https://mwse.github.io/MWSE/references/active-body-part-layers/) namespace.
 --- @param index number A value from [`tes3.activeBodyPart`](https://mwse.github.io/MWSE/references/active-body-parts/) namespace.
 --- @param overwriteData boolean? *Default*: `true`. A flag which controls whether the current data should be overwritten.
---- @param node niBillboardNode|niCollisionSwitch|niNode|niSwitchNode|nil *Default*: `nil`. 
+--- @param node niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode|nil *Default*: `nil`. 
 function tes3bodyPartManager:setActivePartData(layer, index, overwriteData, node) end
 
 --- The method sets a new body part for a given object.

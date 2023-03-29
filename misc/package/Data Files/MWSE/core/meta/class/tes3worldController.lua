@@ -63,7 +63,7 @@
 --- `2` Main menu music
 --- 
 --- Note: These values are available as [`tes3.musicSituation`](https://mwse.github.io/MWSE/references/music-situations/) constants
---- @field nodeCursor niBillboardNode|niCollisionSwitch|niNode|niSwitchNode *Read-only*. The scenegraph node for the target crosshair.
+--- @field nodeCursor niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode *Read-only*. The scenegraph node for the target crosshair.
 --- @field parentWindowHandle HWND *Read-only*. Handle to the parent window.
 --- @field projectionDistance number 
 --- @field quests tes3quest[] *Read-only*. A list of all available quest objects.
@@ -95,7 +95,7 @@
 tes3worldController = {}
 
 --- This method applies an enchantment's effects to a scene node.
---- @param node niBillboardNode|niCollisionSwitch|niNode|niSwitchNode A scene node to which to apply the enchantment's effects.
+--- @param node niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode A scene node to which to apply the enchantment's effects.
 --- @param enchantment tes3enchantment The enchantment's effects to apply.
 --- @return boolean result No description yet available.
 function tes3worldController:applyEnchantEffect(node, enchantment) end

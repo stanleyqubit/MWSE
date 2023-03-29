@@ -10,5 +10,5 @@
 --- @field partType number The layer the body part occupies. Maps to values in [`tes3.activeBodyPartLayer`](https://mwse.github.io/MWSE/references/active-body-part-layers/) namespace.
 --- @field playable boolean A flag that marks this body part as selectable during character generation.
 --- @field raceName string *Read-only*. The name of the race associated with this body part.
---- @field sceneNode niBillboardNode|niCollisionSwitch|niNode|niSwitchNode The NiNode-derived object for the object's loaded mesh.
+--- @field sceneNode niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode The NiNode-derived object for the object's loaded mesh.
 --- @field vampiric boolean A flag that marks this body part as used for vampires.

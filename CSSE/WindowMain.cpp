@@ -358,7 +358,6 @@ namespace se::cs::window::main {
 	}
 
 	void PatchDialogProc_BeforeCommand(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
-		int x = 0;
 		switch (wParam) {
 		case CUSTOM_MENU_ID_CSSE_ABOUT:
 			showAboutDialog(hWnd);

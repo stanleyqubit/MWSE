@@ -1,6 +1,7 @@
 #pragma once
 
 namespace NI {
+	struct Accumulator;
 	struct AlphaProperty;
 	struct AmbientLight;
 	struct AVObject;

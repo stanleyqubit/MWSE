@@ -2,6 +2,7 @@
 
 #include "NIDefines.h"
 
+#include "NIAccumulator.h"
 #include "NIObject.h"
 #include "NIProperty.h"
 #include "NIRect.h"
@@ -76,9 +77,9 @@ namespace NI {
 
 			ALL = BACKBUFFER | STENCIL | ZBUFFER,
 		};
-		Pointer<Object> accumulator; // 0x8
-		Pointer<Property> currentProperty; // 0xC
-		Pointer<Object> currentEffect; // 0x10
+		Pointer<Accumulator> accumulator; // 0x8
+		Pointer<Object> currentPropertyState; // 0xC
+		Pointer<Object> currentEffectState; // 0x10
 		unsigned int precacheCriticalSection; // 0x14
 		unsigned int sourceDataCriticalSection; // 0x18
 

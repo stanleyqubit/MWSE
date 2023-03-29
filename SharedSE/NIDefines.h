@@ -4,6 +4,7 @@
 #include "NIRTTIDefines.h"
 
 namespace NI {
+	struct Accumulator;
 	struct AlphaProperty;
 	struct AmbientLight;
 	struct AVObject;

@@ -29,6 +29,7 @@
 
 #include "NIFlipController.h"
 #include "NILinesData.h"
+#include "NISortAdjustNode.h"
 #include "NIUVController.h"
 
 #include "BitUtil.h"
@@ -718,6 +719,24 @@ namespace mwse::patch {
 	}
 
 	//
+	// Patch: Add deterministic subtree ordering mode to NiSortAdjustNode.
+	//
+
+	const auto NI_SortAdjustNode_Display = reinterpret_cast<void(__thiscall*)(NI::SortAdjustNode*, NI::Camera*)>(0x6DE030);
+	const auto NI_ClusterAccumulator_RegisterObject = reinterpret_cast<void(__thiscall*)(NI::Accumulator*, NI::AVObject*)>(0x6CF200);
+	void __fastcall PatchNISortAdjustNodeDisplay(NI::SortAdjustNode* node, DWORD unused, NI::Camera* camera) {
+		auto accumulator = camera->renderer->accumulator.get();
+		if (node->sortingMode == NI::SortAdjustMode::SORTING_ORDERED_SUBTREE_MWSE
+			&& accumulator != nullptr
+			&& accumulator->isInstanceOfType(NI::RTTIStaticPtr::NiAlphaAccumulator)) {
+			NI_ClusterAccumulator_RegisterObject(accumulator, node);
+		}
+		else {
+			NI_SortAdjustNode_Display(node, camera);
+		}
+	}
+
+	//
 	// Install all the patches.
 	//
 
@@ -1017,6 +1036,9 @@ namespace mwse::patch {
 		genCallEnforced(0x5A1F25, 0x4029F0, reinterpret_cast<DWORD>(PatchSetLoopingSoundBufferVolume));
 		writeValueEnforced<BYTE>(0x5A1FC5, 0x52, 0x56);
 		genCallEnforced(0x5A1FC6, 0x4029F0, reinterpret_cast<DWORD>(PatchSetLoopingSoundBufferVolume));
+
+		// Patch: Add deterministic subtree ordering mode to NiSortAdjustNode.
+		overrideVirtualTableEnforced(0x750580, 0x78, 0x6DE030, reinterpret_cast<DWORD>(PatchNISortAdjustNodeDisplay));
 	}
 
 	void installPostLuaPatches() {

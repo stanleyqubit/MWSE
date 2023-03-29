@@ -27,6 +27,7 @@
 #include "NIPosData.h"
 #include "NIProperty.h"
 #include "NISkinInstance.h"
+#include "NISortAdjustNode.h"
 #include "NISourceTexture.h"
 #include "NISpotLight.h"
 #include "NISwitchNode.h"
@@ -249,6 +250,9 @@ namespace NI {
 				break;
 			case RTTIStaticPtr::NiSkinPartition:
 				ref = sol::make_object_userdata(L, Pointer(static_cast<SkinPartition*>(this)));
+				break;
+			case RTTIStaticPtr::NiSortAdjustNode:
+				ref = sol::make_object_userdata(L, Pointer(static_cast<SortAdjustNode*>(this)));
 				break;
 			case RTTIStaticPtr::NiSourceTexture:
 				ref = sol::make_object_userdata(L, Pointer(static_cast<SourceTexture*>(this)));

@@ -5,6 +5,7 @@
 
 #include "NIBillboardNode.h"
 #include "NINode.h"
+#include "NISortAdjustNode.h"
 
 namespace mwse::lua {
 	void bindNINode() {
@@ -38,6 +39,21 @@ namespace mwse::lua {
 
 			// Basic function binding.
 			usertypeDefinition["rotateToCamera"] = &NI::BillboardNode::rotateToCamera;
+		}
+
+		// Binding for NI::SortAdjustNode.
+		{
+			// Start our usertype.
+			auto usertypeDefinition = state.new_usertype<NI::SortAdjustNode>("niSortAdjustNode");
+			usertypeDefinition["new"] = &NI::SortAdjustNode::create;
+
+			// Define inheritance structures. These must be defined in order from top to bottom. The complete chain must be defined.
+			usertypeDefinition[sol::base_classes] = sol::bases<NI::Node, NI::AVObject, NI::ObjectNET, NI::Object>();
+			setUserdataForNINode(usertypeDefinition);
+
+			// Basic property binding.
+			usertypeDefinition["accumulator"] = &NI::SortAdjustNode::accumulator;
+			usertypeDefinition["sortingMode"] = &NI::SortAdjustNode::sortingMode;
 		}
 	}
 }

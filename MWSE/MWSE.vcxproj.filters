@@ -1701,6 +1701,12 @@
     <ClInclude Include="TES3DialogueFilterContext.h">
       <Filter>Header Files\DataAdapters\TES3\Dialog</Filter>
     </ClInclude>
+    <ClInclude Include="NIAccumulator.h">
+      <Filter>Header Files\DataAdapters\NI</Filter>
+    </ClInclude>
+    <ClInclude Include="NISortAdjustNode.h">
+      <Filter>Header Files\DataAdapters\NI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -3706,6 +3712,9 @@
     </ClCompile>
     <ClCompile Include="TES3DialogueFilterContext.cpp">
       <Filter>Source Files\Lua\Bindings\TES3</Filter>
+    </ClCompile>
+    <ClCompile Include="NISortAdjustNode.cpp">
+      <Filter>Source Files\DataAdapters\NI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

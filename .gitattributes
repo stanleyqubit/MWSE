@@ -16,6 +16,7 @@
 *.modelproj  text eol=crlf
 *.sqlproj    text eol=crlf
 *.wmaproj    text eol=crlf
+*.rc         binary
 
 *.xproj      text eol=crlf
 *.props      text eol=crlf
@@ -70,5 +71,3 @@
 *.def text
 *.bmp binary
 *.ico binary
-*.rc text
-

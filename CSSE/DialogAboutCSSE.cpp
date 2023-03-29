@@ -17,7 +17,7 @@ namespace se::cs {
 		CDialogEx::OnInitDialog();
 
 		// Update build number.
-#if APPVEYOR_BUILD_NUMBER
+#ifdef APPVEYOR_BUILD_NUMBER
 		std::stringstream ss;
 		ss << "Build " << APPVEYOR_BUILD_NUMBER;
 		auto label = GetDlgItem(IDC_BUILD_INFO_STATIC);

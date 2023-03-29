@@ -209,6 +209,8 @@ namespace TES3 {
 
 			return getItemCount(item);
 		}
+
+		return 0;
 	}
 
 	bool Inventory::containsItem(Item * item, ItemData * data) {

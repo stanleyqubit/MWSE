@@ -4,6 +4,7 @@
 
 namespace se::cs {
 	Settings_t settings;
+	const Settings_t default_settings;
 
 	//
 	// Dialogue Window
@@ -300,7 +301,7 @@ namespace se::cs {
 		}
 	}
 
-	void Settings_t::save() {
+	void Settings_t::save() const {
 		if (!valid) {
 			return;
 		}
@@ -329,8 +330,8 @@ namespace se::cs {
 	toml::value Settings_t::into_toml() const {
 		return toml::value(
 			{
-				{ "enabled", enabled },
 				{ "title", "Construction Set Extender" },
+				{ "enabled", enabled },
 				{ "dialogue_window", dialogue_window },
 				{ "object_window", object_window },
 				{ "render_window", render_window },

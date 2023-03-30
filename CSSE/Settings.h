@@ -137,11 +137,12 @@ namespace se::cs {
 		bool enabled = true;
 
 		void load();
-		void save();
+		void save() const;
 
 		void from_toml(const toml::value& v);
 		toml::value into_toml() const;
 	};
 
 	extern Settings_t settings;
+	extern const Settings_t default_settings;
 }

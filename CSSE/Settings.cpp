@@ -26,8 +26,15 @@ namespace se::cs {
 	//
 
 	void Settings_t::RenderWindowSettings::from_toml(const toml::value& v) {
+		// Backwards compatibility to convert "milliseconds_between_updates" setting.
+		const auto milliseconds_between_updates_toml = toml::find_or(v, "milliseconds_between_updates", -1);
+		if (milliseconds_between_updates_toml != -1) {
+			const auto milliseconds_between_updates = std::clamp(milliseconds_between_updates_toml, 4, 40);
+			fps_limit = std::ceil(1.0f / float(milliseconds_between_updates) * 1000.0f);
+		}
+
 		fov = toml::find_or(v, "fov", fov);
-		milliseconds_between_updates = std::clamp(toml::find_or(v, "milliseconds_between_updates", milliseconds_between_updates), 4, 40);
+		fps_limit = std::clamp(toml::find_or(v, "fps_limit", fps_limit), 25, 250);
 		multisamples = toml::find_or(v, "multisamples", multisamples);
 		use_group_scaling = toml::find_or(v, "use_group_scaling", use_group_scaling);
 		use_legacy_grid_snap = toml::find_or(v, "use_legacy_grid_snap", use_legacy_grid_snap);
@@ -39,7 +46,7 @@ namespace se::cs {
 		return toml::value(
 			{
 				{ "fov", fov },
-				{ "milliseconds_between_updates", milliseconds_between_updates },
+				{ "fps_limit", fps_limit },
 				{ "multisamples", multisamples },
 				{ "use_group_scaling", use_group_scaling },
 				{ "use_legacy_grid_snap", use_legacy_grid_snap },

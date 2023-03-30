@@ -1697,6 +1697,7 @@ namespace se::cs::dialog::render_window {
 		genJumpEnforced(0x4020EF, 0x45A3F0, reinterpret_cast<DWORD>(PatchDialogProc));
 
 		// Patch: Customize render window update rate.
-		writeValueEnforced<BYTE>(0x45BF58 + 0x1, 40u, settings.render_window.milliseconds_between_updates);
+		const auto limitTimeInMS = (BYTE)std::floor(1.0f / float(settings.render_window.fps_limit) * 1000.0f);
+		writeValueEnforced<BYTE>(0x45BF58 + 0x1, 40u, limitTimeInMS);
 	}
 }

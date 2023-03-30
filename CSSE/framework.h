@@ -34,6 +34,8 @@
 
 // MFC classes.
 #include <afxdialogex.h>
+#include <afxpropertypage.h>
+#include <afxpropertygridctrl.h>
 
 // Standard template libraries.
 #include <algorithm>

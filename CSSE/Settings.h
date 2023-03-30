@@ -9,7 +9,7 @@ namespace se::cs {
 			bool use_world_axis_rotations_by_default = true;
 			float fov = 53.1301024f;
 			int multisamples = 0;
-			unsigned int milliseconds_between_updates = 16u;
+			int milliseconds_between_updates = 16;
 
 			void from_toml(const toml::value& v);
 			toml::value into_toml() const;

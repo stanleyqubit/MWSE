@@ -10,6 +10,7 @@ namespace se::cs::window::main {
 
 	constexpr UINT CUSTOM_WM_COMMAND_WPARAM_TOGGLE_LANDSCAPE_EDITING = 0x9CFE;
 
+	constexpr UINT CUSTOM_MENU_ID_CSSE_SETTINGS = 100000;
 	constexpr UINT CUSTOM_MENU_ID_CSSE_ABOUT = 100001;
 
 	// Global variables.

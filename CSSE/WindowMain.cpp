@@ -23,6 +23,7 @@
 #include "RenderWindowWidgets.h"
 
 #include "DialogAboutCSSE.h"
+#include "DialogCSSESettings.h"
 
 namespace se::cs::window::main {
 
@@ -325,6 +326,7 @@ namespace se::cs::window::main {
 	HMENU createExtenderMenu() {
 		auto menu = CreateMenu();
 
+		AppendMenuA(menu, MF_STRING, CUSTOM_MENU_ID_CSSE_SETTINGS, "&Settings");
 		AppendMenuA(menu, MF_STRING, CUSTOM_MENU_ID_CSSE_ABOUT, "&About");
 
 		return menu;
@@ -357,8 +359,16 @@ namespace se::cs::window::main {
 		dialog.DoModal();
 	}
 
+	void showSettingsDialog(HWND hParent) {
+		DialogCSSESettings dialog;
+		dialog.DoModal();
+	}
+
 	void PatchDialogProc_BeforeCommand(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		switch (wParam) {
+		case CUSTOM_MENU_ID_CSSE_SETTINGS:
+			showSettingsDialog(hWnd);
+			break;
 		case CUSTOM_MENU_ID_CSSE_ABOUT:
 			showAboutDialog(hWnd);
 			break;

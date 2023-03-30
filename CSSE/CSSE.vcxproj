@@ -135,6 +135,7 @@ if defined APPVEYOR_BUILD_NUMBER (echo #define APPVEYOR_BUILD_NUMBER %APPVEYOR_B
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CDataBoundPropertyGridProperty.cpp" />
     <ClCompile Include="CSArmor.cpp" />
     <ClCompile Include="CSBodyPart.cpp" />
     <ClCompile Include="CSBook.cpp" />
@@ -148,6 +149,7 @@ if defined APPVEYOR_BUILD_NUMBER (echo #define APPVEYOR_BUILD_NUMBER %APPVEYOR_B
     <ClCompile Include="CSSpell.cpp" />
     <ClCompile Include="CSWeapon.cpp" />
     <ClCompile Include="DialogAboutCSSE.cpp" />
+    <ClCompile Include="DialogCSSESettings.cpp" />
     <ClCompile Include="DialogEditAlchemyObjectWindow.cpp" />
     <ClCompile Include="DialogEditCreatureObjectWindow.cpp" />
     <ClCompile Include="DialogEditEnchantmentObjectWindow.cpp" />
@@ -198,8 +200,10 @@ if defined APPVEYOR_BUILD_NUMBER (echo #define APPVEYOR_BUILD_NUMBER %APPVEYOR_B
     <None Include="res\CSSE.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CDataBoundPropertyGridProperty.h" />
     <ClInclude Include="CSSE.h" />
     <ClInclude Include="DialogAboutCSSE.h" />
+    <ClInclude Include="DialogCSSESettings.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />

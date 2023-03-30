@@ -72,6 +72,12 @@
     <ClCompile Include="DialogAboutCSSE.cpp">
       <Filter>Source Files\UI\DialogClasses</Filter>
     </ClCompile>
+    <ClCompile Include="DialogCSSESettings.cpp">
+      <Filter>Source Files\UI\DialogClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="CDataBoundPropertyGridProperty.cpp">
+      <Filter>Source Files\UI\ControlClasses</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="CSSE.def">
@@ -327,6 +333,12 @@
     </ClInclude>
     <ClInclude Include="DialogAboutCSSE.h">
       <Filter>Header Files\UI\DialogClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogCSSESettings.h">
+      <Filter>Header Files\UI\DialogClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="CDataBoundPropertyGridProperty.h">
+      <Filter>Header Files\UI\ControlClasses</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -28,10 +28,9 @@ namespace se::cs {
 
 	void Settings_t::RenderWindowSettings::from_toml(const toml::value& v) {
 		// Backwards compatibility to convert "milliseconds_between_updates" setting.
-		const auto milliseconds_between_updates_toml = toml::find_or(v, "milliseconds_between_updates", -1);
-		if (milliseconds_between_updates_toml != -1) {
-			const auto milliseconds_between_updates = std::clamp(milliseconds_between_updates_toml, 4, 40);
-			fps_limit = std::ceil(1.0f / float(milliseconds_between_updates) * 1000.0f);
+		const auto milliseconds_between_updates = toml::find_or(v, "milliseconds_between_updates", -1);
+		if (milliseconds_between_updates != -1) {
+			fps_limit = (int)std::ceil(1.0f / float(std::clamp(milliseconds_between_updates, 4, 40)) * 1000.0f);
 		}
 
 		fov = toml::find_or(v, "fov", fov);

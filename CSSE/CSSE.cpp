@@ -9,7 +9,9 @@
 #include "CSRecordHandler.h"
 
 #include "NIAVObject.h"
+#include "NICamera.h"
 #include "NILinesData.h"
+#include "NISortAdjustNode.h"
 
 #include "WindowMain.h"
 
@@ -146,6 +148,31 @@ namespace se::cs {
 
 			const auto overwrittenFunction = reinterpret_cast<void(__thiscall*)(RecordHandler*)>(0x4016F4);
 			overwrittenFunction(recordHandler);
+		}
+
+		//
+		// Patch: Add deterministic subtree ordering mode to NiSortAdjustNode. Fix crash when cloning with no accumulator.
+		//
+
+		const auto NI_SortAdjustNode_Display = reinterpret_cast<void(__thiscall*)(NI::SortAdjustNode*, NI::Camera*)>(0x5CF270);
+		const auto NI_ClusterAccumulator_RegisterObject = reinterpret_cast<void(__thiscall*)(NI::Accumulator*, NI::AVObject*)>(0x5BE250);
+
+		void __fastcall NISortAdjustNodeDisplay(NI::SortAdjustNode* node, DWORD unused, NI::Camera* camera) {
+			// Add extra sort adjust mode for accumulating a node instead of geom.
+			auto accumulator = camera->renderer->accumulator.get();
+			if (node->sortingMode == NI::SortAdjustMode::SORTING_ORDERED_SUBTREE_MWSE
+				&& accumulator != nullptr
+				&& accumulator->isInstanceOfType(NI::RTTIStaticPtr::NiAlphaAccumulator)) {
+				NI_ClusterAccumulator_RegisterObject(accumulator, node);
+			}
+			else {
+				NI_SortAdjustNode_Display(node, camera);
+			}
+		}
+
+		NI::Object* __fastcall NISortAdjustNodeCloneAccumulator(NI::Accumulator* accumulator) {
+			// Only call createClone if accumulator exists.
+			return accumulator ? accumulator->vTable.asObject->createClone(accumulator) : nullptr;
 		}
 
 		//
@@ -347,6 +374,7 @@ namespace se::cs {
 
 	void CSSE::InstallPatches() const {
 		using memory::genCallEnforced;
+		using memory::genCallUnprotected;
 		using memory::genNOPUnprotected;
 		using memory::genJumpEnforced;
 		using memory::genJumpUnprotected;
@@ -403,6 +431,10 @@ namespace se::cs {
 		// Patch: Always copy all NiExtraData on clone, instead of only the first NiStringExtraData.
 		genJumpUnprotected(0x53FEE8, 0x53FF0E);
 		genJumpUnprotected(0x53FF17, 0x53FF21);
+
+		// Patch: Add deterministic subtree ordering mode to NiSortAdjustNode. Fix crash when cloning with no accumulator.
+		overrideVirtualTableEnforced(0x67A5C8, 0x78, 0x5CF270, reinterpret_cast<DWORD>(patch::NISortAdjustNodeDisplay));
+		genCallUnprotected(0x5CF45B, reinterpret_cast<DWORD>(patch::NISortAdjustNodeCloneAccumulator));
 
 		// Install all our sectioned patches.
 		window::main::installPatches();

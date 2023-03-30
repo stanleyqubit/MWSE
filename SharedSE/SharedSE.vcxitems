@@ -51,6 +51,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)NIRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)NIRTTI.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)NISkinInstance.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)NISortAdjustNode.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)NIStream.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)NISwitchNode.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)NITArray.h" />

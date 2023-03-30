@@ -13,7 +13,7 @@ A game object which holds information about body parts.
 ### `activeBodyParts`
 <div class="search_terms" style="display: none">activebodyparts</div>
 
-*Read-only*. The access to the reference's [`tes3bodyPartManagerActiveBodyPart`](https://mwse.github.io/MWSE/types/tes3bodyPartManagerActiveBodyPart/) objects. It's a 2-dimensional table, with first dimension index values from [`tes3.activeBodyPartLayer`](https://mwse.github.io/MWSE/references/active-body-part-layers/) namespace, while its second dimension indexes are values from [`tes3.activeBodyPart`](https://mwse.github.io/MWSE/references/active-body-parts/) namespace.
+*Read-only*. Access to the reference's [`tes3bodyPartManagerActiveBodyPart`](https://mwse.github.io/MWSE/types/tes3bodyPartManagerActiveBodyPart/) objects. It's a 2-dimensional table, with first dimension index values from [`tes3.activeBodyPartLayer`](https://mwse.github.io/MWSE/references/active-body-part-layers/) namespace, while its second dimension indexes are values from [`tes3.activeBodyPart`](https://mwse.github.io/MWSE/references/active-body-parts/) namespace.
 
 **Returns**:
 
@@ -59,7 +59,7 @@ A game object which holds information about body parts.
 ### `getActiveBodyPart`
 <div class="search_terms" style="display: none">getactivebodypart, activebodypart</div>
 
-The method fetches active body part of a actor at a given layer and position.
+The method fetches the active body part at a given layer and position. This gives access to the associated scene node, equipped item, and base body part.
 
 ```lua
 local result = myObject:getActiveBodyPart(layer, index)
@@ -95,23 +95,21 @@ local result = myObject:getActiveBodyPartForItem(item)
 
 ***
 
-### `getActiveBodyPartNode`
-<div class="search_terms" style="display: none">getactivebodypartnode, activebodypartnode</div>
+### `removeActiveBodyPart`
+<div class="search_terms" style="display: none">removeactivebodypart, activebodypart</div>
 
-The method fetches the NiNode-derived object for the loaded mesh of an active body part at a given layer and position.
+Removes an active body part and optionally sets override data that can be used prevent other items using the same location.
 
 ```lua
-local result = myObject:getActiveBodyPartNode(layer, index)
+myObject:removeActiveBodyPart(layer, index, setOverride, overrideData)
 ```
 
 **Parameters**:
 
 * `layer` (number): A value from [`tes3.activeBodyPartLayer`](https://mwse.github.io/MWSE/references/active-body-part-layers/) namespace.
 * `index` (number): A value from [`tes3.activeBodyPart`](https://mwse.github.io/MWSE/references/active-body-parts/) namespace.
-
-**Returns**:
-
-* `result` ([niNode](../../types/niNode))
+* `setOverride` (boolean): *Default*: `true`. A flag which controls whether the override data should be written.
+* `overrideData` (number): *Default*: `0`. Use -1 to prevent other items from appearing in the same location.
 
 ***
 
@@ -126,57 +124,39 @@ myObject:removeEquippedLayers()
 
 ***
 
-### `setActivePartData`
-<div class="search_terms" style="display: none">setactivepartdata, activepartdata</div>
-
-The method sets a niNode derived object as active body part at a given layer and position.
-
-```lua
-myObject:setActivePartData(layer, index, overwriteData, node)
-```
-
-**Parameters**:
-
-* `layer` (number): A value from [`tes3.activeBodyPartLayer`](https://mwse.github.io/MWSE/references/active-body-part-layers/) namespace.
-* `index` (number): A value from [`tes3.activeBodyPart`](https://mwse.github.io/MWSE/references/active-body-parts/) namespace.
-* `overwriteData` (boolean): *Default*: `true`. A flag which controls whether the current data should be overwritten.
-* `node` ([niNode](../../types/niNode)): *Default*: `nil`. 
-
-***
-
 ### `setBodyPartByIdForObject`
 <div class="search_terms" style="display: none">setbodypartbyidforobject, bodypartbyidforobject</div>
 
 The method sets a new body part for a given object.
 
 ```lua
-myObject:setBodyPartByIdForObject(object, index, bodyPartId, isFirstPerson)
+myObject:setBodyPartByIdForObject(item, index, bodyPartId, isFirstPerson)
 ```
 
 **Parameters**:
 
-* `object` ([tes3physicalObject](../../types/tes3physicalObject)): An object whose body part to set.
+* `item` ([tes3item](../../types/tes3item)): The item that the body part is from.
 * `index` (number): A value from [`tes3.activeBodyPart`](https://mwse.github.io/MWSE/references/active-body-parts/) namespace.
 * `bodyPartId` (string): The unique ID of the `tes3bodyPart` object to set as a new body part for given object.
-* `isFirstPerson` (boolean): *Default*: `false`. A flag which controls whether the body part is used in first person.
+* `isFirstPerson` (boolean): *Default*: `false`. A flag which must be set if the target reference is the first person player.
 
 ***
 
 ### `setBodyPartForObject`
 <div class="search_terms" style="display: none">setbodypartforobject, bodypartforobject</div>
 
-The method sets a new body part for a given object. Triggers `bodyPart` event.
+The method sets an active body part slot with an item and bodyPart. Triggers `bodyPart` event.
 
 ```lua
-myObject:setBodyPartForObject(object, index, bodyPart, isFirstPerson)
+myObject:setBodyPartForObject(item, index, bodyPart, isFirstPerson)
 ```
 
 **Parameters**:
 
-* `object` ([tes3physicalObject](../../types/tes3physicalObject)): An object whose body part to set.
+* `item` ([tes3item](../../types/tes3item)): The item that the body part is from.
 * `index` (number): A value from [`tes3.activeBodyPart`](https://mwse.github.io/MWSE/references/active-body-parts/) namespace.
 * `bodyPart` ([tes3bodyPart](../../types/tes3bodyPart)): The `tes3bodyPart` object to set as a new body part for given object.
-* `isFirstPerson` (boolean): *Default*: `false`. A flag which controls whether the body part is used in first person.
+* `isFirstPerson` (boolean): *Default*: `false`. A flag which must be set if the target reference is the first person player.
 
 ***
 
@@ -191,5 +171,5 @@ myObject:updateForReference(reference)
 
 **Parameters**:
 
-* `reference` ([tes3reference](../../types/tes3reference)): The reference whose body parts to update.
+* `reference` ([tes3reference](../../types/tes3reference)): The reference whose body parts will be updated.
 

@@ -40,14 +40,14 @@ namespace TES3 {
 		return TES3_BodyPartManager_getActiveBodyPartForItem(this, item);
 	}
 
-	const auto TES3_BodyPartManager_getActiveBodyPartNode = reinterpret_cast<NI::Node * (__thiscall*)(BodyPartManager*, BodyPartManager::ActiveBodyPart::Layer, BodyPartManager::ActiveBodyPart::Index)>(0x473030);
-	NI::Node* BodyPartManager::getActiveBodyPartNode(ActiveBodyPart::Layer layer, ActiveBodyPart::Index index) {
-		return TES3_BodyPartManager_getActiveBodyPartNode(this, layer, index);
+	const auto TES3_BodyPartManager_getActiveBodyPartBaseNode = reinterpret_cast<NI::Node * (__thiscall*)(BodyPartManager*, BodyPartManager::ActiveBodyPart::Layer, BodyPartManager::ActiveBodyPart::Index)>(0x473030);
+	NI::Node* BodyPartManager::getActiveBodyPartBaseNode(ActiveBodyPart::Layer layer, ActiveBodyPart::Index index) {
+		return TES3_BodyPartManager_getActiveBodyPartBaseNode(this, layer, index);
 	}
 
-	const auto TES3_BodyPartManager_setActivePartData = reinterpret_cast<void(__thiscall*)(BodyPartManager*, BodyPartManager::ActiveBodyPart::Layer, BodyPartManager::ActiveBodyPart::Index, bool, NI::Node*)>(0x472EA0);
-	void BodyPartManager::setActivePartData(ActiveBodyPart::Layer layer, ActiveBodyPart::Index index, bool overwriteData, NI::Node* node) {
-		TES3_BodyPartManager_setActivePartData(this, layer, index, overwriteData, node);
+	const auto TES3_BodyPartManager_removeActiveBodyPart = reinterpret_cast<void(__thiscall*)(BodyPartManager*, BodyPartManager::ActiveBodyPart::Layer, BodyPartManager::ActiveBodyPart::Index, bool, int)>(0x472EA0);
+	void BodyPartManager::removeActiveBodyPart(ActiveBodyPart::Layer layer, ActiveBodyPart::Index index, bool setOverride, int overrideData) {
+		TES3_BodyPartManager_removeActiveBodyPart(this, layer, index, setOverride, overrideData);
 	}
 
 	const auto TES3_BodyPartManager_setBodyPartForItem = reinterpret_cast<void(__thiscall*)(BodyPartManager*, PhysicalObject*, BodyPartManager::ActiveBodyPart::Index, BodyPart*, int)>(0x473CB0);

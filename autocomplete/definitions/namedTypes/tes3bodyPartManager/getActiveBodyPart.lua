@@ -1,6 +1,6 @@
 return {
 	type = "method",
-	description = [[The method fetches active body part of a actor at a given layer and position.]],
+	description = [[The method fetches the active body part at a given layer and position. This gives access to the associated scene node, equipped item, and base body part.]],
 	arguments = {
 		{ name = "layer", type = "number", description = "A value from [`tes3.activeBodyPartLayer`](https://mwse.github.io/MWSE/references/active-body-part-layers/) namespace." },
 		{ name = "index", type = "number", description = "A value from [`tes3.activeBodyPart`](https://mwse.github.io/MWSE/references/active-body-parts/) namespace." },

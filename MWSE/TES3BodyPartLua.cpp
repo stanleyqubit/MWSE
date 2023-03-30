@@ -95,9 +95,8 @@ namespace mwse::lua {
 			// Basic function bindings.
 			usertypeDefinition["getActiveBodyPart"] = &TES3::BodyPartManager::getActiveBodyPart;
 			usertypeDefinition["getActiveBodyPartForItem"] = &TES3::BodyPartManager::getActiveBodyPartForItem;
-			usertypeDefinition["getActiveBodyPartNode"] = &TES3::BodyPartManager::getActiveBodyPartNode;
+			usertypeDefinition["removeActiveBodyPart"] = &TES3::BodyPartManager::removeActiveBodyPart;
 			usertypeDefinition["removeEquippedLayers"] = &TES3::BodyPartManager::removeEquippedLayers;
-			usertypeDefinition["setActivePartData"] = &TES3::BodyPartManager::setActivePartData;
 			usertypeDefinition["setBodyPartByIdForObject"] = &TES3::BodyPartManager::setBodyPartByIdForObject;
 			usertypeDefinition["setBodyPartForObject"] = &TES3::BodyPartManager::setBodyPartForObject;
 			usertypeDefinition["updateForReference"] = &TES3::BodyPartManager::updateForReference;

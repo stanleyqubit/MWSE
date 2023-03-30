@@ -245,7 +245,7 @@ The scene graph node for this object's physics collision, if its mesh has a root
 ### `sceneNode`
 <div class="search_terms" style="display: none">scenenode</div>
 
-The NiNode-derived object for the object's loaded mesh.
+The base mesh for the body part. New parts are cloned from this mesh, and may be accessed through the reference's `tes3bodyPartManager`.
 
 **Returns**:
 

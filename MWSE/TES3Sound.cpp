@@ -139,23 +139,23 @@ namespace TES3 {
 	}
 
 	float Sound::getVolume() {
-		return (float)volume / 250.0f;
+		return float(volume) / 255.0f;
 	}
 
 	void Sound::setVolume(float volume) {
 		float currentScale = 1.0f;
-		if (soundBuffer && soundBuffer->lpSoundBuffer) {
+		if (soundBuffer) {
 			if (this->volume == 0) {
 				currentScale = 0.0f;
 			}
 			else {
-				currentScale = (float)soundBuffer->volume / (float)this->volume;
+				currentScale = (float(soundBuffer->volume) / 250.0f) / (float(this->volume) / 255.0f);
 			}
 		}
 
-		this->volume = volume * 250;
-
-		setVolumeRaw(currentScale);
+		volume *= 255.0f;
+		this->volume = (unsigned char)volume;
+		setVolumeRaw(currentScale * volume);
 	}
 
 	std::string Sound::toJson() const {

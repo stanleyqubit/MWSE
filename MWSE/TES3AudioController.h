@@ -82,6 +82,7 @@ namespace TES3 {
 		void changeMusicTrack_lua(const char* filename, sol::optional<int> crossfade, sol::optional<float> volume);
 
 		static void __cdecl adjustLoopingSoundsVolume();
+		void setSoundBufferVolume(SoundBuffer* soundBuffer, unsigned char volume);
 
 		//
 		// Wrapper functions to expose volumes in a consistent format.

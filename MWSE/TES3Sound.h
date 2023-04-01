@@ -84,6 +84,7 @@ namespace TES3 {
 
 		float getVolume();
 		void setVolume(float volume);
+		void adjustPlayingSoundVolume(unsigned char volume);
 
 		std::string toJson() const;
 		bool play_lua(sol::optional<sol::table> params);

@@ -167,4 +167,10 @@ namespace TES3 {
 	void __cdecl AudioController::adjustLoopingSoundsVolume() {
 		TES3_AdjustLoopingSoundsVolume();
 	}
+
+	const auto TES3_AudioController_SetSoundBufferVolume = reinterpret_cast<void(__thiscall*)(AudioController*, SoundBuffer*, unsigned char)>(0x4029F0);
+	void AudioController::setSoundBufferVolume(SoundBuffer* soundBuffer, unsigned char volume) {
+		TES3_AudioController_SetSoundBufferVolume(this, soundBuffer, volume);
+	}
+
 }

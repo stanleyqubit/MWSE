@@ -5,6 +5,7 @@
 #include "Log.h"
 
 #include "TES3Actor.h"
+#include "TES3AudioController.h"
 #include "TES3BodyPartManager.h"
 #include "TES3Cell.h"
 #include "TES3Class.h"
@@ -712,14 +713,9 @@ namespace mwse::patch {
 	// Patch: When adjusting effects mix volume, update looping audio volume correctly.
 	//
 	
-	void __fastcall PatchChangeLoopingSoundVolume(TES3::Sound* sound, DWORD unused, unsigned char volume) {
-		sound->setVolume(float(volume) / 255.0f);
-	}
-
-	const auto TES3_AudioController_SetSoundBufferVolume = reinterpret_cast<void(__thiscall*)(TES3::AudioController*, TES3::SoundBuffer*, unsigned char)>(0x4029F0);
 	void __fastcall PatchSetLoopingSoundBufferVolume(TES3::AudioController* audio, DWORD unused, TES3::SoundEvent* soundEvent, unsigned char volume) {
 		unsigned char adjustedVolume = (unsigned char)(float(volume) * float(soundEvent->sound->volume) / 255.0f);
-		TES3_AudioController_SetSoundBufferVolume(audio, soundEvent->soundBuffer, adjustedVolume);
+		audio->setSoundBufferVolume(soundEvent->soundBuffer, adjustedVolume);
 	}
 
 	//
@@ -1056,8 +1052,6 @@ namespace mwse::patch {
 		genCallUnprotected(0x57E1E8 + 0x2, reinterpret_cast<DWORD>(PatchUIElementTexcoordWrite));
 
 		// Patch: When adjusting effects mix volume, update looping audio volume correctly.
-		genCallEnforced(0x5A1E98, 0x510C30, reinterpret_cast<DWORD>(PatchChangeLoopingSoundVolume));
-		genCallEnforced(0x5A2019, 0x510C30, reinterpret_cast<DWORD>(PatchChangeLoopingSoundVolume));
 		writeValueEnforced<BYTE>(0x5A1F24, 0x52, 0x56);
 		genCallEnforced(0x5A1F25, 0x4029F0, reinterpret_cast<DWORD>(PatchSetLoopingSoundBufferVolume));
 		writeValueEnforced<BYTE>(0x5A1FC5, 0x52, 0x56);

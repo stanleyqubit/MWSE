@@ -2474,57 +2474,62 @@ namespace mwse::lua {
 
 		// Try to match any mwse information from -metadata.toml files to an active lua mod.
 		for (const auto& p : std::filesystem::directory_iterator("Data Files", std::filesystem::directory_options::follow_directory_symlink)) {
-			auto lowerPath = p.path().string();
-			string::to_lower(lowerPath);
+			try {
+				auto lowerPath = p.path().string();
+				string::to_lower(lowerPath);
 
-			// We only care *-metadata.toml files.
-			if (!string::ends_with(lowerPath, "-metadata.toml")) {
-				continue;
+				// We only care *-metadata.toml files.
+				if (!string::ends_with(lowerPath, "-metadata.toml")) {
+					continue;
+				}
+
+				// Load the metadata.
+				sol::safe_function_result metadata_result = luaState["toml"]["loadFile"](lowerPath);
+				if (metadata_result.valid()) {
+					sol::table metadata = metadata_result;
+					if (metadata == sol::nil) {
+						continue;
+					}
+
+					sol::table metadata_tools = metadata["tools"];
+					if (metadata_tools == sol::nil) {
+						continue;
+					}
+
+					sol::table metadata_tools_mwse = metadata_tools["mwse"];
+					if (metadata_tools_mwse == sol::nil) {
+						continue;
+					}
+
+					sol::optional<std::string> luaKey = metadata_tools_mwse["lua-mod"];
+					if (!luaKey) {
+						continue;
+					}
+
+					// Ensure that keys are lowercased for lookup.
+					string::to_lower(luaKey.value());
+
+					sol::table runtime = activeLuaMods[luaKey.value()];
+					if (runtime == sol::nil) {
+						continue;
+					}
+
+					// Make sure we don't already have a metadata assigned.
+					if (runtime["metadata"] != sol::nil) {
+						log::getLog() << "[LuaManager] WARNING: More than one metadata found claiming mod '" << luaKey.value() << "'." << std::endl;
+						continue;
+					}
+
+					runtime["metadata"] = metadata;
+				}
+				else {
+					sol::error error = metadata_result;
+					log::getLog() << "[LuaManager] ERROR: Could not parse mod metadata '" << p.path().string() << "':" << std::endl << error.what() << std::endl;
+					continue;
+				}
 			}
-
-			// Load the metadata.
-			sol::safe_function_result metadata_result = luaState["toml"]["loadFile"](lowerPath);
-			if (metadata_result.valid()) {
-				sol::table metadata = metadata_result;
-				if (metadata == sol::nil) {
-					continue;
-				}
-
-				sol::table metadata_tools = metadata["tools"];
-				if (metadata_tools == sol::nil) {
-					continue;
-				}
-
-				sol::table metadata_tools_mwse = metadata_tools["mwse"];
-				if (metadata_tools_mwse == sol::nil) {
-					continue;
-				}
-
-				sol::optional<std::string> luaKey = metadata_tools_mwse["lua-mod"];
-				if (!luaKey) {
-					continue;
-				}
-
-				// Ensure that keys are lowercased for lookup.
-				string::to_lower(luaKey.value());
-
-				sol::table runtime = activeLuaMods[luaKey.value()];
-				if (runtime == sol::nil) {
-					continue;
-				}
-
-				// Make sure we don't already have a metadata assigned.
-				if (runtime["metadata"] != sol::nil) {
-					log::getLog() << "[LuaManager] WARNING: More than one metadata found claiming mod '" << luaKey.value() << "'." << std::endl;
-					continue;
-				}
-
-				runtime["metadata"] = metadata;
-			}
-			else {
-				sol::error error = metadata_result;
-				log::getLog() << "[LuaManager] ERROR: Could not parse mod metadata '" << p.path().string() << "':" << std::endl << error.what() << std::endl;
-				continue;
+			catch (std::exception& e) {
+				// TODO: Figure out how to handle paths that contain unicode files without causing exceptions.
 			}
 		}
 	}
@@ -2550,35 +2555,40 @@ namespace mwse::lua {
 
 		auto subclassOrder = 0u;
 		for (const auto& p : std::filesystem::recursive_directory_iterator(path, std::filesystem::directory_options::follow_directory_symlink)) {
-			if (p.path().filename() == filename) {
-				// If a parent directory is marked .disabled, ignore files in it.
-				const auto pathString = p.path().string();
-				if (isPathDisabled(pathString)) {
-					log::getLog() << "[LuaManager] Skipping mod initializer in disabled directory: " << pathString << std::endl;
-					continue;
+			try {
+				if (p.path().filename() == filename) {
+					// If a parent directory is marked .disabled, ignore files in it.
+					const auto pathString = p.path().string();
+					if (isPathDisabled(pathString)) {
+						log::getLog() << "[LuaManager] Skipping mod initializer in disabled directory: " << pathString << std::endl;
+						continue;
+					}
+
+					// Get a version of its path as a key.
+					auto luaModKey = pathString.substr(path.length() + 1, pathString.length() - path.length() - filename.length() - 2);
+					std::replace(luaModKey.begin(), luaModKey.end(), '\\', '.');
+					string::to_lower(luaModKey);
+
+					// Check for key conflicts.
+					if (activeLuaMods[luaModKey] != sol::nil) {
+						log::getLog() << "[LuaManager] Skipping mod with duplicate key '" << luaModKey << "' in direcotry: " << pathString << std::endl;
+						continue;
+					}
+
+					// Prepare runtime data.
+					auto runtime = luaState.create_table();
+					runtime["path"] = p.path().string();
+					runtime["parent_path"] = p.path().parent_path().string();
+					runtime["key"] = luaModKey;
+					runtime["core_mod"] = core;
+					runtime["legacy_mod"] = !string::equal(filename, "main.lua");
+					runtime["load_std_order"] = subclassOrder++;
+
+					activeLuaMods[luaModKey] = runtime;
 				}
-
-				// Get a version of its path as a key.
-				auto luaModKey = pathString.substr(path.length() + 1, pathString.length() - path.length() - filename.length() - 2);
-				std::replace(luaModKey.begin(), luaModKey.end(), '\\', '.');
-				string::to_lower(luaModKey);
-
-				// Check for key conflicts.
-				if (activeLuaMods[luaModKey] != sol::nil) {
-					log::getLog() << "[LuaManager] Skipping mod with duplicate key '" << luaModKey << "' in direcotry: " << pathString << std::endl;
-					continue;
-				}
-
-				// Prepare runtime data.
-				auto runtime = luaState.create_table();
-				runtime["path"] = p.path().string();
-				runtime["parent_path"] = p.path().parent_path().string();
-				runtime["key"] = luaModKey;
-				runtime["core_mod"] = core;
-				runtime["legacy_mod"] = !string::equal(filename, "main.lua");
-				runtime["load_std_order"] = subclassOrder++;
-
-				activeLuaMods[luaModKey] = runtime;
+			}
+			catch (std::exception& e) {
+				// TODO: Figure out how to handle paths that contain unicode files without causing exceptions.
 			}
 		}
 	}

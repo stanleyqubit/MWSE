@@ -276,11 +276,10 @@ namespace se::cs::window::main {
 	}
 
 	//
-	//
+	// Patch: Use CSSE.dll's toolbar bitmap.
 	//
 
 	HWND __stdcall PatchReplaceToolbarBitmap(HWND hWnd, DWORD ws, UINT wID, int nBitmaps, HINSTANCE hBMInst, UINT_PTR wBMID, LPCTBBUTTON lpButtons, int iNumButtons, int dxButton, int dyButton, int dxBitmap, int dyBitmap, UINT uStructSize) {
-		// Replace 
 		hBMInst = application.m_hInstance;
 		wBMID = IDB_MAIN_TOOLBAR;
 
@@ -431,14 +430,13 @@ namespace se::cs::window::main {
 		Toolbar_AddSeparator(hWndToolbar);
 		Toolbar_AddButton(hWndToolbar, WM_COMMAND_TEST_IN_GAME_MORROWIND, 14);
 
-		// Add OpenMW button if no valid location is given.
+		// Add OpenMW button we have a valid installation.
 		if (!settings.openmw.location.empty()) {
 			const auto path = settings.openmw.location + "\\openmw.exe";
 			if (std::filesystem::exists(path)) {
 				Toolbar_AddButton(hWndToolbar, WM_COMMAND_TEST_IN_GAME_OPENMW, 15);
 			}
 		}
-
 	}
 
 	void PatchDialogProc_AfterCreate(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
@@ -546,7 +544,7 @@ namespace se::cs::window::main {
 		// Patch: Enable QuickStart cell loading.
 		genCallEnforced(0x447B78, 0x4033FF, reinterpret_cast<DWORD>(PatchEnableQuickStartCellLoading));
 
-		// Patch: Use CSSE.dll's toolbar bitmap
+		// Patch: Use CSSE.dll's toolbar bitmap.
 		genCallUnprotected(0x46F97B, reinterpret_cast<DWORD>(PatchReplaceToolbarBitmap), 0x6);
 
 		// Patch: Extend window messages.

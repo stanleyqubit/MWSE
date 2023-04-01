@@ -80,4 +80,11 @@ namespace se::cs::winui {
 	// This can be blocked if the changing notification returns TRUE.
 	void TabCtrl_SetCurSelEx(HWND hWnd, int index);
 
+	//
+	// Toolbar
+	//
+
+	void Toolbar_AddSeparator(HWND hWndToolbar, int iWidth = 0);
+	void Toolbar_AddButton(HWND hWndToolbar, int idCommand, int iBitmap = I_IMAGENONE);
+
 }

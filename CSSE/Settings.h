@@ -133,6 +133,13 @@ namespace se::cs {
 			toml::value into_toml() const;
 		} script_editor;
 
+		struct OpenMW {
+			std::string location = "";
+
+			void from_toml(const toml::value& v);
+			toml::value into_toml() const;
+		} openmw;
+
 		bool valid = true;
 		bool enabled = true;
 

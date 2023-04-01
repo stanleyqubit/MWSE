@@ -280,6 +280,22 @@ namespace se::cs {
 	}
 
 	//
+	// OpenMW
+	//
+
+	void Settings_t::OpenMW::from_toml(const toml::value& v) {
+		location = toml::find_or(v, "location", location);
+	}
+
+	toml::value Settings_t::OpenMW::into_toml() const {
+		return toml::value(
+			{
+				{ "location", location },
+			}
+		);
+	}
+
+	//
 	//
 	//
 
@@ -324,6 +340,7 @@ namespace se::cs {
 		quickstart = toml::find_or(v, "quickstart", quickstart);
 		render_window = toml::find_or(v, "render_window", render_window);
 		script_editor = toml::find_or(v, "script_editor", script_editor);
+		openmw = toml::find_or(v, "openmw", openmw);
 	}
 
 	toml::value Settings_t::into_toml() const {
@@ -336,6 +353,7 @@ namespace se::cs {
 				{ "render_window", render_window },
 				{ "quickstart", quickstart },
 				{ "script_editor", script_editor },
+				{ "openmw", openmw },
 			}
 		);
 	}

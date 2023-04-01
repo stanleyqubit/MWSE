@@ -253,4 +253,26 @@ namespace se::cs::winui {
 			SendMessageA(hParent, WM_NOTIFY, (WPARAM)hWnd, (LPARAM)&nmhdr);
 		}
 	}
+
+	//
+	// Toolbar
+	//
+
+	void Toolbar_AddSeparator(HWND hWndToolbar, int iWidth) {
+		TBBUTTON button = {};
+		button.iBitmap = iWidth;
+		button.idCommand = 0x0FFFFFFFF;
+		button.fsState = TBSTATE_ENABLED;
+		button.fsStyle = BTNS_SEP;
+		SendMessageA(hWndToolbar, TB_ADDBUTTONS, 1, (LPARAM)&button);
+	}
+
+	void Toolbar_AddButton(HWND hWndToolbar, int idCommand, int iBitmap) {
+		TBBUTTON button = {};
+		button.iBitmap = iBitmap;
+		button.idCommand = idCommand;
+		button.fsState = TBSTATE_ENABLED;
+		button.fsStyle = BTNS_BUTTON;
+		SendMessageA(hWndToolbar, TB_ADDBUTTONS, 1, (LPARAM)&button);
+	}
 }

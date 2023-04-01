@@ -25,6 +25,9 @@
 #include "DialogAboutCSSE.h"
 #include "DialogCSSESettings.h"
 
+#include "CSSE.h"
+#include "resource.h"
+
 namespace se::cs::window::main {
 
 	struct ObjectEditLParam {
@@ -273,6 +276,18 @@ namespace se::cs::window::main {
 	}
 
 	//
+	//
+	//
+
+	HWND __stdcall PatchReplaceToolbarBitmap(HWND hWnd, DWORD ws, UINT wID, int nBitmaps, HINSTANCE hBMInst, UINT_PTR wBMID, LPCTBBUTTON lpButtons, int iNumButtons, int dxButton, int dyButton, int dxBitmap, int dyBitmap, UINT uStructSize) {
+		// Replace 
+		hBMInst = application.m_hInstance;
+		wBMID = IDB_MAIN_TOOLBAR;
+
+		return CreateToolbarEx(hWnd, ws, wID, nBitmaps, hBMInst, wBMID, lpButtons, iNumButtons, dxButton, dyButton, dxBitmap, dyBitmap, uStructSize);
+	}
+
+	//
 	// Patch: Extend window messages.
 	//
 
@@ -358,6 +373,32 @@ namespace se::cs::window::main {
 		}
 	}
 
+	// Catch tooltip info requests to add custom tooltips to new toolbar buttons.
+	void PatchDialogProc_BeforeNotify_TooltipGetDisplayInfo(HWND hWnd, UINT msg, WPARAM wParam, NMTTDISPINFOA* lParam) {
+		const char* tooltip = nullptr;
+		switch (lParam->hdr.idFrom) {
+		case WM_COMMAND_TEST_IN_GAME_MORROWIND:
+			tooltip = "Test in Morrowind";
+			break;
+		case WM_COMMAND_TEST_IN_GAME_OPENMW:
+			tooltip = "Test in OpenMW";
+			break;
+		}
+
+		if (tooltip) {
+			strcpy_s(lParam->szText, tooltip);
+			messageResultOverride = TRUE;
+		}
+	}
+
+	void PatchDialogProc_BeforeNotify(HWND hWnd, UINT msg, WPARAM wParam, NMHDR* lParam) {
+		switch (lParam->code) {
+		case TTN_GETDISPINFO:
+			PatchDialogProc_BeforeNotify_TooltipGetDisplayInfo(hWnd, msg, wParam, (NMTTDISPINFOA*)lParam);
+			break;
+		}
+	}
+
 	void PatchDialogProc_BeforeClose(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		auto sgController = dialog::render_window::SceneGraphController::get();
 		delete sgController->widgets;
@@ -380,8 +421,29 @@ namespace se::cs::window::main {
 		InsertMenuItemA(menu, 6, TRUE, &newExtenderMenu);
 	}
 
+	void PatchDialogProc_AfterCreate_DoBaseToolbarExtensions(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		using winui::Toolbar_AddButton;
+		using winui::Toolbar_AddSeparator;
+
+		const auto hWndToolbar = ghToolbar::get();
+
+		// Always-there buttons.
+		Toolbar_AddSeparator(hWndToolbar);
+		Toolbar_AddButton(hWndToolbar, WM_COMMAND_TEST_IN_GAME_MORROWIND, 14);
+
+		// Add OpenMW button if no valid location is given.
+		if (!settings.openmw.location.empty()) {
+			const auto path = settings.openmw.location + "\\openmw.exe";
+			if (std::filesystem::exists(path)) {
+				Toolbar_AddButton(hWndToolbar, WM_COMMAND_TEST_IN_GAME_OPENMW, 15);
+			}
+		}
+
+	}
+
 	void PatchDialogProc_AfterCreate(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		PatchDialogProc_AfterCreate_CreateNewCSSEMenu(hWnd, msg, wParam, lParam);
+		PatchDialogProc_AfterCreate_DoBaseToolbarExtensions(hWnd, msg, wParam, lParam);
 	}
 
 	void PatchDialogProc_AfterCommand_ToggleLandscapeEditing(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
@@ -389,10 +451,47 @@ namespace se::cs::window::main {
 		SetFocus(memory::ExternalGlobal<HWND, 0x6CE93C>::get());
 	}
 
+	void PatchDialogProc_AfterCommand_TestInMorrowind(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		STARTUPINFO si = { sizeof(STARTUPINFO) };
+		PROCESS_INFORMATION pi = {};
+
+		CreateProcessA("Morrowind.exe", NULL, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi);
+
+		CloseHandle(pi.hProcess);
+		CloseHandle(pi.hThread);
+	}
+
+	void PatchDialogProc_AfterCommand_TestInOpenMW(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		STARTUPINFO si = { sizeof(STARTUPINFO) };
+		PROCESS_INFORMATION pi = {};
+
+		if (settings.openmw.location.empty()) {
+			MessageBox(NULL, "No OpenMW location found.", "Invalid Settings", MB_ICONERROR | MB_OK);
+			return;
+		}
+
+		const auto path = settings.openmw.location + "\\openmw.exe";
+		if (!std::filesystem::exists(path)) {
+			MessageBox(NULL, "Invalid OpenMW location.", "Executable Not Found", MB_ICONERROR | MB_OK);
+			return;
+		}
+
+		CreateProcessA(path.c_str(), NULL, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi);
+
+		CloseHandle(pi.hProcess);
+		CloseHandle(pi.hThread);
+	}
+
 	void PatchDialogProc_AfterCommand(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		switch (wParam) {
 		case WM_COMMAND_TOGGLE_LANDSCAPE_EDITING:
 			PatchDialogProc_AfterCommand_ToggleLandscapeEditing(hWnd, msg, wParam, lParam);
+			break;
+		case WM_COMMAND_TEST_IN_GAME_MORROWIND:
+			PatchDialogProc_AfterCommand_TestInMorrowind(hWnd, msg, wParam, lParam);
+			break;
+		case WM_COMMAND_TEST_IN_GAME_OPENMW:
+			PatchDialogProc_AfterCommand_TestInOpenMW(hWnd, msg, wParam, lParam);
 			break;
 		}
 	}
@@ -407,6 +506,9 @@ namespace se::cs::window::main {
 			break;
 		case WM_COMMAND:
 			PatchDialogProc_BeforeCommand(hWnd, msg, wParam, lParam);
+			break;
+		case WM_NOTIFY:
+			PatchDialogProc_BeforeNotify(hWnd, msg, wParam, (NMHDR*)lParam);
 			break;
 		case WM_CLOSE:
 			PatchDialogProc_BeforeClose(hWnd, msg, wParam, lParam);
@@ -436,12 +538,16 @@ namespace se::cs::window::main {
 	void installPatches() {
 		using memory::genJumpEnforced;
 		using memory::genCallEnforced;
+		using memory::genCallUnprotected;
 
 		// Patch: Throttle UI status updates.
 		genJumpEnforced(0x404881, 0x46E680, reinterpret_cast<DWORD>(PatchThrottleMessageUpdate));
 
 		// Patch: Enable QuickStart cell loading.
 		genCallEnforced(0x447B78, 0x4033FF, reinterpret_cast<DWORD>(PatchEnableQuickStartCellLoading));
+
+		// Patch: Use CSSE.dll's toolbar bitmap
+		genCallUnprotected(0x46F97B, reinterpret_cast<DWORD>(PatchReplaceToolbarBitmap), 0x6);
 
 		// Patch: Extend window messages.
 		genJumpEnforced(0x401EF1, 0x444590, reinterpret_cast<DWORD>(PatchDialogProc));

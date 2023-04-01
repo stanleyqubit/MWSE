@@ -1,6 +1,6 @@
 return {
 	type = "function",
-	description = [[Causes a target actor to play a voiceover.]],
+	description = [[Causes a target actor to play a voiceover. To stop a currently playing voiceover see `tes3.removeSound()`.]],
 	arguments = {{
 		name = "params",
 		type = "table",

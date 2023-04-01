@@ -1,6 +1,11 @@
 return {
 	type = "event",
-	description = "This event triggers when a magic effect has been removed from an actor. This includes magic effects that have been resisted or are part of abilities like racial passives and diseases.",
+	description = [[This event triggers when a magic effect has been removed from an actor. This includes:
+
+ - magic effects that have been resisted or are part of abilities like racial passives and diseases
+ - magic effects that are removed when an actor is unloaded
+
+This event doesn't trigger when an effect expires naturally.]],
 	eventData = {
 		["mobile"] = {
 			type = "tes3mobileActor",
@@ -20,7 +25,7 @@ return {
 		["target"] = {
 			type = "tes3reference",
 			readOnly = true,
-			description = "The target of the magic source that contained the magic effect. Can be `nil`.",
+			description = "The target of the magic source that contained the magic effect. Can be `nil` if the target was unloaded.",
 		},
 		["source"] = {
 			type = "tes3alchemy|tes3enchantment|tes3spell",

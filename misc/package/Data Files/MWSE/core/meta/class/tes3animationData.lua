@@ -24,7 +24,13 @@
 --- @field headGeometry niParticles|niRotatingParticles|niTriShape 
 --- @field headNode niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode 
 --- @field keyframeLayers tes3animationDataSequenceGroup[] *Read-only*. 
---- @field lipsyncLevel number 
+--- @field lipsyncLevel number This value indicates whether the NPC is speaking or not. The table below describes the relationship.
+--- 
+--- Value      | Behavior
+--- ---------- | ---------
+---       -1   | The NPC isn't speaking.
+---  0.0 - 1.0 | The NPC is speaking. The `lipsyncLevel` can be `0.0` when there is a silent part in the sound file the NPC is currently speaking.
+--- 
 --- @field loopCounts number[] *Read-only*. 
 --- @field manager niKeyframeManager 
 --- @field modelRootNode niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode 

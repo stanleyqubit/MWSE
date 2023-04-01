@@ -2,7 +2,12 @@
 -- More information: https://github.com/MWSE/MWSE/tree/master/docs
 
 --- @meta
---- This event triggers when a magic effect has been removed from an actor. This includes magic effects that have been resisted or are part of abilities like racial passives and diseases.
+--- This event triggers when a magic effect has been removed from an actor. This includes:
+--- 
+---  - magic effects that have been resisted or are part of abilities like racial passives and diseases
+---  - magic effects that are removed when an actor is unloaded
+--- 
+--- This event doesn't trigger when an effect expires naturally.
 ---
 --- [Examples available in online documentation](https://mwse.github.io/MWSE/events/magicEffectRemoved).
 --- @class magicEffectRemovedEventData
@@ -15,4 +20,4 @@
 --- @field reference tes3reference *Read-only*. The reference of the mobile actor the magic effect is removed from.
 --- @field source tes3alchemy|tes3enchantment|tes3spell *Read-only*. The magic source that contains the effect.
 --- @field sourceInstance tes3magicSourceInstance *Read-only*. The unique instance of the magic source that contains the effect.
---- @field target tes3reference *Read-only*. The target of the magic source that contained the magic effect. Can be `nil`.
+--- @field target tes3reference *Read-only*. The target of the magic source that contained the magic effect. Can be `nil` if the target was unloaded.

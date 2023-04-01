@@ -1806,7 +1806,7 @@ function tes3.playSound(params) end
 --- @field pitch number? *Default*: `1.0`. The pitch-shift multiplier. For 22kHz audio (most typical) it can have the range [0.005, 4.5]; for 44kHz audio it can have the range [0.0025, 2.25].
 --- @field soundPath string? *Optional*. The path to a custom soundfile (useful for playing sounds that are not registered in the Construction Set). Starts in Data Files\Sound\.
 
---- Causes a target actor to play a voiceover.
+--- Causes a target actor to play a voiceover. To stop a currently playing voiceover see `tes3.removeSound()`.
 --- @param params tes3.playVoiceover.params This table accepts the following values:
 --- 
 --- `actor`: tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|tes3reference|string — The actor to play a voiceover.
@@ -2009,17 +2009,17 @@ function tes3.removeItemData(params) end
 --- @field ignoreOwnership boolean? *Default*: `true`. If `force` is false, a check will be made to see if the item data is empty and can be deleted. By default this ignores any ownership data. Setting this to false will override that behavior.
 --- @field updateGUI boolean? *Default*: `true`. If false, the player or contents menu won't be updated.
 
---- Stops a sound playing. Without a reference, it will match unattached sounds. With a reference, it will only match a sound playing on that specific reference.
+--- Stops a sound playing. Without a reference, it will match unattached sounds. With a reference, it will only match a sound playing on that specific reference. To stop a voiceover, pass the wanted actor as the `reference` parameter and `sound = nil`.
 --- @param params tes3.removeSound.params This table accepts the following values:
 --- 
---- `sound`: tes3sound|string — The sound object, or id of the sound to look for.
+--- `sound`: tes3sound|string|nil — The sound object, or id of the sound to look for. If no sound is passed, removes every sound on the reference.
 --- 
 --- `reference`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil — *Optional*. The reference the sound is attached to.
 function tes3.removeSound(params) end
 
 ---Table parameter definitions for `tes3.removeSound`.
 --- @class tes3.removeSound.params
---- @field sound tes3sound|string The sound object, or id of the sound to look for.
+--- @field sound tes3sound|string|nil The sound object, or id of the sound to look for. If no sound is passed, removes every sound on the reference.
 --- @field reference tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil *Optional*. The reference the sound is attached to.
 
 --- Removes a spell from an actor's spell list. If the spell is passive, any active effects from that spell are retired.

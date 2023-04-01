@@ -6,7 +6,12 @@
 	More information: https://github.com/MWSE/MWSE/tree/master/docs
 -->
 
-This event triggers when a magic effect has been removed from an actor. This includes magic effects that have been resisted or are part of abilities like racial passives and diseases.
+This event triggers when a magic effect has been removed from an actor. This includes:
+
+ - magic effects that have been resisted or are part of abilities like racial passives and diseases
+ - magic effects that are removed when an actor is unloaded
+
+This event doesn't trigger when an effect expires naturally.
 
 ```lua
 --- @param e magicEffectRemovedEventData
@@ -31,7 +36,7 @@ event.register(tes3.event.magicEffectRemoved, magicEffectRemovedCallback)
 * `reference` ([tes3reference](../../types/tes3reference)): *Read-only*. The reference of the mobile actor the magic effect is removed from.
 * `source` ([tes3alchemy](../../types/tes3alchemy), [tes3enchantment](../../types/tes3enchantment), [tes3spell](../../types/tes3spell)): *Read-only*. The magic source that contains the effect.
 * `sourceInstance` ([tes3magicSourceInstance](../../types/tes3magicSourceInstance)): *Read-only*. The unique instance of the magic source that contains the effect.
-* `target` ([tes3reference](../../types/tes3reference)): *Read-only*. The target of the magic source that contained the magic effect. Can be `nil`.
+* `target` ([tes3reference](../../types/tes3reference)): *Read-only*. The target of the magic source that contained the magic effect. Can be `nil` if the target was unloaded.
 
 ## Examples
 

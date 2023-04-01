@@ -3486,7 +3486,7 @@ local executed = tes3.playSound({ sound = ..., reference = ..., loop = ..., mixC
 ### `tes3.playVoiceover`
 <div class="search_terms" style="display: none">playvoiceover</div>
 
-Causes a target actor to play a voiceover.
+Causes a target actor to play a voiceover. To stop a currently playing voiceover see `tes3.removeSound()`.
 
 ```lua
 local played = tes3.playVoiceover({ actor = ..., voiceover = ... })
@@ -3806,7 +3806,7 @@ local wasRemoved = tes3.removeItemData({ from = ..., item = ..., itemData = ...,
 ### `tes3.removeSound`
 <div class="search_terms" style="display: none">removesound, sound</div>
 
-Stops a sound playing. Without a reference, it will match unattached sounds. With a reference, it will only match a sound playing on that specific reference.
+Stops a sound playing. Without a reference, it will match unattached sounds. With a reference, it will only match a sound playing on that specific reference. To stop a voiceover, pass the wanted actor as the `reference` parameter and `sound = nil`.
 
 ```lua
 tes3.removeSound({ sound = ..., reference = ... })
@@ -3815,7 +3815,7 @@ tes3.removeSound({ sound = ..., reference = ... })
 **Parameters**:
 
 * `params` (table)
-	* `sound` ([tes3sound](../../types/tes3sound), string): The sound object, or id of the sound to look for.
+	* `sound` ([tes3sound](../../types/tes3sound), string, nil): The sound object, or id of the sound to look for. If no sound is passed, removes every sound on the reference.
 	* `reference` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): *Optional*. The reference the sound is attached to.
 
 ***

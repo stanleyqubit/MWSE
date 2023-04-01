@@ -8,14 +8,14 @@
 --- 
 --- Value | Behavior
 --- ----- | ---------
---- -1	| Undecided
---- 0	 | Hello
---- 2	 | Idle
---- 3	 | Attack
---- 4	 | Avoid
---- 6	 | Flee
---- 8	 | Walk
---- 12	| Greet
+--- -1    | Undecided
+---  0    | Hello
+---  2    | Idle
+---  3    | Attack
+---  4    | Avoid
+---  6    | Flee
+---  8    | Walk
+--- 12    | Greet
 --- @field animationAttackState number The actor's animation state. Maps to values in [`tes3.animationState`](https://mwse.github.io/MWSE/references/animation-states/) namespace.
 --- @field attackSwing number When attacking, this value represents how much the weapon has been pulled back. The value ranges from [0.0 - 1.0].
 --- @field currentAnimationGroup number Actor's current animation group. Maps to values in [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) namespace.

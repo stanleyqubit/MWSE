@@ -28,6 +28,7 @@ event.register(tes3.event.modConfigReady, modConfigReadyCallback)
 	local function onModConfigReady()
 		local template = mwse.mcm.createTemplate({ name = "My Mod" })
 		template:saveOnClose("My Mod", config)
+		template:register()
 	
 		local settings = template:createSideBarPage({ label = "Settings" })
 		settings.sidebar:createInfo({

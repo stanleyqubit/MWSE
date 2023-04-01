@@ -63,7 +63,7 @@ The types are arranged into functional groupings. Within each grouping, indentat
 
 #### Object Depth Sorting Classes
 - niObject
-	- <span  style = "color:YellowGreen">niAccumulator</span>
+	- <span  style = "color:Turquoise">niAccumulator</span>
 		- <span  style = "color:YellowGreen">niClusterAccumulator</span>
 			- <span  style = "color:YellowGreen">niAlphaAccumulator</span>
 
@@ -113,7 +113,7 @@ The types are arranged into functional groupings. Within each grouping, indentat
 				- <span  style = "color:YellowGreen">AvoidNode</span>
 				- niBillboardNode
 				- <span  style = "color:YellowGreen">niBSPNode</span>
-				- <span  style = "color:YellowGreen">niSortAdjustNode</span>
+				- niSortAdjustNode
 				- niSwitchNode
 					- <span  style = "color:YellowGreen">niFltAnimationNode</span>
 					- <span  style = "color:YellowGreen">niLODNode</span>
@@ -351,11 +351,11 @@ graph LR
 
 	%% Turquoise
 	classDef notExposed color:#000, fill: #40E0D0, stroke: #333, stroke-width: 2px;
-	class DA,HA,HD,HK,Q,R,W notExposed;
+	class B,DA,HA,HD,HK,Q,R,W notExposed;
 
 	%% YellowGreen
 	classDef notResearched color:#000, fill: #ADFF2F, stroke: #333, stroke-width: 2px;
-	class B,BA,BAA,CA,CE,DBA,DCAA,DCB,EBB,EBE,EBF,EBG,EBK,EC,EDAA,GA,HB,HBA,HBB,HE,HG,HH,HHA,HIA,HJ,HL,I,K,L,N,O,X notResearched;
+	class BA,BAA,CA,CE,DBA,DCAA,DCB,EBB,EBE,EBF,EBG,EBK,EC,EDAA,GA,HB,HBA,HBB,HE,HG,HH,HHA,HIA,HJ,HL,I,K,L,N,O,X notResearched;
 ```
 
 ```mermaid
@@ -415,5 +415,5 @@ graph LR
 
 	%% YellowGreen
 	classDef notResearched color:#000, fill: #ADFF2F, stroke: #333, stroke-width: 2px;
-	class EACCB,EADA,EADB,EADD,EADE,EADG,EADH,EADHA,EADIA,EADIB notResearched;
+	class EACCB,EADA,EADB,EADD,EADE,EADH,EADHA,EADIA,EADIB notResearched;
 ```

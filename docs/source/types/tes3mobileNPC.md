@@ -160,6 +160,7 @@ The actor's alarm AI value.
 *Read-only*. The actor's current armour rating, taking equipment condition into account. Armour mitigation can be automatically applied to damage by using the `applyDamage` function.
 
 !!! note "Armour mitigation calculation:"
+	```
 	x = damage / (damage + target.armorRating)
 
 	damage *= max(fCombatArmorMinMult, x)
@@ -169,6 +170,7 @@ The actor's alarm AI value.
 		damage = 1
 
 	end
+	```
 
 
 **Returns**:

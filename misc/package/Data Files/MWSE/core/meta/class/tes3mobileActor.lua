@@ -16,6 +16,7 @@
 --- @field armorRating number *Read-only*. The actor's current armour rating, taking equipment condition into account. Armour mitigation can be automatically applied to damage by using the `applyDamage` function.
 --- 
 --- !!! note "Armour mitigation calculation:"
+--- 	```
 --- 	x = damage / (damage + target.armorRating)
 --- 
 --- 	damage *= max(fCombatArmorMinMult, x)
@@ -25,6 +26,7 @@
 --- 		damage = 1
 --- 
 --- 	end
+--- 	```
 --- 
 --- @field attackBonus number Direct access to the actor's attack bonus effect attribute.
 --- @field attacked boolean *Read-only*. Friendly access to the actor's flag that controls if the actor has been attacked.

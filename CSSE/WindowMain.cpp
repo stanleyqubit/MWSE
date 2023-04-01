@@ -335,23 +335,6 @@ namespace se::cs::window::main {
 	void PatchDialogProc_BeforeFinishInitialization(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		// Handle quickstart.
 		setupQuickStart();
-
-		// Add MWSE to the menu.
-		auto menu = GetMenu(hWnd);
-		if (!menu) {
-			return;
-		}
-
-		// Add the MWSE menu to the system.
-		MENUITEMINFO newExtenderMenu = {};
-		newExtenderMenu.cbSize = sizeof(MENUITEMINFO);
-		newExtenderMenu.fMask = MIIM_STRING | MIIM_SUBMENU;
-		newExtenderMenu.hSubMenu = createExtenderMenu();
-		newExtenderMenu.dwTypeData = (char*)"C&SSE";
-		InsertMenuItemA(menu, 6, TRUE, &newExtenderMenu);
-
-		// Redraw the menu.
-		DrawMenuBar(hWnd);
 	}
 
 	void showAboutDialog(HWND hParent) {
@@ -379,6 +362,26 @@ namespace se::cs::window::main {
 		auto sgController = dialog::render_window::SceneGraphController::get();
 		delete sgController->widgets;
 		sgController->widgets = nullptr;
+	}
+
+	void PatchDialogProc_AfterCreate_CreateNewCSSEMenu(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		// Add MWSE to the menu.
+		auto menu = GetMenu(hWnd);
+		if (!menu) {
+			return;
+		}
+
+		// Add the MWSE menu to the system.
+		MENUITEMINFO newExtenderMenu = {};
+		newExtenderMenu.cbSize = sizeof(MENUITEMINFO);
+		newExtenderMenu.fMask = MIIM_STRING | MIIM_SUBMENU;
+		newExtenderMenu.hSubMenu = createExtenderMenu();
+		newExtenderMenu.dwTypeData = (char*)"C&SSE";
+		InsertMenuItemA(menu, 6, TRUE, &newExtenderMenu);
+	}
+
+	void PatchDialogProc_AfterCreate(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		PatchDialogProc_AfterCreate_CreateNewCSSEMenu(hWnd, msg, wParam, lParam);
 	}
 
 	void PatchDialogProc_AfterCommand_ToggleLandscapeEditing(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
@@ -419,6 +422,9 @@ namespace se::cs::window::main {
 		auto result = CS_MainWindowDialogProc(hWnd, msg, wParam, lParam);
 
 		switch (msg) {
+		case WM_CREATE:
+			PatchDialogProc_AfterCreate(hWnd, msg, wParam, lParam);
+			break;
 		case WM_COMMAND:
 			PatchDialogProc_AfterCommand(hWnd, msg, wParam, lParam);
 			break;

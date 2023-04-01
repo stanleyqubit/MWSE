@@ -8,6 +8,8 @@ namespace mwse::lua {
 	std::optional<std::string> getClipboardText();
 	bool setClipboardText(std::optional<std::string> text);
 
+	sol::table getCommandLine(sol::this_state ts);
+
 	sol::optional<std::shared_ptr<LuaExecutor>> createProcess(sol::table params);
 	
 	void openURL(const std::string& url);

@@ -80,6 +80,21 @@ local result = os.getClipboardText()
 
 ***
 
+### `os.getCommandLine`
+<div class="search_terms" style="display: none">getcommandline, commandline</div>
+
+Returns the command line array for the currently execution. This almost always has one value, which is the (potentially relative) path to Morrowind.exe
+
+```lua
+local commandLine = os.getCommandLine()
+```
+
+**Returns**:
+
+* `commandLine` (string[]): An array of strings that reprents the command line.
+
+***
+
 ### `os.openURL`
 <div class="search_terms" style="display: none">openurl, url</div>
 

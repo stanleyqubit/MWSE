@@ -447,6 +447,7 @@ namespace mwse::lua {
 		luaState["os"]["getClipboardText"] = getClipboardText;
 		luaState["os"]["openURL"] = openURL;
 		luaState["os"]["setClipboardText"] = setClipboardText;
+		luaState["os"]["getCommandLine"] = getCommandLine;
 		LuaExecutor::defineLuaBindings();
 
 		// Extend math library.

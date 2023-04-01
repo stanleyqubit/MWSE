@@ -326,8 +326,8 @@ namespace se::cs::window::main {
 	HMENU createExtenderMenu() {
 		auto menu = CreateMenu();
 
-		AppendMenuA(menu, MF_STRING, CUSTOM_MENU_ID_CSSE_SETTINGS, "&Settings");
-		AppendMenuA(menu, MF_STRING, CUSTOM_MENU_ID_CSSE_ABOUT, "&About");
+		AppendMenuA(menu, MF_STRING, MENU_ID_CSSE_SETTINGS, "&Settings");
+		AppendMenuA(menu, MF_STRING, MENU_ID_CSSE_ABOUT, "&About");
 
 		return menu;
 	}
@@ -349,10 +349,10 @@ namespace se::cs::window::main {
 
 	void PatchDialogProc_BeforeCommand(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		switch (wParam) {
-		case CUSTOM_MENU_ID_CSSE_SETTINGS:
+		case MENU_ID_CSSE_SETTINGS:
 			showSettingsDialog(hWnd);
 			break;
-		case CUSTOM_MENU_ID_CSSE_ABOUT:
+		case MENU_ID_CSSE_ABOUT:
 			showAboutDialog(hWnd);
 			break;
 		}
@@ -391,7 +391,7 @@ namespace se::cs::window::main {
 
 	void PatchDialogProc_AfterCommand(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		switch (wParam) {
-		case CUSTOM_WM_COMMAND_WPARAM_TOGGLE_LANDSCAPE_EDITING:
+		case WM_COMMAND_TOGGLE_LANDSCAPE_EDITING:
 			PatchDialogProc_AfterCommand_ToggleLandscapeEditing(hWnd, msg, wParam, lParam);
 			break;
 		}
@@ -402,7 +402,7 @@ namespace se::cs::window::main {
 
 		// Handle pre-patches.
 		switch (msg) {
-		case CUSTOM_WM_FINISH_INITIALIZATION:
+		case WM_FINISH_INITIALIZATION:
 			PatchDialogProc_BeforeFinishInitialization(hWnd, msg, wParam, lParam);
 			break;
 		case WM_COMMAND:

@@ -3192,7 +3192,7 @@ namespace mwse::lua {
 		element->setProperty(property, value, type);
 	}
 
-	static TES3::Creature PatchGetAliasedSoulValueProperty_AliasedCreature;
+	static TES3::Creature* PatchGetAliasedSoulValueProperty_AliasedCreature = new TES3::Creature();
 	static bool PatchGetAliasedSoulValueProperty_UseAliasedCreature = false;
 
 	TES3::UI::PropertyValue* __fastcall PatchGetAliasedSoulValueProperty_GetRepairTool(const TES3::UI::Element* self, DWORD _UNUSED_, TES3::UI::PropertyValue* propValue, TES3::UI::Property prop, TES3::UI::PropertyType propType, const TES3::UI::Element* element, bool checkInherited) {
@@ -3218,12 +3218,12 @@ namespace mwse::lua {
 		auto itemData = reinterpret_cast<TES3::ItemData*>(value->ptrValue);
 		auto actor = itemData->soul;
 		if (actor->objectType == TES3::ObjectType::Creature) {
-			PatchGetAliasedSoulValueProperty_AliasedCreature.soul = static_cast<TES3::Creature*>(actor)->getSoulValue();
-			itemData->soul = &PatchGetAliasedSoulValueProperty_AliasedCreature;
+			PatchGetAliasedSoulValueProperty_AliasedCreature->soul = static_cast<TES3::Creature*>(actor)->getSoulValue();
+			itemData->soul = PatchGetAliasedSoulValueProperty_AliasedCreature;
 		}
 		else if (actor->objectType == TES3::ObjectType::NPC) {
-			PatchGetAliasedSoulValueProperty_AliasedCreature.soul = static_cast<TES3::NPC*>(actor)->getSoulValue().value_or(0);
-			itemData->soul = &PatchGetAliasedSoulValueProperty_AliasedCreature;
+			PatchGetAliasedSoulValueProperty_AliasedCreature->soul = static_cast<TES3::NPC*>(actor)->getSoulValue().value_or(0);
+			itemData->soul = PatchGetAliasedSoulValueProperty_AliasedCreature;
 		}
 
 		return value;

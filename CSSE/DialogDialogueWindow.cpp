@@ -22,32 +22,25 @@ namespace se::cs::dialog::dialogue_window {
 	constexpr auto ENABLE_ALL_OPTIMIZATIONS = true;
 	constexpr auto LOG_PERFORMANCE_RESULTS = false;
 
-	static bool modeShowModifiedOnly = false;
-
-	void redisplayAllData() {
-		const auto hWnd = ghWnd::get();
-		if (hWnd == NULL) {
-			return;
-		}
-
+	void redisplayAllData(HWND hWnd) {
 		// Invoke update logic by simulating the combo box selection changing.
 		// There may be a better way.
 		auto hFilterCombo = GetDlgItem(hWnd, CONTROL_ID_FILTER_FOR_COMBO);
 		SendMessage(hWnd, WM_COMMAND, MAKEWPARAM(CONTROL_ID_FILTER_FOR_COMBO, CBN_SELCHANGE), (LPARAM)hFilterCombo);
 	}
 
-	void clearFilters() {
-		const auto hWnd = ghWnd::get();
-		if (hWnd == NULL) {
+	void clearFilters(HWND hWnd) {
+		auto userData = reinterpret_cast<DialogueWindowData*>(GetWindowLongA(hWnd, GWL_USERDATA));
+		if (userData == nullptr) {
 			return;
 		}
 
-		modeShowModifiedOnly = false;
+		userData->modeShowModifiedOnly = false;
 
 		Button_SetCheck(GetDlgItem(hWnd, CONTROL_ID_SHOW_MODIFIED_ONLY_BUTTON), BST_UNCHECKED);
 		ComboBox_SetCurSel(GetDlgItem(hWnd, CONTROL_ID_FILTER_FOR_COMBO), 0);
 
-		redisplayAllData();
+		redisplayAllData(hWnd);
 	}
 
 	HWND createOrFocus(Actor* filter) {
@@ -90,13 +83,14 @@ namespace se::cs::dialog::dialogue_window {
 			return false;
 		}
 
+		auto userData = reinterpret_cast<DialogueWindowData*>(GetWindowLongA(hWnd, GWL_USERDATA));
+
 		// If the dialog isn't modified and we're filtered to it, make sure it still shows.
-		if (!dialogue->getModified() && modeShowModifiedOnly) {
-			modeShowModifiedOnly = false;
+		if (!dialogue->getModified() && userData->modeShowModifiedOnly) {
+			userData->modeShowModifiedOnly = false;
 		}
 
 		// If the dialogue/info isn't available for the current filter actor, remove that too.
-		auto userData = reinterpret_cast<DialogueWindowData*>(GetWindowLongA(hWnd, GWL_USERDATA));
 		if (userData->currentFilterObject) {
 			if (info) {
 				if (!info->filter(userData->currentFilterObject, nullptr, 1, dialogue)) {
@@ -392,18 +386,28 @@ namespace se::cs::dialog::dialogue_window {
 	// Patch: Allow filtering of topic list.
 	//
 
-	bool PatchFilterTopicList(const Dialogue* topic) {
-		if (modeShowModifiedOnly && !topic->getModified()) {
+	bool PatchFilterTopicList(HWND hWnd, const Dialogue* topic) {
+		auto userData = reinterpret_cast<DialogueWindowData*>(GetWindowLongA(hWnd, GWL_USERDATA));
+		if (userData->modeShowModifiedOnly && !topic->getModified()) {
 			return false;
 		}
 		return true;
 	}
 
 	void __cdecl PatchTopicListAddItem(HWND hDlg, const Dialogue* topic) {
-		if (PatchFilterTopicList(topic)) {
+		if (PatchFilterTopicList(hDlg, topic)) {
 			const auto CS_AddTopicToList = reinterpret_cast<void(__cdecl*)(HWND, const Dialogue*)>(0x4E7050);
 			CS_AddTopicToList(hDlg, topic);
 		}
+	}
+
+	//
+	// Patch: Extend structure of the dialogue window user data.
+	//
+
+	LONG __stdcall SetExtendedUserData(HWND hWnd, int nIndex, DialogueWindowData* userData) {
+		userData->modeShowModifiedOnly = false;
+		return SetWindowLongA(hWnd, nIndex, (LONG)userData);
 	}
 
 	//
@@ -900,14 +904,15 @@ namespace se::cs::dialog::dialogue_window {
 	}
 
 	void PatchDialogProc_BeforeCommand(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		auto userData = (DialogueWindowData*)GetWindowLongA(hWnd, GWL_USERDATA);
 		const auto command = HIWORD(wParam);
 		const auto id = LOWORD(wParam);
 		switch (command) {
 		case BN_CLICKED:
 			switch (id) {
 			case CONTROL_ID_SHOW_MODIFIED_ONLY_BUTTON:
-				modeShowModifiedOnly = SendDlgItemMessageA(hWnd, id, BM_GETCHECK, 0, 0);
-				redisplayAllData();
+				userData->modeShowModifiedOnly = SendDlgItemMessageA(hWnd, id, BM_GETCHECK, 0, 0);
+				redisplayAllData(hWnd);
 				break;
 			}
 			break;
@@ -953,13 +958,14 @@ namespace se::cs::dialog::dialogue_window {
 	}
 
 	void installPatches() {
-		using memory::genNOPUnprotected;
-		using memory::genJumpEnforced;
-		using memory::genJumpUnprotected;
 		using memory::genCallEnforced;
 		using memory::genCallUnprotected;
+		using memory::genJumpEnforced;
+		using memory::genJumpUnprotected;
+		using memory::genNOPUnprotected;
 		using memory::writeDoubleWordEnforced;
 		using memory::writePatchCodeUnprotected;
+		using memory::writeValueEnforced;
 
 		// Patch: Optimize insertion of cell names.
 		if constexpr (ENABLE_ALL_OPTIMIZATIONS) {
@@ -992,6 +998,10 @@ namespace se::cs::dialog::dialogue_window {
 
 		// Patch: Allow filtering of topic list.
 		genCallEnforced(0x4E7143, 0x404160, reinterpret_cast<DWORD>(PatchTopicListAddItem));
+
+		// Patch: Extend structure of the dialogue window user data.
+		writeValueEnforced<BYTE>(0x4EBFF4 + 0x1, sizeof(DialogueWindowData_Vanilla), sizeof(DialogueWindowData));
+		genCallUnprotected(0x4EC018, reinterpret_cast<DWORD>(SetExtendedUserData), 0x6);
 
 		// Patch: Extend Render Window message handling.
 		genJumpEnforced(0x401334, 0x4EAEA0, reinterpret_cast<DWORD>(PatchDialogProc));

@@ -82,7 +82,7 @@ namespace se::cs::dialog::dialogue_window {
 	// Global variables
 	using ghWnd = memory::ExternalGlobal<HWND, 0x6CE9A0>;
 
-	struct DialogueWindowData {
+	struct DialogueWindowData_Vanilla {
 		int unknown_0x0;
 		int unknown_0x4;
 		bool unknown_0x8;
@@ -97,7 +97,11 @@ namespace se::cs::dialog::dialogue_window {
 		int unknown_0x2C;
 		bool unknown_0x30;
 	};
-	static_assert(sizeof(DialogueWindowData) == 0x34, "DialogueWindowData failed size validation");
+	static_assert(sizeof(DialogueWindowData_Vanilla) == 0x34, "DialogueWindowData failed size validation");
+
+	struct DialogueWindowData : DialogueWindowData_Vanilla {
+		bool modeShowModifiedOnly;
+	};
 
 	HWND createOrFocus(Actor* filter = nullptr);
 

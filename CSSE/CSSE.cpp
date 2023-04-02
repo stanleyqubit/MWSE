@@ -2,6 +2,7 @@
 
 #include "LogUtil.h"
 
+#include "CSDialogue.h"
 #include "CSDialogueInfo.h"
 #include "CSGameFile.h"
 #include "CSGameSetting.h"
@@ -87,6 +88,17 @@ namespace se::cs {
 				sprintf_s(buffer, format, topicId, infoId, text);
 				log::stream << "Suppressing warning: " << buffer << std::endl;
 			}
+		}
+
+		void __fastcall suppressDeletedDefaultDialogueTypeChangeWarning(Dialogue* self, DWORD _EDX_, Dialogue* from) {
+			// Ignore type changes entirely for deleted data.
+			if (self->id == nullptr && from->id == nullptr && self->type != from->type && self->getDeleted() && from->getDeleted()) {
+				return;
+			}
+
+			// Call overwritten code.
+			const auto TES3_Dialogue_LoadOver = reinterpret_cast<void(__thiscall*)(Dialogue*, Dialogue*)>(0x4F3360);
+			TES3_Dialogue_LoadOver(self, from);
 		}
 
 		const auto ShowDuplicateReferenceWarning = reinterpret_cast<bool(__cdecl*)(const char*, int)>(0x40123A);
@@ -398,6 +410,9 @@ namespace se::cs {
 		genCallEnforced(0x4F31AA, 0x40123A, reinterpret_cast<DWORD>(patch::suppressDialogueInfoResolveIssues));
 		genCallEnforced(0x4F3236, 0x40123A, reinterpret_cast<DWORD>(patch::suppressDialogueInfoResolveIssues));
 		genCallEnforced(0x4F325A, 0x40123A, reinterpret_cast<DWORD>(patch::suppressDialogueInfoResolveIssues));
+
+		// Patch: suppressDeletedDefaultDialogueTypeChangeWarning
+		genJumpEnforced(0x402211, 0x4F3360, reinterpret_cast<DWORD>(patch::suppressDeletedDefaultDialogueTypeChangeWarning));
 
 		// Patch: Suppress "1 duplicate references were removed" warning popups for vanilla masters.
 		genCallEnforced(0x50A9ED, 0x40123A, reinterpret_cast<DWORD>(patch::suppressDuplicateReferenceRemovedWarningForVanillaMasters));

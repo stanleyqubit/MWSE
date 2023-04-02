@@ -34,6 +34,7 @@ namespace mwse::lua {
 		usertypeDefinition["month"] = sol::readonly_property(&TES3::GameFile::getMonth);
 		usertypeDefinition["path"] = sol::readonly_property(&TES3::GameFile::getPath);
 		usertypeDefinition["playerName"] = sol::readonly_property(&TES3::GameFile::getPlayerName);
+		usertypeDefinition["toLoad"] = sol::property(&TES3::GameFile::getToLoad, &TES3::GameFile::setToLoad);
 		usertypeDefinition["year"] = sol::readonly_property(&TES3::GameFile::getYear);
 
 		// Function bindings.

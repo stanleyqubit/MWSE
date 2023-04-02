@@ -387,6 +387,25 @@ local result = myObject:findSound(id)
 
 ***
 
+### `getGameFile`
+<div class="search_terms" style="display: none">getgamefile, gamefile</div>
+
+Returns a tes3gameFile for a given file name.
+
+```lua
+local gameFile = myObject:getGameFile(fileName)
+```
+
+**Parameters**:
+
+* `fileName` (string): The name of the file to get.
+
+**Returns**:
+
+* `gameFile` ([tes3gameFile](../../types/tes3gameFile), nil): The game file associated with the name.
+
+***
+
 ### `resolveObject`
 <div class="search_terms" style="display: none">resolveobject</div>
 

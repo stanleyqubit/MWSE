@@ -89,6 +89,16 @@ namespace TES3 {
 		return TES3_TES3File_setFilePointer(this, offset);
 	}
 
+	const auto TES3_TES3File_getToLoad = reinterpret_cast<bool(__thiscall*)(const GameFile*)>(0x4B6250);
+	bool GameFile::getToLoad() const {
+		return TES3_TES3File_getToLoad(this);
+	}
+
+	const auto TES3_TES3File_setToLoad = reinterpret_cast<void(__thiscall*)(GameFile*, bool)>(0x4B6280);
+	void GameFile::setToLoad(bool set) {
+		TES3_TES3File_setToLoad(this, set);
+	}
+
 	const auto TES3_TES3File_getMaster = reinterpret_cast<GameFile*(__thiscall*)(GameFile*, unsigned int)>(0x4B5CF0);
 	GameFile* GameFile::getMaster(unsigned int index) {
 		return TES3_TES3File_getMaster(this, index);

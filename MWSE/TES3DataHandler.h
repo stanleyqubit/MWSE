@@ -177,6 +177,8 @@ namespace TES3 {
 
 		const char* getBaseAnimationFile(int isFemale = 0, int firstPerson = 0) const;
 
+		GameFile* getGameFile(const char* name);
+
 		//
 		// Custom functions.
 		//

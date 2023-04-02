@@ -73,6 +73,7 @@ namespace mwse::lua {
 			usertypeDefinition["findGlobalVariable"] = &TES3::NonDynamicData::findGlobalVariable;
 			usertypeDefinition["findScript"] = &TES3::NonDynamicData::findScriptByName;
 			usertypeDefinition["findSound"] = &TES3::NonDynamicData::findSound;
+			usertypeDefinition["getGameFile"] = &TES3::NonDynamicData::getGameFile;
 			usertypeDefinition["resolveObject"] = &TES3::NonDynamicData::resolveObject;
 			usertypeDefinition["showLocationOnMap"] = &TES3::NonDynamicData::showLocationOnMap;
 

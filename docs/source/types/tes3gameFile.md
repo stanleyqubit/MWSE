@@ -208,6 +208,17 @@ Represents a loaded ESM, ESP, or ESS file.
 
 ***
 
+### `toLoad`
+<div class="search_terms" style="display: none">toload</div>
+
+True if the file is flagged to load. Flagging a file to load will overwrite the user's load options, and should not be done lightly.
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
 ### `year`
 <div class="search_terms" style="display: none">year</div>
 

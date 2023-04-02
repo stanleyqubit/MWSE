@@ -22,6 +22,7 @@
 --- @field month number *Read-only*. The current month, from a save game.
 --- @field path string *Read-only*. The path to the file.
 --- @field playerName string *Read-only*. The player's name, from a save game.
+--- @field toLoad boolean True if the file is flagged to load. Flagging a file to load will overwrite the user's load options, and should not be done lightly.
 --- @field year number *Read-only*. The current year, from a save game.
 tes3gameFile = {}
 

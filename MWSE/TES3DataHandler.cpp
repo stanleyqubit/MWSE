@@ -429,6 +429,11 @@ namespace TES3 {
 		return TES3_NonDynamicData_getBaseAnimationFile(this, isFemale, firstPerson);
 	}
 
+	const auto TES3_NonDynamicData_getGameFile = reinterpret_cast<GameFile* (__thiscall*)(TES3::NonDynamicData*, const char*)>(0x4BAF80);
+	GameFile* NonDynamicData::getGameFile(const char* name) {
+		return TES3_NonDynamicData_getGameFile(this, name);
+	}
+
 	std::reference_wrapper<Skill[27]> NonDynamicData::getSkills() {
 		return std::ref(skills);
 	}

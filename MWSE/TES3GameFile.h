@@ -88,6 +88,9 @@ namespace TES3 {
 		bool loadByPath(const char* path, const char* filename, int unknown1 = 0, bool unknown2 = false);
 		bool setFilePointer(unsigned int offset);
 
+		bool getToLoad() const;
+		void setToLoad(bool set);
+
 		GameFile* getMaster(unsigned int index);
 
 		//

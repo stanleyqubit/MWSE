@@ -113,6 +113,7 @@ namespace se::cs {
 		int unknown_0x4EC;
 		int unknown_0x4F0;
 
+		bool getToLoadFlag() const;
 		void setToLoadFlag(bool state);
 	};
 	static_assert(sizeof(GameFile) == 0x4F4, "GameFile failed size validation");

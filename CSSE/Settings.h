@@ -133,6 +133,23 @@ namespace se::cs {
 			toml::value into_toml() const;
 		} script_editor;
 
+		struct TestEnvironment {
+			std::vector<std::string> game_files = {};
+			bool start_new_game = true;
+			std::string starting_cell = {};
+			std::array<int, 2> starting_grid = { 0, 0 };
+			std::array<float, 3> position = { 0.0f, 0.0f, 0.0f };
+			std::array<float, 3> orientation = { 0.0f, 0.0f, 0.0f };
+			std::unordered_map<std::string, int> inventory = {};
+			std::vector<std::string> spells = {};
+			std::unordered_map<std::string, int> journal = {};
+			std::vector<std::string> topics = {};
+			std::unordered_map<std::string, float> globals = {};
+
+			void from_toml(const toml::value& v);
+			toml::value into_toml() const;
+		} test_environment;
+
 		struct OpenMW {
 			std::string location = "";
 

@@ -78,6 +78,9 @@
     <ClCompile Include="CDataBoundPropertyGridProperty.cpp">
       <Filter>Source Files\UI\ControlClasses</Filter>
     </ClCompile>
+    <ClCompile Include="CSCell.cpp">
+      <Filter>Source Files\CS</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="CSSE.def">
@@ -339,6 +342,9 @@
     </ClInclude>
     <ClInclude Include="CDataBoundPropertyGridProperty.h">
       <Filter>Header Files\UI\ControlClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="CSArchive.h">
+      <Filter>Header Files\CS</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

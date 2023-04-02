@@ -6,6 +6,7 @@
 
 #include "Settings.h"
 
+#include "CSArchive.h"
 #include "CSBaseObject.h"
 #include "CSDataHandler.h"
 #include "CSGameFile.h"
@@ -81,6 +82,147 @@ namespace se::cs::window::main {
 	HWND showRaceEditWindow(BaseObject* object) {
 		using ghWndDialogRaces = memory::ExternalGlobal<HWND, 0x6CE978>;
 		return showComboBasedEditWindow(object, ghWndDialogRaces::get(), (LPCSTR)0x9F, (DLGPROC)0x403BFC, 1083);
+	}
+
+	void UpdateLoadedFilesInTestEnvironment() {
+		const auto recordHandler = DataHandler::get()->recordHandler;
+		settings.test_environment.game_files.clear();
+		for (auto i = 0; i < recordHandler->activeModCount; ++i) {
+			const auto gameFile = recordHandler->activeGameFiles[i];
+			if (gameFile && gameFile->getToLoadFlag()) {
+				settings.test_environment.game_files.push_back(gameFile->fileName);
+			}
+		}
+
+		// Update the file on disk so Morrowind can see the update.
+		settings.save();
+	}
+
+	void LaunchMorrowind() {
+		// Update the environment data in settings.
+		UpdateLoadedFilesInTestEnvironment();
+
+		// Startup Morrowind.
+		STARTUPINFO si = { sizeof(STARTUPINFO) };
+		PROCESS_INFORMATION pi = {};
+		if (CreateProcessA("Morrowind.exe", "Morrowind.exe --fromCSSE", NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi)) {
+			CloseHandle(pi.hProcess);
+			CloseHandle(pi.hThread);
+		}
+	}
+
+	static std::string openmwTempFolder = std::filesystem::current_path().string() + "\\Data Files\\MWSE\\tmp\\csse\\openmw";
+
+	void UpdateOpenMWConfig() {
+		std::ofstream cfg(openmwTempFolder + "\\openmw.cfg");
+		if (!cfg.is_open()) {
+			return;
+		}
+
+		cfg << "skip-menu=1" << std::endl;
+		cfg << "encoding=win1252" << std::endl;
+		cfg << "data=" << std::filesystem::current_path().string() + "\\Data Files" << std::endl;
+
+		// Build a stack of archives to display.
+		std::stack<std::string> archives;
+		auto archive = gBSALoader::get()->lastLoadedArchive;
+		while (archive) {
+			constexpr auto PREFIX_SIZE = sizeof("Data Files\\");
+			archives.push(&archive->path[PREFIX_SIZE - 1]);
+			archive = archive->nextArchive;
+		}
+		while (!archives.empty()) {
+			cfg << "fallback-archive=" << archives.top() << std::endl;
+			archives.pop();
+		}
+
+		for (const auto& file : settings.test_environment.game_files) {
+			cfg << "content=" << file << std::endl;
+		}
+
+		cfg.close();
+	}
+
+	void UpdateOpenMWScriptFile() {
+		std::ofstream mwscript(openmwTempFolder + "\\startup.txt");
+		if (!mwscript.is_open()) {
+			return;
+		}
+
+		const auto& environment = settings.test_environment;
+
+		if (environment.starting_cell != "") {
+			mwscript << "player->PositionCell "
+				<< environment.position[0] << " "
+				<< environment.position[1] << " "
+				<< environment.position[2] << " "
+				<< environment.orientation[2] << " "
+				<< "\"" << environment.starting_cell << "\"" << std::endl;
+		}
+		else {
+			mwscript << "player->Position "
+				<< environment.position[0] << " "
+				<< environment.position[1] << " "
+				<< environment.position[2] << " "
+				<< environment.orientation[2] << std::endl;
+		}
+
+		for (const auto& [item, count] : environment.inventory) {
+			mwscript << "player->AddItem \"" << item << "\" " << count << std::endl;
+		}
+
+		for (const auto& spell : environment.spells) {
+			mwscript << "player->AddSpell \"" << spell << "\"" << std::endl;
+		}
+
+		for (const auto& [journal, stage] : environment.journal) {
+			mwscript << "Journal \"" << journal << "\" " << stage << std::endl;
+		}
+
+		for (const auto& topic : environment.topics) {
+			mwscript << "AddTopic \"" << topic << "\"" << std::endl;
+		}
+
+		for (const auto& [variable, value] : environment.globals) {
+			mwscript << "set " << variable << " to " << value << std::endl;
+		}
+
+		mwscript.close();
+	}
+
+	void LaunchOpenMW() {
+		// Update the environment data in settings.
+		UpdateLoadedFilesInTestEnvironment();
+
+		// Update the script to have OpenMW run based on the environment.
+		std::filesystem::create_directories(openmwTempFolder);
+		UpdateOpenMWConfig();
+		UpdateOpenMWScriptFile();
+
+		// Make sure that 
+		if (settings.openmw.location.empty()) {
+			MessageBoxA(NULL, "No OpenMW location found.", "Invalid Settings", MB_ICONERROR | MB_OK);
+			return;
+		}
+
+		const auto path = settings.openmw.location + "\\openmw.exe";
+		if (!std::filesystem::exists(path)) {
+			MessageBoxA(NULL, "Invalid OpenMW location.", "Executable Not Found", MB_ICONERROR | MB_OK);
+			return;
+		}
+
+		std::stringstream ss;
+		ss << "openmw.exe";
+		ss << " --replace=config --config=\"" << std::filesystem::current_path().string() << "\\Data Files\\MWSE\\tmp\\csse\\openmw\"";
+		ss << " --script-run \"" << openmwTempFolder << "\\startup.txt\"";
+
+		STARTUPINFO si = { sizeof(STARTUPINFO) };
+		PROCESS_INFORMATION pi = {};
+		const auto commandLine = ss.str();
+		if (CreateProcessA(path.c_str(), (LPSTR)commandLine.c_str(), NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi)) {
+			CloseHandle(pi.hProcess);
+			CloseHandle(pi.hThread);
+		}
 	}
 
 	struct ScriptWindowUserData {
@@ -199,6 +341,11 @@ namespace se::cs::window::main {
 		default:
 			return showDefaultObjectEditWindow(object);
 		}
+	}
+
+	const auto TES3CS_CreateAutosave = reinterpret_cast<void(__stdcall*)()>(0x401ED3);
+	void createAutosave() {
+		TES3CS_CreateAutosave();
 	}
 
 	//
@@ -341,6 +488,8 @@ namespace se::cs::window::main {
 		auto menu = CreateMenu();
 
 		AppendMenuA(menu, MF_STRING, MENU_ID_CSSE_SETTINGS, "&Settings");
+		//AppendMenuA(menu, MF_STRING, MENU_ID_CSSE_TEST_ENVIRONMENT, "&Test Environment");
+		AppendMenuA(menu, MF_SEPARATOR, NULL, NULL);
 		AppendMenuA(menu, MF_STRING, MENU_ID_CSSE_ABOUT, "&About");
 
 		return menu;
@@ -351,13 +500,17 @@ namespace se::cs::window::main {
 		setupQuickStart();
 	}
 
-	void showAboutDialog(HWND hParent) {
-		DialogAboutCSSE dialog;
+	void showSettingsDialog(HWND hParent) {
+		DialogCSSESettings dialog;
 		dialog.DoModal();
 	}
 
-	void showSettingsDialog(HWND hParent) {
-		DialogCSSESettings dialog;
+	void showTestEnvironmentDialog(HWND hParent) {
+
+	}
+
+	void showAboutDialog(HWND hParent) {
+		DialogAboutCSSE dialog;
 		dialog.DoModal();
 	}
 
@@ -365,6 +518,9 @@ namespace se::cs::window::main {
 		switch (wParam) {
 		case MENU_ID_CSSE_SETTINGS:
 			showSettingsDialog(hWnd);
+			break;
+		case MENU_ID_CSSE_TEST_ENVIRONMENT:
+			showTestEnvironmentDialog(hWnd);
 			break;
 		case MENU_ID_CSSE_ABOUT:
 			showAboutDialog(hWnd);
@@ -449,35 +605,26 @@ namespace se::cs::window::main {
 		SetFocus(memory::ExternalGlobal<HWND, 0x6CE93C>::get());
 	}
 
+	static std::optional<UINT> testAfterSave = {};
+
 	void PatchDialogProc_AfterCommand_TestInMorrowind(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
-		STARTUPINFO si = { sizeof(STARTUPINFO) };
-		PROCESS_INFORMATION pi = {};
-
-		CreateProcessA("Morrowind.exe", NULL, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi);
-
-		CloseHandle(pi.hProcess);
-		CloseHandle(pi.hThread);
+		if (gActiveFileModified::get()) {
+			testAfterSave = WM_COMMAND_TEST_IN_GAME_MORROWIND;
+			SendMessageA(hWnd, WM_COMMAND, WM_COMMAND_SAVE, NULL);
+		}
+		else {
+			LaunchMorrowind();
+		}
 	}
 
 	void PatchDialogProc_AfterCommand_TestInOpenMW(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
-		STARTUPINFO si = { sizeof(STARTUPINFO) };
-		PROCESS_INFORMATION pi = {};
-
-		if (settings.openmw.location.empty()) {
-			MessageBox(NULL, "No OpenMW location found.", "Invalid Settings", MB_ICONERROR | MB_OK);
-			return;
+		if (gActiveFileModified::get()) {
+			testAfterSave = WM_COMMAND_TEST_IN_GAME_OPENMW;
+			SendMessageA(hWnd, WM_COMMAND, WM_COMMAND_SAVE, NULL);
 		}
-
-		const auto path = settings.openmw.location + "\\openmw.exe";
-		if (!std::filesystem::exists(path)) {
-			MessageBox(NULL, "Invalid OpenMW location.", "Executable Not Found", MB_ICONERROR | MB_OK);
-			return;
+		else {
+			LaunchOpenMW();
 		}
-
-		CreateProcessA(path.c_str(), NULL, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi);
-
-		CloseHandle(pi.hProcess);
-		CloseHandle(pi.hThread);
 	}
 
 	void PatchDialogProc_AfterCommand(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
@@ -494,14 +641,24 @@ namespace se::cs::window::main {
 		}
 	}
 
+	void PatchDialogProc_AfterSave(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		if (testAfterSave) {
+			switch (testAfterSave.value()) {
+			case WM_COMMAND_TEST_IN_GAME_MORROWIND:
+				LaunchMorrowind();
+				break;
+			case WM_COMMAND_TEST_IN_GAME_OPENMW:
+				LaunchOpenMW();
+				break;
+			}
+		}
+	}
+
 	LRESULT CALLBACK PatchDialogProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		messageResultOverride.reset();
 
 		// Handle pre-patches.
 		switch (msg) {
-		case WM_FINISH_INITIALIZATION:
-			PatchDialogProc_BeforeFinishInitialization(hWnd, msg, wParam, lParam);
-			break;
 		case WM_COMMAND:
 			PatchDialogProc_BeforeCommand(hWnd, msg, wParam, lParam);
 			break;
@@ -510,6 +667,9 @@ namespace se::cs::window::main {
 			break;
 		case WM_CLOSE:
 			PatchDialogProc_BeforeClose(hWnd, msg, wParam, lParam);
+			break;
+		case WM_FINISH_INITIALIZATION:
+			PatchDialogProc_BeforeFinishInitialization(hWnd, msg, wParam, lParam);
 			break;
 		}
 
@@ -527,6 +687,9 @@ namespace se::cs::window::main {
 			break;
 		case WM_COMMAND:
 			PatchDialogProc_AfterCommand(hWnd, msg, wParam, lParam);
+			break;
+		case WM_SAVE:
+			PatchDialogProc_AfterSave(hWnd, msg, wParam, lParam);
 			break;
 		}
 

@@ -1118,6 +1118,62 @@ namespace se::cs::dialog::render_window {
 		settings.save();
 	}
 
+	void setTestingPositionToReference() {
+		auto target = SelectionData::get()->getLastTarget();
+		if (target == nullptr) {
+			return;
+		}
+
+		auto targetRef = target->reference;
+		if (targetRef == nullptr) {
+			return;
+		}
+
+		auto currentCell = gCurrentCell::get();
+		auto& test_environment = settings.test_environment;
+		if (currentCell->getIsInterior()) {
+			test_environment.starting_cell = currentCell->getObjectID();
+			test_environment.starting_grid = { 0, 0 };
+		}
+		else {
+			test_environment.starting_cell = "";
+			test_environment.starting_grid[0] = currentCell->gridX;
+			test_environment.starting_grid[1] = currentCell->gridY;
+		}
+		test_environment.position[0] = targetRef->position.x;
+		test_environment.position[1] = targetRef->position.y;
+		test_environment.position[2] = targetRef->position.z;
+		test_environment.orientation[0] = 0;
+		test_environment.orientation[1] = 0;
+		test_environment.orientation[2] = targetRef->orientationNonAttached.z;
+
+		settings.save();
+	}
+
+	void setTestingPositionToCamera() {
+		auto rendererController = RenderController::get();
+
+		auto currentCell = gCurrentCell::get();
+		auto& test_environment = settings.test_environment;
+		if (currentCell->getIsInterior()) {
+			test_environment.starting_cell = currentCell->getObjectID();
+			test_environment.starting_grid = { 0, 0 };
+		}
+		else {
+			test_environment.starting_cell = "";
+			test_environment.starting_grid[0] = currentCell->gridX;
+			test_environment.starting_grid[1] = currentCell->gridY;
+		}
+		test_environment.position[0] = rendererController->node->localTranslate.x;
+		test_environment.position[1] = rendererController->node->localTranslate.y;
+		test_environment.position[2] = rendererController->node->localTranslate.z;
+		test_environment.orientation[0] = 0;
+		test_environment.orientation[1] = 0;
+		test_environment.orientation[2] = 0;
+
+		settings.save();
+	}
+
 	void showContextAwareActionMenu(HWND hWndRenderWindow) {
 		auto menu = CreatePopupMenu();
 		if (menu == NULL) {
@@ -1152,6 +1208,8 @@ namespace se::cs::dialog::render_window {
 			USE_WORLD_AXIS_ROTATION,
 			SAVE_STATE_TO_QUICKSTART,
 			CLEAR_STATE_FROM_QUICKSTART,
+			TEST_FROM_REFERENCE_POSITION,
+			TEST_FROM_CAMERA_POSITION,
 		};
 
 		/*
@@ -1378,6 +1436,25 @@ namespace se::cs::dialog::render_window {
 		menuItem.dwTypeData = (LPSTR)"Clear QuickStart";
 		InsertMenuItemA(menu, index++, TRUE, &menuItem);
 
+		menuItem.wID = RESERVED_NO_CALLBACK;
+		menuItem.fMask = MIIM_FTYPE | MIIM_ID;
+		menuItem.fType = MFT_SEPARATOR;
+		InsertMenuItemA(menu, index++, TRUE, &menuItem);
+
+		menuItem.wID = TEST_FROM_REFERENCE_POSITION;
+		menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID | MIIM_STATE;
+		menuItem.fType = MFT_STRING;
+		menuItem.fState = SelectionData::get()->numberOfTargets > 0 ? MFS_ENABLED : MFS_DISABLED;
+		menuItem.dwTypeData = (LPSTR)"Use reference position for testing";
+		InsertMenuItemA(menu, index++, TRUE, &menuItem);
+
+		menuItem.wID = TEST_FROM_CAMERA_POSITION;
+		menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID | MIIM_STATE;
+		menuItem.fType = MFT_STRING;
+		menuItem.fState = gCurrentCell::get() ? MFS_ENABLED : MFS_DISABLED;
+		menuItem.dwTypeData = (LPSTR)"Use camera position for testing";
+		InsertMenuItemA(menu, index++, TRUE, &menuItem);
+
 		POINT p;
 		GetCursorPos(&p);
 
@@ -1455,6 +1532,12 @@ namespace se::cs::dialog::render_window {
 			break;
 		case CLEAR_STATE_FROM_QUICKSTART:
 			clearRenderStateFromQuickStart();
+			break;
+		case TEST_FROM_REFERENCE_POSITION:
+			setTestingPositionToReference();
+			break;
+		case TEST_FROM_CAMERA_POSITION:
+			setTestingPositionToCamera();
 			break;
 		default:
 			log::stream << "Unknown render window context menu ID " << result << " used!" << std::endl;

@@ -280,6 +280,41 @@ namespace se::cs {
 	}
 
 	//
+	// Test Environment
+	//
+
+	void Settings_t::TestEnvironment::from_toml(const toml::value& v) {
+		start_new_game = toml::find_or(v, "start_new_game", start_new_game);
+		starting_cell = toml::find_or(v, "starting_cell", starting_cell);
+		starting_grid = toml::find_or(v, "starting_grid", starting_grid);
+		position = toml::find_or(v, "position", position);
+		orientation = toml::find_or(v, "orientation", orientation);
+		inventory = toml::find_or(v, "inventory", inventory);
+		spells = toml::find_or(v, "spells", spells);
+		journal = toml::find_or(v, "journal", journal);
+		topics = toml::find_or(v, "topics", topics);
+		globals = toml::find_or(v, "globals", globals);
+	}
+
+	toml::value Settings_t::TestEnvironment::into_toml() const {
+		return toml::value(
+			{
+				{ "start_new_game", start_new_game },
+				{ "starting_cell", starting_cell },
+				{ "starting_grid", starting_grid },
+				{ "position", position },
+				{ "orientation", orientation },
+				{ "game_files", game_files },
+				{ "inventory", inventory },
+				{ "spells", spells },
+				{ "journal", journal },
+				{ "topics", topics },
+				{ "globals", globals },
+			}
+		);
+	}
+
+	//
 	// OpenMW
 	//
 
@@ -340,6 +375,7 @@ namespace se::cs {
 		quickstart = toml::find_or(v, "quickstart", quickstart);
 		render_window = toml::find_or(v, "render_window", render_window);
 		script_editor = toml::find_or(v, "script_editor", script_editor);
+		test_environment = toml::find_or(v, "test_environment", test_environment);
 		openmw = toml::find_or(v, "openmw", openmw);
 	}
 
@@ -353,6 +389,7 @@ namespace se::cs {
 				{ "render_window", render_window },
 				{ "quickstart", quickstart },
 				{ "script_editor", script_editor },
+				{ "test_environment", test_environment },
 				{ "openmw", openmw },
 			}
 		);

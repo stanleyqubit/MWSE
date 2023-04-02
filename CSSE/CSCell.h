@@ -12,6 +12,19 @@ namespace se::cs {
 		Cell* cell; // 0xC
 	};
 
+	namespace CellFlag {
+		typedef unsigned int value_type;
+
+		enum Flag : value_type {
+			Interior = 0x1,
+			HasWater = 0x2,
+			SleepIsIllegal = 0x4,
+			WasLoaded = 0x8,
+			IsLoaded = 0x20,
+			BehavesAsExterior = 0x80
+		};
+	}
+
 	struct Cell : BaseObject {
 		const char* name; // 0x10
 		NI::Pointer<NI::Node> pickObjectsRoot; // 0x14
@@ -40,6 +53,8 @@ namespace se::cs {
 			float waterLevel;
 			BaseObject* region;
 		}; // 0x5C
+
+		bool getIsInterior() const;
 	};
 	static_assert(sizeof(Cell) == 0x60, "Cell failed size validation");
 }

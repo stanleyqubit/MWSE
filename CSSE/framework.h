@@ -52,6 +52,7 @@
 #include <queue>
 #include <random>
 #include <sstream>
+#include <stack>
 #include <stddef.h>
 #include <stdexcept>
 #include <stdio.h>

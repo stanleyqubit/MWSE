@@ -2510,12 +2510,13 @@ namespace mwse::lua {
 					// Ensure that keys are lowercased for lookup.
 					string::to_lower(luaKey.value());
 
-					sol::table runtime = activeLuaMods[luaKey.value()];
-					if (runtime == sol::nil) {
+					sol::object maybeRuntime = activeLuaMods[luaKey.value()];
+					if (maybeRuntime == sol::nil) {
 						continue;
 					}
 
 					// Make sure we don't already have a metadata assigned.
+					sol::table runtime = maybeRuntime;
 					if (runtime["metadata"] != sol::nil) {
 						log::getLog() << "[LuaManager] WARNING: More than one metadata found claiming mod '" << luaKey.value() << "'." << std::endl;
 						continue;

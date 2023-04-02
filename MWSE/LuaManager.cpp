@@ -681,10 +681,10 @@ namespace mwse::lua {
 	// Hook: Finished initializing game code.
 	//
 
-	bool __fastcall FinishInitialization(TES3::Game* game) {
+	void __fastcall InitDataHandler(TES3::WorldController* worldController, DWORD _EDX_, NI::Node* objectRoot, NI::Node* pickObjectRoot, NI::Node* landRoot, NI::Light* skyLight, NI::FogProperty* fogProperty) {
 		// Call overwritten code.
-		const auto TES3Game_loadAllPlugins = reinterpret_cast<bool(__thiscall*)(TES3::Game*)>(0x419CE0);
-		TES3Game_loadAllPlugins(game);
+		const auto TES3_WorldController_InitDataHandler = reinterpret_cast<void(__thiscall*)(TES3::WorldController*, NI::Node*, NI::Node*, NI::Node*, NI::Light*, NI::FogProperty*)>(0x40E790);
+		TES3_WorldController_InitDataHandler(worldController, objectRoot, pickObjectRoot, landRoot, skyLight, fogProperty);
 
 		// Hook up shorthand access to data handler, world controller, and game.
 		auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
@@ -692,7 +692,15 @@ namespace mwse::lua {
 		state["tes3"]["dataHandler"] = TES3::DataHandler::get();
 		state["tes3"]["worldController"] = TES3::WorldController::get();
 		state["tes3"]["game"] = TES3::Game::get();
+	}
 
+	bool __fastcall FinishInitialization(TES3::Game* game) {
+		// Call overwritten code.
+		const auto TES3Game_loadAllPlugins = reinterpret_cast<bool(__thiscall*)(TES3::Game*)>(0x419CE0);
+		TES3Game_loadAllPlugins(game);
+
+		// Trigger initialization.
+		auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
 		stateHandle.triggerEvent(new event::GenericEvent("initialized"));
 
 		// Return success.
@@ -4336,6 +4344,7 @@ namespace mwse::lua {
 		genCallEnforced(0x4C0180, 0x4E4510, reinterpret_cast<DWORD>(OnPlayerReferenceCreated));
 
 		// Event: initialized. Hook initial plugin loading and merging function.
+		genCallEnforced(0x419EE7, 0x40E790, reinterpret_cast<DWORD>(InitDataHandler));
 		genCallEnforced(0x418F88, 0x419CE0, reinterpret_cast<DWORD>(FinishInitialization));
 
 		// Event: enterFrame. This hook can be in a couple of locations, because of MCP.

@@ -653,6 +653,7 @@ namespace se::cs::window::main {
 				LaunchOpenMW();
 				break;
 			}
+			testAfterSave.reset();
 		}
 	}
 

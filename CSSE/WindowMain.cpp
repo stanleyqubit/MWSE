@@ -26,6 +26,8 @@
 #include "DialogAboutCSSE.h"
 #include "DialogCSSESettings.h"
 
+#include "MathUtil.h"
+
 #include "CSSE.h"
 #include "resource.h"
 
@@ -156,7 +158,7 @@ namespace se::cs::window::main {
 				<< environment.position[0] << " "
 				<< environment.position[1] << " "
 				<< environment.position[2] << " "
-				<< environment.orientation[2] << " "
+				<< math::radiansToDegrees(environment.orientation[2]) << " "
 				<< "\"" << environment.starting_cell << "\"" << std::endl;
 		}
 		else {
@@ -164,7 +166,7 @@ namespace se::cs::window::main {
 				<< environment.position[0] << " "
 				<< environment.position[1] << " "
 				<< environment.position[2] << " "
-				<< environment.orientation[2] << std::endl;
+				<< math::radiansToDegrees(environment.orientation[2]) << std::endl;
 		}
 
 		for (const auto& [item, count] : environment.inventory) {

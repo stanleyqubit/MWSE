@@ -152,7 +152,7 @@ The following dependencies are available:
             plugin = "OAAB_Data.esm"
         ```
 
-    -  `lua-mod`
+    -  `mwse-module`
 
         The name of the lua mod to check for. This can be a file in `Data Files\MWSE\mods\` or `Data Files\MWSE\lib` etc, using the mwse module loading syntax (i.e, the string you would pass to `include` or `require` to load the mod).
 

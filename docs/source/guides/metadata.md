@@ -160,7 +160,7 @@ The following dependencies are available:
 
         ```toml
             [dependencies.mods."My Lua mod"]
-            lua-mod = "mer.myLuaMod"
+            mwse-module = "mer.myLuaMod"
         ```
 
     -  `version`
@@ -186,7 +186,7 @@ The following dependencies are available:
 
 		```toml
 		    [dependencies.mods."My Other Mod"]
-			lua-mod = "mer.myOtherMod"
+			mwse-module = "mer.myOtherMod"
 			version = ">=7.8.9"
 			url = "https://www.nexusmods.com/morrowind/mods/52116"
 
@@ -249,9 +249,9 @@ buildnumber = 2907
 [dependencies.mge-xe]
 version = ">=0.15.0"
 
-# lua-mod can be a folder or lua file, anywhere in /mods, /lib etc
+# mwse-module can be a folder or lua file, anywhere in /mods, /lib etc
 [dependencies.mods."My Lua mod"]
-lua-mod = "mer.myLuaMod"
+mwse-module = "mer.myLuaMod"
 
 # Check if a plugin (esp or esm) is active
 [dependencies.mods."OAAB Data"]

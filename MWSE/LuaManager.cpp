@@ -194,6 +194,7 @@
 #include "LuaCalcEnchantmentPriceEvent.h"
 #include "LuaCalcHitArmorPieceEvent.h"
 #include "LuaCalcHitChanceEvent.h"
+#include "LuaCalcHitDetectionConeEvent.h"
 #include "LuaCalcRepairPriceEvent.h"
 #include "LuaCalcRestInterruptEvent.h"
 #include "LuaCalcSoulValueEvent.h"
@@ -4219,6 +4220,105 @@ namespace mwse::lua {
 	}
 
 	//
+	// Patch: Modifiable physical hit detection cone and weapon reach;
+	// 
+
+	static float attackReach_saved, fCombatAngleXY_saved, fCombatAngleZ_saved;
+
+	// Override of possible hit detection at the start of a swing. Saves data to be used in generic hit cone check later.
+	void __cdecl PatchCombatPhysicalHitDetection(TES3::MobileActor* attacker) {
+		auto ndd = TES3::DataHandler::get()->nonDynamicData;
+		float attackReach = attacker->getAttackReach();
+		float fCombatAngleXY = ndd->GMSTs[TES3::GMST::fCombatAngleXY]->value.asFloat;
+		float fCombatAngleZ = ndd->GMSTs[TES3::GMST::fCombatAngleZ]->value.asFloat;
+
+		// Fire event.
+		if (event::CalcHitDetectionConeEvent::getEventEnabled()) {
+			auto stateHandle = mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle();
+			sol::object response = stateHandle.triggerEvent(new event::CalcHitDetectionConeEvent(attacker, attackReach, fCombatAngleXY, fCombatAngleZ));
+			if (response.get_type() == sol::type::table) {
+				sol::table eventData = response;
+				attackReach = eventData["reach"];
+				fCombatAngleXY = eventData["angleXY"];
+				fCombatAngleZ = eventData["angleZ"];
+			}
+		}
+
+		// Save values for use in cone test function.
+		attackReach_saved = attackReach;
+		fCombatAngleXY_saved = fCombatAngleXY;
+		fCombatAngleZ_saved = fCombatAngleZ;
+
+		// Call original function.
+		const auto TES3_CombatPhysicalHitDetection = reinterpret_cast<void (__cdecl*)(TES3::MobileActor*)>(0x554960);
+		TES3_CombatPhysicalHitDetection(attacker);
+	}
+
+	// Override of touch magic hit cone check. Saves data to be used in generic hit cone check later.
+	TES3::MobileActor* PatchCombatTouchMagicHitDetection(TES3::MobileActor* attacker) {
+		auto ndd = TES3::DataHandler::get()->nonDynamicData;
+		attackReach_saved = ndd->GMSTs[TES3::GMST::fCombatDistance]->value.asFloat;
+		fCombatAngleXY_saved = ndd->GMSTs[TES3::GMST::fCombatAngleXY]->value.asFloat;
+		fCombatAngleZ_saved = ndd->GMSTs[TES3::GMST::fCombatAngleZ]->value.asFloat;
+
+		// Call original function.
+		const auto TES3_CombatTouchMagicHitDetection = reinterpret_cast<TES3::MobileActor* (__cdecl*)(TES3::MobileActor*)>(0x554C30);
+		return TES3_CombatTouchMagicHitDetection(attacker);
+	}
+
+	// Generic hit cone check overrides.
+	float __stdcall PatchCombatHitDetectionCone1() {
+		return attackReach_saved;
+	}
+	float __stdcall PatchCombatHitDetectionCone2(int) {
+		return fCombatAngleXY_saved;
+	}
+	float __stdcall PatchCombatHitDetectionCone3(int) {
+		return fCombatAngleZ_saved;
+	}
+
+	// Override of reach calculation only for MACT::combatWeaponStrike caller.
+	bool PatchCombatStrikeIsActorInReach(TES3::MobileActor* attacker, TES3::MobileObject* target, float* out_distanceBetweenActors) {
+		// Original code.
+		if (attacker == nullptr || target == nullptr) {
+			return false;
+		}
+		if (!target->getMobileObjectFlag(TES3::MobileActorFlag::ActiveInSimulation)) {
+			return false;
+		}
+		if (target->reference && target->reference->getDisabled()) {
+			return false;
+		}
+
+		// Use event to allow attack reach to be modified.
+		auto ndd = TES3::DataHandler::get()->nonDynamicData;
+		float attackReach = attacker->getAttackReach();
+		float fCombatAngleXY = ndd->GMSTs[TES3::GMST::fCombatAngleXY]->value.asFloat;
+		float fCombatAngleZ = ndd->GMSTs[TES3::GMST::fCombatAngleZ]->value.asFloat;
+
+		// Fire event.
+		if (event::CalcHitDetectionConeEvent::getEventEnabled()) {
+			auto stateHandle = mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle();
+			sol::object response = stateHandle.triggerEvent(new event::CalcHitDetectionConeEvent(attacker, attackReach, fCombatAngleXY, fCombatAngleZ));
+			if (response.get_type() == sol::type::table) {
+				sol::table eventData = response;
+				attackReach = eventData["reach"];
+			}
+		}
+
+		// Original code.
+		const auto TES3_getDistanceToActorBounds = reinterpret_cast<float (__cdecl*)(TES3::MobileActor*, TES3::MobileObject*, bool)>(0x53ADD0);
+		*out_distanceBetweenActors = TES3_getDistanceToActorBounds(attacker, target, true);
+		auto fCombatDistance = TES3::DataHandler::get()->nonDynamicData->GMSTs[TES3::GMST::fCombatDistance]->value.asFloat;
+		if (attackReach < fCombatDistance) {
+			attackReach *= fCombatDistance;
+		}
+
+		return std::fabs(attacker->getPosition()->z - target->getPosition()->z) < attackReach
+			&& *out_distanceBetweenActors < attackReach;
+	}
+
+	//
 	//
 	//
 
@@ -5094,6 +5194,14 @@ namespace mwse::lua {
 		genCallEnforced(0x485FCA, 0x485E40, reinterpret_cast<DWORD>(OnItemDropped)); // MCP-added function.
 		genCallEnforced(0x49B550, 0x485E40, reinterpret_cast<DWORD>(OnItemDropped)); // Vanilla function.
 
+		// Patch: Modifiable physical hit detection cone and weapon reach.
+		genCallEnforced(0x514780, 0x554C30, reinterpret_cast<DWORD>(PatchCombatTouchMagicHitDetection));
+		genCallEnforced(0x55682D, 0x554960, reinterpret_cast<DWORD>(PatchCombatPhysicalHitDetection));
+		genCallEnforced(0x554F60, 0x5584C0, reinterpret_cast<DWORD>(PatchCombatHitDetectionCone1));
+		genCallEnforced(0x55510B, 0x40F950, reinterpret_cast<DWORD>(PatchCombatHitDetectionCone2));
+		genCallEnforced(0x555216, 0x40F950, reinterpret_cast<DWORD>(PatchCombatHitDetectionCone3));
+		genCallEnforced(0x556FD4, 0x554E50, reinterpret_cast<DWORD>(PatchCombatStrikeIsActorInReach));
+
 		// Event: Calculate hit chance.
 		constexpr auto patchCalcHitChanceAvailableSize = 0x5554F7u - 0x55549Bu;
 		static_assert(patchCalculateHitChance_size <= patchCalcHitChanceAvailableSize, "calcHitChance patch too large!");
@@ -5853,6 +5961,7 @@ namespace mwse::lua {
 		auto projectileManagerResolveCollisions = &TES3::ProjectileManager::resolveCollisions;
 		genCallEnforced(0x5638F8, 0x5753A0, *reinterpret_cast<DWORD*>(&projectileManagerResolveCollisions));
 
+	// Patch: Modifiable physical hit detection cone.
 		// Warn about MGE being disabled.
 		if (!InstructionStore::getInstance().isOpcode(OpCode::xGetGS)) {
 			log::getLog() << "WARNING: MGE XE is flagged as disabled. Some mods may have unintended behavior." << std::endl;

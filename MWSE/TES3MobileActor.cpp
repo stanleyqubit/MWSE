@@ -405,6 +405,11 @@ namespace TES3 {
 		return TES3_MobileActor_getWeaponSpeed(this);
 	}
 
+	const auto TES3_MobileActor_getAttackReach = reinterpret_cast<float(__thiscall*)(const MobileActor*)>(0x5584C0);
+	float MobileActor::getAttackReach() const {
+		return TES3_MobileActor_getAttackReach(this);
+	}
+
 	const auto TES3_MobileActor_startCombat = reinterpret_cast<void(__thiscall*)(MobileActor*, MobileActor*)>(0x530470);
 	void MobileActor::startCombat(MobileActor* target) {
 		// Patch: Make sure that disabled NPCs can't start combat.

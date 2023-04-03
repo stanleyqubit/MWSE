@@ -23,6 +23,7 @@
 #include "LuaCalcEnchantmentPriceEvent.h"
 #include "LuaCalcHitArmorPieceEvent.h"
 #include "LuaCalcHitChanceEvent.h"
+#include "LuaCalcHitDetectionConeEvent.h"
 #include "LuaCalcMovementSpeedEvent.h"
 #include "LuaCalcRepairPriceEvent.h"
 #include "LuaCalcRestInterruptEvent.h"
@@ -183,6 +184,7 @@ namespace mwse::lua::event {
 		usertypeDefinition["calcEnchantmentPrice"] = sol::property(&CalculateEnchantmentPriceEvent::getEventEnabled, &CalculateEnchantmentPriceEvent::setEventEnabled);
 		usertypeDefinition["calcFlySpeed"] = sol::property(&CalculateMovementSpeed::getEventEnabled, &CalculateMovementSpeed::setEventEnabled);
 		usertypeDefinition["calcHitChance"] = sol::property(&CalcHitChanceEvent::getEventEnabled, &CalcHitChanceEvent::setEventEnabled);
+		usertypeDefinition["calcHitDetectionCone"] = sol::property(&CalcHitDetectionConeEvent::getEventEnabled, &CalcHitDetectionConeEvent::setEventEnabled);
 		usertypeDefinition["calcMoveSpeed"] = sol::property(&CalculateMovementSpeed::getEventEnabled, &CalculateMovementSpeed::setEventEnabled);
 		usertypeDefinition["calcRepairPrice"] = sol::property(&CalculateRepairPriceEvent::getEventEnabled, &CalculateRepairPriceEvent::setEventEnabled);
 		usertypeDefinition["calcRestInterrupt"] = sol::property(&CalcRestInterruptEvent::getEventEnabled, &CalcRestInterruptEvent::setEventEnabled);

@@ -21,6 +21,7 @@ return {
 	["calcEnchantmentPrice"] = "calcEnchantmentPrice",
 	["calcFlySpeed"] = "calcFlySpeed",
 	["calcHitChance"] = "calcHitChance",
+	["calcHitDetectionCone"] = "calcHitDetectionCone",
 	["calcMoveSpeed"] = "calcMoveSpeed",
 	["calcRepairPrice"] = "calcRepairPrice",
 	["calcRestInterrupt"] = "calcRestInterrupt",

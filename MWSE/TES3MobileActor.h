@@ -242,6 +242,7 @@ namespace TES3 {
 
 		float getBootsWeight() const;
 		float getWeaponSpeed() const;
+		float getAttackReach() const;
 
 		void startCombat(MobileActor*);
 		void startCombat_lua(sol::object target);

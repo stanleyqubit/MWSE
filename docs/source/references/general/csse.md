@@ -49,6 +49,51 @@ If you are using [Construction Set Better UI](https://www.nexusmods.com/morrowin
 * Opening the Construction Set through Mod Organizer 2 is no longer slowed by the number of active MO2 mod folders.
 * The NetImmerse NiLinesData structure loads correctly.
 
+#### Testing from the Construction Set
+
+Both Morrowind and OpenMW can be launched from the CS with a specified environment. Two new buttons have been added to the toolbar, the first with Morrowind's icon, and the second with OpenMW's icon.
+
+When one of these buttons is clicked, the appropriate game launches with only the active plugins loaded in the Construction Set loading. Instead of seeing the main menu, you will be loaded to a specified position with a mostly fresh character.
+
+To change the starting location, use the Render Window's quick menu. You can click on a reference and test at its position (e.g. where a door marker is, or on a carpet) or at the camera position.
+
+##### OpenMW Support
+
+The OpenMW icon will only display if a valid OpenMW installation directory has been provided. This must be entered into the csse.toml file:
+
+```toml
+[openmw]
+location = "D:\\Games\\OpenMW"
+```
+
+Because of the implementation of the OpenMW support, a custom config directory is used. This means user settings such as resolution must be reconfigured the first time the game is run from this environment.
+
+##### Test Environment
+
+Developers can customize the starting environment of the test character to test changes in quests. This can be done by editing the csse.toml file to specify items, spells, topics, quest states, and global variable values they want to use. Below is an example environment that gives the player a relatively fresh start with some experience in the Mages' Guild:
+
+```toml
+[test_environment]
+spells = ["fireball","mark","recall","levitate"]
+topics = ["duties", "advancement", "latest rumors", "little secret"]
+
+[test_environment.inventory]
+"iron dagger" = 1
+ingred_gold_kanet_01 = 3
+ingred_stoneflower_petals_01 = 4
+ingred_willow_anther_01 = 2
+ingred_heather_01 = 4
+gold_001 = 5000
+
+[test_environment.journal]
+MG_Flowers = 10
+MG_Sabotage = 100
+MG_BCShrooms = 100
+
+[test_environment.globals]
+chargenstate = -1.0
+```
+
 ### Object Window
 
 * Significantly improved UI responsiveness.

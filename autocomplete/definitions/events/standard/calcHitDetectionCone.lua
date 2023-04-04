@@ -12,17 +12,27 @@ return {
 			readOnly = true,
 			description = "The mobile which is making the attack.",
 		},
+		["target"] = {
+			type = "tes3reference",
+			readOnly = true,
+			description = "The reference of the target. Only available at the second stage (weapon strike).",
+		},
+		["targetMobile"] = {
+			type = "tes3mobileActor",
+			readOnly = true,
+			description = "The mobile which is targetted. Only available at the second stage (weapon strike).",
+		},
 		["reach"] = {
 			type = "number",
 			description = "The weapon's reach multiplier, typically in the range 0.5 - 2.0. May be adjusted.",
 		},
 		["angleXY"] = {
 			type = "number",
-			description = "The cosine of the maximum allowable angle offset in the horizontal direction that will hit. This is the same units as game setting fCombatAngleXY. May be adjusted.",
+			description = "The maximum allowable angle offset (in radians) in the horizontal direction that will hit. This is related to game setting fCombatAngleXY but using different units. May be adjusted.",
 		},
 		["angleZ"] = {
 			type = "number",
-			description = "The cosine of the maximum allowable angle offset in the vertical direction that will hit. This is the same units as game setting fCombatAngleXY. May be adjusted.",
+			description = "The maximum allowable angle offset (in radians) in the vertical direction that will hit. This is related to game setting fCombatAngleZ but using different units. May be adjusted.",
 		},
 	},
 	filter = "attacker.baseObject",

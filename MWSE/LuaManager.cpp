@@ -4235,12 +4235,12 @@ namespace mwse::lua {
 		// Fire event.
 		if (event::CalcHitDetectionConeEvent::getEventEnabled()) {
 			auto stateHandle = mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle();
-			sol::object response = stateHandle.triggerEvent(new event::CalcHitDetectionConeEvent(attacker, attackReach, fCombatAngleXY, fCombatAngleZ));
+			sol::object response = stateHandle.triggerEvent(new event::CalcHitDetectionConeEvent(attacker, nullptr, attackReach, std::acos(fCombatAngleXY), std::acos(fCombatAngleZ)));
 			if (response.get_type() == sol::type::table) {
 				sol::table eventData = response;
 				attackReach = eventData["reach"];
-				fCombatAngleXY = eventData["angleXY"];
-				fCombatAngleZ = eventData["angleZ"];
+				fCombatAngleXY = float(std::cos(double(eventData["angleXY"])));
+				fCombatAngleZ = float(std::cos(double(eventData["angleZ"])));
 			}
 		}
 
@@ -4278,7 +4278,7 @@ namespace mwse::lua {
 	}
 
 	// Override of reach calculation only for MACT::combatWeaponStrike caller.
-	bool PatchCombatStrikeIsActorInReach(TES3::MobileActor* attacker, TES3::MobileObject* target, float* out_distanceBetweenActors) {
+	bool PatchCombatStrikeIsActorInReach(TES3::MobileActor* attacker, TES3::MobileActor* target, float* out_distanceBetweenActors) {
 		// Original code.
 		if (attacker == nullptr || target == nullptr) {
 			return false;
@@ -4299,7 +4299,7 @@ namespace mwse::lua {
 		// Fire event.
 		if (event::CalcHitDetectionConeEvent::getEventEnabled()) {
 			auto stateHandle = mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle();
-			sol::object response = stateHandle.triggerEvent(new event::CalcHitDetectionConeEvent(attacker, attackReach, fCombatAngleXY, fCombatAngleZ));
+			sol::object response = stateHandle.triggerEvent(new event::CalcHitDetectionConeEvent(attacker, target, attackReach, std::acos(fCombatAngleXY), std::acos(fCombatAngleZ)));
 			if (response.get_type() == sol::type::table) {
 				sol::table eventData = response;
 				attackReach = eventData["reach"];

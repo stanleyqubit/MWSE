@@ -23,9 +23,11 @@ event.register(tes3.event.calcHitDetectionCone, calcHitDetectionConeCallback)
 
 ## Event Data
 
-* `angleXY` (number): The cosine of the maximum allowable angle offset in the horizontal direction that will hit. This is the same units as game setting fCombatAngleXY. May be adjusted.
-* `angleZ` (number): The cosine of the maximum allowable angle offset in the vertical direction that will hit. This is the same units as game setting fCombatAngleXY. May be adjusted.
+* `angleXY` (number): The maximum allowable angle offset (in radians) in the horizontal direction that will hit. This is related to game setting fCombatAngleXY but using different units. May be adjusted.
+* `angleZ` (number): The maximum allowable angle offset (in radians) in the vertical direction that will hit. This is related to game setting fCombatAngleZ but using different units. May be adjusted.
 * `attacker` ([tes3reference](../../types/tes3reference)): *Read-only*. The reference of the attacker.
 * `attackerMobile` ([tes3mobileActor](../../types/tes3mobileActor)): *Read-only*. The mobile which is making the attack.
 * `reach` (number): The weapon's reach multiplier, typically in the range 0.5 - 2.0. May be adjusted.
+* `target` ([tes3reference](../../types/tes3reference)): *Read-only*. The reference of the target. Only available at the second stage (weapon strike).
+* `targetMobile` ([tes3mobileActor](../../types/tes3mobileActor)): *Read-only*. The mobile which is targetted. Only available at the second stage (weapon strike).
 

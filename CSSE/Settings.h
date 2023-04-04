@@ -4,6 +4,7 @@ namespace se::cs {
 	struct Settings_t {
 		struct RenderWindowSettings {
 			bool use_group_scaling = false;
+			bool use_legacy_camera = false;
 			bool use_legacy_grid_snap = true;
 			bool use_legacy_object_movement = false;
 			bool use_world_axis_rotations_by_default = true;

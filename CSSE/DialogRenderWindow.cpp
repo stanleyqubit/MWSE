@@ -140,6 +140,74 @@ namespace se::cs::dialog::render_window {
 	static_assert(sizeof(NetImmerseInstance) == 0x64, "CS::NetImmerseInstance failed size validation");
 	static_assert(sizeof(NetImmerseInstance::VirtualTable) == 0x64, "CS::NetImmerseInstance's virtual table failed size validation");
 
+
+	//
+	// Patch: Improve camera controls.
+	//
+
+	enum class CameraChangeType : unsigned int {
+		PanX,
+		PanY,
+		PanZ,
+		SetPositionX,
+		SetPositionY,
+		SetPositionZ,
+		Unknown6,
+		Unknown7,
+		Unknown8,
+		Unknown9,
+		Unknown10,
+		Unknown11,
+	};
+
+	static auto panOrigin = std::optional<NI::Vector3>();
+
+	bool __cdecl Patch_ImproveCameraControls(NI::Node* cameraNode, CameraChangeType changeType, float changeValue) {
+
+		bool useLegacyCamera = settings.render_window.use_legacy_camera;
+		if (!useLegacyCamera) {
+			if (changeType == CameraChangeType::PanX || changeType == CameraChangeType::PanZ) {
+				NI::Vector3 rayOrigin;
+				NI::Vector3 rayDirection;
+				auto camera = RenderController::get()->camera;
+				if (!camera->windowPointToRay(lastCursorPosX, lastCursorPosY, rayOrigin, rayDirection)) {
+					return 0;
+				}
+
+				// Store the initial mouse pick position when entering pan mode.
+				if (!panOrigin.has_value()) {
+					auto pick = SceneGraphController::get()->objectPick;
+					if (pick->pickObjectsWithSkinDeforms(&rayOrigin, &rayDirection)) {
+						panOrigin = pick->results[0]->intersection;
+					}
+				}
+				if (!panOrigin.has_value()) {
+					auto pick = SceneGraphController::get()->landscapePick;
+					if (pick->pickObjectsWithSkinDeforms(&rayOrigin, &rayDirection)) {
+						panOrigin = pick->results[0]->intersection;
+					}
+				}
+				if (!panOrigin.has_value()) {
+					panOrigin = rayOrigin + (rayDirection * 2048.0f);
+				}
+
+				// Calculate the vector from initial mouse position to current.
+				auto [_, intersection] = math::rayPlaneIntersection(rayOrigin, rayDirection, panOrigin.value(), camera->worldDirection);
+				auto difference = intersection - panOrigin.value();
+
+				// Apply camera movement.
+				cameraNode->localTranslate = cameraNode->localTranslate - difference;
+
+				return true;
+			}
+		}
+
+		// Fall back to original logic.
+		const auto CS_HandleCameraChange = reinterpret_cast<bool(__cdecl*)(NI::Node*, CameraChangeType, float)>(0x469C50);
+		return CS_HandleCameraChange(cameraNode, changeType, changeValue);
+	}
+
+
 	//
 	// Patch: Use world rotation values unless ALT is held.
 	//
@@ -1656,6 +1724,9 @@ namespace se::cs::dialog::render_window {
 		case 'Z':
 			PatchDialogProc_AfterKeyUp_XYZ(hWnd, msg, wParam, lParam);
 			break;
+		case VK_SPACE:
+			panOrigin.reset();
+			break;
 		}
 	}
 
@@ -1710,6 +1781,9 @@ namespace se::cs::dialog::render_window {
 		case WM_LBUTTONUP:
 			PatchDialogProc_AfterLMouseButtonUp(hWnd, msg, wParam, lParam);
 			break;
+		case WM_MBUTTONUP:
+			panOrigin.reset();
+			break;
 		case WM_INITDIALOG:
 			PatchDialogProc_AfterInitDialog(hWnd, msg, wParam, lParam);
 			break;
@@ -1735,6 +1809,9 @@ namespace se::cs::dialog::render_window {
 		static_assert(sizeof(SceneGraphController) < INT8_MAX);
 		genPushEnforced(0x4473FD, (BYTE)sizeof(SceneGraphController));
 		genJumpEnforced(0x403855, 0x449930, reinterpret_cast<DWORD>(SceneGraphController::initialize));
+
+		// Patch: Improve camera controls.
+		genJumpEnforced(0x40494E, 0x469C50, reinterpret_cast<DWORD>(Patch_ImproveCameraControls));
 
 		// Patch: Use world rotation values.
 		genJumpEnforced(0x403D41, 0x4652D0, reinterpret_cast<DWORD>(Patch_ReplaceRotationLogic));

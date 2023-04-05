@@ -10,6 +10,8 @@
 
 		virtual BOOL OnInitDialog();
 
+		afx_msg void OnGetMinMaxInfo(MINMAXINFO* lpMMI);
+
 		// Dialog Data
 #ifdef AFX_DESIGN_TIME
 		enum { IDD = IDD_CSSE_SETTINGS };

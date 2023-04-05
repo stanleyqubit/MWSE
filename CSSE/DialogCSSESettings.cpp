@@ -77,10 +77,17 @@ BOOL DialogCSSESettings::OnInitDialog() {
 	return TRUE;
 }
 
+afx_msg void DialogCSSESettings::OnGetMinMaxInfo(MINMAXINFO* lpMMI) {
+	lpMMI->ptMinTrackSize.x = 377;
+
+	CDialogEx::OnGetMinMaxInfo(lpMMI);
+}
+
 void DialogCSSESettings::DoDataExchange(CDataExchange* pDX) {
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_SETTINGS_GRID, m_PropertyGrid);
 }
 
 BEGIN_MESSAGE_MAP(DialogCSSESettings, CDialogEx)
+	ON_WM_GETMINMAXINFO()
 END_MESSAGE_MAP()

@@ -170,17 +170,11 @@ namespace se::cs::dialog::render_window {
 		if (!useLegacyCamera) {
 			if (changeType == CameraChangeType::PanX || changeType == CameraChangeType::PanZ) {
 				NI::Vector3 rayOrigin;
-				NI::Vector3 rayDirection, rayDirectionDDX, rayDirectionDDY;
+				NI::Vector3 rayDirection;
 				auto camera = RenderController::get()->camera;
 
 				if (!panOrigin.has_value()) {
 					if (!camera->windowPointToRay(lastCursorPosX, lastCursorPosY, rayOrigin, rayDirection)) {
-						return 0;
-					}
-					if (!camera->windowPointToRay(lastCursorPosX + 1, lastCursorPosY, rayOrigin, rayDirectionDDX)) {
-						return 0;
-					}
-					if (!camera->windowPointToRay(lastCursorPosX, lastCursorPosY + 1, rayOrigin, rayDirectionDDY)) {
 						return 0;
 					}
 
@@ -205,6 +199,7 @@ namespace se::cs::dialog::render_window {
 						panOrigin = rayOrigin + (rayDirection * 2048.0f);
 					}
 
+					// Do some forward differencing to get the changes relative to mouse coord changes.
 					float z_dist = (panOrigin.value() - rayOrigin).dotProduct(&camera->worldDirection);
 					panDDX = camera->worldRight * (2.0f * z_dist * camera->viewFrustum.right / camera->renderer->getBackBufferWidth());
 					panDDY = camera->worldUp * (-2.0f * z_dist * camera->viewFrustum.top / camera->renderer->getBackBufferHeight());
@@ -212,8 +207,6 @@ namespace se::cs::dialog::render_window {
 
 				// Calculate the vector from initial mouse position to current.
 				NI::Vector3 difference = panDDX * (lastCursorPosX - panInitialCursorX) + panDDY * (lastCursorPosY - panInitialCursorY);
-				//auto [_, intersection] = math::rayPlaneIntersection(rayOrigin, rayDirection, panOrigin.value(), camera->worldDirection);
-				//auto difference = intersection - panOrigin.value();
 
 				// Apply camera movement.
 				cameraNode->localTranslate = panInitialCameraPos - difference;

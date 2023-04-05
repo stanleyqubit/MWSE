@@ -290,5 +290,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)CodePatchUtil.cpp">
       <Filter>Source Files\Util</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)NIRenderer.cpp">
+      <Filter>Source Files\NI</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

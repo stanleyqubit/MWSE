@@ -30,8 +30,8 @@
 #include "DialogLandscapeEditSettingsWindow.h"
 
 namespace se::cs::dialog::render_window {
-	WORD lastCursorPosX = 0;
-	WORD lastCursorPosY = 0;
+	__int16 lastCursorPosX = 0;
+	__int16 lastCursorPosY = 0;
 
 	using gObjectMove = memory::ExternalGlobal<float, 0x6CE9B4>;
 	using gObjectRotate = memory::ExternalGlobal<float, 0x6CE9B0>;
@@ -161,6 +161,8 @@ namespace se::cs::dialog::render_window {
 	};
 
 	static auto panOrigin = std::optional<NI::Vector3>();
+	static NI::Vector3 panDDX, panDDY, panInitialCameraPos;
+	static int panInitialCursorX, panInitialCursorY;
 
 	bool __cdecl Patch_ImproveCameraControls(NI::Node* cameraNode, CameraChangeType changeType, float changeValue) {
 
@@ -168,35 +170,53 @@ namespace se::cs::dialog::render_window {
 		if (!useLegacyCamera) {
 			if (changeType == CameraChangeType::PanX || changeType == CameraChangeType::PanZ) {
 				NI::Vector3 rayOrigin;
-				NI::Vector3 rayDirection;
+				NI::Vector3 rayDirection, rayDirectionDDX, rayDirectionDDY;
 				auto camera = RenderController::get()->camera;
-				if (!camera->windowPointToRay(lastCursorPosX, lastCursorPosY, rayOrigin, rayDirection)) {
-					return 0;
-				}
 
-				// Store the initial mouse pick position when entering pan mode.
 				if (!panOrigin.has_value()) {
-					auto pick = SceneGraphController::get()->objectPick;
-					if (pick->pickObjectsWithSkinDeforms(&rayOrigin, &rayDirection)) {
-						panOrigin = pick->results[0]->intersection;
+					if (!camera->windowPointToRay(lastCursorPosX, lastCursorPosY, rayOrigin, rayDirection)) {
+						return 0;
 					}
-				}
-				if (!panOrigin.has_value()) {
-					auto pick = SceneGraphController::get()->landscapePick;
-					if (pick->pickObjectsWithSkinDeforms(&rayOrigin, &rayDirection)) {
-						panOrigin = pick->results[0]->intersection;
+					if (!camera->windowPointToRay(lastCursorPosX + 1, lastCursorPosY, rayOrigin, rayDirectionDDX)) {
+						return 0;
 					}
-				}
-				if (!panOrigin.has_value()) {
-					panOrigin = rayOrigin + (rayDirection * 2048.0f);
+					if (!camera->windowPointToRay(lastCursorPosX, lastCursorPosY + 1, rayOrigin, rayDirectionDDY)) {
+						return 0;
+					}
+
+					// Store the initial mouse pick position when entering pan mode.
+					panInitialCameraPos = cameraNode->localTranslate;
+					panInitialCursorX = lastCursorPosX;
+					panInitialCursorY = lastCursorPosY;
+				
+					if (!panOrigin.has_value()) {
+						auto pick = SceneGraphController::get()->objectPick;
+						if (pick->pickObjectsWithSkinDeforms(&rayOrigin, &rayDirection)) {
+							panOrigin = pick->results[0]->intersection;
+						}
+					}
+					if (!panOrigin.has_value()) {
+						auto pick = SceneGraphController::get()->landscapePick;
+						if (pick->pickObjectsWithSkinDeforms(&rayOrigin, &rayDirection)) {
+							panOrigin = pick->results[0]->intersection;
+						}
+					}
+					if (!panOrigin.has_value()) {
+						panOrigin = rayOrigin + (rayDirection * 2048.0f);
+					}
+
+					float z_dist = (panOrigin.value() - rayOrigin).dotProduct(&camera->worldDirection);
+					panDDX = camera->worldRight * (2.0f * z_dist * camera->viewFrustum.right / camera->renderer->getBackBufferWidth());
+					panDDY = camera->worldUp * (-2.0f * z_dist * camera->viewFrustum.top / camera->renderer->getBackBufferHeight());
 				}
 
 				// Calculate the vector from initial mouse position to current.
-				auto [_, intersection] = math::rayPlaneIntersection(rayOrigin, rayDirection, panOrigin.value(), camera->worldDirection);
-				auto difference = intersection - panOrigin.value();
+				NI::Vector3 difference = panDDX * (lastCursorPosX - panInitialCursorX) + panDDY * (lastCursorPosY - panInitialCursorY);
+				//auto [_, intersection] = math::rayPlaneIntersection(rayOrigin, rayDirection, panOrigin.value(), camera->worldDirection);
+				//auto difference = intersection - panOrigin.value();
 
 				// Apply camera movement.
-				cameraNode->localTranslate = cameraNode->localTranslate - difference;
+				cameraNode->localTranslate = panInitialCameraPos - difference;
 
 				return true;
 			}

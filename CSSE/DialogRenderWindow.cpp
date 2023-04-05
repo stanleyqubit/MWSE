@@ -53,6 +53,7 @@ namespace se::cs::dialog::render_window {
 	using gIsHoldingY = memory::ExternalGlobal<bool, 0x6CF787>;
 	using gIsHoldingZ = memory::ExternalGlobal<bool, 0x6CF788>;
 	using gIsScaling = memory::ExternalGlobal<bool, 0x6CF785>;
+	using gIsPanning = memory::ExternalGlobal<bool, 0x6CF78A>;
 
 	using gRenderNextFrame = memory::ExternalGlobal<bool, 0x6CF78D>;
 
@@ -164,8 +165,33 @@ namespace se::cs::dialog::render_window {
 	static NI::Vector3 panDDX, panDDY, panInitialCameraPos;
 	static int panInitialCursorX, panInitialCursorY;
 
-	bool __cdecl Patch_ImproveCameraControls(NI::Node* cameraNode, CameraChangeType changeType, float changeValue) {
+	void __stdcall Patch_ImproveCameraControls_EnterPanningMode() {
+		// Do nothing if there is no change.
+		if (gIsPanning::get() == true) {
+			return;
+		}
 
+		// TODO: Add whatever initialization for panning here.
+		log::stream << "Entering panning mode." << std::endl;
+
+		// Perform overwritten logic.
+		gIsPanning::set(true);
+	}
+
+	void __stdcall Patch_ImproveCameraControls_ExitPanningMode() {
+		// Do nothing if there is no change.
+		if (gIsPanning::get() == false) {
+			return;
+		}
+
+		// TODO: Add whatever initialization for panning here.
+		log::stream << "Exiting panning mode." << std::endl;
+
+		// Perform overwritten logic.
+		gIsPanning::set(false);
+	}
+
+	bool __cdecl Patch_ImproveCameraControls(NI::Node* cameraNode, CameraChangeType changeType, float changeValue) {
 		bool useLegacyCamera = settings.render_window.use_legacy_camera;
 		if (!useLegacyCamera) {
 			if (changeType == CameraChangeType::PanX || changeType == CameraChangeType::PanZ) {
@@ -1824,6 +1850,10 @@ namespace se::cs::dialog::render_window {
 		genJumpEnforced(0x403855, 0x449930, reinterpret_cast<DWORD>(SceneGraphController::initialize));
 
 		// Patch: Improve camera controls.
+		genCallUnprotected(0x45E323, reinterpret_cast<DWORD>(Patch_ImproveCameraControls_EnterPanningMode), 0x7);
+		genCallUnprotected(0x45A5A4, reinterpret_cast<DWORD>(Patch_ImproveCameraControls_ExitPanningMode), 0x6);
+		genCallUnprotected(0x45C0EC, reinterpret_cast<DWORD>(Patch_ImproveCameraControls_ExitPanningMode), 0x7);
+		genCallUnprotected(0x45E347, reinterpret_cast<DWORD>(Patch_ImproveCameraControls_ExitPanningMode), 0x7);
 		genJumpEnforced(0x40494E, 0x469C50, reinterpret_cast<DWORD>(Patch_ImproveCameraControls));
 
 		// Patch: Use world rotation values.

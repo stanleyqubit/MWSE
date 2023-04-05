@@ -192,8 +192,7 @@ namespace se::cs::dialog::render_window {
 	}
 
 	struct CameraPanContext {
-		short initialCursorX;
-		short initialCursorY;
+		POINT initialCursorPosition;
 		NI::Vector3 initialPosition;
 		NI::Vector3 panDDX;
 		NI::Vector3 panDDY;
@@ -202,8 +201,9 @@ namespace se::cs::dialog::render_window {
 			auto camera = RenderController::get()->camera;
 
 			// Store the initial cursor/camera position when entering panning mode.
-			initialCursorX = lastCursorPosX;
-			initialCursorY = lastCursorPosY;
+			if (!GetCursorPos(&initialCursorPosition)) {
+				return false;
+			}
 			initialPosition = camera->worldTransform.translation;
 
 			// Get distance of the surface currently under the cursor.
@@ -236,16 +236,31 @@ namespace se::cs::dialog::render_window {
 		gIsPanning::set(true);
 	}
 
+	constexpr DWORD Patch_ImproveCameraControls_EnterPanningMode_Wrapper_ReturnAddress = 0x45E32A;
+	__declspec(naked) void Patch_ImproveCameraControls_EnterPanningMode_Wrapper() {
+		__asm {
+			pushad
+			call Patch_ImproveCameraControls_EnterPanningMode
+			popad
+			jmp Patch_ImproveCameraControls_EnterPanningMode_Wrapper_ReturnAddress
+		}
+	}
+
 	bool __cdecl Patch_ImproveCameraControls(NI::Node* cameraNode, CameraChangeType changeType, float changeValue) {
 		bool useLegacyCamera = settings.render_window.use_legacy_camera;
 		if (!useLegacyCamera) {
 			if (changeType == CameraChangeType::PanX || changeType == CameraChangeType::PanZ) {
 				auto& context = cameraPanContext;
 
+				POINT cursorPos = {};
+				if (!GetCursorPos(&cursorPos)) {
+					return false;
+				}
+
 				// Calculate the vector from initial mouse position to current.
 				NI::Vector3 difference = (
-					context.panDDX * (lastCursorPosX - context.initialCursorX) +
-					context.panDDY * (lastCursorPosY - context.initialCursorY)
+					context.panDDX * (cursorPos.x - context.initialCursorPosition.x) +
+					context.panDDY * (cursorPos.y - context.initialCursorPosition.y)
 				);
 
 				// Apply camera movement.
@@ -1846,6 +1861,7 @@ namespace se::cs::dialog::render_window {
 		using memory::genCallEnforced;
 		using memory::genCallUnprotected;
 		using memory::genJumpEnforced;
+		using memory::genJumpUnprotected;
 		using memory::genPushEnforced;
 		using memory::writeDoubleWordEnforced;
 		using memory::writePatchCodeUnprotected;
@@ -1857,7 +1873,7 @@ namespace se::cs::dialog::render_window {
 		genJumpEnforced(0x403855, 0x449930, reinterpret_cast<DWORD>(SceneGraphController::initialize));
 
 		// Patch: Improve camera controls.
-		genCallUnprotected(0x45E323, reinterpret_cast<DWORD>(Patch_ImproveCameraControls_EnterPanningMode), 0x7);
+		genJumpUnprotected(0x45E323, reinterpret_cast<DWORD>(Patch_ImproveCameraControls_EnterPanningMode_Wrapper), 0x7);
 		genJumpEnforced(0x40494E, 0x469C50, reinterpret_cast<DWORD>(Patch_ImproveCameraControls));
 
 		// Patch: Use world rotation values.

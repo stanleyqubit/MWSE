@@ -33,6 +33,8 @@ namespace se::cs::dialog::render_window {
 	__int16 lastCursorPosX = 0;
 	__int16 lastCursorPosY = 0;
 
+	using gRenderWindowHandle = memory::ExternalGlobal<HWND, 0x6CE93C>;
+
 	using gObjectMove = memory::ExternalGlobal<float, 0x6CE9B4>;
 	using gObjectRotate = memory::ExternalGlobal<float, 0x6CE9B0>;
 
@@ -1706,6 +1708,13 @@ namespace se::cs::dialog::render_window {
 		}
 	}
 
+	void PatchDialogProc_BeforeTimer(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		// Fixup window capture if we've lost it when panning.
+		if (gIsPanning::get() && GetCapture() != gRenderWindowHandle::get()) {
+			SetCapture(gRenderWindowHandle::get());
+		}
+	}
+
 	void PatchDialogProc_AfterLMouseButtonUp(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		// see: Patch_ReplaceScalingLogic
 		if (selectionNeedsScaleUpdate) {
@@ -1824,6 +1833,9 @@ namespace se::cs::dialog::render_window {
 			break;
 		case CustomWindowMessage::SetCameraPosition:
 			PatchDialogProc_BeforeSetCameraPosition(hWnd, msg, wParam, lParam);
+			break;
+		case WM_TIMER:
+			PatchDialogProc_BeforeTimer(hWnd, msg, wParam, lParam);
 			break;
 		}
 

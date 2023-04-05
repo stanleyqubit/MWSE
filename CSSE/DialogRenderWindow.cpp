@@ -161,81 +161,95 @@ namespace se::cs::dialog::render_window {
 		Unknown11,
 	};
 
-	static auto panOrigin = std::optional<NI::Vector3>();
-	static NI::Vector3 panDDX, panDDY, panInitialCameraPos;
-	static int panInitialCursorX, panInitialCursorY;
+	float getHoveredSurfaceDistance() {
+		auto camera = RenderController::get()->camera;
+
+		NI::Vector3 origin;
+		NI::Vector3 direction;
+		if (!camera->windowPointToRay(lastCursorPosX, lastCursorPosY, origin, direction)) {
+			return 0.0;
+		}
+
+		NI::Vector3 intersection;
+
+		auto pick = SceneGraphController::get()->objectPick;
+		if (pick->pickObjectsWithSkinDeforms(&origin, &direction)) {
+			intersection = pick->results[0]->intersection;
+		}
+		else {
+			auto pick = SceneGraphController::get()->landscapePick;
+			if (pick->pickObjects(&origin, &direction)) {
+				intersection = pick->results[0]->intersection;
+			}
+			else {
+				return 0.0;
+			}
+		}
+
+		float zDist = (intersection - origin).dotProduct(&camera->worldDirection);
+
+		return zDist;
+	}
+
+	struct CameraPanContext {
+		short initialCursorX;
+		short initialCursorY;
+		NI::Vector3 initialPosition;
+		NI::Vector3 panDDX;
+		NI::Vector3 panDDY;
+
+		bool setup() {
+			auto camera = RenderController::get()->camera;
+
+			// Store the initial cursor/camera position when entering panning mode.
+			initialCursorX = lastCursorPosX;
+			initialCursorY = lastCursorPosY;
+			initialPosition = camera->worldTransform.translation;
+
+			// Get distance of the surface currently under the cursor.
+			// Be sure to use a safe fallback value if nothing is under the cursor.
+			float zDist = getHoveredSurfaceDistance();
+			zDist = (zDist != 0.0f) ? zDist : 2048.0f;
+
+			// Do some forward differencing to get the changes relative to mouse coord changes.
+			panDDX = camera->worldRight * (2.0f * zDist * camera->viewFrustum.right / camera->renderer->getBackBufferWidth());
+			panDDY = camera->worldUp * (-2.0f * zDist * camera->viewFrustum.top / camera->renderer->getBackBufferHeight());
+
+			return true;
+		}
+	};
+	static auto cameraPanContext = CameraPanContext();
 
 	void __stdcall Patch_ImproveCameraControls_EnterPanningMode() {
-		// Do nothing if there is no change.
 		if (gIsPanning::get() == true) {
 			return;
 		}
-
-		// TODO: Add whatever initialization for panning here.
-		log::stream << "Entering panning mode." << std::endl;
-
-		// Perform overwritten logic.
-		gIsPanning::set(true);
-	}
-
-	void __stdcall Patch_ImproveCameraControls_ExitPanningMode() {
-		// Do nothing if there is no change.
-		if (gIsPanning::get() == false) {
-			return;
+		
+		bool useLegacyCamera = settings.render_window.use_legacy_camera;
+		if (!useLegacyCamera) {
+			auto success = cameraPanContext.setup();
+			if (!success) {
+				return;
+			}
 		}
 
-		// TODO: Add whatever initialization for panning here.
-		log::stream << "Exiting panning mode." << std::endl;
-
-		// Perform overwritten logic.
-		gIsPanning::set(false);
+		gIsPanning::set(true);
 	}
 
 	bool __cdecl Patch_ImproveCameraControls(NI::Node* cameraNode, CameraChangeType changeType, float changeValue) {
 		bool useLegacyCamera = settings.render_window.use_legacy_camera;
 		if (!useLegacyCamera) {
 			if (changeType == CameraChangeType::PanX || changeType == CameraChangeType::PanZ) {
-				NI::Vector3 rayOrigin;
-				NI::Vector3 rayDirection;
-				auto camera = RenderController::get()->camera;
-
-				if (!panOrigin.has_value()) {
-					if (!camera->windowPointToRay(lastCursorPosX, lastCursorPosY, rayOrigin, rayDirection)) {
-						return 0;
-					}
-
-					// Store the initial mouse pick position when entering pan mode.
-					panInitialCameraPos = cameraNode->localTranslate;
-					panInitialCursorX = lastCursorPosX;
-					panInitialCursorY = lastCursorPosY;
-				
-					if (!panOrigin.has_value()) {
-						auto pick = SceneGraphController::get()->objectPick;
-						if (pick->pickObjectsWithSkinDeforms(&rayOrigin, &rayDirection)) {
-							panOrigin = pick->results[0]->intersection;
-						}
-					}
-					if (!panOrigin.has_value()) {
-						auto pick = SceneGraphController::get()->landscapePick;
-						if (pick->pickObjectsWithSkinDeforms(&rayOrigin, &rayDirection)) {
-							panOrigin = pick->results[0]->intersection;
-						}
-					}
-					if (!panOrigin.has_value()) {
-						panOrigin = rayOrigin + (rayDirection * 2048.0f);
-					}
-
-					// Do some forward differencing to get the changes relative to mouse coord changes.
-					float z_dist = (panOrigin.value() - rayOrigin).dotProduct(&camera->worldDirection);
-					panDDX = camera->worldRight * (2.0f * z_dist * camera->viewFrustum.right / camera->renderer->getBackBufferWidth());
-					panDDY = camera->worldUp * (-2.0f * z_dist * camera->viewFrustum.top / camera->renderer->getBackBufferHeight());
-				}
+				auto& context = cameraPanContext;
 
 				// Calculate the vector from initial mouse position to current.
-				NI::Vector3 difference = panDDX * (lastCursorPosX - panInitialCursorX) + panDDY * (lastCursorPosY - panInitialCursorY);
+				NI::Vector3 difference = (
+					context.panDDX * (lastCursorPosX - context.initialCursorX) +
+					context.panDDY * (lastCursorPosY - context.initialCursorY)
+				);
 
 				// Apply camera movement.
-				cameraNode->localTranslate = panInitialCameraPos - difference;
+				cameraNode->localTranslate = context.initialPosition - difference;
 
 				return true;
 			}
@@ -245,7 +259,6 @@ namespace se::cs::dialog::render_window {
 		const auto CS_HandleCameraChange = reinterpret_cast<bool(__cdecl*)(NI::Node*, CameraChangeType, float)>(0x469C50);
 		return CS_HandleCameraChange(cameraNode, changeType, changeValue);
 	}
-
 
 	//
 	// Patch: Use world rotation values unless ALT is held.
@@ -1763,9 +1776,6 @@ namespace se::cs::dialog::render_window {
 		case 'Z':
 			PatchDialogProc_AfterKeyUp_XYZ(hWnd, msg, wParam, lParam);
 			break;
-		case VK_SPACE:
-			panOrigin.reset();
-			break;
 		}
 	}
 
@@ -1820,9 +1830,6 @@ namespace se::cs::dialog::render_window {
 		case WM_LBUTTONUP:
 			PatchDialogProc_AfterLMouseButtonUp(hWnd, msg, wParam, lParam);
 			break;
-		case WM_MBUTTONUP:
-			panOrigin.reset();
-			break;
 		case WM_INITDIALOG:
 			PatchDialogProc_AfterInitDialog(hWnd, msg, wParam, lParam);
 			break;
@@ -1851,9 +1858,6 @@ namespace se::cs::dialog::render_window {
 
 		// Patch: Improve camera controls.
 		genCallUnprotected(0x45E323, reinterpret_cast<DWORD>(Patch_ImproveCameraControls_EnterPanningMode), 0x7);
-		genCallUnprotected(0x45A5A4, reinterpret_cast<DWORD>(Patch_ImproveCameraControls_ExitPanningMode), 0x6);
-		genCallUnprotected(0x45C0EC, reinterpret_cast<DWORD>(Patch_ImproveCameraControls_ExitPanningMode), 0x7);
-		genCallUnprotected(0x45E347, reinterpret_cast<DWORD>(Patch_ImproveCameraControls_ExitPanningMode), 0x7);
 		genJumpEnforced(0x40494E, 0x469C50, reinterpret_cast<DWORD>(Patch_ImproveCameraControls));
 
 		// Patch: Use world rotation values.

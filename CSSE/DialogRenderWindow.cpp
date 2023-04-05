@@ -30,8 +30,10 @@
 #include "DialogLandscapeEditSettingsWindow.h"
 
 namespace se::cs::dialog::render_window {
-	WORD lastCursorPosX = 0;
-	WORD lastCursorPosY = 0;
+	__int16 lastCursorPosX = 0;
+	__int16 lastCursorPosY = 0;
+
+	using gRenderWindowHandle = memory::ExternalGlobal<HWND, 0x6CE93C>;
 
 	using gObjectMove = memory::ExternalGlobal<float, 0x6CE9B4>;
 	using gObjectRotate = memory::ExternalGlobal<float, 0x6CE9B0>;
@@ -53,6 +55,7 @@ namespace se::cs::dialog::render_window {
 	using gIsHoldingY = memory::ExternalGlobal<bool, 0x6CF787>;
 	using gIsHoldingZ = memory::ExternalGlobal<bool, 0x6CF788>;
 	using gIsScaling = memory::ExternalGlobal<bool, 0x6CF785>;
+	using gIsPanning = memory::ExternalGlobal<bool, 0x6CF78A>;
 
 	using gRenderNextFrame = memory::ExternalGlobal<bool, 0x6CF78D>;
 
@@ -139,6 +142,140 @@ namespace se::cs::dialog::render_window {
 	};
 	static_assert(sizeof(NetImmerseInstance) == 0x64, "CS::NetImmerseInstance failed size validation");
 	static_assert(sizeof(NetImmerseInstance::VirtualTable) == 0x64, "CS::NetImmerseInstance's virtual table failed size validation");
+
+
+	//
+	// Patch: Improve camera controls.
+	//
+
+	enum class CameraChangeType : unsigned int {
+		PanX,
+		PanY,
+		PanZ,
+		SetPositionX,
+		SetPositionY,
+		SetPositionZ,
+		Unknown6,
+		Unknown7,
+		Unknown8,
+		Unknown9,
+		Unknown10,
+		Unknown11,
+	};
+
+	float getHoveredSurfaceDistance() {
+		auto camera = RenderController::get()->camera;
+
+		NI::Vector3 origin;
+		NI::Vector3 direction;
+		if (!camera->windowPointToRay(lastCursorPosX, lastCursorPosY, origin, direction)) {
+			return 0.0;
+		}
+
+		NI::Vector3 intersection;
+
+		auto pick = SceneGraphController::get()->objectPick;
+		if (pick->pickObjectsWithSkinDeforms(&origin, &direction)) {
+			intersection = pick->results[0]->intersection;
+		}
+		else {
+			auto pick = SceneGraphController::get()->landscapePick;
+			if (pick->pickObjects(&origin, &direction)) {
+				intersection = pick->results[0]->intersection;
+			}
+			else {
+				return 0.0;
+			}
+		}
+
+		float zDist = (intersection - origin).dotProduct(&camera->worldDirection);
+
+		return zDist;
+	}
+
+	struct CameraPanContext {
+		POINT initialCursorPosition;
+		NI::Vector3 initialPosition;
+		NI::Vector3 panDDX;
+		NI::Vector3 panDDY;
+
+		bool setup() {
+			auto camera = RenderController::get()->camera;
+
+			// Store the initial cursor/camera position when entering panning mode.
+			if (!GetCursorPos(&initialCursorPosition)) {
+				return false;
+			}
+			initialPosition = camera->worldTransform.translation;
+
+			// Get distance of the surface currently under the cursor.
+			// Be sure to use a safe fallback value if nothing is under the cursor.
+			float zDist = getHoveredSurfaceDistance();
+			zDist = (zDist != 0.0f) ? zDist : 2048.0f;
+
+			// Do some forward differencing to get the changes relative to mouse coord changes.
+			panDDX = camera->worldRight * (2.0f * zDist * camera->viewFrustum.right / camera->renderer->getBackBufferWidth());
+			panDDY = camera->worldUp * (-2.0f * zDist * camera->viewFrustum.top / camera->renderer->getBackBufferHeight());
+
+			return true;
+		}
+	};
+	static auto cameraPanContext = CameraPanContext();
+
+	void __stdcall Patch_ImproveCameraControls_EnterPanningMode() {
+		if (gIsPanning::get() == true) {
+			return;
+		}
+		
+		bool useLegacyCamera = settings.render_window.use_legacy_camera;
+		if (!useLegacyCamera) {
+			auto success = cameraPanContext.setup();
+			if (!success) {
+				return;
+			}
+		}
+
+		gIsPanning::set(true);
+	}
+
+	constexpr DWORD Patch_ImproveCameraControls_EnterPanningMode_Wrapper_ReturnAddress = 0x45E32A;
+	__declspec(naked) void Patch_ImproveCameraControls_EnterPanningMode_Wrapper() {
+		__asm {
+			pushad
+			call Patch_ImproveCameraControls_EnterPanningMode
+			popad
+			jmp Patch_ImproveCameraControls_EnterPanningMode_Wrapper_ReturnAddress
+		}
+	}
+
+	bool __cdecl Patch_ImproveCameraControls(NI::Node* cameraNode, CameraChangeType changeType, float changeValue) {
+		bool useLegacyCamera = settings.render_window.use_legacy_camera;
+		if (!useLegacyCamera) {
+			if (changeType == CameraChangeType::PanX || changeType == CameraChangeType::PanZ) {
+				auto& context = cameraPanContext;
+
+				POINT cursorPos = {};
+				if (!GetCursorPos(&cursorPos)) {
+					return false;
+				}
+
+				// Calculate the vector from initial mouse position to current.
+				NI::Vector3 difference = (
+					context.panDDX * (cursorPos.x - context.initialCursorPosition.x) +
+					context.panDDY * (cursorPos.y - context.initialCursorPosition.y)
+				);
+
+				// Apply camera movement.
+				cameraNode->localTranslate = context.initialPosition - difference;
+
+				return true;
+			}
+		}
+
+		// Fall back to original logic.
+		const auto CS_HandleCameraChange = reinterpret_cast<bool(__cdecl*)(NI::Node*, CameraChangeType, float)>(0x469C50);
+		return CS_HandleCameraChange(cameraNode, changeType, changeValue);
+	}
 
 	//
 	// Patch: Use world rotation values unless ALT is held.
@@ -1571,6 +1708,13 @@ namespace se::cs::dialog::render_window {
 		}
 	}
 
+	void PatchDialogProc_BeforeTimer(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		// Fixup window capture if we've lost it when panning.
+		if (gIsPanning::get() && GetCapture() != gRenderWindowHandle::get()) {
+			SetCapture(gRenderWindowHandle::get());
+		}
+	}
+
 	void PatchDialogProc_AfterLMouseButtonUp(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		// see: Patch_ReplaceScalingLogic
 		if (selectionNeedsScaleUpdate) {
@@ -1690,6 +1834,9 @@ namespace se::cs::dialog::render_window {
 		case CustomWindowMessage::SetCameraPosition:
 			PatchDialogProc_BeforeSetCameraPosition(hWnd, msg, wParam, lParam);
 			break;
+		case WM_TIMER:
+			PatchDialogProc_BeforeTimer(hWnd, msg, wParam, lParam);
+			break;
 		}
 
 		if (PatchDialogProc_OverrideResult) {
@@ -1726,6 +1873,7 @@ namespace se::cs::dialog::render_window {
 		using memory::genCallEnforced;
 		using memory::genCallUnprotected;
 		using memory::genJumpEnforced;
+		using memory::genJumpUnprotected;
 		using memory::genPushEnforced;
 		using memory::writeDoubleWordEnforced;
 		using memory::writePatchCodeUnprotected;
@@ -1735,6 +1883,10 @@ namespace se::cs::dialog::render_window {
 		static_assert(sizeof(SceneGraphController) < INT8_MAX);
 		genPushEnforced(0x4473FD, (BYTE)sizeof(SceneGraphController));
 		genJumpEnforced(0x403855, 0x449930, reinterpret_cast<DWORD>(SceneGraphController::initialize));
+
+		// Patch: Improve camera controls.
+		genJumpUnprotected(0x45E323, reinterpret_cast<DWORD>(Patch_ImproveCameraControls_EnterPanningMode_Wrapper), 0x7);
+		genJumpEnforced(0x40494E, 0x469C50, reinterpret_cast<DWORD>(Patch_ImproveCameraControls));
 
 		// Patch: Use world rotation values.
 		genJumpEnforced(0x403D41, 0x4652D0, reinterpret_cast<DWORD>(Patch_ReplaceRotationLogic));

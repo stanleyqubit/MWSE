@@ -20,8 +20,8 @@ namespace NI {
 		void * getLeftRightSwap; // 0x48
 		void * setLeftRightSwap; // 0x4C
 		void * setUseWBuffer; // 0x50
-		void * getBackBufferWidth; // 0x54
-		void * getBackBufferHeight; // 0x58
+		int(__thiscall* getBackBufferWidth)(const Renderer*); // 0x54
+		int(__thiscall* getBackBufferHeight)(const Renderer*); // 0x58
 		PixelData*(__thiscall* takeScreenshot)(Renderer*, const Rect<unsigned int>*); // 0x5C
 		void * imageBlt; // 0x60
 		void * setDepthClear; // 0x64
@@ -90,6 +90,8 @@ namespace NI {
 		char* getDriverInfo();
 		unsigned int getCapabilityFlags();
 		const Texture::FormatPrefs* findClosestPixelFormat(Texture::FormatPrefs* toFormat);
+		int getBackBufferWidth() const;
+		int getBackBufferHeight() const;
 		bool setRenderTarget(RenderedTexture* texture = nullptr);
 		PixelData* takeScreenshot(const Rect<unsigned int>* bounds);
 		bool getTextureMemoryStats(unsigned int& total, unsigned int& available);

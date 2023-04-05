@@ -18,8 +18,8 @@ namespace se::cs::dialog::render_window {
 	};
 	static_assert(sizeof(RenderController) == 0xC, "CS::RenderController failed size validation");
 
-	extern WORD lastCursorPosX;
-	extern WORD lastCursorPosY;
+	extern __int16 lastCursorPosX;
+	extern __int16 lastCursorPosY;
 
 	constexpr UINT DIALOG_ID = 176;
 

@@ -37,6 +37,7 @@ namespace se::cs {
 		fps_limit = std::clamp(toml::find_or(v, "fps_limit", fps_limit), 25, 250);
 		multisamples = toml::find_or(v, "multisamples", multisamples);
 		use_group_scaling = toml::find_or(v, "use_group_scaling", use_group_scaling);
+		use_legacy_camera = toml::find_or(v, "use_legacy_camera", use_legacy_camera);
 		use_legacy_grid_snap = toml::find_or(v, "use_legacy_grid_snap", use_legacy_grid_snap);
 		use_legacy_object_movement = toml::find_or(v, "use_legacy_object_movement", use_legacy_object_movement);
 		use_world_axis_rotations_by_default = toml::find_or(v, "use_world_axis_rotations_by_default", use_world_axis_rotations_by_default);
@@ -49,6 +50,7 @@ namespace se::cs {
 				{ "fps_limit", fps_limit },
 				{ "multisamples", multisamples },
 				{ "use_group_scaling", use_group_scaling },
+				{ "use_legacy_camera", use_legacy_camera },
 				{ "use_legacy_grid_snap", use_legacy_grid_snap },
 				{ "use_legacy_object_movement", use_legacy_object_movement },
 				{ "use_world_axis_rotations_by_default", use_world_axis_rotations_by_default },

@@ -1341,7 +1341,6 @@ namespace se::cs::dialog::render_window {
 			ALIGN_SELECTION_SCALE,
 			ALIGN_SELECTION_ALL,
 			USE_GROUP_SCALING,
-			USE_LEGACY_OBJECT_MOVEMENT,
 			USE_WORLD_AXIS_ROTATION,
 			SAVE_STATE_TO_QUICKSTART,
 			CLEAR_STATE_FROM_QUICKSTART,
@@ -1519,14 +1518,6 @@ namespace se::cs::dialog::render_window {
 		InsertMenuItemA(menu, index++, TRUE, &menuItem);
 		CheckMenuItem(menu, USE_GROUP_SCALING, (settings.render_window.use_group_scaling) ? MFS_CHECKED : MFS_UNCHECKED);
 
-		menuItem.wID = USE_LEGACY_OBJECT_MOVEMENT;
-		menuItem.fMask = MIIM_FTYPE | MIIM_CHECKMARKS | MIIM_STRING | MIIM_ID;
-		menuItem.fType = MFT_STRING;
-		menuItem.fState = (settings.render_window.use_legacy_object_movement) ? MFS_CHECKED : MFS_UNCHECKED;
-		menuItem.dwTypeData = (LPSTR)"Use Legacy Object &Movement";
-		InsertMenuItemA(menu, index++, TRUE, &menuItem);
-		CheckMenuItem(menu, USE_LEGACY_OBJECT_MOVEMENT, (settings.render_window.use_legacy_object_movement) ? MFS_CHECKED : MFS_UNCHECKED);
-
 		menuItem.wID = USE_WORLD_AXIS_ROTATION;
 		menuItem.fMask = MIIM_FTYPE | MIIM_CHECKMARKS | MIIM_STRING | MIIM_ID;
 		menuItem.fType = MFT_STRING;
@@ -1654,10 +1645,6 @@ namespace se::cs::dialog::render_window {
 			break;
 		case USE_GROUP_SCALING:
 			settings.render_window.use_group_scaling = !settings.render_window.use_group_scaling;
-			settings.save();
-			break;
-		case USE_LEGACY_OBJECT_MOVEMENT:
-			settings.render_window.use_legacy_object_movement = !settings.render_window.use_legacy_object_movement;
 			settings.save();
 			break;
 		case USE_WORLD_AXIS_ROTATION:

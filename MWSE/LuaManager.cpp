@@ -2480,7 +2480,7 @@ namespace mwse::lua {
 
 	void LuaManager::gatherModMetadata() {
 		sol::table luaMWSE = luaState["mwse"];
-		auto activeLuaMods = luaMWSE["activeLuaMods"];
+		sol::table activeLuaMods = luaMWSE["activeLuaMods"];
 
 		// Try to match any mwse information from -metadata.toml files to an active lua mod.
 		for (const auto& p : std::filesystem::directory_iterator("Data Files", std::filesystem::directory_options::follow_directory_symlink)) {
@@ -2496,22 +2496,22 @@ namespace mwse::lua {
 				// Load the metadata.
 				sol::safe_function_result metadata_result = luaState["toml"]["loadFile"](lowerPath);
 				if (metadata_result.valid()) {
-					sol::table metadata = metadata_result;
-					if (metadata == sol::nil) {
+					sol::optional<sol::table> metadata = metadata_result;
+					if (!metadata) {
 						continue;
 					}
 
-					sol::table metadata_tools = metadata["tools"];
-					if (metadata_tools == sol::nil) {
+					sol::optional<sol::table> metadata_tools = metadata.value()["tools"];
+					if (!metadata_tools) {
 						continue;
 					}
 
-					sol::table metadata_tools_mwse = metadata_tools["mwse"];
-					if (metadata_tools_mwse == sol::nil) {
+					sol::optional<sol::table> metadata_tools_mwse = metadata_tools.value()["mwse"];
+					if (!metadata_tools_mwse) {
 						continue;
 					}
 
-					sol::optional<std::string> luaKey = metadata_tools_mwse["lua-mod"];
+					sol::optional<std::string> luaKey = metadata_tools_mwse.value()["lua-mod"];
 					if (!luaKey) {
 						continue;
 					}
@@ -2519,19 +2519,18 @@ namespace mwse::lua {
 					// Ensure that keys are lowercased for lookup.
 					string::to_lower(luaKey.value());
 
-					sol::object maybeRuntime = activeLuaMods[luaKey.value()];
-					if (maybeRuntime == sol::nil) {
+					sol::optional<sol::table> runtime = activeLuaMods[luaKey.value()];
+					if (!runtime) {
 						continue;
 					}
 
 					// Make sure we don't already have a metadata assigned.
-					sol::table runtime = maybeRuntime;
-					if (runtime["metadata"] != sol::nil) {
+					if (runtime.value()["metadata"] != sol::nil) {
 						log::getLog() << "[LuaManager] WARNING: More than one metadata found claiming mod '" << luaKey.value() << "'." << std::endl;
 						continue;
 					}
 
-					runtime["metadata"] = metadata;
+					runtime.value()["metadata"] = metadata;
 				}
 				else {
 					sol::error error = metadata_result;
@@ -2562,7 +2561,7 @@ namespace mwse::lua {
 
 		// Do some precomputing for storing and calculating active lua mods.
 		sol::table luaMWSE = luaState["mwse"];
-		auto activeLuaMods = luaMWSE["activeLuaMods"];
+		sol::table activeLuaMods = luaMWSE["activeLuaMods"];
 
 		auto subclassOrder = 0u;
 		for (const auto& p : std::filesystem::recursive_directory_iterator(path, std::filesystem::directory_options::follow_directory_symlink)) {

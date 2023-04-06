@@ -2478,68 +2478,79 @@ namespace mwse::lua {
 		OnSkillTrained_SkillId = -1;
 	}
 
+	std::optional<std::string> getLowerPath(const std::filesystem::directory_entry& path) {
+		try {
+			auto lowerPath = path.path().string();
+			string::to_lower(lowerPath);
+
+			return lowerPath;
+		}
+		catch (std::exception&) {
+			return {};
+		}
+	}
+
 	void LuaManager::gatherModMetadata() {
 		sol::table luaMWSE = luaState["mwse"];
 		sol::table activeLuaMods = luaMWSE["activeLuaMods"];
 
 		// Try to match any mwse information from -metadata.toml files to an active lua mod.
 		for (const auto& p : std::filesystem::directory_iterator("Data Files", std::filesystem::directory_options::follow_directory_symlink)) {
-			try {
-				auto lowerPath = p.path().string();
-				string::to_lower(lowerPath);
-
-				// We only care *-metadata.toml files.
-				if (!string::ends_with(lowerPath, "-metadata.toml")) {
-					continue;
-				}
-
-				// Load the metadata.
-				sol::safe_function_result metadata_result = luaState["toml"]["loadFile"](lowerPath);
-				if (metadata_result.valid()) {
-					sol::optional<sol::table> metadata = metadata_result;
-					if (!metadata) {
-						continue;
-					}
-
-					sol::optional<sol::table> metadata_tools = metadata.value()["tools"];
-					if (!metadata_tools) {
-						continue;
-					}
-
-					sol::optional<sol::table> metadata_tools_mwse = metadata_tools.value()["mwse"];
-					if (!metadata_tools_mwse) {
-						continue;
-					}
-
-					sol::optional<std::string> luaKey = metadata_tools_mwse.value()["lua-mod"];
-					if (!luaKey) {
-						continue;
-					}
-
-					// Ensure that keys are lowercased for lookup.
-					string::to_lower(luaKey.value());
-
-					sol::optional<sol::table> runtime = activeLuaMods[luaKey.value()];
-					if (!runtime) {
-						continue;
-					}
-
-					// Make sure we don't already have a metadata assigned.
-					if (runtime.value()["metadata"] != sol::nil) {
-						log::getLog() << "[LuaManager] WARNING: More than one metadata found claiming mod '" << luaKey.value() << "'." << std::endl;
-						continue;
-					}
-
-					runtime.value()["metadata"] = metadata;
-				}
-				else {
-					sol::error error = metadata_result;
-					log::getLog() << "[LuaManager] ERROR: Could not parse mod metadata '" << p.path().string() << "':" << std::endl << error.what() << std::endl;
-					continue;
-				}
+			auto maybeLowerPath = getLowerPath(p);
+			if (!maybeLowerPath) {
+				continue;
 			}
-			catch (std::exception& e) {
-				// TODO: Figure out how to handle paths that contain unicode files without causing exceptions.
+			const auto& lowerPath = maybeLowerPath.value();
+
+			// We only care *-metadata.toml files.
+			if (!string::ends_with(lowerPath, "-metadata.toml")) {
+				continue;
+			}
+
+			// Load the metadata.
+			const sol::protected_function tomlLoadFile = luaState["toml"]["loadFile"];
+			auto metadata_result = tomlLoadFile(lowerPath);
+			if (metadata_result.valid()) {
+				sol::optional<sol::table> metadata = metadata_result;
+				if (!metadata) {
+					continue;
+				}
+
+				sol::optional<sol::table> metadata_tools = metadata.value()["tools"];
+				if (!metadata_tools) {
+					continue;
+				}
+
+				sol::optional<sol::table> metadata_tools_mwse = metadata_tools.value()["mwse"];
+				if (!metadata_tools_mwse) {
+					continue;
+				}
+
+				sol::optional<std::string> luaKey = metadata_tools_mwse.value()["lua-mod"];
+				if (!luaKey) {
+					continue;
+				}
+
+				// Ensure that keys are lowercased for lookup.
+				string::to_lower(luaKey.value());
+
+				sol::optional<sol::table> runtime = activeLuaMods[luaKey.value()];
+				if (!runtime) {
+					continue;
+				}
+
+				// Make sure we don't already have a metadata assigned.
+				if (runtime.value()["metadata"] != sol::nil) {
+					log::getLog() << "[LuaManager] WARNING: More than one metadata found claiming mod '" << luaKey.value() << "'." << std::endl;
+					continue;
+				}
+
+				runtime.value()["metadata"] = metadata;
+			}
+			else {
+				sol::error error = metadata_result;
+				log::getLog() << "[LuaManager] ERROR: Could not parse mod metadata '" << p.path().string() << "':" << std::endl << error.what() << std::endl;
+				continue;
 			}
 		}
 	}
@@ -2597,7 +2608,7 @@ namespace mwse::lua {
 					activeLuaMods[luaModKey] = runtime;
 				}
 			}
-			catch (std::exception& e) {
+			catch (std::exception&) {
 				// TODO: Figure out how to handle paths that contain unicode files without causing exceptions.
 			}
 		}

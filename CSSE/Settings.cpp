@@ -287,6 +287,7 @@ namespace se::cs {
 
 	void Settings_t::TestEnvironment::from_toml(const toml::value& v) {
 		start_new_game = toml::find_or(v, "start_new_game", start_new_game);
+		load_save = toml::find_or(v, "load_save", load_save);
 		starting_cell = toml::find_or(v, "starting_cell", starting_cell);
 		starting_grid = toml::find_or(v, "starting_grid", starting_grid);
 		position = toml::find_or(v, "position", position);
@@ -302,6 +303,7 @@ namespace se::cs {
 		return toml::value(
 			{
 				{ "start_new_game", start_new_game },
+				{ "load_save", load_save },
 				{ "starting_cell", starting_cell },
 				{ "starting_grid", starting_grid },
 				{ "position", position },

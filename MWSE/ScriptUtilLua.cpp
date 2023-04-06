@@ -24,16 +24,17 @@ namespace mwse::lua {
 	void bindScriptUtil() {
 		auto stateHandle = LuaManager::getInstance().getThreadSafeStateHandle();
 		auto& state = stateHandle.state;
+		sol::table lua_mwscript = state["mwscript"];
 
 		//
 		// Get context on the current execution.
 		//
 
-		state["mwscript"]["getScript"] = []() {
+		lua_mwscript["getScript"] = []() {
 			return LuaManager::getInstance().getCurrentScript();
 		};
 
-		state["mwscript"]["getReference"] = []() {
+		lua_mwscript["getReference"] = []() {
 			return LuaManager::getInstance().getCurrentReference();
 		};
 
@@ -41,13 +42,13 @@ namespace mwse::lua {
 		// Expose base game opcodes.
 		//
 
-		state["mwscript"]["activate"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["activate"] = [](sol::optional<sol::table> params) {
 			auto script = getOptionalParamExecutionScript(params);
 			auto reference = getOptionalParamExecutionReference(params);
 
 			mwscript::Activate(script, reference);
 		};
-		state["mwscript"]["addItem"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["addItem"] = [](sol::optional<sol::table> params) {
 			auto script = getOptionalParamExecutionScript(params);
 			auto reference = getOptionalParamExecutionReference(params);
 			auto item = getOptionalParamObject<TES3::Item>(params, "item");
@@ -61,7 +62,7 @@ namespace mwse::lua {
 			reference->baseObject->setObjectModified(true);
 			return true;
 		};
-		state["mwscript"]["addSoulGem"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["addSoulGem"] = [](sol::optional<sol::table> params) {
 			auto script = getOptionalParamExecutionScript(params);
 			auto reference = getOptionalParamExecutionReference(params);
 			auto creature = getOptionalParamObject<TES3::Creature>(params, "creature");
@@ -73,7 +74,7 @@ namespace mwse::lua {
 			mwscript::AddSoulGem(script, reference, creature, soulGem);
 			return true;
 		};
-		state["mwscript"]["addToLevCreature"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["addToLevCreature"] = [](sol::optional<sol::table> params) {
 			auto script = getOptionalParamExecutionScript(params);
 			auto reference = getOptionalParamExecutionReference(params);
 			auto list = getOptionalParamObject<TES3::LeveledCreature>(params, "list");
@@ -86,7 +87,7 @@ namespace mwse::lua {
 			mwscript::AddToLevCreature(script, reference, list, actor, level);
 			return true;
 		};
-		state["mwscript"]["addSpell"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["addSpell"] = [](sol::optional<sol::table> params) {
 			auto script = getOptionalParamExecutionScript(params);
 			auto reference = getOptionalParamExecutionReference(params);
 			auto spell = getOptionalParamSpell(params, "spell");
@@ -97,7 +98,7 @@ namespace mwse::lua {
 			mwscript::AddSpell(script, reference, spell);
 			return true;
 		};
-		state["mwscript"]["addToLevItem"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["addToLevItem"] = [](sol::optional<sol::table> params) {
 			auto script = getOptionalParamExecutionScript(params);
 			auto reference = getOptionalParamExecutionReference(params);
 			auto list = getOptionalParamObject<TES3::BaseObject>(params, "list");
@@ -110,7 +111,7 @@ namespace mwse::lua {
 			mwscript::AddToLevItem(script, reference, list, item, level);
 			return true;
 		};
-		state["mwscript"]["addTopic"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["addTopic"] = [](sol::optional<sol::table> params) {
 			auto script = getOptionalParamExecutionScript(params);
 			auto reference = getOptionalParamExecutionReference(params);
 			auto topic = getOptionalParamDialogue(params, "topic");
@@ -121,7 +122,7 @@ namespace mwse::lua {
 			mwscript::AddTopic(script, reference, topic);
 			return true;
 		};
-		state["mwscript"]["aiTravel"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["aiTravel"] = [](sol::optional<sol::table> params) {
 			auto script = getOptionalParamExecutionScript(params);
 			auto reference = getOptionalParamExecutionReference(params);
 			auto x = getOptionalParam(params, "x", 0.0f);
@@ -131,7 +132,7 @@ namespace mwse::lua {
 			mwscript::AITravel(script, reference, x, y, z);
 			return true;
 		};
-		state["mwscript"]["disable"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["disable"] = [](sol::optional<sol::table> params) {
 			auto script = getOptionalParamExecutionScript(params);
 			auto reference = getOptionalParamExecutionReference(params);
 			auto setModified = getOptionalParam(params, "modify", true);
@@ -143,7 +144,7 @@ namespace mwse::lua {
 			mwscript::Disable(script, reference);
 			return true;
 		};
-		state["mwscript"]["drop"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["drop"] = [](sol::optional<sol::table> params) {
 			auto script = getOptionalParamExecutionScript(params);
 			auto reference = getOptionalParamExecutionReference(params);
 			auto item = getOptionalParamObject<TES3::Item>(params, "item");
@@ -155,7 +156,7 @@ namespace mwse::lua {
 			mwscript::Drop(script, reference, item, count);
 			return true;
 		};
-		state["mwscript"]["enable"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["enable"] = [](sol::optional<sol::table> params) {
 			auto script = getOptionalParamExecutionScript(params);
 			auto reference = getOptionalParamExecutionReference(params);
 			auto setModified = getOptionalParam(params, "modify", true);
@@ -171,7 +172,7 @@ namespace mwse::lua {
 			mwscript::Enable(script, reference);
 			return true;
 		};
-		state["mwscript"]["equip"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["equip"] = [](sol::optional<sol::table> params) {
 			auto script = getOptionalParamExecutionScript(params);
 			auto reference = getOptionalParamExecutionReference(params);
 			auto item = getOptionalParamObject<TES3::Item>(params, "item");
@@ -195,7 +196,7 @@ namespace mwse::lua {
 			mwscript::Equip(script, reference, item);
 			return true;
 		};
-		state["mwscript"]["explodeSpell"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["explodeSpell"] = [](sol::optional<sol::table> params) {
 			auto script = getOptionalParamExecutionScript(params);
 			auto reference = getOptionalParamExecutionReference(params);
 			auto spell = getOptionalParamSpell(params, "spell");
@@ -206,13 +207,13 @@ namespace mwse::lua {
 			mwscript::ExplodeSpell(script, reference, spell);
 			return true;
 		};
-		state["mwscript"]["getButtonPressed"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["getButtonPressed"] = [](sol::optional<sol::table> params) {
 			auto script = getOptionalParamExecutionScript(params);
 			auto reference = getOptionalParamExecutionReference(params);
 
 			return mwscript::GetButtonPressed(script, reference);
 		};
-		state["mwscript"]["hasItemEquipped"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["hasItemEquipped"] = [](sol::optional<sol::table> params) {
 			auto script = getOptionalParamExecutionScript(params);
 			auto reference = getOptionalParamExecutionReference(params);
 			auto item = getOptionalParamObject<TES3::Item>(params, "item");
@@ -223,13 +224,13 @@ namespace mwse::lua {
 			return mwscript::HasItemEquipped(script, reference, item);
 		};
 		// Obsolete. Do not document.
-		state["mwscript"]["getDelete"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["getDelete"] = [](sol::optional<sol::table> params) {
 			auto script = getOptionalParamExecutionScript(params);
 			auto reference = getOptionalParamExecutionReference(params);
 
 			return BITMASK_TEST(reference->objectFlags, TES3::ObjectFlag::Delete);
 		};
-		state["mwscript"]["getDetected"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["getDetected"] = [](sol::optional<sol::table> params) {
 			auto script = getOptionalParamExecutionScript(params);
 			auto reference = getOptionalParamExecutionReference(params);
 			auto target = getOptionalParamReference(params, "target");
@@ -239,12 +240,12 @@ namespace mwse::lua {
 
 			return mwscript::GetDetected(script, reference, target);
 		};
-		state["mwscript"]["getDisabled"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["getDisabled"] = [](sol::optional<sol::table> params) {
 			auto script = getOptionalParamExecutionScript(params);
 			auto reference = getOptionalParamExecutionReference(params);
 			return mwscript::GetDisabled(script, reference);
 		};
-		state["mwscript"]["getDistance"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["getDistance"] = [](sol::optional<sol::table> params) {
 			auto script = getOptionalParamExecutionScript(params);
 			auto reference = getOptionalParamExecutionReference(params);
 			auto target = getOptionalParamReference(params, "target");
@@ -254,7 +255,7 @@ namespace mwse::lua {
 
 			return mwscript::GetDistance(script, reference, target);
 		};
-		state["mwscript"]["getItemCount"] = [](sol::optional<sol::table> params) -> int {
+		lua_mwscript["getItemCount"] = [](sol::optional<sol::table> params) -> int {
 			auto script = getOptionalParamExecutionScript(params);
 			auto reference = getOptionalParamExecutionReference(params);
 			auto item = getOptionalParamObject<TES3::Item>(params, "item");
@@ -264,19 +265,19 @@ namespace mwse::lua {
 
 			return mwscript::GetItemCount(script, reference, item);
 		};
-		state["mwscript"]["getPCJumping"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["getPCJumping"] = [](sol::optional<sol::table> params) {
 			auto script = getOptionalParamExecutionScript(params);
 			return mwscript::GetPCJumping(script);
 		};
-		state["mwscript"]["getPCRunning"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["getPCRunning"] = [](sol::optional<sol::table> params) {
 			auto script = getOptionalParamExecutionScript(params);
 			return mwscript::GetPCRunning(script);
 		};
-		state["mwscript"]["getPCSneaking"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["getPCSneaking"] = [](sol::optional<sol::table> params) {
 			auto script = getOptionalParamExecutionScript(params);
 			return mwscript::GetPCSneaking(script);
 		};
-		state["mwscript"]["getSpellEffects"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["getSpellEffects"] = [](sol::optional<sol::table> params) {
 			auto script = getOptionalParamExecutionScript(params);
 			auto reference = getOptionalParamExecutionReference(params);
 			auto spell = getOptionalParamSpell(params, "spell");
@@ -287,7 +288,7 @@ namespace mwse::lua {
 			return mwscript::GetSpellEffects(script, reference, spell);
 		};
 		// Obsolete. Do not document.
-		state["mwscript"]["onActivate"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["onActivate"] = [](sol::optional<sol::table> params) {
 			auto script = getOptionalParamExecutionScript(params);
 			auto reference = getOptionalParamExecutionReference(params);
 
@@ -297,7 +298,7 @@ namespace mwse::lua {
 			return result;
 		};
 		// Obsolete. Do not document.
-		state["mwscript"]["onDeath"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["onDeath"] = [](sol::optional<sol::table> params) {
 			auto reference = getOptionalParamExecutionReference(params);
 
 			auto result = reference->testActionFlag(TES3::ActionFlags::OnDeath);
@@ -305,7 +306,7 @@ namespace mwse::lua {
 			return result;
 		};
 		// Obsolete. Do not document.
-		state["mwscript"]["onKnockout"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["onKnockout"] = [](sol::optional<sol::table> params) {
 			auto reference = getOptionalParamExecutionReference(params);
 
 			auto result = reference->testActionFlag(TES3::ActionFlags::OnKnockout);
@@ -313,14 +314,14 @@ namespace mwse::lua {
 			return result;
 		};
 		// Obsolete. Do not document.
-		state["mwscript"]["onMurder"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["onMurder"] = [](sol::optional<sol::table> params) {
 			auto reference = getOptionalParamExecutionReference(params);
 
 			auto result = reference->testActionFlag(TES3::ActionFlags::OnMurder);
 			reference->clearActionFlag(TES3::ActionFlags::OnMurder);
 			return result;
 		};
-		state["mwscript"]["placeAtPC"] = [](sol::optional<sol::table> params) -> TES3::Reference* {
+		lua_mwscript["placeAtPC"] = [](sol::optional<sol::table> params) -> TES3::Reference* {
 			auto script = getOptionalParamExecutionScript(params);
 			auto reference = getOptionalParamExecutionReference(params);
 			auto object = getOptionalParamObject<TES3::BaseObject>(params, "object");
@@ -334,7 +335,7 @@ namespace mwse::lua {
 			mwscript::PlaceAtPC(script, reference, object, count, distance, direction);
 			return mwscript::lastCreatedPlaceAtPCReference;
 		};
-		state["mwscript"]["playSound"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["playSound"] = [](sol::optional<sol::table> params) {
 			auto script = getOptionalParamExecutionScript(params);
 			auto reference = getOptionalParamExecutionReference(params);
 			auto sound = getOptionalParamSound(params, "sound");
@@ -345,7 +346,7 @@ namespace mwse::lua {
 			mwscript::PlaySound(script, reference, sound);
 			return true;
 		};
-		state["mwscript"]["position"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["position"] = [](sol::optional<sol::table> params) {
 			auto script = getOptionalParamExecutionScript(params);
 			auto reference = getOptionalParamExecutionReference(params);
 			auto x = getOptionalParam(params, "x", 0.0f);
@@ -356,7 +357,7 @@ namespace mwse::lua {
 			mwscript::Position(script, reference, x, y, z, rotation);
 			return true;
 		};
-		state["mwscript"]["positionCell"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["positionCell"] = [](sol::optional<sol::table> params) {
 			auto script = getOptionalParamExecutionScript(params);
 			auto reference = getOptionalParamExecutionReference(params);
 			auto x = getOptionalParam(params, "x", 0.0f);
@@ -371,7 +372,7 @@ namespace mwse::lua {
 			mwscript::PositionCell(script, reference, x, y, z, rotation, cell.c_str());
 			return true;
 		};
-		state["mwscript"]["removeItem"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["removeItem"] = [](sol::optional<sol::table> params) {
 			auto script = getOptionalParamExecutionScript(params);
 			auto reference = getOptionalParamExecutionReference(params);
 			auto item = getOptionalParamObject<TES3::Item>(params, "item");
@@ -385,7 +386,7 @@ namespace mwse::lua {
 			reference->baseObject->setObjectModified(true);
 			return true;
 		};
-		state["mwscript"]["removeSpell"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["removeSpell"] = [](sol::optional<sol::table> params) {
 			auto script = getOptionalParamExecutionScript(params);
 			auto reference = getOptionalParamExecutionReference(params);
 			auto spell = getOptionalParamSpell(params, "spell");
@@ -396,7 +397,7 @@ namespace mwse::lua {
 			mwscript::RemoveSpell(script, reference, spell);
 			return true;
 		};
-		state["mwscript"]["scriptRunning"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["scriptRunning"] = [](sol::optional<sol::table> params) {
 			auto script = getOptionalParamExecutionScript(params);
 			auto targetScript = getOptionalParamScript(params, "script");
 			if (targetScript == nullptr) {
@@ -406,7 +407,7 @@ namespace mwse::lua {
 			return TES3::WorldController::get()->isGlobalScriptRunning(targetScript);
 		};
 		// Obsolete. Do not document.
-		state["mwscript"]["setDelete"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["setDelete"] = [](sol::optional<sol::table> params) {
 			auto script = getOptionalParamExecutionScript(params);
 			auto reference = getOptionalParamExecutionReference(params);
 
@@ -415,7 +416,7 @@ namespace mwse::lua {
 
 			return true;
 		};
-		state["mwscript"]["setLevel"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["setLevel"] = [](sol::optional<sol::table> params) {
 			auto script = getOptionalParamExecutionScript(params);
 			auto reference = getOptionalParamExecutionReference(params);
 			auto level = getOptionalParam<short>(params, "level", 0);
@@ -426,7 +427,7 @@ namespace mwse::lua {
 			mwscript::SetLevel(script, reference, level);
 			return true;
 		};
-		state["mwscript"]["startCombat"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["startCombat"] = [](sol::optional<sol::table> params) {
 			auto script = getOptionalParamExecutionScript(params);
 			auto reference = getOptionalParamExecutionReference(params);
 			auto target = getOptionalParamReference(params, "target");
@@ -437,7 +438,7 @@ namespace mwse::lua {
 			mwscript::StartCombat(script, reference, target);
 			return true;
 		};
-		state["mwscript"]["startScript"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["startScript"] = [](sol::optional<sol::table> params) {
 			auto script = getOptionalParamExecutionScript(params);
 			auto reference = getOptionalParamExecutionReference(params);
 			auto targetScript = getOptionalParamScript(params, "script");
@@ -448,7 +449,7 @@ namespace mwse::lua {
 			TES3::WorldController::get()->startGlobalScript(targetScript, reference);
 			return true;
 		};
-		state["mwscript"]["stopCombat"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["stopCombat"] = [](sol::optional<sol::table> params) {
 			auto script = getOptionalParamExecutionScript(params);
 			auto reference = getOptionalParamExecutionReference(params);
 			if (reference == nullptr) {
@@ -458,7 +459,7 @@ namespace mwse::lua {
 			mwscript::StopCombat(script, reference);
 			return true;
 		};
-		state["mwscript"]["stopScript"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["stopScript"] = [](sol::optional<sol::table> params) {
 			auto script = getOptionalParamExecutionScript(params);
 			auto reference = getOptionalParamExecutionReference(params);
 			auto targetScript = getOptionalParamScript(params, "script");
@@ -473,7 +474,7 @@ namespace mwse::lua {
 
 			return false;
 		};
-		state["mwscript"]["stopSound"] = [](sol::optional<sol::table> params) {
+		lua_mwscript["stopSound"] = [](sol::optional<sol::table> params) {
 			auto script = getOptionalParamExecutionScript(params);
 			auto reference = getOptionalParamExecutionReference(params);
 			auto sound = getOptionalParamSound(params, "sound");
@@ -484,7 +485,7 @@ namespace mwse::lua {
 			mwscript::StopSound(script, reference, sound);
 			return true;
 		};
-		state["mwscript"]["wakeUpPC"] = []() {
+		lua_mwscript["wakeUpPC"] = []() {
 			mwscript::RunOriginalOpCode(nullptr, nullptr, OpCode::WakeUpPC);
 		};
 	}

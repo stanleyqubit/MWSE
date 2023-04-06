@@ -508,6 +508,13 @@ namespace mwse::lua {
 		}
 	}
 
+	void newGame() {
+		auto cachedSuppressState = true;
+		std::swap(TES3::DataHandler::suppressThreadLoad, cachedSuppressState);
+		tes3::startNewGame();
+		std::swap(TES3::DataHandler::suppressThreadLoad, cachedSuppressState);
+	}
+
 	bool isModActive(const char* modName) {
 		auto dataHandler = TES3::DataHandler::get();
 		if (dataHandler && dataHandler->nonDynamicData->activeModCount > 0) {
@@ -5962,7 +5969,7 @@ namespace mwse::lua {
 		tes3["lock"] = lock;
 		tes3["messageBox"] = messageBox;
 		tes3["modStatistic"] = modStatistic;
-		tes3["newGame"] = tes3::startNewGame;
+		tes3["newGame"] = newGame;
 		tes3["persuade"] = persuade;
 		tes3["playAnimation"] = playAnimation;
 		tes3["playItemPickupSound"] = playItemPickupSound;

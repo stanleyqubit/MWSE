@@ -125,6 +125,8 @@ chargenstate = -1.0
 * Reference rotation is now performed on the world axis, rather than the local axis. To rotate on the local axis as it worked in vanilla, hold the alt key.
 * Dropping a reference (using the F key) is more reliable and accurate. It works on skinned references as well.
 * References can be group-scaled. By holding the alt key when scaling, all selected references will scale together and reposition accordingly.
+* Reference moving will follow the cursor, instead of using the movement scale. This can be disabled in the settings window.
+* Camera panning will anchor to be relative to the object under the cursor, instead of moving at a fixed rate. This can be disabled in the settings window.
 * References can be moved onto surfaces. By holding the alt key when drag-moving a reference, it will rotate and snap onto the surface under the cursor. The context menu (Q) can be used to set the axis to snap to.
 * Extended editor marker support. Toggling markers (M) will now also toggle markers supported by the game executable. This allows custom markers to be toggled by tagging them with a MRK string and adding a EditorMarker node, or by defining objects whose name begins with or matches "Tri EditorMarker".
 * A new context menu is available, using the Q key. From it you can access some new features:
@@ -133,8 +135,9 @@ chargenstate = -1.0
 	* Hide selected references, culling them from the scene so you can work behind them.
 	* Restore hidden references, restoring to view any references hidden with the hide selection option.
 	* Set or clear the QuickStart data from the current render window perspective.
+	* Set the testing environment to use the selected reference position/rotation or that of the camera.
 * The field of view (FOV) and antialiasing (multisamples) can be overwritten in the config file.
-* The update rate of the render window can be changed from the default of 40ms. Values between 4 (250 FPS) and 40 (25 FPS) are supported.
+* The update rate of the render window can be changed from the default of 25 FPS. By default it now runs at (up to) 60 FPS.
 * Fixed an issue with bound calculations. Any bound-related functions, such as focusing the camera (C or T keys) on a light will never send the camera into the stratosphere.
 
 The following changes to the rendering window apply when landscape editing:

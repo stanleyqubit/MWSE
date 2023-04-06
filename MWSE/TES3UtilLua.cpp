@@ -510,14 +510,27 @@ namespace mwse::lua {
 
 	bool isModActive(const char* modName) {
 		auto dataHandler = TES3::DataHandler::get();
-		if (dataHandler == nullptr) {
-			return false;
+		if (dataHandler && dataHandler->nonDynamicData->activeModCount > 0) {
+			// Check the active mod list if it is available.
+			const auto activeMods = dataHandler->nonDynamicData->getActiveMods();
+			for (auto gameFile : activeMods) {
+				if (_strnicmp(gameFile->filename, modName, sizeof(gameFile->filename)) == 0) {
+					return true;
+				}
+			}
 		}
+		else {
+			// Otherwise we have to fall back to see if the mod will load.
+			char buffer[512] = {};
+			for (auto i = 0; i < 1024; ++i) {
+				sprintf_s(buffer, "GameFile%d", i);
+				if (!GetPrivateProfileStringA("Game Files", buffer, "", buffer, sizeof(buffer), ".\\Morrowind.ini")) {
+					break;
+				}
 
-		auto activeMods = dataHandler->nonDynamicData->getActiveMods();
-		for (auto gameFile : activeMods) {
-			if (_strnicmp(gameFile->filename, modName, sizeof(gameFile->filename)) == 0) {
-				return true;
+				if (string::iequal(buffer, modName)) {
+					return true;
+				}
 			}
 		}
 

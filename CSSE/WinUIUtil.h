@@ -43,6 +43,8 @@ namespace se::cs::winui {
 	std::optional<int> GetDlgItemSignedInt(HWND hWnd, UINT nIDDlgItem);
 	std::optional<unsigned int> GetDlgItemUnsignedInt(HWND hWnd, UINT nIDDlgItem);
 
+	BOOL GetOpenFileNameWithoutDirChangeA(LPOPENFILENAMEA param);
+
 	//
 	// ComboBox
 	//

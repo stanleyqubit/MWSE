@@ -153,6 +153,18 @@ namespace se::cs::winui {
 		return result;
 	}
 
+	BOOL GetOpenFileNameWithoutDirChangeA(LPOPENFILENAMEA param) {
+		// Cache current directory because GetOpenFileName changes it for some absurd reason.
+		const auto currentDir = std::filesystem::current_path();
+
+		auto result = GetOpenFileNameA(param);
+
+		// Restore directory.
+		std::filesystem::current_path(currentDir);
+
+		return result;
+	}
+
 	//
 	// ComboBox
 	//

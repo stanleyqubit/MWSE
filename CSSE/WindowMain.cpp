@@ -530,6 +530,112 @@ namespace se::cs::window::main {
 		}
 	}
 
+	void PatchDialogProc_BeforeNotify_TooltipRightClick_TestInMorrowind_NewGame(HWND hWnd) {
+		settings.test_environment.start_new_game = true;
+		settings.test_environment.load_save = "";
+
+		SendMessageA(hWnd, WM_COMMAND, WM_COMMAND_TEST_IN_GAME_MORROWIND, NULL);
+	}
+
+	void PatchDialogProc_BeforeNotify_TooltipRightClick_TestInMorrowind_SelectSave(HWND hWnd) {
+		OPENFILENAME ofn = {};
+		TCHAR szFile[260] = {};
+		ofn.lStructSize = sizeof(ofn);
+		ofn.hwndOwner = hWnd;
+		ofn.lpstrFile = szFile;
+		ofn.nMaxFile = sizeof(szFile);
+		ofn.lpstrFilter = _T("Elder Scroll Saves (*.ess)\0*.ess\0");
+		ofn.nFilterIndex = 1;
+		ofn.lpstrFileTitle = _T("Select save file");
+		ofn.nMaxFileTitle = 0;
+		ofn.lpstrInitialDir = NULL;
+		ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+
+		if (winui::GetOpenFileNameWithoutDirChangeA(&ofn) != TRUE) {
+			return;
+		}
+
+		settings.test_environment.start_new_game = false;
+		settings.test_environment.load_save = std::filesystem::path(ofn.lpstrFile).filename().string();
+
+		SendMessageA(hWnd, WM_COMMAND, WM_COMMAND_TEST_IN_GAME_MORROWIND, NULL);
+	}
+
+	void PatchDialogProc_BeforeNotify_TooltipRightClick_TestInMorrowind_MainMenu(HWND hWnd) {
+		settings.test_environment.start_new_game = false;
+		settings.test_environment.load_save = "";
+
+		SendMessageA(hWnd, WM_COMMAND, WM_COMMAND_TEST_IN_GAME_MORROWIND, NULL);
+	}
+
+	void PatchDialogProc_BeforeNotify_TooltipRightClick_TestInMorrowind(HWND hWnd, UINT msg, WPARAM wParam, NMMOUSE* lParam) {
+		auto menu = CreatePopupMenu();
+		if (menu == NULL) {
+			return;
+		}
+
+		enum ContextMenuId {
+			RESERVED_ERROR,
+			RESERVED_NO_CALLBACK,
+			TEST_NEW_GAME,
+			TEST_LOAD_GAME,
+			TEST_TO_MAIN_MENU,
+		};
+
+		MENUITEMINFO menuItem = {};
+		menuItem.cbSize = sizeof(MENUITEMINFO);
+		unsigned int index = 0;
+
+		menuItem.wID = TEST_NEW_GAME;
+		menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID;
+		menuItem.fType = MFT_STRING;
+		menuItem.dwTypeData = (LPSTR)"Test &new game at chosen position";
+		InsertMenuItemA(menu, index++, TRUE, &menuItem);
+
+		menuItem.wID = TEST_LOAD_GAME;
+		menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID;
+		menuItem.fType = MFT_STRING;
+		menuItem.dwTypeData = (LPSTR)"Test &saved game";
+		InsertMenuItemA(menu, index++, TRUE, &menuItem);
+
+		menuItem.wID = TEST_TO_MAIN_MENU;
+		menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID;
+		menuItem.fType = MFT_STRING;
+		menuItem.dwTypeData = (LPSTR)"Test normally from &main menu";
+		InsertMenuItemA(menu, index++, TRUE, &menuItem);
+
+		POINT p;
+		GetCursorPos(&p);
+
+		auto result = TrackPopupMenuEx(menu, TPM_LEFTALIGN | TPM_TOPALIGN | TPM_RETURNCMD | TPM_LEFTBUTTON | TPM_NOANIMATION | TPM_VERTICAL, p.x, p.y, hWnd, NULL);
+		switch (result) {
+		case RESERVED_ERROR:
+			break;
+		case TEST_NEW_GAME:
+			PatchDialogProc_BeforeNotify_TooltipRightClick_TestInMorrowind_NewGame(hWnd);
+			break;
+		case TEST_LOAD_GAME:
+			PatchDialogProc_BeforeNotify_TooltipRightClick_TestInMorrowind_SelectSave(hWnd);
+			break;
+		case TEST_TO_MAIN_MENU:
+			PatchDialogProc_BeforeNotify_TooltipRightClick_TestInMorrowind_MainMenu(hWnd);
+			break;
+		}
+
+		// Cleanup our menus.
+		DestroyMenu(menu);
+
+		messageResultOverride = TRUE;
+	}
+
+	void PatchDialogProc_BeforeNotify_TooltipRightClick(HWND hWnd, UINT msg, WPARAM wParam, NMMOUSE* lParam) {
+		switch (lParam->dwItemSpec) {
+		case WM_COMMAND_TEST_IN_GAME_MORROWIND:
+			PatchDialogProc_BeforeNotify_TooltipRightClick_TestInMorrowind(hWnd, msg, wParam, lParam);
+			break;
+		}
+	}
+
 	// Catch tooltip info requests to add custom tooltips to new toolbar buttons.
 	void PatchDialogProc_BeforeNotify_TooltipGetDisplayInfo(HWND hWnd, UINT msg, WPARAM wParam, NMTTDISPINFOA* lParam) {
 		const char* tooltip = nullptr;
@@ -550,6 +656,9 @@ namespace se::cs::window::main {
 
 	void PatchDialogProc_BeforeNotify(HWND hWnd, UINT msg, WPARAM wParam, NMHDR* lParam) {
 		switch (lParam->code) {
+		case NM_RCLICK:
+			PatchDialogProc_BeforeNotify_TooltipRightClick(hWnd, msg, wParam, (NMMOUSE*)lParam);
+			break;
 		case TTN_GETDISPINFO:
 			PatchDialogProc_BeforeNotify_TooltipGetDisplayInfo(hWnd, msg, wParam, (NMTTDISPINFOA*)lParam);
 			break;

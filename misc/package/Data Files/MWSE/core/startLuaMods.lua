@@ -28,8 +28,12 @@ local function execLuaMod(runtime)
 	local prefix = runtime.legacy_mod and "mod_init" or "main"
 	local result, err = pcall(dofile, runtime.key .. "." .. prefix)
 	if (not result) then
-		mwse.log("[LuaManager] ERROR: Failed to run mod initialization script:")
-		mwse.log(err)
+		mwse.log("[LuaManager] ERROR: Failed to run mod initialization script '%s':", runtime.key .. "." .. prefix)
+		if (type(err) == "table") then
+			mwse.log(json.encode(err))
+		else
+			mwse.log(err)
+		end
 		runtime.initialized = false
 		return
 	end

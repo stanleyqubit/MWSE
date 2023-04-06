@@ -75,7 +75,7 @@ end
 -- If start_new_game is set, automatically load into position.
 --
 
-local function noop() mwse.log("Womp womp") end
+local function noop() return false end
 
 local chargenScripts = { "CharGen" }
 
@@ -134,7 +134,7 @@ local function onLoaded(e)
 	if (test_environment.start_new_game and test_environment.load_save == "") then
 		local cell = nil
 		if (test_environment.starting_cell ~= "") then
-			cell = tes3.getCell({ id = cell })
+			cell = tes3.getCell({ id = test_environment.starting_cell })
 			if (cell == nil) then
 				error("Could not resolve starting cell!")
 			end

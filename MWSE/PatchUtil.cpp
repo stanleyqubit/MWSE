@@ -47,6 +47,14 @@
 
 namespace mwse::patch {
 
+#ifndef _DEBUG
+	// Release builds.
+	constexpr auto INSTALL_MINIDUMP_HOOK = true;
+#else
+	// Debug builds.
+	constexpr auto INSTALL_MINIDUMP_HOOK = false;
+#endif
+
 	//
 	// Patch: Enable
 	//
@@ -1405,11 +1413,11 @@ namespace mwse::patch {
 	}
 
 	bool installMiniDumpHook() {
-#ifndef _DEBUG
-		// Create our hook.
-		return genCallEnforced(0x7279AD, 0x416E10, reinterpret_cast<DWORD>(onWinMain));
-#else
-		return true;
-#endif
+		if constexpr (INSTALL_MINIDUMP_HOOK) {
+			return genCallEnforced(0x7279AD, 0x416E10, reinterpret_cast<DWORD>(onWinMain));
+		}
+		else {
+			return true;
+		}
 	}
 }

@@ -787,14 +787,19 @@ function toml.loadFile(fileName)
 	-- Load the contents of the file.
 	local f = io.open(fileName, "r")
 	if (f == nil) then
-		return nil
+		return nil, { reason = "Could not open file." }
 	end
 
 	local fileContents = f:read("*all")
 	f:close()
 
 	-- Return decoded toml.
-	return toml.decode(fileContents)
+	local status, resultOrError = pcall(toml.decode, fileContents)
+	if (status) then
+		return resultOrError
+	else
+		return nil, resultOrError
+	end
 end
 
 function toml.saveFile(fileName, object)

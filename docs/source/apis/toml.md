@@ -54,7 +54,7 @@ local result = toml.encode(input)
 Loads a toml file from `path`, using `toml.decode`. Unlike the related `json.loadfile` function, this is relative to the current working directory, and not relative to Data Files\MWSE. A file extension should be part of the `path` string.
 
 ```lua
-local data = toml.loadFile(path)
+local data, error = toml.loadFile(path)
 ```
 
 **Parameters**:
@@ -64,6 +64,7 @@ local data = toml.loadFile(path)
 **Returns**:
 
 * `data` (table?): The decoded data, or `nil` if the file could not be found.
+* `error` (table?): Information about why the toml file could not be decoded. This result will only be given if the operation fails.
 
 ***
 

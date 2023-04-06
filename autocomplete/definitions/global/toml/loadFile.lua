@@ -6,5 +6,6 @@ return {
 	},
 	returns = {
 		{ name = "data", type = "table?", description = "The decoded data, or `nil` if the file could not be found." },
+		{ name = "error", type = "table?", description = "Information about why the toml file could not be decoded. This result will only be given if the operation fails." },
 	},
 }

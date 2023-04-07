@@ -10,7 +10,7 @@ return {
 		["transition"] = {
 			type = "number",
 			readOnly = true,
-			description = "The transition for the keybind that was tested. This is typically `tes3.keyTransition.down` but not guaranteed to be. Always be sure to check what transition is being used.",
+			description = "The transition for the keybind that was tested. This is typically `tes3.keyTransition.isDown` but not guaranteed to be. Always be sure to check what transition is being used.",
 		},
 		["result"] = {
 			type = "boolean",

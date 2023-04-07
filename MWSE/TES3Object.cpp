@@ -48,6 +48,8 @@
 #include "TES3Weapon.h"
 #include "TES3WorldController.h"
 
+#include "TES3UIMenuController.h"
+
 #include "BitUtil.h"
 #include "LuaUtil.h"
 #include "MemoryUtil.h"
@@ -69,6 +71,13 @@ namespace TES3 {
 	const auto BaseObject_dtor = reinterpret_cast<TES3::BaseObject * (__thiscall*)(TES3::BaseObject*)>(0x4F0CA0);
 	void BaseObject::dtor() {
 		clearCachedLuaObject(this);
+
+		if (UI::MenuInputController::lastTooltipObject == this) {
+			UI::MenuInputController::lastTooltipObject = nullptr;
+			UI::MenuInputController::lastTooltipItemData = nullptr;
+			UI::MenuInputController::lastTooltipCount = 0;
+		}
+
 		BaseObject_dtor(this);
 	}
 

@@ -286,8 +286,12 @@ namespace se::cs {
 	//
 
 	void Settings_t::TestEnvironment::from_toml(const toml::value& v) {
+		// Port legacy settings.
+		load_save_morrowind = toml::find_or(v, "load_save", load_save_morrowind);
+
 		start_new_game = toml::find_or(v, "start_new_game", start_new_game);
-		load_save = toml::find_or(v, "load_save", load_save);
+		load_save_morrowind = toml::find_or(v, "load_save_morrowind", load_save_morrowind);
+		load_save_openmw = toml::find_or(v, "load_save_openmw", load_save_openmw);
 		starting_cell = toml::find_or(v, "starting_cell", starting_cell);
 		starting_grid = toml::find_or(v, "starting_grid", starting_grid);
 		position = toml::find_or(v, "position", position);
@@ -303,7 +307,8 @@ namespace se::cs {
 		return toml::value(
 			{
 				{ "start_new_game", start_new_game },
-				{ "load_save", load_save },
+				{ "load_save_morrowind", load_save_morrowind },
+				{ "load_save_openmw", load_save_openmw },
 				{ "starting_cell", starting_cell },
 				{ "starting_grid", starting_grid },
 				{ "position", position },

@@ -163,6 +163,8 @@ namespace se::cs {
 		bool valid = true;
 		bool enabled = true;
 
+		std::filesystem::path file_location() const;
+
 		void load();
 		void save() const;
 

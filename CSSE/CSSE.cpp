@@ -30,6 +30,7 @@
 #include "DialogTextSearchWindow.h"
 
 #include "MemoryUtil.h"
+#include "PathUtil.h"
 #include "StringUtil.h"
 #include "WindowsUtil.h"
 
@@ -342,7 +343,7 @@ namespace se::cs {
 		CWinApp::InitInstance();
 
 		// Open our log file.
-		log::stream.open(windows::getModulePath(m_hInstance).parent_path() / "csse.log");
+		log::stream.open(path::getInstallPath() / "csse.log");
 #ifdef APPVEYOR_BUILD_NUMBER
 		log::stream << "Construction Set Extender build " << APPVEYOR_BUILD_NUMBER << " (built " << __DATE__ << ") hooked." << std::endl;
 #else

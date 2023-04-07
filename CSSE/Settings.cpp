@@ -1,6 +1,7 @@
 #include "Settings.h"
 
 #include "LogUtil.h"
+#include "PathUtil.h"
 
 namespace se::cs {
 	Settings_t settings;
@@ -343,17 +344,26 @@ namespace se::cs {
 	//
 	//
 
-	static const char* settingsFilename = "csse.toml";
+	std::filesystem::path Settings_t::file_location() const {
+		return path::getInstallPath() / "csse.toml";
+	}
 
 	void Settings_t::load() {
-		if (std::filesystem::exists(settingsFilename)) {
+		if (std::filesystem::current_path() != path::getInstallPath()) {
+			log::stream << "[WARNING] Loading config file from unexpected working directory:" << std::endl;
+			log::stream << "  Expected: " << path::getInstallPath().string() << std::endl;
+			log::stream << "  Observed: " << std::filesystem::current_path().string() << std::endl;
+		}
+
+		const auto path = file_location();
+		if (std::filesystem::exists(path)) {
 			try {
-				const auto data = toml::parse(settingsFilename);
+				const auto data = toml::parse(path);
 				from_toml(data);
 			}
 			catch (toml::syntax_error& e) {
 				valid = false;
-				log::stream << "Error while parsing settings file " << settingsFilename << ":" << std::endl;
+				log::stream << "Error while parsing settings file " << path.string() << ":" << std::endl;
 				log::stream << e.what() << std::endl << std::endl;
 				throw;	// Re-throw
 			}
@@ -366,14 +376,14 @@ namespace se::cs {
 		}
 
 		std::ofstream outFile;
-		outFile.open(settingsFilename);
+		outFile.open(file_location());
 
 		if (!outFile.fail()) {
 			const toml::value data = settings;
 			outFile << std::setw(80) << std::setprecision(8) << data;
 		}
 		else {
-			log::stream << "Failed to save settings file " << settingsFilename << "." << std::endl;
+			log::stream << "Failed to save settings file " << file_location().string() << "." << std::endl;
 		}
 	}
 

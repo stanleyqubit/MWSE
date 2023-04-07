@@ -1549,7 +1549,7 @@ local cells = tes3.getActiveCells()
 ### `tes3.getAnimationActionTiming`
 <div class="search_terms" style="display: none">getanimationactiontiming, animationactiontiming</div>
 
-This function fetches a dictionary of the timings of the action keys for a specific animation group on an actor. The actor is required, as different actors can use different animations. The result is a table with action names as keys, and timings as values.
+This function fetches a dictionary of the timings of the action keys for a specific animation group on an actor. The actor is required, as different actors can use different animations. The result is a table with action names as keys, and timings as values. The function will return nil if the actor does not have that animation group, or if the actor's animations are not active.
 
 ```lua
 local result = tes3.getAnimationActionTiming({ reference = ..., group = ... })

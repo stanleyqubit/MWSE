@@ -4517,6 +4517,10 @@ namespace mwse::lua {
 		}
 
 		auto animGroup = animData->animationGroups[group];
+		if (animGroup == nullptr) {
+			return {};
+		}
+
 		const auto animNoteTextByClass = reinterpret_cast<const char**>(0x78ABC8);
 		const auto animGroupNoteClass = reinterpret_cast<const int*>(0x78B0A8);
 		auto noteLabel = animNoteTextByClass + animGroupNoteClass[group];

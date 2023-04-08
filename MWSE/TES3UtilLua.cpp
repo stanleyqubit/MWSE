@@ -2706,17 +2706,17 @@ namespace mwse::lua {
 		TES3::Reference* reference = new TES3::Reference();
 		reference->baseObject = object;
 
-		// Scale as needed.
-		float scale = getOptionalParam<float>(params, "scale", 1.0f);
-		if (scale != 1.0f) {
-			reference->setScale(scale);
-		}
-
 		// Add it to the cell lists/data handler.
 		bool cellWasCreated = false;
 		dataHandler->nonDynamicData->createReference(object, &maybePosition.value(), &orientation, cellWasCreated, reference, cell);
 		reference->ensureScriptDataIsInstanced();
 		cell->insertReference(reference);
+
+		// Scale as needed.
+		const auto scale = getOptionalParam<float>(params, "scale");
+		if (scale) {
+			reference->setScale(scale.value());
+		}
 
 		// Did we just make an actor? If so we need to add it to the mob manager.
 		if (object->objectType == TES3::ObjectType::Creature || object->objectType == TES3::ObjectType::NPC) {

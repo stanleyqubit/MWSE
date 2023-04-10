@@ -597,7 +597,7 @@ The soruceless flag of the object.
 
 **Returns**:
 
-* `result` ([tes3spellList](../../types/tes3spellList))
+* `result` ([tes3spellList](../../types/tes3spellList), [tes3spell](../../types/tes3spell)[])
 
 ***
 

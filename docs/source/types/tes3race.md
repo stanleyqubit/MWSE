@@ -18,7 +18,7 @@ This type inherits the following: [tes3baseObject](../../types/tes3baseObject)
 
 **Returns**:
 
-* `result` ([tes3spellList](../../types/tes3spellList))
+* `result` ([tes3spellList](../../types/tes3spellList), [tes3spell](../../types/tes3spell)[])
 
 ***
 

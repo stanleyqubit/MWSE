@@ -54,8 +54,8 @@ namespace TES3 {
 			case DialogueInfoFilterType::PCFaction:
 				filterPlayerFaction = condition->pcFaction;
 				break;
-			case DialogueInfoFilterType::ResultScript:
-				filterResultScript = condition->scriptText;
+			case DialogueInfoFilterType::SoundPath:
+				filterResultScript = condition->soundPath;
 				break;
 			case DialogueInfoFilterType::Conditional0:
 				setConditional(0, condition->conditional);

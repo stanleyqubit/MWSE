@@ -373,6 +373,21 @@ local dialogue = myObject:findDialogue()
 
 ***
 
+### `getSoundPath`
+<div class="search_terms" style="display: none">getsoundpath, soundpath</div>
+
+Get the dialogue info's associated sound path.
+
+```lua
+local result = myObject:getSoundPath()
+```
+
+**Returns**:
+
+* `result` (string)
+
+***
+
 ### `runScript`
 <div class="search_terms" style="display: none">runscript</div>
 

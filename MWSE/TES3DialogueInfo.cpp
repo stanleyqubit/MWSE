@@ -252,6 +252,15 @@ namespace TES3 {
 		}
 	}
 
+	const char* DialogueInfo::getSoundPath() {
+		for (auto node = conditions; node; node = node->next) {
+			if (node->tag == DialogueInfoFilterType::SoundPath) {
+				return node->soundPath;
+			}
+		}
+		return nullptr;
+	}
+
 	sol::optional<std::string> DialogueInfo::getID() {
 		// If we're already loaded for some reason, don't reload.
 		if (loadLinkNode) {

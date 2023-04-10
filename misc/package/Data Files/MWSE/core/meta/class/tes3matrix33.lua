@@ -111,3 +111,7 @@ function tes3matrix33:toZero() end
 --- @return tes3matrix33 result No description yet available.
 function tes3matrix33:transpose() end
 
+--- Converts the matrix to a string with 2 decimal places.
+--- @return string result No description yet available.
+function tes3matrix33:__tostring() end
+

@@ -41,3 +41,7 @@ function tes3matrix44:copy() end
 --- Zeroes out all values in the matrix.
 function tes3matrix44:toZero() end
 
+--- Converts the vector to a string with 2 decimal places.
+--- @return string result No description yet available.
+function tes3matrix44:__tostring() end
+

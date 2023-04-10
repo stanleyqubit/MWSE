@@ -16,3 +16,7 @@ function tes3boundingBox:copy() end
 --- @return tes3vector3[] result No description yet available.
 function tes3boundingBox:vertices() end
 
+--- Converts the bounding box to a string with 2 decimal places. The minimum bounds are printed first, then the maximal bounds.
+--- @return string result No description yet available.
+function tes3boundingBox:__tostring() end
+

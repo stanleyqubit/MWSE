@@ -35,3 +35,7 @@ function tes3vector2:normalize() end
 --- @return tes3vector2 result No description yet available.
 function tes3vector2:normalized() end
 
+--- Converts the vector to a string with 2 decimal places.
+--- @return string result No description yet available.
+function tes3vector2:__tostring() end
+

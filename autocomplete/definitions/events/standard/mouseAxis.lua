@@ -17,10 +17,15 @@ return {
 			readOnly = true,
 			description = "True if control is held.",
 		},
+		["isShiftDown"] = {
+			type = "number",
+			readOnly = true,
+			description = "True if either shift key is held.",
+		},
 		["isAltDown"] = {
 			type = "number",
 			readOnly = true,
-			description = "True if alt  is held.",
+			description = "True if alt is held.",
 		},
 		["isSuperDown"] = {
 			type = "number",

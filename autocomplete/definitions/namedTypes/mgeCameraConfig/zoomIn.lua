@@ -4,6 +4,7 @@ return {
 	arguments = {{
 		name = "params",
 		type = "table",
+		optional = true,
 		tableParams = {
 			{ name = "amount", type = "number", optional = true, default = 0.0625, },
 		},

@@ -6,8 +6,8 @@ return {
 		type = "table",
 		optional = true,
 		tableParams = {
-			{ name = "rate", type = "number", optional = true },
-			{ name = "targetRate", type = "number", optional = true },
+			{ name = "rate", type = "number", optional = true, default = 1.0 },
+			{ name = "targetRate", type = "number", optional = true, default = "`rate`" },
 		},
 	}},
 }

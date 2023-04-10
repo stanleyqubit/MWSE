@@ -112,8 +112,8 @@ mgeCameraConfig.zoomContinuous({ rate = ..., targetRate = ... })
 **Parameters**:
 
 * `params` (table): *Optional*.
-	* `rate` (number): *Optional*.
-	* `targetRate` (number): *Optional*.
+	* `rate` (number): *Default*: `1`.
+	* `targetRate` (number): *Default*: `rate`.
 
 ***
 
@@ -128,7 +128,7 @@ mgeCameraConfig.zoomIn({ amount = ... })
 
 **Parameters**:
 
-* `params` (table)
+* `params` (table): *Optional*.
 	* `amount` (number): *Default*: `0.0625`.
 
 ***
@@ -144,6 +144,6 @@ mgeCameraConfig.zoomOut({ amount = ... })
 
 **Parameters**:
 
-* `params` (table)
+* `params` (table): *Optional*.
 	* `amount` (number)
 

@@ -4,7 +4,7 @@
 --- @meta
 --- A core object representing a character race.
 --- @class tes3race : tes3baseObject
---- @field abilities tes3spellList|tes3spell[] *Read-only*. A list of abilities that NPCs of that race have access to. It is a `tes3spellList`, which is a list wrapper with helper functions. The actual list is accessed with `.iterator`. e.g. `for _, ability in pairs(race.abilities.iterator) do print(ability.name) end`
+--- @field abilities tes3spellList|tes3spell[] *Read-only*. A list of abilities that NPCs of that race have access to. It is a `tes3spellList`, which is a list wrapper with helper functions. The actual list is iterated over using `pairs`. E.g. `for _, ability in pairs(race.abilities) do print(ability.name) end`
 --- @field baseAttributes tes3raceBaseAttribute[] *Read-only*. Array-style table access to base 8 attributes for the race. Each element in the array is a [`tes3raceBaseAttribute`](https://mwse.github.io/MWSE/types/tes3raceBaseAttribute/).
 --- @field description string *Read-only*. Loads from disk and returns the description of the race.
 --- @field femaleBody tes3raceBodyParts *Read-only*. Access to all the body parts that will be used for female actors of this race.

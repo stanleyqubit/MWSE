@@ -615,7 +615,7 @@ The soruceless flag of the object.
 ### `spells`
 <div class="search_terms" style="display: none">spells</div>
 
-*Read-only*. Quick access to the base NPC's spell list. It is a `tes3spellList`, which is a list wrapper with helper functions. The actual list is accessed with `.iterator`. e.g. `for _, spell in pairs(npc.spells.iterator) do print(spell.name) end`
+*Read-only*. Quick access to the NPC's spell list. It is a `tes3spellList`, which is a list wrapper with helper functions. The actual list is iterated over using `pairs`. E.g. `for _, spell in pairs(npc.spells) do print(spell.name) end`
 
 **Returns**:
 

@@ -20,8 +20,13 @@ namespace TES3 {
 	}
 
 	const auto TES3_ProcessManager_detectPresence = reinterpret_cast<bool(__thiscall*)(ProcessManager*, MobileActor*, bool)>(0x570A60);
-	bool ProcessManager::detectPresence(MobileActor * actor, bool unknown) {
-		return TES3_ProcessManager_detectPresence(this, actor, unknown);
+	bool ProcessManager::detectPresence(MobileActor* actor, bool ignoreCreatures) {
+		return TES3_ProcessManager_detectPresence(this, actor, ignoreCreatures);
+	}
+
+	const auto TES3_ProcessManager_detectByActor = reinterpret_cast<bool(__thiscall*)(ProcessManager*, MobileActor*, MobileActor*)>(0x570960);
+	bool ProcessManager::detectByActor(MobileActor* detector, MobileActor* target) {
+		return TES3_ProcessManager_detectByActor(this, detector, target);
 	}
 
 	const auto TES3_ProcessManager_detectSneak = reinterpret_cast<bool(__thiscall*)(ProcessManager*, MobileActor*, MobileActor*, bool)>(0x570600);

@@ -14,7 +14,7 @@ namespace TES3 {
 		NPCFaction,
 		Cell,
 		PCFaction,
-		ResultScript,
+		SoundPath,
 		Conditional0,
 		Conditional1,
 		Conditional2,
@@ -52,7 +52,7 @@ namespace TES3 {
 			Faction* npcFaction;
 			Cell* cell;
 			Faction* pcFaction;
-			const char* scriptText;
+			const char* soundPath;
 			DialogueConditional* conditional;
 		};
 
@@ -119,6 +119,8 @@ namespace TES3 {
 
 		static char* getLastLoadedScript();
 		static void setLastLoadedScript(const char* text);
+
+		const char* getSoundPath();
 
 		//
 		// Custom functions.

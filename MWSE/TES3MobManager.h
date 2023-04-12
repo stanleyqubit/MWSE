@@ -28,8 +28,9 @@ namespace TES3 {
 		//
 
 		bool detectAttack(MobileActor* actor);
-		bool detectPresence(MobileActor * actor, bool unknown = true);
-		bool detectSneak(MobileActor * detector, MobileActor * target, bool unknown = true);
+		bool detectPresence(MobileActor* actor, bool ignoreCreatures = true);
+		bool detectByActor(MobileActor* detector, MobileActor* target);
+		bool detectSneak(MobileActor* detector, MobileActor* target, bool unknown = true);
 		void findActorsInProximity(Vector3 * position, float range, IteratedList<MobileActor*>* outputList);
 		void checkAlarmRadius(MobileActor * actor, IteratedList<AIPlanner*> * container);
 		void checkPlayerDistance();

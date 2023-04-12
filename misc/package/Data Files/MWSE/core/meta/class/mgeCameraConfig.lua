@@ -21,13 +21,13 @@ function mgeCameraConfig.stopZoom() end
 --- 
 --- `rate`: number? — *Default*: `1`. No description yet available.
 --- 
---- `targetRate`: number? — *Default*: `rate`. No description yet available.
+--- `targetRate`: number? — *Default*: ``rate``. No description yet available.
 function mgeCameraConfig.zoomContinuous(params) end
 
 ---Table parameter definitions for `mgeCameraConfig.zoomContinuous`.
 --- @class mgeCameraConfig.zoomContinuous.params
 --- @field rate number? *Default*: `1`. No description yet available.
---- @field targetRate number? *Default*: `rate`. No description yet available.
+--- @field targetRate number? *Default*: ``rate``. No description yet available.
 
 --- Zooms in by the specified amount, or by a small amount if no amount is provided.
 --- @param params mgeCameraConfig.zoomIn.params? This table accepts the following values:

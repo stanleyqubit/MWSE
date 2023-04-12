@@ -603,7 +603,7 @@ local instance = tes3.applyMagicSource({ reference = ..., source = ..., name = .
 	* `source` ([tes3object](../../types/tes3object)): *Optional*. A magic source to apply.
 	* `name` (string): *Optional*. While optional for other uses, if applying alchemy as a source, you must specify a name for the magic source.
 	* `effects` (table): *Optional*. A table of custom effects to apply as a potion. Maximal number of effects is 8.
-		* `id` (boolean): *Default*: `-1`. ID of the effect.
+		* `id` (boolean): *Default*: `-1`. ID of the effect. Maps to values in [`tes3.effect`](https://mwse.github.io/MWSE/references/magic-effects/) table.
 		* `skill` (number): *Default*: `-1`. If effect parameter specified is: Absorb, Damage, Drain, Fortify or Restore Skill, a skill should be provided. This also applies to any custom spell effect which operates on a certain skill. This value maps to [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) constants.
 		* `attribute` (number): *Default*: `-1`. If effect parameter specified is: Absorb, Damage, Drain, Fortify or Restore Attribute, an attribute should be provided. This also applies to any custom spell effect which operates on a certain attribute. This value maps to [`tes3.attribute`](https://mwse.github.io/MWSE/references/attributes/) constants.
 		* `rangeType` (number): *Default*: `tes3.effectRange.self`. The range of the effect. This maps to [`tes3.effectRange`](https://mwse.github.io/MWSE/references/effect-ranges/) constants.
@@ -795,6 +795,7 @@ local success = tes3.cast({ reference = ..., target = ..., spell = ..., instant 
 	event.register(tes3.event.keyDown, function(e)
 		if e.isAltDown then
 			tes3.messageBox("mwscript.explodeSpell")
+			---@diagnostic disable-next-line: deprecated
 			mwscript.explodeSpell({
 				reference = tes3.game.playerTarget,
 				spell = "proj_trap_spell"
@@ -805,7 +806,7 @@ local success = tes3.cast({ reference = ..., target = ..., spell = ..., instant 
 	event.register(tes3.event.keyDown, function(e)
 		if e.isAltDown then
 			tes3.messageBox("tes3.cast")
-			-- This will behave the same as will mwscript.explodeSpell()
+			-- This will behave the same as mwscript.explodeSpell()
 			tes3.cast({
 				target = tes3.game.playerTarget,
 				reference = tes3.game.playerTarget,

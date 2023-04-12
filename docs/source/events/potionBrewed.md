@@ -45,6 +45,7 @@ event.register(tes3.event.potionBrewed, potionBrewedCallback)
 			p.effects[i] = e.object.effects[i]
 		end
 	
+		---@diagnostic disable-next-line: deprecated
 		local newPotion = tes3alchemy.create(p)
 		tes3.removeItem{reference = tes3.player, item = e.object, playSound = false}
 		tes3.addItem{reference = tes3.player, item = newPotion, playSound = false}

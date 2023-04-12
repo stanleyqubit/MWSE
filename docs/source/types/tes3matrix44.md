@@ -59,7 +59,7 @@ The 4th row of the matrix.
 ### `__tostring`
 <div class="search_terms" style="display: none">__tostring</div>
 
-Converts the vector to a string with 2 decimal places.
+Converts the matrix to a string with 2 decimal places.
 
 ```lua
 local result = myObject:__tostring()

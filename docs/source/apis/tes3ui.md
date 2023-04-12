@@ -47,6 +47,9 @@ tes3ui.captureMouseDrag(capture)
 	Using the UI event system, cause a given element to capture the mouse drag.
 
 	```lua
+	---@type tes3uiElement
+	local element -- Created somewhere before
+	
 	element:register("mouseDown", function(e)
 		-- Capture must be inside a mouse event.
 		tes3ui.captureMouseDrag(true)
@@ -206,8 +209,11 @@ local result = tes3ui.createTooltipMenu({ item = ..., itemData = ..., spell = ..
 	This demonstrates adding an item tooltip to a button using the help event.
 
 	```lua
+	---@type tes3uiElement
+	local menu -- Created somewhere before
+	
 	local button = menu:createButton{text = "- Item -"}
-	local item = tes3.getObject("iron_shield")
+	local item = tes3.getObject("iron_shield") --[[@as tes3armor]]
 	
 	button:register("help", function(e)
 		local tooltip = tes3ui.createTooltipMenu{item = item}

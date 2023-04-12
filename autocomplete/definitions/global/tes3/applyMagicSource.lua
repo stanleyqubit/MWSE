@@ -14,7 +14,7 @@ return {
 				description = "A table of custom effects to apply as a potion. Maximal number of effects is 8.",
 				type = "table" ,
 				tableParams = {
-					{ name = "id", type = "boolean", optional = true, default = -1, description = "ID of the effect." },
+					{ name = "id", type = "boolean", optional = true, default = -1, description = "ID of the effect. Maps to values in [`tes3.effect`](https://mwse.github.io/MWSE/references/magic-effects/) table." },
 					{ name = "skill", type = "number", optional = true, default = -1, description = "If effect parameter specified is: Absorb, Damage, Drain, Fortify or Restore Skill, a skill should be provided. This also applies to any custom spell effect which operates on a certain skill. This value maps to [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) constants." },
 					{ name = "attribute", type = "number", optional = true, default = -1, description = "If effect parameter specified is: Absorb, Damage, Drain, Fortify or Restore Attribute, an attribute should be provided. This also applies to any custom spell effect which operates on a certain attribute. This value maps to [`tes3.attribute`](https://mwse.github.io/MWSE/references/attributes/) constants." },
 					{ name = "rangeType", type = "number", optional = true, default = "tes3.effectRange.self", description = "The range of the effect. This maps to [`tes3.effectRange`](https://mwse.github.io/MWSE/references/effect-ranges/) constants." },

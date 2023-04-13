@@ -1652,10 +1652,13 @@ namespace mwse::lua {
 			return { false, nullptr };
 		}
 
+		// Allow overriding the context.
+		const auto context = (TES3::Dialogue::GetFilteredInfoContext)getOptionalParam(params, "context", (int)TES3::Dialogue::GetFilteredInfoContext::Script);
+
 		// Check for service refusal response.
 		const int serviceRefusalPage = 7;
 		auto dialogue = TES3::Dialogue::getDialogue((int)TES3::DialogueType::Persuasion, serviceRefusalPage);
-		auto serviceRefusal = dialogue->getFilteredInfo(actor, reference, true);
+		auto serviceRefusal = dialogue->getFilteredInfoWithContext(actor, reference, true, context);
 
 		return { serviceRefusal == nullptr, serviceRefusal };
 	}

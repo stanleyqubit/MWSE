@@ -825,13 +825,15 @@ local success = tes3.cast({ reference = ..., target = ..., spell = ..., instant 
 Checks if a merchant will offer a service to you, including dialogue checks like disposition and faction membership. A specific service can be checked, or if no service is given, a generic dialogue check is made. If the service is refused, the dialogue reply for the refusal may also be returned (it may be nil, as there may not always be a reply available).
 
 ```lua
-local offersService, refusalReply = tes3.checkMerchantOffersService(reference, service)
+local offersService, refusalReply = tes3.checkMerchantOffersService({ reference = ..., service = ..., context = ... })
 ```
 
 **Parameters**:
 
-* `reference` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string)
-* `service` (number): *Optional*. The specific service to check for availability. Maps to values in the [`tes3.merchantService`](https://mwse.github.io/MWSE/references/merchant-services/) table.
+* `params` (table)
+	* `reference` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string)
+	* `service` (number): *Optional*. The specific service to check for availability. Maps to values in the [`tes3.merchantService`](https://mwse.github.io/MWSE/references/merchant-services/) table.
+	* `context` (number): *Default*: `tes3.dialogueFilterContext.script`. An override for how this info request should be treated. Maps to values in the [`tes3.dialogueFilterContext`](https://mwse.github.io/MWSE/references/dialogue-filter-context/) table.
 
 **Returns**:
 

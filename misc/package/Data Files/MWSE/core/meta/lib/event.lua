@@ -65,6 +65,7 @@
 --- @field register fun(eventId: '"determineAction"', callback: fun(e: determineActionEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"determinedAction"', callback: fun(e: determinedActionEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"dialogueEnvironmentCreated"', callback: fun(e: dialogueEnvironmentCreatedEventData): boolean?, options: table?)
+--- @field register fun(eventId: '"dialogueFiltered"', callback: fun(e: dialogueFilteredEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"disposition"', callback: fun(e: dispositionEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"enchantChargeUse"', callback: fun(e: enchantChargeUseEventData): boolean?, options: table?)
 --- @field register fun(eventId: '"enchantedItemCreateFailed"', callback: fun(e: enchantedItemCreateFailedEventData): boolean?, options: table?)

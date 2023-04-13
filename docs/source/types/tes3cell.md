@@ -538,5 +538,5 @@ local iterator = myObject:iterateReferences(filter)
 
 **Returns**:
 
-* `iterator` (fun(): tes3reference)
+* `iterator` (fun(): [tes3reference](../../types/tes3reference))
 

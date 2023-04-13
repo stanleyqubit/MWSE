@@ -36,7 +36,7 @@ local timer = myObject:create({ duration = ..., callback = ..., iterations = ...
 
 * `params` (table)
 	* `duration` (number): Duration of the timer. The method of time passing depends on the timer type.
-	* `callback` (fun(e: mwseTimerCallbackData), string): The callback function that will execute when the timer expires. If starting a registered timer, this needs to be the `name` string passed to `timer.register`.
+	* `callback` (fun(e: [mwseTimerCallbackData](../../types/mwseTimerCallbackData)), string): The callback function that will execute when the timer expires. If starting a registered timer, this needs to be the `name` string passed to `timer.register`.
 	* `iterations` (integer): *Default*: `1`. The number of iterations to run. Use `-1` for infinite looping.
 	* `persist` (boolean): *Default*: `true`. Registering a timer with persist flag set to `true` will serialize the callback string in the save to persist between sessions. Only a registered timer will persist between sessions. See `timer.register()`.
 	* `data` (table, nil): *Default*: `nil`. Data to be attached to the timer. If this is a persistent timer, the data must be json-serializable, matching the same limitations as data stored on references.

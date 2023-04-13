@@ -1564,7 +1564,7 @@ local result = tes3.getAnimationActionTiming({ reference = ..., group = ... })
 
 **Returns**:
 
-* `result` (table&lt;string, number&gt;)
+* `result` (table&lt;string, number&gt;, nil)
 
 ***
 
@@ -3045,7 +3045,7 @@ local iterator = tes3.iterate(iterator)
 
 **Returns**:
 
-* `iterator` (fun(): tes3object)
+* `iterator` (fun(): [tes3object](../../types/tes3object))
 
 ***
 
@@ -3064,7 +3064,7 @@ local objectIterator = tes3.iterateObjects(filter)
 
 **Returns**:
 
-* `objectIterator` (fun(): tes3object)
+* `objectIterator` (fun(): [tes3object](../../types/tes3object))
 
 ***
 
@@ -3180,7 +3180,7 @@ local iterationFunction = tes3.loopTArray(tarray)
 
 **Returns**:
 
-* `iterationFunction` (fun(): tes3object)
+* `iterationFunction` (fun(): [tes3object](../../types/tes3object))
 
 ***
 

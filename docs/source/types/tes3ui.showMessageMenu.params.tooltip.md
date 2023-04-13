@@ -17,7 +17,7 @@ A function to call when the tooltip has been created. Passes context information
 
 **Returns**:
 
-* `result` (fun(params: tes3ui.showMessageMenu.params.tooltip.callbackData))
+* `result` (fun(params: [tes3ui.showMessageMenu.params.tooltip.callbackData](../../types/tes3ui.showMessageMenu.params.tooltip.callbackData)))
 
 ***
 

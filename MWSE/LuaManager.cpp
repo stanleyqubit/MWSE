@@ -4106,6 +4106,15 @@ namespace mwse::lua {
 	}
 
 	//
+	// Event: dialogueFiltered
+	//
+
+	template<TES3::Dialogue::GetFilteredInfoContext context>
+	TES3::DialogueInfo* __fastcall PatchDialogueFilteredFor(TES3::Dialogue* self, DWORD _EDX_, TES3::Actor* actor, TES3::Reference* reference, bool flag) {
+		return self->getFilteredInfoWithContext(actor, reference, flag, context);
+	}
+
+	//
 	// Event: Repair
 	//
 
@@ -5921,6 +5930,23 @@ namespace mwse::lua {
 		genCallEnforced(0x4D5DCD, 0x4DA330, *reinterpret_cast<DWORD*>(&TES3_NPCInstance_getDisposition));
 		genCallEnforced(0x5077EA, 0x4DA330, *reinterpret_cast<DWORD*>(&TES3_NPCInstance_getDisposition));
 		genCallEnforced(0x54DC88, 0x4DA330, *reinterpret_cast<DWORD*>(&TES3_NPCInstance_getDisposition));
+
+		// Event: dialogueFiltered
+		genCallEnforced(0x6004E9, 0x4B29E0, reinterpret_cast<DWORD>(PatchDialogueFilteredFor<TES3::Dialogue::GetFilteredInfoContext::Persuasion>)); // Persuasion
+		genCallEnforced(0x5C0A67, 0x4B29E0, reinterpret_cast<DWORD>(PatchDialogueFilteredFor<TES3::Dialogue::GetFilteredInfoContext::ClickTopicFallback>)); // Click topic fallback
+		genCallEnforced(0x5C0A48, 0x4B29E0, reinterpret_cast<DWORD>(PatchDialogueFilteredFor<TES3::Dialogue::GetFilteredInfoContext::ClickTopic>)); // Click topic
+		genCallEnforced(0x5C05F7, 0x4B29E0, reinterpret_cast<DWORD>(PatchDialogueFilteredFor<TES3::Dialogue::GetFilteredInfoContext::ClickAnswer>)); // Click answer
+		genCallEnforced(0x5BF62C, 0x4B29E0, reinterpret_cast<DWORD>(PatchDialogueFilteredFor<TES3::Dialogue::GetFilteredInfoContext::ServiceEnchanting>)); // Service: Enchanting
+		genCallEnforced(0x5BF51C, 0x4B29E0, reinterpret_cast<DWORD>(PatchDialogueFilteredFor<TES3::Dialogue::GetFilteredInfoContext::ServiceSpellmaking>)); // Service: Spellmaking
+		genCallEnforced(0x5BF43C, 0x4B29E0, reinterpret_cast<DWORD>(PatchDialogueFilteredFor<TES3::Dialogue::GetFilteredInfoContext::ServiceTravel>)); // Service: Travel
+		genCallEnforced(0x5BF33C, 0x4B29E0, reinterpret_cast<DWORD>(PatchDialogueFilteredFor<TES3::Dialogue::GetFilteredInfoContext::ServiceTraining>)); // Service: Training
+		genCallEnforced(0x5BF25C, 0x4B29E0, reinterpret_cast<DWORD>(PatchDialogueFilteredFor<TES3::Dialogue::GetFilteredInfoContext::ServiceSpells>)); // Service: Spells
+		genCallEnforced(0x5BF17C, 0x4B29E0, reinterpret_cast<DWORD>(PatchDialogueFilteredFor<TES3::Dialogue::GetFilteredInfoContext::ServiceRepair>)); // Service: Repair
+		genCallEnforced(0x5BF01C, 0x4B29E0, reinterpret_cast<DWORD>(PatchDialogueFilteredFor<TES3::Dialogue::GetFilteredInfoContext::ServiceBarter>)); // Service: Barter
+		genCallEnforced(0x52931A, 0x4B29E0, reinterpret_cast<DWORD>(PatchDialogueFilteredFor<TES3::Dialogue::GetFilteredInfoContext::Greeting>)); // Greeting
+		genCallEnforced(0x5290B2, 0x4B29E0, reinterpret_cast<DWORD>(PatchDialogueFilteredFor<TES3::Dialogue::GetFilteredInfoContext::Voice>)); // Say voice
+		genCallEnforced(0x4B2F51, 0x4B29E0, reinterpret_cast<DWORD>(PatchDialogueFilteredFor<TES3::Dialogue::GetFilteredInfoContext::TopicPopulation>)); // Topic population
+		genCallEnforced(0x40B8EE, 0x4B29E0, reinterpret_cast<DWORD>(PatchDialogueFilteredFor<TES3::Dialogue::GetFilteredInfoContext::HyperlinkParser>)); // Font calculation
 
 		// Event: Repair
 		genCallEnforced(0x59A3AE, 0x60E260, reinterpret_cast<DWORD>(OnClickRepairOrRecharge));

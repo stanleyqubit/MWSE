@@ -55,6 +55,7 @@
 #include "LuaDetermineActionEvent.h"
 #include "LuaDeterminedActionEvent.h"
 #include "LuaDialogueEnvironmentCreatedEvent.h"
+#include "LuaDialogueFilteredEvent.h"
 #include "LuaDisarmTrapEvent.h"
 #include "LuaDispositionEvent.h"
 #include "LuaEnchantChargeUseEvent.h"
@@ -222,6 +223,7 @@ namespace mwse::lua::event {
 		usertypeDefinition["determineAction"] = sol::property(&DetermineActionEvent::getEventEnabled, &DetermineActionEvent::setEventEnabled);
 		usertypeDefinition["determinedAction"] = sol::property(&DeterminedActionEvent::getEventEnabled, &DeterminedActionEvent::setEventEnabled);
 		usertypeDefinition["dialogueEnvironmentCreated"] = sol::property(&DialogueEnvironmentCreatedEvent::getEventEnabled, &DialogueEnvironmentCreatedEvent::setEventEnabled);
+		usertypeDefinition["dialogueFiltered"] = sol::property(&DialogueFilteredEvent::getEventEnabled, &DialogueFilteredEvent::setEventEnabled);
 		usertypeDefinition["disposition"] = sol::property(&DispositionEvent::getEventEnabled, &DispositionEvent::setEventEnabled);
 		usertypeDefinition["enchantChargeUse"] = sol::property(&EnchantChargeUseEvent::getEventEnabled, &EnchantChargeUseEvent::setEventEnabled);
 		usertypeDefinition["enchantedItemCreated"] = sol::property(&EnchantedItemCreatedEvent::getEventEnabled, &EnchantedItemCreatedEvent::setEventEnabled);

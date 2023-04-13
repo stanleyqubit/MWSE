@@ -3,6 +3,7 @@
 #include "LuaManager.h"
 
 #include "LuaJournalEvent.h"
+#include "LuaDialogueFilteredEvent.h"
 
 #include "LuaUtil.h"
 
@@ -122,18 +123,7 @@ namespace TES3 {
 		return nullptr;
 	}
 
-	DialogueInfo* Dialogue::getDeepFilteredInfo(Actor* actor, Reference* reference, bool flag) {
-		auto info = getFilteredInfo(actor, reference, flag);
-		if (info == nullptr) {
-			auto dialogue = getDialogue(3, 0);
-			if (dialogue) {
-				info = dialogue->getFilteredInfo(actor, reference, flag);
-			}
-		}
-		return info;
-	}
-
-	const auto TES3_Dialogue_getFilteredInfo = reinterpret_cast<DialogueInfo* (__thiscall*)(Dialogue*, Actor*, Reference*, bool)>(0x4B29E0);
+	const auto TES3_Dialogue_getFilteredInfo = reinterpret_cast<DialogueInfo * (__thiscall*)(Dialogue*, Actor*, Reference*, bool)>(0x4B29E0);
 	DialogueInfo* Dialogue::getFilteredInfo(Actor* actor, Reference* reference, bool flag) {
 		// Cache some heavier values.
 		if (actor->objectType == ObjectType::NPC) {
@@ -152,6 +142,19 @@ namespace TES3 {
 		return result;
 	}
 
+	DialogueInfo* Dialogue::getFilteredInfoWithContext(Actor* actor, Reference* reference, bool flag, GetFilteredInfoContext context) {
+		auto info = getFilteredInfo(actor, reference, flag);
+		if (info == nullptr) {
+			return nullptr;
+		}
+
+		if (mwse::lua::event::DialogueFilteredEvent::getEventEnabled()) {
+			mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle().triggerEvent(new mwse::lua::event::DialogueFilteredEvent(this, info, actor, reference, context));
+		}
+
+		return info;
+	}
+
 	std::string Dialogue::toJson() {
 		std::ostringstream ss;
 		ss << "\"tes3dialogue:" << name << "\"";
@@ -167,9 +170,23 @@ namespace TES3 {
 		return addToJournal(index, actor);
 	}
 
+	DialogueInfo* Dialogue::getDeepFilteredInfo(Actor* actor, Reference* reference, bool flag, GetFilteredInfoContext context) {
+		auto info = getFilteredInfoWithContext(actor, reference, flag, context);
+		if (info == nullptr) {
+			auto dialogue = getDialogue(3, 0);
+			if (dialogue) {
+				info = dialogue->getFilteredInfoWithContext(actor, reference, flag, context);
+			}
+		}
+		return info;
+	}
+
 	DialogueInfo* Dialogue::getDeepFilteredInfo_lua(sol::table params) {
-		TES3::MobileActor* mobile = mwse::lua::getOptionalParamMobileActor(params, "actor");
-		return getDeepFilteredInfo(reinterpret_cast<TES3::Actor*>(mobile->reference->baseObject), mobile->reference, true);
+		using namespace mwse::lua;
+		using namespace mwse::lua::event;
+		const auto mobile = getOptionalParamMobileActor(params, "actor");
+		const auto context = (GetFilteredInfoContext)getOptionalParam(params, "context", (int)GetFilteredInfoContext::Script);
+		return getDeepFilteredInfo(reinterpret_cast<TES3::Actor*>(mobile->reference->baseObject), mobile->reference, true, context);
 	}
 
 	DialogueInfo* Dialogue::getJournalInfo(sol::optional<int> index) const {

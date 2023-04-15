@@ -72,15 +72,11 @@ namespace TES3 {
 				return false;
 			}
 		}
-		else if (pcRank != -1 && context.speakerBaseActor->objectType == ObjectType::NPC) {
-			const auto speakerFaction = static_cast<NPC*>(context.speakerBaseActor)->getFaction();
-			if (speakerFaction == nullptr || pcRank > speakerFaction->getEffectivePlayerRank()) {
-				return false;
-			}
-		}
 
 		// NPC only conditions.
 		if (context.speakerBaseActor->objectType == ObjectType::NPC) {
+			const auto speakerFaction = context.speakerBaseActor->getFaction();
+
 			// Check for race condition.
 			if (context.filterRace && context.speakerBaseActor->getRace() != context.filterRace) {
 				return false;
@@ -97,13 +93,25 @@ namespace TES3 {
 				return false;
 			}
 
-			// Check for faction condition.
-			if (context.filterFaction && context.speakerBaseActor->getFaction() != context.filterFaction) {
-				return false;
+			// Check for player faction membership/rank in speaker's faction.
+			if (pcRank != -1 && !context.filterPlayerFaction) {
+				if (speakerFaction == nullptr || pcRank > speakerFaction->getEffectivePlayerRank()) {
+					return false;
+				}
+			}
+
+			// Check for faction condition, with no-faction special case.
+			if (context.filterFaction) {
+				if (reinterpret_cast<int>(context.filterFaction) == -1 && speakerFaction != nullptr) {
+					return false;
+				}
+				if (speakerFaction != context.filterFaction) {
+					return false;
+				}
 			}
 
 			// Check for faction rank condition.
-			if (npcRank != -1 && context.speakerBaseActor->getFactionRank() < npcRank) {
+			if (npcRank != -1 && (speakerFaction == nullptr || context.speakerBaseActor->getFactionRank() < npcRank)) {
 				return false;
 			}
 

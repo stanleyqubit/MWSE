@@ -4253,13 +4253,19 @@ namespace mwse::lua {
 
 		// Fire event.
 		if (event::CalcHitDetectionConeEvent::getEventEnabled()) {
+			const double radiansToDegrees = 57.29577951308232;
+			double degreesXY = radiansToDegrees * std::asin(fCombatAngleXY);
+			double degreesZ = radiansToDegrees * std::asin(fCombatAngleZ);
+
 			auto stateHandle = mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle();
-			sol::object response = stateHandle.triggerEvent(new event::CalcHitDetectionConeEvent(attacker, nullptr, attackReach, std::acos(fCombatAngleXY), std::acos(fCombatAngleZ)));
+			sol::object response = stateHandle.triggerEvent(new event::CalcHitDetectionConeEvent(attacker, nullptr, attackReach, degreesXY, degreesZ));
 			if (response.get_type() == sol::type::table) {
 				sol::table eventData = response;
 				attackReach = eventData["reach"];
-				fCombatAngleXY = float(std::cos(double(eventData["angleXY"])));
-				fCombatAngleZ = float(std::cos(double(eventData["angleZ"])));
+				degreesXY = eventData["angleXY"];
+				degreesZ = eventData["angleZ"];
+				fCombatAngleXY = float(std::sin(std::min(90.0, degreesXY) / radiansToDegrees));
+				fCombatAngleZ = float(std::sin(std::min(90.0, degreesZ) / radiansToDegrees));
 			}
 		}
 
@@ -4317,8 +4323,12 @@ namespace mwse::lua {
 
 		// Fire event.
 		if (event::CalcHitDetectionConeEvent::getEventEnabled()) {
+			const double radiansToDegrees = 57.29577951308232;
+			double degreesXY = radiansToDegrees * std::asin(fCombatAngleXY);
+			double degreesZ = radiansToDegrees * std::asin(fCombatAngleZ);
+
 			auto stateHandle = mwse::lua::LuaManager::getInstance().getThreadSafeStateHandle();
-			sol::object response = stateHandle.triggerEvent(new event::CalcHitDetectionConeEvent(attacker, target, attackReach, std::acos(fCombatAngleXY), std::acos(fCombatAngleZ)));
+			sol::object response = stateHandle.triggerEvent(new event::CalcHitDetectionConeEvent(attacker, target, attackReach, degreesXY, degreesZ));
 			if (response.get_type() == sol::type::table) {
 				sol::table eventData = response;
 				attackReach = eventData["reach"];

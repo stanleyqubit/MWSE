@@ -7,7 +7,7 @@
 #include "TES3Reference.h"
 
 namespace mwse::lua::event {
-	CalcHitDetectionConeEvent::CalcHitDetectionConeEvent(TES3::MobileActor* attacker, TES3::MobileActor* target, float reach, float angleXY, float angleZ) :
+	CalcHitDetectionConeEvent::CalcHitDetectionConeEvent(TES3::MobileActor* attacker, TES3::MobileActor* target, float reach, double angleXY, double angleZ) :
 		ObjectFilteredEvent("calcHitDetectionCone", attacker->reference),
 		m_Attacker(attacker),
 		m_Target(target),

@@ -3,6 +3,9 @@
 
 Mods can create new GUIs. One GUI that that MWSE ships with is the Mod Configuration Menu. By registering into this system, mods can create settings pages for their mods in a place where users can easily find and manipulate them.
 
+!!! note
+    The complete MCM API documentation doesn't exist yet. You can browse its predecessor [EasyMCM's documentation](https://easymcm.readthedocs.io/en/latest/).
+
 ## Simplest Example
 
 Below is the simplest code required to setup a mod config:
@@ -91,7 +94,7 @@ MCM has a lot of features and one of the most commonly-used components is the Si
             "The mod is very awesome. And this is its awesome description.\n",
     })
 
-    settings:createYesNoButton{
+    settings:createYesNoButton({
         label = "Enable Mod",
 		-- This description will be displayed at the right panel if the button is moused over.
         description =
@@ -101,7 +104,7 @@ MCM has a lot of features and one of the most commonly-used components is the Si
             "\n" ..
             "Default: yes",
         variable = mwse.mcm:createTableVariable({ id = "enabled", table = config }),
-    }
+    })
 	```
 
 ### Key Binder
@@ -110,12 +113,12 @@ If your mod adds any hotkey function, a hotkey rebind in the mod config menu is 
 
 !!! example "**MyMod\\main.lua**"
 	```lua
-	settings:createKeyBinder{
+	settings:createKeyBinder({
 		label = "Assign Keybind",
 		description = "Assign a new keybind to perform awesome tasks.",
 		variable = mwse.mcm.createTableVariable{ id = "keybind", table = config },
 		allowCombinations = true,
-	}
+	})
 	```
 
 ### Exclusions Page
@@ -124,7 +127,7 @@ Let's say your My Awesome Mod makes certain ingredients non-edible. Using an Exc
 
 !!! example "**MyMod\\main.lua**"
 	```lua
-	template:createExclusionsPage{
+	template:createExclusionsPage({
 		label = "Non-Edible Ingredients",
 		description = "Ingredients that can't be directly consumed via equipping.",
 		leftListLabel = "Non-Edible Ingredients",
@@ -137,7 +140,7 @@ Let's say your My Awesome Mod makes certain ingredients non-edible. Using an Exc
 		filters = {
 			{ label = "Ingredients", type = "Object", objectType = tes3.objectType.ingredient }, 
 		},
-	}
+	})
 	```
 
 There is also a more customized way to filter the right list. The following code filters the right list by ingredients with value higher than 100 gold.
@@ -155,8 +158,8 @@ There is also a more customized way to filter the right list. The following code
 							table.insert(ingreds, ingred)
 						end
 					end
-					table.sort(merchants)
-					return merchants
+					table.sort(ingreds)
+					return ingreds
                 end 
 			}, 
 		},

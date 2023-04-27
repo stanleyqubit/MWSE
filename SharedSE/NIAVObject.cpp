@@ -375,7 +375,7 @@ namespace NI {
 		// Ignore collision-disabled subgraphs.
 		if (object->isOfType(RTTIStaticPtr::NiCollisionSwitch)) {
 			const auto asCollisionSwitch = static_cast<const CollisionSwitch*>(object);
-			if (asCollisionSwitch->getCollisionActive()) {
+			if (!asCollisionSwitch->getCollisionActive()) {
 				return;
 			}
 		}

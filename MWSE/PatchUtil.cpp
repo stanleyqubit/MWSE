@@ -28,6 +28,7 @@
 #include "TES3VFXManager.h"
 #include "TES3WorldController.h"
 
+#include "NICollisionSwitch.h"
 #include "NIFlipController.h"
 #include "NILinesData.h"
 #include "NISortAdjustNode.h"
@@ -1054,6 +1055,12 @@ namespace mwse::patch {
 		// Patch: Add deterministic subtree ordering mode to NiSortAdjustNode. Fix cloning with no accumulator.
 		overrideVirtualTableEnforced(0x750580, 0x78, 0x6DE030, reinterpret_cast<DWORD>(PatchNISortAdjustNodeDisplay));
 		genCallUnprotected(0x6DE21B, reinterpret_cast<DWORD>(PatchNISortAdjustNodeCloneAccumulator));
+
+		// Patch: Add pick proxy behaviour to NiCollisionSwitch.
+		auto CollisionSwitch_linkObject = &NI::CollisionSwitch::linkObject;
+		auto CollisionSwitch_findIntersectons = &NI::CollisionSwitch::findIntersections;
+		overrideVirtualTableEnforced(0x74F418, 0x10, 0x6D7100, *reinterpret_cast<DWORD*>(&CollisionSwitch_linkObject));
+		overrideVirtualTableEnforced(0x74F418, 0x88, 0x6D6E10, *reinterpret_cast<DWORD*>(&CollisionSwitch_findIntersectons));
 
 		// Patch: Improve error reporting by including the source mod next to object IDs in load error messages.
 		// In Cell::loadReference:

@@ -50,6 +50,8 @@ namespace se::cs::dialog::render_window {
 
 	using gCurrentCell = memory::ExternalGlobal<Cell*, 0x6CF7B8>;
 
+	using gIsTranslating = memory::ExternalGlobal<bool, 0x6CF782>;
+	using gIsRotating = memory::ExternalGlobal<bool, 0x6CF783>;
 	using gIsHoldingV = memory::ExternalGlobal<bool, 0x6CF789>;
 	using gIsHoldingX = memory::ExternalGlobal<bool, 0x6CF786>;
 	using gIsHoldingY = memory::ExternalGlobal<bool, 0x6CF787>;
@@ -1680,6 +1682,20 @@ namespace se::cs::dialog::render_window {
 		movementContext.reset();
 	}
 
+	void PatchDialogProc_BeforeLMouseButtonUp(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		// Prevent selection changes during object rotation mode. Prevents non-undoable changes, and a crash if the selection becomes empty.
+		if (gIsRotating::get()) {
+			PatchDialogProc_OverrideResult = FALSE;
+		}
+	}
+
+	void PatchDialogProc_BeforeLMouseDoubleClick(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+		// Prevent opening details dialog during object rotation mode.
+		if (gIsRotating::get()) {
+			PatchDialogProc_OverrideResult = FALSE;
+		}
+	}
+
 	void PatchDialogProc_BeforeRMouseButtonDown(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		constexpr auto comboPickLandscapeTexture = MK_CONTROL | MK_RBUTTON;
 		if ((wParam & comboPickLandscapeTexture) == comboPickLandscapeTexture) {
@@ -1811,6 +1827,12 @@ namespace se::cs::dialog::render_window {
 			break;
 		case WM_LBUTTONDOWN:
 			PatchDialogProc_BeforeLMouseButtonDown(hWnd, msg, wParam, lParam);
+			break;
+		case WM_LBUTTONUP:
+			PatchDialogProc_BeforeLMouseButtonUp(hWnd, msg, wParam, lParam);
+			break;
+		case WM_LBUTTONDBLCLK:
+			PatchDialogProc_BeforeLMouseDoubleClick(hWnd, msg, wParam, lParam);
 			break;
 		case WM_RBUTTONDOWN:
 			PatchDialogProc_BeforeRMouseButtonDown(hWnd, msg, wParam, lParam);

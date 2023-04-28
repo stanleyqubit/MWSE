@@ -26,8 +26,11 @@ namespace NI {
 		if (name && strcmp(name, pickProxyObjectName) == 0) {
 			BITMASK_SET_ON(flags, flagPickProxy);
 
-			auto proxy = children.at(children.endIndex - 1);
-			proxy->setAppCulled(true);
+			// Ensure pick proxy starts culled.
+			if (children.filledCount > 0) {
+				auto& proxy = children.at(0);
+				proxy->setAppCulled(true);
+			}
 		}
 	}
 
@@ -38,11 +41,14 @@ namespace NI {
 			return false;
 		}
 		else if (BITMASK_TEST(flags, flagPickProxy)) {
-			// Use last child as a proxy for picking (raycasts) on this subtree.
-			auto proxy = children.at(children.endIndex - 1);
-			proxy->setAppCulled(false);
-			auto result = proxy->vTable.asAVObject->findIntersections(proxy, position, direction, pick);
-			proxy->setAppCulled(true);
+			// Use first child as a proxy for picking (raycasts) on this subtree.
+			bool result = false;
+			if (children.filledCount > 0) {
+				auto& proxy = children.at(0);
+				proxy->setAppCulled(false);
+				result = proxy->vTable.asAVObject->findIntersections(proxy, position, direction, pick);
+				proxy->setAppCulled(true);
+			}
 			return result;
 		}
 		else {

@@ -148,8 +148,8 @@ This field containg the spell the actor is currently casting. If not in casting 
 
 ***
 
-### `selectionPriority`
-<div class="search_terms" style="display: none">selectionpriority</div>
+### `spellPriority`
+<div class="search_terms" style="display: none">spellpriority</div>
 
 No description yet available.
 

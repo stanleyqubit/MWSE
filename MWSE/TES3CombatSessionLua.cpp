@@ -29,7 +29,7 @@ namespace mwse::lua {
 		usertypeDefinition["selectedShield"] = sol::readonly_property(&TES3::CombatSession::selectedShield);
 		usertypeDefinition["selectedSpell"] = &TES3::CombatSession::selectedSpell;
 		usertypeDefinition["selectedWeapon"] = sol::readonly_property(&TES3::CombatSession::selectedWeapon);
-		usertypeDefinition["selectionPriority"] = &TES3::CombatSession::selectionPriority;
+		usertypeDefinition["spellPriority"] = &TES3::CombatSession::spellPriority;
 
 		// Basic function binding.
 		usertypeDefinition["selectAlchemyWithEffect"] = &TES3::CombatSession::chooseAlchemyWithEffect;

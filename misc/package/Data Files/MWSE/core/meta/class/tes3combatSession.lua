@@ -32,7 +32,7 @@
 --- @field selectedShield tes3equipmentStack *Read-only*. No description yet available.
 --- @field selectedSpell tes3spell This field containg the spell the actor is currently casting. If not in casting state this field has `nil` value.
 --- @field selectedWeapon tes3equipmentStack *Read-only*. The weapon the actor is using in this combat session.
---- @field selectionPriority number No description yet available.
+--- @field spellPriority number No description yet available.
 tes3combatSession = {}
 
 --- This method equips an item to the mobile in this combat sesion.

@@ -39,15 +39,15 @@ namespace TES3 {
 		Spell * selectedSpell; // 0x20
 		Unknown_0x24* unknown_0x24;
 		int nextAction; // 0x28
-		float selectionPriority; // 0x2C
+		float spellPriority; // 0x2C
 		float alchemyPriority; // 0x30
-		Deque<Spell*> spells; // 0x38
-		float unknown_0x40;
-		float unknown_0x44;
+		Deque<Spell*> spells; // 0x34
+		float combatDelayTimer; // 0x40
+		float combatDelayNextHitTime; // 0x44
 		signed char potionUseFlag; // 0x48
-		signed char unknown_0x49;
-		signed char unknown_0x4A;
-		signed char unknown_0x4B;
+		signed char spellUseFlag; // 0x49
+		signed char enchantedItemUseFlag; // 0x4A
+		char padding_0x4B;
 
 		//
 		// Related static functions.

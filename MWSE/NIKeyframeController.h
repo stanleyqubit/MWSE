@@ -6,7 +6,17 @@
 
 namespace NI {
 	struct AnimationKey {
-		enum Type : unsigned int {
+		enum class ContentType : unsigned int {
+			Float,
+			Position,
+			Rotation,
+			Color,
+			Text,
+			Vis,
+
+			COUNT,
+		};
+		enum class KeyType : unsigned int {
 			NoInterp,
 			Linear,
 			Bezier,
@@ -17,9 +27,14 @@ namespace NI {
 		};
 
 		float timing; // 0x0
+		
+		using FillDerivedValuesFunction = void (__cdecl*)(AnimationKey* keys, unsigned int keyCount, KeyType keyType);
+		static FillDerivedValuesFunction getFillDerivedValuesFunction(ContentType content, KeyType key);
+
 	};
 	static_assert(sizeof(AnimationKey) == 0x4, "NI::AnimationKey failed size validation");
-	static_assert(AnimationKey::Type::COUNT == 5, "NI::AnimationKey::Type failed enum count validation");
+	static_assert(static_cast<unsigned int>(AnimationKey::ContentType::COUNT) == 6u, "NI::AnimationKey::ContentType failed enum count validation");
+	static_assert(static_cast<unsigned int>(AnimationKey::KeyType::COUNT) == 5, "NI::AnimationKey::KeyType failed enum count validation");
 
 	struct FloatKey : AnimationKey {
 		float value; // 0x4
@@ -82,7 +97,7 @@ namespace NI {
 			ORDER_COUNT,
 		};
 		unsigned int numKeys[3]; // 0x14
-		Type keyTypes[3]; // 0x20
+		KeyType keyTypes[3]; // 0x20
 		Order order; // 0x2C;
 		AmbiguousFloatKeyPtr keys[3]; // 0x30
 		unsigned int lastIndices[3]; // 0x38
@@ -136,17 +151,20 @@ namespace NI {
 	struct KeyframeData : Object {
 		unsigned int rotationKeyCount; // 0x8
 		AmbiguousRotKeyPtr rotationKeys; // 0xC
-		AnimationKey::Type rotationType; // 0x10
+		AnimationKey::KeyType rotationType; // 0x10
 		unsigned int positionKeyCount; // 0x14
 		AmbiguousPosKeyPtr positionKeys; // 0x18
-		AnimationKey::Type positionType; // 0x1C
+		AnimationKey::KeyType positionType; // 0x1C
 		unsigned int scaleKeyCount; // 0x20
 		AmbiguousFloatKeyPtr scaleKeys; // 0x24
-		AnimationKey::Type scaleType; // 0x28
+		AnimationKey::KeyType scaleType; // 0x28
 
 		sol::object getRotationKeys_lua(sol::this_state L);
 		sol::object getPositionKeys_lua(sol::this_state L);
 		sol::object getScaleKeys_lua(sol::this_state L);
+
+		void updateDerivedValues();
+		void replaceScaleData(FloatKey* keys, unsigned int numKeys, AnimationKey::KeyType keyType);
 
 	};
 	static_assert(sizeof(KeyframeData) == 0x2C, "NI::KeyframeData failed size validation");

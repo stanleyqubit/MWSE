@@ -7,7 +7,7 @@ namespace NI {
 	struct PosData : Object {
 		unsigned int keyCount; // 0x8
 		AmbiguousPosKeyPtr keys; // 0xC
-		AnimationKey::Type keyType; // 0x10
+		AnimationKey::KeyType keyType; // 0x10
 
 		unsigned int getKeyDataSize() const;
 	};

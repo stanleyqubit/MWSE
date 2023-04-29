@@ -215,3 +215,14 @@ local success = myObject:saveBinary(path)
 
 * `success` (boolean): If true the object was successfully serialized.
 
+***
+
+### `updateDerivedValues`
+<div class="search_terms" style="display: none">updatederivedvalues, derivedvalues</div>
+
+This updates the keyframe data's position, rotation, and scale keys as is appropriate for their key types.
+
+```lua
+myObject:updateDerivedValues()
+```
+

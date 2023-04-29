@@ -268,6 +268,9 @@ namespace mwse::lua {
 			usertypeDefinition["scaleKeyCount"] = sol::readonly_property(&NI::KeyframeData::scaleKeyCount);
 			usertypeDefinition["scaleKeys"] = sol::readonly_property(&NI::KeyframeData::getScaleKeys_lua);
 			usertypeDefinition["scaleType"] = sol::readonly_property(&NI::KeyframeData::scaleType);
+
+			// Basic function binding.
+			usertypeDefinition["updateDerivedValues"] = &NI::KeyframeData::updateDerivedValues;
 		}
 
 		// Bind NI::KeyframeController

@@ -339,6 +339,7 @@ namespace TES3 {
 
 		bool getWeaponReady() const;
 		void setWeaponReady(bool value);
+		bool forceWeaponAttack(int attackType = 0);
 
 		void updateOpacity();
 		void notifyActorDeadOrDestroyed(MobileActor* mobileActor);

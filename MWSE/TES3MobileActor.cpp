@@ -20,6 +20,7 @@
 #include "TES3ActorAnimationController.h"
 #include "TES3Alchemy.h"
 #include "TES3AudioController.h"
+#include "TES3CombatSession.h"
 #include "TES3Enchantment.h"
 #include "TES3DataHandler.h"
 #include "TES3GameSetting.h"
@@ -1283,6 +1284,75 @@ namespace TES3 {
 			// Start unreadying action.
 			actionData.animStateAttack = AttackAnimationState::UnreadyWeap;
 		}
+	}
+
+	bool MobileActor::forceWeaponAttack(int attackType) {
+		// This function is based on CombatSession::checkAttackWithWeapon.
+		// It is modified to start an attack without reach or timer checks.
+		const auto isWeaponAnimNotCreatureAttack = reinterpret_cast<bool(__thiscall*)(MobileActor*)>(0x528050);
+		if (isWeaponAnimNotCreatureAttack(this) && !getFlagWeaponDrawn()) {
+			return false;
+		}
+		if (readiedWeapon && readiedWeapon->object->getSceneGraphNode() == nullptr) {
+			return false;
+		}
+
+		if (actionData.animStateAttack == AttackAnimationState::Wait) {
+			actionData.animStateAttack = AttackAnimationState::Idle;
+		}
+
+		auto animState = actionData.animStateAttack;
+		auto animGroup = actionData.currentAnimGroup;
+		const unsigned char Hit1 = 0x13, SwimHit3 = 0x1A;
+
+		if (animState == AttackAnimationState::Idle
+			|| (animState == AttackAnimationState::ReadyingWeap && animGroup >= Hit1 && animGroup <= SwimHit3)) {
+			auto data_animGroupNoteClass = reinterpret_cast<int*>(0x78B0A8);
+			auto weaponAnimGroup = this->vTable.mobileActor->getReadiedWeaponAnimationGroup(this);
+
+			switch (data_animGroupNoteClass[weaponAnimGroup]) {
+			case 2: // Creature attack
+			{
+				int roll100 = mwse::tes3::rand() % 100;
+				if (roll100 < 33) {
+					actionData.physicalAttackType = PhysicalAttackType::Creature1;
+				}
+				else if (roll100 < 66) {
+					actionData.physicalAttackType = PhysicalAttackType::Creature2;
+				}
+				else {
+					actionData.physicalAttackType = PhysicalAttackType::Creature3;
+				}
+				break;
+			}
+			case 3: // Projectile weapon
+				if (!getMobileActorMovementFlag(ActorMovement::Swimming)) {
+					actionData.physicalAttackType = PhysicalAttackType::Projectile;
+				}
+				break;
+			case 7: // Melee weapon
+				const auto getWeightedRandomAttackDirection = reinterpret_cast<PhysicalAttackType(__thiscall*)(CombatSession*)>(0x5373B0);
+				if (attackType > 0) {
+					actionData.physicalAttackType = (PhysicalAttackType)attackType;
+				}
+				else if (combatSession) {
+					actionData.physicalAttackType = getWeightedRandomAttackDirection(combatSession);
+				}
+				else {
+					actionData.physicalAttackType = PhysicalAttackType::Slash;
+				}
+				break;
+			}
+
+			float attackSwingReleaseAt = 0.1f + 0.01f * (mwse::tes3::rand() % 100);
+			attackSwingReleaseAt = std::min(1.0f, attackSwingReleaseAt);
+			if (combatSession) {
+				combatSession->combatDelayTimer = 0;
+			}
+			animationController.asActor->startAttackAnimation(attackSwingReleaseAt);
+			return true;
+		}
+		return false;
 	}
 
 	void MobileActor::updateOpacity() {

@@ -6009,7 +6009,6 @@ namespace mwse::lua {
 		auto projectileManagerResolveCollisions = &TES3::ProjectileManager::resolveCollisions;
 		genCallEnforced(0x5638F8, 0x5753A0, *reinterpret_cast<DWORD*>(&projectileManagerResolveCollisions));
 
-	// Patch: Modifiable physical hit detection cone.
 		// Warn about MGE being disabled.
 		if (!InstructionStore::getInstance().isOpcode(OpCode::xGetGS)) {
 			log::getLog() << "WARNING: MGE XE is flagged as disabled. Some mods may have unintended behavior." << std::endl;

@@ -146,6 +146,7 @@ namespace TES3 {
 	struct Vector4;
 	struct VFX;
 	struct VFXManager;
+	struct WaterController;
 	struct Weapon;
 	struct WearablePart;
 	struct Weather;

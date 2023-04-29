@@ -152,6 +152,7 @@
 #include "TES3UIWidgetsLua.h"
 #include "TES3VectorsLua.h"
 #include "TES3VFXManagerLua.h"
+#include "TES3WaterControllerLua.h"
 #include "TES3WeaponLua.h"
 #include "TES3WeatherControllerLua.h"
 #include "TES3WeatherLua.h"
@@ -525,6 +526,7 @@ namespace mwse::lua {
 		bindTES3Statistic();
 		bindTES3Vectors();
 		bindTES3VFX();
+		bindTES3WaterController();
 		bindTES3Weapon();
 		bindTES3Weather();
 		bindTES3WeatherController();

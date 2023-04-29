@@ -24,6 +24,7 @@
 #include "TES3Sound.h"
 #include "TES3Spell.h"
 #include "TES3MagicEffect.h"
+#include "TES3WaterController.h"
 
 #include "NINode.h"
 #include "NISourceTexture.h"
@@ -118,6 +119,7 @@ namespace mwse::lua {
 			usertypeDefinition["nonDynamicData"] = sol::readonly_property(&TES3::DataHandler::nonDynamicData);
 			usertypeDefinition["threadSleepTime"] = sol::readonly_property(&TES3::DataHandler::threadSleepTime);
 			usertypeDefinition["useCellTransitionFader"] = &TES3::DataHandler::useCellTransitionFader;
+			usertypeDefinition["waterController"] = sol::readonly_property(&TES3::DataHandler::waterController);
 			usertypeDefinition["worldLandscapeRoot"] = sol::readonly_property(&TES3::DataHandler::worldLandscapeRoot);
 			usertypeDefinition["worldObjectRoot"] = sol::readonly_property(&TES3::DataHandler::worldObjectRoot);
 			usertypeDefinition["worldPickObjectRoot"] = sol::readonly_property(&TES3::DataHandler::worldPickObjectRoot);

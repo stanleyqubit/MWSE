@@ -288,7 +288,7 @@ namespace TES3 {
 		char unknown_0xB4E6;
 		char unknown_0xB4E7;
 		HashMap<const char*, NI::Pointer<NI::SourceTexture>>* textures; // 0xB4E8
-		void * waterController;
+		WaterController* waterController;
 		int unknown_0xB4F0;
 		int unknown_0xB4F4;
 		char unknown_0xB4F8;

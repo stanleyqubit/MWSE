@@ -865,8 +865,10 @@ namespace se::cs::dialog::render_window {
 			auto reference = target->reference;
 			reference->position = intersection + (reference->position - planeOrigin);
 			reference->unknown_0x10 = reference->position;
-			reference->sceneNode->localTranslate = reference->position;
-			reference->sceneNode->update(0.0f, true, true);
+			if (reference->sceneNode) {
+				reference->sceneNode->localTranslate = reference->position;
+				reference->sceneNode->update(0.0f, true, true);
+			}
 
 			// Avoid lighting updates when moving large number of targets.
 			if (selectionData->numberOfTargets <= 20) {

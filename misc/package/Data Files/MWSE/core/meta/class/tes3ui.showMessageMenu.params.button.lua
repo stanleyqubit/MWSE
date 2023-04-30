@@ -4,7 +4,7 @@
 --- @meta
 --- Layout for the buttons table passed to `tes3ui.showMessageMenu` function.
 --- @class tes3ui.showMessageMenu.params.button
---- @field callback fun(callbackParams: table) The function to call when this button is clicked.
+--- @field callback fun(callbackParams: table) The function to call when this button is clicked. This function will be passed the `callbackParams` table that was provided in `tes3ui.showMessageMenu`.
 --- @field enableRequirements fun(callbackParams: table): boolean|nil Function that, if provided, determines whether the button will call the callback when clicked, or be disabled + greyed out. This function will be passed the `callbackParams` table that was provided in `tes3ui.showMessageMenu`.
 --- @field showRequirements fun(callbackParams: table): boolean|nil If set, the button will only be visible if this function returns true. This function will be passed the `callbackParams` table that was provided in `tes3ui.showMessageMenu`.
 --- @field text string **Required.** The label on the button.

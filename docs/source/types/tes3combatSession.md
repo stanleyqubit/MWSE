@@ -107,7 +107,7 @@ Value | Behavior
 ### `selectedItem`
 <div class="search_terms" style="display: none">selecteditem</div>
 
-No description yet available.
+A potion or an enchanted item whose spell will be used.
 
 **Returns**:
 

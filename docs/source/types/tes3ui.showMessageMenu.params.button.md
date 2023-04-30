@@ -13,7 +13,7 @@ Layout for the buttons table passed to `tes3ui.showMessageMenu` function.
 ### `callback`
 <div class="search_terms" style="display: none">callback</div>
 
-The function to call when this button is clicked.
+The function to call when this button is clicked. This function will be passed the `callbackParams` table that was provided in `tes3ui.showMessageMenu`.
 
 **Returns**:
 

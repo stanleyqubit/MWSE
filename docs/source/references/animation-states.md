@@ -21,11 +21,12 @@ swingFollowHeavy | `7`
 readyingWeap     | `8`
 unreadyWeap      | `9`
 casting          | `10`
-casting2         | `11`
+castingFollow    | `11`
 readyingMagic    | `12`
 unreadyMagic     | `13`
 knockdown        | `14`
 knockedOut       | `15`
 pickingProbing   | `16`
+wait             | `17`
 dying            | `18`
 dead             | `19`

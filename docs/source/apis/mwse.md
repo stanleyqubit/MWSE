@@ -101,7 +101,7 @@ It is usually better to use `mwse.buildDate` instead.
 Configures MWSE to no longer execute a lua function instead when a script would run. This undoes the work of `mwse.overrideScript`.
 
 ```lua
-local result = mwse.clearScriptOverride(scriptId)
+local success = mwse.clearScriptOverride(scriptId)
 ```
 
 **Parameters**:
@@ -110,7 +110,7 @@ local result = mwse.clearScriptOverride(scriptId)
 
 **Returns**:
 
-* `result` (boolean)
+* `success` (boolean)
 
 ***
 
@@ -271,17 +271,17 @@ Configures MWSE to execute a given function instead when a script would run.
 In most cases its intended to stop the execution of the original mwscript script. You can do so in the callback function by calling `mwscript.stopScript()`.
 
 ```lua
-local result = mwse.overrideScript(scriptId, callback)
+local success = mwse.overrideScript(scriptId, callback)
 ```
 
 **Parameters**:
 
 * `scriptId` (string)
-* `callback` (function)
+* `callback` (fun(e: [mwseOverrideScriptCallbackData](../../types/mwseOverrideScriptCallbackData)))
 
 **Returns**:
 
-* `result` (boolean)
+* `success` (boolean)
 
 ??? example "Example: Here is an example of the most common use case for this function."
 

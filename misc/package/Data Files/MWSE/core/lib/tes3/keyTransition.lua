@@ -8,7 +8,10 @@ return {
 
 	-- Legacy values.
 	["test"] = 0,
+	---@deprecated
 	["up"] = 1,
+	---@deprecated
 	["down"] = 2,
+	---@deprecated
 	["toggled"] = 3,
 }

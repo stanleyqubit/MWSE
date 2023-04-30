@@ -337,11 +337,11 @@ function tes3ui.showJournal() end
 --- 
 --- `cancelCallback`: function? — *Optional*. The function to call when the user clicks the cancel button.
 --- 
---- `header`: string|fun(callbackParams: table): string|nil — *Optional*. The optional header displayed above the message. Can also be a function that returns a string.
+--- `header`: string|fun(): string|nil — *Optional*. The optional header displayed above the message. Can also be a function that returns a string.
 --- 
---- `message`: string|fun(callbackParams: table): string — **Required** The message at the top of the messagebox. Can also be a function that returns a string.
+--- `message`: string|fun(): string — **Required** The message at the top of the messagebox. Can also be a function that returns a string.
 --- 
---- `customBlock`: fun(parent: tes3uiElement)? — *Optional*. A custom element to be displayed below the header.
+--- `customBlock`: fun(parent: tes3uiElement)? — *Optional*. A custom element to be displayed below the header. This function is passed a parent tes3uiElement, which it can modify to add a custom block according to your needs.
 --- 
 --- `page`: integer? — *Default*: `1`. No description yet available.
 --- 
@@ -356,9 +356,9 @@ function tes3ui.showMessageMenu(params) end
 --- @field cancels boolean? *Default*: `false`. When set to true, a cancel button is automatically added to the buttom of the list, even when paginated.
 --- @field cancelText string? *Default*: `tes3.findGMST(tes3.gmst.sCancel).value`. The text on the cancel button.
 --- @field cancelCallback function? *Optional*. The function to call when the user clicks the cancel button.
---- @field header string|fun(callbackParams: table): string|nil *Optional*. The optional header displayed above the message. Can also be a function that returns a string.
---- @field message string|fun(callbackParams: table): string **Required** The message at the top of the messagebox. Can also be a function that returns a string.
---- @field customBlock fun(parent: tes3uiElement)? *Optional*. A custom element to be displayed below the header.
+--- @field header string|fun(): string|nil *Optional*. The optional header displayed above the message. Can also be a function that returns a string.
+--- @field message string|fun(): string **Required** The message at the top of the messagebox. Can also be a function that returns a string.
+--- @field customBlock fun(parent: tes3uiElement)? *Optional*. A custom element to be displayed below the header. This function is passed a parent tes3uiElement, which it can modify to add a custom block according to your needs.
 --- @field page integer? *Default*: `1`. No description yet available.
 --- @field pageSize integer? *Default*: `30`. No description yet available.
 

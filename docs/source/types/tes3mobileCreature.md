@@ -1812,7 +1812,7 @@ local result = myObject:forceWeaponAttack({ attackType = ..., swing = ... })
 
 * `params` (table)
 	* `attackType` (number): *Optional*. The physical attack type to use for melee weapons (slash, chop, thrust). Maps to values in [`tes3.physicalAttackType`](https://mwse.github.io/MWSE/references/physical-attack-types/) namespace. When not specified, it uses a weighted random attack type for NPCs and creatures.
-	* `swing` (number): The strength of the attack swing, in the range [0 to 1]. When not specified, the attack swing is randomized. This value cannot affect the player swing, as player attacks are driven by input.
+	* `swing` (number): *Optional*. The strength of the attack swing, in the range [0 to 1]. When not specified, the attack swing is randomized. This value cannot affect the player swing, as player attacks are driven by input.
 
 **Returns**:
 

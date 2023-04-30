@@ -1286,10 +1286,16 @@ namespace TES3 {
 		}
 	}
 
-	bool MobileActor::forceWeaponAttack(int attackType) {
+	bool MobileActor::forceWeaponAttack_lua(sol::optional<sol::table> params) {
+		auto attackType = mwse::lua::getOptionalParam<int>(params, "attackType");
+		auto swing = mwse::lua::getOptionalParam<float>(params, "swing");
+
 		// This function is based on CombatSession::checkAttackWithWeapon.
 		// It is modified to start an attack without reach or timer checks.
 		const auto isWeaponAnimNotCreatureAttack = reinterpret_cast<bool(__thiscall*)(MobileActor*)>(0x528050);
+		if (actionData.target == nullptr) {
+			return false;
+		}
 		if (isWeaponAnimNotCreatureAttack(this) && !getFlagWeaponDrawn()) {
 			return false;
 		}
@@ -1332,8 +1338,8 @@ namespace TES3 {
 				break;
 			case 7: // Melee weapon
 				const auto getWeightedRandomAttackDirection = reinterpret_cast<PhysicalAttackType(__thiscall*)(CombatSession*)>(0x5373B0);
-				if (attackType > 0) {
-					actionData.physicalAttackType = (PhysicalAttackType)attackType;
+				if (attackType) {
+					actionData.physicalAttackType = (PhysicalAttackType)attackType.value();
 				}
 				else if (combatSession) {
 					actionData.physicalAttackType = getWeightedRandomAttackDirection(combatSession);
@@ -1344,8 +1350,15 @@ namespace TES3 {
 				break;
 			}
 
-			float attackSwingReleaseAt = 0.1f + 0.01f * (mwse::tes3::rand() % 100);
-			attackSwingReleaseAt = std::min(1.0f, attackSwingReleaseAt);
+			float attackSwingReleaseAt;
+			if (swing) {
+				attackSwingReleaseAt = swing.value();
+			}
+			else {
+				// Vanilla randomized swing.
+				attackSwingReleaseAt = 0.1f + 0.01f * (mwse::tes3::rand() % 100);
+				attackSwingReleaseAt = std::min(1.0f, attackSwingReleaseAt);
+			}
 			if (combatSession) {
 				combatSession->combatDelayTimer = 0;
 			}

@@ -110,12 +110,12 @@ namespace mwse::patch {
 		auto athletics = &TES3::DataHandler::get()->nonDynamicData->skills[TES3::SkillID::Athletics];
 
 		// If we're running, use the first progress.
-		if (mobilePlayer->movementFlags & TES3::ActorMovement::Running) {
+		if (mobilePlayer->getMovementFlagRunning()) {
 			mobilePlayer->exerciseSkill(TES3::SkillID::Athletics, athletics->progressActions[0] * worldController->deltaTime);
 		}
 
 		// If we're swimming, use the second progress.
-		if (mobilePlayer->movementFlags & TES3::ActorMovement::Swimming) {
+		if (mobilePlayer->getMovementFlagSwimming()) {
 			mobilePlayer->exerciseSkill(TES3::SkillID::Athletics, athletics->progressActions[1] * worldController->deltaTime);
 		}
 	}
@@ -759,8 +759,8 @@ namespace mwse::patch {
 	static char tempErrorMessageObjectID[256];
 
 	const char* __fastcall PatchGetImprovedObjectIdentifier(TES3::Object* object) {
-		const char* id = object->getObjectID();
-		const char* source = object->sourceMod ? object->sourceMod->filename : "no source";
+		const auto id = object->getObjectID();
+		const auto source = object->sourceMod ? object->sourceMod->filename : "no source";
 		std::snprintf(tempErrorMessageObjectID, sizeof(tempErrorMessageObjectID), "%s' (%s)", id, source);
 		return tempErrorMessageObjectID;
 	}

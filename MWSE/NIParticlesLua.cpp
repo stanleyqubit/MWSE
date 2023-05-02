@@ -2,9 +2,10 @@
 
 #include "LuaManager.h"
 
-#include "NIParticleModifier.h"
-#include "NIParticles.h"
+#include "NIPerParticleData.h"
 #include "NIParticleSystemController.h"
+#include "NIParticles.h"
+#include "NIParticleModifier.h"
 
 namespace mwse::lua {
 	void bindNIParticles() {
@@ -103,6 +104,7 @@ namespace mwse::lua {
 			usertypeDefinition["spawnMultiplier"] = &NI::ParticleSystemController::spawnMultiplier;
 			usertypeDefinition["spawnSpeedChaos"] = &NI::ParticleSystemController::spawnSpeedChaos;
 			usertypeDefinition["spawnDirectionChaos"] = &NI::ParticleSystemController::spawnDirectionChaos;
+			usertypeDefinition["particleData"] = sol::readonly_property(&NI::ParticleSystemController::getPerParticleData);
 			usertypeDefinition["particleDataCount"] = sol::readonly_property(&NI::ParticleSystemController::particleDataCount);
 			usertypeDefinition["activeParticleCount"] = sol::readonly_property(&NI::ParticleSystemController::activeParticleCount);
 			usertypeDefinition["currentParticleIndex"] = sol::readonly_property(&NI::ParticleSystemController::currentParticleIndex);
@@ -112,6 +114,22 @@ namespace mwse::lua {
 			usertypeDefinition["staticBounds"] = &NI::ParticleSystemController::staticBounds;
 			usertypeDefinition["firstTime"] = &NI::ParticleSystemController::firstTime;
 			usertypeDefinition["lastEmit"] = &NI::ParticleSystemController::lastEmit;
+		}
+
+		// Binding for NI::PerParticleData.
+		{
+			// Start our usertype.
+			auto usertypeDefinition = state.new_usertype<NI::PerParticleData>("niPerParticleData");
+			usertypeDefinition["new"] = sol::no_constructor;
+
+			// Basic property binding.
+			usertypeDefinition["age"] = &NI::PerParticleData::age;
+			usertypeDefinition["generation"] = &NI::PerParticleData::generation;
+			usertypeDefinition["index"] = sol::readonly_property(&NI::PerParticleData::index);
+			usertypeDefinition["lastUpdate"] = &NI::PerParticleData::lastUpdate;
+			usertypeDefinition["lifeSpan"] = &NI::PerParticleData::lifeSpan;
+			usertypeDefinition["rotationAxis"] = &NI::PerParticleData::rotationAxis;
+			usertypeDefinition["velocity"] = &NI::PerParticleData::velocity;
 		}
 
 		// Binding for NI::ParticleModifier.

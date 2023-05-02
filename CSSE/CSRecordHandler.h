@@ -105,6 +105,8 @@ namespace se::cs {
 		GameSetting* getGameSettingForEffect(int id) const;
 
 		void getNameForEffect(char* buffer, size_t bufferSize, int effect, int attribute, int skill) const;
+
+		GameFile* getAvailableGameFileByIndex(unsigned int index) const;
 	};
 	static_assert(sizeof(RecordHandler) == 0xB0F8, "RecordHandler failed size validation");
 	static_assert(sizeof(RecordHandler::GameSettingsContainer) == 0x17D4, "RecordHandler::GameSettingsContainer failed size validation");

@@ -1696,7 +1696,7 @@ namespace mwse::lua {
 
 				// Allow overriding the spawn.
 				sol::object maybeCreature = eventData["creature"];
-				if (maybeCreature.is<TES3::MobileNPC*>() || maybeCreature.is<TES3::MobileCreature*>()) {
+				if (maybeCreature.is<TES3::Creature*>() || maybeCreature.is<TES3::NPC*>()) {
 					return maybeCreature.as<TES3::Actor*>();
 				}
 				else if (maybeCreature.is<TES3::LeveledCreature*>()) {

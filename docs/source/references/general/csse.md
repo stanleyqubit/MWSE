@@ -36,6 +36,8 @@ If you are using [Construction Set Better UI](https://www.nexusmods.com/morrowin
 
 ## Features
 
+Prefer to learn from videos? Danae has made [a non-exhaustive summary video of the CSSE](https://www.youtube.com/watch?v=uGOA7MIKsw0), last updated May 5th, 2023.
+
 ### General
 
 * General optimizations to UI rendering. Status updates are throttled to only update once every 20ms, which drastically improves load times.

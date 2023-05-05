@@ -155,6 +155,7 @@ namespace se::cs::winui {
 
 	BOOL GetOpenFileNameWithoutDirChangeA(LPOPENFILENAMEA param) {
 		// Cache current directory because GetOpenFileName changes it for some absurd reason.
+		// OFN_NOCHANGEDIR doesn't seem to act reliably in this situation.
 		const auto currentDir = std::filesystem::current_path();
 
 		auto result = GetOpenFileNameA(param);

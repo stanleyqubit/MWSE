@@ -535,6 +535,20 @@ namespace se::cs::window::main {
 		dialog.DoModal();
 	}
 
+	BOOL __stdcall PatchSaveESPGetSaveFileName(OPENFILENAMEA* ofn) {
+		// WINE compatibility shim for the save plugin file dialog.
+		// Provide a dummy file path buffer so that WINE will fill in the OFN struct without exiting early.
+		char tmp[MAX_PATH];
+		memset(tmp, 0, sizeof(tmp));
+
+		ofn->lpstrFile = tmp;
+		ofn->nMaxFile = sizeof(tmp);
+		auto result = GetSaveFileNameA(ofn);
+		ofn->lpstrFile = nullptr;
+		ofn->nMaxFile = 0;
+		return result;
+	}
+
 	void PatchDialogProc_BeforeCommand(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		switch (wParam) {
 		case MENU_ID_CSSE_SETTINGS:
@@ -997,6 +1011,9 @@ namespace se::cs::window::main {
 
 		// Patch: Use CSSE.dll's toolbar bitmap.
 		genCallUnprotected(0x46F97B, reinterpret_cast<DWORD>(PatchReplaceToolbarBitmap), 0x6);
+
+		// Patch: WINE compatibility shim for the save plugin file dialog.
+		genCallEnforced(0x4153FD, 0x573296, reinterpret_cast<DWORD>(PatchSaveESPGetSaveFileName));
 
 		// Patch: Extend window messages.
 		genJumpEnforced(0x401EF1, 0x444590, reinterpret_cast<DWORD>(PatchDialogProc));

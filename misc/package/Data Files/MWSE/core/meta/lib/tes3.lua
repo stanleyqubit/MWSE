@@ -1107,7 +1107,7 @@ function tes3.getEffectMagnitude(params) end
 --- `slot`: number? — *Optional*. Maps to [`tes3.armorSlot`](https://mwse.github.io/MWSE/references/armor-slots/) or [`tes3.clothingSlot`](https://mwse.github.io/MWSE/references/clothing-slots/). Used to filter equipment by slot.
 --- 
 --- `type`: number? — *Optional*. Maps to [`tes3.weaponType`](https://mwse.github.io/MWSE/references/weapon-types/). Used to filter equipment by type.
---- @return tes3equipmentStack stack No description yet available.
+--- @return tes3equipmentStack|nil stack The equipped stack, or `nil` if the queried stack was not found.
 function tes3.getEquippedItem(params) end
 
 ---Table parameter definitions for `tes3.getEquippedItem`.

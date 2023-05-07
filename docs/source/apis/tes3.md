@@ -1910,7 +1910,7 @@ local stack = tes3.getEquippedItem({ actor = ..., enchanted = ..., objectType = 
 
 **Returns**:
 
-* `stack` ([tes3equipmentStack](../../types/tes3equipmentStack))
+* `stack` ([tes3equipmentStack](../../types/tes3equipmentStack), nil): The equipped stack, or `nil` if the queried stack was not found.
 
 ??? example "Example: Get Player’s Equipped Light"
 

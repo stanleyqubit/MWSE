@@ -1380,12 +1380,13 @@ myObject:loadMenuPosition()
 Copies this element to a new parent, then destroys this element. This function can have unintended consequences. The specifics of what exact elements are being copied is important.
 
 ```lua
-local copy = myObject:move(to)
+local copy = myObject:move({ to = ... })
 ```
 
 **Parameters**:
 
-* `to` ([tes3uiElement](../../types/tes3uiElement)): Where to create the copy.
+* `params` (table)
+	* `to` ([tes3uiElement](../../types/tes3uiElement)): Where to create the copy.
 
 **Returns**:
 

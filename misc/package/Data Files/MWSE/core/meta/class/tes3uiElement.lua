@@ -515,9 +515,15 @@ function tes3uiElement:getTopLevelParent() end
 function tes3uiElement:loadMenuPosition() end
 
 --- Copies this element to a new parent, then destroys this element. This function can have unintended consequences. The specifics of what exact elements are being copied is important.
---- @param to tes3uiElement Where to create the copy.
+--- @param params tes3uiElement.move.params This table accepts the following values:
+--- 
+--- `to`: tes3uiElement — Where to create the copy.
 --- @return tes3uiElement copy The created copy.
-function tes3uiElement:move(to) end
+function tes3uiElement:move(params) end
+
+---Table parameter definitions for `tes3uiElement.move`.
+--- @class tes3uiElement.move.params
+--- @field to tes3uiElement Where to create the copy.
 
 --- Sets an `event` handler, which can add or override an existing event handler. The use of `registerBefore` or `registerAfter` is recommended if you do not want to replace the existing event handler. The eventID can be a standard `event` name, or an event specific to an element class. These can be accessed through [`tes3.uiEvent`](https://mwse.github.io/MWSE/references/ui-events/) for convenience. The callback receives an argument with the event data. See below for details.
 --- 

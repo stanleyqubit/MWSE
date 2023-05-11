@@ -142,6 +142,19 @@ Access to dontThreadLoad setting.
 
 ***
 
+### `lowestZInCurrentCell`
+<div class="search_terms" style="display: none">lowestzincurrentcell</div>
+
+*Read-only*. The Z coordinate of the lowest point in the current cell, which is the bottom of the bounding box of the lowest object. Only valid for interiors.
+
+This is used by the engine to check for the player falling out of bounds.
+
+**Returns**:
+
+* `result` (number)
+
+***
+
 ### `mainThread`
 <div class="search_terms" style="display: none">mainthread</div>
 

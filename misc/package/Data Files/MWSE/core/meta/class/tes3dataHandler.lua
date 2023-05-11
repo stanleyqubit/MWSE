@@ -16,6 +16,9 @@
 --- @field dontThreadLoad boolean Access to dontThreadLoad setting.
 --- @field exteriorCells tes3dataHandlerExteriorCellData[] *Read-only*. A table of nine [`tes3cellExteriorData`](https://mwse.github.io/MWSE/types/tes3cellExteriorData/) objects for all loaded exterior cells.
 --- @field lastExteriorCell tes3cell *Read-only*. Access to the last visited exterior cell.
+--- @field lowestZInCurrentCell number *Read-only*. The Z coordinate of the lowest point in the current cell, which is the bottom of the bounding box of the lowest object. Only valid for interiors.
+--- 
+--- This is used by the engine to check for the player falling out of bounds.
 --- @field mainThread number *Read-only*. A Windows handle to the main execution thread.
 --- @field mainThreadId number *Read-only*. The thread ID for the main execution thread.
 --- @field nonDynamicData tes3nonDynamicData *Read-only*. A child structure where core game objects are held.

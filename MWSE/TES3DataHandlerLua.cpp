@@ -114,6 +114,7 @@ namespace mwse::lua {
 			usertypeDefinition["currentInteriorCell"] = sol::readonly_property(&TES3::DataHandler::currentInteriorCell);
 			usertypeDefinition["exteriorCells"] = sol::readonly_property(&TES3::DataHandler::getExteriorCellData_lua);
 			usertypeDefinition["lastExteriorCell"] = sol::readonly_property(&TES3::DataHandler::lastExteriorCell);
+			usertypeDefinition["lowestZInCurrentCell"] = sol::readonly_property(&TES3::DataHandler::getLowestZInCurrentCell);
 			usertypeDefinition["mainThread"] = sol::readonly_property(&TES3::DataHandler::mainThread);
 			usertypeDefinition["mainThreadId"] = sol::readonly_property(&TES3::DataHandler::mainThreadID);
 			usertypeDefinition["nonDynamicData"] = sol::readonly_property(&TES3::DataHandler::nonDynamicData);

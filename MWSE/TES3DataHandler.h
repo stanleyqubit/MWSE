@@ -356,6 +356,7 @@ namespace TES3 {
 		//
 
 		Vector3 getLastExteriorPosition();
+		float getLowestZInCurrentCell() const;
 
 		void addSound(Sound* sound, Reference* reference = nullptr, int playbackFlags = 0, unsigned char volume = 250, float pitch = 1.0f, bool isVoiceover = false, int unknown = 0);
 		Sound* addSoundById(const char* soundId, Reference* reference = 0, int playbackFlags = 0, unsigned char volume = 250, float pitch = 1.0f, int unknown = 0);

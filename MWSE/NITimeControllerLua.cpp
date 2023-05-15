@@ -8,6 +8,7 @@
 #include "NIAnimationData.h"
 #include "NILookAtController.h"
 #include "NIKeyframeController.h"
+#include "NIPathController.h"
 #include "NITimeController.h"
 
 namespace mwse::lua {
@@ -289,6 +290,37 @@ namespace mwse::lua {
 			usertypeDefinition["lastUsedPositionIndex"] = &NI::KeyframeController::lastPosIndex;
 			usertypeDefinition["lastUsedRotationIndex"] = &NI::KeyframeController::lastRotIndex;
 			usertypeDefinition["lastUsedScaleIndex"] = &NI::KeyframeController::lastScaleIndex;
+		}
+
+		// Bind NI::PathController
+		{
+			// Start our usertype.
+			auto usertypeDefinition = state.new_usertype<NI::PathController>("niPathController");
+			usertypeDefinition["new"] = sol::no_constructor;
+
+			// Define inheritance structures. These must be defined in order from top to bottom. The complete chain must be defined.
+			usertypeDefinition[sol::base_classes] = sol::bases<NI::TimeController, NI::Object>();
+			setUserdataForNITimeController(usertypeDefinition);
+
+			// Basic property binding.
+			usertypeDefinition["lastUsedPathIndex"] = sol::readonly_property(&NI::PathController::lastUsedPathIndex);
+			usertypeDefinition["lastUsedPercentIndex"] = sol::readonly_property(&NI::PathController::lastUsedPercentIndex);
+			usertypeDefinition["pathData"] = sol::readonly_property(&NI::PathController::pathData);
+			usertypeDefinition["percentData"] = sol::readonly_property(&NI::PathController::percentData);
+			usertypeDefinition["totalLength"] = sol::readonly_property(&NI::PathController::totalLength);
+			usertypeDefinition["maxBankAngle"] = &NI::PathController::maxBankAngle;
+			usertypeDefinition["smoothing"] = &NI::PathController::smoothing;
+			usertypeDefinition["followAxis"] = &NI::PathController::followAxis;
+			usertypeDefinition["bankDirection"] = &NI::PathController::bankDirection;
+			usertypeDefinition["bank_related_data"] = &NI::PathController::bank_related_data;
+
+			// Functions exposed as properties.
+			usertypeDefinition["allowFlip"] = sol::property(&NI::PathController::getAllowFlip, &NI::PathController::setAllowFlip);
+			usertypeDefinition["bank"] = sol::property(&NI::PathController::getBank, &NI::PathController::setBank);
+			usertypeDefinition["constantVelocity"] = sol::property(&NI::PathController::getConstantVelocity, &NI::PathController::setConstantVelocity);
+			usertypeDefinition["flipFollowAxis"] = sol::property(&NI::PathController::getFlipFollowAxis, &NI::PathController::setFlipFollowAxis);
+			usertypeDefinition["follow"] = sol::property(&NI::PathController::getFollow, &NI::PathController::setFollow);
+			usertypeDefinition["openCurve"] = sol::property(&NI::PathController::getOpenCurve, &NI::PathController::setOpenCurve);
 		}
 	}
 }

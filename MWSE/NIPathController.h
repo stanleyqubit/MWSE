@@ -1,8 +1,7 @@
 #pragma once
 
+#include "NIAnimationData.h"
 #include "NITimeController.h"
-#include "NIFloatData.h"
-#include "NIPosData.h"
 
 namespace NI {
 	namespace PathControllerFlags {
@@ -30,8 +29,8 @@ namespace NI {
 	}
 
 	struct PathController : TimeController {
-		int lastPathInterpIndex; // 0x34
-		int lastPercentInterpIndex; // 0x38
+		int lastUsedPathIndex; // 0x34
+		int lastUsedPercentIndex; // 0x38
 		Pointer<PosData> pathData; // 0x3C
 		Pointer<FloatData> percentData; // 0x40
 		float* partialLengths; // 0x44
@@ -39,7 +38,7 @@ namespace NI {
 		float maxBankAngle; // 0x4C
 		float smoothing; // 0x50
 		short followAxis; // 0x54
-		float bank_related_58; // 0x58
+		float bank_related_data; // 0x58
 		int bankDirection; // 0x5C
 
 		//

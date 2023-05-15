@@ -1716,6 +1716,9 @@
     <ClInclude Include="NIAnimationKey.h">
       <Filter>Header Files\DataAdapters\NI</Filter>
     </ClInclude>
+    <ClInclude Include="NIPathController.h">
+      <Filter>Header Files\DataAdapters\NI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -3735,6 +3738,9 @@
       <Filter>Source Files\DataAdapters\NI</Filter>
     </ClCompile>
     <ClCompile Include="NIAnimationKey.cpp">
+      <Filter>Source Files\DataAdapters\NI</Filter>
+    </ClCompile>
+    <ClCompile Include="NIPathController.cpp">
       <Filter>Source Files\DataAdapters\NI</Filter>
     </ClCompile>
   </ItemGroup>

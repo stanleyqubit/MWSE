@@ -20,6 +20,7 @@
     <ClInclude Include="NIAccumulator.h" />
     <ClInclude Include="NIAnimationData.h" />
     <ClInclude Include="NIAnimationKey.h" />
+    <ClInclude Include="NIPathController.h" />
     <ClInclude Include="NISortAdjustNode.h" />
     <ClInclude Include="TES3DialogueFilterContext.h" />
     <ClInclude Include="TES3LandLua.h" />
@@ -720,6 +721,7 @@
     <ClCompile Include="NIParticles.cpp" />
     <ClCompile Include="NIParticlesLua.cpp" />
     <ClCompile Include="NIParticleSystemController.cpp" />
+    <ClCompile Include="NIPathController.cpp" />
     <ClCompile Include="NIProperty.cpp" />
     <ClCompile Include="NIQuaternion.cpp" />
     <ClCompile Include="NIQuaternionLua.cpp" />

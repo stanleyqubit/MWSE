@@ -22,6 +22,7 @@
 #include "NIParticleModifier.h"
 #include "NIParticles.h"
 #include "NIParticleSystemController.h"
+#include "NIPathController.h"
 #include "NIPixelData.h"
 #include "NIPointLight.h"
 #include "NIProperty.h"
@@ -228,6 +229,9 @@ namespace NI {
 				break;
 			case RTTIStaticPtr::NiParticleSystemController:
 				ref = sol::make_object_userdata(L, Pointer(static_cast<ParticleSystemController*>(this)));
+				break;
+			case RTTIStaticPtr::NiPathController:
+				ref = sol::make_object_userdata(L, Pointer(static_cast<PathController*>(this)));
 				break;
 			case RTTIStaticPtr::NiPlanarCollider:
 				ref = sol::make_object_userdata(L, Pointer(static_cast<PlanarCollider*>(this)));

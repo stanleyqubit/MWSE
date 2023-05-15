@@ -18,6 +18,8 @@
     <ClInclude Include="LuaDialogueFilteredEvent.h" />
     <ClInclude Include="LuaUiSkillTooltipEvent.h" />
     <ClInclude Include="NIAccumulator.h" />
+    <ClInclude Include="NIAnimationData.h" />
+    <ClInclude Include="NIAnimationKey.h" />
     <ClInclude Include="NISortAdjustNode.h" />
     <ClInclude Include="TES3DialogueFilterContext.h" />
     <ClInclude Include="TES3LandLua.h" />
@@ -48,11 +50,8 @@
     <ClInclude Include="MGEPostShadersLua.h" />
     <ClInclude Include="MGEUtilLua.h" />
     <ClInclude Include="NICollisionGroupLua.h" />
-    <ClInclude Include="NIColorData.h" />
-    <ClInclude Include="NIColorKey.h" />
     <ClInclude Include="NICopyTransformController.h" />
     <ClInclude Include="NIDX8TextureData.h" />
-    <ClInclude Include="NIPosData.h" />
     <ClInclude Include="NIQuaternion.h" />
     <ClInclude Include="NIQuaternionLua.h" />
     <ClInclude Include="NiRenderedTextureLua.h" />
@@ -695,13 +694,13 @@
     <ClCompile Include="MWSEConfig.cpp" />
     <ClCompile Include="MWSEUtilLua.cpp" />
     <ClCompile Include="NIAmbientLight.cpp" />
+    <ClCompile Include="NIAnimationKey.cpp" />
     <ClCompile Include="NIBillboardNode.cpp" />
     <ClCompile Include="NIBinaryStream.cpp" />
     <ClCompile Include="NICamera.cpp" />
     <ClCompile Include="NICollisionGroup.cpp" />
     <ClCompile Include="NICollisionGroupLua.cpp" />
     <ClCompile Include="NICollisionSwitch.cpp" />
-    <ClCompile Include="NIColorData.cpp" />
     <ClCompile Include="NICopyTransformController.cpp" />
     <ClCompile Include="NIDirectionalLight.cpp" />
     <ClCompile Include="NIDX8TextureData.cpp" />
@@ -709,6 +708,7 @@
     <ClCompile Include="NIExtraData.cpp" />
     <ClCompile Include="NIExtraDataLua.cpp" />
     <ClCompile Include="NIFlipController.cpp" />
+    <ClCompile Include="NIAnimationData.cpp" />
     <ClCompile Include="NIGeometry.cpp" />
     <ClCompile Include="NIGeometryData.cpp" />
     <ClCompile Include="NIGeometryDataLua.cpp" />
@@ -720,7 +720,6 @@
     <ClCompile Include="NIParticles.cpp" />
     <ClCompile Include="NIParticlesLua.cpp" />
     <ClCompile Include="NIParticleSystemController.cpp" />
-    <ClCompile Include="NIPosData.cpp" />
     <ClCompile Include="NIProperty.cpp" />
     <ClCompile Include="NIQuaternion.cpp" />
     <ClCompile Include="NIQuaternionLua.cpp" />

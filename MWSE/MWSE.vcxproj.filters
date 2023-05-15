@@ -1620,15 +1620,6 @@
     <ClInclude Include="LuaVFXCreatedEvent.h">
       <Filter>Header Files\Lua\Events</Filter>
     </ClInclude>
-    <ClInclude Include="NIColorData.h">
-      <Filter>Header Files\DataAdapters\NI</Filter>
-    </ClInclude>
-    <ClInclude Include="NIColorKey.h">
-      <Filter>Header Files\DataAdapters\NI</Filter>
-    </ClInclude>
-    <ClInclude Include="NIPosData.h">
-      <Filter>Header Files\DataAdapters\NI</Filter>
-    </ClInclude>
     <ClInclude Include="LuaDialogueEnvironmentCreatedEvent.h">
       <Filter>Header Files\Lua\Events</Filter>
     </ClInclude>
@@ -1718,6 +1709,12 @@
     </ClInclude>
     <ClInclude Include="TES3WaterControllerLua.h">
       <Filter>Header Files\Lua\Bindings\TES3</Filter>
+    </ClInclude>
+    <ClInclude Include="NIAnimationData.h">
+      <Filter>Header Files\DataAdapters\NI</Filter>
+    </ClInclude>
+    <ClInclude Include="NIAnimationKey.h">
+      <Filter>Header Files\DataAdapters\NI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -3641,12 +3638,6 @@
     <ClCompile Include="LuaVFXCreatedEvent.cpp">
       <Filter>Source Files\Lua\Events</Filter>
     </ClCompile>
-    <ClCompile Include="NIColorData.cpp">
-      <Filter>Source Files\DataAdapters\NI</Filter>
-    </ClCompile>
-    <ClCompile Include="NIPosData.cpp">
-      <Filter>Source Files\DataAdapters\NI</Filter>
-    </ClCompile>
     <ClCompile Include="NIKeyframeController.cpp">
       <Filter>Source Files\DataAdapters\NI</Filter>
     </ClCompile>
@@ -3739,6 +3730,12 @@
     </ClCompile>
     <ClCompile Include="TES3WaterControllerLua.cpp">
       <Filter>Source Files\Lua\Bindings</Filter>
+    </ClCompile>
+    <ClCompile Include="NIAnimationData.cpp">
+      <Filter>Source Files\DataAdapters\NI</Filter>
+    </ClCompile>
+    <ClCompile Include="NIAnimationKey.cpp">
+      <Filter>Source Files\DataAdapters\NI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

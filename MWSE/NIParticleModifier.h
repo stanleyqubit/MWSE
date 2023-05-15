@@ -1,7 +1,7 @@
 #pragma once
 
 #include "NIObject.h"
-#include "NIColorData.h"
+#include "NIAnimationData.h"
 
 #include "TES3Vectors.h"
 

@@ -5,6 +5,7 @@
 #include "LuaManager.h"
 #include "LuaUtil.h"
 
+#include "NIAnimationData.h"
 #include "NILookAtController.h"
 #include "NIKeyframeController.h"
 #include "NITimeController.h"

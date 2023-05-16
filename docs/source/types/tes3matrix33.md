@@ -185,6 +185,22 @@ local matrix, valid = myObject:invert()
 
 ***
 
+### `lookAt`
+<div class="search_terms" style="display: none">lookat</div>
+
+Updates the matrix so that its forward and up vectors point toward the given directions.
+
+```lua
+myObject:lookAt(forward, up)
+```
+
+**Parameters**:
+
+* `forward` ([tes3vector3](../../types/tes3vector3))
+* `up` ([tes3vector3](../../types/tes3vector3))
+
+***
+
 ### `reorthogonalize`
 <div class="search_terms" style="display: none">reorthogonalize</div>
 

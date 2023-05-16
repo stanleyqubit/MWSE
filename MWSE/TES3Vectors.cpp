@@ -633,6 +633,22 @@ namespace TES3 {
 		return Vector3(m0.z, m1.z, m2.z);
 	}
 
+	void Matrix33::lookAt(Vector3 direction, Vector3 worldUp) {
+		auto forward = direction.normalized();
+		auto left = worldUp.crossProduct(&forward);
+		left.normalize();
+		auto up = forward.crossProduct(&left);
+		m0.x = -left.x;
+		m1.x = -left.y;
+		m2.x = -left.z;
+		m0.y = forward.x;
+		m1.y = forward.y;
+		m2.y = forward.z;
+		m0.z = up.x;
+		m1.z = up.y;
+		m2.z = up.z;
+	};
+
 	//
 	// Matrix44
 	//

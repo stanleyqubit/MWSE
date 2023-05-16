@@ -5,9 +5,8 @@
 
 #include "NIObjectLua.h"
 
+#include "NIAnimationData.h"
 #include "NIColor.h"
-#include "NIColorData.h"
-#include "NIColorKey.h"
 
 namespace mwse::lua {
 	void bindNIColor() {

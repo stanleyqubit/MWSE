@@ -189,6 +189,8 @@ function tes3uiElement:createFillBar(params) end
 
 --- Creates a horizontally scrolling pane.
 --- 
+--- Scroll panes create a complex UI subtree, with a container for child elements. create* methods automatically place new elements in this container, not as a direct child of the scroll pane. The container element can be accessed with the `getContentElement()` method. It should be used when iterating or clearing the scroll pane contents.
+--- 
 --- Scroll pane specific properties can be accessed through the `widget` property. The widget type for scroll panes is [`tes3uiScrollPane`](https://mwse.github.io/MWSE/types/tes3uiScrollPane/).
 --- @param params tes3uiElement.createHorizontalScrollPane.params? This table accepts the following values:
 --- 
@@ -432,6 +434,8 @@ function tes3uiElement:createThinBorder(params) end
 
 --- Creates a vertically scrolling pane. Useful as a list box.
 --- 
+--- Scroll panes create a complex UI subtree, with a container for child elements. create* methods automatically place new elements in this container, not as a direct child of the scroll pane. The container element can be accessed with the `getContentElement()` method. It should be used when iterating or clearing the scroll pane contents.
+--- 
 --- Scroll pane specific properties can be accessed through the `widget` property. The widget type for scroll panes is [`tes3uiScrollPane`](https://mwse.github.io/MWSE/types/tes3uiScrollPane/).
 ---
 --- [Examples available in online documentation](https://mwse.github.io/MWSE/types/tes3uiElement/#createVerticalScrollPane).
@@ -449,6 +453,8 @@ function tes3uiElement:createVerticalScrollPane(params) end
 function tes3uiElement:destroy() end
 
 --- Deletes all the child elements of this element. If any element is bound to text input by `tes3ui.acquireTextInput`_, the input is automatically released.
+--- 
+--- Some widgets like ScrollPanes are built of multiple layers of elements. When an element is created in a complex widget, it is automatically placed as a child of a content element. When clearing a widget's children, you should use `element:getContentElement():destroyChildren()`.
 function tes3uiElement:destroyChildren() end
 
 --- Finds a child element matching the `id` argument. Searches children recursively. Returns the first child element with a matching id, or `nil` if no match found.
@@ -710,6 +716,6 @@ function tes3uiElement:unregisterAfter(eventID, callback) end
 --- @return boolean wasUnregistered No description yet available.
 function tes3uiElement:unregisterBefore(eventID, callback) end
 
---- Updates a menu's element layout and all child elements. Needs to be called on a top level menu when any elements contained in it are added, moved or resized.
+--- Updates a menu's element layout and all child elements. Needs to be called on a top level menu when any elements contained in it are added, moved or resized. e.g. `menu:updateLayout()` or `element:getTopLevelMenu():updateLayout()`
 function tes3uiElement:updateLayout() end
 

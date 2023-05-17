@@ -788,6 +788,8 @@ local result = myObject:createFillBar({ id = ..., current = ..., max = ... })
 
 Creates a horizontally scrolling pane.
 
+Scroll panes create a complex UI subtree, with a container for child elements. create* methods automatically place new elements in this container, not as a direct child of the scroll pane. The container element can be accessed with the `getContentElement()` method. It should be used when iterating or clearing the scroll pane contents.
+
 Scroll pane specific properties can be accessed through the `widget` property. The widget type for scroll panes is [`tes3uiScrollPane`](https://mwse.github.io/MWSE/types/tes3uiScrollPane/).
 
 ```lua
@@ -1107,6 +1109,8 @@ local result = myObject:createThinBorder({ id = ... })
 
 Creates a vertically scrolling pane. Useful as a list box.
 
+Scroll panes create a complex UI subtree, with a container for child elements. create* methods automatically place new elements in this container, not as a direct child of the scroll pane. The container element can be accessed with the `getContentElement()` method. It should be used when iterating or clearing the scroll pane contents.
+
 Scroll pane specific properties can be accessed through the `widget` property. The widget type for scroll panes is [`tes3uiScrollPane`](https://mwse.github.io/MWSE/types/tes3uiScrollPane/).
 
 ```lua
@@ -1156,6 +1160,8 @@ myObject:destroy()
 <div class="search_terms" style="display: none">destroychildren</div>
 
 Deletes all the child elements of this element. If any element is bound to text input by `tes3ui.acquireTextInput`_, the input is automatically released.
+
+Some widgets like ScrollPanes are built of multiple layers of elements. When an element is created in a complex widget, it is automatically placed as a child of a content element. When clearing a widget's children, you should use `element:getContentElement():destroyChildren()`.
 
 ```lua
 myObject:destroyChildren()
@@ -1778,7 +1784,7 @@ local wasUnregistered = myObject:unregisterBefore(eventID, callback)
 ### `updateLayout`
 <div class="search_terms" style="display: none">updatelayout, layout</div>
 
-Updates a menu's element layout and all child elements. Needs to be called on a top level menu when any elements contained in it are added, moved or resized.
+Updates a menu's element layout and all child elements. Needs to be called on a top level menu when any elements contained in it are added, moved or resized. e.g. `menu:updateLayout()` or `element:getTopLevelMenu():updateLayout()`
 
 ```lua
 myObject:updateLayout()

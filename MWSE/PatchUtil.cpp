@@ -766,6 +766,21 @@ namespace mwse::patch {
 	}
 
 	//
+	// Patch: Do not load VFX with maxAge <= 0.001f from save games.
+	//
+
+	const auto TES3_VFXManager_createFromSaveData = reinterpret_cast<TES3::VFX* (__thiscall*)(TES3::VFXManager*, TES3::PhysicalObject*, TES3::Reference*, TES3::VFXSerialized*, float)>(0x468620);
+
+	TES3::VFX* __fastcall PatchVFXManagerCreateFromSaveData(TES3::VFXManager* vfxManager, DWORD unused, TES3::PhysicalObject* effect, TES3::Reference* reference, TES3::VFXSerialized* serializedVFX, float verticalOffset) {
+		// Do not load VFX with maxAge <= 0.001f, as they are persistent and may have accumulated in saves from before these fixes.
+		if (serializedVFX->maxAge <= 0.001f) {
+			return nullptr;
+		}
+
+		return TES3_VFXManager_createFromSaveData(vfxManager, effect, reference, serializedVFX, verticalOffset);
+	}
+
+	//
 	// Install all the patches.
 	//
 
@@ -1156,6 +1171,9 @@ namespace mwse::patch {
 		// Patch: Ensure VFX with maxAge <= 0.001f are cleared when clearing data on load game, instead of leaking.
 		auto VFXManager_reset = &TES3::VFXManager::reset;
 		genCallEnforced(0x4C6F00, 0x469390, *reinterpret_cast<DWORD*>(&VFXManager_reset));
+
+		// Patch: Do not load VFX with maxAge <= 0.001f from save games.
+		genCallEnforced(0x46A04B, 0x468620, reinterpret_cast<DWORD>(PatchVFXManagerCreateFromSaveData));
 	}
 
 	void installPostLuaPatches() {

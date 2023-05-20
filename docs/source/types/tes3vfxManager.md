@@ -30,3 +30,16 @@ The root node that general VFXs are attached to.
 
 * `result` ([niNode](../../types/niNode))
 
+***
+
+## Methods
+
+### `reset`
+<div class="search_terms" style="display: none">reset</div>
+
+Removes all active vfx.
+
+```lua
+myObject:reset()
+```
+

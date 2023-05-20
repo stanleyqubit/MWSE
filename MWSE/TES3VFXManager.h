@@ -41,18 +41,21 @@ namespace TES3 {
 		VFXManager() = delete;
 		~VFXManager() = delete;
 
-		VFX* createForMagicEffect(int effect, Reference* reference, float lifespan);
+		VFX* createForMagicEffect(int magicEffectID, Reference* reference, float lifespan);
 		VFX* createForSource(MagicSourceInstance* source, Reference* reference, float lifespan);
-		VFX* createForEffect(unsigned int serial, PhysicalObject* effect, int unknown, float lifespan, float scale, float verticalOffset);
+		VFX* createForEffect(unsigned int serial, PhysicalObject* effect, int animLoopCount, float lifespan, float scale, float verticalOffset);
 
-		VFX* createForReference(unsigned int serial, PhysicalObject* effect, Reference* reference, int repeatCount, float lifespan, float scale, float verticalOffset);
-		VFX* createAtPosition(unsigned int serial, PhysicalObject* effect, Vector3* position, int unknown, float lifespan, float scale, float verticalOffset);
-		VFX* createForAVObject(unsigned int serial, PhysicalObject* effect, NI::AVObject* avObject, int unknown, float lifespan, float scale, float verticalOffset);
+		VFX* createForReference(unsigned int serial, PhysicalObject* effect, Reference* reference, int animLoopCount, float lifespan, float scale, float verticalOffset);
+		VFX* createAtPosition(unsigned int serial, PhysicalObject* effect, Vector3* position, int animLoopCount, float lifespan, float scale, float verticalOffset);
+		VFX* createForAVObject(unsigned int serial, PhysicalObject* effect, NI::AVObject* avObject, int animLoopCount, float lifespan, float scale, float verticalOffset);
 
 		void remove(VFX* vfx);
 		void removeForReference(Reference* reference);
 		void removeFromAVObject(NI::AVObject* avObject);
 		void removeForSerialForReference(unsigned int serial, Reference* reference);
+
+		void reset();
+		void resetOnNewScene();
 	};
 	static_assert(sizeof(VFXManager) == 0x14, "TES3::VFXManager failed size validation");
 }

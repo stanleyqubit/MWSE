@@ -23,6 +23,9 @@ namespace mwse::lua {
 			// Basic property bindings.
 			usertypeDefinition["data"] = sol::readonly_property(&TES3::VFXManager::vfxNodes);
 			usertypeDefinition["worldVFXRoot"] = sol::readonly_property(&TES3::VFXManager::worldVFXRoot);
+
+			// Basic function bindings.
+			usertypeDefinition["reset"] = &TES3::VFXManager::reset;
 		}
 
 		// Bindings for TES3::VFX

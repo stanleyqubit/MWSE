@@ -1152,6 +1152,10 @@ namespace mwse::patch {
 		genCallUnprotected(0x4E6C0C, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
 		writeBytesUnprotected(0x4F2132, patchImprovedErrorIDArgs20, sizeof(patchImprovedErrorIDArgs20));
 		genCallUnprotected(0x4F2134, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+
+		// Patch: Ensure VFX with maxAge <= 0.001f are cleared when clearing data on load game, instead of leaking.
+		auto VFXManager_reset = &TES3::VFXManager::reset;
+		genCallEnforced(0x4C6F00, 0x469390, *reinterpret_cast<DWORD*>(&VFXManager_reset));
 	}
 
 	void installPostLuaPatches() {

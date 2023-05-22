@@ -518,6 +518,7 @@ function tes3uiElement:getTopLevelMenu() end
 function tes3uiElement:getTopLevelParent() end
 
 --- Restores the menu's position and size information from the Morrowind.ini file. This may only be called on top-level parents.
+--- @return boolean success True if the menu was restored.
 function tes3uiElement:loadMenuPosition() end
 
 --- Copies this element to a new parent, then destroys this element. This function can have unintended consequences. The specifics of what exact elements are being copied is important.

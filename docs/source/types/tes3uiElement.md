@@ -1375,8 +1375,12 @@ local result = myObject:getTopLevelMenu()
 Restores the menu's position and size information from the Morrowind.ini file. This may only be called on top-level parents.
 
 ```lua
-myObject:loadMenuPosition()
+local success = myObject:loadMenuPosition()
 ```
+
+**Returns**:
+
+* `success` (boolean): True if the menu was restored.
 
 ***
 

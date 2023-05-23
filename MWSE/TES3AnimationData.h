@@ -53,7 +53,7 @@ namespace TES3 {
 		SequenceGroup keyframeLayers[3]; // 0x2C4
 		NI::Geometry* headGeometry; // 0x2E8
 		float lipsyncLevel; // 0x2EC
-		float lipsyncTimeToNextUpdate; // 0x2F0
+		float timeToNextBlink; // 0x2F0
 		float headMorphTiming; // 0x2F4
 		float talkMorphStartTime; // 0x2F8
 		float talkMorphEndTime; // 0x2FC

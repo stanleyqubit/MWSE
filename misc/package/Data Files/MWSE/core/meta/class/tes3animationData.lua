@@ -11,6 +11,8 @@
 --- @field animationGroupSoundgenCounts number[] *Read-only*. The number of sound generators for each of the animation groups, indexed by the [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) namespace.
 --- @field animGroupLayerIndicies number[] *Read-only*. The layer from which each of the actor's animation groups come, indexed by the [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) namespace.
 --- @field approxRootTravelSpeeds number[] *Read-only*. The approximate root node travel speed for each of the animation groups, indexed by the [`tes3.animationGroup`](https://mwse.github.io/MWSE/references/animation-groups/) namespace.
+--- @field blinkMorphEndTime number Blink animation end time for `headMorphTiming`. Timing is specific to the current head model.
+--- @field blinkMorphStartTime number Blink animation start time for `headMorphTiming`. Timing is specific to the current head model.
 --- @field castSpeed number The animation speed multiplier for the spell casting animation. This is a feature added by MWSE.
 --- 
 --- It functions slightly differently to the other animation speed multipliers. It is not reset by the AI like the movement and weapon speeds. Therefore, it can be set before a spell is cast, as well as during casting. The speed will affect all further casting by the actor.
@@ -22,6 +24,7 @@
 --- @field flags number 
 --- @field hasOverrideAnimations boolean *Read-only*. 
 --- @field headGeometry niParticles|niRotatingParticles|niTriShape 
+--- @field headMorphTiming number The timing offset of the head morph controller. Used to select either blinking or lipsync animations. Actively updated by the animation system during blinking or voiceovers. Timing is specific to the current head model.
 --- @field headNode niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode 
 --- @field keyframeLayers tes3animationDataSequenceGroup[] *Read-only*. 
 --- @field lipsyncLevel number This value indicates whether the NPC is speaking or not. The table below describes the relationship.
@@ -40,6 +43,9 @@
 --- @field spine1Node niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode 
 --- @field spine2Node niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode 
 --- @field spineAngle number 
+--- @field talkMorphEndTime number Lipsync animation end time for `headMorphTiming`. Timing is specific to the current head model.
+--- @field talkMorphStartTime number Lipsync animation start time for `headMorphTiming`. Timing is specific to the current head model.
+--- @field timeToNextBlink number The time in seconds until the next blink. It is fixed at 0 while the blink animation plays.
 --- @field timings number[] The time in seconds indicating the current position within the animation for each individual body section, indexed by values in the [`tes3.animationBodySection`](https://mwse.github.io/MWSE/references/animation-body-sections/) table.
 --- @field weaponSpeed number The animation speed multiplier of weapon animations. This includes all weapon related idle, attack, and ready/unready animations.
 tes3animationData = {}

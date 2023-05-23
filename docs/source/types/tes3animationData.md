@@ -67,6 +67,28 @@ Animations are divided into three layers. The layer 0 is the base layer containi
 
 ***
 
+### `blinkMorphEndTime`
+<div class="search_terms" style="display: none">blinkmorphendtime</div>
+
+Blink animation end time for `headMorphTiming`. Timing is specific to the current head model.
+
+**Returns**:
+
+* `result` (number)
+
+***
+
+### `blinkMorphStartTime`
+<div class="search_terms" style="display: none">blinkmorphstarttime</div>
+
+Blink animation start time for `headMorphTiming`. Timing is specific to the current head model.
+
+**Returns**:
+
+* `result` (number)
+
+***
+
 ### `castSpeed`
 <div class="search_terms" style="display: none">castspeed</div>
 
@@ -165,6 +187,17 @@ The time in seconds since the last update.
 **Returns**:
 
 * `result` ([niGeometry](../../types/niGeometry))
+
+***
+
+### `headMorphTiming`
+<div class="search_terms" style="display: none">headmorphtiming</div>
+
+The timing offset of the head morph controller. Used to select either blinking or lipsync animations. Actively updated by the animation system during blinking or voiceovers. Timing is specific to the current head model.
+
+**Returns**:
+
+* `result` (number)
 
 ***
 
@@ -314,6 +347,39 @@ Value      | Behavior
 <div class="search_terms" style="display: none">spineangle</div>
 
 
+
+**Returns**:
+
+* `result` (number)
+
+***
+
+### `talkMorphEndTime`
+<div class="search_terms" style="display: none">talkmorphendtime</div>
+
+Lipsync animation end time for `headMorphTiming`. Timing is specific to the current head model.
+
+**Returns**:
+
+* `result` (number)
+
+***
+
+### `talkMorphStartTime`
+<div class="search_terms" style="display: none">talkmorphstarttime</div>
+
+Lipsync animation start time for `headMorphTiming`. Timing is specific to the current head model.
+
+**Returns**:
+
+* `result` (number)
+
+***
+
+### `timeToNextBlink`
+<div class="search_terms" style="display: none">timetonextblink</div>
+
+The time in seconds until the next blink. It is fixed at 0 while the blink animation plays.
 
 **Returns**:
 

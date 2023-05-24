@@ -818,6 +818,7 @@ namespace mwse::patch {
 		genCallEnforced(0x4BCB7E, 0x55D950, *reinterpret_cast<DWORD*>(&killCounter_save));
 #endif
 
+		// Patch: Post-simulate event just before tickClock.
 		// Patch: Don't truncate hour when advancing time past midnight.
 		// Also don't nudge time forward by small extra increments when resting.
 		auto WorldController_tickClock = &TES3::WorldController::tickClock;

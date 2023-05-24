@@ -18,6 +18,7 @@
 #include "TES3Util.h"
 
 #include "LuaPlayItemSoundEvent.h"
+#include "LuaSimulatedEvent.h"
 
 #include "LuaManager.h"
 
@@ -566,6 +567,13 @@ namespace TES3 {
 	}
 
 	void WorldController::tickClock() {
+		// Run post-simulate event before updating game time.
+		if (mwse::lua::event::SimulatedEvent::getEventEnabled()) {
+			auto& luaManager = mwse::lua::LuaManager::getInstance();
+			auto stateHandle = luaManager.getThreadSafeStateHandle();
+			stateHandle.triggerEvent(new mwse::lua::event::SimulatedEvent());
+		}
+
 		gvarGameHour->value += (deltaTime * gvarTimescale->value) / 3600.0f;
 		checkForDayWrapping();
 	}

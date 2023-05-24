@@ -16,6 +16,7 @@
     <ClInclude Include="BSAnimationManager.h" />
     <ClInclude Include="LuaCalcHitDetectionConeEvent.h" />
     <ClInclude Include="LuaDialogueFilteredEvent.h" />
+    <ClInclude Include="LuaSimulatedEvent.h" />
     <ClInclude Include="LuaUiSkillTooltipEvent.h" />
     <ClInclude Include="NIAccumulator.h" />
     <ClInclude Include="NIAnimationData.h" />
@@ -645,6 +646,7 @@
     <ClCompile Include="LuaPlayAnimationGroupEvent.cpp" />
     <ClCompile Include="LuaPlayItemSoundEvent.cpp" />
     <ClCompile Include="LuaPostInfoResponseEvent.cpp" />
+    <ClCompile Include="LuaSimulatedEvent.cpp" />
     <ClCompile Include="LuaPotionBrewedEvent.cpp" />
     <ClCompile Include="LuaPotionBrewFailedEvent.cpp" />
     <ClCompile Include="LuaPotionBrewSkillCheckEvent.cpp" />

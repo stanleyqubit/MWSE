@@ -134,6 +134,7 @@ return {
 	["save"] = "save",
 	["saved"] = "saved",
 	["simulate"] = "simulate",
+	["simulated"] = "simulated",
 	["skillRaised"] = "skillRaised",
 	["soundObjectPlay"] = "soundObjectPlay",
 	["spellCast"] = "spellCast",

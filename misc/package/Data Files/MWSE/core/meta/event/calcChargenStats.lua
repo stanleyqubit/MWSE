@@ -5,5 +5,7 @@
 --- The calcChargenStats event triggers when the stats review menu is shown.
 --- 	
 --- 	The player stats will have already been calculated, but on this event you may modify them before the menu is displayed.
+---
+--- [Examples available in online documentation](https://mwse.github.io/MWSE/events/calcChargenStats).
 --- @class calcChargenStatsEventData
 --- @field claim boolean If set to `true`, any lower-priority event callbacks will be skipped. Returning `false` will set this to `true`.

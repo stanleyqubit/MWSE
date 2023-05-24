@@ -13,7 +13,7 @@
 timer = {}
 
 --- Creates a timer that will finish the next frame. It defaults to the next simulation frame.
---- @param callback function The callback function that will execute when the timer expires.
+--- @param callback fun(e: mwseTimerCallbackData) The callback function that will execute when the timer expires.
 --- @param type integer? *Default*: ``timer.simulate``. Type of the timer. This value can be `timer.simulate`, `timer.game` or `timer.real`.
 --- @return mwseTimer timer No description yet available.
 function timer.delayOneFrame(callback, type) end
@@ -22,7 +22,7 @@ function timer.delayOneFrame(callback, type) end
 ---
 --- [Examples available in online documentation](https://mwse.github.io/MWSE/apis/timer/#timerregister).
 --- @param name string Name of the registered timer.
---- @param fn function A callback function for the timer.
+--- @param fn fun(e: mwseTimerCallbackData) A callback function for the timer.
 function timer.register(name, fn) end
 
 --- Creates a timer.
@@ -34,7 +34,7 @@ function timer.register(name, fn) end
 --- 
 --- `duration`: number — Duration of the timer. The method of time passing depends on the timer type.
 --- 
---- `callback`: function|string — The callback function that will execute when the timer expires. If starting a registered timer, this needs to be the `name` string passed to `timer.register`.
+--- `callback`: fun(e: mwseTimerCallbackData)|string — The callback function that will execute when the timer expires. If starting a registered timer, this needs to be the `name` string passed to `timer.register`.
 --- 
 --- `iterations`: integer? — *Default*: `1`. The number of iterations to run. Use `-1` for infinite looping.
 --- 
@@ -48,7 +48,7 @@ function timer.start(params) end
 --- @class timer.start.params
 --- @field type integer? *Default*: ``timer.simulate``. Type of the timer. This value can be `timer.simulate`, `timer.game` or `timer.real`.
 --- @field duration number Duration of the timer. The method of time passing depends on the timer type.
---- @field callback function|string The callback function that will execute when the timer expires. If starting a registered timer, this needs to be the `name` string passed to `timer.register`.
+--- @field callback fun(e: mwseTimerCallbackData)|string The callback function that will execute when the timer expires. If starting a registered timer, this needs to be the `name` string passed to `timer.register`.
 --- @field iterations integer? *Default*: `1`. The number of iterations to run. Use `-1` for infinite looping.
 --- @field persist boolean? *Default*: `true`. Registering a timer with persist flag set to `true` will serialize the callback string in the save to persist between sessions. Only a registered timer will persist between sessions. See `timer.register()`.
 --- @field data table|nil *Default*: `nil`. Data to be attached to the timer. If this is a persistent timer, the data must be json-serializable, matching the same limitations as data stored on references.

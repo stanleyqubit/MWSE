@@ -185,6 +185,8 @@ namespace TES3 {
 		Vector3 getRightVector();
 		Vector3 getUpVector();
 
+		void lookAt(Vector3 direction, Vector3 worldUp);
+
 		bool reorthogonalize();
 
 	};

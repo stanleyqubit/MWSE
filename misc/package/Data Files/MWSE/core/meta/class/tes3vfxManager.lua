@@ -6,3 +6,8 @@
 --- @class tes3vfxManager
 --- @field data tes3vfx[] A collection of active managed visual effects.
 --- @field worldVFXRoot niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode The root node that general VFXs are attached to.
+tes3vfxManager = {}
+
+--- Removes all active vfx.
+function tes3vfxManager:reset() end
+

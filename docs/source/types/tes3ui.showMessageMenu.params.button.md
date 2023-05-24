@@ -13,7 +13,7 @@ Layout for the buttons table passed to `tes3ui.showMessageMenu` function.
 ### `callback`
 <div class="search_terms" style="display: none">callback</div>
 
-The function to call when this button is clicked.
+The function to call when this button is clicked. This function will be passed the `callbackParams` table that was provided in `tes3ui.showMessageMenu`.
 
 **Returns**:
 
@@ -61,7 +61,7 @@ A table with header and text that will display as a tooltip when an enabled butt
 
 **Returns**:
 
-* `result` ([tes3ui.showMessageMenu.params.tooltip](../../types/tes3ui.showMessageMenu.params.tooltip), fun(callbackParams: table): tes3ui.showMessageMenu.params.tooltip, nil)
+* `result` ([tes3ui.showMessageMenu.params.tooltip](../../types/tes3ui.showMessageMenu.params.tooltip), fun(callbackParams: table): [tes3ui.showMessageMenu.params.tooltip](../../types/tes3ui.showMessageMenu.params.tooltip), nil)
 
 ***
 
@@ -72,5 +72,5 @@ The tooltip to show when the button is disabled. Can be a simple string or a tab
 
 **Returns**:
 
-* `result` (string, [tes3ui.showMessageMenu.params.tooltip](../../types/tes3ui.showMessageMenu.params.tooltip), fun(callbackParams: table): tes3ui.showMessageMenu.params.tooltip, nil)
+* `result` (string, [tes3ui.showMessageMenu.params.tooltip](../../types/tes3ui.showMessageMenu.params.tooltip), fun(callbackParams: table): [tes3ui.showMessageMenu.params.tooltip](../../types/tes3ui.showMessageMenu.params.tooltip), nil)
 

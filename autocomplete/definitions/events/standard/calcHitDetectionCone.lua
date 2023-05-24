@@ -28,11 +28,11 @@ return {
 		},
 		["angleXY"] = {
 			type = "number",
-			description = "The maximum allowable angle offset (in radians) in the horizontal direction that will hit. This is related to game setting fCombatAngleXY but using different units. May be adjusted.",
+			description = "The maximum allowable angle offset (in degrees) in the horizontal direction that will hit. This is related to game setting fCombatAngleXY but using different units. May be adjusted. The highest effective angle is 90 degrees, and larger angles will behave like 90 degrees.",
 		},
 		["angleZ"] = {
 			type = "number",
-			description = "The maximum allowable angle offset (in radians) in the vertical direction that will hit. This is related to game setting fCombatAngleZ but using different units. May be adjusted.",
+			description = "The maximum allowable angle offset (in degrees) in the vertical direction that will hit. This is related to game setting fCombatAngleZ but using different units. May be adjusted. The highest effective angle is 90 degrees, and larger angles will behave like 90 degrees.",
 		},
 	},
 	filter = "attacker.baseObject",

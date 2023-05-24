@@ -31,8 +31,12 @@ local result = myObject:getObject()
 Returns true if the object of this handle is still valid. Objects that are invalid do no longer exist and cannot be used.
 
 ```lua
-myObject:valid()
+local valid = myObject:valid()
 ```
+
+**Returns**:
+
+* `valid` (boolean)
 
 ??? example "Example: An example of usage"
 

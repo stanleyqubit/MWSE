@@ -3,6 +3,7 @@
 event.register(tes3.event.keyDown, function(e)
 	if e.isAltDown then
 		tes3.messageBox("mwscript.explodeSpell")
+		---@diagnostic disable-next-line: deprecated
 		mwscript.explodeSpell({
 			reference = tes3.game.playerTarget,
 			spell = "proj_trap_spell"
@@ -13,7 +14,7 @@ end, { filter = tes3.scanCode.l })
 event.register(tes3.event.keyDown, function(e)
 	if e.isAltDown then
 		tes3.messageBox("tes3.cast")
-		-- This will behave the same as will mwscript.explodeSpell()
+		-- This will behave the same as mwscript.explodeSpell()
 		tes3.cast({
 			target = tes3.game.playerTarget,
 			reference = tes3.game.playerTarget,

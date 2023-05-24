@@ -169,7 +169,7 @@ The types are arranged into functional groupings. Within each grouping, indentat
 		- niParticleRotation
 	- niTimeController - Not only related to particles
 		- niParticleSystemController
-- <span style = "color:Turquoise">niPerParticleData</span>
+- niPerParticleData
 
 ---
 
@@ -196,7 +196,7 @@ The types are arranged into functional groupings. Within each grouping, indentat
 	- niColorData
 	- niExtraData - this type is not related to animation by itself.
 		- niTextKeyExtraData
-	- <span  style = "color:YellowGreen">niFloatData</span>
+	- <span  style = "color:Turquoise">niFloatData</span>
 	- niKeyframeData
 	- <span  style = "color:YellowGreen">niMorphData</span>
 	- <span style = "color:Turquoise">niPosData</span>
@@ -215,7 +215,7 @@ The types are arranged into functional groupings. Within each grouping, indentat
 			- <span  style = "color:YellowGreen">niGeomMorpherController</span>
 		- niParticleSystemController
 			- <span  style = "color:YellowGreen">niBSPArrayController</span>
-		- <span  style = "color:YellowGreen">niPathController</span>
+		- niPathController
 		- <span style = "color:Turquoise">niUVController</span>
 		- <span  style = "color:YellowGreen">niVisController</span>
 	- <span style = "color:Turquoise">niUVData</span>
@@ -351,11 +351,11 @@ graph LR
 
 	%% Turquoise
 	classDef notExposed color:#000, fill: #40E0D0, stroke: #333, stroke-width: 2px;
-	class B,DA,HA,HD,HK,Q,R,W notExposed;
+	class B,DA,HA,HD,HK,L,Q,R,W notExposed;
 
 	%% YellowGreen
 	classDef notResearched color:#000, fill: #ADFF2F, stroke: #333, stroke-width: 2px;
-	class BA,BAA,CA,CE,DBA,DCAA,DCB,EBB,EBE,EBF,EBG,EBK,EC,EDAA,GA,HB,HBA,HBB,HE,HG,HH,HHA,HIA,HJ,HL,I,K,L,N,O,X notResearched;
+	class BA,BAA,CA,CE,DBA,DCAA,DCB,EBB,EBE,EBF,EBG,EBK,EC,EDAA,GA,HB,HBA,HBB,HE,HG,HH,HHA,HIA,HL,I,K,N,O,X notResearched;
 ```
 
 ```mermaid

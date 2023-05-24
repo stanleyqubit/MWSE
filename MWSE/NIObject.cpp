@@ -8,11 +8,11 @@
 #include "MemoryUtil.h"
 
 #include "NIAmbientLight.h"
+#include "NIAnimationData.h"
 #include "NIAVObject.h"
 #include "NIBillboardNode.h"
 #include "NICamera.h"
 #include "NICollisionSwitch.h"
-#include "NIColorData.h"
 #include "NIDirectionalLight.h"
 #include "NIExtraData.h"
 #include "NIKeyframeController.h"
@@ -22,9 +22,9 @@
 #include "NIParticleModifier.h"
 #include "NIParticles.h"
 #include "NIParticleSystemController.h"
+#include "NIPathController.h"
 #include "NIPixelData.h"
 #include "NIPointLight.h"
-#include "NIPosData.h"
 #include "NIProperty.h"
 #include "NISkinInstance.h"
 #include "NISortAdjustNode.h"
@@ -176,6 +176,9 @@ namespace NI {
 			case RTTIStaticPtr::NiExtraData:
 				ref = sol::make_object_userdata(L, Pointer(static_cast<ExtraData*>(this)));
 				break;
+			case RTTIStaticPtr::NiFloatData:
+				ref = sol::make_object_userdata(L, Pointer(static_cast<FloatData*>(this)));
+				break;
 			case RTTIStaticPtr::NiFogProperty:
 				ref = sol::make_object_userdata(L, Pointer(static_cast<FogProperty*>(this)));
 				break;
@@ -226,6 +229,9 @@ namespace NI {
 				break;
 			case RTTIStaticPtr::NiParticleSystemController:
 				ref = sol::make_object_userdata(L, Pointer(static_cast<ParticleSystemController*>(this)));
+				break;
+			case RTTIStaticPtr::NiPathController:
+				ref = sol::make_object_userdata(L, Pointer(static_cast<PathController*>(this)));
 				break;
 			case RTTIStaticPtr::NiPlanarCollider:
 				ref = sol::make_object_userdata(L, Pointer(static_cast<PlanarCollider*>(this)));

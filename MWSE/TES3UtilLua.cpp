@@ -1652,10 +1652,13 @@ namespace mwse::lua {
 			return { false, nullptr };
 		}
 
+		// Allow overriding the context.
+		const auto context = (TES3::Dialogue::GetFilteredInfoContext)getOptionalParam(params, "context", (int)TES3::Dialogue::GetFilteredInfoContext::Script);
+
 		// Check for service refusal response.
 		const int serviceRefusalPage = 7;
 		auto dialogue = TES3::Dialogue::getDialogue((int)TES3::DialogueType::Persuasion, serviceRefusalPage);
-		auto serviceRefusal = dialogue->getFilteredInfo(actor, reference, true);
+		auto serviceRefusal = dialogue->getFilteredInfoWithContext(actor, reference, true, context);
 
 		return { serviceRefusal == nullptr, serviceRefusal };
 	}
@@ -2706,17 +2709,17 @@ namespace mwse::lua {
 		TES3::Reference* reference = new TES3::Reference();
 		reference->baseObject = object;
 
-		// Scale as needed.
-		float scale = getOptionalParam<float>(params, "scale", 1.0f);
-		if (scale != 1.0f) {
-			reference->setScale(scale);
-		}
-
 		// Add it to the cell lists/data handler.
 		bool cellWasCreated = false;
 		dataHandler->nonDynamicData->createReference(object, &maybePosition.value(), &orientation, cellWasCreated, reference, cell);
 		reference->ensureScriptDataIsInstanced();
 		cell->insertReference(reference);
+
+		// Scale as needed.
+		const auto scale = getOptionalParam<float>(params, "scale");
+		if (scale) {
+			reference->setScale(scale.value());
+		}
 
 		// Did we just make an actor? If so we need to add it to the mob manager.
 		if (object->objectType == TES3::ObjectType::Creature || object->objectType == TES3::ObjectType::NPC) {
@@ -4517,6 +4520,10 @@ namespace mwse::lua {
 		}
 
 		auto animGroup = animData->animationGroups[group];
+		if (animGroup == nullptr) {
+			return {};
+		}
+
 		const auto animNoteTextByClass = reinterpret_cast<const char**>(0x78ABC8);
 		const auto animGroupNoteClass = reinterpret_cast<const int*>(0x78B0A8);
 		auto noteLabel = animNoteTextByClass + animGroupNoteClass[group];

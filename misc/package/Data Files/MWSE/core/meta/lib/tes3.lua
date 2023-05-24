@@ -577,11 +577,22 @@ function tes3.cast(params) end
 --- @field bypassResistances boolean? *Default*: `false`. If `true`, the spell will bypass the target's resistances. For NPCs, this only applies if `instant` is `true`.
 
 --- Checks if a merchant will offer a service to you, including dialogue checks like disposition and faction membership. A specific service can be checked, or if no service is given, a generic dialogue check is made. If the service is refused, the dialogue reply for the refusal may also be returned (it may be nil, as there may not always be a reply available).
---- @param reference tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string No description yet available.
---- @param service number? *Optional*. The specific service to check for availability. Maps to values in the [`tes3.merchantService`](https://mwse.github.io/MWSE/references/merchant-services/) table.
+--- @param params tes3.checkMerchantOffersService.params This table accepts the following values:
+--- 
+--- `reference`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string — No description yet available.
+--- 
+--- `service`: number? — *Optional*. The specific service to check for availability. Maps to values in the [`tes3.merchantService`](https://mwse.github.io/MWSE/references/merchant-services/) table.
+--- 
+--- `context`: number? — *Default*: `tes3.dialogueFilterContext.script`. An override for how this info request should be treated. Maps to values in the [`tes3.dialogueFilterContext`](https://mwse.github.io/MWSE/references/dialogue-filter-context/) table.
 --- @return boolean offersService No description yet available.
 --- @return tes3dialogueInfo refusalReply No description yet available.
-function tes3.checkMerchantOffersService(reference, service) end
+function tes3.checkMerchantOffersService(params) end
+
+---Table parameter definitions for `tes3.checkMerchantOffersService`.
+--- @class tes3.checkMerchantOffersService.params
+--- @field reference tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string No description yet available.
+--- @field service number? *Optional*. The specific service to check for availability. Maps to values in the [`tes3.merchantService`](https://mwse.github.io/MWSE/references/merchant-services/) table.
+--- @field context number? *Default*: `tes3.dialogueFilterContext.script`. An override for how this info request should be treated. Maps to values in the [`tes3.dialogueFilterContext`](https://mwse.github.io/MWSE/references/dialogue-filter-context/) table.
 
 --- Determines if a merchant trades in a given item.
 --- @param params tes3.checkMerchantTradesItem.params This table accepts the following values:
@@ -927,7 +938,7 @@ function tes3.get3rdPersonCameraOffset() end
 --- @return tes3cell[] cells No description yet available.
 function tes3.getActiveCells() end
 
---- This function fetches a dictionary of the timings of the action keys for a specific animation group on an actor. The actor is required, as different actors can use different animations. The result is a table with action names as keys, and timings as values.
+--- This function fetches a dictionary of the timings of the action keys for a specific animation group on an actor. The actor is required, as different actors can use different animations. The result is a table with action names as keys, and timings as values. The function will return nil if the actor does not have that animation group, or if the actor's animations are not active.
 --- @param params tes3.getAnimationActionTiming.params This table accepts the following values:
 --- 
 --- `reference`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string — A reference to the which actor whose animations will be checked.
@@ -1096,7 +1107,7 @@ function tes3.getEffectMagnitude(params) end
 --- `slot`: number? — *Optional*. Maps to [`tes3.armorSlot`](https://mwse.github.io/MWSE/references/armor-slots/) or [`tes3.clothingSlot`](https://mwse.github.io/MWSE/references/clothing-slots/). Used to filter equipment by slot.
 --- 
 --- `type`: number? — *Optional*. Maps to [`tes3.weaponType`](https://mwse.github.io/MWSE/references/weapon-types/). Used to filter equipment by type.
---- @return tes3equipmentStack stack No description yet available.
+--- @return tes3equipmentStack|nil stack The equipped stack, or `nil` if the queried stack was not found.
 function tes3.getEquippedItem(params) end
 
 ---Table parameter definitions for `tes3.getEquippedItem`.
@@ -2822,6 +2833,7 @@ tes3.contentType = require("tes3.contentType")
 tes3.creatureType = require("tes3.creatureType")
 tes3.crimeType = require("tes3.crimeType")
 tes3.damageSource = require("tes3.damageSource")
+tes3.dialogueFilterContext = require("tes3.dialogueFilterContext")
 tes3.dialoguePage = require("tes3.dialoguePage")
 tes3.dialogueType = require("tes3.dialogueType")
 tes3.effect = require("tes3.effect")

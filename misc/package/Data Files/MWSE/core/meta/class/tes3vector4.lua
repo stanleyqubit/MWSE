@@ -32,3 +32,7 @@ function tes3vector4:copy() end
 --- @return number result No description yet available.
 function tes3vector4:length() end
 
+--- Converts the vector to a string with 2 decimal places.
+--- @return string result No description yet available.
+function tes3vector4:__tostring() end
+

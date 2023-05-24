@@ -453,7 +453,7 @@ The next object in parent collection's list.
 ### `orientation`
 <div class="search_terms" style="display: none">orientation</div>
 
-Access to the reference's orientation, in XYZ Euler angles in Radians. Changing the orientation marks the reference as modified.
+Access to the reference's orientation, in XYZ Euler angles in Radians in [0, 2 PI]. Changing the orientation marks the reference as modified.
 
 **Returns**:
 

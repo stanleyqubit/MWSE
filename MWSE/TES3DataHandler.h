@@ -288,7 +288,7 @@ namespace TES3 {
 		char unknown_0xB4E6;
 		char unknown_0xB4E7;
 		HashMap<const char*, NI::Pointer<NI::SourceTexture>>* textures; // 0xB4E8
-		void * waterController;
+		WaterController* waterController;
 		int unknown_0xB4F0;
 		int unknown_0xB4F4;
 		char unknown_0xB4F8;
@@ -356,6 +356,7 @@ namespace TES3 {
 		//
 
 		Vector3 getLastExteriorPosition();
+		float getLowestZInCurrentCell() const;
 
 		void addSound(Sound* sound, Reference* reference = nullptr, int playbackFlags = 0, unsigned char volume = 250, float pitch = 1.0f, bool isVoiceover = false, int unknown = 0);
 		Sound* addSoundById(const char* soundId, Reference* reference = 0, int playbackFlags = 0, unsigned char volume = 250, float pitch = 1.0f, int unknown = 0);

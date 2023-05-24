@@ -660,17 +660,17 @@ namespace TES3 {
 
 	Vector3 Reference::getForwardDirectionVector() {
 		Matrix33 rotation = getRotationMatrix();
-		return rotation.getForwardVector();
+		return rotation.getForwardVector().normalized();
 	}
 
 	Vector3 Reference::getRightDirectionVector() {
 		Matrix33 rotation = getRotationMatrix();
-		return rotation.getRightVector();
+		return rotation.getRightVector().normalized();
 	}
 
 	Vector3 Reference::getUpDirectionVector() {
 		Matrix33 rotation = getRotationMatrix();
-		return rotation.getUpVector();
+		return rotation.getUpVector().normalized();
 	}
 
 	float Reference::getFacing() {

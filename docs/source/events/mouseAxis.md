@@ -22,7 +22,8 @@ event.register(tes3.event.mouseAxis, mouseAxisCallback)
 
 * `deltaX` (number): *Read-only*. The difference in horizontal mouse position from the previous frame.
 * `deltaY` (number): *Read-only*. The difference in vertical mouse position from the previous frame.
-* `isAltDown` (number): *Read-only*. True if alt  is held.
+* `isAltDown` (number): *Read-only*. True if alt is held.
 * `isControlDown` (number): *Read-only*. True if control is held.
+* `isShiftDown` (number): *Read-only*. True if either shift key is held.
 * `isSuperDown` (number): *Read-only*. True if super (Windows key) is held.
 

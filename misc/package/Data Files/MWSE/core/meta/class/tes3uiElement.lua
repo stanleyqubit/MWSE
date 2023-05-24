@@ -189,6 +189,8 @@ function tes3uiElement:createFillBar(params) end
 
 --- Creates a horizontally scrolling pane.
 --- 
+--- Scroll panes create a complex UI subtree, with a container for child elements. create* methods automatically place new elements in this container, not as a direct child of the scroll pane. The container element can be accessed with the `getContentElement()` method. It should be used when iterating or clearing the scroll pane contents.
+--- 
 --- Scroll pane specific properties can be accessed through the `widget` property. The widget type for scroll panes is [`tes3uiScrollPane`](https://mwse.github.io/MWSE/types/tes3uiScrollPane/).
 --- @param params tes3uiElement.createHorizontalScrollPane.params? This table accepts the following values:
 --- 
@@ -432,6 +434,8 @@ function tes3uiElement:createThinBorder(params) end
 
 --- Creates a vertically scrolling pane. Useful as a list box.
 --- 
+--- Scroll panes create a complex UI subtree, with a container for child elements. create* methods automatically place new elements in this container, not as a direct child of the scroll pane. The container element can be accessed with the `getContentElement()` method. It should be used when iterating or clearing the scroll pane contents.
+--- 
 --- Scroll pane specific properties can be accessed through the `widget` property. The widget type for scroll panes is [`tes3uiScrollPane`](https://mwse.github.io/MWSE/types/tes3uiScrollPane/).
 ---
 --- [Examples available in online documentation](https://mwse.github.io/MWSE/types/tes3uiElement/#createVerticalScrollPane).
@@ -449,6 +453,8 @@ function tes3uiElement:createVerticalScrollPane(params) end
 function tes3uiElement:destroy() end
 
 --- Deletes all the child elements of this element. If any element is bound to text input by `tes3ui.acquireTextInput`_, the input is automatically released.
+--- 
+--- Some widgets like ScrollPanes are built of multiple layers of elements. When an element is created in a complex widget, it is automatically placed as a child of a content element. When clearing a widget's children, you should use `element:getContentElement():destroyChildren()`.
 function tes3uiElement:destroyChildren() end
 
 --- Finds a child element matching the `id` argument. Searches children recursively. Returns the first child element with a matching id, or `nil` if no match found.
@@ -512,12 +518,19 @@ function tes3uiElement:getTopLevelMenu() end
 function tes3uiElement:getTopLevelParent() end
 
 --- Restores the menu's position and size information from the Morrowind.ini file. This may only be called on top-level parents.
+--- @return boolean success True if the menu was restored.
 function tes3uiElement:loadMenuPosition() end
 
 --- Copies this element to a new parent, then destroys this element. This function can have unintended consequences. The specifics of what exact elements are being copied is important.
---- @param to tes3uiElement Where to create the copy.
+--- @param params tes3uiElement.move.params This table accepts the following values:
+--- 
+--- `to`: tes3uiElement — Where to create the copy.
 --- @return tes3uiElement copy The created copy.
-function tes3uiElement:move(to) end
+function tes3uiElement:move(params) end
+
+---Table parameter definitions for `tes3uiElement.move`.
+--- @class tes3uiElement.move.params
+--- @field to tes3uiElement Where to create the copy.
 
 --- Sets an `event` handler, which can add or override an existing event handler. The use of `registerBefore` or `registerAfter` is recommended if you do not want to replace the existing event handler. The eventID can be a standard `event` name, or an event specific to an element class. These can be accessed through [`tes3.uiEvent`](https://mwse.github.io/MWSE/references/ui-events/) for convenience. The callback receives an argument with the event data. See below for details.
 --- 
@@ -704,6 +717,6 @@ function tes3uiElement:unregisterAfter(eventID, callback) end
 --- @return boolean wasUnregistered No description yet available.
 function tes3uiElement:unregisterBefore(eventID, callback) end
 
---- Updates a menu's element layout and all child elements. Needs to be called on a top level menu when any elements contained in it are added, moved or resized.
+--- Updates a menu's element layout and all child elements. Needs to be called on a top level menu when any elements contained in it are added, moved or resized. e.g. `menu:updateLayout()` or `element:getTopLevelMenu():updateLayout()`
 function tes3uiElement:updateLayout() end
 

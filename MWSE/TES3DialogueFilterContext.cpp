@@ -54,8 +54,8 @@ namespace TES3 {
 			case DialogueInfoFilterType::PCFaction:
 				filterPlayerFaction = condition->pcFaction;
 				break;
-			case DialogueInfoFilterType::ResultScript:
-				filterResultScript = condition->scriptText;
+			case DialogueInfoFilterType::SoundPath:
+				filterResultScript = condition->soundPath;
 				break;
 			case DialogueInfoFilterType::Conditional0:
 				setConditional(0, condition->conditional);
@@ -274,12 +274,12 @@ namespace TES3 {
 		const auto worldController = WorldController::get();
 		const auto mobile = context->parentContext->speakerMobile;
 		const auto macp = worldController->getMobilePlayer();
-		const auto detected = worldController->mobManager->processManager->detectPresence(mobile, macp);
+		const auto detected = worldController->mobManager->processManager->detectByActor(mobile, macp);
 		context->compareValue = detected ? 1.0f : 0.0f;
 	}
 
 	void loadFunctionAlarmed(DialogueFilterContext::ConditionalContext* context) {
-		const auto isAlarmed = context->parentContext->speakerMobile->actionData.aiBehaviourState != AIBehavior::Alarmed;
+		const auto isAlarmed = context->parentContext->speakerMobile->actionData.aiBehaviourState == AIBehavior::Alarmed;
 		context->compareValue = isAlarmed ? 1.0f : 0.0f;
 	}
 
@@ -531,12 +531,14 @@ namespace TES3 {
 	void loadLocalVariableValue(DialogueFilterContext::ConditionalContext* context) {
 		const auto script = context->parentContext->speakerBaseActor->getScript();
 		if (script == nullptr) {
+			context->resultOverride = false;
 			return;
 		}
 
 		unsigned int index = 0;
 		const auto varType = script->getLocalVarIndexAndType(context->conditional->localVarName, &index);
 		if (varType == 0) {
+			context->resultOverride = false;
 			return;
 		}
 

@@ -209,13 +209,14 @@ local result = myObject:addToJournal({ index = ..., actor = ... })
 Fetches the info that a given actor would produce for the dialogue.
 
 ```lua
-local result = myObject:getInfo({ actor = ... })
+local result = myObject:getInfo({ actor = ..., context = ... })
 ```
 
 **Parameters**:
 
 * `params` (table)
 	* `actor` ([tes3mobileActor](../../types/tes3mobileActor), [tes3reference](../../types/tes3reference), string)
+	* `context` (number): *Default*: `tes3.dialogueFilterContext.script`. An override for how this info request should be treated. Maps to values in the [`tes3.dialogueFilterContext`](https://mwse.github.io/MWSE/references/dialogue-filter-context/) table.
 
 **Returns**:
 

@@ -13,5 +13,6 @@ mwseSafeObjectHandle = {}
 function mwseSafeObjectHandle:getObject() end
 
 --- Returns true if the object of this handle is still valid. Objects that are invalid do no longer exist and cannot be used.
+--- @return boolean valid No description yet available.
 function mwseSafeObjectHandle:valid() end
 

@@ -471,6 +471,10 @@ namespace TES3 {
 		}
 	}
 
+	float DataHandler::getLowestZInCurrentCell() const {
+		return *reinterpret_cast<float*>(0x7B217C);
+	}
+
 	const auto TES3_DataHandler_addSound = reinterpret_cast<void(__thiscall*)(DataHandler*, Sound*, Reference*, int, unsigned char, float, bool, int)>(0x48BD40);
 	void DataHandler::addSound(Sound* sound, Reference* reference, int playbackFlags, unsigned char volume, float pitch, bool isVoiceover, int unknown) {
 		if (mwse::lua::event::AddSoundEvent::getEventEnabled()) {

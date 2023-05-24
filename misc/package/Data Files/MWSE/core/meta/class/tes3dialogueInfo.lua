@@ -35,6 +35,10 @@ function tes3dialogueInfo:filter(actor, reference, source, dialogue) end
 --- @return tes3dialogue dialogue No description yet available.
 function tes3dialogueInfo:findDialogue() end
 
+--- Get the dialogue info's associated sound path.
+--- @return string result No description yet available.
+function tes3dialogueInfo:getSoundPath() end
+
 --- This method runs the dialogue info's associated script on a given reference.
 --- @param reference tes3reference The reference on which to run the script on.
 function tes3dialogueInfo:runScript(reference) end

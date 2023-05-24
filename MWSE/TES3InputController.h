@@ -52,10 +52,12 @@ namespace TES3 {
 
 	namespace KeyTransition {
 		enum KeyTransition {
-			Test = 0x0,
-			Up = 0x1,
-			Down = 0x2,
-			Toggled = 0x3,
+			Unknown0 = 0,
+			IsDown = 1,
+			DownThisFrame = 2,
+			UpThisFrame = 3,
+			ToggledThisFrame = 4,
+			Unknown5 = 5
 		};
 	}
 

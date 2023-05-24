@@ -61,6 +61,7 @@ return {
 	["determineAction"] = "determineAction",
 	["determinedAction"] = "determinedAction",
 	["dialogueEnvironmentCreated"] = "dialogueEnvironmentCreated",
+	["dialogueFiltered"] = "dialogueFiltered",
 	["disposition"] = "disposition",
 	["enchantChargeUse"] = "enchantChargeUse",
 	["enchantedItemCreated"] = "enchantedItemCreated",

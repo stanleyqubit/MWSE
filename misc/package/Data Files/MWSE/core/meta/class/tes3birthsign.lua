@@ -6,5 +6,5 @@
 --- @class tes3birthsign : tes3baseObject
 --- @field description string *Read-only*. Loads from disk and returns the description of the birthsign.
 --- @field name string The player-facing name for the object.
---- @field spells tes3spellList *Read-only*. A list of spells granted by the birthsign.
+--- @field spells tes3spellList|tes3spell[] *Read-only*. A list of spells granted by the birthsign.
 --- @field texturePath string Path to the related image representing the birthsign.

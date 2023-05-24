@@ -27,6 +27,7 @@
 #include "DialogCSSESettings.h"
 
 #include "MathUtil.h"
+#include "PathUtil.h"
 
 #include "CSSE.h"
 #include "resource.h"
@@ -91,39 +92,46 @@ namespace se::cs::window::main {
 		settings.test_environment.game_files.clear();
 		for (auto i = 0; i < recordHandler->activeModCount; ++i) {
 			const auto gameFile = recordHandler->activeGameFiles[i];
-			if (gameFile && gameFile->getToLoadFlag()) {
+			if (gameFile) {
 				settings.test_environment.game_files.push_back(gameFile->fileName);
 			}
 		}
-
-		// Update the file on disk so Morrowind can see the update.
-		settings.save();
 	}
 
 	void LaunchMorrowind() {
 		// Update the environment data in settings.
 		UpdateLoadedFilesInTestEnvironment();
 
+		// Update the file on disk so Morrowind can see the update.
+		settings.save();
+
 		// Startup Morrowind.
 		STARTUPINFO si = { sizeof(STARTUPINFO) };
 		PROCESS_INFORMATION pi = {};
-		if (CreateProcessA("Morrowind.exe", "Morrowind.exe --fromCSSE", NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi)) {
+		constexpr auto commandLine = "Morrowind.exe --fromCSSE";
+		if (CreateProcessA("Morrowind.exe", (LPSTR)commandLine, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi)) {
+			log::stream << "Running Morrowind with command line: " << commandLine << std::endl;
 			CloseHandle(pi.hProcess);
 			CloseHandle(pi.hThread);
 		}
+		else {
+			log::stream << "[ERROR] Failed to run Morrowind with command line: " << commandLine << std::endl;
+			log::stream << "  Process path: " << (std::filesystem::current_path() / "Morrowind.exe").string() << std::endl;
+		}
 	}
 
-	static std::string openmwTempFolder = std::filesystem::current_path().string() + "\\Data Files\\MWSE\\tmp\\csse\\openmw";
-
 	void UpdateOpenMWConfig() {
-		std::ofstream cfg(openmwTempFolder + "\\openmw.cfg");
+		std::ofstream cfg(path::openmw::getTemporaryConfigPath() / "openmw.cfg");
 		if (!cfg.is_open()) {
 			return;
 		}
 
-		cfg << "skip-menu=1" << std::endl;
+		const auto& environment = settings.test_environment;
+		if (!environment.load_save_openmw.empty() || environment.start_new_game) {
+			cfg << "skip-menu=1" << std::endl;
+		}
 		cfg << "encoding=win1252" << std::endl;
-		cfg << "data=" << std::filesystem::current_path().string() + "\\Data Files" << std::endl;
+		cfg << "data=" << path::getDataFilesPath().string() << std::endl;
 
 		// Build a stack of archives to display.
 		std::stack<std::string> archives;
@@ -146,27 +154,29 @@ namespace se::cs::window::main {
 	}
 
 	void UpdateOpenMWScriptFile() {
-		std::ofstream mwscript(openmwTempFolder + "\\startup.txt");
+		std::ofstream mwscript(path::openmw::getTemporaryConfigPath() / "startup.txt");
 		if (!mwscript.is_open()) {
 			return;
 		}
 
 		const auto& environment = settings.test_environment;
 
-		if (environment.starting_cell != "") {
-			mwscript << "player->PositionCell "
-				<< environment.position[0] << " "
-				<< environment.position[1] << " "
-				<< environment.position[2] << " "
-				<< math::radiansToDegrees(environment.orientation[2]) << " "
-				<< "\"" << environment.starting_cell << "\"" << std::endl;
-		}
-		else {
-			mwscript << "player->Position "
-				<< environment.position[0] << " "
-				<< environment.position[1] << " "
-				<< environment.position[2] << " "
-				<< math::radiansToDegrees(environment.orientation[2]) << std::endl;
+		if (environment.start_new_game) {
+			if (environment.starting_cell != "") {
+				mwscript << "player->PositionCell "
+					<< environment.position[0] << " "
+					<< environment.position[1] << " "
+					<< environment.position[2] << " "
+					<< math::radiansToDegrees(environment.orientation[2]) << " "
+					<< "\"" << environment.starting_cell << "\"" << std::endl;
+			}
+			else {
+				mwscript << "player->Position "
+					<< environment.position[0] << " "
+					<< environment.position[1] << " "
+					<< environment.position[2] << " "
+					<< math::radiansToDegrees(environment.orientation[2]) << std::endl;
+			}
 		}
 
 		for (const auto& [item, count] : environment.inventory) {
@@ -195,18 +205,19 @@ namespace se::cs::window::main {
 	void LaunchOpenMW() {
 		// Update the environment data in settings.
 		UpdateLoadedFilesInTestEnvironment();
+		settings.save();
 
 		// Update the script to have OpenMW run based on the environment.
-		std::filesystem::create_directories(openmwTempFolder);
+		const auto tempPath = path::openmw::getTemporaryConfigPath();
+		std::filesystem::create_directories(tempPath);
 		UpdateOpenMWConfig();
 		UpdateOpenMWScriptFile();
 
-		// Make sure that 
+		// Verify installation.
 		if (settings.openmw.location.empty()) {
 			MessageBoxA(NULL, "No OpenMW location found.", "Invalid Settings", MB_ICONERROR | MB_OK);
 			return;
 		}
-
 		const auto path = settings.openmw.location + "\\openmw.exe";
 		if (!std::filesystem::exists(path)) {
 			MessageBoxA(NULL, "Invalid OpenMW location.", "Executable Not Found", MB_ICONERROR | MB_OK);
@@ -215,15 +226,23 @@ namespace se::cs::window::main {
 
 		std::stringstream ss;
 		ss << "openmw.exe";
-		ss << " --replace=config --config=\"" << std::filesystem::current_path().string() << "\\Data Files\\MWSE\\tmp\\csse\\openmw\"";
-		ss << " --script-run \"" << openmwTempFolder << "\\startup.txt\"";
+		ss << " --replace=config --config=\"" << tempPath.string() << "\"";
+		if (!settings.test_environment.load_save_openmw.empty()) {
+			ss << " --load-savegame \"" << (path::openmw::getSavePath() / settings.test_environment.load_save_openmw).string() << "\"";
+		}
+		ss << " --script-run \"" << (tempPath / "startup.txt").string() << "\"";
 
 		STARTUPINFO si = { sizeof(STARTUPINFO) };
 		PROCESS_INFORMATION pi = {};
 		const auto commandLine = ss.str();
 		if (CreateProcessA(path.c_str(), (LPSTR)commandLine.c_str(), NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi)) {
+			log::stream << "Running OpenMW with command line: " << commandLine << std::endl;
 			CloseHandle(pi.hProcess);
 			CloseHandle(pi.hThread);
+		}
+		else {
+			log::stream << "[ERROR] Failed to run OpenMW with command line: " << commandLine << std::endl;
+			log::stream << "  Process path: " << path << std::endl;
 		}
 	}
 
@@ -516,6 +535,20 @@ namespace se::cs::window::main {
 		dialog.DoModal();
 	}
 
+	BOOL __stdcall PatchSaveESPGetSaveFileName(OPENFILENAMEA* ofn) {
+		// WINE compatibility shim for the save plugin file dialog.
+		// Provide a dummy file path buffer so that WINE will fill in the OFN struct without exiting early.
+		char tmp[MAX_PATH];
+		memset(tmp, 0, sizeof(tmp));
+
+		ofn->lpstrFile = tmp;
+		ofn->nMaxFile = sizeof(tmp);
+		auto result = GetSaveFileNameA(ofn);
+		ofn->lpstrFile = nullptr;
+		ofn->nMaxFile = 0;
+		return result;
+	}
+
 	void PatchDialogProc_BeforeCommand(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		switch (wParam) {
 		case MENU_ID_CSSE_SETTINGS:
@@ -532,7 +565,7 @@ namespace se::cs::window::main {
 
 	void PatchDialogProc_BeforeNotify_TooltipRightClick_TestInMorrowind_NewGame(HWND hWnd) {
 		settings.test_environment.start_new_game = true;
-		settings.test_environment.load_save = "";
+		settings.test_environment.load_save_morrowind = "";
 
 		SendMessageA(hWnd, WM_COMMAND, WM_COMMAND_TEST_IN_GAME_MORROWIND, NULL);
 	}
@@ -556,14 +589,14 @@ namespace se::cs::window::main {
 		}
 
 		settings.test_environment.start_new_game = false;
-		settings.test_environment.load_save = std::filesystem::path(ofn.lpstrFile).filename().string();
+		settings.test_environment.load_save_morrowind = std::filesystem::path(ofn.lpstrFile).filename().string();
 
 		SendMessageA(hWnd, WM_COMMAND, WM_COMMAND_TEST_IN_GAME_MORROWIND, NULL);
 	}
 
 	void PatchDialogProc_BeforeNotify_TooltipRightClick_TestInMorrowind_MainMenu(HWND hWnd) {
 		settings.test_environment.start_new_game = false;
-		settings.test_environment.load_save = "";
+		settings.test_environment.load_save_morrowind = "";
 
 		SendMessageA(hWnd, WM_COMMAND, WM_COMMAND_TEST_IN_GAME_MORROWIND, NULL);
 	}
@@ -628,11 +661,173 @@ namespace se::cs::window::main {
 		messageResultOverride = TRUE;
 	}
 
+	void PatchDialogProc_BeforeNotify_TooltipRightClick_TestInOpenMW_NewGame(HWND hWnd) {
+		settings.test_environment.start_new_game = true;
+		settings.test_environment.load_save_openmw = "";
+
+		SendMessageA(hWnd, WM_COMMAND, WM_COMMAND_TEST_IN_GAME_OPENMW, NULL);
+	}
+
+	void PatchDialogProc_BeforeNotify_TooltipRightClick_TestInOpenMW_SelectSave(HWND hWnd) {
+		OPENFILENAME ofn = {};
+		TCHAR szFile[260] = {};
+		ofn.lStructSize = sizeof(ofn);
+		ofn.hwndOwner = hWnd;
+		ofn.lpstrFile = szFile;
+		ofn.nMaxFile = sizeof(szFile);
+		ofn.lpstrFilter = _T("OpenMW saves (*.omwsave)\0*.omwsave\0");
+		ofn.nFilterIndex = 1;
+		ofn.lpstrFileTitle = _T("Select save file");
+		ofn.nMaxFileTitle = 0;
+		ofn.lpstrInitialDir = NULL;
+		ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+
+		std::filesystem::current_path(path::openmw::getSavePath());
+		const auto currentDir = std::filesystem::current_path();
+		const auto exists = std::filesystem::exists(currentDir);
+		if (GetOpenFileNameA(&ofn) != TRUE) {
+			std::filesystem::current_path(path::getInstallPath());
+			return;
+		}
+		std::filesystem::current_path(path::getInstallPath());
+
+		settings.test_environment.start_new_game = false;
+
+		const auto selectedFile = std::filesystem::canonical(ofn.lpstrFile);
+		settings.test_environment.load_save_openmw = (selectedFile.parent_path().filename() / selectedFile.filename()).string();
+
+		SendMessageA(hWnd, WM_COMMAND, WM_COMMAND_TEST_IN_GAME_OPENMW, NULL);
+	}
+
+	void PatchDialogProc_BeforeNotify_TooltipRightClick_TestInOpenMW_MainMenu(HWND hWnd) {
+		settings.test_environment.start_new_game = false;
+		settings.test_environment.load_save_openmw = "";
+
+		SendMessageA(hWnd, WM_COMMAND, WM_COMMAND_TEST_IN_GAME_OPENMW, NULL);
+	}
+
+	void PatchDialogProc_BeforeNotify_TooltipRightClick_TestInOpenMW(HWND hWnd, UINT msg, WPARAM wParam, NMMOUSE* lParam) {
+		auto menu = CreatePopupMenu();
+		if (menu == NULL) {
+			return;
+		}
+
+		enum ContextMenuId {
+			RESERVED_ERROR,
+			RESERVED_NO_CALLBACK,
+			TEST_NEW_GAME,
+			TEST_LOAD_GAME,
+			TEST_TO_MAIN_MENU,
+		};
+
+		MENUITEMINFO menuItem = {};
+		menuItem.cbSize = sizeof(MENUITEMINFO);
+		unsigned int index = 0;
+
+		menuItem.wID = TEST_NEW_GAME;
+		menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID;
+		menuItem.fType = MFT_STRING;
+		menuItem.dwTypeData = (LPSTR)"Test &new game at chosen position";
+		InsertMenuItemA(menu, index++, TRUE, &menuItem);
+
+		menuItem.wID = TEST_LOAD_GAME;
+		menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID;
+		menuItem.fType = MFT_STRING;
+		menuItem.dwTypeData = (LPSTR)"Test &saved game";
+		InsertMenuItemA(menu, index++, TRUE, &menuItem);
+
+		menuItem.wID = TEST_TO_MAIN_MENU;
+		menuItem.fMask = MIIM_FTYPE | MIIM_STRING | MIIM_ID;
+		menuItem.fType = MFT_STRING;
+		menuItem.dwTypeData = (LPSTR)"Test normally from &main menu";
+		InsertMenuItemA(menu, index++, TRUE, &menuItem);
+
+		POINT p;
+		GetCursorPos(&p);
+
+		auto result = TrackPopupMenuEx(menu, TPM_LEFTALIGN | TPM_TOPALIGN | TPM_RETURNCMD | TPM_LEFTBUTTON | TPM_NOANIMATION | TPM_VERTICAL, p.x, p.y, hWnd, NULL);
+		switch (result) {
+		case RESERVED_ERROR:
+			break;
+		case TEST_NEW_GAME:
+			PatchDialogProc_BeforeNotify_TooltipRightClick_TestInOpenMW_NewGame(hWnd);
+			break;
+		case TEST_LOAD_GAME:
+			PatchDialogProc_BeforeNotify_TooltipRightClick_TestInOpenMW_SelectSave(hWnd);
+			break;
+		case TEST_TO_MAIN_MENU:
+			PatchDialogProc_BeforeNotify_TooltipRightClick_TestInOpenMW_MainMenu(hWnd);
+			break;
+		}
+
+		// Cleanup our menus.
+		DestroyMenu(menu);
+
+		messageResultOverride = TRUE;
+	}
+
 	void PatchDialogProc_BeforeNotify_TooltipRightClick(HWND hWnd, UINT msg, WPARAM wParam, NMMOUSE* lParam) {
 		switch (lParam->dwItemSpec) {
 		case WM_COMMAND_TEST_IN_GAME_MORROWIND:
 			PatchDialogProc_BeforeNotify_TooltipRightClick_TestInMorrowind(hWnd, msg, wParam, lParam);
 			break;
+		case WM_COMMAND_TEST_IN_GAME_OPENMW:
+			PatchDialogProc_BeforeNotify_TooltipRightClick_TestInOpenMW(hWnd, msg, wParam, lParam);
+			break;
+		}
+	}
+
+	void PatchDialogProc_BeforeNotify_TooltipGetDisplayInfo_TestInMorrowind(HWND hWnd, UINT msg, WPARAM wParam, NMTTDISPINFOA* lParam) {
+		const auto& environment = settings.test_environment;
+		if (!environment.load_save_morrowind.empty()) {
+			constexpr auto allowance = sizeof(lParam->szText) - sizeof("Test in Morrowind (%s)") - 2u;
+			static_assert(allowance < sizeof(lParam->szText) && allowance > 8, "String too long. Need a larger buffer or a smaller tooltip string.");
+			if (environment.load_save_morrowind.length() <= allowance) {
+				sprintf_s(lParam->szText, "Test in Morrowind (%s)", environment.load_save_morrowind.c_str());
+			}
+			else {
+				auto clipped = environment.load_save_morrowind;
+				clipped.resize(allowance - 3);
+				clipped += "...";
+				sprintf_s(lParam->szText, "Test in Morrowind (%s)", clipped.c_str());
+			}
+			messageResultOverride = TRUE;
+		}
+		else if (environment.start_new_game) {
+			strcpy_s(lParam->szText, "Test in Morrowind (New Game)");
+			messageResultOverride = TRUE;
+		}
+		else {
+			strcpy_s(lParam->szText, "Test in Morrowind (Normal Start)");
+			messageResultOverride = TRUE;
+		}
+	}
+
+	void PatchDialogProc_BeforeNotify_TooltipGetDisplayInfo_TestInOpenMW(HWND hWnd, UINT msg, WPARAM wParam, NMTTDISPINFOA* lParam) {
+		const auto& environment = settings.test_environment;
+
+		if (!environment.load_save_openmw.empty()) {
+			constexpr auto allowance = sizeof(lParam->szText) - sizeof("Test in OpenMW (%s)") - 2u;
+			static_assert(allowance < sizeof(lParam->szText) && allowance > 8, "String too long. Need a larger buffer or a smaller tooltip string.");
+
+			// Just get the character name + save name.
+			const std::filesystem::path asPath = environment.load_save_openmw;
+			std::string clipped = asPath.parent_path().filename().string() + "\\" + asPath.filename().string();
+			if (clipped.length() > allowance) {
+				clipped.resize(allowance - 3);
+				clipped += "...";
+			}
+
+			sprintf_s(lParam->szText, "Test in OpenMW (%s)", clipped.c_str());
+			messageResultOverride = TRUE;
+		}
+		else if (environment.start_new_game) {
+			strcpy_s(lParam->szText, "Test in OpenMW (New Game)");
+			messageResultOverride = TRUE;
+		}
+		else {
+			strcpy_s(lParam->szText, "Test in OpenMW (Normal Start)");
+			messageResultOverride = TRUE;
 		}
 	}
 
@@ -641,16 +836,11 @@ namespace se::cs::window::main {
 		const char* tooltip = nullptr;
 		switch (lParam->hdr.idFrom) {
 		case WM_COMMAND_TEST_IN_GAME_MORROWIND:
-			tooltip = "Test in Morrowind";
+			PatchDialogProc_BeforeNotify_TooltipGetDisplayInfo_TestInMorrowind(hWnd, msg, wParam, lParam);
 			break;
 		case WM_COMMAND_TEST_IN_GAME_OPENMW:
-			tooltip = "Test in OpenMW";
+			PatchDialogProc_BeforeNotify_TooltipGetDisplayInfo_TestInOpenMW(hWnd, msg, wParam, lParam);
 			break;
-		}
-
-		if (tooltip) {
-			strcpy_s(lParam->szText, tooltip);
-			messageResultOverride = TRUE;
 		}
 	}
 
@@ -821,6 +1011,9 @@ namespace se::cs::window::main {
 
 		// Patch: Use CSSE.dll's toolbar bitmap.
 		genCallUnprotected(0x46F97B, reinterpret_cast<DWORD>(PatchReplaceToolbarBitmap), 0x6);
+
+		// Patch: WINE compatibility shim for the save plugin file dialog.
+		genCallEnforced(0x4153FD, 0x573296, reinterpret_cast<DWORD>(PatchSaveESPGetSaveFileName));
 
 		// Patch: Extend window messages.
 		genJumpEnforced(0x401EF1, 0x444590, reinterpret_cast<DWORD>(PatchDialogProc));

@@ -77,6 +77,18 @@ function Dropdown:createDropdown()
 		self.elements.dropdownParent:getTopLevelParent():updateLayout()
 	end
 
+	---@param element tes3uiElement
+	local function recursiveContentsChanged(element)
+		if element then
+			if element.widget and element.widget.contentsChanged then
+				element.widget:contentsChanged()
+			end
+			recursiveContentsChanged(element.parent)
+		end
+	end
+	-- Recursively go back to parent and call contentsChanged because scrolling is affected.
+	recursiveContentsChanged(self.elements.outerContainer.parent)
+
 end
 
 function Dropdown:makeComponent(parentBlock)

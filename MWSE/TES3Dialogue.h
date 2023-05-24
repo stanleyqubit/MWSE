@@ -93,9 +93,32 @@ namespace TES3 {
 		bool setJournalIndex(int index);
 		bool setJournalIndexAndMarkModified(int index);
 
+		enum class GetFilteredInfoContext : int {
+			Unknown,
+			ClickAnswer,
+			ClickTopic,
+			ClickTopicFallback,
+			Greeting,
+			HyperlinkParser,
+			Persuasion,
+			Script,
+			ServiceBarter,
+			ServiceEnchanting,
+			ServiceRepair,
+			ServiceSpellmaking,
+			ServiceSpells,
+			ServiceTraining,
+			ServiceTravel,
+			TopicPopulation,
+			Voice,
+
+			COUNT,
+			Invalid = -1,
+		};
+
 		DialogueInfo* getJournalInfoForIndex(int index) const;
-		DialogueInfo* getDeepFilteredInfo(Actor* actor, Reference* reference, bool flag);
 		DialogueInfo* getFilteredInfo(Actor* actor, Reference* reference, bool flag);
+		DialogueInfo* getFilteredInfoWithContext(Actor* actor, Reference* reference, bool flag, GetFilteredInfoContext context);
 
 		//
 		// Custom functions.
@@ -104,6 +127,7 @@ namespace TES3 {
 		std::string toJson();
 
 		bool addToJournal_lua(sol::table params);
+		DialogueInfo* getDeepFilteredInfo(Actor* actor, Reference* reference, bool flag, GetFilteredInfoContext context);
 		DialogueInfo* getDeepFilteredInfo_lua(sol::table params);
 		DialogueInfo* getJournalInfo(sol::optional<int> index) const;
 

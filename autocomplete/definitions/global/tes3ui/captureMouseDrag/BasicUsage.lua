@@ -1,3 +1,6 @@
+---@type tes3uiElement
+local element -- Created somewhere before
+
 element:register("mouseDown", function(e)
 	-- Capture must be inside a mouse event.
 	tes3ui.captureMouseDrag(true)

@@ -6,6 +6,7 @@ local raceCheckScriptID = "RaceCheck"
 local function raceCheck()
 	-- This is almost always the desired behavior,
 	-- since we are overriding the script.
+	---@diagnostic disable-next-line: deprecated
 	mwscript.stopScript({ script = raceCheckScriptID })
 
 	local pcRaceID = tes3.player.object.race.id:lower()

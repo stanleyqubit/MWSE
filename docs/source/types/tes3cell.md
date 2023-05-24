@@ -394,7 +394,7 @@ The region associated with the cell. Only available on exterior cells, or interi
 
 **Returns**:
 
-* `result` ([tes3region](../../types/tes3region))
+* `result` ([tes3region](../../types/tes3region), nil)
 
 ***
 
@@ -538,5 +538,5 @@ local iterator = myObject:iterateReferences(filter)
 
 **Returns**:
 
-* `iterator` (fun(): tes3reference)
+* `iterator` (fun(): [tes3reference](../../types/tes3reference))
 

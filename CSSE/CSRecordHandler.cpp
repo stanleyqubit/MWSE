@@ -82,4 +82,9 @@ namespace se::cs {
 		// TODO: Make this actually show the correct attribute/skill stuff.
 		sprintf_s(buffer, bufferSize, "%s", gmst->value.asString);
 	}
+
+	GameFile* RecordHandler::getAvailableGameFileByIndex(unsigned int index) const {
+		const auto RecordHandler_getAvailableGameFileByIndex = reinterpret_cast<GameFile * (__thiscall*)(const RecordHandler*, size_t)>(0x501140);
+		return RecordHandler_getAvailableGameFileByIndex(this, index);
+	}
 }

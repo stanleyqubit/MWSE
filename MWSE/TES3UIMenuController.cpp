@@ -9,6 +9,11 @@
 #include "BitUtil.h"
 
 namespace TES3::UI {
+	// Storage of the last data used for displayObjectTooltip, for use with updateObjectTooltip.
+	Object* MenuInputController::lastTooltipObject = nullptr;
+	ItemData* MenuInputController::lastTooltipItemData = nullptr;
+	int MenuInputController::lastTooltipCount = 0;
+
 	const auto TES3_MenuInputController_flushBufferedTextEvents = reinterpret_cast<void(__thiscall*)(MenuInputController*)>(0x58E9C0);
 	void MenuInputController::flushBufferedTextEvents() {
 		TES3_MenuInputController_flushBufferedTextEvents(this);
@@ -25,11 +30,6 @@ namespace TES3::UI {
 		// Reset text buffer to avoid previous input appearing immediately
 		flushBufferedTextEvents();
 	}
-
-	// Storage of the last data used for displayObjectTooltip, for use with updateObjectTooltip.
-	static TES3::Object * lastTooltipObject = nullptr;
-	static TES3::ItemData * lastTooltipItemData = nullptr;
-	static int lastTooltipCount = 0;
 
 	const auto TES3_UI_displayObjectTooltip = reinterpret_cast<void(__thiscall*)(MenuInputController*, TES3::Object*, TES3::ItemData*, int)>(0x590D90);
 	void MenuInputController::displayObjectTooltip(TES3::Object * object, TES3::ItemData * itemData, int count) {

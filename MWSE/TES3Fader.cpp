@@ -76,6 +76,10 @@ namespace TES3 {
 		TES3_Fader_setTexture(this, path);
 	}
 
+	bool Fader::getActive() const {
+		return isActive;
+	}
+
 	void Fader::setActive(bool value) {
 		if (value) {
 			activate();

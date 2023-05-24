@@ -603,7 +603,7 @@ local instance = tes3.applyMagicSource({ reference = ..., source = ..., name = .
 	* `source` ([tes3object](../../types/tes3object)): *Optional*. A magic source to apply.
 	* `name` (string): *Optional*. While optional for other uses, if applying alchemy as a source, you must specify a name for the magic source.
 	* `effects` (table): *Optional*. A table of custom effects to apply as a potion. Maximal number of effects is 8.
-		* `id` (boolean): *Default*: `-1`. ID of the effect.
+		* `id` (boolean): *Default*: `-1`. ID of the effect. Maps to values in [`tes3.effect`](https://mwse.github.io/MWSE/references/magic-effects/) table.
 		* `skill` (number): *Default*: `-1`. If effect parameter specified is: Absorb, Damage, Drain, Fortify or Restore Skill, a skill should be provided. This also applies to any custom spell effect which operates on a certain skill. This value maps to [`tes3.skill`](https://mwse.github.io/MWSE/references/skills/) constants.
 		* `attribute` (number): *Default*: `-1`. If effect parameter specified is: Absorb, Damage, Drain, Fortify or Restore Attribute, an attribute should be provided. This also applies to any custom spell effect which operates on a certain attribute. This value maps to [`tes3.attribute`](https://mwse.github.io/MWSE/references/attributes/) constants.
 		* `rangeType` (number): *Default*: `tes3.effectRange.self`. The range of the effect. This maps to [`tes3.effectRange`](https://mwse.github.io/MWSE/references/effect-ranges/) constants.
@@ -795,6 +795,7 @@ local success = tes3.cast({ reference = ..., target = ..., spell = ..., instant 
 	event.register(tes3.event.keyDown, function(e)
 		if e.isAltDown then
 			tes3.messageBox("mwscript.explodeSpell")
+			---@diagnostic disable-next-line: deprecated
 			mwscript.explodeSpell({
 				reference = tes3.game.playerTarget,
 				spell = "proj_trap_spell"
@@ -805,7 +806,7 @@ local success = tes3.cast({ reference = ..., target = ..., spell = ..., instant 
 	event.register(tes3.event.keyDown, function(e)
 		if e.isAltDown then
 			tes3.messageBox("tes3.cast")
-			-- This will behave the same as will mwscript.explodeSpell()
+			-- This will behave the same as mwscript.explodeSpell()
 			tes3.cast({
 				target = tes3.game.playerTarget,
 				reference = tes3.game.playerTarget,
@@ -824,13 +825,15 @@ local success = tes3.cast({ reference = ..., target = ..., spell = ..., instant 
 Checks if a merchant will offer a service to you, including dialogue checks like disposition and faction membership. A specific service can be checked, or if no service is given, a generic dialogue check is made. If the service is refused, the dialogue reply for the refusal may also be returned (it may be nil, as there may not always be a reply available).
 
 ```lua
-local offersService, refusalReply = tes3.checkMerchantOffersService(reference, service)
+local offersService, refusalReply = tes3.checkMerchantOffersService({ reference = ..., service = ..., context = ... })
 ```
 
 **Parameters**:
 
-* `reference` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string)
-* `service` (number): *Optional*. The specific service to check for availability. Maps to values in the [`tes3.merchantService`](https://mwse.github.io/MWSE/references/merchant-services/) table.
+* `params` (table)
+	* `reference` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string)
+	* `service` (number): *Optional*. The specific service to check for availability. Maps to values in the [`tes3.merchantService`](https://mwse.github.io/MWSE/references/merchant-services/) table.
+	* `context` (number): *Default*: `tes3.dialogueFilterContext.script`. An override for how this info request should be treated. Maps to values in the [`tes3.dialogueFilterContext`](https://mwse.github.io/MWSE/references/dialogue-filter-context/) table.
 
 **Returns**:
 
@@ -1549,7 +1552,7 @@ local cells = tes3.getActiveCells()
 ### `tes3.getAnimationActionTiming`
 <div class="search_terms" style="display: none">getanimationactiontiming, animationactiontiming</div>
 
-This function fetches a dictionary of the timings of the action keys for a specific animation group on an actor. The actor is required, as different actors can use different animations. The result is a table with action names as keys, and timings as values.
+This function fetches a dictionary of the timings of the action keys for a specific animation group on an actor. The actor is required, as different actors can use different animations. The result is a table with action names as keys, and timings as values. The function will return nil if the actor does not have that animation group, or if the actor's animations are not active.
 
 ```lua
 local result = tes3.getAnimationActionTiming({ reference = ..., group = ... })
@@ -1563,7 +1566,7 @@ local result = tes3.getAnimationActionTiming({ reference = ..., group = ... })
 
 **Returns**:
 
-* `result` (table&lt;string, number&gt;)
+* `result` (table&lt;string, number&gt;, nil)
 
 ***
 
@@ -1907,7 +1910,7 @@ local stack = tes3.getEquippedItem({ actor = ..., enchanted = ..., objectType = 
 
 **Returns**:
 
-* `stack` ([tes3equipmentStack](../../types/tes3equipmentStack))
+* `stack` ([tes3equipmentStack](../../types/tes3equipmentStack), nil): The equipped stack, or `nil` if the queried stack was not found.
 
 ??? example "Example: Get Player’s Equipped Light"
 
@@ -3044,7 +3047,7 @@ local iterator = tes3.iterate(iterator)
 
 **Returns**:
 
-* `iterator` (fun(): tes3object)
+* `iterator` (fun(): [tes3object](../../types/tes3object))
 
 ***
 
@@ -3063,7 +3066,7 @@ local objectIterator = tes3.iterateObjects(filter)
 
 **Returns**:
 
-* `objectIterator` (fun(): tes3object)
+* `objectIterator` (fun(): [tes3object](../../types/tes3object))
 
 ***
 
@@ -3179,7 +3182,7 @@ local iterationFunction = tes3.loopTArray(tarray)
 
 **Returns**:
 
-* `iterationFunction` (fun(): tes3object)
+* `iterationFunction` (fun(): [tes3object](../../types/tes3object))
 
 ***
 

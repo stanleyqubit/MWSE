@@ -7,11 +7,15 @@
 namespace NI {
 	struct CollisionSwitch : Node {
 		static constexpr unsigned short flagCollision = 0x20;
+		static constexpr unsigned short flagPickProxy = 0x400; // Added by MWSE
 
 		CollisionSwitch();
 
 		bool getCollisionActive();
 		void setCollisionActive(bool active);
+
+		void linkObject(Stream* stream);
+		bool findIntersections(TES3::Vector3* position, TES3::Vector3* direction, Pick* pick);
 
 		static Pointer<CollisionSwitch> create();
 	};

@@ -28,6 +28,7 @@
 #include "TES3VFXManager.h"
 #include "TES3WorldController.h"
 
+#include "NICollisionSwitch.h"
 #include "NIFlipController.h"
 #include "NILinesData.h"
 #include "NISortAdjustNode.h"
@@ -109,12 +110,12 @@ namespace mwse::patch {
 		auto athletics = &TES3::DataHandler::get()->nonDynamicData->skills[TES3::SkillID::Athletics];
 
 		// If we're running, use the first progress.
-		if (mobilePlayer->movementFlags & TES3::ActorMovement::Running) {
+		if (mobilePlayer->getMovementFlagRunning()) {
 			mobilePlayer->exerciseSkill(TES3::SkillID::Athletics, athletics->progressActions[0] * worldController->deltaTime);
 		}
 
 		// If we're swimming, use the second progress.
-		if (mobilePlayer->movementFlags & TES3::ActorMovement::Swimming) {
+		if (mobilePlayer->getMovementFlagSwimming()) {
 			mobilePlayer->exerciseSkill(TES3::SkillID::Athletics, athletics->progressActions[1] * worldController->deltaTime);
 		}
 	}
@@ -758,10 +759,25 @@ namespace mwse::patch {
 	static char tempErrorMessageObjectID[256];
 
 	const char* __fastcall PatchGetImprovedObjectIdentifier(TES3::Object* object) {
-		const char* id = object->getObjectID();
-		const char* source = object->sourceMod ? object->sourceMod->filename : "no source";
+		const auto id = object->getObjectID();
+		const auto source = object->sourceMod ? object->sourceMod->filename : "no source";
 		std::snprintf(tempErrorMessageObjectID, sizeof(tempErrorMessageObjectID), "%s' (%s)", id, source);
 		return tempErrorMessageObjectID;
+	}
+
+	//
+	// Patch: Do not load VFX with maxAge <= 0.001f from save games.
+	//
+
+	const auto TES3_VFXManager_createFromSaveData = reinterpret_cast<TES3::VFX* (__thiscall*)(TES3::VFXManager*, TES3::PhysicalObject*, TES3::Reference*, TES3::VFXSerialized*, float)>(0x468620);
+
+	TES3::VFX* __fastcall PatchVFXManagerCreateFromSaveData(TES3::VFXManager* vfxManager, DWORD unused, TES3::PhysicalObject* effect, TES3::Reference* reference, TES3::VFXSerialized* serializedVFX, float verticalOffset) {
+		// Do not load VFX with maxAge <= 0.001f, as they are persistent and may have accumulated in saves from before these fixes.
+		if (serializedVFX->maxAge <= 0.001f) {
+			return nullptr;
+		}
+
+		return TES3_VFXManager_createFromSaveData(vfxManager, effect, reference, serializedVFX, verticalOffset);
 	}
 
 	//
@@ -1019,23 +1035,7 @@ namespace mwse::patch {
 		// Patch: Fix crash when releasing a clone of a light with no reference.
 		genCallEnforced(0x4D260C, 0x4E5170, reinterpret_cast<DWORD>(PatchReleaseLightEntityForReference));
 
-		// Patch: Cache values between dialogue filters.
-		auto Dialogue_getFilteredInfo = &TES3::Dialogue::getFilteredInfo;
-		genCallEnforced(0x40B8EE, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
-		genCallEnforced(0x4B2F51, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
-		genCallEnforced(0x5290B2, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
-		genCallEnforced(0x52931A, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
-		genCallEnforced(0x5BF01C, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
-		genCallEnforced(0x5BF17C, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
-		genCallEnforced(0x5BF25C, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
-		genCallEnforced(0x5BF33C, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
-		genCallEnforced(0x5BF43C, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
-		genCallEnforced(0x5BF51C, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
-		genCallEnforced(0x5BF62C, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
-		genCallEnforced(0x5C05F7, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
-		genCallEnforced(0x5C0A48, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
-		genCallEnforced(0x5C0A67, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
-		genCallEnforced(0x6004E9, 0x4B29E0, *reinterpret_cast<DWORD*>(&Dialogue_getFilteredInfo));
+		// Patch: Cache values between dialogue filters. The actual override that makes use of this cache is in LuaManager for its hooks.
 		genCallUnprotected(0x4B1646, reinterpret_cast<DWORD>(PatchDialogueFilterCacheGetDisposition), 0x6);
 		genCallUnprotected(0x4B167B, reinterpret_cast<DWORD>(PatchDialogueFilterCacheGetDisposition), 0x6);
 
@@ -1070,6 +1070,12 @@ namespace mwse::patch {
 		// Patch: Add deterministic subtree ordering mode to NiSortAdjustNode. Fix cloning with no accumulator.
 		overrideVirtualTableEnforced(0x750580, 0x78, 0x6DE030, reinterpret_cast<DWORD>(PatchNISortAdjustNodeDisplay));
 		genCallUnprotected(0x6DE21B, reinterpret_cast<DWORD>(PatchNISortAdjustNodeCloneAccumulator));
+
+		// Patch: Add pick proxy behaviour to NiCollisionSwitch.
+		auto CollisionSwitch_linkObject = &NI::CollisionSwitch::linkObject;
+		auto CollisionSwitch_findIntersectons = &NI::CollisionSwitch::findIntersections;
+		overrideVirtualTableEnforced(0x74F418, 0x10, 0x6D7100, *reinterpret_cast<DWORD*>(&CollisionSwitch_linkObject));
+		overrideVirtualTableEnforced(0x74F418, 0x88, 0x6D6E10, *reinterpret_cast<DWORD*>(&CollisionSwitch_findIntersectons));
 
 		// Patch: Improve error reporting by including the source mod next to object IDs in load error messages.
 		// In Cell::loadReference:
@@ -1161,6 +1167,13 @@ namespace mwse::patch {
 		genCallUnprotected(0x4E6C0C, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
 		writeBytesUnprotected(0x4F2132, patchImprovedErrorIDArgs20, sizeof(patchImprovedErrorIDArgs20));
 		genCallUnprotected(0x4F2134, reinterpret_cast<DWORD>(PatchGetImprovedObjectIdentifier));
+
+		// Patch: Ensure VFX with maxAge <= 0.001f are cleared when clearing data on load game, instead of leaking.
+		auto VFXManager_reset = &TES3::VFXManager::reset;
+		genCallEnforced(0x4C6F00, 0x469390, *reinterpret_cast<DWORD*>(&VFXManager_reset));
+
+		// Patch: Do not load VFX with maxAge <= 0.001f from save games.
+		genCallEnforced(0x46A04B, 0x468620, reinterpret_cast<DWORD>(PatchVFXManagerCreateFromSaveData));
 	}
 
 	void installPostLuaPatches() {

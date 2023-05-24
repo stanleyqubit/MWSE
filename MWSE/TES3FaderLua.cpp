@@ -23,7 +23,7 @@ namespace mwse::lua {
 		usertypeDefinition["updateMaterialProperty"] = &TES3::Fader::updateMaterialProperty;
 
 		// Expose writing active state as mapping for activate/deactivate.
-		usertypeDefinition["active"] = sol::property(&TES3::Fader::isActive, &TES3::Fader::setActive);
+		usertypeDefinition["active"] = sol::property(&TES3::Fader::getActive, &TES3::Fader::setActive);
 
 		// Expose fade as a fancier functions.
 		usertypeDefinition["fadeIn"] = &TES3::Fader::fadeIn_lua;

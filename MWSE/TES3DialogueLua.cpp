@@ -94,6 +94,7 @@ namespace mwse::lua {
 			usertypeDefinition["runScript"] = &TES3::DialogueInfo::runScript;
 			usertypeDefinition["filter"] = &TES3::DialogueInfo::filter;
 			usertypeDefinition["findDialogue"] = &TES3::DialogueInfo::findDialogue;
+			usertypeDefinition["getSoundPath"] = &TES3::DialogueInfo::getSoundPath;
 		}
 
 		// Binding for TES3::Quest

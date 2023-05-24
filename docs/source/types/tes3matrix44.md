@@ -56,6 +56,21 @@ The 4th row of the matrix.
 
 ## Methods
 
+### `__tostring`
+<div class="search_terms" style="display: none">__tostring</div>
+
+Converts the matrix to a string with 2 decimal places.
+
+```lua
+local result = myObject:__tostring()
+```
+
+**Returns**:
+
+* `result` (string)
+
+***
+
 ### `copy`
 <div class="search_terms" style="display: none">copy</div>
 

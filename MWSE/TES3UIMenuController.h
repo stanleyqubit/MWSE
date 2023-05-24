@@ -45,6 +45,10 @@ namespace TES3::UI {
 		bool chargenBirthsignDone; // 0xA4
 		Reference* mouseoverWorldObject; // 0xA8
 
+		static Object* lastTooltipObject;
+		static ItemData* lastTooltipItemData;
+		static int lastTooltipCount;
+
 		MenuInputController() = delete;
 		~MenuInputController() = delete;
 

@@ -8,4 +8,5 @@
 --- @field delta number *Read-only*. The direction and strength of the mouse wheel movement. This value is hardware dependent.
 --- @field isAltDown number *Read-only*. True if alt is held.
 --- @field isControlDown number *Read-only*. True if control is held.
+--- @field isShiftDown number *Read-only*. True if either shift key is held.
 --- @field isSuperDown number *Read-only*. True if super (Windows key) is held.

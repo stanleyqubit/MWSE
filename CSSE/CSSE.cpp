@@ -30,6 +30,7 @@
 #include "DialogTextSearchWindow.h"
 
 #include "MemoryUtil.h"
+#include "PathUtil.h"
 #include "StringUtil.h"
 #include "WindowsUtil.h"
 
@@ -188,6 +189,20 @@ namespace se::cs {
 		}
 
 		//
+		// Patch: Prevent rogue files from popping up.
+		//
+
+		HANDLE __stdcall CreateRootDirectoryFile(LPCSTR lpFileName, DWORD dwDesiredAccess, DWORD dwShareMode, LPSECURITY_ATTRIBUTES lpSecurityAttributes, DWORD dwCreationDisposition, DWORD dwFlagsAndAttributes, HANDLE hTemplateFile) {
+			const auto forcedPath = (path::getInstallPath() / lpFileName).string();
+			return CreateFileA(forcedPath.c_str(), dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
+		}
+
+		BOOL __stdcall DeleteRootDirectoryFile(LPCSTR lpFileName) {
+			const auto forcedPath = (path::getInstallPath() / lpFileName).string();
+			return DeleteFileA(forcedPath.c_str());
+		}
+
+		//
 		// Create minidumps.
 		//
 
@@ -342,7 +357,7 @@ namespace se::cs {
 		CWinApp::InitInstance();
 
 		// Open our log file.
-		log::stream.open(windows::getModulePath(m_hInstance).parent_path() / "csse.log");
+		log::stream.open(path::getInstallPath() / "csse.log");
 #ifdef APPVEYOR_BUILD_NUMBER
 		log::stream << "Construction Set Extender build " << APPVEYOR_BUILD_NUMBER << " (built " << __DATE__ << ") hooked." << std::endl;
 #else
@@ -450,6 +465,13 @@ namespace se::cs {
 		// Patch: Add deterministic subtree ordering mode to NiSortAdjustNode. Fix crash when cloning with no accumulator.
 		overrideVirtualTableEnforced(0x67A5C8, 0x78, 0x5CF270, reinterpret_cast<DWORD>(patch::NISortAdjustNodeDisplay));
 		genCallUnprotected(0x5CF45B, reinterpret_cast<DWORD>(patch::NISortAdjustNodeCloneAccumulator));
+
+		// Patch: Prevent rogue files from popping up.
+		genCallUnprotected(0x4852C8, reinterpret_cast<DWORD>(patch::CreateRootDirectoryFile), 0x6); // Warnings.txt
+		genCallUnprotected(0x4852F2, reinterpret_cast<DWORD>(patch::DeleteRootDirectoryFile), 0x6); // Warnings.txt
+		genCallUnprotected(0x485359, reinterpret_cast<DWORD>(patch::CreateRootDirectoryFile), 0x6); // Warnings.txt
+		genCallUnprotected(0x485494, reinterpret_cast<DWORD>(patch::CreateRootDirectoryFile), 0x6); // Warnings.txt
+		genCallUnprotected(0x4857A6, reinterpret_cast<DWORD>(patch::CreateRootDirectoryFile), 0x6); // ProgramFlow.txt
 
 		// Install all our sectioned patches.
 		window::main::installPatches();

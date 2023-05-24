@@ -34,6 +34,21 @@ The minimum bound of the box.
 
 ## Methods
 
+### `__tostring`
+<div class="search_terms" style="display: none">__tostring</div>
+
+Converts the bounding box to a string with 2 decimal places. The minimum bounds are printed first, then the maximal bounds.
+
+```lua
+local result = myObject:__tostring()
+```
+
+**Returns**:
+
+* `result` (string)
+
+***
+
 ### `copy`
 <div class="search_terms" style="display: none">copy</div>
 

@@ -12,8 +12,9 @@ return {
 			{ name = "type", type = "number", optional = true, description = "Maps to [`tes3.weaponType`](https://mwse.github.io/MWSE/references/weapon-types/). Used to filter equipment by type." },
 		},
 	}},
-	returns = "stack",
-	valuetype = "tes3equipmentStack",
+	returns = {
+		{ name = "stack", type = "tes3equipmentStack|nil", description = "The equipped stack, or `nil` if the queried stack was not found." },
+	},
 	examples = {
 		["GetPlayerLight"] = {
 			title = "Get Player’s Equipped Light",

@@ -196,6 +196,7 @@ namespace mwse::lua {
 			usertypeDefinition["toRotationZ"] = &TES3::Matrix33::toRotationZ;
 			usertypeDefinition["toZero"] = &TES3::Matrix33::toZero;
 			usertypeDefinition["transpose"] = &TES3::Matrix33::transpose;
+			usertypeDefinition["lookAt"] = &TES3::Matrix33::lookAt;
 
 			// Handle functions with out values.
 			usertypeDefinition["invert"] = &TES3::Matrix33::invert_lua;

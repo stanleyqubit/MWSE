@@ -14,11 +14,11 @@ This type inherits the following: [tes3baseObject](../../types/tes3baseObject)
 ### `abilities`
 <div class="search_terms" style="display: none">abilities</div>
 
-*Read-only*. A list of abilities that NPCs of that race have access to. It is a `tes3spellList`, which is a list wrapper with helper functions. The actual list is accessed with `.iterator`. e.g. `for _, ability in pairs(race.abilities.iterator) do print(ability.name) end`
+*Read-only*. A list of abilities that NPCs of that race have access to. It is a `tes3spellList`, which is a list wrapper with helper functions. The actual list is iterated over using `pairs`. E.g. `for _, ability in pairs(race.abilities) do print(ability.name) end`
 
 **Returns**:
 
-* `result` ([tes3spellList](../../types/tes3spellList))
+* `result` ([tes3spellList](../../types/tes3spellList), [tes3spell](../../types/tes3spell)[])
 
 ***
 

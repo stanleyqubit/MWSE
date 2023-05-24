@@ -23,7 +23,7 @@
 --- @field name string The name and id of the cell. See also `displayName` and `editorName`.
 --- @field pathGrid tes3pathGrid|nil *Read-only*. Access to the cell's pathgrid. Not all cells have a pathgrid. The property is unaccessible on unloaded cells.
 --- @field pickObjectsRoot niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode The scenegraph node containing player-interactable objects from this cell.
---- @field region tes3region The region associated with the cell. Only available on exterior cells, or interior cells that behave as exterior cells.
+--- @field region tes3region|nil The region associated with the cell. Only available on exterior cells, or interior cells that behave as exterior cells.
 --- @field restingIsIllegal boolean If true, the player may not rest in the cell.
 --- @field staticObjectsRoot niBillboardNode|niCollisionSwitch|niNode|niSortAdjustNode|niSwitchNode The scenegraph node containing static non-player-interactable objects from this cell.
 --- @field statics tes3referenceList *Read-only*. One of the three reference collections for a cell.

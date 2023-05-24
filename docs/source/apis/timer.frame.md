@@ -21,7 +21,7 @@ local timer = timer.frame.delayOneFrame(callback)
 
 **Parameters**:
 
-* `callback` (function): The callback function that will execute when the timer expires.
+* `callback` (fun(e: [mwseTimerCallbackData](../../types/mwseTimerCallbackData))): The callback function that will execute when the timer expires.
 
 **Returns**:
 

@@ -33,7 +33,7 @@ namespace TES3 {
 		return vfx;
 	}
 
-	const auto TES3_VFXManager_createForSource = reinterpret_cast<VFX*(__thiscall*)(VFXManager*, MagicSourceInstance*, Reference*, float)>(0x469570);
+	const auto TES3_VFXManager_createForSource = reinterpret_cast<VFX * (__thiscall*)(VFXManager*, MagicSourceInstance*, Reference*, float)>(0x469570);
 	VFX* VFXManager::createForSource(MagicSourceInstance* source, Reference* reference, float lifespan) {
 		auto vfx = TES3_VFXManager_createForSource(this, source, reference, lifespan);
 		if (vfx && mwse::lua::event::VFXCreatedEvent::getEventEnabled()) {
@@ -96,5 +96,18 @@ namespace TES3 {
 	const auto TES3_VFXManager_removeForSerialForReference = reinterpret_cast<void(__thiscall*)(VFXManager*, unsigned int, Reference*)>(0x4691E0);
 	void VFXManager::removeForSerialForReference(unsigned int serial, Reference* reference) {
 		TES3_VFXManager_removeForSerialForReference(this, serial, reference);
+	}
+
+	void VFXManager::reset() {
+		// For all vfx, set maxAge to a value that will definitely be cleared.
+		for (auto vfx : vfxNodes) {
+			vfx->maxAge = 1.0;
+		}
+		resetOnNewScene();
+	}
+
+	const auto TES3_VFXManager_resetOnNewScene = reinterpret_cast<void(__thiscall*)(VFXManager*)>(0x469390);
+	void VFXManager::resetOnNewScene() {
+		TES3_VFXManager_resetOnNewScene(this);
 	}
 }

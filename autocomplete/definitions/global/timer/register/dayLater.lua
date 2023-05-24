@@ -1,8 +1,4 @@
-
----@class timerCallbackData
----@field timer mwseTimer Access to our timer
-
----@param e timerCallbackData
+---@param e mwseTimerCallbackData
 local function showMessage(e)
 	local timer = e.timer
 	local data = timer.data

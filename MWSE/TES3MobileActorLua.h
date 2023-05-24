@@ -133,6 +133,7 @@ namespace mwse::lua {
 		usertypeDefinition["doJump"] = &TES3::MobileActor::doJump_lua;
 		usertypeDefinition["equip"] = &TES3::MobileActor::equip_lua;
 		usertypeDefinition["equipMagic"] = &TES3::MobileActor::equipMagic_lua;
+		usertypeDefinition["forceWeaponAttack"] = &TES3::MobileActor::forceWeaponAttack_lua;
 		usertypeDefinition["getActiveMagicEffects"] = &TES3::MobileActor::getActiveMagicEffectsList_lua;
 		usertypeDefinition["getBootsWeight"] = &TES3::MobileActor::getBootsWeight;
 		usertypeDefinition["getViewToActor"] = &TES3::MobileActor::getViewToActor;

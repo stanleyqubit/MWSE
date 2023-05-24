@@ -23,7 +23,7 @@ namespace TES3 {
 		Knockdown = 0xE,
 		KnockedOut = 0xF,
 		PickingProbing = 0x10,
-		Unknown_0x11 = 0x11,
+		Wait = 0x11,
 		Dying = 0x12,
 		Dead = 0x13,
 	};

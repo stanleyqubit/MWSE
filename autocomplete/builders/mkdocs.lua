@@ -83,23 +83,100 @@ local function getTypeLink(type)
 	return typeLinks[type]
 end
 
+--- This function converts a union of types to an array. E.g.:<br>
+--- "table<integer, tes3ref|tes3mobile>|fun(self: infoGetTextEventData|string): boolean, string|integer" to<br>
+--- {<br>
+---    "table<integer, tes3ref|tes3mobile>",<br>
+---    "fun(self: infoGetTextEventData|string): boolean, string",<br>
+---    "integer",<br>
+--- }<br>
+---@param union string
+---@return string[]
+local function breakoutUnion(union)
+	local types = {}
+
+	while union ~= "" do
+		if union:startswith("|") then
+			union = union:sub(2, -1)
+		end
+
+		local i, _, tableStr = union:find("(table%b<>)([^|]*)")
+		if i == 1 then -- A table found, e.g. table<integer, tes3reference|tes3actor>
+			table.insert(types, tableStr)
+			union = union:sub(tableStr:len() + 1)
+			goto continue
+		end
+
+		local i, _, functionParams, functionReturns = union:find("(fun%b())([^|]*)")
+		if i == 1 then
+			local functionStr = functionParams .. functionReturns
+			table.insert(types, functionStr)
+			union = union:sub(functionStr:len() + 1)
+			goto continue
+		end
+
+		local type = union:match("[^|]+")
+		table.insert(types, type)
+		union = union:sub(type:len() + 1)
+		::continue::
+	end
+	return types
+end
+
 ---@param type string
 ---@param nested boolean?
 ---@return string
 local function breakoutTypeLinks(type, nested)
-	local types = {}
+	local types = breakoutUnion(type)
 
-	-- Support "table<x, y>" as type, in HTML < and > signs have a special meaning.
-	-- Use "&lt;" and "&gt;" instead.
-	if type:startswith("table<") then
-		local keyType, valueType = type:match("table<(%w+), (.+)>")
-		keyType = breakoutTypeLinks(keyType, true)
-		valueType = breakoutTypeLinks(valueType, true)
+	for i, t in ipairs(types) do
+		-- Support "table<x, y>" as type, in HTML < and > signs have a special meaning.
+		-- Use "&lt;" and "&gt;" instead.
+		if t:startswith("table<") then
+			local keyType, valueType = t:match("table<(%w+), (.+)>")
+			keyType = breakoutTypeLinks(keyType, true)
+			valueType = breakoutTypeLinks(valueType, true)
 
-		table.insert(types, string.format("table&lt;%s, %s&gt;", keyType, valueType))
-	else
-		for _, t in ipairs(string.split(type, "|")) do
-			table.insert(types, getTypeLink(t))
+			types[i] = string.format("table&lt;%s, %s&gt;", keyType, valueType)
+		elseif t:startswith("fun(") then
+			-- Let's take "fun(e: mwseTimerCallbackData, param2): boolean, string"
+			-- params: "(e: mwseTimerCallbackData, param2)",
+			-- ret: "boolean, string"
+			local params, ret = t:match("fun(%b())[:]?[%s]?(.*)")
+
+			-- Handle the parameters
+			-- "e: mwseTimerCallbackData, param2"
+			params = params:sub(2, -2)
+			local p = {}
+			for i, paramStr in ipairs(params:split(",")) do
+				-- paramStr: "e: mwseTimerCallbackData", " param2"
+				paramStr = paramStr:trim()
+				-- name: "e", type: "mwseTimerCallbackData" or
+				-- name: "param2", type: nil
+				local name, type = paramStr:match("([%w]+)[:]?[%s]?(.*)")
+				p[i] = ("%s%s"):format(
+					name,
+					type and (": " .. breakoutTypeLinks(type, true)) or ""
+				)
+			end
+			params = table.concat(p, ", ")
+
+			-- Handle the return values
+			if ret then
+				local r = {}
+				for i, returnStr in ipairs(ret:split(", ")) do
+					-- returnStr: "boolean", "string"
+					r[i] = breakoutTypeLinks(returnStr, true)
+				end
+				ret = table.concat(r, ", ")
+			end
+
+			types[i] = string.format("fun(%s)%s",
+				params or "",
+				(ret ~= "") and (": " .. ret) or ""
+			)
+		else
+			types[i] = getTypeLink(t)
 		end
 	end
 	return table.concat(types, nested and "|" or ", ")

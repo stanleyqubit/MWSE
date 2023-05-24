@@ -131,7 +131,7 @@ end
 
 local function onLoaded(e)
 	-- If we were starting a new game, reposition ourselves to the right place.
-	if (test_environment.start_new_game and test_environment.load_save == "") then
+	if (test_environment.start_new_game and test_environment.load_save_morrowind == "") then
 		local cell = nil
 		if (test_environment.starting_cell ~= "") then
 			cell = tes3.getCell({ id = test_environment.starting_cell })
@@ -170,8 +170,8 @@ local function loadTestingSave()
 	event.register(tes3.event.loaded, onLoaded, { doOnce = true })
 
 	-- Were we given a specific save to load?
-	if (test_environment.load_save ~= "") then
-		tes3.loadGame(test_environment.load_save)
+	if (test_environment.load_save_morrowind ~= "") then
+		tes3.loadGame(test_environment.load_save_morrowind)
 		return
 	end
 
@@ -197,7 +197,7 @@ end
 
 local function onAboutToShowMainMenu()
 	-- If we're not loading a save or starting a new game, there's no point in continuing.
-	if (test_environment.load_save == "" and test_environment.start_new_game == false) then
+	if (test_environment.load_save_morrowind == "" and test_environment.start_new_game == false) then
 		return
 	end
 

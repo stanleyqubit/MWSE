@@ -4,5 +4,5 @@ return {
 	arguments = {
 		{ name = "scriptId", type = "string" },
 	},
-	returns = "boolean",
+	returns = {{ name = "success", type = "boolean" }},
 }

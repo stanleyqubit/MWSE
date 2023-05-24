@@ -808,6 +808,8 @@ function toml.saveFile(fileName, object)
 	f:close()
 end
 
+---@param key string
+---@return MWSE.Metadata?
 function toml.loadMetadata(key)
 	return toml.loadFile(string.format("Data Files\\%s-metadata.toml", key))
 end

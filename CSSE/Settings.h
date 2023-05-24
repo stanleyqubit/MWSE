@@ -137,7 +137,8 @@ namespace se::cs {
 		struct TestEnvironment {
 			std::vector<std::string> game_files = {};
 			bool start_new_game = true;
-			std::string load_save = "";
+			std::string load_save_morrowind = "";
+			std::string load_save_openmw = "";
 			std::string starting_cell = {};
 			std::array<int, 2> starting_grid = { 0, 0 };
 			std::array<float, 3> position = { 0.0f, 0.0f, 0.0f };
@@ -161,6 +162,8 @@ namespace se::cs {
 
 		bool valid = true;
 		bool enabled = true;
+
+		std::filesystem::path file_location() const;
 
 		void load();
 		void save() const;

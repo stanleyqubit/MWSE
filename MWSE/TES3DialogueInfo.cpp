@@ -46,63 +46,8 @@ namespace TES3 {
 		if (context.filterActor && context.speakerBaseActor != context.filterActor) {
 			return false;
 		}
-
-		// Check for race condition.
-		if (context.filterRace && context.speakerBaseActor->getRace() != context.filterRace) {
+		if (context.speakerBaseActor->objectType == ObjectType::Creature && context.filterActor == nullptr) {
 			return false;
-		}
-
-		// Check for sex condition.
-		const auto npcIsFemale = (npcSex == 1);
-		if (npcSex != -1 && context.speakerBaseActor->isFemale() != npcIsFemale) {
-			return false;
-		}
-
-		// Check for class condition.
-		if (context.filterClass && context.speakerBaseActor->getClass() != context.filterClass) {
-			return false;
-		}
-
-		// Check for faction condition.
-		if (context.filterFaction && context.speakerBaseActor->getFaction() != context.filterFaction) {
-			return false;
-		}
-
-		// Check for faction rank condition.
-		if (npcRank != -1 && context.speakerBaseActor->getFactionRank() < npcRank) {
-			return false;
-		}
-
-		// Check for player faction membership/rank.
-		if (context.filterPlayerFaction) {
-			if (!context.filterPlayerFaction->getPlayerJoined()) {
-				return false;
-			}
-			if (pcRank != -1 && pcRank > context.filterPlayerFaction->getEffectivePlayerRank()) {
-				return false;
-			}
-		}
-		else if (pcRank != -1 && context.speakerBaseActor->objectType == ObjectType::NPC) {
-			const auto speakerFaction = static_cast<NPC*>(context.speakerBaseActor)->getFaction();
-			if (speakerFaction == nullptr || pcRank > speakerFaction->getEffectivePlayerRank()) {
-				return false;
-			}
-		}
-
-		// Check for disposition.
-		if (context.speakerMobile && context.speakerBaseActor->objectType == ObjectType::NPC) {
-			const auto mobileNPC = static_cast<MobileNPC*>(context.speakerMobile);
-			// Service refusal disposition checks are flipped for some reason?
-			if (dialogue->getResponseType() == ResponseType::ServiceRefusal) {
-				if (source != FilterSource::None && disposition && mobileNPC->getDisposition() >= disposition) {
-					return false;
-				}
-			}
-			else if (source != FilterSource::None) {
-				if (mobileNPC->getDisposition() < disposition) {
-					return false;
-				}
-			}
 		}
 
 		// Check for cell condition.
@@ -115,6 +60,75 @@ namespace TES3 {
 			std::string_view cellId = context.filterCell->getObjectID();
 			if (_strnicmp(playerCell->getObjectID(), cellId.data(), cellId.size()) != 0) {
 				return false;
+			}
+		}
+
+		// Check for player faction membership/rank.
+		if (context.filterPlayerFaction) {
+			if (!context.filterPlayerFaction->getPlayerJoined()) {
+				return false;
+			}
+			if (pcRank != -1 && pcRank > context.filterPlayerFaction->getEffectivePlayerRank()) {
+				return false;
+			}
+		}
+
+		// NPC only conditions.
+		if (context.speakerBaseActor->objectType == ObjectType::NPC) {
+			const auto speakerFaction = context.speakerBaseActor->getFaction();
+
+			// Check for race condition.
+			if (context.filterRace && context.speakerBaseActor->getRace() != context.filterRace) {
+				return false;
+			}
+
+			// Check for sex condition.
+			const auto npcIsFemale = (npcSex == 1);
+			if (npcSex != -1 && context.speakerBaseActor->isFemale() != npcIsFemale) {
+				return false;
+			}
+
+			// Check for class condition.
+			if (context.filterClass && context.speakerBaseActor->getClass() != context.filterClass) {
+				return false;
+			}
+
+			// Check for player faction membership/rank in speaker's faction.
+			if (pcRank != -1 && !context.filterPlayerFaction) {
+				if (speakerFaction == nullptr || pcRank > speakerFaction->getEffectivePlayerRank()) {
+					return false;
+				}
+			}
+
+			// Check for faction condition, with no-faction special case.
+			if (context.filterFaction) {
+				if (reinterpret_cast<int>(context.filterFaction) == -1 && speakerFaction != nullptr) {
+					return false;
+				}
+				if (speakerFaction != context.filterFaction) {
+					return false;
+				}
+			}
+
+			// Check for faction rank condition.
+			if (npcRank != -1 && (speakerFaction == nullptr || context.speakerBaseActor->getFactionRank() < npcRank)) {
+				return false;
+			}
+
+			// Check for disposition.
+			if (context.speakerMobile) {
+				const auto mobileNPC = static_cast<MobileNPC*>(context.speakerMobile);
+				// Service refusal disposition checks are flipped for some reason?
+				if (dialogue->getResponseType() == ResponseType::ServiceRefusal) {
+					if (source != FilterSource::None && disposition && mobileNPC->getDisposition() >= disposition) {
+						return false;
+					}
+				}
+				else if (source != FilterSource::None) {
+					if (mobileNPC->getDisposition() < disposition) {
+						return false;
+					}
+				}
 			}
 		}
 
@@ -250,6 +264,15 @@ namespace TES3 {
 			TES3_DialogueInfo_lastLoadedScript[length] = '\0';
 			strcpy(TES3_DialogueInfo_lastLoadedScript, text);
 		}
+	}
+
+	const char* DialogueInfo::getSoundPath() {
+		for (auto node = conditions; node; node = node->next) {
+			if (node->tag == DialogueInfoFilterType::SoundPath) {
+				return node->soundPath;
+			}
+		}
+		return nullptr;
 	}
 
 	sol::optional<std::string> DialogueInfo::getID() {

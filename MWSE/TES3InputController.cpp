@@ -84,7 +84,7 @@ namespace TES3 {
 	}
 
 	bool InputController::keybindTest_lua(unsigned int key, sol::optional<unsigned int> transition) const {
-		return (bool)keybindTest(key, transition.value_or(TES3::KeyTransition::Down));
+		return keybindTest(key, transition.value_or(TES3::KeyTransition::IsDown)) != FALSE;
 	}
 
 	std::reference_wrapper<unsigned char[256]> InputController::getKeyboardState() {

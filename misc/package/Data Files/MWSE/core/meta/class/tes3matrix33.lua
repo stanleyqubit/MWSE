@@ -64,6 +64,11 @@ function tes3matrix33:getUpVector() end
 --- @return boolean valid No description yet available.
 function tes3matrix33:invert() end
 
+--- Updates the matrix so that its forward and up vectors point toward the given directions.
+--- @param forward tes3vector3 No description yet available.
+--- @param up tes3vector3 No description yet available.
+function tes3matrix33:lookAt(forward, up) end
+
 --- Reorthogonalizes the matrix.
 --- @return boolean result No description yet available.
 function tes3matrix33:reorthogonalize() end
@@ -110,4 +115,8 @@ function tes3matrix33:toZero() end
 --- No description yet available.
 --- @return tes3matrix33 result No description yet available.
 function tes3matrix33:transpose() end
+
+--- Converts the matrix to a string with 2 decimal places.
+--- @return string result No description yet available.
+function tes3matrix33:__tostring() end
 

@@ -55,6 +55,7 @@ namespace TES3 {
 		// Custom functions.
 		//
 
+		bool getActive() const;
 		void setActive(bool value);
 
 		void fadeIn_lua(sol::optional<sol::table> params);

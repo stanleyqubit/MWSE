@@ -20,7 +20,7 @@ mwse = {}
 
 --- Configures MWSE to no longer execute a lua function instead when a script would run. This undoes the work of `mwse.overrideScript`.
 --- @param scriptId string No description yet available.
---- @return boolean result No description yet available.
+--- @return boolean success No description yet available.
 function mwse.clearScriptOverride(scriptId) end
 
 --- This function returns information on the current mwscript execution state.
@@ -78,8 +78,8 @@ function mwse.longToString(type) end
 ---
 --- [Examples available in online documentation](https://mwse.github.io/MWSE/apis/mwse/#mwseoverridescript).
 --- @param scriptId string No description yet available.
---- @param callback function No description yet available.
---- @return boolean result No description yet available.
+--- @param callback fun(e: mwseOverrideScriptCallbackData) No description yet available.
+--- @return boolean success No description yet available.
 function mwse.overrideScript(scriptId, callback) end
 
 --- Saves a config table to Data Files\\MWSE\\config\\{fileName}.json.

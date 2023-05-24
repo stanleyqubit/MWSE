@@ -7,7 +7,7 @@
 timer.frame = {}
 
 --- Creates a timer that will finish the next frame.
---- @param callback function The callback function that will execute when the timer expires.
+--- @param callback fun(e: mwseTimerCallbackData) The callback function that will execute when the timer expires.
 --- @return mwseTimer timer No description yet available.
 function timer.frame.delayOneFrame(callback) end
 

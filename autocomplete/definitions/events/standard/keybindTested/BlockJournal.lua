@@ -1,7 +1,7 @@
 --- @param e keybindTestedEventData
 local function noJournalMenu(e)
     -- We only care about checks to see if the key was pressed.
-    if (e.transition ~= tes3.keyTransition.down) then
+    if (e.transition ~= tes3.keyTransition.isDown) then
         return
     end
 

@@ -434,6 +434,8 @@ namespace TES3 {
 		// Custom functions.
 		//
 
+		int getShadowLevel() const;
+		void setShadowLevel(int shadows);
 		_declspec(dllexport) void tickClock();
 		_declspec(dllexport) void checkForDayWrapping();
 

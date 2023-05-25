@@ -171,7 +171,7 @@ namespace mwse::lua {
 			usertypeDefinition["shaderWaterReflectTerrain"] = &TES3::WorldController::shaderWaterReflectsTerrain;
 			usertypeDefinition["shaderWaterReflectUpdate"] = &TES3::WorldController::shaderWaterReflectUpdate;
 			usertypeDefinition["shadowCamera"] = sol::readonly_property(&TES3::WorldController::shadowCamera);
-			usertypeDefinition["shadows"] = &TES3::WorldController::bShadows;
+			usertypeDefinition["shadows"] = sol::property(&TES3::WorldController::getShadowLevel, &TES3::WorldController::setShadowLevel);
 			usertypeDefinition["showSubtitles"] = &TES3::WorldController::showSubtitles;
 			usertypeDefinition["simulationTimeScalar"] = sol::var(std::ref(TES3::WorldController::simulationTimeScalar));
 			usertypeDefinition["splashController"] = sol::readonly_property(&TES3::WorldController::splashController);

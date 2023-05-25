@@ -1722,6 +1722,9 @@
     <ClInclude Include="NIPathController.h">
       <Filter>Header Files\DataAdapters\NI</Filter>
     </ClInclude>
+    <ClInclude Include="LuaSimulatedEvent.h">
+      <Filter>Header Files\Lua\Events</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -3748,6 +3751,9 @@
     </ClCompile>
     <ClCompile Include="NIPathController.cpp">
       <Filter>Source Files\DataAdapters\NI</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaSimulatedEvent.cpp">
+      <Filter>Source Files\Lua\Events</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -18,6 +18,7 @@
 #include "TES3Util.h"
 
 #include "LuaPlayItemSoundEvent.h"
+#include "LuaSimulatedEvent.h"
 
 #include "LuaManager.h"
 
@@ -565,7 +566,30 @@ namespace TES3 {
 		TES3_WorldController_rechargerAddItem(this, item, enchantment, itemData);
 	}
 
+	int WorldController::getShadowLevel() const {
+		return bShadows;
+	}
+
+	const auto TES3_ShadowManager_setUseRealtimeShadows = reinterpret_cast<void(__thiscall*)(void*, bool)>(0x4360F0);
+	void WorldController::setShadowLevel(int shadows) {
+		// Check for state change.
+		const auto hadShadowsBefore = bShadows > 0;
+		const auto hasShadowsNow = shadows > 0;
+
+		bShadows = shadows;
+		if (hadShadowsBefore != hasShadowsNow) {
+			TES3_ShadowManager_setUseRealtimeShadows(shadowManager, hasShadowsNow);
+		}
+	}
+
 	void WorldController::tickClock() {
+		// Run post-simulate event before updating game time.
+		if (mwse::lua::event::SimulatedEvent::getEventEnabled()) {
+			auto& luaManager = mwse::lua::LuaManager::getInstance();
+			auto stateHandle = luaManager.getThreadSafeStateHandle();
+			stateHandle.triggerEvent(new mwse::lua::event::SimulatedEvent());
+		}
+
 		gvarGameHour->value += (deltaTime * gvarTimescale->value) / 3600.0f;
 		checkForDayWrapping();
 	}

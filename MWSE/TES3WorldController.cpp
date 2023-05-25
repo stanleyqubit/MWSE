@@ -566,6 +566,22 @@ namespace TES3 {
 		TES3_WorldController_rechargerAddItem(this, item, enchantment, itemData);
 	}
 
+	int WorldController::getShadowLevel() const {
+		return bShadows;
+	}
+
+	const auto TES3_ShadowManager_setUseRealtimeShadows = reinterpret_cast<void(__thiscall*)(void*, bool)>(0x4360F0);
+	void WorldController::setShadowLevel(int shadows) {
+		// Check for state change.
+		const auto hadShadowsBefore = bShadows > 0;
+		const auto hasShadowsNow = shadows > 0;
+
+		bShadows = shadows;
+		if (hadShadowsBefore != hasShadowsNow) {
+			TES3_ShadowManager_setUseRealtimeShadows(shadowManager, hasShadowsNow);
+		}
+	}
+
 	void WorldController::tickClock() {
 		// Run post-simulate event before updating game time.
 		if (mwse::lua::event::SimulatedEvent::getEventEnabled()) {

@@ -26,6 +26,7 @@ bookGetText                   | `"bookGetText"`                   | [`bookGetTex
 buttonPressed                 | `"buttonPressed"`                 | [`buttonPressed`](https://mwse.github.io/MWSE/events/buttonPressed)
 calcArmorPieceHit             | `"calcArmorPieceHit"`             | [`calcArmorPieceHit`](https://mwse.github.io/MWSE/events/calcArmorPieceHit)
 calcArmorRating               | `"calcArmorRating"`               | [`calcArmorRating`](https://mwse.github.io/MWSE/events/calcArmorRating)
+calcChargenStats              | `"calcChargenStats"`              | [`calcChargenStats`](https://mwse.github.io/MWSE/events/calcChargenStats)
 calcBarterPrice               | `"calcBarterPrice"`               | [`calcBarterPrice`](https://mwse.github.io/MWSE/events/calcBarterPrice)
 calcBlockChance               | `"calcBlockChance"`               | [`calcBlockChance`](https://mwse.github.io/MWSE/events/calcBlockChance)
 calcEnchantmentPrice          | `"calcEnchantmentPrice"`          | [`calcEnchantmentPrice`](https://mwse.github.io/MWSE/events/calcEnchantmentPrice/)

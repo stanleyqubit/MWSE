@@ -14,6 +14,7 @@
     <ClInclude Include="ArrayUtil.h" />
     <ClInclude Include="BitUtil.h" />
     <ClInclude Include="BSAnimationManager.h" />
+    <ClInclude Include="LuaCalcChargenStatsEvent.h" />
     <ClInclude Include="LuaCalcHitDetectionConeEvent.h" />
     <ClInclude Include="LuaDialogueFilteredEvent.h" />
     <ClInclude Include="LuaSimulatedEvent.h" />
@@ -544,6 +545,7 @@
     <ClCompile Include="LuaButtonPressedEvent.cpp" />
     <ClCompile Include="LuaCalcArmorRatingEvent.cpp" />
     <ClCompile Include="LuaCalcBlockChanceEvent.cpp" />
+    <ClCompile Include="LuaCalcChargenStatsEvent.cpp" />
     <ClCompile Include="LuaCalcEnchantmentPriceEvent.cpp" />
     <ClCompile Include="LuaCalcHitArmorPieceEvent.cpp" />
     <ClCompile Include="LuaCalcHitChanceEvent.cpp" />

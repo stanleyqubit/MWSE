@@ -38,6 +38,7 @@
 #include "TES3Game.h"
 #include "TES3GameFile.h"
 #include "TES3GameSetting.h"
+#include "TES3GlobalVariable.h"
 #include "TES3Ingredient.h"
 #include "TES3InputController.h"
 #include "TES3ItemData.h"
@@ -204,6 +205,7 @@
 #include "LuaCalcSpellPriceEvent.h"
 #include "LuaCalcTrainingPriceEvent.h"
 #include "LuaCalcTravelPriceEvent.h"
+#include "LuaCalcChargenStatsEvent.h"
 #include "LuaCellChangedEvent.h"
 #include "LuaCrimeWitnessedEvent.h"
 #include "LuaDamageEvent.h"
@@ -4197,6 +4199,29 @@ namespace mwse::lua {
 		return std::max(repairAmount, 1);
 	}
 
+	// Event: CalculateChargenStats
+	const auto TES3_sub_5A9150 = reinterpret_cast<char(__cdecl*)(int)>(0x5A9150);
+	void __fastcall CalcChargenStats(int unknown) {
+		TES3_sub_5A9150(unknown);
+		// Check for chargen in progress to raise event.
+		if (TES3::WorldController::get()->isChargenRunning()) {
+			if (event::CalcChargenStatsEvent::getEventEnabled()) {
+				LuaManager::getInstance().getThreadSafeStateHandle().triggerEvent(new event::CalcChargenStatsEvent());
+			}
+		}
+	}
+
+	const auto TES3_ui_showStatReviewMenu = reinterpret_cast<char(__cdecl*)()>(0x62CE60);
+	void __fastcall ShowStatReviewMenu() {
+		if (TES3::WorldController::get()->isChargenRunning()) {
+			if (event::CalcChargenStatsEvent::getEventEnabled()) {
+				LuaManager::getInstance().getThreadSafeStateHandle().triggerEvent(new event::CalcChargenStatsEvent());
+			}
+		}
+		// Raise event first, allowing changes to be made before the menu is shown.
+		TES3_ui_showStatReviewMenu();
+	}
+
 	//
 	// Patch: Error reporting for mesh loading
 	//
@@ -5983,6 +6008,14 @@ namespace mwse::lua {
 		genCallEnforced(0x59A3AE, 0x60E260, reinterpret_cast<DWORD>(OnClickRepairOrRecharge));
 		genPushEnforced(0x60DAF6, reinterpret_cast<DWORD>(OnClickRepairOrRecharge));
 		genCallEnforced(0x60E37C, 0x60ECD0, reinterpret_cast<DWORD>(AttemptRepair));
+
+		// Event: CalcChargenStats
+		genCallEnforced(0x5A901B, 0x5A9150, reinterpret_cast<DWORD>(CalcChargenStats));
+		genCallEnforced(0x5A931E, 0x5A9150, reinterpret_cast<DWORD>(CalcChargenStats));
+		genCallEnforced(0x5B164D, 0x5A9150, reinterpret_cast<DWORD>(CalcChargenStats));
+		// Special call to raise an event when at the last stage of character creation (caused by script call to EnableStatReviewMenu)
+		genCallEnforced(0x50B940, 0x62CE60, reinterpret_cast<DWORD>(ShowStatReviewMenu));
+
 
 		// UI framework hooks
 		TES3::UI::hook();

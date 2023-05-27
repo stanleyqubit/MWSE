@@ -1,6 +1,6 @@
 return {
 	type = "function",
-	description = [[Plays a sound on a given reference. Provides control over volume (including volume channel), pitch, and loop control. Triggers `addTempSound` event if `soundPath` argument is passed, triggers `playSound` otherwise.
+	description = [[Plays a sound on a given reference. Provides control over volume (including volume channel), pitch, and loop control. Triggers `addTempSound` event if `soundPath` argument is passed, triggers `playSound` or `soundObjectPlay` otherwise.
 
 **Note**: MP3 sound files can only be played if they are inside \\Vo\\ folder. The files must conform to the MPEG Layer-3, 64 Kbps 44100 kHz, 16-bit mono specification.]],
 	arguments = {{
@@ -8,7 +8,7 @@ return {
 		type = "table",
 		tableParams = {
 			{ name = "sound", type = "tes3sound|string", description = "The sound object, or id of the sound to look for." },
-			{ name = "reference", type = "tes3reference|tes3mobileActor|string", description = "The reference to attach the sound to.", optional = true },
+			{ name = "reference", type = "tes3reference|tes3mobileActor|string", description = "The reference to attach the sound to. If no reference is provided, the sound will be played directly and `soundObjectPlay` will be triggered instead of `playSound`.", optional = true },
 			{ name = "loop", type = "boolean", optional = true, default = false, description = "If true, the sound will loop." },
 			{ name = "mixChannel", type = "number", optional = true, default = "tes3.soundMix.effects", description = "The channel to base volume off of. Maps to [`tes3.soundMix`](https://mwse.github.io/MWSE/references/sound-mix-types/) constants." },
 			{ name = "volume", type = "number", optional = true, default = "1.0", description = "A value between 0.0 and 1.0 to scale the volume off of." },

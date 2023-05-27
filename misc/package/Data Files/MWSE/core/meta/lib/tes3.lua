@@ -1786,14 +1786,14 @@ function tes3.playItemPickupSound(params) end
 --- @field item tes3alchemy|tes3apparatus|tes3armor|tes3book|tes3clothing|tes3ingredient|tes3light|tes3lockpick|tes3misc|tes3probe|tes3repairTool|tes3weapon No description yet available.
 --- @field pickup boolean? *Default*: `true`. If false, the place down item will be used.
 
---- Plays a sound on a given reference. Provides control over volume (including volume channel), pitch, and loop control. Triggers `addTempSound` event if `soundPath` argument is passed, triggers `playSound` otherwise.
+--- Plays a sound on a given reference. Provides control over volume (including volume channel), pitch, and loop control. Triggers `addTempSound` event if `soundPath` argument is passed, triggers `playSound` or `soundObjectPlay` otherwise.
 --- 
 --- **Note**: MP3 sound files can only be played if they are inside \\Vo\\ folder. The files must conform to the MPEG Layer-3, 64 Kbps 44100 kHz, 16-bit mono specification.
 --- @param params tes3.playSound.params This table accepts the following values:
 --- 
 --- `sound`: tes3sound|string — The sound object, or id of the sound to look for.
 --- 
---- `reference`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil — *Optional*. The reference to attach the sound to.
+--- `reference`: tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil — *Optional*. The reference to attach the sound to. If no reference is provided, the sound will be played directly and `soundObjectPlay` will be triggered instead of `playSound`.
 --- 
 --- `loop`: boolean? — *Default*: `false`. If true, the sound will loop.
 --- 
@@ -1810,7 +1810,7 @@ function tes3.playSound(params) end
 ---Table parameter definitions for `tes3.playSound`.
 --- @class tes3.playSound.params
 --- @field sound tes3sound|string The sound object, or id of the sound to look for.
---- @field reference tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil *Optional*. The reference to attach the sound to.
+--- @field reference tes3reference|tes3mobileCreature|tes3mobileNPC|tes3mobilePlayer|string|nil *Optional*. The reference to attach the sound to. If no reference is provided, the sound will be played directly and `soundObjectPlay` will be triggered instead of `playSound`.
 --- @field loop boolean? *Default*: `false`. If true, the sound will loop.
 --- @field mixChannel number? *Default*: `tes3.soundMix.effects`. The channel to base volume off of. Maps to [`tes3.soundMix`](https://mwse.github.io/MWSE/references/sound-mix-types/) constants.
 --- @field volume number? *Default*: `1.0`. A value between 0.0 and 1.0 to scale the volume off of.

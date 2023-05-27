@@ -3461,7 +3461,7 @@ local executed = tes3.playItemPickupSound({ reference = ..., item = ..., pickup 
 ### `tes3.playSound`
 <div class="search_terms" style="display: none">playsound</div>
 
-Plays a sound on a given reference. Provides control over volume (including volume channel), pitch, and loop control. Triggers `addTempSound` event if `soundPath` argument is passed, triggers `playSound` otherwise.
+Plays a sound on a given reference. Provides control over volume (including volume channel), pitch, and loop control. Triggers `addTempSound` event if `soundPath` argument is passed, triggers `playSound` or `soundObjectPlay` otherwise.
 
 **Note**: MP3 sound files can only be played if they are inside \\Vo\\ folder. The files must conform to the MPEG Layer-3, 64 Kbps 44100 kHz, 16-bit mono specification.
 
@@ -3473,7 +3473,7 @@ local executed = tes3.playSound({ sound = ..., reference = ..., loop = ..., mixC
 
 * `params` (table)
 	* `sound` ([tes3sound](../../types/tes3sound), string): The sound object, or id of the sound to look for.
-	* `reference` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): *Optional*. The reference to attach the sound to.
+	* `reference` ([tes3reference](../../types/tes3reference), [tes3mobileActor](../../types/tes3mobileActor), string): *Optional*. The reference to attach the sound to. If no reference is provided, the sound will be played directly and `soundObjectPlay` will be triggered instead of `playSound`.
 	* `loop` (boolean): *Default*: `false`. If true, the sound will loop.
 	* `mixChannel` (number): *Default*: `tes3.soundMix.effects`. The channel to base volume off of. Maps to [`tes3.soundMix`](https://mwse.github.io/MWSE/references/sound-mix-types/) constants.
 	* `volume` (number): *Default*: `1.0`. A value between 0.0 and 1.0 to scale the volume off of.

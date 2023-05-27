@@ -342,6 +342,17 @@ namespace mwse::lua {
 		// Apply mix and rescale to 0-250
 		volume *= 250.0 * TES3::WorldController::get()->audioController->getMixVolume(TES3::AudioMixType(mix));
 
+		// Try to play the sound directly if we don't have a reference to play off of.
+		if (reference == nullptr) {
+			if (sound) {
+				const auto flags = loop ? TES3::SoundPlayFlags::Loop : NULL;
+				return sound->play(flags, volume, pitch, true);
+			}
+			else {
+				return false;
+			}
+		}
+
 		if (soundPath) {
 			bool isVoiceover = getOptionalParam<bool>(params, "isVoiceover", false);
 			TES3::DataHandler::get()->addTemporySound(soundPath, reference, loop ? TES3::SoundPlayFlags::Loop : 0, int(volume), pitch, isVoiceover, sound);

@@ -2056,7 +2056,7 @@ namespace mwse::lua {
 	// We can't use the mapped function in TES3Inventory.h because of the custom inventory pointer made. That breaks getActor.
 	// So we need to get a cached reference above.
 	const auto TES3_Inventory_resolveLeveledLists = reinterpret_cast<void(__thiscall*)(TES3::Inventory*, TES3::MobileActor*)>(0x49A190);
-	void __fastcall ContainerCloseResolveLevelledLists(TES3::Inventory* inventory, DWORD _EDX_, TES3::MobileActor* mobile) {
+	void __fastcall ContainerCloseResolveLeveledLists(TES3::Inventory* inventory, DWORD _EDX_, TES3::MobileActor* mobile) {
 		TES3_Inventory_resolveLeveledLists(inventory, mobile);
 		mwse::lua::event::LeveledItemPickedEvent::m_Reference = nullptr;
 	}
@@ -2086,6 +2086,24 @@ namespace mwse::lua {
 		auto result = leveledList->resolve();
 		event::LeveledCreaturePickedEvent::m_IsForEmptyCell = false;
 		return result;
+	}
+
+	// Patch NPCClone::ctor_args to make the reference available during inventory resolve.
+	__declspec(naked) void patchNPCCloneResolveLeveledLists() {
+		__asm {
+			push edi		// push reference
+			jmp $ + 0xF		// skip replaced code
+		}
+	}
+	const size_t patchNPCCloneResolveLeveledLists_size = 0x6;
+
+	void __fastcall NPCCloneResolveLeveledLists(TES3::Inventory* inventory, DWORD _EDX_, TES3::Reference* reference) {
+		mwse::lua::event::LeveledItemPickedEvent::m_Reference = reference;
+
+		TES3::MobileActor* mobile = reference ? reference->getAttachedMobileActor() : nullptr;
+		TES3_Inventory_resolveLeveledLists(inventory, mobile);
+
+		mwse::lua::event::LeveledItemPickedEvent::m_Reference = nullptr;
 	}
 
 	//
@@ -5053,8 +5071,9 @@ namespace mwse::lua {
 		genCallEnforced(0x49D5C4, 0x49A190, *reinterpret_cast<DWORD*>(&inventoryResolveLeveledLists));
 		genCallEnforced(0x4A42A9, 0x49A190, *reinterpret_cast<DWORD*>(&inventoryResolveLeveledLists));
 		genCallEnforced(0x4A4492, 0x4957E0, reinterpret_cast<DWORD>(CacheContainerCloseReference));
-		genCallEnforced(0x4A44F8, 0x49A190, reinterpret_cast<DWORD>(ContainerCloseResolveLevelledLists));
-		genCallEnforced(0x4D83A1, 0x49A190, *reinterpret_cast<DWORD*>(&inventoryResolveLeveledLists));
+		genCallEnforced(0x4A44F8, 0x49A190, reinterpret_cast<DWORD>(ContainerCloseResolveLeveledLists));
+		writePatchCodeUnprotected(0x4D838E, (BYTE*)&patchNPCCloneResolveLeveledLists, patchNPCCloneResolveLeveledLists_size);
+		genCallEnforced(0x4D83A1, 0x49A190, reinterpret_cast<DWORD>(NPCCloneResolveLeveledLists));
 		genCallEnforced(0x508BB2, 0x49A190, *reinterpret_cast<DWORD*>(&inventoryResolveLeveledLists));
 		genCallEnforced(0x529B72, 0x49A190, *reinterpret_cast<DWORD*>(&inventoryResolveLeveledLists));
 

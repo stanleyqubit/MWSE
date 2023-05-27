@@ -16,7 +16,7 @@ return {
 		["spawner"] = {
 			type = "tes3reference|nil",
 			--readOnly = true,
-			description = "The reference for the inventory that the item is being picked in. In many cases this may be `nil`.",
+			description = "The reference for the inventory that the item is being picked in. In a few cases this may be `nil`. Note that the reference.object.objectType can be either tes3creature/tes3npc/tes3container or tes3creatureInstance/tes3npcInstance/tes3containerInstance, as the inventory is resolved before cloning is fully complete.",
 		},
 	},
 	filter = "list",

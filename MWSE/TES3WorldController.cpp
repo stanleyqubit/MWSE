@@ -666,20 +666,17 @@ namespace TES3 {
 		}
 	}
 
-	const bool WorldController::isChargenStarted()
-	{
+	bool WorldController::isChargenStarted() const {
 		// Chargenstate is 0 on the main menu.
 		return gvarCharGenState->value != 0.0;
 	}
 
-	const bool WorldController::isChargenRunning()
-	{
+	bool WorldController::isChargenRunning() const {
 		// Chargenstate is set to 10 in vanilla, but this isn't guaranteed with mods, so instead check that it's > 0
 		return gvarCharGenState->value > 0.0;
 	}
 
-	const bool WorldController::isChargenFinished()
-	{
+	bool WorldController::isChargenFinished() const {
 		// Vanilla sets Chargenstate to -1 once finished.
 		return gvarCharGenState->value < 0.0;
 	}

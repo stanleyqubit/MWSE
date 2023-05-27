@@ -438,9 +438,9 @@ namespace TES3 {
 		void setShadowLevel(int shadows);
 		_declspec(dllexport) void tickClock();
 		_declspec(dllexport) void checkForDayWrapping();
-		bool isChargenStarted();
-		bool isChargenRunning();
-		bool isChargenFinished();
+		const bool isChargenStarted();
+		const bool isChargenRunning();
+		const bool isChargenFinished();
 
 		//
 		// Helpful static variables.

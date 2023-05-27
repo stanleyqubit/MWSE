@@ -1543,6 +1543,14 @@ function tes3.isAffectedBy(params) end
 --- @field effect number? *Optional*. A numerical identifier of the magic effect to perform a check for. Maps to [`tes3.effect`](https://mwse.github.io/MWSE/references/magic-effects/) constant, including those claimed with `tes3.claimSpellEffectId()`, and then added with `tes3.addMagicEffect()`.
 --- @field object tes3alchemy|tes3enchantment|tes3spell|tes3magicEffect|string|nil *Optional*. An object to perform a check for.
 
+--- Returns `true` if the character generation process has not yet been started (this is only true on the main menu).
+--- @return boolean result No description yet available.
+function tes3.isCharGenStarted() end
+
+--- Returns `true` if the character generation process is still in progress for the current player character.
+--- @return boolean result No description yet available.
+function tes3.isCharGenRunning() end
+
 --- Returns `true` if the character generation process has been finished for the current player character.
 --- @return boolean result No description yet available.
 function tes3.isCharGenFinished() end

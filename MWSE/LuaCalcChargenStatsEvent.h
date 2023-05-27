@@ -7,5 +7,6 @@ namespace mwse::lua::event {
 	class CalcChargenStatsEvent : public GenericEvent, public DisableableEvent<CalcChargenStatsEvent> {
 	public:
 		CalcChargenStatsEvent();
+		sol::table createEventTable();
 	};
 }

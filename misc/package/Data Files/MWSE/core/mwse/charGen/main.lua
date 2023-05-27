@@ -1,11 +1,16 @@
-local charGenStates = {
-	none = 0,
-	running = 10,
-	finished = -1
-}
+function tes3.isCharGenStarted()
+	--charGenState is 0 on the main menu.
+	return tes3.worldController ~= nil and tes3.worldController.charGenState.value ~= 0
+end
+
+function tes3.isCharGenRunning()
+	--Chargenstate is set to 10 in vanilla, but this isn't guaranteed with mods, so instead check that it's > 0
+	return tes3.worldController ~= nil and tes3.worldController.charGenState.value > 0
+end
 
 function tes3.isCharGenFinished()
-	return tes3.worldController ~= nil and tes3.worldController.charGenState.value == charGenStates.finished
+	--Vanilla sets Chargenstate to -1 once finished.
+	return tes3.worldController ~= nil and tes3.worldController.charGenState.value < 0
 end
 
 local function onSimulate(e)

@@ -665,4 +665,22 @@ namespace TES3 {
 			ndd->respawnContainers();
 		}
 	}
+
+	bool WorldController::isChargenStarted()
+	{
+		//Chargenstate is 0 on the main menu.
+		return TES3::WorldController::get()->gvarCharGenState->value != 0.0;
+	}
+
+	bool WorldController::isChargenRunning()
+	{
+		//Chargenstate is set to 10 in vanilla, but this isn't guaranteed with mods, so instead check that it's > 0
+		return TES3::WorldController::get()->gvarCharGenState->value > 0.0;
+	}
+
+	bool WorldController::isChargenFinished()
+	{
+		//Vanilla sets Chargenstate to -1 once finished.
+		return TES3::WorldController::get()->gvarCharGenState->value < 0.0;
+	}
 }

@@ -4186,7 +4186,7 @@ namespace mwse::lua {
 	void __fastcall CalcChargenStats(int unknown) {
 		TES3_sub_5A9150(unknown);
 		// Check for chargen in progress to raise event.
-		if (TES3::WorldController::get()->gvarCharGenState->value == 10.0f) {
+		if (TES3::WorldController::get()->isChargenRunning()) {
 			if (event::CalcChargenStatsEvent::getEventEnabled()) {
 				LuaManager::getInstance().getThreadSafeStateHandle().triggerEvent(new event::CalcChargenStatsEvent());
 			}
@@ -4195,7 +4195,7 @@ namespace mwse::lua {
 
 	const auto TES3_ui_showStatReviewMenu = reinterpret_cast<char(__cdecl*)()>(0x62CE60);
 	void __fastcall ShowStatReviewMenu() {
-		if (TES3::WorldController::get()->gvarCharGenState->value == 10.0f) {
+		if (TES3::WorldController::get()->isChargenRunning()) {
 			if (event::CalcChargenStatsEvent::getEventEnabled()) {
 				LuaManager::getInstance().getThreadSafeStateHandle().triggerEvent(new event::CalcChargenStatsEvent());
 			}

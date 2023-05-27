@@ -499,8 +499,9 @@ namespace mwse::lua {
 	}
 
 	void loadGame(const char* fileName) {
-		// Char Gen State will equal 0 in the menu.
-		if (TES3::WorldController::get()->gvarCharGenState->value == 0.0f) {
+		auto worldController = TES3::WorldController::get();
+		// Char Gen State will equal 0 (NONE) in the menu.
+		if (!worldController->isChargenFinished() && !worldController->isChargenRunning()) {
 			TES3::DataHandler::get()->nonDynamicData->loadGameMainMenu(fileName);
 		}
 		else {

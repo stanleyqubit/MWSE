@@ -28,5 +28,5 @@ event.register(tes3.event.leveledItemPicked, leveledItemPickedCallback)
 
 * `list` ([tes3leveledItem](../../types/tes3leveledItem)): *Read-only*. The list responsible for creating a pick.
 * `pick` ([tes3item](../../types/tes3item)): The result of the pick by vanilla mechanism.
-* `spawner` ([tes3reference](../../types/tes3reference), nil): The reference for the inventory that the item is being picked in. In a few cases this may be `nil`. Note that the reference.object.objectType can be either tes3creature/tes3npc/tes3container or tes3creatureInstance/tes3npcInstance/tes3containerInstance, as the inventory is resolved before cloning is fully complete.
+* `spawner` ([tes3reference](../../types/tes3reference), nil): The reference for the inventory that the item is being picked in. In a few cases this may be `nil`. Note that during actor cloning, the inventory is resolved before cloning is fully complete.
 

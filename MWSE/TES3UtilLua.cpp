@@ -335,32 +335,31 @@ namespace mwse::lua {
 			return false;
 		}
 
-		// Clamp volume. RIP no std::clamp.
-		volume = std::max(0.0, volume);
-		volume = std::min(volume, 1.0);
+		// Clamp volume.
+		volume = std::clamp(volume, 0.0, 1.0);
 
 		// Apply mix and rescale to 0-250
-		volume *= 250.0 * TES3::WorldController::get()->audioController->getMixVolume(TES3::AudioMixType(mix));
+		const auto worldController = TES3::WorldController::get();
+		volume *= 250.0 * worldController->audioController->getMixVolume(TES3::AudioMixType(mix));
 
-		// Try to play the sound directly if we don't have a reference to play off of.
-		if (reference == nullptr) {
-			if (sound) {
-				const auto flags = loop ? TES3::SoundPlayFlags::Loop : NULL;
-				return sound->play(flags, volume, pitch, true);
+		// Only allow positional sounds if we are loaded in and have a player reference.
+		const auto mobilePlayer = worldController->getMobilePlayer();
+		if (mobilePlayer) {
+			if (soundPath) {
+				bool isVoiceover = getOptionalParam<bool>(params, "isVoiceover", false);
+				TES3::DataHandler::get()->addTemporySound(soundPath, reference, loop ? TES3::SoundPlayFlags::Loop : 0, int(volume), pitch, isVoiceover, sound);
+				return true;
 			}
-			else {
-				return false;
+			else if (sound) {
+				TES3::DataHandler::get()->addSound(sound, reference, loop ? TES3::SoundPlayFlags::Loop : 0, int(volume), pitch);
+				return true;
 			}
 		}
 
-		if (soundPath) {
-			bool isVoiceover = getOptionalParam<bool>(params, "isVoiceover", false);
-			TES3::DataHandler::get()->addTemporySound(soundPath, reference, loop ? TES3::SoundPlayFlags::Loop : 0, int(volume), pitch, isVoiceover, sound);
-			return true;
-		}
-		else if (sound) {
-			TES3::DataHandler::get()->addSound(sound, reference, loop ? TES3::SoundPlayFlags::Loop : 0, int(volume), pitch);
-			return true;
+		// Try to fall back on direct-playing a sound.
+		if (sound) {
+			const auto flags = loop ? TES3::SoundPlayFlags::Loop : NULL;
+			return sound->play(flags, volume, pitch, true);
 		}
 
 		return false;

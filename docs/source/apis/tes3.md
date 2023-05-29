@@ -2950,6 +2950,36 @@ local result = tes3.isCharGenFinished()
 
 ***
 
+### `tes3.isCharGenRunning`
+<div class="search_terms" style="display: none">ischargenrunning, chargenrunning</div>
+
+Returns `true` if the character generation process is still in progress for the current player character.
+
+```lua
+local result = tes3.isCharGenRunning()
+```
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
+### `tes3.isCharGenStarted`
+<div class="search_terms" style="display: none">ischargenstarted, chargenstarted</div>
+
+Returns `true` if the character generation process has been started (this is only false on the main menu).
+
+```lua
+local result = tes3.isCharGenStarted()
+```
+
+**Returns**:
+
+* `result` (boolean)
+
+***
+
 ### `tes3.isKeyEqual`
 <div class="search_terms" style="display: none">iskeyequal, keyequal</div>
 

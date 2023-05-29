@@ -18,6 +18,16 @@ return {
 			readOnly = true,
 			description = "The collision point of the mobile projectile.",
 		},
+		["position"] = {
+			type = "tes3vector3",
+			readOnly = true,
+			description = "The position of the mobile projectile at collision.",
+		},
+		["velocity"] = {
+			type = "tes3vector3",
+			readOnly = true,
+			description = "The velocity of the mobile projectile at collision.",
+		},
 		["firingReference"] = {
 			type = "tes3reference",
 			readOnly = true,

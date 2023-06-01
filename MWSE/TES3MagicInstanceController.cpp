@@ -1,5 +1,9 @@
 #include "TES3MagicInstanceController.h"
 
+#include "LuaManager.h"
+
+#include "LuaActiveMagicEffectIconsUpdatedEvent.h"
+
 namespace TES3 {
 
 	const auto TES3_MagicInstanceController_activateSpell = reinterpret_cast<unsigned int (__thiscall*)(MagicInstanceController*, Reference *, EquipmentStack*, MagicSourceCombo*)>(0x454A60);
@@ -21,8 +25,20 @@ namespace TES3 {
 	MagicSourceInstance* MagicInstanceController::getInstanceFromSerial(unsigned int serial) {
 		return TES3_MagicInstanceController_getInstanceFromSerial(this, serial);
 	}
+
 	const auto TES3_MagicInstanceController_retireMagicCastedByActor = reinterpret_cast<void(__thiscall*)(MagicInstanceController*, Reference*)>(0x454EC0);
 	void MagicInstanceController::retireMagicCastedByActor(Reference* reference) {
 		TES3_MagicInstanceController_retireMagicCastedByActor(this, reference);
+	}
+
+	const auto TES3_UI_updateActiveMagicEffectIcons = reinterpret_cast<void(__cdecl*)()>(0x5E2480);
+	void MagicInstanceController::updateActiveMagicEffectIcons() {
+		TES3_UI_updateActiveMagicEffectIcons();
+
+		if (mwse::lua::event::ActiveMagicEffectIconsUpdatedEvent::getEventEnabled()) {
+			auto& luaManager = mwse::lua::LuaManager::getInstance();
+			auto stateHandle = luaManager.getThreadSafeStateHandle();
+			stateHandle.triggerEvent(new mwse::lua::event::ActiveMagicEffectIconsUpdatedEvent());
+		}
 	}
 }

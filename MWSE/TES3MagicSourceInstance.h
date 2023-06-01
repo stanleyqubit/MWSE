@@ -80,6 +80,7 @@ namespace TES3 {
 		bool spellHit(Reference* hitReference, int effectIndex);
 		void onAbsorbedMagic(MobileActor* mact);
 
+		void process(float deltaTime);
 		void retire(TES3::Reference* reference);
 
 		//

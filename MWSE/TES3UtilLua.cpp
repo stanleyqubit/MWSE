@@ -2447,10 +2447,16 @@ namespace mwse::lua {
 			TES3::MagicSourceCombo sourceCombo = spell;
 			auto serial = magicInstanceController->activateSpell(reference, nullptr, &sourceCombo);
 			if (serial != 0) {
-				// Force bypass resistances.
 				auto instance = magicInstanceController->getInstanceFromSerial(serial);
 				if (instance) {
+					// Force bypass resistances.
 					instance->bypassResistances = getOptionalParam(params, "bypassResistances", true);
+					// Process twice so that it becomes active immediately. State transitions are pre-cast -> casting -> working.
+					// This makes the effects immediately visible in menu mode.
+					// It also prevents a bad state where tes3.removeSpell only removes the spell but not the effect,
+					// because it's not active on the target yet.
+					instance->process(0);
+					instance->process(0);
 				}
 			}
 		}
@@ -2530,8 +2536,15 @@ namespace mwse::lua {
 
 		// Update GUI elements if necessary.
 		auto mobilePlayer = TES3::WorldController::get()->getMobilePlayer();
-		if (mobilePlayer && mobile == mobilePlayer && spell->isActiveCast() && getOptionalParam(params, "updateGUI", true)) {
-			TES3_UI_removeSpellFromGUIList(spell);
+		if (mobilePlayer && mobile == mobilePlayer && getOptionalParam(params, "updateGUI", true)) {
+			if (spell->isActiveCast()) {
+				// Magic menu spell list.
+				TES3_UI_removeSpellFromGUIList(spell);
+			}
+			else {
+				// Active effects icon bar.
+				TES3::MagicInstanceController::updateActiveMagicEffectIcons();
+			}
 		}
 
 		// Update modified flags.

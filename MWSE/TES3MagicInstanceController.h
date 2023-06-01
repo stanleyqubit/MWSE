@@ -34,6 +34,11 @@ namespace TES3 {
 		MagicSourceInstance* getInstanceFromSerial(unsigned int serial);
 		void retireMagicCastedByActor(Reference* reference);
 
+		//
+		// Other related static functions.
+		//
+
+		static void updateActiveMagicEffectIcons();
 	};
 	static_assert(sizeof(MagicInstanceController) == 0x38, "TES3::MagicInstanceController failed size validation");
 }

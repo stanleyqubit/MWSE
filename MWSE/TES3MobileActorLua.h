@@ -136,9 +136,9 @@ namespace mwse::lua {
 		usertypeDefinition["forceWeaponAttack"] = &TES3::MobileActor::forceWeaponAttack_lua;
 		usertypeDefinition["getActiveMagicEffects"] = &TES3::MobileActor::getActiveMagicEffectsList_lua;
 		usertypeDefinition["getBootsWeight"] = &TES3::MobileActor::getBootsWeight;
-		usertypeDefinition["getViewToActor"] = &TES3::MobileActor::getViewToActor;
-		usertypeDefinition["getViewToPoint"] = &TES3::MobileActor::getViewToPoint;
-		usertypeDefinition["getViewToPointWithFacing"] = &TES3::MobileActor::getViewToPointWithFacing;
+		usertypeDefinition["getViewToActor"] = &TES3::MobileActor::getViewToActor_lua;
+		usertypeDefinition["getViewToPoint"] = &TES3::MobileActor::getViewToPoint_lua;
+		usertypeDefinition["getViewToPointWithFacing"] = &TES3::MobileActor::getViewToPointWithFacing_lua;
 		usertypeDefinition["getFatigueTerm"] = &TES3::MobileActor::getFatigueTerm;
 		usertypeDefinition["getPowerUseTimestamp"] = &TES3::MobileActor::getPowerUseTimestamp;
 		usertypeDefinition["getSkillStatistic"] = &TES3::MobileActor::getSkillStatistic;

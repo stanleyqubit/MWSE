@@ -237,8 +237,11 @@ namespace TES3 {
 
 		float getFacing() const;
 		float getViewToPoint(const Vector3* point) const;
+		float getViewToPoint_lua(sol::object point) const;
 		float getViewToPointWithFacing(float facing, const Vector3* point) const;
+		float getViewToPointWithFacing_lua(float facing, sol::object point) const;
 		float getViewToActor(const TES3::MobileActor* mobile) const;
+		float getViewToActor_lua(sol::object mobile) const;
 
 		float getBootsWeight() const;
 		float getWeaponSpeed() const;

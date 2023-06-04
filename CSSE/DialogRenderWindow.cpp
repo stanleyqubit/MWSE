@@ -1137,7 +1137,8 @@ namespace se::cs::dialog::render_window {
 			NI::Matrix33 rotation;
 			auto orientation = reference->yetAnotherOrientation;
 			rotation.fromEulerXYZ(orientation.x, orientation.y, orientation.z);
-			
+
+			reference->updateRotationMatrixForRaceAndSex(rotation);
 			reference->sceneNode->setLocalRotationMatrix(&rotation);
 			reference->sceneNode->localTranslate = reference->position; 
 			reference->sceneNode->localScale = reference->getScale();

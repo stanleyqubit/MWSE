@@ -9,6 +9,8 @@
 #include "NIIteratedList.h"
 
 #include "CSBook.h"
+#include "CSFaction.h"
+#include "CSNPC.h"
 #include "CSScript.h"
 
 #include "EditBasicExtended.h"
@@ -229,6 +231,23 @@ namespace se::cs::dialog::object_window {
 			auto asBook = static_cast<const Book*>(object);
 			if (asBook->text && matchDispatcher(asBook->text)) {
 				return true;
+			}
+		}
+
+		// Allow filtering by faction.
+		if (settings.object_window.filter_by_faction && object->objectType == ObjectType::NPC) {
+			const auto asNPC = static_cast<const NPC*>(object);
+			auto faction = asNPC->getFaction();
+			if (faction) {
+				// Basic ID check.
+				if (matchDispatcher(faction->getObjectID())) {
+					return true;
+				}
+
+				// Also check rank.
+				if (matchDispatcher(asNPC->getFactionRankName())) {
+					return true;
+				}
 			}
 		}
 

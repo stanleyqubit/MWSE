@@ -370,7 +370,7 @@ namespace se::cs::dialog::object_window {
 	int TabColumnActorFactionRank::sortObject(const Object* lParam1, const Object* lParam2, bool sortOrderAsc) const {
 		const auto a = static_cast<const NPC*>(lParam1);
 		const auto b = static_cast<const NPC*>(lParam2);
-		return sort(a->getFactionRankName(), b->getFactionRankName(), sortOrderAsc);
+		return sort(a->factionRank, b->factionRank, sortOrderAsc);
 	}
 
 	TabColumn::ColumnSettings& TabColumnActorFactionRank::getSettings() const {

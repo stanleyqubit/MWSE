@@ -45,12 +45,13 @@ namespace mwse::lua {
 			if (id.size() > 31) {
 				throw std::invalid_argument{ "tes3.createObject: 'id' parameter must be less than 32 character long." };
 			}
-
-			if (auto existingObject = TES3::DataHandler::get()->nonDynamicData->resolveObject(id.c_str()); existingObject != nullptr) {
-				if (getIfExists && existingObject->objectType == TES3::ObjectType::Activator) {
-					return existingObject;
+			else if (!id.empty()) {
+				if (auto existingObject = TES3::DataHandler::get()->nonDynamicData->resolveObject(id.c_str()); existingObject != nullptr) {
+					if (getIfExists && existingObject->objectType == TES3::ObjectType::Activator) {
+						return existingObject;
+					}
+					throw std::invalid_argument{ "tes3.createObject: 'id' parameter already assigned to an existing object that is not an activator." };
 				}
-				throw std::invalid_argument{ "tes3.createObject: 'id' parameter already assigned to an existing object that is not an activator." };
 			}
 
 			std::string name = getOptionalParam<std::string>(params, "name", "Activator");
@@ -83,7 +84,7 @@ namespace mwse::lua {
 			if (!TES3::DataHandler::get()->nonDynamicData->addNewObject(activator)) {
 				delete activator;
 				activator = nullptr;
-				throw std::runtime_error("tes3.createObject: could not add the newly created activator in its proper collection.");
+				throw std::runtime_error("tes3.createObject: could not add the newly created activator to its proper collection.");
 			}
 
 			// If created outside of a save game, mark the object as sourceless.
@@ -104,13 +105,13 @@ namespace mwse::lua {
 			if (id.size() > 31) {
 				throw std::invalid_argument{ "tes3.createObject: 'id' parameter must be less than 32 character long." };
 			}
-
-			if (auto existingObject = TES3::DataHandler::get()->nonDynamicData->getSpellById(id.c_str()); existingObject != nullptr) {
-				if (getIfExists && existingObject->objectType == TES3::ObjectType::Alchemy) {
-					return existingObject;
+			else if (!id.empty()) {
+				if (auto existingObject = TES3::DataHandler::get()->nonDynamicData->resolveObject(id.c_str()); existingObject != nullptr) {
+					if (getIfExists && existingObject->objectType == TES3::ObjectType::Alchemy) {
+						return existingObject;
+					}
+					throw std::invalid_argument{ "tes3.createObject: 'id' parameter already assigned to an existing object that is not an alchemy item." };
 				}
-
-				throw std::invalid_argument{ "tes3.createObject: 'id' parameter already assigned to an existing object that is not an alchemy item." };
 			}
 
 			std::string name = getOptionalParam<std::string>(params, "name", {});
@@ -159,7 +160,7 @@ namespace mwse::lua {
 			if (!TES3::DataHandler::get()->nonDynamicData->addNewObject(alchemy)) {
 				delete alchemy;
 				alchemy = nullptr;
-				throw std::runtime_error("tes3.createObject: Could not add the newly created alchemy in its proper collection.");
+				throw std::runtime_error("tes3.createObject: Could not add the newly created alchemy item to its proper collection.");
 			}
 
 			// If created outside of a save game, mark the object as sourceless.
@@ -179,14 +180,13 @@ namespace mwse::lua {
 			if (id.size() > 31) {
 				throw std::invalid_argument{ "tes3.createObject: 'id' parameter must be less than 32 character long." };
 			}
-
-			auto objectType = getOptionalParam<unsigned int>(params, "objectType", TES3::ObjectType::Invalid);
-			if (auto existingObject = TES3::DataHandler::get()->nonDynamicData->resolveObject(id.c_str()); existingObject != nullptr) {
-				if (getIfExists && existingObject->objectType == objectType) {
-					return existingObject;
+			else if (!id.empty()) {
+				if (auto existingObject = TES3::DataHandler::get()->nonDynamicData->resolveObject(id.c_str()); existingObject != nullptr) {
+					if (getIfExists && existingObject->objectType == TES3::ObjectType::Armor) {
+						return existingObject;
+					}
+					throw std::invalid_argument{ "tes3.createObject: 'id' parameter already assigned to an existing object that is not an armor item." };
 				}
-
-				throw std::invalid_argument{ "tes3.createObject: 'id' parameter already assigned to an existing object that is not a weapon item." };
 			}
 
 			std::string name = getOptionalParam<std::string>(params, "name", "Armor");
@@ -231,7 +231,7 @@ namespace mwse::lua {
 			if (!TES3::DataHandler::get()->nonDynamicData->addNewObject(armor)) {
 				delete armor;
 				armor = nullptr;
-				throw std::runtime_error("tes3.createObject: could not add the newly created misc item in its proper collection.");
+				throw std::runtime_error("tes3.createObject: could not add the newly created armor to its proper collection.");
 			}
 
 			// If created outside of a save game, mark the object as sourceless.
@@ -251,14 +251,13 @@ namespace mwse::lua {
 			if (id.size() > 31) {
 				throw std::invalid_argument{ "tes3.createObject: 'id' parameter must be less than 32 character long." };
 			}
-
-			auto objectType = getOptionalParam<unsigned int>(params, "objectType", TES3::ObjectType::Invalid);
-			if (auto existingObject = TES3::DataHandler::get()->nonDynamicData->resolveObject(id.c_str()); existingObject != nullptr) {
-				if (getIfExists && existingObject->objectType == objectType) {
-					return existingObject;
+			else if (!id.empty()) {
+				if (auto existingObject = TES3::DataHandler::get()->nonDynamicData->resolveObject(id.c_str()); existingObject != nullptr) {
+					if (getIfExists && existingObject->objectType == TES3::ObjectType::Book) {
+						return existingObject;
+					}
+					throw std::invalid_argument{ "tes3.createObject: 'id' parameter already assigned to an existing object that is not a book." };
 				}
-
-				throw std::invalid_argument{ "tes3.createObject: 'id' parameter already assigned to an existing object that is not a book." };
 			}
 
 			std::string name = getOptionalParam<std::string>(params, "name", "Book");
@@ -317,7 +316,7 @@ namespace mwse::lua {
 			if (!TES3::DataHandler::get()->nonDynamicData->addNewObject(book)) {
 				delete book;
 				book = nullptr;
-				throw std::runtime_error("tes3.createObject: could not add the newly created book in its proper collection.");
+				throw std::runtime_error("tes3.createObject: could not add the newly created book to its proper collection.");
 			}
 
 			// If created outside of a save game, mark the object as sourceless.
@@ -337,14 +336,13 @@ namespace mwse::lua {
 			if (id.size() > 31) {
 				throw std::invalid_argument{ "tes3.createObject: 'id' parameter must be less than 32 character long." };
 			}
-
-			auto objectType = getOptionalParam<unsigned int>(params, "objectType", TES3::ObjectType::Invalid);
-			if (auto existingObject = TES3::DataHandler::get()->nonDynamicData->resolveObject(id.c_str()); existingObject != nullptr) {
-				if (getIfExists && existingObject->objectType == objectType) {
-					return existingObject;
+			else if (!id.empty()) {
+				if (auto existingObject = TES3::DataHandler::get()->nonDynamicData->resolveObject(id.c_str()); existingObject != nullptr) {
+					if (getIfExists && existingObject->objectType == TES3::ObjectType::Clothing) {
+						return existingObject;
+					}
+					throw std::invalid_argument{ "tes3.createObject: 'id' parameter already assigned to an existing object that is not a clothing item." };
 				}
-
-				throw std::invalid_argument{ "tes3.createObject: 'id' parameter already assigned to an existing object that is not a weapon item." };
 			}
 
 			std::string name = getOptionalParam<std::string>(params, "name", "Clothing");
@@ -387,7 +385,7 @@ namespace mwse::lua {
 			if (!TES3::DataHandler::get()->nonDynamicData->addNewObject(clothing)) {
 				delete clothing;
 				clothing = nullptr;
-				throw std::runtime_error("tes3.createObject: could not add the newly created misc item in its proper collection.");
+				throw std::runtime_error("tes3.createObject: could not add the newly created clothing to its proper collection.");
 			}
 
 			// If created outside of a save game, mark the object as sourceless.
@@ -408,13 +406,13 @@ namespace mwse::lua {
 			if (id.size() > 31) {
 				throw std::invalid_argument{ "tes3.createObject: 'id' parameter must be less than 32 character long." };
 			}
-
-			if (auto existingObject = TES3::DataHandler::get()->nonDynamicData->resolveObject(id.c_str()); existingObject != nullptr) {
-				if (getIfExists && existingObject->objectType == TES3::ObjectType::Enchantment) {
-					return existingObject;
+			else if (!id.empty()) {
+				if (auto existingObject = TES3::DataHandler::get()->nonDynamicData->resolveObject(id.c_str()); existingObject != nullptr) {
+					if (getIfExists && existingObject->objectType == TES3::ObjectType::Enchantment) {
+						return existingObject;
+					}
+					throw std::invalid_argument{ "tes3.createObject: 'id' parameter already assigned to an existing object that is not an enchantment." };
 				}
-
-				throw std::invalid_argument{ "tes3.createObject: 'id' parameter already assigned to an existing object that is not an enchantment." };
 			}
 
 			auto castType = getOptionalParam(params, "castType", TES3::EnchantmentCastType::Invalid);
@@ -457,7 +455,7 @@ namespace mwse::lua {
 			if (!TES3::DataHandler::get()->nonDynamicData->addNewObject(enchantment)) {
 				delete enchantment;
 				enchantment = nullptr;
-				throw std::runtime_error("tes3.createObject: could not add the newly created enchantment in its proper collection.");
+				throw std::runtime_error("tes3.createObject: could not add the newly created enchantment to its proper collection.");
 			}
 
 			// If created outside of a save game, mark the object as sourceless.
@@ -478,12 +476,13 @@ namespace mwse::lua {
 			if (id.size() > 31) {
 				throw std::invalid_argument{ "tes3.createObject: 'id' parameter must be less than 32 character long." };
 			}
-
-			if (auto existingObject = TES3::DataHandler::get()->nonDynamicData->resolveObject(id.c_str()); existingObject != nullptr) {
-				if (getIfExists && existingObject->objectType == TES3::ObjectType::Container) {
-					return existingObject;
+			else if (!id.empty()) {
+				if (auto existingObject = TES3::DataHandler::get()->nonDynamicData->resolveObject(id.c_str()); existingObject != nullptr) {
+					if (getIfExists && existingObject->objectType == TES3::ObjectType::Container) {
+						return existingObject;
+					}
+					throw std::invalid_argument{ "tes3.createObject: 'id' parameter already assigned to an existing object that is not a container." };
 				}
-				throw std::invalid_argument{ "tes3.createObject: 'id' parameter already assigned to an existing object that is not an enchantment." };
 			}
 
 			std::string name = getOptionalParam<std::string>(params, "name", "Container");
@@ -521,7 +520,7 @@ namespace mwse::lua {
 			if (!TES3::DataHandler::get()->nonDynamicData->addNewObject(container)) {
 				delete container;
 				container = nullptr;
-				throw std::runtime_error("tes3.createObject: could not add the newly created misc item in its proper collection.");
+				throw std::runtime_error("tes3.createObject: could not add the newly created container to its proper collection.");
 			}
 
 			// If created outside of a save game, mark the object as sourceless.
@@ -542,12 +541,13 @@ namespace mwse::lua {
 			if (id.size() > 31) {
 				throw std::invalid_argument{ "tes3.createObject: 'id' parameter must be less than 32 character long." };
 			}
-
-			if (auto existingObject = TES3::DataHandler::get()->nonDynamicData->resolveObject(id.c_str()); existingObject != nullptr) {
-				if (getIfExists && existingObject->objectType == TES3::ObjectType::Misc) {
-					return existingObject;
+			else if (!id.empty()) {
+				if (auto existingObject = TES3::DataHandler::get()->nonDynamicData->resolveObject(id.c_str()); existingObject != nullptr) {
+					if (getIfExists && existingObject->objectType == TES3::ObjectType::Misc) {
+						return existingObject;
+					}
+					throw std::invalid_argument{ "tes3.createObject: 'id' parameter already assigned to an existing object that is not a misc. item." };
 				}
-				throw std::invalid_argument{ "tes3.createObject: 'id' parameter already assigned to an existing object that is not an enchantment." };
 			}
 
 			std::string name = getOptionalParam<std::string>(params, "name", "Miscellaneous item");
@@ -589,7 +589,7 @@ namespace mwse::lua {
 			if (!TES3::DataHandler::get()->nonDynamicData->addNewObject(miscItem)) {
 				delete miscItem;
 				miscItem = nullptr;
-				throw std::runtime_error("tes3.createObject: could not add the newly created misc item in its proper collection.");
+				throw std::runtime_error("tes3.createObject: could not add the newly created misc item to its proper collection.");
 			}
 
 			// If created outside of a save game, mark the object as sourceless.
@@ -610,13 +610,13 @@ namespace mwse::lua {
 			if (id.size() > 31) {
 				throw std::invalid_argument{ "tes3.createObject: 'id' parameter must be less than 32 character long." };
 			}
-
-			if (auto existingObject = TES3::DataHandler::get()->nonDynamicData->findSound(id.c_str()); existingObject != nullptr) {
-				if (getIfExists && existingObject->objectType == TES3::ObjectType::Sound) {
-					return existingObject;
+			else if (!id.empty()) {
+				if (auto existingObject = TES3::DataHandler::get()->nonDynamicData->resolveObject(id.c_str()); existingObject != nullptr) {
+					if (getIfExists && existingObject->objectType == TES3::ObjectType::Sound) {
+						return existingObject;
+					}
+					throw std::invalid_argument{ "tes3.createObject: 'id' parameter already assigned to an existing object that is not a sound." };
 				}
-
-				throw std::invalid_argument{ "tes3.createObject: 'id' parameter already assigned to an existing object that is not a sound." };
 			}
 
 			std::string filename = getOptionalParam<std::string>(params, "filename", {});
@@ -638,7 +638,7 @@ namespace mwse::lua {
 			if (!TES3::DataHandler::get()->nonDynamicData->addSound(soundObject)) {
 				delete soundObject;
 				soundObject = nullptr;
-				throw std::runtime_error("tes3.createObject: Could not add the newly created sound in its proper collection.");
+				throw std::runtime_error("tes3.createObject: Could not add the newly created sound to its proper collection.");
 			}
 
 			// If created outside of a save game, mark the object as sourceless.
@@ -659,13 +659,13 @@ namespace mwse::lua {
 			if (id.size() > 31) {
 				throw std::invalid_argument{ "tes3.createObject: 'id' parameter must be less than 32 character long." };
 			}
-
-			if (auto existingObject = TES3::DataHandler::get()->nonDynamicData->getSpellById(id.c_str()); existingObject != nullptr) {
-				if (getIfExists && existingObject->objectType == TES3::ObjectType::Spell) {
-					return existingObject;
+			else if (!id.empty()) {
+				if (auto existingObject = TES3::DataHandler::get()->nonDynamicData->resolveObject(id.c_str()); existingObject != nullptr) {
+					if (getIfExists && existingObject->objectType == TES3::ObjectType::Spell) {
+						return existingObject;
+					}
+					throw std::invalid_argument{ "tes3.createObject: 'id' parameter already assigned to an existing object that is not a spell." };
 				}
-
-				throw std::invalid_argument{ "tes3.createObject: 'id' parameter already assigned to an existing object that is not a spell." };
 			}
 
 			std::string name = getOptionalParam<std::string>(params, "name", {});
@@ -703,7 +703,7 @@ namespace mwse::lua {
 			if (!TES3::DataHandler::get()->nonDynamicData->addNewObject(spell)) {
 				delete spell;
 				spell = nullptr;
-				throw std::runtime_error("tes3.createObject: Could not add the newly created spell in its proper collection.");
+				throw std::runtime_error("tes3.createObject: Could not add the newly created spell to its proper collection.");
 			}
 
 			// If created outside of a save game, mark the object as sourceless.
@@ -729,13 +729,13 @@ namespace mwse::lua {
 			if (id.size() > 31) {
 				throw std::invalid_argument{ "tes3.createObject: 'id' parameter must be less than 32 character long." };
 			}
-
-			if (auto existingObject = TES3::DataHandler::get()->nonDynamicData->resolveObject(id.c_str()); existingObject != nullptr) {
-				if (getIfExists && existingObject->objectType == TES3::ObjectType::Static) {
-					return existingObject;
+			else if (!id.empty()) {
+				if (auto existingObject = TES3::DataHandler::get()->nonDynamicData->resolveObject(id.c_str()); existingObject != nullptr) {
+					if (getIfExists && existingObject->objectType == TES3::ObjectType::Static) {
+						return existingObject;
+					}
+					throw std::invalid_argument{ "tes3.createObject: 'id' parameter already assigned to an existing object that is not a static object." };
 				}
-
-				throw std::invalid_argument{ "tes3.createObject: 'id' parameter already assigned to an existing object that is not a static." };
 			}
 
 			std::string mesh = getOptionalParam<std::string>(params, "mesh", {});
@@ -755,7 +755,7 @@ namespace mwse::lua {
 			if (!TES3::DataHandler::get()->nonDynamicData->addNewObject(staticObject)) {
 				delete staticObject;
 				staticObject = nullptr;
-				throw std::runtime_error("tes3.createObject: could not add the newly created static in its proper collection.");
+				throw std::runtime_error("tes3.createObject: could not add the newly created static to its proper collection.");
 			}
 
 			// If created outside of a save game, mark the object as sourceless.
@@ -772,17 +772,17 @@ namespace mwse::lua {
 	public:
 		TES3::BaseObject* create(sol::table params, bool getIfExists) const override {
 			std::string id = getOptionalParam<std::string>(params, "id", {});
+			auto objectType = getOptionalParam<unsigned int>(params, "objectType", TES3::ObjectType::Invalid);
 			if (id.size() > 31) {
 				throw std::invalid_argument{ "tes3.createObject: 'id' parameter must be less than 32 character long." };
 			}
-
-			auto objectType = getOptionalParam<unsigned int>(params, "objectType", TES3::ObjectType::Invalid);
-			if (auto existingObject = TES3::DataHandler::get()->nonDynamicData->resolveObject(id.c_str()); existingObject != nullptr) {
-				if (getIfExists && existingObject->objectType == objectType) {
-					return existingObject;
+			else if (!id.empty()) {
+				if (auto existingObject = TES3::DataHandler::get()->nonDynamicData->resolveObject(id.c_str()); existingObject != nullptr) {
+					if (getIfExists && existingObject->objectType == objectType) {
+						return existingObject;
+					}
+					throw std::invalid_argument{ "tes3.createObject: 'id' parameter already assigned to an existing object that is not a weapon." };
 				}
-
-				throw std::invalid_argument{ "tes3.createObject: 'id' parameter already assigned to an existing object that is not a weapon item." };
 			}
 
 			std::string name = getOptionalParam<std::string>(params, "name", "Miscellaneous item");
@@ -845,7 +845,7 @@ namespace mwse::lua {
 			if (!TES3::DataHandler::get()->nonDynamicData->addNewObject(weapon)) {
 				delete weapon;
 				weapon = nullptr;
-				throw std::runtime_error("tes3.createObject: could not add the newly created misc item in its proper collection.");
+				throw std::runtime_error("tes3.createObject: could not add the newly created weapon to its proper collection.");
 			}
 
 			// If created outside of a save game, mark the object as sourceless.

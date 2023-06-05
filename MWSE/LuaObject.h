@@ -611,7 +611,7 @@ namespace mwse::lua {
 				throw std::invalid_argument{ "tes3.createObject: 'id' parameter must be less than 32 character long." };
 			}
 			else if (!id.empty()) {
-				if (auto existingObject = TES3::DataHandler::get()->nonDynamicData->resolveObject(id.c_str()); existingObject != nullptr) {
+				if (auto existingObject = TES3::DataHandler::get()->nonDynamicData->findSound(id.c_str()); existingObject != nullptr) {
 					if (getIfExists && existingObject->objectType == TES3::ObjectType::Sound) {
 						return existingObject;
 					}
@@ -660,7 +660,7 @@ namespace mwse::lua {
 				throw std::invalid_argument{ "tes3.createObject: 'id' parameter must be less than 32 character long." };
 			}
 			else if (!id.empty()) {
-				if (auto existingObject = TES3::DataHandler::get()->nonDynamicData->resolveObject(id.c_str()); existingObject != nullptr) {
+				if (auto existingObject = TES3::DataHandler::get()->nonDynamicData->getSpellById(id.c_str()); existingObject != nullptr) {
 					if (getIfExists && existingObject->objectType == TES3::ObjectType::Spell) {
 						return existingObject;
 					}

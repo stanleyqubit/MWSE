@@ -1,0 +1,48 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - test
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup VsDevCmd
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x86
+
+      - name: Restore NuGet packages
+        run: nuget restore -Verbosity quiet
+
+      - name: Build LuaJIT
+        run: |
+          cd deps\LuaJIT\src
+          .\msvcbuild.bat
+
+      - name: Build MWSE
+        run: |
+          msbuild "MWSE.sln" /p:Configuration=Release /p:Platform=x86 /m /verbosity:minimal
+
+      - name: Prepare distribution files
+        run: |
+          New-Item -ItemType Directory -Path build\dist
+          Copy-Item -Path misc\package -Destination build\dist -Recurse -Force
+          Copy-Item -Path build\release\mwse.dll -Destination build\dist -Force
+          Copy-Item -Path build\release\csse.dll -Destination build\dist -Force
+          Copy-Item -Path deps\LuaJIT\src\lua51.dll -Destination build\dist -Force
+          Copy-Item -Path MWSE-Update\bin\Release\MWSE-Update.exe -Destination build\dist -Force
+          Copy-Item -Path MWSE-Update\bin\Release\Newtonsoft.Json.dll -Destination build\dist -Force
+          Copy-Item -Path MWSE-Update\bin\Release\Newtonsoft.Json.xml -Destination build\dist -Force
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: mwse
+          path: build\dist

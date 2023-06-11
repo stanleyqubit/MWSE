@@ -375,7 +375,17 @@ namespace mwse::lua {
 			return false;
 		}
 
-		return bool(TES3::DataHandler::get()->getSoundPlaying(sound, reference));
+        TES3::SoundEvent* e = TES3::DataHandler::get()->getSoundPlaying(sound, reference);
+        if (e->soundBuffer && e->soundBuffer->volume) {
+            log::getLog() << "tes3.getSoundPlaying: soundBuffer->volume:" << std::endl;
+            log::getLog() << std::to_string(e->soundBuffer->volume) << std::endl;
+        }
+        if (e->sound->soundBuffer && e->sound->soundBuffer->volume) {
+            log::getLog() << "tes3.getSoundPlaying: sound->soundBuffer->volume:" << std::endl;
+            log::getLog() << std::to_string(e->sound->soundBuffer->volume) << std::endl;
+        }
+		//return bool(TES3::DataHandler::get()->getSoundPlaying(sound, reference));
+        return bool(e);
 	}
 
 	void adjustSoundVolume(sol::optional<sol::table> params) {
